@@ -39,3 +39,8 @@ Do not use this recipe for a short one-page preference form where document flow 
 
 - [scroll-body-shell](../patterns/viewport-shell/scroll-body-shell.md)
 - [supporting-pane](../patterns/split-sidebar/supporting-pane.md)
+
+## IA Navigation
+
+Parent: [Layout Recipes](index.md).
+Next: [Quality And Findability](../quality/index.md) for route checks, or [Layout Pattern Catalog](../CATALOG.md) when replacing a primitive.

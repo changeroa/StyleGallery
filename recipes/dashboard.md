@@ -40,3 +40,8 @@ Do not use this recipe for a single focused workflow. A [form flow](form-flow.md
 - [ram-grid](../patterns/grid-repetition/ram-grid.md)
 - [dense-grid](../patterns/grid-repetition/dense-grid.md)
 - [wrap-row](../patterns/in-line-grouping/wrap-row.md)
+
+## IA Navigation
+
+Parent: [Layout Recipes](index.md).
+Next: [Quality And Findability](../quality/index.md) for route checks, or [Layout Pattern Catalog](../CATALOG.md) when replacing a primitive.

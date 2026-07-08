@@ -39,3 +39,8 @@ Do not use this recipe when the detail page is a full navigation destination. Us
 
 - [supporting-pane](../patterns/split-sidebar/supporting-pane.md)
 - [fixed-sidenav-shell](../patterns/viewport-shell/fixed-sidenav-shell.md)
+
+## IA Navigation
+
+Parent: [Layout Recipes](index.md).
+Next: [Quality And Findability](../quality/index.md) for route checks, or [Layout Pattern Catalog](../CATALOG.md) when replacing a primitive.

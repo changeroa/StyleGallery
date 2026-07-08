@@ -39,3 +39,8 @@ Do not use this recipe for a simple content page with one or two actions. A [clu
 
 - [reel](../patterns/in-line-grouping/reel.md)
 - [panel-layout](../patterns/viewport-shell/panel-layout.md)
+
+## IA Navigation
+
+Parent: [Layout Recipes](index.md).
+Next: [Quality And Findability](../quality/index.md) for route checks, or [Layout Pattern Catalog](../CATALOG.md) when replacing a primitive.

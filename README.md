@@ -8,7 +8,44 @@ description: Principles and authoring policy for the layout pattern library.
 
 `layout-gallery` is a gallery of minimal, portable CSS layout patterns.
 
+Primary role: repository guide.
+
 Each pattern documents one primary spatial problem and the smallest robust HTML/CSS structure that solves it. The gallery is not a visual design system: reusable pattern CSS should stabilize structure, flow, sizing, alignment, spacing, scrolling, ratio, and containment while leaving brand, typography, color, shadow, animation, and decoration outside the core pattern.
+
+## Repository Entry Roles
+
+Use each root hub for one primary job.
+
+| Entry | Primary role | Use when |
+| --- | --- | --- |
+| [README](README.md) | Repository guide | You need the library purpose, policies, and task routes. |
+| [OKF index](index.md) | OKF bundle map | You need a compact knowledge-bundle table of contents. |
+| [Layout Planning Guide](GUIDE.md) | Planning workflow | You need to classify a screen before choosing patterns. |
+| [Layout Pattern Catalog](CATALOG.md) | Pattern lookup | You already know the spatial problem or pattern name. |
+
+## Task Routes
+
+Each common task has one primary route. Use secondary links only after the primary route answers the first decision.
+
+| Task | Primary route | Why |
+| --- | --- | --- |
+| `plan a screen before the layout problem is obvious` | [Layout Planning Guide](GUIDE.md) | It sequences task, content, scroll, recipe, and verification choices. |
+| `choose a pattern when the name is unknown` | [Decision Tree](guides/decision-tree.md) | It routes from constraints to pattern categories. |
+| `fill in requirements before selecting a pattern stack` | [Layout Brief Template](guides/layout-brief.md) | It captures content, constraints, and verification inputs. |
+| `compose a full screen from primitives` | [Layout Recipes](recipes/index.md) | Recipes map screen models to pattern stacks. |
+| `choose a settings layout` | [SaaS Settings Recipe](recipes/saas-settings.md) | It is the primary route for stable settings navigation and constrained content. |
+| `choose a dashboard layout` | [Dashboard Recipe](recipes/dashboard.md) | It is the primary route for repeated panels and scan paths. |
+| `choose an article layout` | [Article Page Recipe](recipes/article-page.md) | It is the primary route for readable prose plus supporting material. |
+| `choose a list-detail layout` | [List Detail Recipe](recipes/list-detail.md) | It is the primary route for browse-and-inspect workflows. |
+| `look up a known layout primitive` | [Layout Pattern Catalog](CATALOG.md) | It is the generated pattern lookup surface. |
+| `browse pattern categories` | [Pattern Categories](patterns/index.md) | It groups generated patterns by spatial family. |
+| `run findability QA` | [Tree-Test Findability QA](quality/index.md#tree-test-findability-qa) | It tests whether task routes are discoverable, not just linked. |
+
+## Link Policy
+
+- Navigation links move a reader to the next decision point in the repository. Root hubs, indexes, parent links, and next-step links are navigation links.
+- Citation links identify source lineage or evidence boundaries. They support a claim but should not be the only way to continue a task.
+- Dependency links identify generated, validation, or composition relationships. They explain what must stay in sync, such as `scripts/pattern-data.mjs`, generated pattern files, catalog entries, and validator fixtures.
 
 ## How To Use This Repository
 
@@ -17,6 +54,7 @@ Each pattern documents one primary spatial problem and the smallest robust HTML/
 - Fill out the [Layout Brief Template](guides/layout-brief.md) before choosing a pattern stack.
 - Use [Layout Recipes](recipes/index.md) when you need screen-level composition.
 - Use [Layout Pattern Catalog](CATALOG.md) when you already know the spatial problem.
+- Use [Quality And Findability](quality/index.md) when checking repository routes and leaf navigation.
 
 ## Principles
 

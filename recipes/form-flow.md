@@ -39,3 +39,8 @@ Do not use this recipe for a data-dense editor where users compare many fields a
 
 - [sticky-footer](../patterns/viewport-shell/sticky-footer.md)
 - [line-up](../patterns/stacking/line-up.md)
+
+## IA Navigation
+
+Parent: [Layout Recipes](index.md).
+Next: [Quality And Findability](../quality/index.md) for route checks, or [Layout Pattern Catalog](../CATALOG.md) when replacing a primitive.

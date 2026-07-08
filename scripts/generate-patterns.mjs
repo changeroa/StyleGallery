@@ -77,6 +77,11 @@ function contractSections(pattern, rootClass) {
     "- Do not add color, border, shadow, typography, or animation rules to reusable pattern CSS.",
     "- Do not use this pattern to repair unclear HTML structure; make the DOM roles legible first.",
     "",
+    "## IA Navigation",
+    "",
+    `Parent: [${pattern.category} patterns](index.md) in [Pattern Categories](../index.md).`,
+    "Next: [Layout Recipes](../../recipes/index.md) for screen-level composition, or return to the [Layout Pattern Catalog](../../CATALOG.md) when choosing another primitive.",
+    "",
   ];
 }
 
@@ -166,6 +171,8 @@ fs.writeFileSync(
     "---",
     "",
     "# Layout Pattern Catalog",
+    "",
+    "Primary role: pattern lookup.",
     "",
     "Generated from `scripts/generate-patterns.mjs` and `scripts/pattern-data.mjs`.",
     "",

@@ -6,6 +6,8 @@ description: Pre-design entry point for choosing and composing layout-gallery pa
 
 # Layout Planning Guide
 
+Primary role: planning workflow.
+
 Use this guide before a layout problem appears. It helps you classify a screen, name its spatial responsibilities, and choose a small stack of layout patterns before writing application CSS.
 
 `layout-gallery` has two modes:

@@ -82,3 +82,8 @@ Use `split_nav` as the stable pattern root and compose additional layout behavio
 
 - Do not add color, border, shadow, typography, or animation rules to reusable pattern CSS.
 - Do not use this pattern to repair unclear HTML structure; make the DOM roles legible first.
+
+## IA Navigation
+
+Parent: [In-line grouping patterns](index.md) in [Pattern Categories](../index.md).
+Next: [Layout Recipes](../../recipes/index.md) for screen-level composition, or return to the [Layout Pattern Catalog](../../CATALOG.md) when choosing another primitive.

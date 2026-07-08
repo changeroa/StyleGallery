@@ -29,6 +29,8 @@ jobs:
           node -c scripts/test-validate-patterns.mjs
           node -c scripts/validate-links.mjs
           node -c scripts/validate-catalog.mjs
+          node -c scripts/validate-ia.mjs
+          node -c scripts/test-validate-ia.mjs
           git diff --check
 
       - name: Generated artifacts are current
@@ -47,6 +49,11 @@ jobs:
 
       - name: Markdown link check
         run: node scripts/validate-links.mjs --json
+
+      - name: Information architecture check
+        run: |
+          node scripts/validate-ia.mjs --json
+          node scripts/test-validate-ia.mjs --json
 
       - name: Pattern count and category coverage
         run: node scripts/validate-catalog.mjs --json

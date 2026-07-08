@@ -6,6 +6,8 @@ okf_version: "0.1"
 
 `layout-gallery` is an OKF-style knowledge bundle of minimal, portable CSS layout patterns.
 
+Primary role: OKF bundle map.
+
 ## Concepts
 
 - [Repository principles](README.md) - Principles and authoring policy for the layout pattern library.
@@ -16,4 +18,5 @@ okf_version: "0.1"
 - [Agent instructions](AGENTS.md) - Rules coding agents must follow when editing this layout pattern library.
 - [Layout pattern catalog](CATALOG.md) - Generated index of layout-gallery patterns.
 - [Pattern categories](patterns/index.md) - Category index for generated layout patterns.
+- [Quality and findability](quality/index.md) - IA route checks and tree-test QA for repository navigation.
 - [Update log](log.md) - Bundle update history.

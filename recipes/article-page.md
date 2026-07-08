@@ -39,3 +39,8 @@ Do not use sticky aside behavior when supplemental content must be read in seque
 
 - [sidebar](../patterns/split-sidebar/sidebar.md)
 - [box](../patterns/containment/box.md)
+
+## IA Navigation
+
+Parent: [Layout Recipes](index.md).
+Next: [Quality And Findability](../quality/index.md) for route checks, or [Layout Pattern Catalog](../CATALOG.md) when replacing a primitive.
