@@ -10,3 +10,4 @@ Evidence references describe what sources and artifacts can support. They do not
 - [HCI evaluation](hci-evaluation.md) - Heuristic, walkthrough, and user-evidence references.
 - [Design rationale](design-rationale.md) - Rationale and argument-structure references.
 - [Tokens](tokens.md) - Design token evidence and limits.
+- [Search, metadata, and polyhierarchy](search-metadata-polyhierarchy.md) - Retrieval benchmark, metadata dictionary, and search adoption decision.
