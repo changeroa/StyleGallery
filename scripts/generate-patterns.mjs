@@ -39,6 +39,16 @@ function inlineCodeList(values) {
   return values.map((value) => `\`${value}\``).join(", ");
 }
 
+function cognitiveRisk(pattern) {
+  if (pattern.scrollOwnership && !pattern.scrollOwnership.startsWith("No internal")) {
+    return "Medium: scroll ownership can hide context, controls, or return points if it is not named in the consuming layout.";
+  }
+  if (pattern.responsiveness === "reflow") {
+    return "Medium: reflow can change spatial adjacency, so labels, controls, and related content must remain adjacent in DOM order.";
+  }
+  return "Low: the pattern should preserve ordinary reading flow when semantic order is already correct.";
+}
+
 function contractSections(pattern, rootClass) {
   const properties = declarationNames(pattern);
   const core = inlineCodeList(properties);
@@ -62,7 +72,11 @@ function contractSections(pattern, rootClass) {
     "",
     "## Accessibility And Source Order Notes",
     "",
-    "Keep semantic elements, DOM order, reading order, and focus order independent from the visual placement created by the layout classes.",
+    "- Semantic role expectation: Preserve the HTML sample's landmark, list, navigation, form, figure, or article roles; layout classes must not replace semantic elements.",
+    "- DOM order expectation: Keep semantic elements, DOM order, reading order, and focus order independent from the visual placement created by the layout classes.",
+    "- Focus risk: Any interactive descendants follow DOM order; do not use this pattern to create a visual order that keyboard focus cannot follow.",
+    `- Scroll expectation: ${pattern.scrollOwnership ?? "No internal scroll container."}`,
+    `- Cognitive risk: ${cognitiveRisk(pattern)}`,
     "",
     "## Browser And Fallback Notes",
     "",

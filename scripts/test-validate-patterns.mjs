@@ -57,6 +57,12 @@ const cases = [
     expect: "missing Core Properties section",
   },
   {
+    name: "missing_accessibility_risk_details",
+    file: "patterns/stacking/bad.md",
+    content: legacyPattern("bad", "Stacking", ".bad {\n    display: grid;\n}"),
+    expect: "missing accessibility risk detail",
+  },
+  {
     name: "contract_sections_inside_code_block",
     file: "patterns/stacking/bad.md",
     content: legacyPattern(
@@ -112,7 +118,7 @@ function legacyPattern(name, category, css, html = `<section class="${name}"></s
 
 function pattern(name, category, css, html = `<section class="${name}"></section>`, responsiveness = "fluid") {
   const cssBlock = css ? `\n\`\`\`css\n${css}\n\`\`\`\n` : "\n";
-  return `---\nname: ${name}\ncategory: ${category}\nprimary_spatial_problem: Test spatial problem.\nsecondary_spatial_problems: none\nlayout_axis: block\ncontent_shape: mixed\nresponsiveness: ${responsiveness}\nconstraints: Test constraints.\nscroll_ownership: No internal scroll container.\nsource_lineage: test\n---\n\n# ${name}\n\n## When To Use\n\nUse for validation tests.\n\n## HTML\n\n\`\`\`html\n${html}\n\`\`\`\n\n## CSS\n${cssBlock}\n## Core Properties\n\n- \`display\` establishes the layout context.\n\n## Properties That Break The Layout If Removed\n\n- Removing \`display\` removes the layout behavior.\n\n## Constraints And Change Points\n\nTest constraints.\n\n## Scroll Ownership\n\nNo internal scroll container.\n\n## Accessibility And Source Order Notes\n\nKeep semantic order.\n\n## Browser And Fallback Notes\n\nUse a simpler block fallback when needed.\n\n## Composition Notes\n\nCompose with semantic regions.\n\n## Anti-patterns\n\nDo not use for unrelated visual styling.\n`;
+  return `---\nname: ${name}\ncategory: ${category}\nprimary_spatial_problem: Test spatial problem.\nsecondary_spatial_problems: none\nlayout_axis: block\ncontent_shape: mixed\nresponsiveness: ${responsiveness}\nconstraints: Test constraints.\nscroll_ownership: No internal scroll container.\nsource_lineage: test\n---\n\n# ${name}\n\n## When To Use\n\nUse for validation tests.\n\n## HTML\n\n\`\`\`html\n${html}\n\`\`\`\n\n## CSS\n${cssBlock}\n## Core Properties\n\n- \`display\` establishes the layout context.\n\n## Properties That Break The Layout If Removed\n\n- Removing \`display\` removes the layout behavior.\n\n## Constraints And Change Points\n\nTest constraints.\n\n## Scroll Ownership\n\nNo internal scroll container.\n\n## Accessibility And Source Order Notes\n\n- Semantic role expectation: Preserve the element roles already present in the HTML sample.\n- DOM order expectation: Keep semantic order.\n- Focus risk: Keep focus order aligned with DOM order.\n- Scroll expectation: No internal scroll container.\n- Cognitive risk: Low when the pattern does not reorder meaning or hide controls.\n\n## Browser And Fallback Notes\n\nUse a simpler block fallback when needed.\n\n## Composition Notes\n\nCompose with semantic regions.\n\n## Anti-patterns\n\nDo not use for unrelated visual styling.\n`;
 }
 
 function runCase(testCase) {

@@ -23,6 +23,15 @@ Place primary commands before secondary command groups when they operate on the 
 
 The shell body owns content scrolling. Command rows should wrap when possible; use [reel](../patterns/in-line-grouping/reel.md) only when horizontal scanning is part of the interaction model.
 
+## Accessibility Checklist
+
+- Source order: Put primary commands before secondary commands and before the content region they affect when the command is the task entry point.
+- Focus expectation: Keyboard focus must reach every command, preserve visible focus, and return to the edited or inspected content after command execution when appropriate.
+- Scroll expectation: Keep fixed command regions outside the body scroll container; if command groups overflow horizontally, provide a named scroll model and keyboard path.
+- Semantic risk: Icon-only or compact commands need accessible names, state, and grouping before layout classes compress them.
+- Cognitive risk: Tool-heavy surfaces increase recognition and mode burden; keep command grouping stable and avoid moving commands between breakpoints without a documented overflow model.
+- Verification method: Pair `automated` accessible-name checks with `manual` keyboard traversal, focus-return, and mode-state review; reserve `debt` for commands that intentionally require later assistive-technology testing.
+
 ## Responsive Behavior
 
 At narrow widths, command groups should wrap into stable rows or move into a declared overflow region. Do not let command text resize the shell.

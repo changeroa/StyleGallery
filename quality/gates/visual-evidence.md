@@ -24,6 +24,7 @@ Use this gate when a claim depends on rendered output, visual state, hierarchy, 
 
 - Screenshot diffs show rendered change, not usability.
 - A stable visual diff does not prove accessibility.
+- Generated images, GPT Image references, and screenshots are not accessibility proof.
 - A visual QA pass does not prove brand fit or aesthetic quality.
 - Visual review must cite the principle, task, state, or brief it evaluates.
 

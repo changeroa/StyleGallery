@@ -38,6 +38,14 @@ const requiredSections = [
   "## Anti-patterns",
 ];
 
+const requiredAccessibilityDetails = [
+  "Semantic role expectation:",
+  "DOM order expectation:",
+  "Focus risk:",
+  "Scroll expectation:",
+  "Cognitive risk:",
+];
+
 const forbiddenProperties = [
   "animation",
   "background",
@@ -201,6 +209,9 @@ for (const absolute of files) {
   const markdown = stripFencedCodeBlocks(content);
   for (const section of requiredSections) {
     if (!hasHeading(markdown, section)) failures.push(`${file}: missing ${section.replace("## ", "")} section`);
+  }
+  for (const detail of requiredAccessibilityDetails) {
+    if (!markdown.includes(detail)) failures.push(`${file}: missing accessibility risk detail ${detail}`);
   }
   const html = codeBlock(content, "html");
   if (!html) failures.push(`${file}: missing html code block`);

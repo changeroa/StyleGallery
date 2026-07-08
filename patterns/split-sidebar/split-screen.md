@@ -63,7 +63,11 @@ No internal scroll container.
 
 ## Accessibility And Source Order Notes
 
-Keep semantic elements, DOM order, reading order, and focus order independent from the visual placement created by the layout classes.
+- Semantic role expectation: Preserve the HTML sample's landmark, list, navigation, form, figure, or article roles; layout classes must not replace semantic elements.
+- DOM order expectation: Keep semantic elements, DOM order, reading order, and focus order independent from the visual placement created by the layout classes.
+- Focus risk: Any interactive descendants follow DOM order; do not use this pattern to create a visual order that keyboard focus cannot follow.
+- Scroll expectation: No internal scroll container.
+- Cognitive risk: Medium: reflow can change spatial adjacency, so labels, controls, and related content must remain adjacent in DOM order.
 
 ## Browser And Fallback Notes
 

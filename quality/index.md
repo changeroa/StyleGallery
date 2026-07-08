@@ -9,6 +9,7 @@ This layer does not make the repository a visual design system. Pattern files st
 - [Quality principles](principles.md) - Principles shared by the quality gate layer.
 - [Gate index](gates/index.md) - Gate contracts for layout, design claims, visual evidence, accessibility evidence, and rationale.
 - [Evidence index](evidence/index.md) - Reference sources and evidence boundaries for design-side claims.
+- [Accessibility evidence register](evidence/accessibility.md) - Classification for accessibility claims: automated, manual, user, or debt.
 
 ## Admission Model
 

@@ -21,11 +21,23 @@ Use this gate when a claim affects access, comprehension, keyboard use, screen-r
 - screen-reader or accessibility-tree review when the claim depends on semantics;
 - cognitive accessibility review for language, memory burden, predictability, and help.
 
+## Verification Method Register
+
+Classify every accessibility claim before approval:
+
+- `automated`: rule-scoped machine checks such as axe, ACT, contrast math, lint output, or validator output.
+- `manual`: expert review of DOM order, focus order, keyboard behavior, screen-reader flow, language clarity, motion comfort, or cognitive load.
+- `user`: participant evidence for task completion, comprehension, assistive-technology fit, or perceived effort.
+- `debt`: a known accessibility gap with affected users, owner, review trigger, and expiry condition.
+
+The claim record must include the verification method, the evidence artifact, the boundary, and any accepted debt. A rendered screenshot, visual diff, generated image, or GPT Image reference can be supporting context only; it is not an accessibility verification method.
+
 ## Required Boundary Language
 
 - Automated accessibility scans assist evaluation, not determine accessibility.
 - Passing an automated scan means no issue was found by that tested rule set.
 - Manual judgment is required for claims involving task completion, cognitive load, clarity, assistive technology behavior, or user comprehension.
+- Visual evidence cannot prove accessibility unless it is paired with the relevant automated, manual, user, or debt record.
 
 ## Blocking Conditions
 

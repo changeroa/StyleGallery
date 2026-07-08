@@ -23,6 +23,15 @@ Keep labels, descriptions, fields, and errors adjacent in DOM order. Group relat
 
 Prefer document scrolling. If actions must remain visible, use a shell or footer pattern only after confirming it does not obscure validation messages or focus targets.
 
+## Accessibility Checklist
+
+- Source order: Keep each label, description, input, hint, and error adjacent in DOM order, even when groups are visually split into columns.
+- Focus expectation: Keyboard focus must move through fields, validation messages, and actions in the same sequence a user completes the form.
+- Scroll expectation: Sticky or fixed actions must not cover focused fields, inline errors, or the first invalid field after submission.
+- Semantic risk: Group related controls with fieldset/legend or labelled sections before adding stack or cluster layout classes.
+- Cognitive risk: Long flows create memory burden; expose step context, error recovery, and required/optional state without depending on color alone.
+- Verification method: Use `automated` form-name/error association checks where possible, then `manual` keyboard and error-recovery review; use `user` evidence for completion-rate or comprehension claims.
+
 ## Responsive Behavior
 
 Field groups should stack naturally. Action groups should wrap before they overflow and should preserve a clear primary action position.

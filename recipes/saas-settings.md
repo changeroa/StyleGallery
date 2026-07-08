@@ -23,6 +23,12 @@ Place the navigation before the main settings region when it is the first meanin
 
 The main region owns vertical scrolling. The side navigation remains stable. Avoid adding independent scrolling to individual settings groups unless a group has a named overflow responsibility.
 
+## Accessibility Expectations
+
+- Focus expectation: Side-navigation links move predictably into the matching settings section, and focus remains visible when the main region scrolls.
+- Scroll expectation: The stable navigation must not create a second hidden scroll path; each settings group should rely on the main region unless overflow is declared.
+- Cognitive risk: Settings pages mix navigation and editing; use headings, save-state labels, and grouping so users do not lose the current section.
+
 ## Responsive Behavior
 
 At narrow widths, navigation may become an inline region above the main content. Preserve source order and avoid visually reordering sections ahead of their headings.

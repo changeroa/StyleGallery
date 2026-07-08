@@ -23,6 +23,12 @@ Place the article before supplemental aside content when the article is the prim
 
 The document owns scrolling. The aside may become sticky, but it should not introduce an independent scroll container unless the aside content is longer than the viewport and has a declared overflow behavior.
 
+## Accessibility Expectations
+
+- Focus expectation: Article links and controls follow the article's DOM order before moving to supplemental aside content unless the aside is the active task.
+- Scroll expectation: Sticky aside behavior must not cover headings, anchors, or focused links while the document scrolls.
+- Cognitive risk: Supplemental content can interrupt reading flow; keep references close to the article section they support.
+
 ## Responsive Behavior
 
 At narrow widths, aside content should fall into document flow after the related article region. Keep references close to the content they support.

@@ -61,7 +61,11 @@ Pattern owns the named scroll container.
 
 ## Accessibility And Source Order Notes
 
-Keep semantic elements, DOM order, reading order, and focus order independent from the visual placement created by the layout classes.
+- Semantic role expectation: Preserve the HTML sample's landmark, list, navigation, form, figure, or article roles; layout classes must not replace semantic elements.
+- DOM order expectation: Keep semantic elements, DOM order, reading order, and focus order independent from the visual placement created by the layout classes.
+- Focus risk: Any interactive descendants follow DOM order; do not use this pattern to create a visual order that keyboard focus cannot follow.
+- Scroll expectation: Pattern owns the named scroll container.
+- Cognitive risk: Medium: scroll ownership can hide context, controls, or return points if it is not named in the consuming layout.
 
 ## Browser And Fallback Notes
 
