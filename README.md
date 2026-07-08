@@ -13,6 +13,7 @@ Each pattern documents one primary spatial problem and the smallest robust HTML/
 ## How To Use This Repository
 
 - Start with [Layout Planning Guide](GUIDE.md) when you are designing a screen before a layout problem is obvious.
+- Use the [Webpage Generation Workflow](guides/webpage-generation-workflow.md) when raw content needs to become a homepage or ordinary webpage before a layout recipe is obvious.
 - Use the [Decision Tree](guides/decision-tree.md) when you do not know the pattern name yet.
 - Fill out the [Layout Brief Template](guides/layout-brief.md) before choosing a pattern stack.
 - Use [Layout Recipes](recipes/index.md) when you need screen-level composition.

@@ -81,3 +81,10 @@ Avoid multiple nested scroll containers unless each one has a named responsibili
 - Icons need a stable square slot: [icon-frame](../patterns/media-fit/icon-frame.md)
 - Overlay should not change document order: [imposter](../patterns/overlay-exception/imposter.md)
 - Regions intentionally occupy the same grid cell: [overlay-stack](../patterns/overlay-exception/overlay-stack.md)
+
+## Rejected Alternatives
+
+Rejected alternatives:
+
+- Record any recipe or pattern rejected because it weakens source order, focus order, scroll ownership, constraints, or content stress behavior.
+- Keep the reason in the [Layout brief](layout-brief.md) so the rejected option is visible during harmony evaluation and implementation handoff.

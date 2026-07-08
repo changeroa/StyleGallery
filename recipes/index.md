@@ -2,6 +2,7 @@
 
 Recipes combine layout patterns into screen-level spatial models.
 
+- [Homepage](homepage.md) - Content-led webpage composition with hero, proof, explanation, conversion, and navigation sections.
 - [SaaS settings](saas-settings.md) - Fixed navigation with a constrained settings flow.
 - [Dashboard](dashboard.md) - Repeated metric and panel regions on a page grid.
 - [Article page](article-page.md) - Readable prose with supporting aside content.

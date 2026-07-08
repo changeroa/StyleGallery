@@ -12,6 +12,7 @@ Use this guide before a layout problem appears. It helps you classify a screen, 
 
 - **After a problem appears:** find a named pattern in `CATALOG.md` and port its HTML/CSS contract.
 - **Before a problem appears:** start with the screen type, answer the layout brief, then compose patterns from `recipes/`.
+- **When content needs to become a webpage:** use the [Webpage generation workflow](guides/webpage-generation-workflow.md) to classify the use case, make the content-to-layout match, run harmony evaluation, create the GPT Image reference, and record the implementation handoff before writing product CSS.
 
 ## Planning Flow
 
@@ -27,6 +28,7 @@ Use this guide before a layout problem appears. It helps you classify a screen, 
 
 - [Decision tree](guides/decision-tree.md): start here when you do not know the pattern name.
 - [Layout brief](guides/layout-brief.md): answer these questions before selecting a pattern stack.
+- [Webpage generation workflow](guides/webpage-generation-workflow.md): start here when content needs to become a homepage or ordinary webpage.
 - [Recipe index](recipes/index.md): screen-type compositions built from reusable patterns.
 - [Pattern catalog](CATALOG.md): individual layout primitives and their contracts.
 
