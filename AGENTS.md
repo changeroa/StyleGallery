@@ -8,14 +8,14 @@ description: Rules coding agents must follow when editing this layout pattern li
 
 This repository is `layout-gallery`: a gallery of minimal, portable CSS layout patterns.
 
-## Using StyleGallery As A Downstream Reference
+## Using layout-gallery As A Downstream Reference
 
-When another project asks an agent to use StyleGallery or this repository as a reference, start with the [StyleGallery Reference Contract](README.md#stylegallery-reference-contract).
+When another project asks an agent to use this repository as a reference, start with the [layout-gallery Reference Contract](README.md#layout-gallery-reference-contract).
 
 - Borrow structure, not literal selectors: preserve semantic order, layout responsibility, pattern stack, scroll owner, constraints, and accessibility risks, then map them to the consuming project's local class/component names.
 - Use repo-local units in the consuming project: do not convert a `px` token system to `rem`, or a `rem` system to `px`, just because an example here uses a different unit.
 - Do not infer visual styling from layout primitives. Brand, typography, color, radius, shadow, motion, image treatment, and page-specific surfaces belong to the consuming product.
-- Report the mapping: StyleGallery recipe or primitive -> local selector/component -> local token/unit decision -> verification surface.
+- Report the mapping: `layout-gallery` recipe or primitive -> local selector/component -> local token/unit decision -> verification surface.
 
 ## Core Rules
 

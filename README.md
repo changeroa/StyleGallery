@@ -10,9 +10,9 @@ description: Principles and authoring policy for the layout pattern library.
 
 Each pattern documents one primary spatial problem and the smallest robust HTML/CSS structure that solves it. The gallery is not a visual design system: reusable pattern CSS should stabilize structure, flow, sizing, alignment, spacing, scrolling, ratio, and containment while leaving brand, typography, color, shadow, animation, and decoration outside the core pattern.
 
-## StyleGallery Reference Contract
+## layout-gallery Reference Contract
 
-Use this section when a consuming project or agent says it is using StyleGallery as a reference. In this repository, `layout-gallery` is the canonical name for the pattern library; `StyleGallery` is an acceptable external shorthand only when it still follows this contract.
+Use this section when a consuming project or agent says it is using this repository as a reference. The canonical name for the pattern library is `layout-gallery`.
 
 ### Source-of-truth order
 
@@ -37,20 +37,20 @@ Do not copy by default:
 
 ### Use repo-local units
 
-Use repo-local units in the consuming project. If that project standardizes on `px` tokens, keep using `px` tokens. If it standardizes on `rem`, use `rem`. Do not infer a required unit system from StyleGallery examples. StyleGallery examples use whatever unit best explains the layout mechanic; downstream CSS should preserve the mechanic while matching the consuming product's token and unit policy.
+Use repo-local units in the consuming project. If that project standardizes on `px` tokens, keep using `px` tokens. If it standardizes on `rem`, use `rem`. Do not infer a required unit system from `layout-gallery` examples. Examples in this repository use whatever unit best explains the layout mechanic; downstream CSS should preserve the mechanic while matching the consuming product's token and unit policy.
 
 ### Do not infer
 
-Do not infer that a StyleGallery recipe requires exact selectors, exact values, exact breakpoints, or exact DOM depth. A recipe names the spatial responsibilities that must survive translation. If the consuming project already has a matching primitive, component, or token, adapt the StyleGallery structure to that local surface and record the mapping in the implementation handoff.
+Do not infer that a `layout-gallery` recipe requires exact selectors, exact values, exact breakpoints, or exact DOM depth. A recipe names the spatial responsibilities that must survive translation. If the consuming project already has a matching primitive, component, or token, adapt the `layout-gallery` structure to that local surface and record the mapping in the implementation handoff.
 
 ### Agent verification checklist
 
-Before claiming that a consuming implementation followed StyleGallery, verify and report:
+Before claiming that a consuming implementation followed `layout-gallery`, verify and report:
 
 - Which source files were read from the source-of-truth order above.
 - Which recipe and primitives were borrowed, and which local selectors/classes implemented them.
 - Which values were copied, which were translated to local tokens or units, and why.
-- Which StyleGallery items were intentionally ignored because they were visual, generated-image, or product-level styling decisions.
+- Which `layout-gallery` items were intentionally ignored because they were visual, generated-image, or product-level styling decisions.
 - Which real surface proved the translated structure under narrow viewport, long content, wrapping actions, and focus order.
 
 ## How To Use This Repository
