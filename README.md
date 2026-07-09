@@ -10,6 +10,49 @@ description: Principles and authoring policy for the layout pattern library.
 
 Each pattern documents one primary spatial problem and the smallest robust HTML/CSS structure that solves it. The gallery is not a visual design system: reusable pattern CSS should stabilize structure, flow, sizing, alignment, spacing, scrolling, ratio, and containment while leaving brand, typography, color, shadow, animation, and decoration outside the core pattern.
 
+## StyleGallery Reference Contract
+
+Use this section when a consuming project or agent says it is using StyleGallery as a reference. In this repository, `layout-gallery` is the canonical name for the pattern library; `StyleGallery` is an acceptable external shorthand only when it still follows this contract.
+
+### Source-of-truth order
+
+1. [README](README.md) defines repository purpose, authoring policies, and this downstream reference contract.
+2. [Layout Planning Guide](GUIDE.md), [Layout Recipes](recipes/index.md), and [Layout Pattern Catalog](CATALOG.md) define screen-level structure, recipe choice, and primitive lookup.
+3. `patterns/**/*.md` exposes generated primitive examples from `scripts/pattern-data.mjs`; use them for the primitive contract, not as product CSS templates.
+4. A consuming product's own `DESIGN.md`, tokens, component names, framework conventions, and existing CSS decide final class names, units, typography, color, border, shadow, and motion.
+
+### Borrow structure, not literal selectors
+
+Borrow:
+
+- semantic order, layout responsibility, scroll owner, constraints, and accessibility risks;
+- recipe and primitive composition, such as `cover`, `content-limiter`, `stack`, `cluster`, `ram-grid`, and `frame`;
+- layout mechanics that solve the same spatial problem, such as intrinsic grids, wrapping action rows, readable measure, aspect-ratio frames, or normal document scrolling.
+
+Do not copy by default:
+
+- literal class names such as `.ram_grid`, `.content_limiter`, `.cover`, `.stack`, `.cluster`, or `.frame` into a product that already has local naming conventions;
+- literal numeric values or units from examples when the consuming product already has tokens or a different unit system;
+- visual treatment, including brand color, typography, border, radius, shadow, animation, generated-image decoration, or page-specific surface styling.
+
+### Use repo-local units
+
+Use repo-local units in the consuming project. If that project standardizes on `px` tokens, keep using `px` tokens. If it standardizes on `rem`, use `rem`. Do not infer a required unit system from StyleGallery examples. StyleGallery examples use whatever unit best explains the layout mechanic; downstream CSS should preserve the mechanic while matching the consuming product's token and unit policy.
+
+### Do not infer
+
+Do not infer that a StyleGallery recipe requires exact selectors, exact values, exact breakpoints, or exact DOM depth. A recipe names the spatial responsibilities that must survive translation. If the consuming project already has a matching primitive, component, or token, adapt the StyleGallery structure to that local surface and record the mapping in the implementation handoff.
+
+### Agent verification checklist
+
+Before claiming that a consuming implementation followed StyleGallery, verify and report:
+
+- Which source files were read from the source-of-truth order above.
+- Which recipe and primitives were borrowed, and which local selectors/classes implemented them.
+- Which values were copied, which were translated to local tokens or units, and why.
+- Which StyleGallery items were intentionally ignored because they were visual, generated-image, or product-level styling decisions.
+- Which real surface proved the translated structure under narrow viewport, long content, wrapping actions, and focus order.
+
 ## How To Use This Repository
 
 - Start with [Layout Planning Guide](GUIDE.md) when you are designing a screen before a layout problem is obvious.
