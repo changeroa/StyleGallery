@@ -1,13 +1,7 @@
+import { sentinelProvenanceClauses } from "./governance-policy-contract.mjs";
+
 export const generatedWarning = "<!-- Generated from `scripts/generate-patterns.mjs` and `scripts/pattern-data.mjs`. Do not hand-edit generated catalog or pattern docs; edit the source files and regenerate. -->";
-export const sentinelProvenanceClauses = [
-  "Completed-CI repository, workflow, run ID and attempt, SHA, and artifact-name fields are workflow-recorded, self-asserted metadata, not an external attestation.",
-  "The self-asserted repository field names the canonical upstream changeroa/StyleGallery; the self-asserted execution_repository field names the actual GitHub Actions repository and is limited to changeroa/StyleGallery or ark-jo/StyleGallery.",
-  "The committed calibration's external_verification object records an independently checked GitHub Actions run and artifact API identity; artifact.api_digest is distinct from committed_ci.raw_evidence_sha256.",
-  "Future CI aggregates remain awaiting_external_verification until their uploaded artifact API identity is independently checked.",
-  "Linux/amd64 repeatability is externally verified only for committed run 29260372260; it does not establish baseline-owner approval or product suitability.",
-  "Baseline-owner approval remains unclaimed until the named owner explicitly approves it.",
-  "Synthetic fixtures validate rejection and acceptance behavior only; they are not authenticated provenance.",
-];
+export { sentinelProvenanceClauses };
 
 export const files = {
   "AGENTS.md": "# Agent Instructions\n\nSee [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md) and [StyleGallery Domains](DOMAINS.md).\n",
@@ -40,6 +34,9 @@ export const files = {
     "Promotion governance remains a closed JSON-only, invariant-scoped, deferred example contract.",
     "Synthetic validation does not authenticate adoption, organizations, owners, support capacity, provenance, or a promotion decision.",
     "The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.",
+    "Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles.",
+    "one clean capture session binds the browser artifacts to the governed source inventory",
+    "It does not prove product suitability, independent adoption, full accessibility, cross-browser behavior, or owner approval",
     "Linux/amd64 20-run calibration and `baseline_owner_approval` remain pending.",
     ...sentinelProvenanceClauses,
     "",
@@ -81,6 +78,8 @@ export const files = {
     "jobs:",
     "  validate:",
     "uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4",
+    "  with:",
+    "    persist-credentials: false",
     "uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4",
     "uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4",
     "node -c scripts/component-state-workflow-contract.mjs",
@@ -98,6 +97,7 @@ export const files = {
     "node scripts/test-validate-webpage-workflow.mjs --json",
     "node -c scripts/validate-consumer-reference.mjs",
     "node -c scripts/test-validate-consumer-reference.mjs",
+    "node -c scripts/consumer-reference-case-runner.mjs",
     "node -c scripts/governed-profile-registry.mjs",
     "node -c scripts/promotion-attestation-contract.mjs",
     "node -c scripts/validate-promotion-rfc.mjs",
@@ -109,6 +109,10 @@ export const files = {
     "consumer-reference/schema/promotion-rfc.schema.json",
     "consumer-reference/policies/shared-experimental.json",
     "node scripts/test-consumer-reference-sentinel.mjs",
+    "node -c scripts/baseline-schema-parity.mjs",
+    "node -c scripts/test-component-state-source-contract.mjs",
+    "node scripts/test-component-state-source-contract.mjs",
+    "consumer-reference/schema/visual-evidence.schema.json",
     "  component-state-evidence:",
     "    env:",
     "      STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state",
@@ -189,6 +193,9 @@ export const files = {
     "`scripts/generate-patterns.mjs`",
     "`scripts/generate-consumer-reference-evidence.mjs`",
     "Browser state evidence begins with `scripts/create-component-state-session.mjs`",
+    "Receipt creation rejects dirty relevant sources.",
+    "browser-authored visual sidecars bind the same session, scenario, capture time, source digest, PNG bytes, dimensions, and hash",
+    "exactly 30 channel passes over the closed 40-file runtime set",
     "Validation uses the receipt and completed manifest interval, not a wall-clock maximum age",
     "design-engineering/reference-profiles/governed-local/editorial/generated/state-matrix.md",
     "design-engineering/reference-profiles/governed-local/editorial/generated/keyboard-matrix.md",

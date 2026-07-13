@@ -4,10 +4,13 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { files, generatedWarning, sentinelProvenanceClauses } from "./governance-test-fixture.mjs";
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(root, "scripts", "validate-governance.mjs");
+const adapterHarness = path.join(root, "scripts", "test-reference-adapters.mjs");
+const adapterPipeParser = 'let output = ""; process.stdin.setEncoding("utf8"); process.stdin.on("data", (chunk) => { output += chunk; }); process.stdin.on("end", () => { const report = JSON.parse(output); const complete = report.ok === true && report.failures.length === 0 && report.results.length === 42; process.stdout.write(complete ? "42\\n" : "incomplete\\n"); process.exitCode = complete ? 0 : 1; });';
 
 const cases = [
   { name: "missing_governance", omit: ["GOVERNANCE.md"], expect: "GOVERNANCE.md: missing file" },
@@ -78,9 +81,16 @@ const cases = [
   { name: "missing_domain_ci_wiring", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("node scripts/validate-domains.mjs --json\n", "") }, expect: ".github/workflows/validate.yml: missing node scripts/validate-domains.mjs --json" },
   { name: "missing_domain_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail.", "Domain fixtures must fail.") }, expect: "quality/evidence/executable-evidence.md: missing Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail." },
   { name: "missing_sentinel_ci_wiring", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replaceAll("node scripts/test-consumer-reference-sentinel.mjs", "") }, expect: ".github/workflows/validate.yml: missing node scripts/test-consumer-reference-sentinel.mjs" },
+  { name: "missing_component_source_contract_ci", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("node scripts/test-component-state-source-contract.mjs", "") }, expect: ".github/workflows/validate.yml: missing node scripts/test-component-state-source-contract.mjs" },
+  { name: "missing_visual_schema_ci", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("consumer-reference/schema/visual-evidence.schema.json", "") }, expect: ".github/workflows/validate.yml: missing consumer-reference/schema/visual-evidence.schema.json" },
   {
     name: "browser_artifact_harness_in_static_job",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("  component-state-evidence:\n", "node scripts/test-validate-component-state-artifacts.mjs\n  component-state-evidence:\n") },
+    mutate: {
+      ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace(
+        "  validate:\n",
+        "  validate:\nnode scripts/test-validate-component-state-artifacts.mjs\n",
+      ),
+    },
     expect: ".github/workflows/validate.yml: browser-dependent artifact/session harness must not run in validate job",
   },
   {
@@ -134,10 +144,16 @@ const cases = [
     expect: ".github/workflows/validate.yml: missing shared component-state workspace path STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state",
   },
   { name: "missing_sentinel_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.", "Chromium evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence." },
+  { name: "missing_component_state_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles.", "Component evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles." },
   {
     name: "floating_action_ref",
     mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4", "uses: actions/checkout@v4") },
     expect: ".github/workflows/validate.yml: floating or unlabeled action ref uses: actions/checkout@v4",
+  },
+  {
+    name: "checkout_credentials_persisted",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("    persist-credentials: false\n", "") },
+    expect: ".github/workflows/validate.yml: every actions/checkout step must set persist-credentials: false",
   },
   {
     name: "missing_scoped_checkout_sha_trust",
@@ -221,6 +237,15 @@ function runCase(testCase) {
 }
 
 const results = cases.map(runCase);
+const adapterPipeCheck = spawnSync("sh", ["-c", '"$NODE_BIN" "$ADAPTER_HARNESS" --json | "$NODE_BIN" -e "$ADAPTER_PIPE_PARSER"'], {
+  cwd: root, encoding: "utf8", env: { ...process.env, ADAPTER_HARNESS: adapterHarness, ADAPTER_PIPE_PARSER: adapterPipeParser, NODE_BIN: process.execPath },
+});
+results.push({
+  actual: { status: adapterPipeCheck.status, stdout: adapterPipeCheck.stdout.trim() },
+  expected: "complete 42-result JSON report through a pipe",
+  name: "adapter_json_pipe_complete",
+  ok: adapterPipeCheck.status === 0 && adapterPipeCheck.stdout.trim() === "42",
+});
 const report = {
   ok: results.every((result) => result.ok),
   results,

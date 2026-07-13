@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -51,6 +53,7 @@ jobs:
           node -c scripts/governed-profile-registry.mjs
           node -c scripts/promotion-attestation-contract.mjs
           node -c scripts/governance-test-fixture.mjs
+          node -c scripts/workflow-action-contract.mjs
           node -c scripts/validate-governance.mjs
           node -c scripts/test-validate-governance.mjs
           node -c scripts/validate-domains.mjs
@@ -59,10 +62,12 @@ jobs:
           node -c scripts/test-validate-webpage-workflow.mjs
           node -c scripts/validate-consumer-reference.mjs
           node -c scripts/test-validate-consumer-reference.mjs
+          node -c scripts/consumer-reference-case-runner.mjs
           node -c scripts/validate-promotion-rfc.mjs
           node -c scripts/test-validate-promotion-rfc.mjs
           node -c consumer-reference/adapters/style-dictionary.config.mjs
           node -c scripts/reference-token-contract.mjs
+          node -c scripts/reference-artifact-path-contract.mjs
           node -c scripts/build-reference-artifacts.mjs
           node -c scripts/validate-reference-artifacts.mjs
           node -c scripts/test-reference-adapters.mjs
@@ -74,6 +79,7 @@ jobs:
           node -c scripts/calibration-raw-contract.mjs
           node -c scripts/validate-baseline-manifest.mjs
           node -c scripts/test-validate-baseline-manifest.mjs
+          node -c scripts/baseline-schema-parity.mjs
           node -c scripts/summarize-sentinel-calibration.mjs
           node -c scripts/test-summarize-sentinel-calibration.mjs
           node -c scripts/validate-renderer-purity.mjs
@@ -89,6 +95,7 @@ jobs:
           node -c scripts/validate-component-state.mjs
           node -c scripts/test-validate-component-state.mjs
           node -c scripts/test-validate-component-state-artifacts.mjs
+          node -c scripts/test-component-state-source-contract.mjs
           node -c scripts/test-component-state-sentinel.mjs
           node -c scripts/generate-consumer-reference-evidence.mjs
           node -c scripts/test-generate-consumer-reference-evidence.mjs
@@ -100,6 +107,7 @@ jobs:
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/capture-session.schema.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/dom-evidence.schema.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/ax-evidence.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/visual-evidence.schema.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/fixture-manifest.schema.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/evidence-record.schema.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/runtime-evidence-manifest.schema.json"))'
@@ -164,6 +172,7 @@ jobs:
 
       - name: Compound component state and evidence integrity
         run: |
+          node scripts/test-component-state-source-contract.mjs
           node scripts/validate-component-state.mjs --json
           node scripts/test-validate-component-state.mjs --json
           node scripts/generate-consumer-reference-evidence.mjs --check --json
@@ -198,6 +207,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node 22
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -225,6 +236,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node 22
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -281,6 +294,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node 22
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
