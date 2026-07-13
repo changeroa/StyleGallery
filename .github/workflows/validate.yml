@@ -45,6 +45,12 @@ jobs:
           node -c scripts/validate-vocabulary.mjs
           node -c scripts/test-validate-vocabulary.mjs
           node -c scripts/component-state-workflow-contract.mjs
+          node -c scripts/promotion-governance-contract.mjs
+          node -c scripts/promotion-fixture-inventory.mjs
+          node -c scripts/promotion-boundary-test-contract.mjs
+          node -c scripts/governed-profile-registry.mjs
+          node -c scripts/promotion-attestation-contract.mjs
+          node -c scripts/governance-test-fixture.mjs
           node -c scripts/validate-governance.mjs
           node -c scripts/test-validate-governance.mjs
           node -c scripts/validate-domains.mjs
@@ -53,6 +59,8 @@ jobs:
           node -c scripts/test-validate-webpage-workflow.mjs
           node -c scripts/validate-consumer-reference.mjs
           node -c scripts/test-validate-consumer-reference.mjs
+          node -c scripts/validate-promotion-rfc.mjs
+          node -c scripts/test-validate-promotion-rfc.mjs
           node -c consumer-reference/adapters/style-dictionary.config.mjs
           node -c scripts/reference-token-contract.mjs
           node -c scripts/build-reference-artifacts.mjs
@@ -95,6 +103,9 @@ jobs:
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/fixture-manifest.schema.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/evidence-record.schema.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/runtime-evidence-manifest.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/promotion-rfc.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/policies/shared-experimental.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/fixtures/promotion/manifest.json"))'
           git diff --check
 
       - name: Generated artifacts are current
@@ -140,6 +151,11 @@ jobs:
         run: |
           node scripts/validate-consumer-reference.mjs --json
           node scripts/test-validate-consumer-reference.mjs --json
+
+      - name: Shared promotion policy contract
+        run: |
+          node scripts/validate-promotion-rfc.mjs --json
+          node scripts/test-validate-promotion-rfc.mjs --json
 
       - name: Portable token artifact integrity
         run: |

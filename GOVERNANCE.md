@@ -25,6 +25,7 @@ Use this file before editing repository documentation. It names which file is au
 | Portable token source | `consumer-reference/fixtures/token-portability/valid-reference.json`, `consumer-reference/schema/portable-tokens.schema.json` | `scripts/build-reference-artifacts.mjs` with Style Dictionary `5.5.0` | `consumer-reference/generated/tokens.css`, `consumer-reference/generated/manifest.json` | `stable` restricted adapter contract, `generated` output | Allowed token shape, adapter/version pin, source token count, warning, declaration, or content hash changes. | `scripts/validate-reference-artifacts.mjs`, `scripts/test-reference-adapters.mjs` | Repository governance owner with Validation owner |
 | Governed local reference profiles | `design-engineering/reference-profiles/governed-local/**` | Manual | None | `experimental`, `example_only`, non-default related fixtures | Layout revision, identity values, UA/reset assumptions, explicit selection, or fixture relationship changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Design Engineering owner with Validation owner |
 | Component-state evidence matrices | Each profile's declared `components/*.component.json`, `states/*.states.json`, `fixtures/*.fixture.json`, and `evidence/*.evidence.json` records | `scripts/generate-consumer-reference-evidence.mjs` | `design-engineering/reference-profiles/governed-local/editorial/generated/state-matrix.md`, `design-engineering/reference-profiles/governed-local/editorial/generated/keyboard-matrix.md`, `design-engineering/reference-profiles/governed-local/editorial/generated/evidence-coverage.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/state-matrix.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/keyboard-matrix.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/evidence-coverage.md` | `generated` output from `experimental` canonical records | Declared record paths, capture-session identity, scenario/mode/channel counts, claim boundary, generated escaping, or generator output changes. | `scripts/validate-component-state.mjs`, `scripts/test-validate-component-state.mjs`, `scripts/test-validate-component-state-artifacts.mjs`, `scripts/test-generate-consumer-reference-evidence.mjs` | Design Engineering owner with Validation owner |
+| Shared promotion policy | `consumer-reference/policies/shared-experimental.json`, `consumer-reference/schema/promotion-rfc.schema.json` | Manual | None; promotion fixtures are synthetic examples | `stable` policy with `example_only`, deferred fixtures | Gateway scope, independence basis, evidence, ownership, support, compatibility, migration, deprecation, rollback, provenance, or decision changes. | `scripts/validate-promotion-rfc.mjs`, `scripts/test-validate-promotion-rfc.mjs` | Repository governance owner with actual consumer, support, migration, rollback, and Validation owners |
 | Proposed Chromium sentinel | `tests/helpers/render-consumer-reference.mjs`, `consumer-reference/schema/{baseline-manifest,calibration-record}.schema.json`, `consumer-reference/baselines/*.json` | Playwright `1.61.0` in the digest-pinned `linux/amd64` image | `tests/snapshots/consumer-reference-card-grid.png`, raw GitHub Actions calibration artifact | `experimental`, nonblocking while owner approval is pending | Renderer source, exact image/platform/tool pin, baseline bytes, computed layout contract, or calibration metadata changes. | `scripts/validate-baseline-manifest.mjs`, `scripts/test-validate-baseline-manifest.mjs`, `scripts/test-summarize-sentinel-calibration.mjs`, Playwright | Repository governance owner with Validation owner |
 | Domain manifest and scope decision | `DOMAINS.md`, `quality/claim-records/stylegallery-multidomain-scope.md` | Manual | None | `stable` | Domain membership, repository-scope, or provenance-policy changes. | `scripts/validate-domains.mjs`, `scripts/validate-governance.mjs` | Repository governance owner |
 | Layout domain hub | `layout/index.md` | Manual | None | `stable` | Layout route or ownership changes. | `scripts/validate-domains.mjs`, `scripts/validate-ia.mjs` | Pattern-data owner |
@@ -100,6 +101,7 @@ Consumer-reference ownership records the current truth as `owner.enforcement: "p
 | `guides/**`, `GUIDE.md`, `recipes/**` | Planning-doc owner | Planning flow, task routes, recipe composition boundaries. |
 | `quality/**` | Quality owner | Claim boundaries, executable evidence, review gates. |
 | `consumer-reference/**` | Repository governance owner with Validation owner | Required handoff, repository-local record safety, lifecycle separation, ownership truth, and reverse-dependency guard. |
+| `consumer-reference/policies/**`, `consumer-reference/fixtures/promotion/**`, `consumer-reference/schema/promotion-rfc.schema.json`, `scripts/*promotion-rfc.mjs` | Repository governance owner with actual consumer, support, migration, rollback, and Validation owners | Invariant-only scope, independence truth, claim-scoped evidence, compatibility, support capacity, lifecycle duties, and zero promotion/adoption overclaim. |
 | `consumer-reference/adapters/**`, `consumer-reference/generated/**`, `scripts/*reference-artifacts.mjs`, `scripts/test-reference-adapters.mjs` | Repository governance owner with Validation owner | Restricted token ingress, exact adapter pin, warning handling, token/declaration counts, hashes, preserved aliases, and generated drift. |
 | `DOMAINS.md`, `layout/**` | Repository governance owner with Pattern-data owner | Domain routing and preservation of the stable Layout path contract. |
 | `motion/**` | Motion domain owner | Motion terminology, review procedure, practice classification, and evidence boundaries. |
@@ -108,6 +110,16 @@ Consumer-reference ownership records the current truth as `owner.enforcement: "p
 | `tests/**`, `playwright.config.mjs`, `consumer-reference/baselines/**`, `scripts/*baseline*.mjs`, `scripts/*sentinel*.mjs`, `scripts/*renderer-purity.mjs` | Repository governance owner with Validation owner | Pure rendering, computed semantics before screenshots, immutable browser pins, nonblocking status, calibration cardinality, and pending owner approval. |
 | `platform-guides/**` | Platform Guides domain owner | Platform/source/version limits, comparison boundaries, and stale review. |
 | `scripts/validate-*.mjs`, `scripts/test-validate-*.mjs`, `.github/workflows/validate.yml` | Validation owner | Validator scope, negative fixtures, CI parity. |
+
+## Shared Promotion Governance
+
+The StyleGallery-local `>=2` independent-consumer gateway applies only to consumer-local → shared-experimental invariant eligibility. It is neither a universal rule nor a stable threshold. Shared stable has no numeric adoption threshold; it requires claim-scoped evidence, active owner and support capacity, compatibility review, known-issue and exception visibility, migration and deprecation readiness, rollback triggers, resolved provenance debt, and an explicit scope decision.
+
+Normative accessibility, security, standards, or correctness fixes may waive adoption count only. They never waive regression proof, scope control, owner acceptance, support capacity, compatibility, migration, deprecation, or rollback. Palette, typography, imagery, motion character, and component skin remain consumer-local even when repeated.
+
+The committed RFC fixtures are synthetic `example_only` proposals with `decision: "deferred"`; they contain zero durable adopter attestations and record no promotion. Editorial and terminal remain related fixtures in one set and never count as independent consumers. Current review truth remains `review_independence: "single_account"`; booleans and multiple role labels do not create independent review.
+
+If evidence fails, restrict, maintain, or roll back the candidate. A consumed stable contract may be deprecated only with a named migration; it must never be silently relabeled shared-experimental. The canonical JSON policy and RFC records own these decisions; no YAML promotion record is valid.
 
 ## Staleness Control
 
@@ -179,6 +191,13 @@ node scripts/validate-component-state.mjs \
   --runtime-manifest "$STATE_EVIDENCE_ROOT/runtime-manifest.json" \
   --json
 npm run test:component-state:runtime-negative
+```
+
+For shared promotion governance, also run:
+
+```sh
+node scripts/validate-promotion-rfc.mjs --json
+node scripts/test-validate-promotion-rfc.mjs --json
 ```
 
 Do not pass `--update-snapshots` in CI. Calibration runs exactly 20 times on the manifest's digest-pinned `linux/amd64` container and uploads raw Playwright JSON, strict exit records, PNG, DOM, AX, metadata, and post-assertion comparison evidence. Failed or incomplete calibration still uploads its truthful raw evidence without writing a completed aggregate. It remains nonblocking until the named owner explicitly approves the baseline.

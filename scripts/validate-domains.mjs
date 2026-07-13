@@ -227,6 +227,22 @@ function checkReferenceDocuments() {
   }
 }
 
+function checkPromotionBoundary() {
+  const relative = "DOMAINS.md";
+  const content = stripFencedCodeBlocks(read(relative));
+  const required = [
+    "### Consumer Reference Promotion",
+    "applies only to consumer-local → shared-experimental invariant eligibility",
+    "Editorial and terminal are related examples in one fixture set",
+    "Shared stable has no numeric adoption threshold",
+    "Normative correctness may waive adoption count only",
+    "never silently relabeled experimental",
+    "Promotion records are JSON-only",
+    "zero adopter attestations",
+  ];
+  for (const clause of required) if (!content.includes(clause)) failures.push(`${relative}: missing promotion boundary ${clause}`);
+}
+
 checkManifest();
 read("quality/claim-records/stylegallery-multidomain-scope.md");
 requireRootRoutes();
@@ -242,6 +258,7 @@ for (const domain of domains) {
 rejectUndeclaredDomainDocuments();
 rejectOmoDependencies();
 checkReferenceDocuments();
+checkPromotionBoundary();
 
 const result = { ok: failures.length === 0, checkedDomains: domains.length, checkedLeaves, failures: [...new Set(failures)] };
 if (json) console.log(JSON.stringify(result, null, 2));

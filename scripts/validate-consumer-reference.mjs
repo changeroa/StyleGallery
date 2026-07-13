@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import Ajv2020 from "ajv/dist/2020.js";
 import { isPlainObject, validateItemSchema } from "./consumer-reference-schema.mjs";
+import { canonicalGovernedProfilePaths } from "./governed-profile-registry.mjs";
 import { validateReferenceProfile, validateReferenceProfileSet } from "./reference-profile-contract.mjs";
 
 const root = process.cwd();
@@ -12,10 +13,7 @@ const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-re
 const validateFullItemSchema = new Ajv2020({ allErrors: true, strict: false }).compile(schema);
 const failures = [];
 const warnings = [];
-const canonicalProfilePaths = [
-  "design-engineering/reference-profiles/governed-local/editorial/profile.json",
-  "design-engineering/reference-profiles/governed-local/terminal/profile.json",
-];
+const canonicalProfilePaths = canonicalGovernedProfilePaths;
 const defaultItems = [
   "consumer-reference/fixtures/valid-experimental.json",
   "consumer-reference/fixtures/valid-deprecated.json",

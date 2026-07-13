@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { componentStateWorkflowFailures } from "./component-state-workflow-contract.mjs";
+import { promotionGovernanceFailures } from "./promotion-governance-contract.mjs";
 
 const args = new Set(process.argv.slice(2));
 const json = args.has("--json");
@@ -31,6 +32,9 @@ const requiredCodeowners = [
   "/platform-guides/ @changeroa",
   "/consumer-reference/ @changeroa",
   "/consumer-reference/baselines/ @changeroa",
+  "/consumer-reference/policies/ @changeroa",
+  "/consumer-reference/fixtures/promotion/ @changeroa",
+  "/consumer-reference/schema/promotion-rfc.schema.json @changeroa",
   "/tests/ @changeroa",
   "/playwright.config.mjs @changeroa",
   "/GUIDE.md @changeroa",
@@ -93,6 +97,7 @@ function requireGovernanceMatrix() {
     "Quality gates and evidence",
     "Consumer reference contract",
     "Component-state evidence matrices",
+    "Shared promotion policy",
     "Proposed Chromium sentinel",
     "Domain manifest and scope decision",
     "Layout domain hub",
@@ -156,8 +161,16 @@ function requireCiwiring() {
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-validate-webpage-workflow.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/validate-consumer-reference.mjs");
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/test-validate-consumer-reference.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node -c scripts/governed-profile-registry.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node -c scripts/promotion-attestation-contract.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node -c scripts/validate-promotion-rfc.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node -c scripts/test-validate-promotion-rfc.mjs");
   requireIncludes(".github/workflows/validate.yml", "node scripts/validate-consumer-reference.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-validate-consumer-reference.mjs --json");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/validate-promotion-rfc.mjs --json");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/test-validate-promotion-rfc.mjs --json");
+  requireIncludes(".github/workflows/validate.yml", "consumer-reference/schema/promotion-rfc.schema.json");
+  requireIncludes(".github/workflows/validate.yml", "consumer-reference/policies/shared-experimental.json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-consumer-reference-sentinel.mjs");
   requireIncludes(".github/workflows/validate.yml", "node scripts/create-component-state-session.mjs");
   requireIncludes(".github/workflows/validate.yml", "STATE_SESSION_RECEIPT=");
@@ -235,6 +248,7 @@ requireImmutableActions();
 requireRootLinks();
 requireEvidenceMap();
 requireSentinelProvenanceBoundary();
+failures.push(...promotionGovernanceFailures(read));
 requireGeneratedWarning("CATALOG.md");
 requireGeneratedWarning("patterns/index.md");
 requireGeneratedWarning("patterns/stacking/index.md");

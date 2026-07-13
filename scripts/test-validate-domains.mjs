@@ -115,6 +115,15 @@ const baseFiles = {
     "",
     "[Consumer Reference](consumer-reference/index.md) is shared infrastructure and not a fifth domain.",
     "",
+    "### Consumer Reference Promotion",
+    "",
+    "The gateway applies only to consumer-local → shared-experimental invariant eligibility.",
+    "Editorial and terminal are related examples in one fixture set.",
+    "Shared stable has no numeric adoption threshold.",
+    "Normative correctness may waive adoption count only.",
+    "A stable contract is never silently relabeled experimental.",
+    "Promotion records are JSON-only and examples have zero adopter attestations.",
+    "",
   ].join("\n"),
   "layout/index.md": indexPage("Layout", [["Catalog", "../CATALOG.md"]]),
   "motion/index.md": indexPage("Motion", [["Motion Vocabulary", "vocabulary.md"], ["Motion Review Workflow", "review-workflow.md"], ["Motion Practice Reference", "practice-reference.md"]]),
@@ -136,6 +145,9 @@ const cases = [
   { name: "empty_manifest", mutate: ["DOMAINS.md", baseFiles["DOMAINS.md"], "# Empty manifest\n"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "manifest_extra_domain", mutate: ["DOMAINS.md", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |\n| Other | [Other](other/index.md) | `experimental` |"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "consumer_reference_fifth_domain", mutate: ["DOMAINS.md", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |\n| Consumer Reference | [Consumer Reference](consumer-reference/index.md) | `stable` |"], expect: "DOMAINS.md: missing canonical domain contract" },
+  { name: "promotion_stable_by_count", mutate: ["DOMAINS.md", "Shared stable has no numeric adoption threshold.", "Shared stable uses a numeric adoption threshold."], expect: "DOMAINS.md: missing promotion boundary Shared stable has no numeric adoption threshold" },
+  { name: "promotion_related_as_independent", mutate: ["DOMAINS.md", "Editorial and terminal are related examples in one fixture set.", "Editorial and terminal are independent consumers."], expect: "DOMAINS.md: missing promotion boundary Editorial and terminal are related examples in one fixture set" },
+  { name: "promotion_yaml_route", mutate: ["DOMAINS.md", "Promotion records are JSON-only", "Promotion records may use YAML"], expect: "DOMAINS.md: missing promotion boundary Promotion records are JSON-only" },
   { name: "reference_profiles_fifth_domain", mutate: ["design-engineering/reference-profiles/index.md", "Domain classification: design-engineering.", "Domain classification: reference-profiles."], expect: "design-engineering/reference-profiles/index.md: reference profiles must remain in the Design Engineering domain" },
   { name: "manifest_extra_leaf", mutate: ["DOMAINS.md", "`motion/vocabulary.md`,", "`motion/vocabulary.md`, `motion/ghost.md`,"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "manifest_wrong_lifecycle", mutate: ["DOMAINS.md", "| Motion | [Motion](motion/index.md) | `experimental` |", "| Motion | [Motion](motion/index.md) | `stable` |"], expect: "DOMAINS.md: missing canonical domain contract" },
@@ -203,4 +215,4 @@ function runCase(testCase) {
 const results = cases.map(runCase);
 const report = { ok: results.every((result) => result.ok), results };
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

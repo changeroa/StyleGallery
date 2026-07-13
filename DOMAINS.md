@@ -47,6 +47,12 @@ All five new domain leaves are independent method rewrites inspired by [emilkowa
 
 External adaptations begin `experimental`. Promotion to `stable` requires a demonstrated reader or review task, evidence that the document improves that task, a named review owner, and no unresolved provenance or platform-version debt. Remove or revise a page when its source revision changes materially, a platform claim becomes stale, a local quality gate contradicts it, or a reader test shows the route is misleading.
 
+### Consumer Reference Promotion
+
+Consumer-reference promotion does not add a domain. The StyleGallery-local `>=2` independent-consumer gateway applies only to consumer-local → shared-experimental invariant eligibility. Editorial and terminal are related examples in one fixture set, so neither counts as an independent consumer. Shared stable has no numeric adoption threshold.
+
+Normative correctness may waive adoption count only; regression evidence, invariant scope, owner and support capacity, compatibility, migration, deprecation, rollback, and provenance duties remain required. A failed stable contract is restricted, maintained, rolled back, or deprecated with migration, never silently relabeled experimental. Promotion records are JSON-only; the committed examples are synthetic, `example_only`, deferred, and contain zero adopter attestations.
+
 Consumer-reference maturity is governed independently from artifact mode. Stable records cannot have ended support, and related repository fixtures are not independent adoption evidence.
 
 ## IA Navigation

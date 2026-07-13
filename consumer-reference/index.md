@@ -14,6 +14,8 @@ Out of scope: profiles, themes, components, browser runtime, decorative styling,
 
 - [Receiver contract](contract.md) - Required handoff shape, record-path boundary, lifecycle fields, ownership truth, and dependency direction.
 - [Consumer reference item schema](schema/item.schema.json) - Machine-readable shape for the current receiver item.
+- [Promotion RFC schema](schema/promotion-rfc.schema.json) - Closed JSON shape for deferred or rejected invariant-promotion proposals.
+- [Shared-experimental promotion policy](policies/shared-experimental.json) - Count scope, normative bypass, lifecycle, and zero-promotion claim boundary.
 - [Chromium calibration schema](schema/calibration-record.schema.json) - Immutable environment, repetition, and evidence-cardinality contract for the proposed nonblocking sentinel.
 - [Chromium baseline manifest schema](schema/baseline-manifest.schema.json) - Exact proposed source, baseline, platform, and calibration routing contract.
 - `baselines/` - Proposed Chromium geometry baseline metadata and a pending committed-CI calibration record; these files do not constitute baseline-owner approval.
