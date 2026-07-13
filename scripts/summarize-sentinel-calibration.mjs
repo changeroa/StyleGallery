@@ -5,9 +5,9 @@ import path from "node:path";
 import { BASELINE_ENVIRONMENT, BASELINE_REFERENCE, finding, sha256, validateCalibration } from "./baseline-contract.mjs";
 import { parseCalibrationRun } from "./calibration-raw-contract.mjs";
 
-const options = { artifactName: "", checkoutSha: "", headSha: "", input: "", json: false, output: "", repository: "", runAttempt: "", runId: "", sha: "", workflow: "" };
+const options = { artifactName: "", checkoutSha: "", executionRepository: "", headSha: "", input: "", json: false, output: "", repository: "", runAttempt: "", runId: "", sha: "", workflow: "" };
 const valueOptions = new Map([
-  ["--artifact-name", "artifactName"], ["--checkout-sha", "checkoutSha"], ["--head-sha", "headSha"],
+  ["--artifact-name", "artifactName"], ["--checkout-sha", "checkoutSha"], ["--execution-repository", "executionRepository"], ["--head-sha", "headSha"],
   ["--input", "input"], ["--output", "output"], ["--repository", "repository"],
   ["--run-attempt", "runAttempt"], ["--run-id", "runId"], ["--sha", "sha"], ["--workflow", "workflow"],
 ]);
@@ -66,6 +66,7 @@ const record = {
   committed_ci: {
     artifact_name: options.artifactName,
     checkout_sha: options.checkoutSha,
+    execution_repository: options.executionRepository,
     head_sha: options.headSha,
     raw_evidence_sha256: rawEvidence,
     repository: options.repository,

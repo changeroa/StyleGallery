@@ -22,6 +22,8 @@ export const BASELINE_REFERENCE = {
 };
 
 export const BASELINE_METADATA_SHA256 = sha256(JSON.stringify({ environment: BASELINE_ENVIRONMENT, reference: BASELINE_REFERENCE }));
+export const CALIBRATION_CANONICAL_REPOSITORY = "changeroa/StyleGallery";
+export const CALIBRATION_EXECUTION_REPOSITORIES = Object.freeze(["ark-jo/StyleGallery", CALIBRATION_CANONICAL_REPOSITORY]);
 
 export function finding(code, file, message) {
   return { code, message, path: file };
@@ -89,18 +91,19 @@ export function validateCalibration(record, file) {
   if (record.status !== "completed") return [...failures, finding("calibration_status_invalid", file, "status must be awaiting_committed_ci or completed")];
   if (!isRecord(record.committed_ci)) failures.push(finding("calibration_committed_ci_missing", file, "completed calibration requires committed CI metadata"));
   else {
-    rejectUnknown(record.committed_ci, new Set(["artifact_name", "checkout_sha", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"]), "calibration_committed_ci_property_unknown", file, failures);
+    rejectUnknown(record.committed_ci, new Set(["artifact_name", "checkout_sha", "execution_repository", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"]), "calibration_committed_ci_property_unknown", file, failures);
     const expectedArtifact = `chromium-sentinel-calibration-${record.committed_ci.run_id}-${record.committed_ci.sha}`;
     if (!/^[0-9]+$/.test(record.committed_ci.run_id ?? "")
       || !/^[0-9]+$/.test(record.committed_ci.run_attempt ?? "")
       || !/^[0-9a-f]{40}$/.test(record.committed_ci.sha ?? "")
       || !/^[0-9a-f]{40}$/.test(record.committed_ci.head_sha ?? "")
       || record.committed_ci.checkout_sha !== record.committed_ci.sha
+      || !CALIBRATION_EXECUTION_REPOSITORIES.includes(record.committed_ci.execution_repository)
       || !/^[0-9a-f]{64}$/.test(record.committed_ci.raw_evidence_sha256 ?? "")
-      || record.committed_ci.repository !== "changeroa/StyleGallery"
+      || record.committed_ci.repository !== CALIBRATION_CANONICAL_REPOSITORY
       || record.committed_ci.workflow !== ".github/workflows/validate.yml"
       || record.committed_ci.artifact_name !== expectedArtifact) {
-      failures.push(finding("calibration_committed_ci_invalid", file, "repository, workflow, run, attempt, SHAs, raw evidence, and artifact name must have the canonical identity"));
+      failures.push(finding("calibration_committed_ci_invalid", file, "canonical and execution repositories, workflow, run, attempt, SHAs, raw evidence, and artifact name must have the canonical identity"));
     }
   }
   if (record.runs.length !== 20) failures.push(finding("calibration_run_count", file, "completed calibration requires exactly 20 runs"));

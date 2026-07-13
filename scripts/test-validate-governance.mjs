@@ -10,6 +10,7 @@ const validator = path.join(root, "scripts", "validate-governance.mjs");
 const generatedWarning = "<!-- Generated from `scripts/generate-patterns.mjs` and `scripts/pattern-data.mjs`. Do not hand-edit generated catalog or pattern docs; edit the source files and regenerate. -->";
 const sentinelProvenanceClauses = [
   "Completed-CI repository, workflow, run ID and attempt, SHA, and artifact-name fields are workflow-recorded, self-asserted metadata, not an external attestation.",
+  "The self-asserted repository field names the canonical upstream changeroa/StyleGallery; the self-asserted execution_repository field names the actual GitHub Actions repository and is limited to changeroa/StyleGallery or ark-jo/StyleGallery.",
   "Verification against the uploaded GitHub Actions run and artifact ID and digest remains pending.",
   "Linux/amd64 repeatability remains unclaimed until that external verification succeeds.",
   "Baseline-owner approval remains unclaimed until the named owner explicitly approves it.",
@@ -97,6 +98,10 @@ const files = {
     "node scripts/test-summarize-sentinel-calibration.mjs",
     "node scripts/validate-renderer-purity.mjs --json",
     "checkout_sha=\"$(git -c safe.directory=\"$GITHUB_WORKSPACE\" rev-parse HEAD)\"",
+    "--repository \"changeroa/StyleGallery\" \\",
+    "--execution-repository \"$GITHUB_REPOSITORY\" \\",
+    "\"repository\":\"%s\",\"execution_repository\":\"%s\"",
+    "\"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"",
     "permissions:",
     "contents: read",
     "",
@@ -235,6 +240,21 @@ const cases = [
       ),
     },
     expect: ".github/workflows/validate.yml: broad Git safe.directory wildcard is forbidden",
+  },
+  {
+    name: "missing_canonical_repository_wiring",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("--repository \"changeroa/StyleGallery\" \\", "--repository \"$GITHUB_REPOSITORY\" \\") },
+    expect: ".github/workflows/validate.yml: missing --repository \"changeroa/StyleGallery\" \\",
+  },
+  {
+    name: "missing_execution_repository_wiring",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("--execution-repository \"$GITHUB_REPOSITORY\" \\\n", "") },
+    expect: ".github/workflows/validate.yml: missing --execution-repository \"$GITHUB_REPOSITORY\" \\",
+  },
+  {
+    name: "workflow_metadata_repository_mismatch",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("\"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"", "\"$GITHUB_REPOSITORY\" \"changeroa/StyleGallery\" \"$GITHUB_RUN_ID\"") },
+    expect: ".github/workflows/validate.yml: missing \"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"",
   },
   { name: "success_path", expect: null },
 ];

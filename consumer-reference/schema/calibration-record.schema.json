@@ -17,15 +17,22 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["artifact_name", "checkout_sha", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"],
+          "required": ["artifact_name", "checkout_sha", "execution_repository", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"],
           "properties": {
             "run_id": { "type": "string", "pattern": "^[0-9]+$" },
             "run_attempt": { "type": "string", "pattern": "^[0-9]+$" },
             "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
             "checkout_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+            "execution_repository": {
+              "description": "Actual GitHub Actions repository, limited to the canonical upstream or the explicit calibration fork.",
+              "enum": ["ark-jo/StyleGallery", "changeroa/StyleGallery"]
+            },
             "head_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
             "raw_evidence_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-            "repository": { "const": "changeroa/StyleGallery" },
+            "repository": {
+              "description": "Canonical upstream repository, independent of the GitHub Actions execution repository.",
+              "const": "changeroa/StyleGallery"
+            },
             "workflow": { "const": ".github/workflows/validate.yml" },
             "artifact_name": { "type": "string", "pattern": "^chromium-sentinel-calibration-[0-9]+-[0-9a-f]{40}$" }
           }

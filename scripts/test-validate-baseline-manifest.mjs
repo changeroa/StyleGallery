@@ -12,8 +12,9 @@ const canonical = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer
 const canonicalManifest = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "baselines", "manifest.json"), "utf8"));
 const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "schema", "calibration-record.schema.json"), "utf8"));
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-pr4-calibration-"));
+const executionRepositories = ["ark-jo/StyleGallery", "changeroa/StyleGallery"];
 
-function completeRecord() {
+function completeRecord(committedCi = {}) {
   const runs = Array.from({ length: 20 }, (_, index) => ({
     architecture: "amd64",
     ax_sha256: "a".repeat(64),
@@ -29,6 +30,7 @@ function completeRecord() {
     committed_ci: {
       artifact_name: `chromium-sentinel-calibration-123-${"0".repeat(40)}`,
       checkout_sha: "0".repeat(40),
+      execution_repository: "changeroa/StyleGallery",
       head_sha: "1".repeat(40),
       raw_evidence_sha256: "2".repeat(64),
       repository: "changeroa/StyleGallery",
@@ -36,6 +38,7 @@ function completeRecord() {
       run_id: "123",
       sha: "0".repeat(40),
       workflow: ".github/workflows/validate.yml",
+      ...committedCi,
     },
     status: "completed",
     runs,
@@ -56,6 +59,14 @@ const cases = [
   ["wrong_stable_baseline_hash", (record) => ({ ...record, runs: record.runs.map((run) => ({ ...run, png_sha256: "d".repeat(64) })) }), "calibration_baseline_hash_mismatch"],
   ["wrong_stable_metadata_hash", (record) => ({ ...record, runs: record.runs.map((run) => ({ ...run, metadata_sha256: "c".repeat(64) })) }), "calibration_metadata_hash_mismatch"],
   ["unknown_run_property", (record) => ({ ...record, runs: record.runs.map((run, index) => index === 19 ? { ...run, forged: true } : run) }), "calibration_run_property_unknown"],
+  ["checkout_sha_not_tested_sha", (record) => ({ ...record, committed_ci: { ...record.committed_ci, checkout_sha: record.committed_ci.head_sha } }), "calibration_committed_ci_invalid"],
+  ["artifact_bound_to_head_sha", (record) => ({ ...record, committed_ci: { ...record.committed_ci, artifact_name: `chromium-sentinel-calibration-${record.committed_ci.run_id}-${record.committed_ci.head_sha}` } }), "calibration_committed_ci_invalid"],
+  ["unrecognized_execution_repository", (record) => ({ ...record, committed_ci: { ...record.committed_ci, execution_repository: "untrusted/StyleGallery" } }), "calibration_committed_ci_invalid"],
+  ["swapped_canonical_and_execution_repository", (record) => ({ ...record, committed_ci: { ...record.committed_ci, execution_repository: "changeroa/StyleGallery", repository: "ark-jo/StyleGallery" } }), "calibration_committed_ci_invalid"],
+  ["missing_execution_repository", (record) => {
+    const { execution_repository: omitted, ...committedCi } = record.committed_ci;
+    return { ...record, committed_ci: committedCi };
+  }, "calibration_committed_ci_invalid"],
   ["invalid_committed_ci", (record) => ({ ...record, committed_ci: { artifact_name: "forged", extra: true, run_id: "abc", sha: "x" } }), "calibration_committed_ci_property_unknown"],
   ["owner_approval_preclaim", (record) => ({ ...record, baseline_owner_approval: "approved" }), "baseline_owner_approval_invalid"],
   ["pending_evidence_preclaim", (record) => ({ ...record, status: "awaiting_committed_ci" }), "calibration_pending_evidence_forbidden"],
@@ -79,15 +90,37 @@ try {
     && runSchema.additionalProperties === false
     && runSchema.properties.png_sha256.const === BASELINE_REFERENCE.baseline.sha256
     && runSchema.properties.metadata_sha256.const === BASELINE_METADATA_SHA256
+    && committedSchema.properties.repository.const === "changeroa/StyleGallery"
+    && JSON.stringify(committedSchema.properties.execution_repository?.enum ?? []) === JSON.stringify(executionRepositories)
     && JSON.stringify(runContains.map((entry) => entry.contains.properties.run.const).sort((left, right) => left - right)) === JSON.stringify(Array.from({ length: 20 }, (_, index) => index + 1))
     && runContains.every((entry) => entry.minContains === 1 && entry.maxContains === 1)
-    && JSON.stringify([...committedSchema.required].sort()) === JSON.stringify(["artifact_name", "checkout_sha", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"].sort());
+    && JSON.stringify([...committedSchema.required].sort()) === JSON.stringify(["artifact_name", "checkout_sha", "execution_repository", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"].sort());
   results.push({ actual: { schemaParity }, expected: "recursive schema/runtime identity parity", name: "schema_runtime_parity", ok: schemaParity });
   const validFixture = path.join(tempRoot, "valid-completed.json");
   fs.writeFileSync(validFixture, `${JSON.stringify(completeRecord(), null, 2)}\n`);
   const validChild = spawnSync(process.execPath, [validator, "--calibration", validFixture, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
   const validOutput = JSON.parse(validChild.stdout);
   results.push({ actual: { codes: validOutput.failures.map((failure) => failure.code), status: validChild.status }, expected: "completed calibration and exit:0", name: "valid_completed_calibration", ok: validChild.status === 0 && validOutput.ok === true });
+  const pullRequestFixture = path.join(tempRoot, "valid-pull-request-merge-head.json");
+  const mergeSha = "11f4668fe5988720c27e88ec7203ecd1685a40df";
+  const headSha = "8b8eaed41094286138973157b581a1d9ab9957a8";
+  fs.writeFileSync(pullRequestFixture, `${JSON.stringify(completeRecord({
+    artifact_name: `chromium-sentinel-calibration-29258810962-${mergeSha}`,
+    checkout_sha: mergeSha,
+    execution_repository: "ark-jo/StyleGallery",
+    head_sha: headSha,
+    repository: "changeroa/StyleGallery",
+    run_id: "29258810962",
+    sha: mergeSha,
+  }), null, 2)}\n`);
+  const pullRequestChild = spawnSync(process.execPath, [validator, "--calibration", pullRequestFixture, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
+  const pullRequestOutput = JSON.parse(pullRequestChild.stdout);
+  results.push({
+    actual: { codes: pullRequestOutput.failures.map((failure) => failure.code), status: pullRequestChild.status },
+    expected: "distinct canonical pull-request merge checkout and head SHAs",
+    name: "valid_pull_request_merge_and_head_identity",
+    ok: pullRequestChild.status === 0 && pullRequestOutput.ok === true,
+  });
   for (const [name, mutate, expected] of cases) {
     const fixture = path.join(tempRoot, `${name}.json`);
     fs.writeFileSync(fixture, `${JSON.stringify(mutate(completeRecord()), null, 2)}\n`);

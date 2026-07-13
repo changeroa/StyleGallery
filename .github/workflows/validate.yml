@@ -211,7 +211,8 @@ jobs:
           node scripts/summarize-sentinel-calibration.mjs \
             --input calibration-artifacts \
             --output calibration-artifacts/calibration.json \
-            --repository "$GITHUB_REPOSITORY" \
+            --repository "changeroa/StyleGallery" \
+            --execution-repository "$GITHUB_REPOSITORY" \
             --workflow ".github/workflows/validate.yml" \
             --run-id "$GITHUB_RUN_ID" \
             --run-attempt "$GITHUB_RUN_ATTEMPT" \
@@ -222,8 +223,8 @@ jobs:
             --json > "$validation_output"
           summary_exit=$?
           mv "$validation_output" calibration-artifacts/calibration-validation.json
-          printf '{"run_id":"%s","sha":"%s","artifact_name":"%s","platform":"linux/amd64","architecture":"amd64","container_image":"%s"}\n' \
-            "$GITHUB_RUN_ID" "$GITHUB_SHA" "$artifact_name" "$SENTINEL_CONTAINER_IMAGE" \
+          printf '{"repository":"%s","execution_repository":"%s","run_id":"%s","sha":"%s","artifact_name":"%s","platform":"linux/amd64","architecture":"amd64","container_image":"%s"}\n' \
+            "changeroa/StyleGallery" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" "$GITHUB_SHA" "$artifact_name" "$SENTINEL_CONTAINER_IMAGE" \
             > calibration-artifacts/workflow-metadata.json
           if [ "$summary_exit" -ne 0 ]; then failed=1; fi
           exit "$failed"

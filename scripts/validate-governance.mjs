@@ -10,6 +10,7 @@ const failures = [];
 const warnings = [];
 const sentinelProvenanceClauses = [
   "Completed-CI repository, workflow, run ID and attempt, SHA, and artifact-name fields are workflow-recorded, self-asserted metadata, not an external attestation.",
+  "The self-asserted repository field names the canonical upstream changeroa/StyleGallery; the self-asserted execution_repository field names the actual GitHub Actions repository and is limited to changeroa/StyleGallery or ark-jo/StyleGallery.",
   "Verification against the uploaded GitHub Actions run and artifact ID and digest remains pending.",
   "Linux/amd64 repeatability remains unclaimed until that external verification succeeds.",
   "Baseline-owner approval remains unclaimed until the named owner explicitly approves it.",
@@ -146,6 +147,10 @@ function requireCiwiring() {
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-summarize-sentinel-calibration.mjs");
   requireIncludes(".github/workflows/validate.yml", "node scripts/validate-renderer-purity.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "checkout_sha=\"$(git -c safe.directory=\"$GITHUB_WORKSPACE\" rev-parse HEAD)\"");
+  requireIncludes(".github/workflows/validate.yml", "--repository \"changeroa/StyleGallery\" \\");
+  requireIncludes(".github/workflows/validate.yml", "--execution-repository \"$GITHUB_REPOSITORY\" \\");
+  requireIncludes(".github/workflows/validate.yml", "\"repository\":\"%s\",\"execution_repository\":\"%s\"");
+  requireIncludes(".github/workflows/validate.yml", "\"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"");
   if (/safe\.directory(?:=|\s+)["']?\*["']?/.test(read(".github/workflows/validate.yml"))) {
     failures.push(".github/workflows/validate.yml: broad Git safe.directory wildcard is forbidden");
   }

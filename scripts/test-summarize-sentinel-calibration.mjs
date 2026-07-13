@@ -74,24 +74,31 @@ function writeRun(root, run) {
   return runRoot;
 }
 
-function invoke(name, mutate) {
+function invoke(name, mutate, identity = {}) {
   const input = path.join(tempRoot, name, "raw");
   const outputFile = path.join(input, "calibration.json");
   for (let run = 1; run <= 20; run += 1) writeRun(input, run);
   mutate?.(path.join(input, "run-01"));
-  const sha = "0".repeat(40);
+  const sha = identity.sha ?? "0".repeat(40);
+  const checkoutSha = identity.checkoutSha ?? sha;
+  const executionRepository = identity.executionRepository ?? "changeroa/StyleGallery";
+  const headSha = identity.headSha ?? "1".repeat(40);
+  const repository = identity.repository ?? "changeroa/StyleGallery";
+  const runId = identity.runId ?? "123";
+  const artifactName = identity.artifactName ?? `chromium-sentinel-calibration-${runId}-${sha}`;
   const child = spawnSync(process.execPath, [
     summarizer,
     "--input", input,
     "--output", outputFile,
-    "--repository", "changeroa/StyleGallery",
+    "--repository", repository,
+    "--execution-repository", executionRepository,
     "--workflow", ".github/workflows/validate.yml",
-    "--run-id", "123",
+    "--run-id", runId,
     "--run-attempt", "1",
     "--sha", sha,
-    "--checkout-sha", sha,
-    "--head-sha", "1".repeat(40),
-    "--artifact-name", `chromium-sentinel-calibration-123-${sha}`,
+    "--checkout-sha", checkoutSha,
+    "--head-sha", headSha,
+    "--artifact-name", artifactName,
     "--json",
   ], { cwd: repositoryRoot, encoding: "utf8" });
   return {
@@ -110,6 +117,25 @@ try {
     name: "valid_raw_calibration",
     ok: valid.status === 0 && valid.report.ok === true && valid.report.status === "completed"
       && valid.output?.runs.length === 20 && new Set(valid.output.runs.map((run) => run.png_sha256)).size === 1,
+  });
+  const pullRequestMergeSha = "11f4668fe5988720c27e88ec7203ecd1685a40df";
+  const pullRequestHeadSha = "8b8eaed41094286138973157b581a1d9ab9957a8";
+  const validFork = invoke("valid_explicit_fork", undefined, {
+    executionRepository: "ark-jo/StyleGallery",
+    headSha: pullRequestHeadSha,
+    runId: "29258810962",
+    sha: pullRequestMergeSha,
+  });
+  results.push({
+    actual: { committedCi: validFork.output?.committed_ci, report: validFork.report, status: validFork.status },
+    expected: "canonical upstream plus explicit execution fork with distinct merge/head SHAs",
+    name: "valid_explicit_fork_pull_request_identity",
+    ok: validFork.status === 0 && validFork.report.ok === true
+      && validFork.output?.committed_ci.repository === "changeroa/StyleGallery"
+      && validFork.output?.committed_ci.execution_repository === "ark-jo/StyleGallery"
+      && validFork.output?.committed_ci.sha === pullRequestMergeSha
+      && validFork.output?.committed_ci.checkout_sha === pullRequestMergeSha
+      && validFork.output?.committed_ci.head_sha === pullRequestHeadSha,
   });
   const invalidCases = [
     ["missing_exit", (root) => fs.rmSync(path.join(root, "exit.json")), "calibration_raw_file_missing"],
@@ -167,6 +193,22 @@ try {
     const actual = invoke(name, mutate);
     const codes = actual.report.failures.map((failure) => failure.code);
     results.push({ actual: { codes, outputExists: actual.output !== null, status: actual.status }, expected, name, ok: actual.status !== 0 && actual.output === null && actual.report.status === "incomplete" && codes.includes(expected) });
+  }
+  const identityCases = [
+    ["checkout_sha_not_tested_sha", { checkoutSha: "1".repeat(40) }],
+    ["artifact_bound_to_head_sha", { artifactName: `chromium-sentinel-calibration-123-${"1".repeat(40)}` }],
+    ["unrecognized_execution_repository", { executionRepository: "untrusted/StyleGallery" }],
+    ["swapped_canonical_and_execution_repository", { executionRepository: "changeroa/StyleGallery", repository: "ark-jo/StyleGallery" }],
+  ];
+  for (const [name, identity] of identityCases) {
+    const actual = invoke(name, undefined, identity);
+    const codes = actual.report.failures.map((failure) => failure.code);
+    results.push({
+      actual: { codes, outputExists: actual.output !== null, status: actual.status },
+      expected: "calibration_committed_ci_invalid",
+      name,
+      ok: actual.status !== 0 && actual.output === null && codes.includes("calibration_committed_ci_invalid"),
+    });
   }
 } finally {
   fs.rmSync(tempRoot, { force: true, recursive: true });
