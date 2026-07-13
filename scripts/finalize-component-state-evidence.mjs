@@ -51,7 +51,8 @@ const schemas = compileSchemas(path.join(repositoryRoot, "consumer-reference/sch
 const capture = receiptFile ? readCaptureSession(receiptFile, schemas.capture, failures) : undefined;
 const intended = canonicalIntended(options.profileRoot, failures);
 if (capture && !sameJson(capture.receipt.intended, intended)) failures.push({ code: "capture_session_intent_mismatch", message: "receipt intent differs from canonical profile scenarios", path: receiptFile });
-if (capture && !sourceManifestMatches(capture.receipt.source, repositoryRoot, options.profileRoot)) failures.push({ code: "capture_source_drift", message: "capture sources differ from the receipt source manifest", path: receiptFile });
+if (capture && !capture.receipt.source) failures.push({ code: "capture_source_missing", message: "capture receipt must include its canonical source manifest", path: receiptFile });
+else if (capture && !sourceManifestMatches(capture.receipt.source, repositoryRoot, options.profileRoot)) failures.push({ code: "capture_source_drift", message: "capture sources differ from the receipt source manifest", path: receiptFile });
 
 const completedAt = new Date().toISOString();
 const completedSession = capture ? {

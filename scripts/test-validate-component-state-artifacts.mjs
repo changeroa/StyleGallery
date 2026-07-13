@@ -5,9 +5,9 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import zlib from "node:zlib";
 import { artifactMetadata } from "./artifact-metadata.mjs";
 import { sessionLink, sha256 } from "./capture-session-contract.mjs";
+import { makePng, syntheticImage } from "./component-state-artifact-fixture.mjs";
 import { resolveProfileRecords } from "./profile-record-contract.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -15,43 +15,6 @@ const sourceProfiles = path.join(repositoryRoot, "design-engineering/reference-p
 const validator = path.join(repositoryRoot, "scripts/validate-component-state.mjs");
 const finalizer = path.join(repositoryRoot, "scripts/finalize-component-state-evidence.mjs");
 const creator = path.join(repositoryRoot, "scripts/create-component-state-session.mjs");
-
-function crc32(bytes) {
-  let crc = 0xffffffff;
-  for (const byte of bytes) {
-    crc ^= byte;
-    for (let bit = 0; bit < 8; bit += 1) crc = (crc >>> 1) ^ (0xedb88320 & -(crc & 1));
-  }
-  return (crc ^ 0xffffffff) >>> 0;
-}
-
-function pngChunk(type, data) {
-  const name = Buffer.from(type, "ascii");
-  const output = Buffer.alloc(12 + data.length);
-  output.writeUInt32BE(data.length, 0);
-  name.copy(output, 4);
-  data.copy(output, 8);
-  output.writeUInt32BE(crc32(Buffer.concat([name, data])), 8 + data.length);
-  return output;
-}
-
-function makePng(red) {
-  const width = 64;
-  const height = 64;
-  const header = Buffer.alloc(13);
-  header.writeUInt32BE(width, 0);
-  header.writeUInt32BE(height, 4);
-  header[8] = 8;
-  header[9] = 6;
-  const row = Buffer.alloc(1 + (width * 4));
-  for (let pixel = 0; pixel < width; pixel += 1) row.set([red, 64, 128, 255], 1 + (pixel * 4));
-  return Buffer.concat([
-    Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]),
-    pngChunk("IHDR", header),
-    pngChunk("IDAT", zlib.deflateSync(Buffer.concat(Array.from({ length: height }, () => row)))),
-    pngChunk("IEND", Buffer.alloc(0)),
-  ]);
-}
 
 const png = makePng(32);
 
@@ -65,6 +28,15 @@ function prepareCanonical() {
   const profileRoot = path.join(root, "profiles");
   const artifactRoot = path.join(root, "artifacts");
   fs.cpSync(sourceProfiles, profileRoot, { recursive: true });
+  for (const entry of fs.readdirSync(profileRoot, { withFileTypes: true }).filter((item) => item.isDirectory())) {
+    const resolved = resolveProfileRecords(path.join(profileRoot, entry.name), []);
+    const statesRecord = resolved.records.states[0];
+    for (const scenario of statesRecord.value.scenarios) {
+      const metadata = artifactMetadata(syntheticImage(entry.name, scenario.id), "image/png");
+      scenario.expected.visual_image = scenario.expected.visual_image.map((expectation) => ({ environment_id: expectation.environment_id, height: metadata.height, sha256: metadata.sha256, width: metadata.width }));
+    }
+    writeJson(statesRecord.path, statesRecord.value);
+  }
   const receiptFile = path.join(artifactRoot, "capture-session.json");
   const created = spawnSync(process.execPath, [creator, "--root", profileRoot, "--output", receiptFile, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
   if (created.status !== 0) throw new Error(`canonical session creation failed: ${created.stdout}${created.stderr}`);
@@ -108,7 +80,7 @@ function prepareCanonical() {
         semantic_mode: scenario.semantic_mode,
       });
       fs.mkdirSync(path.dirname(`${prefix}.png`), { recursive: true });
-      const image = Buffer.concat([png, Buffer.from(`${entry.name}:${fixture.id}`)]);
+      const image = syntheticImage(entry.name, fixture.id);
       fs.writeFileSync(`${prefix}.png`, image);
       writeJson(`${prefix}.visual.json`, {
         capture_session: captureLink,
@@ -163,6 +135,7 @@ const cases = [
   { expect: "evidence_channel_duplicate", name: "channel_substitution", mutate: (m) => { findPass(m, "action-focused", "ax").channel = "dom"; } },
   { expect: "evidence_png_invalid", name: "dummy_visual_bytes", mutate: (m, a) => { const p = findPass(m, "action-focused", "visual"); fs.writeFileSync(path.join(a, p.artifact.path), "not a png"); refresh(p, a, true); } },
   { expect: "evidence_visual_image_mismatch", name: "wrong_valid_png", mutate: (m, a) => { const p = findPass(m, "action-focused", "visual"); fs.writeFileSync(path.join(a, p.artifact.path), makePng(224)); refresh(p, a); } },
+  { expect: "evidence_visual_expectation_mismatch", name: "coordinated_visual_substitution", mutate: (m, a) => { const p = findPass(m, "action-focused", "visual"); const file = path.join(a, p.artifact.path); const image = makePng(224); fs.writeFileSync(file, image); refresh(p, a); const sidecar = path.join(a, p.artifact.path.replace(/\.png$/, ".visual.json")); const document = JSON.parse(fs.readFileSync(sidecar)); document.image = { path: path.basename(file), ...artifactMetadata(image, "image/png") }; writeJson(sidecar, document); } },
   { expect: "evidence_json_invalid", name: "png_as_dom", mutate: (m, a) => { const p = findPass(m, "action-focused", "dom"); fs.writeFileSync(path.join(a, p.artifact.path), png); refresh(p, a); } },
   { expect: "evidence_artifact_symlink", name: "artifact_symlink", mutate: (m, a) => { const p = findPass(m, "action-focused", "visual"); const f = path.join(a, p.artifact.path); fs.rmSync(f); fs.symlinkSync("/etc/hosts", f); } },
   { expect: "evidence_artifact_reused", name: "artifact_path_reuse", mutate: (m) => { const p = findPass(m, "action-loading-busy", "visual"); p.artifact = structuredClone(findPass(m, "action-focused", "visual").artifact); } },
@@ -185,6 +158,11 @@ const cases = [
   { expect: "evidence_ax_schema_invalid", name: "ax_null_type", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "ax", (d) => { d.properties.focused = null; }); } },
   { expect: "evidence_ax_schema_invalid", name: "ax_missing_key", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "ax", (d) => { delete d.role; }); } },
   { expect: "capture_session_receipt_mismatch", name: "receipt_tamper", mutate: (m, a) => { const f = path.join(a, "capture-session.json"); const r = JSON.parse(fs.readFileSync(f)); r.nonce = "0".repeat(64); writeJson(f, r); } },
+  { expect: "capture_session_schema_invalid", name: "receipt_source_missing", mutate: (_m, a) => { const f = path.join(a, "capture-session.json"); const r = JSON.parse(fs.readFileSync(f)); delete r.source; writeJson(f, r); } },
+  { expect: "runtime_manifest_schema_invalid", name: "completed_session_source_missing", mutate: (m) => { delete m.session.source; } },
+  { expect: "evidence_visual_schema_invalid", name: "visual_session_source_missing", mutate: (m, a) => { const p = findPass(m, "action-focused", "visual"); const f = path.join(a, p.artifact.path.replace(/\.png$/, ".visual.json")); const d = JSON.parse(fs.readFileSync(f)); delete d.capture_session.source; writeJson(f, d); } },
+  { expect: "evidence_dom_schema_invalid", name: "dom_session_source_missing", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "dom", (d) => { delete d.capture_session.source; }); } },
+  { expect: "evidence_ax_schema_invalid", name: "ax_session_source_missing", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "ax", (d) => { delete d.capture_session.source; }); } },
   { expect: "capture_session_receipt_mismatch", name: "isolated_session_replay", mutate: (_m, a) => { fs.copyFileSync(path.join(alternate.artifactRoot, "capture-session.json"), path.join(a, "capture-session.json")); } },
   { expect: "capture_session_missing", name: "receipt_missing", mutate: (m, a) => { fs.rmSync(path.join(a, "capture-session.json")); } },
   { expect: "capture_session_mismatch", name: "cross_session_artifact_mix", mutate: (m, a) => { const target = findPass(m, "action-focused", "dom"); const sourceManifest = JSON.parse(fs.readFileSync(alternate.manifest)); const source = findPass(sourceManifest, "action-focused", "dom"); fs.copyFileSync(path.join(alternate.artifactRoot, source.artifact.path), path.join(a, target.artifact.path)); refresh(target, a); } },

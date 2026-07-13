@@ -3,6 +3,7 @@ import path from "node:path";
 import { artifactMetadata } from "./artifact-metadata.mjs";
 import { sameJson, withinSession } from "./capture-session-contract.mjs";
 import { parseStrictJson } from "./strict-json.mjs";
+import { visualExpectationFor } from "./visual-expectation-contract.mjs";
 
 function finding(code, file, message) {
   return { code, message, path: file };
@@ -65,13 +66,19 @@ function validateAx(document, pass, scenario, fixture, profileId, evidenceFile, 
   }
 }
 
-function validateVisual(document, pass, scenario, profileId, actual, evidenceFile, failures) {
+function validateVisual(document, pass, scenario, profileId, actual, visualEnvironments, evidenceFile, failures) {
   if (document.schema_version !== "1.0" || document.channel !== "visual" || document.profile_id !== profileId || document.scenario_id !== pass.scenario_id || document.semantic_mode !== scenario.semantic_mode) {
     failures.push(finding("evidence_visual_identity_mismatch", evidenceFile, `${pass.id} visual identity does not match its pass`));
   }
   if (document.source_sha256 !== pass.session?.source?.sha256) failures.push(finding("capture_source_mismatch", evidenceFile, `${pass.id} visual source digest differs from its capture session`));
   const expectedImage = { path: path.posix.basename(pass.artifact.path), ...actual };
   if (!sameJson(document.image, expectedImage)) failures.push(finding("evidence_visual_image_mismatch", evidenceFile, `${pass.id} visual metadata does not match its PNG`));
+  try {
+    const expectation = visualExpectationFor(scenario, pass.environment, visualEnvironments);
+    if (actual.sha256 !== expectation.sha256 || actual.width !== expectation.width || actual.height !== expectation.height) failures.push(finding("evidence_visual_expectation_mismatch", evidenceFile, `${pass.id} PNG differs from its pre-capture approved visual expectation`));
+  } catch (error) {
+    failures.push(finding("evidence_visual_expectation_invalid", evidenceFile, error instanceof Error ? error.message : String(error)));
+  }
 }
 
 function parseArtifactJson(bytes, pass, scenario, fixture, profileId, evidenceFile, failures, schemas, session) {
@@ -127,7 +134,7 @@ function readArtifact(pass, artifactRoot, evidenceFile, failures) {
   return fs.readFileSync(realTarget);
 }
 
-function parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, evidenceFile, failures, schemas, session) {
+function parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, visualEnvironments, evidenceFile, failures, schemas, session) {
   const reference = pass.artifact.path.replace(/\.png$/, ".visual.json");
   const bytes = readArtifact({ artifact: { path: reference }, id: `${pass.id}-metadata` }, artifactRoot, evidenceFile, failures);
   if (!bytes) return undefined;
@@ -145,7 +152,7 @@ function parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, ev
   if (!sameJson(document.capture_session, pass.session)) failures.push(finding("capture_session_mismatch", evidenceFile, `${pass.id} visual metadata session differs from its pass`));
   if (document.captured_at !== pass.recorded_at) failures.push(finding("evidence_recorded_at_mismatch", evidenceFile, `${pass.id} recorded_at is not derived from visual metadata`));
   if (session && !withinSession(document.captured_at, session.started_at, session.completed_at)) failures.push(finding("capture_session_time_outside", evidenceFile, `${pass.id} visual metadata was not captured within its session`));
-  validateVisual(document, pass, scenario, profileId, actual, evidenceFile, failures);
+  validateVisual(document, pass, scenario, profileId, actual, visualEnvironments, evidenceFile, failures);
   return document;
 }
 
@@ -168,7 +175,7 @@ export function validateEvidenceArtifacts({ artifactRoot, evidence, evidenceFile
         capturedTimes.get(pass.scenario_id).add(document.captured_at);
       }
     } else if (pass.channel === "visual") {
-      const document = parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, evidenceFile, failures, schemas, session);
+      const document = parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, states.visual_environments, evidenceFile, failures, schemas, session);
       if (document?.captured_at) {
         if (!capturedTimes.has(pass.scenario_id)) capturedTimes.set(pass.scenario_id, new Set());
         capturedTimes.get(pass.scenario_id).add(document.captured_at);
