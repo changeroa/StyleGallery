@@ -1,0 +1,6 @@
+{
+  "space": {
+    "$type": "dimension",
+    "large": { "$value": "{space.missing}" }
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "base": { "$type": "dimension", "small": { "$value": { "value": 4, "unit": "px" } } },
+  "derived": { "$extends": "{base}", "large": { "$type": "dimension", "$value": { "value": 8, "unit": "px" } } }
+}

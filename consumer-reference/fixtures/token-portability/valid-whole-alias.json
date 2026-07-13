@@ -1,0 +1,7 @@
+{
+  "color": {
+    "$type": "color",
+    "base": { "$value": { "colorSpace": "srgb", "components": [0.1, 0.2, 0.3] } },
+    "linked": { "$value": "{color.base}" }
+  }
+}

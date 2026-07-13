@@ -13,6 +13,8 @@
 /design-engineering/ @changeroa
 /platform-guides/ @changeroa
 /consumer-reference/ @changeroa
+/consumer-reference/adapters/ @changeroa
+/consumer-reference/generated/ @changeroa
 
 /GUIDE.md @changeroa
 /guides/ @changeroa
@@ -30,3 +32,6 @@
 /scripts/ @changeroa
 /scripts/validate-*.mjs @changeroa
 /scripts/test-validate-*.mjs @changeroa
+/scripts/build-reference-artifacts.mjs @changeroa
+/scripts/validate-reference-artifacts.mjs @changeroa
+/scripts/test-reference-adapters.mjs @changeroa

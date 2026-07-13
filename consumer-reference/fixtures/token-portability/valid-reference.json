@@ -1,0 +1,32 @@
+{
+  "color": {
+    "$type": "color",
+    "accent": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.125, 0.375, 0.875],
+        "alpha": 1
+      }
+    },
+    "action": { "$value": "{color.accent}" }
+  },
+  "duration": {
+    "$type": "duration",
+    "quick": { "$value": { "value": 120, "unit": "ms" } }
+  },
+  "space": {
+    "$type": "dimension",
+    "small": { "$value": { "value": 8, "unit": "px" } },
+    "control": { "$value": "{space.small}" }
+  },
+  "border": {
+    "$type": "border",
+    "focus": {
+      "$value": {
+        "color": "{color.action}",
+        "style": "solid",
+        "width": "{space.control}"
+      }
+    }
+  }
+}

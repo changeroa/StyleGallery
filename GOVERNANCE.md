@@ -22,6 +22,7 @@ Use this file before editing repository documentation. It names which file is au
 | Layout recipes | `recipes/*.md` | Manual | None | `stable` | Pattern-stack changes, route changes, or broken recipe links. | `scripts/validate-okf.mjs`, `scripts/validate-links.mjs`, `scripts/validate-ia.mjs` | Recipe owner |
 | Quality gates and evidence | `quality/**/*.md` | Manual | None | `stable` | Claim-boundary changes, evidence-family changes, or broken quality links. | `scripts/validate-okf.mjs`, `scripts/validate-links.mjs`, `scripts/validate-ia.mjs` | Quality owner |
 | Consumer reference contract | `consumer-reference/contract.md`, `consumer-reference/schema/*.json` | Manual | None | `stable` contract with related fixtures | Handoff shape, path boundary, lifecycle, ownership, or dependency-direction changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Repository governance owner with Validation owner |
+| Portable token source | `consumer-reference/fixtures/token-portability/valid-reference.json`, `consumer-reference/schema/portable-tokens.schema.json` | `scripts/build-reference-artifacts.mjs` with Style Dictionary `5.5.0` | `consumer-reference/generated/tokens.css`, `consumer-reference/generated/manifest.json` | `stable` restricted adapter contract, `generated` output | Allowed token shape, adapter/version pin, source token count, warning, declaration, or content hash changes. | `scripts/validate-reference-artifacts.mjs`, `scripts/test-reference-adapters.mjs` | Repository governance owner with Validation owner |
 | Domain manifest and scope decision | `DOMAINS.md`, `quality/claim-records/stylegallery-multidomain-scope.md` | Manual | None | `stable` | Domain membership, repository-scope, or provenance-policy changes. | `scripts/validate-domains.mjs`, `scripts/validate-governance.mjs` | Repository governance owner |
 | Layout domain hub | `layout/index.md` | Manual | None | `stable` | Layout route or ownership changes. | `scripts/validate-domains.mjs`, `scripts/validate-ia.mjs` | Pattern-data owner |
 | Motion domain guidance | `motion/*.md` | Manual | None | `experimental` | Upstream revision, evidence boundary, or guidance changes. | `scripts/validate-domains.mjs` | Motion domain owner |
@@ -48,6 +49,10 @@ Current generated artifacts:
 - `patterns/index.md`
 - `patterns/**/index.md`
 - `patterns/**/*.md`
+- `consumer-reference/generated/tokens.css`
+- `consumer-reference/generated/manifest.json`
+
+Portable token artifacts are regenerated only from the restricted fixture through the pinned adapter. Run `npm run build`; never broaden the allowed token subset to accommodate an adapter false-success, and revert the adapter with both generated files if the pin regresses.
 
 ## Lifecycle States
 
@@ -81,6 +86,7 @@ Consumer-reference ownership records the current truth as `owner.enforcement: "p
 | `guides/**`, `GUIDE.md`, `recipes/**` | Planning-doc owner | Planning flow, task routes, recipe composition boundaries. |
 | `quality/**` | Quality owner | Claim boundaries, executable evidence, review gates. |
 | `consumer-reference/**` | Repository governance owner with Validation owner | Required handoff, repository-local record safety, lifecycle separation, ownership truth, and reverse-dependency guard. |
+| `consumer-reference/adapters/**`, `consumer-reference/generated/**`, `scripts/*reference-artifacts.mjs`, `scripts/test-reference-adapters.mjs` | Repository governance owner with Validation owner | Restricted token ingress, exact adapter pin, warning handling, token/declaration counts, hashes, preserved aliases, and generated drift. |
 | `DOMAINS.md`, `layout/**` | Repository governance owner with Pattern-data owner | Domain routing and preservation of the stable Layout path contract. |
 | `motion/**` | Motion domain owner | Motion terminology, review procedure, practice classification, and evidence boundaries. |
 | `design-engineering/**` | Design Engineering domain owner | Separation of product heuristics from shared quality gates. |
@@ -120,4 +126,14 @@ node scripts/generate-patterns.mjs
 git diff --exit-code -- CATALOG.md patterns
 node scripts/validate-patterns.mjs --min-count 46 --json
 node scripts/validate-catalog.mjs --json
+```
+
+For portable token source, adapter, or generated artifact changes, run:
+
+```sh
+npm ci --ignore-scripts --no-audit --no-fund
+node scripts/build-reference-artifacts.mjs --adapter style-dictionary --fail-on-warning --json
+node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json
+node scripts/test-reference-adapters.mjs --json
+git diff --exit-code -- consumer-reference/generated
 ```

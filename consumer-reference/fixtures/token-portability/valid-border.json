@@ -1,0 +1,14 @@
+{
+  "color": {
+    "$type": "color",
+    "line": { "$value": { "colorSpace": "srgb", "components": [0.2, 0.2, 0.2] } }
+  },
+  "size": {
+    "$type": "dimension",
+    "line": { "$value": { "value": 1, "unit": "px" } }
+  },
+  "border": {
+    "$type": "border",
+    "default": { "$value": { "color": "{color.line}", "style": "solid", "width": "{size.line}" } }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "$id": "https://stylegallery.example/consumer-reference/schema/portable-tokens.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "alias": {
+      "pattern": "^\\{[a-z0-9]+(?:[.-][a-z0-9]+)*\\}$",
+      "type": "string"
+    },
+    "border": {
+      "additionalProperties": false,
+      "properties": {
+        "color": {
+          "oneOf": [
+            { "$ref": "#/$defs/alias" },
+            { "$ref": "#/$defs/color" }
+          ]
+        },
+        "style": { "const": "solid" },
+        "width": {
+          "oneOf": [
+            { "$ref": "#/$defs/alias" },
+            { "$ref": "#/$defs/dimension" }
+          ]
+        }
+      },
+      "required": ["color", "style", "width"],
+      "type": "object"
+    },
+    "color": {
+      "additionalProperties": false,
+      "properties": {
+        "alpha": { "maximum": 1, "minimum": 0, "type": "number" },
+        "colorSpace": { "const": "srgb" },
+        "components": {
+          "items": { "maximum": 1, "minimum": 0, "type": "number" },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        }
+      },
+      "required": ["colorSpace", "components"],
+      "type": "object"
+    },
+    "dimension": {
+      "additionalProperties": false,
+      "properties": {
+        "unit": { "enum": ["px", "rem"] },
+        "value": { "type": "number" }
+      },
+      "required": ["unit", "value"],
+      "type": "object"
+    },
+    "duration": {
+      "additionalProperties": false,
+      "properties": {
+        "unit": { "enum": ["ms", "s"] },
+        "value": { "minimum": 0, "type": "number" }
+      },
+      "required": ["unit", "value"],
+      "type": "object"
+    },
+    "group": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^(?!\\$)(?!(?:__proto__|prototype|constructor)$)[a-z0-9]+(?:-[a-z0-9]+)*$": { "$ref": "#/$defs/node" }
+      },
+      "properties": {
+        "$description": { "type": "string" },
+        "$type": { "enum": ["border", "color", "dimension", "duration"] }
+      },
+      "type": "object"
+    },
+    "node": {
+      "oneOf": [
+        { "$ref": "#/$defs/token" },
+        { "$ref": "#/$defs/group" }
+      ]
+    },
+    "token": {
+      "additionalProperties": false,
+      "properties": {
+        "$description": { "type": "string" },
+        "$type": { "enum": ["border", "color", "dimension", "duration"] },
+        "$value": {
+          "oneOf": [
+            { "$ref": "#/$defs/alias" },
+            { "$ref": "#/$defs/border" },
+            { "$ref": "#/$defs/color" },
+            { "$ref": "#/$defs/dimension" },
+            { "$ref": "#/$defs/duration" }
+          ]
+        }
+      },
+      "required": ["$value"],
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^(?!\\$)(?!(?:__proto__|prototype|constructor)$)[a-z0-9]+(?:-[a-z0-9]+)*$": { "$ref": "#/$defs/node" }
+  },
+  "title": "StyleGallery portable design tokens",
+  "type": "object"
+}

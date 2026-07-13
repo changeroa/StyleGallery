@@ -22,6 +22,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install pinned validation dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
       - name: Syntax and whitespace
         run: |
           node -c scripts/generate-patterns.mjs
@@ -44,11 +47,17 @@ jobs:
           node -c scripts/test-validate-webpage-workflow.mjs
           node -c scripts/validate-consumer-reference.mjs
           node -c scripts/test-validate-consumer-reference.mjs
+          node -c consumer-reference/adapters/style-dictionary.config.mjs
+          node -c scripts/reference-token-contract.mjs
+          node -c scripts/build-reference-artifacts.mjs
+          node -c scripts/validate-reference-artifacts.mjs
+          node -c scripts/test-reference-adapters.mjs
           git diff --check
 
       - name: Generated artifacts are current
         run: |
           node scripts/generate-patterns.mjs
+          node scripts/build-reference-artifacts.mjs --adapter style-dictionary --fail-on-warning --json
           git diff --exit-code
 
       - name: OKF structure validation
@@ -87,6 +96,11 @@ jobs:
         run: |
           node scripts/validate-consumer-reference.mjs --json
           node scripts/test-validate-consumer-reference.mjs --json
+
+      - name: Portable token artifact integrity
+        run: |
+          node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json
+          node scripts/test-reference-adapters.mjs --json
 
       - name: Webpage workflow check
         run: |
