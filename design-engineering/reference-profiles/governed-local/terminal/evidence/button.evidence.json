@@ -24,22 +24,22 @@
         "viewport": "1024x768"
       },
       "id": "action-disabled-busy-visual",
-      "recorded_at": "2026-07-13T17:57:28.259Z",
+      "recorded_at": "2026-07-13T22:47:00.941Z",
       "result": {
         "observed": "Recorded visual evidence for action-disabled-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "action-disabled-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -51,11 +51,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -69,9 +239,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-disabled-busy.dom.json",
-        "byte_length": 1285,
+        "byte_length": 8289,
         "media_type": "application/json",
-        "sha256": "sha256:b81b10289290e069b73a81481b6b2bc0705a625f0dbd6244c5608e684f58819f"
+        "sha256": "sha256:71d3e5f60eacc2276bc41e95caf5d25d9e96a003ac915c0236930affa7b4da99"
       },
       "channel": "dom",
       "environment": {
@@ -86,22 +256,22 @@
         "viewport": "1024x768"
       },
       "id": "action-disabled-busy-dom",
-      "recorded_at": "2026-07-13T17:57:28.259Z",
+      "recorded_at": "2026-07-13T22:47:00.941Z",
       "result": {
         "observed": "Recorded dom evidence for action-disabled-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "action-disabled-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -113,11 +283,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -131,9 +471,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-disabled-busy.ax.json",
-        "byte_length": 1204,
+        "byte_length": 8208,
         "media_type": "application/json",
-        "sha256": "sha256:282e01575951673bb419bf2064984fe7bb8468d93c296f6fc8f55165347594f1"
+        "sha256": "sha256:e101912252a44f199e1bf8dd7d6a0b296b38cac85bbefffcff0c222bee5f9b90"
       },
       "channel": "ax",
       "environment": {
@@ -148,22 +488,22 @@
         "viewport": "1024x768"
       },
       "id": "action-disabled-busy-ax",
-      "recorded_at": "2026-07-13T17:57:28.259Z",
+      "recorded_at": "2026-07-13T22:47:00.941Z",
       "result": {
         "observed": "Recorded ax evidence for action-disabled-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "action-disabled-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -175,11 +515,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -212,22 +722,22 @@
         "viewport": "1024x768"
       },
       "id": "action-focused-visual",
-      "recorded_at": "2026-07-13T17:57:28.366Z",
+      "recorded_at": "2026-07-13T22:47:01.043Z",
       "result": {
         "observed": "Recorded visual evidence for action-focused; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "action-focused",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -239,11 +749,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -256,9 +936,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-focused.dom.json",
-        "byte_length": 1225,
+        "byte_length": 8229,
         "media_type": "application/json",
-        "sha256": "sha256:fcbed06dfa9cfbc4e764a9c4bd3bb0dbc90920d72f8cf9698095eb23d1317e38"
+        "sha256": "sha256:bcd6a06c58eafdf5aec6f61c272c4c26d2580f2f74d0fe25c2d83b07e211d475"
       },
       "channel": "dom",
       "environment": {
@@ -273,22 +953,22 @@
         "viewport": "1024x768"
       },
       "id": "action-focused-dom",
-      "recorded_at": "2026-07-13T17:57:28.366Z",
+      "recorded_at": "2026-07-13T22:47:01.043Z",
       "result": {
         "observed": "Recorded dom evidence for action-focused; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "action-focused",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -300,11 +980,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -317,9 +1167,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-focused.ax.json",
-        "byte_length": 1149,
+        "byte_length": 8153,
         "media_type": "application/json",
-        "sha256": "sha256:ec9240455b30b17b3d09d7a5a9d3d5488ff8ea10caff2a03524e861210609631"
+        "sha256": "sha256:e12246b87fbe9f8b055a85ea5285771223057d46c469d0a9ac843c8d1e6dc220"
       },
       "channel": "ax",
       "environment": {
@@ -334,22 +1184,22 @@
         "viewport": "1024x768"
       },
       "id": "action-focused-ax",
-      "recorded_at": "2026-07-13T17:57:28.366Z",
+      "recorded_at": "2026-07-13T22:47:01.043Z",
       "result": {
         "observed": "Recorded ax evidence for action-focused; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "action-focused",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -361,11 +1211,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -397,22 +1417,22 @@
         "viewport": "1024x768"
       },
       "id": "action-loading-busy-visual",
-      "recorded_at": "2026-07-13T17:57:28.482Z",
+      "recorded_at": "2026-07-13T22:47:01.179Z",
       "result": {
         "observed": "Recorded visual evidence for action-loading-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "action-loading-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -424,11 +1444,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -443,9 +1633,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-loading-busy.dom.json",
-        "byte_length": 1271,
+        "byte_length": 8275,
         "media_type": "application/json",
-        "sha256": "sha256:fd96628699bc5b1035160e66fff9a35430c1aa38657c9d3b410825151566ba98"
+        "sha256": "sha256:b85bf78aadc96eb104d6b8a51831ea2cc20681bc9bcf47abecfaf583bfe18df8"
       },
       "channel": "dom",
       "environment": {
@@ -460,22 +1650,22 @@
         "viewport": "1024x768"
       },
       "id": "action-loading-busy-dom",
-      "recorded_at": "2026-07-13T17:57:28.482Z",
+      "recorded_at": "2026-07-13T22:47:01.179Z",
       "result": {
         "observed": "Recorded dom evidence for action-loading-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "action-loading-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -487,11 +1677,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -506,9 +1866,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-loading-busy.ax.json",
-        "byte_length": 1176,
+        "byte_length": 8180,
         "media_type": "application/json",
-        "sha256": "sha256:051996c60a57e0934046e63cc32a0bcad8f7bd0e298c571ab57b0cc2ca0e0375"
+        "sha256": "sha256:d9e4afb0ff0f5f27d2c2f993b3e9cc3894149738c4f4d7efe1d2c048c4d0d698"
       },
       "channel": "ax",
       "environment": {
@@ -523,22 +1883,22 @@
         "viewport": "1024x768"
       },
       "id": "action-loading-busy-ax",
-      "recorded_at": "2026-07-13T17:57:28.482Z",
+      "recorded_at": "2026-07-13T22:47:01.179Z",
       "result": {
         "observed": "Recorded ax evidence for action-loading-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "action-loading-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -550,11 +1910,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -588,22 +2118,22 @@
         "viewport": "1024x768"
       },
       "id": "disclosure-expanded-loading-visual",
-      "recorded_at": "2026-07-13T17:57:28.602Z",
+      "recorded_at": "2026-07-13T22:47:01.371Z",
       "result": {
         "observed": "Recorded visual evidence for disclosure-expanded-loading; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "disclosure-expanded-loading",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -615,11 +2145,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -635,9 +2335,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-disclosure-expanded-loading.dom.json",
-        "byte_length": 1328,
+        "byte_length": 8332,
         "media_type": "application/json",
-        "sha256": "sha256:d6c84c4b2edeb5306cc3606a3f79589e385c8d46c5fad2f54e4fb5eedd258f8f"
+        "sha256": "sha256:bc2150a332b593b481e28f3ceeaaf69e26bfdb652bfd24675a6b205c097e14bf"
       },
       "channel": "dom",
       "environment": {
@@ -652,22 +2352,22 @@
         "viewport": "1024x768"
       },
       "id": "disclosure-expanded-loading-dom",
-      "recorded_at": "2026-07-13T17:57:28.602Z",
+      "recorded_at": "2026-07-13T22:47:01.371Z",
       "result": {
         "observed": "Recorded dom evidence for disclosure-expanded-loading; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "disclosure-expanded-loading",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -679,11 +2379,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -699,9 +2569,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-disclosure-expanded-loading.ax.json",
-        "byte_length": 1211,
+        "byte_length": 8215,
         "media_type": "application/json",
-        "sha256": "sha256:4db17e7bbe59a29cf409a798d28f2f91b39dde203f6704df5e3e3038d9e96fd4"
+        "sha256": "sha256:c478c6f24274b363f77dbcfc7dad86f54f664c712eac8a1dc612eab60bd18a95"
       },
       "channel": "ax",
       "environment": {
@@ -716,22 +2586,22 @@
         "viewport": "1024x768"
       },
       "id": "disclosure-expanded-loading-ax",
-      "recorded_at": "2026-07-13T17:57:28.602Z",
+      "recorded_at": "2026-07-13T22:47:01.371Z",
       "result": {
         "observed": "Recorded ax evidence for disclosure-expanded-loading; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "disclosure-expanded-loading",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -743,11 +2613,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -782,22 +2822,22 @@
         "viewport": "1024x768"
       },
       "id": "toggle-focused-pressed-visual",
-      "recorded_at": "2026-07-13T17:57:28.707Z",
+      "recorded_at": "2026-07-13T22:47:01.504Z",
       "result": {
         "observed": "Recorded visual evidence for toggle-focused-pressed; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "toggle-focused-pressed",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -809,11 +2849,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -827,9 +3037,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-toggle-focused-pressed.dom.json",
-        "byte_length": 1265,
+        "byte_length": 8269,
         "media_type": "application/json",
-        "sha256": "sha256:643b8f352ff6895eff1c44f95d6655b363da6ea269b5f0d560150afa931156bd"
+        "sha256": "sha256:e77eba7af268dd94831680f56132dd9f1378b0acc767e13c752788040038d36a"
       },
       "channel": "dom",
       "environment": {
@@ -844,22 +3054,22 @@
         "viewport": "1024x768"
       },
       "id": "toggle-focused-pressed-dom",
-      "recorded_at": "2026-07-13T17:57:28.707Z",
+      "recorded_at": "2026-07-13T22:47:01.504Z",
       "result": {
         "observed": "Recorded dom evidence for toggle-focused-pressed; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "toggle-focused-pressed",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -871,11 +3081,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
@@ -889,9 +3269,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-toggle-focused-pressed.ax.json",
-        "byte_length": 1177,
+        "byte_length": 8181,
         "media_type": "application/json",
-        "sha256": "sha256:d5f2271c832538821cfee9683b873243cc5f51aa1f0fa7912d8fc1878a7fbeec"
+        "sha256": "sha256:18656b4749689d71ece82fa63ef4e576948b8e619a696e437442d3e190efcce8"
       },
       "channel": "ax",
       "environment": {
@@ -906,22 +3286,22 @@
         "viewport": "1024x768"
       },
       "id": "toggle-focused-pressed-ax",
-      "recorded_at": "2026-07-13T17:57:28.707Z",
+      "recorded_at": "2026-07-13T22:47:01.504Z",
       "result": {
         "observed": "Recorded ax evidence for toggle-focused-pressed; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
         "repository": "changeroa/StyleGallery",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
         "source": "local"
       },
       "scenario_id": "toggle-focused-pressed",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-05-state-evidence",
+        "branch": "codex/roadmap-07-final-hardening",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
@@ -933,11 +3313,181 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
-        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
-        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
-        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
-        "started_at": "2026-07-13T17:57:26.704Z"
+        "nonce": "5bb6b9aee04d67b84c4c9096154775e164d7957d9a37b9a8be7623a9fae03a61",
+        "receipt_sha256": "sha256:e6d9de4faeed514953acf64dfb43e9ebd783701d365ea33f24d04bf546b7e55d",
+        "revision": "0e4603bddb187c9d61ad29177cf239f6aceead66",
+        "session_id": "6be007f2-cbd4-4028-b9b0-01b4f1565235",
+        "source": {
+          "files": [
+            {
+              "byte_length": 1375,
+              "path": "consumer-reference/schema/ax-evidence.schema.json",
+              "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+            },
+            {
+              "byte_length": 7261,
+              "path": "consumer-reference/schema/capture-session.schema.json",
+              "sha256": "sha256:898a818d0b820c7baf4b298d70ebd1cc5345d89acb58756e78c9f1d7b34c4c6f"
+            },
+            {
+              "byte_length": 7101,
+              "path": "consumer-reference/schema/component-state.schema.json",
+              "sha256": "sha256:606ef65acadf81c5b2769b1d79f9c1e870880a8fc2b72cbafa4f1c8c7f5e7e67"
+            },
+            {
+              "byte_length": 1799,
+              "path": "consumer-reference/schema/dom-evidence.schema.json",
+              "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+            },
+            {
+              "byte_length": 3807,
+              "path": "consumer-reference/schema/evidence-record.schema.json",
+              "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+            },
+            {
+              "byte_length": 1537,
+              "path": "consumer-reference/schema/fixture-manifest.schema.json",
+              "sha256": "sha256:05332488a36a546b2a1119d420e7cd3695e67f0544177734c46ba515784bc6e1"
+            },
+            {
+              "byte_length": 1669,
+              "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+              "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+            },
+            {
+              "byte_length": 1620,
+              "path": "consumer-reference/schema/visual-evidence.schema.json",
+              "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+            },
+            {
+              "byte_length": 59030,
+              "path": "package-lock.json",
+              "sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e"
+            },
+            {
+              "byte_length": 1404,
+              "path": "package.json",
+              "sha256": "sha256:d08d6dd5282c93788b1ec54a5a9fb9306f314a7357d5c915173141d5b0c84406"
+            },
+            {
+              "byte_length": 532,
+              "path": "playwright.config.mjs",
+              "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+            },
+            {
+              "byte_length": 3069,
+              "path": "profiles/editorial/components/button.component.json",
+              "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/fixtures/button.fixture.json",
+              "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+            },
+            {
+              "byte_length": 340,
+              "path": "profiles/editorial/local-foundations.json",
+              "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+            },
+            {
+              "byte_length": 1434,
+              "path": "profiles/editorial/profile.json",
+              "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+            },
+            {
+              "byte_length": 5710,
+              "path": "profiles/editorial/states/button.states.json",
+              "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+            },
+            {
+              "byte_length": 608,
+              "path": "profiles/editorial/tokens.dtcg.json",
+              "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+            },
+            {
+              "byte_length": 3068,
+              "path": "profiles/terminal/components/button.component.json",
+              "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+            },
+            {
+              "byte_length": 1441,
+              "path": "profiles/terminal/fixtures/button.fixture.json",
+              "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+            },
+            {
+              "byte_length": 343,
+              "path": "profiles/terminal/local-foundations.json",
+              "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+            },
+            {
+              "byte_length": 1432,
+              "path": "profiles/terminal/profile.json",
+              "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+            },
+            {
+              "byte_length": 5709,
+              "path": "profiles/terminal/states/button.states.json",
+              "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+            },
+            {
+              "byte_length": 606,
+              "path": "profiles/terminal/tokens.dtcg.json",
+              "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+            },
+            {
+              "byte_length": 741,
+              "path": "scripts/artifact-metadata.mjs",
+              "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+            },
+            {
+              "byte_length": 7527,
+              "path": "scripts/capture-session-contract.mjs",
+              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+            },
+            {
+              "byte_length": 5099,
+              "path": "scripts/component-state-contract.mjs",
+              "sha256": "sha256:a7d395b008b86ef2520702e97d488bea7065820ce15e18d4b1eb937ba2d78668"
+            },
+            {
+              "byte_length": 12400,
+              "path": "scripts/component-state-semantics.mjs",
+              "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
+            },
+            {
+              "byte_length": 5367,
+              "path": "scripts/create-component-state-session.mjs",
+              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+            },
+            {
+              "byte_length": 6909,
+              "path": "scripts/profile-record-contract.mjs",
+              "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+            },
+            {
+              "byte_length": 1592,
+              "path": "scripts/strict-json.mjs",
+              "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+            },
+            {
+              "byte_length": 953,
+              "path": "scripts/visual-expectation-contract.mjs",
+              "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+            },
+            {
+              "byte_length": 9388,
+              "path": "tests/component-state-evidence.spec.mjs",
+              "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+            },
+            {
+              "byte_length": 7039,
+              "path": "tests/helpers/render-component-state.mjs",
+              "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+            }
+          ],
+          "sha256": "sha256:f756fd65aff144adab940ad27d0911a399fa94473ac7139534b8a209a85b0daf"
+        },
+        "started_at": "2026-07-13T22:46:47.631Z"
       },
       "scope": {
         "component": "button",
