@@ -4,9 +4,20 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(root, "scripts", "validate-ia.mjs");
+const governedProfileRoutes = [
+  ["Editorial profile", "editorial/profile.json"],
+  ["Editorial state matrix", "editorial/generated/state-matrix.md"],
+  ["Editorial keyboard matrix", "editorial/generated/keyboard-matrix.md"],
+  ["Editorial evidence coverage", "editorial/generated/evidence-coverage.md"],
+  ["Terminal profile", "terminal/profile.json"],
+  ["Terminal state matrix", "terminal/generated/state-matrix.md"],
+  ["Terminal keyboard matrix", "terminal/generated/keyboard-matrix.md"],
+  ["Terminal evidence coverage", "terminal/generated/evidence-coverage.md"],
+];
 
 const baseFiles = {
   "README.md": [
@@ -76,7 +87,15 @@ const baseFiles = {
   "design-engineering/index.md": "# Design Engineering\n\n- [Craft](craft.md)\n- [Reference Profiles](reference-profiles/index.md)\n",
   "design-engineering/craft.md": leaf("Craft", "index.md", "../platform-guides/index.md"),
   "design-engineering/reference-profiles/index.md": "# Reference Profiles\n\n- [Governed Local Profiles](governed-local/index.md)\n- [External Adaptation](external-adaptation/index.md)\n\nParent: [Design Engineering](../index.md).\nNext: [Governed Local Profiles](governed-local/index.md).\n",
-  "design-engineering/reference-profiles/governed-local/index.md": "# Governed Local Profiles\n\nParent: [Reference Profiles](../index.md).\nNext: [External Adaptation](../external-adaptation/index.md).\n",
+  "design-engineering/reference-profiles/governed-local/index.md": [
+    "# Governed Local Profiles",
+    "",
+    ...governedProfileRoutes.map(([label, target]) => `- [${label}](${target})`),
+    "",
+    "Parent: [Reference Profiles](../index.md).",
+    "Next: [External Adaptation](../external-adaptation/index.md).",
+    "",
+  ].join("\n"),
   "design-engineering/reference-profiles/external-adaptation/index.md": "# External Adaptation\n\nParent: [Reference Profiles](../index.md).\nNext: [Platform Guides](../../../platform-guides/index.md).\n",
   "platform-guides/index.md": "# Platform Guides\n\n- [Apple](apple.md)\n",
   "platform-guides/apple.md": leaf("Apple", "index.md", "../layout/index.md"),
@@ -141,6 +160,13 @@ const cases = [
     },
     expect: "design-engineering/index.md: missing [Reference Profiles](reference-profiles/index.md)",
   },
+  ...governedProfileRoutes.map(([label, target]) => ({
+    name: `missing_governed_route_${target.replace(/[^a-z]+/g, "_").replace(/^_|_$/g, "")}`,
+    mutate: {
+      "design-engineering/reference-profiles/governed-local/index.md": baseFiles["design-engineering/reference-profiles/governed-local/index.md"].replace(`- [${label}](${target})\n`, ""),
+    },
+    expect: `design-engineering/reference-profiles/governed-local/index.md: missing [${label}](${target})`,
+  })),
   {
     name: "missing_external_adaptation_parent",
     mutate: {
