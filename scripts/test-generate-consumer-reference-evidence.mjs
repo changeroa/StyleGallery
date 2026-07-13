@@ -5,8 +5,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const sourceRoot = path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local");
 const generator = path.join(repositoryRoot, "scripts/generate-consumer-reference-evidence.mjs");
 

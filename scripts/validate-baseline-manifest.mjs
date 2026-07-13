@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import { readJson, validateCalibration, validateManifest } from "./baseline-contract.mjs";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const options = { calibration: "consumer-reference/baselines/calibration.json", json: false, manifest: "consumer-reference/baselines/manifest.json" };
 const failures = [];
 for (let index = 2; index < process.argv.length; index += 1) {

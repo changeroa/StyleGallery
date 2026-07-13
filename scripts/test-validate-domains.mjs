@@ -4,8 +4,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(root, "scripts", "validate-domains.mjs");
 const revision = "220e8607c90b17337d210125777b7b695f26c221";
 const repository = "https://github.com/emilkowalski/skills";

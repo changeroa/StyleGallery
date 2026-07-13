@@ -2,13 +2,14 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import { isPlainObject, validateItemSchema } from "./consumer-reference-schema.mjs";
 import { canonicalGovernedProfilePaths } from "./governed-profile-registry.mjs";
 import { validateReferenceProfile, validateReferenceProfileSet } from "./reference-profile-contract.mjs";
 
 const root = process.cwd();
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "schema", "item.schema.json"), "utf8"));
 const validateFullItemSchema = new Ajv2020({ allErrors: true, strict: false }).compile(schema);
 const failures = [];

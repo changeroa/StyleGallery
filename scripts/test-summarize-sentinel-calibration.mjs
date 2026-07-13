@@ -4,9 +4,10 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { BASELINE_ENVIRONMENT, BASELINE_REFERENCE, sha256 } from "./baseline-contract.mjs";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const summarizer = path.join(repositoryRoot, "scripts", "summarize-sentinel-calibration.mjs");
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-pr4-summary-"));
 const png = fs.readFileSync(path.join(repositoryRoot, BASELINE_REFERENCE.baseline.path));
