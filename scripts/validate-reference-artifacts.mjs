@@ -2,11 +2,13 @@
 
 import crypto from "node:crypto";
 import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { adapter } from "../consumer-reference/adapters/style-dictionary.config.mjs";
+import { inspectArtifactPath } from "./reference-artifact-path-contract.mjs";
 import { validatePortableTokens } from "./reference-token-contract.mjs";
+import { parseStrictJson } from "./strict-json.mjs";
 
 function hash(content) {
   return `sha256:${crypto.createHash("sha256").update(content).digest("hex")}`;
@@ -35,14 +37,18 @@ function parseArguments() {
 const options = parseArguments();
 const failures = [...options.failures];
 const warnings = [];
-const manifestPath = path.resolve(process.cwd(), options.manifest || "missing.json");
+const trustRoot = process.cwd();
+const manifestPath = path.resolve(trustRoot, options.manifest || "missing.json");
 let manifest;
-if (!fs.existsSync(manifestPath)) {
+const manifestInspection = inspectArtifactPath(trustRoot, manifestPath, false);
+if (!manifestInspection.ok && manifestInspection.reason === "missing") {
   failures.push({ code: "artifact_manifest_missing", message: "manifest does not exist", path: options.manifest });
   failures.push({ code: "artifact_output_missing", message: "output cannot be located without a manifest", path: options.manifest });
+} else if (!manifestInspection.ok) {
+  failures.push({ code: "artifact_manifest_untrusted", message: "manifest must be a contained regular non-symlink file", path: options.manifest });
 } else {
   try {
-    manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+    manifest = parseStrictJson(fs.readFileSync(manifestPath, "utf8"));
   } catch (error) {
     failures.push({ code: "artifact_manifest_invalid", message: error instanceof Error ? error.message : String(error), path: options.manifest });
   }
@@ -63,12 +69,15 @@ if (manifest !== undefined) {
   if (new Set(declarationNames).size !== declarationNames.length) failures.push({ code: "artifact_declaration_duplicate", message: "manifest contains duplicate declarations", path: options.manifest });
   const sourcePath = typeof manifest.sourceFile === "string" ? path.resolve(path.dirname(manifestPath), manifest.sourceFile) : "";
   const outputPath = typeof manifest.outputFile === "string" ? path.resolve(path.dirname(manifestPath), manifest.outputFile) : "";
-  if (!sourcePath || !fs.existsSync(sourcePath)) failures.push({ code: "artifact_source_missing", message: "manifest source file does not exist", path: options.manifest });
+  const sourceInspection = sourcePath ? inspectArtifactPath(trustRoot, sourcePath, false) : { ok: false, reason: "missing" };
+  const outputInspection = outputPath ? inspectArtifactPath(trustRoot, outputPath, false) : { ok: false, reason: "missing" };
+  if (!sourceInspection.ok && sourceInspection.reason === "missing") failures.push({ code: "artifact_source_missing", message: "manifest source file does not exist", path: options.manifest });
+  else if (!sourceInspection.ok) failures.push({ code: "token_source_untrusted", message: "manifest source must be a contained regular non-symlink file", path: options.manifest });
   else {
     const sourceBytes = fs.readFileSync(sourcePath);
     if (manifest.inputHash !== hash(sourceBytes)) failures.push({ code: "artifact_input_hash_mismatch", message: "input hash does not match source", path: options.manifest });
     try {
-      const contract = validatePortableTokens(JSON.parse(sourceBytes.toString("utf8")));
+      const contract = validatePortableTokens(parseStrictJson(sourceBytes.toString("utf8")));
       failures.push(...contract.failures);
       if (contract.tokens.length !== manifest.sourceCount) failures.push({ code: "artifact_source_count_mismatch", message: "source count does not match canonical tokens", path: options.manifest });
       const expected = contract.tokens.map((token) => `--${token.path.replaceAll(".", "-")}`);
@@ -77,7 +86,8 @@ if (manifest !== undefined) {
       failures.push({ code: "artifact_source_invalid", message: error instanceof Error ? error.message : String(error), path: options.manifest });
     }
   }
-  if (!outputPath || !fs.existsSync(outputPath)) failures.push({ code: "artifact_output_missing", message: "manifest output file does not exist", path: options.manifest });
+  if (!outputInspection.ok && outputInspection.reason === "missing") failures.push({ code: "artifact_output_missing", message: "manifest output file does not exist", path: options.manifest });
+  else if (!outputInspection.ok) failures.push({ code: "artifact_output_untrusted", message: "manifest output must be a contained regular non-symlink file", path: options.manifest });
   else {
     const css = fs.readFileSync(outputPath, "utf8");
     const emitted = cssDeclarations(css);
@@ -93,12 +103,12 @@ if (manifest !== undefined) {
     if (emitted.length !== manifest.outputCount || emitted.length !== declarationNames.length) failures.push({ code: "artifact_count_mismatch", message: "CSS, manifest count, and declarations differ", path: options.manifest });
     if (css.includes("[object Object]")) failures.push({ code: "artifact_object_sentinel", message: "CSS contains [object Object]", path: options.manifest });
     if (/\{[a-z0-9.-]+\}|\b(?:null|undefined)\b/.test(css)) failures.push({ code: "artifact_unresolved_value", message: "CSS contains an unresolved value", path: options.manifest });
-    if (sourcePath && fs.existsSync(sourcePath)) {
-      const rebuildRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-reference-validation-"));
+    if (sourceInspection.ok) {
+      const rebuildRoot = fs.mkdtempSync(path.join(trustRoot, ".tmp-stylegallery-reference-validation-"));
       try {
         const expectedOutput = path.join(rebuildRoot, "tokens.css");
         const expectedManifest = path.join(rebuildRoot, "manifest.json");
-        const builder = path.join(path.dirname(new URL(import.meta.url).pathname), "build-reference-artifacts.mjs");
+        const builder = path.join(path.dirname(fileURLToPath(import.meta.url)), "build-reference-artifacts.mjs");
         const child = spawnSync(process.execPath, [builder, "--source", sourcePath, "--output", expectedOutput, "--manifest", expectedManifest, "--adapter", "style-dictionary", "--fail-on-warning", "--json"], { cwd: process.cwd(), encoding: "utf8" });
         if (child.status !== 0 || !fs.existsSync(expectedOutput)) failures.push({ code: "artifact_canonical_rebuild_failed", message: "canonical source could not be rebuilt with the pinned adapter", path: options.manifest });
         else if (fs.readFileSync(expectedOutput, "utf8") !== css) failures.push({ code: "artifact_source_output_mismatch", message: "CSS differs from the pinned adapter output derived from canonical source", path: options.manifest });

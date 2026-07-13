@@ -5,7 +5,9 @@ import fs from "node:fs";
 import path from "node:path";
 import StyleDictionary from "style-dictionary";
 import { adapter, createStyleDictionaryConfig } from "../consumer-reference/adapters/style-dictionary.config.mjs";
+import { inspectArtifactPath } from "./reference-artifact-path-contract.mjs";
 import { validatePortableTokens } from "./reference-token-contract.mjs";
+import { parseStrictJson } from "./strict-json.mjs";
 
 const root = process.cwd();
 const defaults = {
@@ -55,14 +57,24 @@ const output = path.resolve(root, options.output);
 const manifestPath = path.resolve(root, options.manifest);
 const failures = [];
 const warnings = [];
+for (const [code, target] of [
+  ["token_source_untrusted", source],
+  ["artifact_output_untrusted", output],
+  ["artifact_manifest_untrusted", manifestPath],
+]) {
+  const inspection = inspectArtifactPath(root, target, code !== "token_source_untrusted");
+  if (!inspection.ok) failures.push({ code, message: `${target} must be a contained regular non-symlink file`, path: path.relative(root, target) || "." });
+}
 let sourceBytes;
 let document;
-try {
-  sourceBytes = fs.readFileSync(source);
-  document = JSON.parse(sourceBytes.toString("utf8"));
-} catch (error) {
-  const code = error instanceof SyntaxError ? "token_json_invalid" : "token_source_unresolved";
-  failures.push({ code, message: error instanceof Error ? error.message : String(error), path: options.source });
+if (failures.length === 0) {
+  try {
+    sourceBytes = fs.readFileSync(source);
+    document = parseStrictJson(sourceBytes.toString("utf8"));
+  } catch (error) {
+    const code = error instanceof SyntaxError ? "token_json_invalid" : "token_source_unresolved";
+    failures.push({ code, message: error instanceof Error ? error.message : String(error), path: options.source });
+  }
 }
 let contract = { failures: [], tokens: [] };
 if (document !== undefined) {
