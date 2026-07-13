@@ -44,6 +44,7 @@ jobs:
           node -c scripts/test-validate-ia.mjs
           node -c scripts/validate-vocabulary.mjs
           node -c scripts/test-validate-vocabulary.mjs
+          node -c scripts/component-state-workflow-contract.mjs
           node -c scripts/validate-governance.mjs
           node -c scripts/test-validate-governance.mjs
           node -c scripts/validate-domains.mjs
@@ -149,7 +150,6 @@ jobs:
         run: |
           node scripts/validate-component-state.mjs --json
           node scripts/test-validate-component-state.mjs --json
-          node scripts/test-validate-component-state-artifacts.mjs
           node scripts/generate-consumer-reference-evidence.mjs --check --json
           node scripts/test-generate-consumer-reference-evidence.mjs --json
 
@@ -201,6 +201,8 @@ jobs:
     name: Chromium component-state evidence (nonblocking)
     runs-on: ubuntu-24.04
     continue-on-error: true
+    env:
+      STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state
     container:
       image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
       options: --platform linux/amd64
@@ -216,25 +218,28 @@ jobs:
       - name: Install exact component-state dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
 
+      - name: Run component-state artifact and session adversarial harness
+        run: node scripts/test-validate-component-state-artifacts.mjs
+
       - name: Capture and validate closed component-state evidence
         shell: bash
         env:
-          STATE_ARTIFACT_DIR: ${{ runner.temp }}/consumer-reference-state/runtime
           SENTINEL_CONTAINER_IMAGE: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
         run: |
           set -o pipefail
           node scripts/create-component-state-session.mjs \
-            --output "${{ runner.temp }}/consumer-reference-state/capture-session.json" \
+            --output "$STATE_EVIDENCE_ROOT/capture-session.json" \
             --json
-          STATE_SESSION_RECEIPT="${{ runner.temp }}/consumer-reference-state/capture-session.json" \
+          STATE_ARTIFACT_DIR="$STATE_EVIDENCE_ROOT/runtime" \
+            STATE_SESSION_RECEIPT="$STATE_EVIDENCE_ROOT/capture-session.json" \
             npm run test:component-state:runtime -- --reporter=line
           node scripts/finalize-component-state-evidence.mjs \
-            --artifact-root "${{ runner.temp }}/consumer-reference-state" \
-            --output "${{ runner.temp }}/consumer-reference-state/runtime-manifest.json" \
+            --artifact-root "$STATE_EVIDENCE_ROOT" \
+            --output "$STATE_EVIDENCE_ROOT/runtime-manifest.json" \
             --json
           node scripts/validate-component-state.mjs \
-            --artifact-root "${{ runner.temp }}/consumer-reference-state" \
-            --runtime-manifest "${{ runner.temp }}/consumer-reference-state/runtime-manifest.json" \
+            --artifact-root "$STATE_EVIDENCE_ROOT" \
+            --runtime-manifest "$STATE_EVIDENCE_ROOT/runtime-manifest.json" \
             --json
 
       - name: Run component-state runtime negative controls
@@ -245,7 +250,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: consumer-reference-state-${{ github.run_id }}-${{ github.sha }}
-          path: ${{ runner.temp }}/consumer-reference-state/
+          path: ${{ env.STATE_EVIDENCE_ROOT }}/
           if-no-files-found: error
           retention-days: 14
 

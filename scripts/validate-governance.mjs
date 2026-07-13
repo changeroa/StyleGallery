@@ -2,6 +2,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { componentStateWorkflowFailures } from "./component-state-workflow-contract.mjs";
 
 const args = new Set(process.argv.slice(2));
 const json = args.has("--json");
@@ -142,6 +143,7 @@ function requireStalenessDecision() {
 }
 
 function requireCiwiring() {
+  requireIncludes(".github/workflows/validate.yml", "node -c scripts/component-state-workflow-contract.mjs");
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/validate-governance.mjs");
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/test-validate-governance.mjs");
   requireIncludes(".github/workflows/validate.yml", "node scripts/validate-governance.mjs --json");
@@ -175,6 +177,11 @@ function requireCiwiring() {
   }
   requireIncludes(".github/workflows/validate.yml", "permissions:");
   requireIncludes(".github/workflows/validate.yml", "contents: read");
+}
+
+function requireComponentStateCiIsolation() {
+  const relative = ".github/workflows/validate.yml";
+  for (const failure of componentStateWorkflowFailures(read(relative))) failures.push(`${relative}: ${failure}`);
 }
 
 function requireImmutableActions() {
@@ -223,6 +230,7 @@ requireLifecycleStates();
 requireOwnership();
 requireStalenessDecision();
 requireCiwiring();
+requireComponentStateCiIsolation();
 requireImmutableActions();
 requireRootLinks();
 requireEvidenceMap();
