@@ -53,6 +53,7 @@ Each common task has one primary route. Use secondary links only after the prima
 | `browse reusable spatial guidance` | [Layout](layout/index.md) | It preserves the existing pattern, recipe, and planning routes. |
 | `name or review interface motion` | [Motion](motion/index.md) | It routes to bounded terminology and review guidance. |
 | `review product-level interface craft` | [Design Engineering](design-engineering/index.md) | It separates practitioner heuristics from shared quality gates. |
+| `compare adversarial consumer identities` | [Reference Profiles](design-engineering/reference-profiles/index.md) | It keeps non-default product values in related Design Engineering examples over one pinned Layout source. |
 | `compare a named platform convention` | [Platform Guides](platform-guides/index.md) | It requires platform and evidence boundaries before adaptation. |
 | `turn raw content into a homepage or ordinary webpage` | [Webpage Generation Workflow](guides/webpage-generation-workflow.md) | It starts with use case, content-to-layout fit, harmony, and handoff. |
 | `plan a screen before the layout problem is obvious` | [Layout Planning Guide](GUIDE.md) | It sequences task, content, scroll, recipe, and verification choices. |

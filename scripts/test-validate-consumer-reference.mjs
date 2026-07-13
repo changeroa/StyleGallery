@@ -224,9 +224,16 @@ const coveredSchemaRules = new Set(results.flatMap((result) => result.rules));
 const expectedSchemaRules = new Set(expectedSchemaRuleNames);
 const missingSchemaRules = [...expectedSchemaRules].filter((rule) => !coveredSchemaRules.has(rule));
 failures.push(...missingSchemaRules.map((rule) => `missing_schema_rule:${rule}`));
+const profileHarness = spawnSync(process.execPath, [path.join(repositoryRoot, "scripts", "test-validate-reference-profiles.mjs"), "--json"], {
+  cwd: repositoryRoot,
+  encoding: "utf8",
+});
+const profileReport = JSON.parse(profileHarness.stdout);
+if (profileHarness.status !== 0 || profileReport.ok !== true) failures.push("missing_semantic:governed_local_reference_profiles");
 const report = {
   failures,
   ok: failures.length === 0,
+  profileReport,
   results,
   schemaParity: { coveredRules: [...coveredSchemaRules].sort(), missingRules: missingSchemaRules },
 };

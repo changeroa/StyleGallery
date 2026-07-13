@@ -1,12 +1,19 @@
 const fieldCodes = {
   artifact_mode: "artifact_mode_invalid",
+  default: "profile_default_forbidden",
+  example_only: "profile_example_only_required",
   fixture_independence: "fixture_independence_related",
   id: "item_id_invalid",
+  layout_source_sha: "profile_layout_source_sha_required",
+  local_foundations: "profile_foundations_path_required",
   maturity: "maturity_invalid",
+  profile_kind: "profile_kind_governed_local",
+  related_fixture_set_id: "profile_related_fixture_set_required",
   removal_trigger: "removal_trigger_invalid",
   replacement: "replacement_invalid",
   review_independence: "review_independence_single_account",
   schema_version: "schema_version_invalid",
+  tokens: "profile_tokens_path_required",
 };
 
 export function isPlainObject(value) {
@@ -27,6 +34,40 @@ function unknownProperties(value, definitions) {
 
 function missingProperties(value, required) {
   return required.filter((key) => !Object.hasOwn(value, key));
+}
+
+function validateProfileObjects(item, schema, add) {
+  if (Object.hasOwn(item, "environment_assumptions")) {
+    const environment = item.environment_assumptions;
+    const definition = schema.properties.environment_assumptions;
+    if (!isPlainObject(environment)) {
+      add("profile_environment_object_required", "environment_assumptions must be an object");
+    } else {
+      for (const property of unknownProperties(environment, definition.properties)) add("profile_environment_property_unknown", `unknown environment assumption ${property}`);
+      if (!Object.hasOwn(environment, "user_agent_styles") || !scalarMatches(environment.user_agent_styles, definition.properties.user_agent_styles)) add("profile_ua_assumption_required", "user_agent_styles must be a non-empty string");
+      const reset = environment.reset;
+      if (!isPlainObject(reset)) {
+        add("profile_reset_assumptions_required", "reset assumptions must be an object");
+      } else {
+        for (const property of unknownProperties(reset, definition.properties.reset.properties)) add("profile_reset_property_unknown", `unknown reset assumption ${property}`);
+        for (const property of definition.properties.reset.required) {
+          if (!Object.hasOwn(reset, property) || !scalarMatches(reset[property], definition.properties.reset.properties[property])) add("profile_reset_assumptions_required", `reset requires ${property}`);
+        }
+      }
+    }
+  }
+  if (Object.hasOwn(item, "selection")) {
+    const selection = item.selection;
+    const definition = schema.properties.selection;
+    if (!isPlainObject(selection)) {
+      add("profile_selection_object_required", "selection must be an object");
+    } else {
+      for (const property of unknownProperties(selection, definition.properties)) add("profile_selection_property_unknown", `unknown selection property ${property}`);
+      for (const property of definition.required) {
+        if (!Object.hasOwn(selection, property) || !scalarMatches(selection[property], definition.properties[property])) add("profile_explicit_selection_required", `selection requires ${property}`);
+      }
+    }
+  }
 }
 
 export function validateItemSchema(item, schema) {
@@ -88,6 +129,8 @@ export function validateItemSchema(item, schema) {
       }
     }
   }
+
+  validateProfileObjects(item, schema, add);
 
   if (item.maturity === "stable" && item.support?.status === "ended") add("stable_support_ended", "stable maturity cannot have ended support");
   if (item.maturity === "deprecated") {

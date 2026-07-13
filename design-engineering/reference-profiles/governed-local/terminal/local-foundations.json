@@ -1,0 +1,12 @@
+{
+  "bindings": {
+    "accent": "{color.accent}",
+    "body_font_family": "SFMono-Regular, Consolas, monospace",
+    "canvas": "{color.screen}",
+    "content_rhythm": "{space.rhythm}",
+    "text": "{color.ink}"
+  },
+  "identity": "Dark high-density operator terminal",
+  "profile_id": "terminal-reference-profile",
+  "schema_version": "1.0"
+}

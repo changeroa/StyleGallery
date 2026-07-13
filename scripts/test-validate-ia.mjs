@@ -73,8 +73,11 @@ const baseFiles = {
   "layout/index.md": "# Layout\n\n- [Catalog](../CATALOG.md)\n",
   "motion/index.md": "# Motion\n\n- [Review](review.md)\n",
   "motion/review.md": leaf("Motion review", "index.md", "../design-engineering/index.md"),
-  "design-engineering/index.md": "# Design Engineering\n\n- [Craft](craft.md)\n",
+  "design-engineering/index.md": "# Design Engineering\n\n- [Craft](craft.md)\n- [Reference Profiles](reference-profiles/index.md)\n",
   "design-engineering/craft.md": leaf("Craft", "index.md", "../platform-guides/index.md"),
+  "design-engineering/reference-profiles/index.md": "# Reference Profiles\n\n- [Governed Local Profiles](governed-local/index.md)\n- [External Adaptation](external-adaptation/index.md)\n\nParent: [Design Engineering](../index.md).\nNext: [Governed Local Profiles](governed-local/index.md).\n",
+  "design-engineering/reference-profiles/governed-local/index.md": "# Governed Local Profiles\n\nParent: [Reference Profiles](../index.md).\nNext: [External Adaptation](../external-adaptation/index.md).\n",
+  "design-engineering/reference-profiles/external-adaptation/index.md": "# External Adaptation\n\nParent: [Reference Profiles](../index.md).\nNext: [Platform Guides](../../../platform-guides/index.md).\n",
   "platform-guides/index.md": "# Platform Guides\n\n- [Apple](apple.md)\n",
   "platform-guides/apple.md": leaf("Apple", "index.md", "../layout/index.md"),
   "consumer-reference/index.md": "# Consumer Reference\n\n- [Contract](contract.md)\n",
@@ -130,6 +133,20 @@ const cases = [
       "index.md": baseFiles["index.md"].replace("- [Design Engineering](design-engineering/index.md)\n", ""),
     },
     expect: "index.md: missing [Design Engineering](design-engineering/index.md)",
+  },
+  {
+    name: "missing_reference_profile_route",
+    mutate: {
+      "design-engineering/index.md": "# Design Engineering\n\n- [Craft](craft.md)\n",
+    },
+    expect: "design-engineering/index.md: missing [Reference Profiles](reference-profiles/index.md)",
+  },
+  {
+    name: "missing_external_adaptation_parent",
+    mutate: {
+      "design-engineering/reference-profiles/external-adaptation/index.md": "# External Adaptation\n\nNext: [Platform Guides](../../../platform-guides/index.md).\n",
+    },
+    expect: "design-engineering/reference-profiles/external-adaptation/index.md: missing Parent navigation link",
   },
   {
     name: "missing_consumer_reference_route",

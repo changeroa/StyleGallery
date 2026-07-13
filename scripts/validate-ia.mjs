@@ -22,6 +22,11 @@ const domainRoutes = [
   ["Platform Guides", "platform-guides/index.md"],
 ];
 const leafDirectories = ["patterns", "recipes", "quality", "motion", "design-engineering", "platform-guides", "consumer-reference"];
+const nestedIndexes = [
+  "design-engineering/reference-profiles/index.md",
+  "design-engineering/reference-profiles/governed-local/index.md",
+  "design-engineering/reference-profiles/external-adaptation/index.md",
+];
 
 function read(relative) {
   const target = path.join(root, relative);
@@ -60,6 +65,9 @@ function requireRootRoles() {
   requireIncludes("quality/index.md", "## Tree-Test Findability QA");
   requireIncludes("README.md", "[Consumer Reference](consumer-reference/index.md)");
   requireIncludes("index.md", "[Consumer reference](consumer-reference/index.md)");
+  requireIncludes("design-engineering/index.md", "[Reference Profiles](reference-profiles/index.md)");
+  requireIncludes("design-engineering/reference-profiles/index.md", "[External Adaptation](external-adaptation/index.md)");
+  requireIncludes("design-engineering/reference-profiles/index.md", "[Governed Local Profiles](governed-local/index.md)");
 }
 
 function requireTaskRoutes() {
@@ -76,7 +84,7 @@ function requireDomainRoutes() {
 }
 
 function requireLeafNavigation() {
-  for (const file of leafDirectories.flatMap(walk)) {
+  for (const file of [...leafDirectories.flatMap(walk), ...nestedIndexes]) {
     const content = stripFencedCodeBlocks(read(file));
     if (!/^Parent: \[[^\]]+\]\([^)]+\)/m.test(content)) failures.push(`${file}: missing Parent navigation link`);
     if (!/^Next: \[[^\]]+\]\([^)]+\)/m.test(content)) failures.push(`${file}: missing Next navigation link`);
@@ -89,7 +97,7 @@ requireDomainRoutes();
 requireLeafNavigation();
 
 const result = {
-  checkedLeafFiles: leafDirectories.flatMap(walk).length,
+  checkedLeafFiles: leafDirectories.flatMap(walk).length + nestedIndexes.length,
   failures,
   ok: failures.length === 0,
 };

@@ -11,6 +11,11 @@ const failures = [];
 const repository = "https://github.com/emilkowalski/skills";
 const revision = "220e8607c90b17337d210125777b7b695f26c221";
 const revisionPattern = /^[0-9a-f]{40}$/;
+const referenceDocuments = [
+  "design-engineering/reference-profiles/index.md",
+  "design-engineering/reference-profiles/governed-local/index.md",
+  "design-engineering/reference-profiles/external-adaptation/index.md",
+];
 
 const domains = [
   { slug: "layout", label: "Layout", leaves: [] },
@@ -23,7 +28,12 @@ const domains = [
       ["motion/practice-reference.md", "skills/review-animations/STANDARDS.md"],
     ],
   },
-  { slug: "design-engineering", label: "Design Engineering", leaves: [["design-engineering/interface-craft.md", "skills/emil-design-eng/SKILL.md"]] },
+  {
+    slug: "design-engineering",
+    label: "Design Engineering",
+    leaves: [["design-engineering/interface-craft.md", "skills/emil-design-eng/SKILL.md"]],
+    referenceDocuments,
+  },
   { slug: "platform-guides", label: "Platform Guides", leaves: [["platform-guides/apple-interaction.md", "skills/apple-design/SKILL.md"]] },
 ];
 
@@ -109,7 +119,7 @@ function checkManifest() {
     if (!pageRow || pageRow[1] !== expectedManualHub) valid = false;
     if (domain.leaves.length > 0 && pageRow) {
       const declaredLeaves = [...pageRow[2].matchAll(/`([^`]+\.md)`/g)].map((match) => match[1]).sort();
-      const expectedLeaves = domain.leaves.map(([leaf]) => leaf).sort();
+      const expectedLeaves = [...domain.leaves.map(([leaf]) => leaf), ...(domain.referenceDocuments ?? [])].sort();
       if (JSON.stringify(declaredLeaves) !== JSON.stringify(expectedLeaves)) valid = false;
     }
   }
@@ -133,6 +143,9 @@ function checkIndex(domain) {
     if (!content.match(new RegExp(`\\[[^\\]]+\\]\\(${target.replaceAll(".", "\\.")}\\)`))) {
       failures.push(`${relative}: missing leaf route ${target}`);
     }
+  }
+  if (domain.referenceDocuments?.length > 0 && !content.includes("[Reference Profiles](reference-profiles/index.md)")) {
+    failures.push(`${relative}: missing reference profile route`);
   }
 }
 
@@ -172,7 +185,7 @@ function checkLeaf(domain, relative, expectedSourcePath, titles) {
 
 function rejectUndeclaredDomainDocuments() {
   for (const domain of domains) {
-    const declared = new Set([`${domain.slug}/index.md`, ...domain.leaves.map(([leaf]) => leaf)]);
+    const declared = new Set([`${domain.slug}/index.md`, ...domain.leaves.map(([leaf]) => leaf), ...(domain.referenceDocuments ?? [])]);
     for (const absolute of walkMarkdown(path.join(root, domain.slug))) {
       const relative = path.relative(root, absolute);
       if (!declared.has(relative)) failures.push(`${relative}: undeclared governed domain document`);
@@ -198,6 +211,20 @@ function rejectOmoDependencies() {
   }
 }
 
+function checkReferenceDocuments() {
+  const index = stripFencedCodeBlocks(read(referenceDocuments[0]));
+  if (!/Domain classification:\s*design-engineering\./i.test(index)) {
+    failures.push(`${referenceDocuments[0]}: reference profiles must remain in the Design Engineering domain`);
+  }
+  if (!index.includes("[Governed Local Profiles](governed-local/index.md)")) {
+    failures.push(`${referenceDocuments[0]}: missing governed-local route`);
+  }
+  const external = stripFencedCodeBlocks(read(referenceDocuments[2]));
+  if (!external.includes("Synthetic validator coverage only") || !external.includes("no durable adopter record")) {
+    failures.push(`${referenceDocuments[1]}: external adaptation must remain documentation-only`);
+  }
+}
+
 checkManifest();
 read("quality/claim-records/stylegallery-multidomain-scope.md");
 requireRootRoutes();
@@ -212,6 +239,7 @@ for (const domain of domains) {
 }
 rejectUndeclaredDomainDocuments();
 rejectOmoDependencies();
+checkReferenceDocuments();
 
 const result = { ok: failures.length === 0, checkedDomains: domains.length, checkedLeaves, failures: [...new Set(failures)] };
 if (json) console.log(JSON.stringify(result, null, 2));

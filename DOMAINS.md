@@ -25,7 +25,7 @@ This manifest is the source of truth for top-level StyleGallery domains. A domai
 | --- | --- | --- |
 | Layout | `layout/index.md` | Existing `GUIDE.md`, Layout-specific `guides/*.md`, and `recipes/*.md`; generated `patterns/**/*.md` and `CATALOG.md` remain at current paths. Shared `quality/**/*.md` infrastructure governs every domain without becoming a Layout leaf. |
 | Motion | `motion/index.md` | `motion/vocabulary.md`, `motion/review-workflow.md`, `motion/practice-reference.md` |
-| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md` |
+| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md` |
 | Platform Guides | `platform-guides/index.md` | `platform-guides/apple-interaction.md` |
 
 ## Shared Non-Domain Infrastructure

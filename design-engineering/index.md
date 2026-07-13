@@ -11,6 +11,7 @@ Out of scope: a second universal principle set, unsupported claims of beauty or 
 ## Documents
 
 - [Interface Craft Decisions](interface-craft.md) connects product purpose, implementation detail, and verification without treating taste as proof.
+- [Reference Profiles](reference-profiles/index.md) provides two explicitly selected, related adversarial examples and a documentation-only external adaptation route.
 
 ## Relationship To Shared Quality
 

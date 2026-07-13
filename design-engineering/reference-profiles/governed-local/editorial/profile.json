@@ -1,0 +1,38 @@
+{
+  "artifact_mode": "governed_local",
+  "default": false,
+  "environment_assumptions": {
+    "reset": {
+      "body_margin": "0",
+      "box_sizing": "border-box",
+      "figure_margin": "0"
+    },
+    "user_agent_styles": "Preserve semantic browser defaults except for the declared reset."
+  },
+  "example_only": true,
+  "fixture_independence": "related",
+  "handoff": {
+    "record": "design-engineering/reference-profiles/governed-local/editorial/profile.json",
+    "status": "declared"
+  },
+  "id": "editorial-reference-profile",
+  "layout_source_sha": "775430bbaf4ee208a642220f440f6926d79c90a3",
+  "local_foundations": "local-foundations.json",
+  "maturity": "experimental",
+  "owner": {
+    "enforcement": "placeholder",
+    "name": "Design Engineering owner"
+  },
+  "profile_kind": "governed_local",
+  "related_fixture_set_id": "layout-identity-adversarial-pair",
+  "review_independence": "single_account",
+  "schema_version": "1.0",
+  "selection": {
+    "method": "profile_path",
+    "required": true
+  },
+  "support": {
+    "status": "active"
+  },
+  "tokens": "tokens.dtcg.json"
+}

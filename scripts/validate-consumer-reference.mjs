@@ -3,20 +3,41 @@
 import fs from "node:fs";
 import path from "node:path";
 import { isPlainObject, validateItemSchema } from "./consumer-reference-schema.mjs";
+import { validateReferenceProfile, validateReferenceProfileSet } from "./reference-profile-contract.mjs";
 
 const root = process.cwd();
 const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "schema", "item.schema.json"), "utf8"));
 const failures = [];
 const warnings = [];
+const canonicalProfilePaths = [
+  "design-engineering/reference-profiles/governed-local/editorial/profile.json",
+  "design-engineering/reference-profiles/governed-local/terminal/profile.json",
+];
 const defaultItems = [
   "consumer-reference/fixtures/valid-experimental.json",
   "consumer-reference/fixtures/valid-deprecated.json",
+  ...canonicalProfilePaths,
 ];
-const reverseMarkers = ["consumerreference", "designengineeringreferenceprofiles", "profilejson", "tokensdtcgjson"];
+const reverseMarkers = ["consumerreference", "designengineeringreferenceprofiles", "profilejson", "tokensdtcgjson", "relatedfixturesetid"];
+const profileSummaries = [];
 
 function addFailure(code, relative, message) {
   failures.push({ code, message, path: relative });
+}
+
+function canonicalProfileIdentity(selected) {
+  if (selected.startsWith("//")
+    || selected.startsWith("\\\\")
+    || path.posix.isAbsolute(selected)
+    || path.win32.isAbsolute(selected)
+    || /^[A-Za-z][A-Za-z\d+.-]*:/.test(selected)
+    || selected.includes("\\")
+    || selected.includes("?")
+    || selected.includes("#")) return null;
+  const normalized = path.posix.normalize(selected);
+  if (normalized === ".." || normalized.startsWith("../") || !isInside(root, path.resolve(root, normalized))) return null;
+  return canonicalProfilePaths.includes(normalized) ? normalized : null;
 }
 
 function isInside(base, target) {
@@ -45,7 +66,10 @@ function parseArguments() {
     }
     addFailure("argument_unknown", "<cli>", `unsupported argument ${argument}`);
   }
-  return { items: items.length > 0 ? items : defaultItems, json };
+  const selected = items.length > 0 ? items : defaultItems;
+  const canonicalized = selected.map((item) => canonicalProfileIdentity(item) ?? item);
+  const requiresCanonicalPair = canonicalized.some((item) => canonicalProfilePaths.includes(item));
+  return { items: requiresCanonicalPair ? [...new Set([...canonicalized, ...canonicalProfilePaths])] : canonicalized, json };
 }
 
 function validateRecordPath(record, itemPath) {
@@ -140,6 +164,11 @@ function validateItem(relative) {
   for (const finding of validateItemSchema(item, schema)) addFailure(finding.code, relative, finding.message);
   if (!isPlainObject(item)) return;
   validateHandoff(item, relative);
+  if (/^design-engineering\/reference-profiles\/governed-local\/[^/]+\/profile\.json$/.test(relative)) {
+    const result = validateReferenceProfile({ item, relative, root });
+    for (const finding of result.failures) addFailure(finding.code, finding.path, finding.message);
+    if (result.summary) profileSummaries.push(result.summary);
+  }
 }
 
 function walkFiles(relative) {
@@ -159,6 +188,13 @@ function rejectReverseImports() {
     if (reverseMarkers.some((marker) => compact.includes(marker))) {
       addFailure("reverse_import", relative, "Layout and generated corpus must not import consumer reference artifacts");
     }
+  }
+}
+
+function rejectExternalAdaptationRecords() {
+  const directory = "design-engineering/reference-profiles/external-adaptation";
+  for (const relative of walkFiles(directory).filter((file) => file.endsWith(".json"))) {
+    addFailure("external_adaptation_record_forbidden", relative, "external adaptation has documentation and synthetic validator coverage only");
   }
 }
 
@@ -193,10 +229,12 @@ function validateHandoffCoverage() {
 const options = parseArguments();
 for (const item of options.items) validateItem(item);
 rejectReverseImports();
+rejectExternalAdaptationRecords();
+for (const finding of validateReferenceProfileSet(profileSummaries)) addFailure(finding.code, finding.path, finding.message);
 const checkedHandoffs = validateHandoffCoverage();
 
 const uniqueFailures = [...new Map(failures.map((failure) => [`${failure.code}:${failure.path}:${failure.message}`, failure])).values()];
-const result = { checkedHandoffs, checkedItems: options.items.length, failures: uniqueFailures, ok: uniqueFailures.length === 0, warnings };
+const result = { checkedHandoffs, checkedItems: options.items.length, failures: uniqueFailures, ok: uniqueFailures.length === 0, profiles: profileSummaries, warnings };
 if (options.json) console.log(JSON.stringify(result, null, 2));
 else if (result.ok) console.log(`ok: ${result.checkedItems} consumer reference items`);
 else console.error(result.failures.map((failure) => `${failure.code}: ${failure.path}: ${failure.message}`).join("\n"));
