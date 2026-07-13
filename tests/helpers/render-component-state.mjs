@@ -69,6 +69,7 @@ export function componentStateFixture(profileName) {
       page: cssDimension(tokens.space.page.$value),
       rhythm: cssDimension(tokenValue(tokens, foundations.bindings.content_rhythm)),
     },
+    visualEnvironments: states.visual_environments,
   };
 }
 

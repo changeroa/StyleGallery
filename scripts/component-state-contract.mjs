@@ -39,6 +39,7 @@ export function compileSchemas(schemaRoot) {
     fixture: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "fixture-manifest.schema.json"), "utf8"))),
     item: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "item.schema.json"), "utf8"))),
     runtime: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "runtime-evidence-manifest.schema.json"), "utf8"))),
+    visual: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "visual-evidence.schema.json"), "utf8"))),
   };
 }
 

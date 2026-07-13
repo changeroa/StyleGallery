@@ -64,12 +64,30 @@
     "stateSet": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["schema_version", "record_kind", "component_id", "profile_id", "scenarios"],
+      "required": ["schema_version", "record_kind", "component_id", "profile_id", "visual_environments", "scenarios"],
       "properties": {
         "schema_version": { "const": "1.0" },
         "record_kind": { "const": "state_set" },
         "component_id": { "const": "button" },
         "profile_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "visual_environments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "browser", "browser_revision", "container_image", "platform", "playwright", "viewport"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+              "browser": { "type": "string", "minLength": 1 },
+              "browser_revision": { "type": "string", "minLength": 1 },
+              "container_image": { "type": "string", "minLength": 1 },
+              "platform": { "enum": ["darwin/arm64", "linux/amd64"] },
+              "playwright": { "const": "1.61.0" },
+              "viewport": { "const": "1024x768" }
+            }
+          }
+        },
         "scenarios": {
           "type": "array",
           "minItems": 1,
@@ -95,13 +113,28 @@
               "expected": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["visual", "dom", "ax", "activation"],
+                "required": ["visual", "visual_image", "dom", "ax", "activation"],
                 "properties": {
                   "visual": {
                     "type": "array",
                     "minItems": 1,
                     "uniqueItems": true,
                     "items": { "enum": ["ready", "focus", "pressed", "expanded", "loading", "busy", "disabled"] }
+                  },
+                  "visual_image": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["environment_id", "sha256", "width", "height"],
+                      "properties": {
+                        "environment_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+                        "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+                        "width": { "type": "integer", "minimum": 44 },
+                        "height": { "type": "integer", "minimum": 44 }
+                      }
+                    }
                   },
                   "dom": { "type": "object", "additionalProperties": { "type": "string" } },
                   "ax": { "type": "object", "additionalProperties": { "type": ["string", "boolean"] } },

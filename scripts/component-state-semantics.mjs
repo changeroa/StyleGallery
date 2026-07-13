@@ -55,10 +55,18 @@ export function validateComponentSemantics(component, file, failures) {
 
 export function validateStateSemantics(states, component, file, failures) {
   const scenarios = states.scenarios ?? [];
+  const visualEnvironments = states.visual_environments ?? [];
+  const visualEnvironmentIds = new Set(visualEnvironments.map((environment) => environment.id));
+  for (const id of duplicateValues(visualEnvironments.map((environment) => environment.id))) failures.push(finding("visual_environment_duplicate", file, `visual environment ${id} is duplicated`));
+  for (const selector of duplicateValues(visualEnvironments, (environment) => JSON.stringify(Object.entries(environment).filter(([key]) => key !== "id").sort()))) failures.push(finding("visual_environment_selector_duplicate", file, `visual environment selector ${selector} is duplicated`));
   for (const id of duplicateValues(scenarios.map((scenario) => scenario.id))) failures.push(finding("scenario_duplicate", file, `scenario ${id} is duplicated`));
   for (const key of duplicateValues(scenarios, (scenario) => [...(scenario.states ?? [])].sort().join("\u0000"))) failures.push(finding("state_set_duplicate", file, `state set ${key} is duplicated`));
   const modes = new Map((component.semantic_modes ?? []).map((mode) => [mode.id, mode]));
   for (const scenario of scenarios) {
+    const visualImages = scenario.expected?.visual_image ?? [];
+    for (const id of duplicateValues(visualImages.map((image) => image.environment_id))) failures.push(finding("visual_expectation_duplicate", file, `${scenario.id} repeats visual expectation ${id}`));
+    for (const image of visualImages) if (!visualEnvironmentIds.has(image.environment_id)) failures.push(finding("visual_environment_unknown", file, `${scenario.id} references unknown visual environment ${image.environment_id}`));
+    for (const id of visualEnvironmentIds) if (!visualImages.some((image) => image.environment_id === id)) failures.push(finding("visual_expectation_missing", file, `${scenario.id} lacks visual expectation ${id}`));
     const stateSet = new Set(scenario.states ?? []);
     const mode = modes.get(scenario.semantic_mode);
     if (!mode) failures.push(finding("scenario_mode_unknown", file, `${scenario.id} references an unknown semantic mode`));

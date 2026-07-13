@@ -1,8 +1,33 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 import { resolveProfileRecords } from "./profile-record-contract.mjs";
 import { parseStrictJson } from "./strict-json.mjs";
+
+const captureSourcePaths = Object.freeze([
+  "package-lock.json",
+  "package.json",
+  "playwright.config.mjs",
+  "consumer-reference/schema/ax-evidence.schema.json",
+  "consumer-reference/schema/capture-session.schema.json",
+  "consumer-reference/schema/component-state.schema.json",
+  "consumer-reference/schema/dom-evidence.schema.json",
+  "consumer-reference/schema/evidence-record.schema.json",
+  "consumer-reference/schema/fixture-manifest.schema.json",
+  "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+  "consumer-reference/schema/visual-evidence.schema.json",
+  "scripts/artifact-metadata.mjs",
+  "scripts/capture-session-contract.mjs",
+  "scripts/component-state-contract.mjs",
+  "scripts/component-state-semantics.mjs",
+  "scripts/create-component-state-session.mjs",
+  "scripts/profile-record-contract.mjs",
+  "scripts/strict-json.mjs",
+  "scripts/visual-expectation-contract.mjs",
+  "tests/component-state-evidence.spec.mjs",
+  "tests/helpers/render-component-state.mjs",
+]);
 
 function finding(code, file, message) {
   return { code, message, path: file };
@@ -10,6 +35,77 @@ function finding(code, file, message) {
 
 export function sha256(bytes) {
   return `sha256:${crypto.createHash("sha256").update(bytes).digest("hex")}`;
+}
+
+function compare(left, right) {
+  return left < right ? -1 : left > right ? 1 : 0;
+}
+
+function profileSourceFiles(profileRoot) {
+  if (!fs.existsSync(profileRoot)) return [];
+  const sources = [];
+  const profiles = fs.readdirSync(profileRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(profileRoot, entry.name, "profile.json")))
+    .sort((left, right) => compare(left.name, right.name));
+  for (const profile of profiles) {
+    const profileFile = path.join(profileRoot, profile.name, "profile.json");
+    const record = parseStrictJson(fs.readFileSync(profileFile, "utf8"));
+    const references = [
+      "profile.json",
+      record.local_foundations,
+      record.tokens,
+      ...(record.component_records ?? []),
+      ...(record.fixture_records ?? []),
+      ...(record.state_records ?? []),
+    ];
+    for (const reference of references) {
+      if (typeof reference !== "string") continue;
+      if (path.posix.isAbsolute(reference) || path.win32.isAbsolute(reference) || reference.includes("\\") || path.posix.normalize(reference) !== reference || reference.split("/").some((segment) => segment === "." || segment === "..")) {
+        throw new Error(`unsafe profile source reference ${profile.name}/${reference}`);
+      }
+      sources.push({
+        file: path.join(profileRoot, profile.name, reference),
+        logicalPath: `profiles/${profile.name}/${reference.split(path.sep).join("/")}`,
+      });
+    }
+  }
+  return sources;
+}
+
+export function relevantSourceFiles(repositoryRoot, profileRoot) {
+  return [
+    ...captureSourcePaths.map((reference) => ({ file: path.join(repositoryRoot, reference), logicalPath: reference })),
+    ...profileSourceFiles(profileRoot),
+  ].sort((left, right) => compare(left.logicalPath, right.logicalPath));
+}
+
+export function canonicalSourceManifest(repositoryRoot, profileRoot) {
+  const files = relevantSourceFiles(repositoryRoot, profileRoot).map(({ file, logicalPath }) => {
+    const stat = fs.lstatSync(file);
+    if (!stat.isFile() || stat.isSymbolicLink()) throw new Error(`capture source must be a regular non-symlink file: ${logicalPath}`);
+    const bytes = fs.readFileSync(file);
+    return { byte_length: bytes.length, path: logicalPath, sha256: sha256(bytes) };
+  });
+  return { files, sha256: sha256(Buffer.from(JSON.stringify(files))) };
+}
+
+export function sourceManifestMatches(source, repositoryRoot, profileRoot) {
+  try {
+    return sameJson(source, canonicalSourceManifest(repositoryRoot, profileRoot));
+  } catch {
+    return false;
+  }
+}
+
+export function dirtyRelevantSources(repositoryRoot, profileRoot) {
+  const repositoryPrefix = `${path.resolve(repositoryRoot)}${path.sep}`;
+  const tracked = relevantSourceFiles(repositoryRoot, profileRoot)
+    .map(({ file }) => path.resolve(file))
+    .filter((file) => file.startsWith(repositoryPrefix))
+    .map((file) => path.relative(repositoryRoot, file));
+  if (tracked.length === 0) return [];
+  const output = execFileSync("git", ["status", "--porcelain=v1", "--untracked-files=all", "--", ...tracked], { cwd: repositoryRoot, encoding: "utf8" });
+  return output.split("\n").filter(Boolean).sort(compare);
 }
 
 export function sessionLink(receipt, receiptSha256) {
@@ -21,6 +117,7 @@ export function sessionLink(receipt, receiptSha256) {
     receipt_sha256: receiptSha256,
     revision: receipt.revision,
     session_id: receipt.session_id,
+    source: receipt.source,
     started_at: receipt.started_at,
   };
 }
@@ -54,10 +151,6 @@ export function readCaptureSession(file, validate, failures) {
     link: sessionLink(receipt, digest),
     receipt,
   };
-}
-
-function compare(left, right) {
-  return left < right ? -1 : left > right ? 1 : 0;
 }
 
 export function canonicalIntended(profileRoot, failures) {

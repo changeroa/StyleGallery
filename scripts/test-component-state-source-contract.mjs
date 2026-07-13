@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import {
+  canonicalSourceManifest,
+  sourceManifestMatches,
+} from "./capture-session-contract.mjs";
+
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const profileRoot = path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local");
+const first = canonicalSourceManifest(repositoryRoot, profileRoot);
+const second = canonicalSourceManifest(repositoryRoot, profileRoot);
+
+assert.equal(first.sha256, second.sha256, "source manifest digest must be deterministic");
+assert.deepEqual(first.files, second.files, "source manifest files must be stable");
+assert(first.files.some((entry) => entry.path === "tests/component-state-evidence.spec.mjs"), "capture browser code must be bound");
+assert(first.files.some((entry) => entry.path === "playwright.config.mjs"), "Playwright capture configuration must be bound");
+assert(first.files.some((entry) => entry.path === "package.json"), "capture dependency declarations must be bound");
+assert(first.files.some((entry) => entry.path === "package-lock.json"), "exact capture dependencies must be bound");
+assert(first.files.some((entry) => entry.path === "scripts/artifact-metadata.mjs"), "capture artifact metadata code must be bound");
+assert(first.files.some((entry) => entry.path === "scripts/visual-expectation-contract.mjs"), "visual expectation selection must be bound");
+assert(!first.files.some((entry) => entry.path === "scripts/finalize-component-state-evidence.mjs"), "post-capture finalization must not invalidate captured source identity");
+assert(!first.files.some((entry) => entry.path === "scripts/validate-component-state.mjs"), "post-capture enforcement must not invalidate captured source identity");
+assert(first.files.some((entry) => entry.path.endsWith("/profile.json")), "profile declarations must be bound");
+assert(first.files.some((entry) => entry.path.endsWith("/tokens.dtcg.json")), "profile token inputs must be bound");
+assert.equal(sourceManifestMatches(first, repositoryRoot, profileRoot), true, "canonical source manifest must match itself");
+
+const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-source-contract-"));
+try {
+  const copiedProfiles = path.join(tempRoot, "profiles");
+  const copiedRepository = path.join(tempRoot, "repository");
+  fs.cpSync(profileRoot, copiedProfiles, { recursive: true });
+  for (const entry of first.files.filter((candidate) => !candidate.path.startsWith("profiles/"))) {
+    const source = path.join(repositoryRoot, entry.path);
+    const target = path.join(copiedRepository, entry.path);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.copyFileSync(source, target);
+  }
+  const copied = canonicalSourceManifest(copiedRepository, copiedProfiles);
+  assert.equal(copied.sha256, first.sha256, "profile-root location must not change the source digest");
+  const tokenFile = path.join(copiedProfiles, "editorial/tokens.dtcg.json");
+  fs.appendFileSync(tokenFile, "\n");
+  assert.equal(sourceManifestMatches(copied, copiedRepository, copiedProfiles), false, "profile source drift must invalidate the manifest");
+  fs.copyFileSync(path.join(profileRoot, "editorial/tokens.dtcg.json"), tokenFile);
+  const configFile = path.join(copiedRepository, "playwright.config.mjs");
+  const config = fs.readFileSync(configFile, "utf8").replace("viewport: { height: 768, width: 1024 },", "deviceScaleFactor: 2,\n    viewport: { height: 768, width: 1024 },");
+  fs.writeFileSync(configFile, config);
+  assert.equal(sourceManifestMatches(copied, copiedRepository, copiedProfiles), false, "deviceScaleFactor drift must invalidate the source manifest before it can double screenshot pixels");
+} finally {
+  fs.rmSync(tempRoot, { force: true, recursive: true });
+}
+
+process.stdout.write(`${JSON.stringify({ files: first.files.length, ok: true, sha256: first.sha256 }, null, 2)}\n`);

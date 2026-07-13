@@ -2,13 +2,19 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { artifactMetadata } from "./evidence-artifact-contract.mjs";
-import { canonicalIntended, readCaptureSession, sameJson } from "./capture-session-contract.mjs";
+import { fileURLToPath } from "node:url";
+import { artifactMetadata } from "./artifact-metadata.mjs";
+import {
+  canonicalIntended,
+  readCaptureSession,
+  sameJson,
+  sourceManifestMatches,
+} from "./capture-session-contract.mjs";
 import { compileSchemas, validateEvidenceArtifacts } from "./component-state-contract.mjs";
 import { resolveProfileRecords } from "./profile-record-contract.mjs";
 import { parseStrictJson } from "./strict-json.mjs";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const options = {
   artifactRoot: undefined,
   json: false,
@@ -45,6 +51,7 @@ const schemas = compileSchemas(path.join(repositoryRoot, "consumer-reference/sch
 const capture = receiptFile ? readCaptureSession(receiptFile, schemas.capture, failures) : undefined;
 const intended = canonicalIntended(options.profileRoot, failures);
 if (capture && !sameJson(capture.receipt.intended, intended)) failures.push({ code: "capture_session_intent_mismatch", message: "receipt intent differs from canonical profile scenarios", path: receiptFile });
+if (capture && !sourceManifestMatches(capture.receipt.source, repositoryRoot, options.profileRoot)) failures.push({ code: "capture_source_drift", message: "capture sources differ from the receipt source manifest", path: receiptFile });
 
 const completedAt = new Date().toISOString();
 const completedSession = capture ? {
@@ -59,6 +66,7 @@ const completedSession = capture ? {
   repository: capture.receipt.repository,
   revision: capture.receipt.revision,
   session_id: capture.receipt.session_id,
+  source: capture.receipt.source,
   started_at: capture.receipt.started_at,
 } : undefined;
 const run = capture ? {
@@ -86,13 +94,14 @@ for (const profileIntent of intended) {
   for (const scenario of fixture.scenarios) {
     const canonical = stateById.get(scenario.id);
     const documents = {};
-    for (const channel of ["dom", "ax"]) {
+    for (const channel of ["dom", "ax", "visual"]) {
       const file = path.join(options.artifactRoot, "runtime", `${profileIntent.profile_name}-${scenario.id}.${channel}.json`);
       try { documents[channel] = parseStrictJson(fs.readFileSync(file, "utf8")); }
       catch (error) { failures.push({ code: "evidence_json_invalid", message: error instanceof Error ? error.message : String(error), path: file }); }
+      if (channel === "visual") expectedFiles.add(path.basename(file));
     }
     const capturedTimes = new Set(Object.values(documents).map((document) => document?.captured_at).filter(Boolean));
-    if (capturedTimes.size !== 1) failures.push({ code: "capture_session_time_mismatch", message: `${scenario.id} DOM and AX must share one captured_at`, path: profileRoot });
+    if (capturedTimes.size !== 1) failures.push({ code: "capture_session_time_mismatch", message: `${scenario.id} visual, DOM, and AX must share one captured_at`, path: profileRoot });
     const recordedAt = [...capturedTimes][0] ?? "";
     for (const channel of scenario.required_channels) {
       const suffix = channelFiles[channel];
