@@ -13,6 +13,38 @@ const canonicalManifest = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "
 const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "schema", "calibration-record.schema.json"), "utf8"));
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-pr4-calibration-"));
 const executionRepositories = ["ark-jo/StyleGallery", "changeroa/StyleGallery"];
+const completedEvidence = {
+  artifactId: "8283099324",
+  artifactName: "chromium-sentinel-calibration-29260372260-18229be570766d3b42f5600955120bfcba690b76",
+  artifactApiDigest: "sha256:3f11a517b447e1b5a1da17d9ee66ba2dd947fc8a0a482c447556ef00652e6074",
+  artifactExpiresAt: "2026-07-27T15:01:36Z",
+  artifactSize: 70310,
+  checkoutSha: "18229be570766d3b42f5600955120bfcba690b76",
+  headSha: "3bfdd25ec9a2df4ca84e19541365d48842a73f59",
+  rawEvidenceSha256: "1f125d5b321063b364e19283897c78c126d73eb1b3368d14686c494b1296dfab",
+  runId: "29260372260",
+  source: "https://github.com/ark-jo/StyleGallery/actions/runs/29260372260",
+  verifiedAt: "2026-07-13T15:04:41Z",
+};
+
+function externalVerification() {
+  return {
+    artifact: {
+      api_digest: completedEvidence.artifactApiDigest,
+      expires_at: completedEvidence.artifactExpiresAt,
+      id: completedEvidence.artifactId,
+      name: completedEvidence.artifactName,
+      size_in_bytes: completedEvidence.artifactSize,
+    },
+    repository_relationship: {
+      execution_is_fork: true,
+      parent: "changeroa/StyleGallery",
+      source: "changeroa/StyleGallery",
+    },
+    source: completedEvidence.source,
+    verified_at: completedEvidence.verifiedAt,
+  };
+}
 
 function completeRecord(committedCi = {}) {
   const runs = Array.from({ length: 20 }, (_, index) => ({
@@ -28,15 +60,16 @@ function completeRecord(committedCi = {}) {
   return {
     ...canonical,
     committed_ci: {
-      artifact_name: `chromium-sentinel-calibration-123-${"0".repeat(40)}`,
-      checkout_sha: "0".repeat(40),
-      execution_repository: "changeroa/StyleGallery",
-      head_sha: "1".repeat(40),
-      raw_evidence_sha256: "2".repeat(64),
+      artifact_name: completedEvidence.artifactName,
+      checkout_sha: completedEvidence.checkoutSha,
+      execution_repository: "ark-jo/StyleGallery",
+      external_verification: externalVerification(),
+      head_sha: completedEvidence.headSha,
+      raw_evidence_sha256: completedEvidence.rawEvidenceSha256,
       repository: "changeroa/StyleGallery",
       run_attempt: "1",
-      run_id: "123",
-      sha: "0".repeat(40),
+      run_id: completedEvidence.runId,
+      sha: completedEvidence.checkoutSha,
       workflow: ".github/workflows/validate.yml",
       ...committedCi,
     },
@@ -67,6 +100,15 @@ const cases = [
     const { execution_repository: omitted, ...committedCi } = record.committed_ci;
     return { ...record, committed_ci: committedCi };
   }, "calibration_committed_ci_invalid"],
+  ["completed_missing_external_verification", (record) => {
+    const { external_verification: omitted, ...committedCi } = record.committed_ci;
+    return { ...record, committed_ci: committedCi };
+  }, "calibration_external_verification_missing"],
+  ["forged_external_artifact_id", (record) => ({ ...record, committed_ci: { ...record.committed_ci, external_verification: { ...record.committed_ci.external_verification, artifact: { ...record.committed_ci.external_verification.artifact, id: "8283099325" } } } }), "calibration_external_verification_invalid"],
+  ["forged_external_artifact_digest", (record) => ({ ...record, committed_ci: { ...record.committed_ci, external_verification: { ...record.committed_ci.external_verification, artifact: { ...record.committed_ci.external_verification.artifact, api_digest: `sha256:${"f".repeat(64)}` } } } }), "calibration_external_verification_invalid"],
+  ["raw_digest_substituted_for_artifact_digest", (record) => ({ ...record, committed_ci: { ...record.committed_ci, external_verification: { ...record.committed_ci.external_verification, artifact: { ...record.committed_ci.external_verification.artifact, api_digest: `sha256:${record.committed_ci.raw_evidence_sha256}` } } } }), "calibration_external_verification_invalid"],
+  ["forged_external_source", (record) => ({ ...record, committed_ci: { ...record.committed_ci, external_verification: { ...record.committed_ci.external_verification, source: "https://github.com/ark-jo/StyleGallery/actions/runs/1" } } }), "calibration_external_verification_invalid"],
+  ["forged_fork_parent_relationship", (record) => ({ ...record, committed_ci: { ...record.committed_ci, external_verification: { ...record.committed_ci.external_verification, repository_relationship: { ...record.committed_ci.external_verification.repository_relationship, parent: "untrusted/StyleGallery" } } } }), "calibration_external_verification_invalid"],
   ["invalid_committed_ci", (record) => ({ ...record, committed_ci: { artifact_name: "forged", extra: true, run_id: "abc", sha: "x" } }), "calibration_committed_ci_property_unknown"],
   ["owner_approval_preclaim", (record) => ({ ...record, baseline_owner_approval: "approved" }), "baseline_owner_approval_invalid"],
   ["pending_evidence_preclaim", (record) => ({ ...record, status: "awaiting_committed_ci" }), "calibration_pending_evidence_forbidden"],
@@ -75,6 +117,9 @@ const cases = [
 const results = [];
 try {
   const committedSchema = schema.properties.committed_ci.oneOf.find((entry) => entry.type === "object");
+  const externalSchema = committedSchema.properties.external_verification?.oneOf?.find((entry) => entry.type === "object") ?? {};
+  const artifactSchema = externalSchema.properties?.artifact ?? {};
+  const relationshipSchema = externalSchema.properties?.repository_relationship ?? {};
   const runSchema = schema.properties.runs.items;
   const runContains = schema.allOf[0].else.properties.runs.allOf;
   const schemaParity = schema.additionalProperties === false
@@ -92,27 +137,64 @@ try {
     && runSchema.properties.metadata_sha256.const === BASELINE_METADATA_SHA256
     && committedSchema.properties.repository.const === "changeroa/StyleGallery"
     && JSON.stringify(committedSchema.properties.execution_repository?.enum ?? []) === JSON.stringify(executionRepositories)
+    && externalSchema.additionalProperties === false
+    && artifactSchema.additionalProperties === false
+    && relationshipSchema.additionalProperties === false
+    && artifactSchema.properties?.api_digest?.const === completedEvidence.artifactApiDigest
+    && artifactSchema.properties?.id?.const === completedEvidence.artifactId
+    && artifactSchema.properties?.name?.const === completedEvidence.artifactName
+    && artifactSchema.properties?.size_in_bytes?.const === completedEvidence.artifactSize
+    && artifactSchema.properties?.expires_at?.const === completedEvidence.artifactExpiresAt
+    && externalSchema.properties?.source?.const === completedEvidence.source
+    && externalSchema.properties?.verified_at?.const === completedEvidence.verifiedAt
     && JSON.stringify(runContains.map((entry) => entry.contains.properties.run.const).sort((left, right) => left - right)) === JSON.stringify(Array.from({ length: 20 }, (_, index) => index + 1))
     && runContains.every((entry) => entry.minContains === 1 && entry.maxContains === 1)
-    && JSON.stringify([...committedSchema.required].sort()) === JSON.stringify(["artifact_name", "checkout_sha", "execution_repository", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"].sort());
+    && JSON.stringify([...committedSchema.required].sort()) === JSON.stringify(["artifact_name", "checkout_sha", "execution_repository", "external_verification", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"].sort());
   results.push({ actual: { schemaParity }, expected: "recursive schema/runtime identity parity", name: "schema_runtime_parity", ok: schemaParity });
   const validFixture = path.join(tempRoot, "valid-completed.json");
   fs.writeFileSync(validFixture, `${JSON.stringify(completeRecord(), null, 2)}\n`);
   const validChild = spawnSync(process.execPath, [validator, "--calibration", validFixture, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
   const validOutput = JSON.parse(validChild.stdout);
   results.push({ actual: { codes: validOutput.failures.map((failure) => failure.code), status: validChild.status }, expected: "completed calibration and exit:0", name: "valid_completed_calibration", ok: validChild.status === 0 && validOutput.ok === true });
+  const awaitingExternalFixture = path.join(tempRoot, "valid-awaiting-external-verification.json");
+  fs.writeFileSync(awaitingExternalFixture, `${JSON.stringify({
+    ...completeRecord({ external_verification: null }),
+    status: "awaiting_external_verification",
+  }, null, 2)}\n`);
+  const awaitingExternalChild = spawnSync(process.execPath, [validator, "--calibration", awaitingExternalFixture, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
+  const awaitingExternalOutput = JSON.parse(awaitingExternalChild.stdout);
+  results.push({
+    actual: { codes: awaitingExternalOutput.failures.map((failure) => failure.code), status: awaitingExternalChild.status },
+    expected: "pre-upload calibration awaits external verification and exits 0",
+    name: "valid_awaiting_external_verification",
+    ok: awaitingExternalChild.status === 0 && awaitingExternalOutput.ok === true,
+  });
+  const pendingFixture = path.join(tempRoot, "valid-awaiting-committed-ci.json");
+  fs.writeFileSync(pendingFixture, `${JSON.stringify({ ...canonical, committed_ci: null, runs: [], status: "awaiting_committed_ci" }, null, 2)}\n`);
+  const pendingChild = spawnSync(process.execPath, [validator, "--calibration", pendingFixture, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
+  const pendingOutput = JSON.parse(pendingChild.stdout);
+  results.push({
+    actual: { codes: pendingOutput.failures.map((failure) => failure.code), status: pendingChild.status },
+    expected: "initial pending record and exit:0",
+    name: "valid_awaiting_committed_ci",
+    ok: pendingChild.status === 0 && pendingOutput.ok === true,
+  });
   const pullRequestFixture = path.join(tempRoot, "valid-pull-request-merge-head.json");
   const mergeSha = "11f4668fe5988720c27e88ec7203ecd1685a40df";
   const headSha = "8b8eaed41094286138973157b581a1d9ab9957a8";
-  fs.writeFileSync(pullRequestFixture, `${JSON.stringify(completeRecord({
-    artifact_name: `chromium-sentinel-calibration-29258810962-${mergeSha}`,
-    checkout_sha: mergeSha,
-    execution_repository: "ark-jo/StyleGallery",
-    head_sha: headSha,
-    repository: "changeroa/StyleGallery",
-    run_id: "29258810962",
-    sha: mergeSha,
-  }), null, 2)}\n`);
+  fs.writeFileSync(pullRequestFixture, `${JSON.stringify({
+    ...completeRecord({
+      artifact_name: `chromium-sentinel-calibration-29258810962-${mergeSha}`,
+      checkout_sha: mergeSha,
+      execution_repository: "ark-jo/StyleGallery",
+      external_verification: null,
+      head_sha: headSha,
+      repository: "changeroa/StyleGallery",
+      run_id: "29258810962",
+      sha: mergeSha,
+    }),
+    status: "awaiting_external_verification",
+  }, null, 2)}\n`);
   const pullRequestChild = spawnSync(process.execPath, [validator, "--calibration", pullRequestFixture, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
   const pullRequestOutput = JSON.parse(pullRequestChild.stdout);
   results.push({

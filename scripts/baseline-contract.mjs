@@ -24,6 +24,22 @@ export const BASELINE_REFERENCE = {
 export const BASELINE_METADATA_SHA256 = sha256(JSON.stringify({ environment: BASELINE_ENVIRONMENT, reference: BASELINE_REFERENCE }));
 export const CALIBRATION_CANONICAL_REPOSITORY = "changeroa/StyleGallery";
 export const CALIBRATION_EXECUTION_REPOSITORIES = Object.freeze(["ark-jo/StyleGallery", CALIBRATION_CANONICAL_REPOSITORY]);
+export const CALIBRATION_EXTERNAL_VERIFICATION = {
+  artifact: {
+    api_digest: "sha256:3f11a517b447e1b5a1da17d9ee66ba2dd947fc8a0a482c447556ef00652e6074",
+    expires_at: "2026-07-27T15:01:36Z",
+    id: "8283099324",
+    name: "chromium-sentinel-calibration-29260372260-18229be570766d3b42f5600955120bfcba690b76",
+    size_in_bytes: 70310,
+  },
+  repository_relationship: {
+    execution_is_fork: true,
+    parent: CALIBRATION_CANONICAL_REPOSITORY,
+    source: CALIBRATION_CANONICAL_REPOSITORY,
+  },
+  source: "https://github.com/ark-jo/StyleGallery/actions/runs/29260372260",
+  verified_at: "2026-07-13T15:04:41Z",
+};
 
 export function finding(code, file, message) {
   return { code, message, path: file };
@@ -88,10 +104,10 @@ export function validateCalibration(record, file) {
     if (record.runs.length !== 0 || record.committed_ci !== null) failures.push(finding("calibration_pending_evidence_forbidden", file, "pending calibration cannot claim runs or committed CI"));
     return failures;
   }
-  if (record.status !== "completed") return [...failures, finding("calibration_status_invalid", file, "status must be awaiting_committed_ci or completed")];
-  if (!isRecord(record.committed_ci)) failures.push(finding("calibration_committed_ci_missing", file, "completed calibration requires committed CI metadata"));
+  if (!["awaiting_external_verification", "completed"].includes(record.status)) return [...failures, finding("calibration_status_invalid", file, "status must be awaiting_committed_ci, awaiting_external_verification, or completed")];
+  if (!isRecord(record.committed_ci)) failures.push(finding("calibration_committed_ci_missing", file, "calibrated record requires committed CI metadata"));
   else {
-    rejectUnknown(record.committed_ci, new Set(["artifact_name", "checkout_sha", "execution_repository", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"]), "calibration_committed_ci_property_unknown", file, failures);
+    rejectUnknown(record.committed_ci, new Set(["artifact_name", "checkout_sha", "execution_repository", "external_verification", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"]), "calibration_committed_ci_property_unknown", file, failures);
     const expectedArtifact = `chromium-sentinel-calibration-${record.committed_ci.run_id}-${record.committed_ci.sha}`;
     if (!/^[0-9]+$/.test(record.committed_ci.run_id ?? "")
       || !/^[0-9]+$/.test(record.committed_ci.run_attempt ?? "")
@@ -105,8 +121,25 @@ export function validateCalibration(record, file) {
       || record.committed_ci.artifact_name !== expectedArtifact) {
       failures.push(finding("calibration_committed_ci_invalid", file, "canonical and execution repositories, workflow, run, attempt, SHAs, raw evidence, and artifact name must have the canonical identity"));
     }
+    if (record.status === "awaiting_external_verification" && record.committed_ci.external_verification !== null) {
+      failures.push(finding("calibration_external_verification_preclaim", file, "awaiting calibration must not claim uploaded artifact verification"));
+    }
+    if (record.status === "completed") {
+      if (!("external_verification" in record.committed_ci) || record.committed_ci.external_verification === null) {
+        failures.push(finding("calibration_external_verification_missing", file, "completed calibration requires independently checked run and artifact metadata"));
+      } else {
+        const external = record.committed_ci.external_verification;
+        const expectedSource = `https://github.com/${record.committed_ci.execution_repository}/actions/runs/${record.committed_ci.run_id}`;
+        if (!sameValue(external, CALIBRATION_EXTERNAL_VERIFICATION)
+          || external?.source !== expectedSource
+          || external?.artifact?.name !== record.committed_ci.artifact_name
+          || external?.artifact?.api_digest === `sha256:${record.committed_ci.raw_evidence_sha256}`) {
+          failures.push(finding("calibration_external_verification_invalid", file, "external verification must equal the independently checked GitHub Actions run, fork relationship, and artifact API identity"));
+        }
+      }
+    }
   }
-  if (record.runs.length !== 20) failures.push(finding("calibration_run_count", file, "completed calibration requires exactly 20 runs"));
+  if (record.runs.length !== 20) failures.push(finding("calibration_run_count", file, "calibrated record requires exactly 20 runs"));
   const runAllowed = new Set(["architecture", "ax_sha256", "completed", "dom_sha256", "metadata_sha256", "png_sha256", "run", "screenshot_diff_pixels"]);
   for (const run of record.runs) {
     if (!isRecord(run)) {

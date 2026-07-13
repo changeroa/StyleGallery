@@ -67,6 +67,7 @@ const record = {
     artifact_name: options.artifactName,
     checkout_sha: options.checkoutSha,
     execution_repository: options.executionRepository,
+    external_verification: null,
     head_sha: options.headSha,
     raw_evidence_sha256: rawEvidence,
     repository: options.repository,
@@ -80,7 +81,7 @@ const record = {
   reference: BASELINE_REFERENCE,
   runs,
   schema_version: "1.0",
-  status: "completed",
+  status: "awaiting_external_verification",
 };
 failures.push(...validateCalibration(record, options.output || "<output>"));
 if (failures.length === 0) {
@@ -91,7 +92,7 @@ if (failures.length === 0) {
 const diffs = runs.map((run) => run.screenshot_diff_pixels).sort((left, right) => left - right);
 const stats = diffs.length === 20 ? { max: diffs[19], mean: diffs.reduce((sum, value) => sum + value, 0) / 20, min: diffs[0], p95: diffs[18] } : null;
 const uniqueFailures = [...new Map(failures.map((failure) => [`${failure.code}:${failure.path}:${failure.message}`, failure])).values()];
-const result = { failures: uniqueFailures, ok: uniqueFailures.length === 0, runs: runs.length, stats, status: uniqueFailures.length === 0 ? "completed" : "incomplete", warnings: [] };
+const result = { failures: uniqueFailures, ok: uniqueFailures.length === 0, runs: runs.length, stats, status: uniqueFailures.length === 0 ? "awaiting_external_verification" : "incomplete", warnings: [] };
 if (options.json) process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
 else if (!result.ok) process.stderr.write(`${result.failures.map((failure) => `${failure.code}: ${failure.message}`).join("\n")}\n`);
 if (!result.ok) process.exitCode = 1;

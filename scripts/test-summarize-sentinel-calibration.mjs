@@ -113,9 +113,11 @@ try {
   const valid = invoke("valid");
   results.push({
     actual: { outputRuns: valid.output?.runs.length, report: valid.report, status: valid.status },
-    expected: "20 truth-derived stable runs and zero diff statistics",
+    expected: "20 truth-derived stable runs awaiting external verification and zero diff statistics",
     name: "valid_raw_calibration",
-    ok: valid.status === 0 && valid.report.ok === true && valid.report.status === "completed"
+    ok: valid.status === 0 && valid.report.ok === true && valid.report.status === "awaiting_external_verification"
+      && valid.output?.status === "awaiting_external_verification"
+      && valid.output?.committed_ci.external_verification === null
       && valid.output?.runs.length === 20 && new Set(valid.output.runs.map((run) => run.png_sha256)).size === 1,
   });
   const pullRequestMergeSha = "11f4668fe5988720c27e88ec7203ecd1685a40df";
@@ -131,6 +133,9 @@ try {
     expected: "canonical upstream plus explicit execution fork with distinct merge/head SHAs",
     name: "valid_explicit_fork_pull_request_identity",
     ok: validFork.status === 0 && validFork.report.ok === true
+      && validFork.report.status === "awaiting_external_verification"
+      && validFork.output?.status === "awaiting_external_verification"
+      && validFork.output?.committed_ci.external_verification === null
       && validFork.output?.committed_ci.repository === "changeroa/StyleGallery"
       && validFork.output?.committed_ci.execution_repository === "ark-jo/StyleGallery"
       && validFork.output?.committed_ci.sha === pullRequestMergeSha

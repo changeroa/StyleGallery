@@ -11,8 +11,9 @@ const warnings = [];
 const sentinelProvenanceClauses = [
   "Completed-CI repository, workflow, run ID and attempt, SHA, and artifact-name fields are workflow-recorded, self-asserted metadata, not an external attestation.",
   "The self-asserted repository field names the canonical upstream changeroa/StyleGallery; the self-asserted execution_repository field names the actual GitHub Actions repository and is limited to changeroa/StyleGallery or ark-jo/StyleGallery.",
-  "Verification against the uploaded GitHub Actions run and artifact ID and digest remains pending.",
-  "Linux/amd64 repeatability remains unclaimed until that external verification succeeds.",
+  "The committed calibration's external_verification object records an independently checked GitHub Actions run and artifact API identity; artifact.api_digest is distinct from committed_ci.raw_evidence_sha256.",
+  "Future CI aggregates remain awaiting_external_verification until their uploaded artifact API identity is independently checked.",
+  "Linux/amd64 repeatability is externally verified only for committed run 29260372260; it does not establish baseline-owner approval or product suitability.",
   "Baseline-owner approval remains unclaimed until the named owner explicitly approves it.",
   "Synthetic fixtures validate rejection and acceptance behavior only; they are not authenticated provenance.",
 ];
