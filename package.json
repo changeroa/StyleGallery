@@ -7,9 +7,14 @@
   },
   "scripts": {
     "build": "node scripts/build-reference-artifacts.mjs --adapter style-dictionary --fail-on-warning --json",
+    "create:component-state-session": "node scripts/create-component-state-session.mjs",
     "test": "node scripts/test-reference-adapters.mjs --json",
+    "test:component-state": "node scripts/test-validate-component-state.mjs --json && node scripts/test-validate-component-state-artifacts.mjs && node scripts/test-generate-consumer-reference-evidence.mjs --json",
+    "test:component-state:runtime": "playwright test tests/component-state-evidence.spec.mjs --project=chromium",
+    "test:component-state:runtime-negative": "node scripts/test-component-state-sentinel.mjs",
     "test:sentinel": "playwright test tests/consumer-reference-sentinels.spec.mjs --project=chromium",
-    "validate": "node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json"
+    "validate": "node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json",
+    "validate:component-state": "node scripts/validate-component-state.mjs --json && node scripts/generate-consumer-reference-evidence.mjs --check --json"
   },
   "devDependencies": {
     "@playwright/test": "1.61.0",

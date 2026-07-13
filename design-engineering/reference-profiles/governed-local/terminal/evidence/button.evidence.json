@@ -1,0 +1,954 @@
+{
+  "claim_boundary": "Scenario artifacts are evidence, not visual regression baselines or accessibility certification.",
+  "component_id": "button",
+  "passes": [
+    {
+      "artifact": {
+        "path": "runtime/terminal-action-disabled-busy.png",
+        "byte_length": 3599,
+        "media_type": "image/png",
+        "sha256": "sha256:d346be9e96750f636f29078d17d9871a04c2f4442b6849b029fa754c2795674e",
+        "height": 56,
+        "width": 640
+      },
+      "channel": "visual",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "action-disabled-busy-visual",
+      "recorded_at": "2026-07-13T17:57:28.259Z",
+      "result": {
+        "observed": "Recorded visual evidence for action-disabled-busy; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "action-disabled-busy",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "action",
+        "state_set": [
+          "busy",
+          "disabled"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-action-disabled-busy.dom.json",
+        "byte_length": 1285,
+        "media_type": "application/json",
+        "sha256": "sha256:b81b10289290e069b73a81481b6b2bc0705a625f0dbd6244c5608e684f58819f"
+      },
+      "channel": "dom",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "action-disabled-busy-dom",
+      "recorded_at": "2026-07-13T17:57:28.259Z",
+      "result": {
+        "observed": "Recorded dom evidence for action-disabled-busy; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "action-disabled-busy",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "action",
+        "state_set": [
+          "busy",
+          "disabled"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-action-disabled-busy.ax.json",
+        "byte_length": 1204,
+        "media_type": "application/json",
+        "sha256": "sha256:282e01575951673bb419bf2064984fe7bb8468d93c296f6fc8f55165347594f1"
+      },
+      "channel": "ax",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "action-disabled-busy-ax",
+      "recorded_at": "2026-07-13T17:57:28.259Z",
+      "result": {
+        "observed": "Recorded ax evidence for action-disabled-busy; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "action-disabled-busy",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "action",
+        "state_set": [
+          "busy",
+          "disabled"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-action-focused.png",
+        "byte_length": 2470,
+        "media_type": "image/png",
+        "sha256": "sha256:39b96bc2459e2f0f442ce7b709f22e46b44f49b17c52d61940dff0246108ec48",
+        "height": 56,
+        "width": 640
+      },
+      "channel": "visual",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "action-focused-visual",
+      "recorded_at": "2026-07-13T17:57:28.366Z",
+      "result": {
+        "observed": "Recorded visual evidence for action-focused; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "action-focused",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "action",
+        "state_set": [
+          "focus"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-action-focused.dom.json",
+        "byte_length": 1225,
+        "media_type": "application/json",
+        "sha256": "sha256:fcbed06dfa9cfbc4e764a9c4bd3bb0dbc90920d72f8cf9698095eb23d1317e38"
+      },
+      "channel": "dom",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "action-focused-dom",
+      "recorded_at": "2026-07-13T17:57:28.366Z",
+      "result": {
+        "observed": "Recorded dom evidence for action-focused; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "action-focused",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "action",
+        "state_set": [
+          "focus"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-action-focused.ax.json",
+        "byte_length": 1149,
+        "media_type": "application/json",
+        "sha256": "sha256:ec9240455b30b17b3d09d7a5a9d3d5488ff8ea10caff2a03524e861210609631"
+      },
+      "channel": "ax",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "action-focused-ax",
+      "recorded_at": "2026-07-13T17:57:28.366Z",
+      "result": {
+        "observed": "Recorded ax evidence for action-focused; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "action-focused",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "action",
+        "state_set": [
+          "focus"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-action-loading-busy.png",
+        "byte_length": 3660,
+        "media_type": "image/png",
+        "sha256": "sha256:05cbe173a8274cfa7e6aab05713d1cb925820a7412bffceadb94d83498c17747",
+        "height": 56,
+        "width": 640
+      },
+      "channel": "visual",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "action-loading-busy-visual",
+      "recorded_at": "2026-07-13T17:57:28.482Z",
+      "result": {
+        "observed": "Recorded visual evidence for action-loading-busy; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "action-loading-busy",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "action",
+        "state_set": [
+          "busy",
+          "focus",
+          "loading"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-action-loading-busy.dom.json",
+        "byte_length": 1271,
+        "media_type": "application/json",
+        "sha256": "sha256:fd96628699bc5b1035160e66fff9a35430c1aa38657c9d3b410825151566ba98"
+      },
+      "channel": "dom",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "action-loading-busy-dom",
+      "recorded_at": "2026-07-13T17:57:28.482Z",
+      "result": {
+        "observed": "Recorded dom evidence for action-loading-busy; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "action-loading-busy",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "action",
+        "state_set": [
+          "busy",
+          "focus",
+          "loading"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-action-loading-busy.ax.json",
+        "byte_length": 1176,
+        "media_type": "application/json",
+        "sha256": "sha256:051996c60a57e0934046e63cc32a0bcad8f7bd0e298c571ab57b0cc2ca0e0375"
+      },
+      "channel": "ax",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "action-loading-busy-ax",
+      "recorded_at": "2026-07-13T17:57:28.482Z",
+      "result": {
+        "observed": "Recorded ax evidence for action-loading-busy; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "action-loading-busy",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "action",
+        "state_set": [
+          "busy",
+          "focus",
+          "loading"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-disclosure-expanded-loading.png",
+        "byte_length": 8556,
+        "media_type": "image/png",
+        "sha256": "sha256:d8c7ba056dd2a61ce6c85d8ec6bf56733cdc34da07678dd9b4175c7de9ab926a",
+        "height": 88,
+        "width": 640
+      },
+      "channel": "visual",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "disclosure-expanded-loading-visual",
+      "recorded_at": "2026-07-13T17:57:28.602Z",
+      "result": {
+        "observed": "Recorded visual evidence for disclosure-expanded-loading; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "disclosure-expanded-loading",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "disclosure",
+        "state_set": [
+          "busy",
+          "expanded",
+          "focus",
+          "loading"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-disclosure-expanded-loading.dom.json",
+        "byte_length": 1328,
+        "media_type": "application/json",
+        "sha256": "sha256:d6c84c4b2edeb5306cc3606a3f79589e385c8d46c5fad2f54e4fb5eedd258f8f"
+      },
+      "channel": "dom",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "disclosure-expanded-loading-dom",
+      "recorded_at": "2026-07-13T17:57:28.602Z",
+      "result": {
+        "observed": "Recorded dom evidence for disclosure-expanded-loading; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "disclosure-expanded-loading",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "disclosure",
+        "state_set": [
+          "busy",
+          "expanded",
+          "focus",
+          "loading"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-disclosure-expanded-loading.ax.json",
+        "byte_length": 1211,
+        "media_type": "application/json",
+        "sha256": "sha256:4db17e7bbe59a29cf409a798d28f2f91b39dde203f6704df5e3e3038d9e96fd4"
+      },
+      "channel": "ax",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "disclosure-expanded-loading-ax",
+      "recorded_at": "2026-07-13T17:57:28.602Z",
+      "result": {
+        "observed": "Recorded ax evidence for disclosure-expanded-loading; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "disclosure-expanded-loading",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "disclosure",
+        "state_set": [
+          "busy",
+          "expanded",
+          "focus",
+          "loading"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-toggle-focused-pressed.png",
+        "byte_length": 2070,
+        "media_type": "image/png",
+        "sha256": "sha256:838229be984b8bda1ebfe6095564f1093df18fdd2ca1e6c3d5b5c086162d4692",
+        "height": 56,
+        "width": 640
+      },
+      "channel": "visual",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "toggle-focused-pressed-visual",
+      "recorded_at": "2026-07-13T17:57:28.707Z",
+      "result": {
+        "observed": "Recorded visual evidence for toggle-focused-pressed; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "toggle-focused-pressed",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "toggle",
+        "state_set": [
+          "focus",
+          "pressed"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-toggle-focused-pressed.dom.json",
+        "byte_length": 1265,
+        "media_type": "application/json",
+        "sha256": "sha256:643b8f352ff6895eff1c44f95d6655b363da6ea269b5f0d560150afa931156bd"
+      },
+      "channel": "dom",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "toggle-focused-pressed-dom",
+      "recorded_at": "2026-07-13T17:57:28.707Z",
+      "result": {
+        "observed": "Recorded dom evidence for toggle-focused-pressed; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "toggle-focused-pressed",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "toggle",
+        "state_set": [
+          "focus",
+          "pressed"
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "path": "runtime/terminal-toggle-focused-pressed.ax.json",
+        "byte_length": 1177,
+        "media_type": "application/json",
+        "sha256": "sha256:d5f2271c832538821cfee9683b873243cc5f51aa1f0fa7912d8fc1878a7fbeec"
+      },
+      "channel": "ax",
+      "environment": {
+        "browser": "Google Chrome for Testing 149.0.7827.55",
+        "browser_revision": "chromium-1228",
+        "container_image": "local-host:25.5.0",
+        "kind": "browser",
+        "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+        "node": "v22.23.1",
+        "platform": "darwin/arm64",
+        "playwright": "1.61.0",
+        "viewport": "1024x768"
+      },
+      "id": "toggle-focused-pressed-ax",
+      "recorded_at": "2026-07-13T17:57:28.707Z",
+      "result": {
+        "observed": "Recorded ax evidence for toggle-focused-pressed; this is not certification.",
+        "status": "passed"
+      },
+      "run": {
+        "attempt": 1,
+        "id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "repository": "changeroa/StyleGallery",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "source": "local"
+      },
+      "scenario_id": "toggle-focused-pressed",
+      "session": {
+        "attempt": 1,
+        "branch": "codex/roadmap-05-state-evidence",
+        "environment": {
+          "browser": "Google Chrome for Testing 149.0.7827.55",
+          "browser_revision": "chromium-1228",
+          "container_image": "local-host:25.5.0",
+          "kind": "browser",
+          "lockfile_sha256": "sha256:f57973ff40f27c7f545f94e9529b61fcc95d8521662f7e3ea3a2ece392dfc86e",
+          "node": "v22.23.1",
+          "platform": "darwin/arm64",
+          "playwright": "1.61.0",
+          "viewport": "1024x768"
+        },
+        "nonce": "a19a4fa9ad541d3d7ddc757435b2718c210733c1d070fea65d8db55ec7195346",
+        "receipt_sha256": "sha256:2db986d79bed5928fdbc531e6884eca8d6ff37299fcdbfb794ab33cf5db85740",
+        "revision": "bb772d303c9dafea6e99d2c5713b4bd66e41a3bb",
+        "session_id": "bcf6a47e-1588-496e-b15c-1c5669539eee",
+        "started_at": "2026-07-13T17:57:26.704Z"
+      },
+      "scope": {
+        "component": "button",
+        "semantic_mode": "toggle",
+        "state_set": [
+          "focus",
+          "pressed"
+        ]
+      }
+    }
+  ],
+  "profile_id": "terminal-reference-profile",
+  "schema_version": "1.0"
+}

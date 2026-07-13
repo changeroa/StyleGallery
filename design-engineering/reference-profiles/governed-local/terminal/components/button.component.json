@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "component",
+  "component_id": "button",
+  "profile_id": "terminal-reference-profile",
+  "anatomy": [
+    "control",
+    "label",
+    "status"
+  ],
+  "semantic_modes": [
+    {
+      "id": "action",
+      "element": "button",
+      "role": "button",
+      "keys": [
+        "Enter",
+        "Space"
+      ],
+      "aria_states": [
+        {
+          "name": "pressed",
+          "status": "prohibited",
+          "reason": "Action buttons do not expose toggle state."
+        },
+        {
+          "name": "expanded",
+          "status": "not_applicable",
+          "reason": "Action buttons do not control disclosed content."
+        },
+        {
+          "name": "busy",
+          "status": "conditional",
+          "condition": "An invoked action is still processing.",
+          "resolution": "required"
+        },
+        {
+          "name": "disabled",
+          "status": "conditional",
+          "condition": "The action is unavailable to the current user.",
+          "resolution": "required"
+        }
+      ],
+      "activation": "invoke"
+    },
+    {
+      "id": "toggle",
+      "element": "button",
+      "role": "button",
+      "keys": [
+        "Enter",
+        "Space"
+      ],
+      "aria_states": [
+        {
+          "name": "pressed",
+          "status": "required",
+          "values": [
+            "false",
+            "true"
+          ]
+        },
+        {
+          "name": "expanded",
+          "status": "prohibited",
+          "reason": "Toggle buttons expose pressed rather than disclosure state."
+        },
+        {
+          "name": "busy",
+          "status": "not_applicable",
+          "reason": "The governed toggle fixture has no asynchronous operation."
+        },
+        {
+          "name": "disabled",
+          "status": "not_applicable",
+          "reason": "The governed toggle fixture remains available for activation."
+        }
+      ],
+      "activation": "toggle"
+    },
+    {
+      "id": "disclosure",
+      "element": "button",
+      "role": "button",
+      "keys": [
+        "Enter",
+        "Space"
+      ],
+      "aria_states": [
+        {
+          "name": "expanded",
+          "status": "required",
+          "values": [
+            "false",
+            "true"
+          ]
+        },
+        {
+          "name": "pressed",
+          "status": "prohibited",
+          "reason": "Disclosure buttons expose expanded rather than toggle state."
+        },
+        {
+          "name": "busy",
+          "status": "conditional",
+          "condition": "Expanded controlled content is still loading.",
+          "resolution": "required"
+        },
+        {
+          "name": "disabled",
+          "status": "not_applicable",
+          "reason": "The governed disclosure fixture remains available for activation."
+        }
+      ],
+      "activation": "control"
+    }
+  ],
+  "versions": {
+    "design_revision": "2026.07.14",
+    "package_version": "0.1.0-preview.1",
+    "api_version": "1.0",
+    "delivery_channel": "preview",
+    "lifecycle": "experimental"
+  }
+}

@@ -37,6 +37,20 @@ function missingProperties(value, required) {
 }
 
 function validateProfileObjects(item, schema, add) {
+  if (Object.hasOwn(item, "profile_kind")) {
+    const governed = schema.allOf.find((rule) => rule.if?.required?.includes("profile_kind"))?.then;
+    for (const property of governed?.required ?? []) if (!Object.hasOwn(item, property)) add("profile_field_required", `governed profile requires ${property}`);
+    for (const property of ["component_records", "evidence_records", "fixture_records", "generated_records", "state_records"]) {
+      if (!Object.hasOwn(item, property)) continue;
+      const value = item[property];
+      const definition = schema.properties[property];
+      const validItems = Array.isArray(value) && value.every((entry) => {
+        if (definition.items.const !== undefined) return entry === definition.items.const;
+        return definition.items.enum.includes(entry);
+      });
+      if (!Array.isArray(value) || value.length < definition.minItems || new Set(value).size !== value.length || !validItems) add("profile_reference_array_invalid", `${property} does not satisfy the governed profile schema`);
+    }
+  }
   if (Object.hasOwn(item, "environment_assumptions")) {
     const environment = item.environment_assumptions;
     const definition = schema.properties.environment_assumptions;

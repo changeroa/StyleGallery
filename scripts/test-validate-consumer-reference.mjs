@@ -31,6 +31,26 @@ const baseItem = {
   },
 };
 
+function applyGovernedProfile(item) {
+  Object.assign(item, {
+    artifact_mode: "governed_local",
+    component_records: ["components/button.component.json"],
+    default: false,
+    environment_assumptions: { reset: { body_margin: "0", box_sizing: "border-box", figure_margin: "0" }, user_agent_styles: "Preserve declared browser defaults." },
+    evidence_records: ["evidence/button.evidence.json"],
+    example_only: true,
+    fixture_records: ["fixtures/button.fixture.json"],
+    generated_records: ["generated/evidence-coverage.md", "generated/keyboard-matrix.md", "generated/state-matrix.md"],
+    layout_source_sha: "775430bbaf4ee208a642220f440f6926d79c90a3",
+    local_foundations: "local-foundations.json",
+    profile_kind: "governed_local",
+    related_fixture_set_id: "layout-identity-adversarial-pair",
+    selection: { method: "profile_path", required: true },
+    state_records: ["states/button.states.json"],
+    tokens: "tokens.dtcg.json",
+  });
+}
+
 const behaviorCases = [
   { expect: null, name: "valid_declared_handoff" },
   { expect: null, mutate: (item) => { item.handoff = { reason: "This fixture has no consumer-specific reference requirement.", status: "not_applicable" }; }, name: "valid_not_applicable_handoff" },
@@ -114,6 +134,14 @@ const parityCases = [
   { expect: "support_status_invalid", mutate: (item) => { item.support.status = "paused"; }, name: "schema_support_status_enum", rules: ["support.status.enum"], schemaValid: false },
   { expect: "stable_support_ended", mutate: (item) => { item.maturity = "stable"; item.support.status = "ended"; }, name: "schema_stable_support_all_of", rules: ["allOf.stable_ended"], schemaValid: false },
   { expect: "deprecated_migration_required", mutate: (item) => { item.maturity = "deprecated"; }, name: "schema_deprecated_all_of", rules: ["allOf.deprecated_required"], schemaValid: false },
+  ...["component_records", "evidence_records", "fixture_records", "generated_records", "state_records"].map((field) => ({
+    expect: "profile_field_required",
+    mutate: (item) => { applyGovernedProfile(item); delete item[field]; },
+    name: `schema_governed_required_${field}`,
+    rules: [`allOf.governed.required.${field}`],
+    schemaValid: false,
+  })),
+  { expect: "profile_reference_array_invalid", mutate: (item) => { applyGovernedProfile(item); item.generated_records[2] = item.generated_records[1]; }, name: "schema_governed_generated_unique", rules: ["generated_records.uniqueItems"], schemaValid: false },
   { expect: null, mutate: (item) => { item.maturity = "stable"; }, name: "schema_valid_stable_active", rules: ["maturity.enum", "allOf.stable_ended"], schemaValid: true },
   { expect: null, mutate: (item) => { item.handoff = { reason: "This reference is intentionally not applicable.", status: "not_applicable" }; item.maturity = "deprecated"; item.removal_trigger = "Remove after migration completes."; item.replacement = "replacement-item"; item.support.status = "ended"; }, name: "schema_valid_deprecated", rules: ["handoff.not_applicable.required", "handoff.reason.type", "handoff.reason.minLength", "handoff.reason.pattern", "allOf.deprecated_required", "support.status.enum"], schemaValid: true },
   ...validArtifactCases,
@@ -129,6 +157,8 @@ const expectedSchemaRuleNames = [
   "owner.enforcement.const", "owner.name.type", "owner.name.minLength", "removal_trigger.type", "removal_trigger.minLength",
   "replacement.type", "replacement.minLength", "review_independence.const", "schema_version.const", "support.type",
   "support.additionalProperties", "support.required.status", "support.status.enum", "allOf.stable_ended", "allOf.deprecated_required",
+  ...["component_records", "evidence_records", "fixture_records", "generated_records", "state_records"].map((field) => `allOf.governed.required.${field}`),
+  "generated_records.uniqueItems",
 ];
 
 function cloneItem() {

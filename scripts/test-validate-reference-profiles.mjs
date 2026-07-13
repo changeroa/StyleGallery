@@ -14,14 +14,18 @@ const layoutSha = "775430bbaf4ee208a642220f440f6926d79c90a3";
 
 const baseProfile = {
   artifact_mode: "governed_local",
+  component_records: ["components/button.component.json"],
   default: false,
   environment_assumptions: {
     reset: { body_margin: "0", box_sizing: "border-box", figure_margin: "0" },
     user_agent_styles: "Preserve browser defaults except for the declared reset.",
   },
   example_only: true,
+  evidence_records: ["evidence/button.evidence.json"],
+  fixture_records: ["fixtures/button.fixture.json"],
   fixture_independence: "related",
   handoff: { record: profilePath, status: "declared" },
+  generated_records: ["generated/evidence-coverage.md", "generated/keyboard-matrix.md", "generated/state-matrix.md"],
   id: "editorial-reference-profile",
   layout_source_sha: layoutSha,
   local_foundations: "local-foundations.json",
@@ -32,6 +36,7 @@ const baseProfile = {
   review_independence: "single_account",
   schema_version: "1.0",
   selection: { method: "profile_path", required: true },
+  state_records: ["states/button.states.json"],
   support: { status: "active" },
   tokens: "tokens.dtcg.json",
 };

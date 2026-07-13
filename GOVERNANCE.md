@@ -24,6 +24,7 @@ Use this file before editing repository documentation. It names which file is au
 | Consumer reference contract | `consumer-reference/contract.md`, `consumer-reference/schema/item.schema.json` | Manual | None | `stable` contract with related fixtures | Handoff shape, path boundary, lifecycle, ownership, or dependency-direction changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Repository governance owner with Validation owner |
 | Portable token source | `consumer-reference/fixtures/token-portability/valid-reference.json`, `consumer-reference/schema/portable-tokens.schema.json` | `scripts/build-reference-artifacts.mjs` with Style Dictionary `5.5.0` | `consumer-reference/generated/tokens.css`, `consumer-reference/generated/manifest.json` | `stable` restricted adapter contract, `generated` output | Allowed token shape, adapter/version pin, source token count, warning, declaration, or content hash changes. | `scripts/validate-reference-artifacts.mjs`, `scripts/test-reference-adapters.mjs` | Repository governance owner with Validation owner |
 | Governed local reference profiles | `design-engineering/reference-profiles/governed-local/**` | Manual | None | `experimental`, `example_only`, non-default related fixtures | Layout revision, identity values, UA/reset assumptions, explicit selection, or fixture relationship changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Design Engineering owner with Validation owner |
+| Component-state evidence matrices | Each profile's declared `components/*.component.json`, `states/*.states.json`, `fixtures/*.fixture.json`, and `evidence/*.evidence.json` records | `scripts/generate-consumer-reference-evidence.mjs` | `design-engineering/reference-profiles/governed-local/editorial/generated/state-matrix.md`, `design-engineering/reference-profiles/governed-local/editorial/generated/keyboard-matrix.md`, `design-engineering/reference-profiles/governed-local/editorial/generated/evidence-coverage.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/state-matrix.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/keyboard-matrix.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/evidence-coverage.md` | `generated` output from `experimental` canonical records | Declared record paths, capture-session identity, scenario/mode/channel counts, claim boundary, generated escaping, or generator output changes. | `scripts/validate-component-state.mjs`, `scripts/test-validate-component-state.mjs`, `scripts/test-validate-component-state-artifacts.mjs`, `scripts/test-generate-consumer-reference-evidence.mjs` | Design Engineering owner with Validation owner |
 | Proposed Chromium sentinel | `tests/helpers/render-consumer-reference.mjs`, `consumer-reference/schema/{baseline-manifest,calibration-record}.schema.json`, `consumer-reference/baselines/*.json` | Playwright `1.61.0` in the digest-pinned `linux/amd64` image | `tests/snapshots/consumer-reference-card-grid.png`, raw GitHub Actions calibration artifact | `experimental`, nonblocking while owner approval is pending | Renderer source, exact image/platform/tool pin, baseline bytes, computed layout contract, or calibration metadata changes. | `scripts/validate-baseline-manifest.mjs`, `scripts/test-validate-baseline-manifest.mjs`, `scripts/test-summarize-sentinel-calibration.mjs`, Playwright | Repository governance owner with Validation owner |
 | Domain manifest and scope decision | `DOMAINS.md`, `quality/claim-records/stylegallery-multidomain-scope.md` | Manual | None | `stable` | Domain membership, repository-scope, or provenance-policy changes. | `scripts/validate-domains.mjs`, `scripts/validate-governance.mjs` | Repository governance owner |
 | Layout domain hub | `layout/index.md` | Manual | None | `stable` | Layout route or ownership changes. | `scripts/validate-domains.mjs`, `scripts/validate-ia.mjs` | Pattern-data owner |
@@ -53,9 +54,19 @@ Current generated artifacts:
 - `patterns/**/*.md`
 - `consumer-reference/generated/tokens.css`
 - `consumer-reference/generated/manifest.json`
+- `design-engineering/reference-profiles/governed-local/editorial/generated/state-matrix.md`
+- `design-engineering/reference-profiles/governed-local/editorial/generated/keyboard-matrix.md`
+- `design-engineering/reference-profiles/governed-local/editorial/generated/evidence-coverage.md`
+- `design-engineering/reference-profiles/governed-local/terminal/generated/state-matrix.md`
+- `design-engineering/reference-profiles/governed-local/terminal/generated/keyboard-matrix.md`
+- `design-engineering/reference-profiles/governed-local/terminal/generated/evidence-coverage.md`
 - `tests/snapshots/consumer-reference-card-grid.png` (proposed; update only by an explicit local baseline proposal, never in CI)
 
 Portable token artifacts are regenerated only from the restricted fixture through the pinned adapter. Run `npm run build`; never broaden the allowed token subset to accommodate an adapter false-success, and revert the adapter with both generated files if the pin regresses.
+
+Component-state evidence matrices are regenerated only from the records declared by each `profile.json`. Run `node scripts/generate-consumer-reference-evidence.mjs --json`; never hand-edit any of the six matrices or substitute undeclared record paths.
+
+Browser state evidence begins with `scripts/create-component-state-session.mjs`. Its closed receipt binds a random nonce and session ID to the checked-out revision, branch, attempt, exact runtime pins, viewport, and intended profile/scenario/channel set before capture. DOM and AX artifacts embed the receipt digest and session identity; the finalizer derives pass timestamps from those artifacts and binds the visual artifact hash to the same scenario triple. Validation uses the receipt and completed manifest interval, not a wall-clock maximum age, so an unchanged downloaded session remains verifiable later.
 
 ## Lifecycle States
 
@@ -153,6 +164,21 @@ node scripts/test-validate-baseline-manifest.mjs --json
 node scripts/test-summarize-sentinel-calibration.mjs
 node scripts/validate-renderer-purity.mjs --json
 node scripts/test-renderer-purity.mjs
+```
+
+For capture-session-bound component-state evidence, also run:
+
+```sh
+node scripts/create-component-state-session.mjs --output "$STATE_EVIDENCE_ROOT/capture-session.json" --json
+STATE_SESSION_RECEIPT="$STATE_EVIDENCE_ROOT/capture-session.json" \
+  STATE_ARTIFACT_DIR="$STATE_EVIDENCE_ROOT/runtime" \
+  npm run test:component-state:runtime -- --reporter=line
+node scripts/finalize-component-state-evidence.mjs --artifact-root "$STATE_EVIDENCE_ROOT" --json
+node scripts/validate-component-state.mjs \
+  --artifact-root "$STATE_EVIDENCE_ROOT" \
+  --runtime-manifest "$STATE_EVIDENCE_ROOT/runtime-manifest.json" \
+  --json
+npm run test:component-state:runtime-negative
 ```
 
 Do not pass `--update-snapshots` in CI. Calibration runs exactly 20 times on the manifest's digest-pinned `linux/amd64` container and uploads raw Playwright JSON, strict exit records, PNG, DOM, AX, metadata, and post-assertion comparison evidence. Failed or incomplete calibration still uploads its truthful raw evidence without writing a completed aggregate. It remains nonblocking until the named owner explicitly approves the baseline.

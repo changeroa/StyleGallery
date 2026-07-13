@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
 
@@ -70,14 +70,37 @@ jobs:
           node -c scripts/validate-renderer-purity.mjs
           node -c scripts/test-renderer-purity.mjs
           node -c scripts/test-consumer-reference-sentinel.mjs
+          node -c scripts/component-state-contract.mjs
+          node -c scripts/component-state-semantics.mjs
+          node -c scripts/capture-session-contract.mjs
+          node -c scripts/create-component-state-session.mjs
+          node -c scripts/profile-record-contract.mjs
+          node -c scripts/evidence-artifact-contract.mjs
+          node -c scripts/finalize-component-state-evidence.mjs
+          node -c scripts/validate-component-state.mjs
+          node -c scripts/test-validate-component-state.mjs
+          node -c scripts/test-validate-component-state-artifacts.mjs
+          node -c scripts/test-component-state-sentinel.mjs
+          node -c scripts/generate-consumer-reference-evidence.mjs
+          node -c scripts/test-generate-consumer-reference-evidence.mjs
+          node -c tests/helpers/render-component-state.mjs
+          node -c tests/component-state-evidence.spec.mjs
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/baseline-manifest.schema.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/calibration-record.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/component-state.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/capture-session.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/dom-evidence.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/ax-evidence.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/fixture-manifest.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/evidence-record.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/runtime-evidence-manifest.schema.json"))'
           git diff --check
 
       - name: Generated artifacts are current
         run: |
           node scripts/generate-patterns.mjs
           node scripts/build-reference-artifacts.mjs --adapter style-dictionary --fail-on-warning --json
+          node scripts/generate-consumer-reference-evidence.mjs --json
           git diff --exit-code
 
       - name: OKF structure validation
@@ -122,6 +145,14 @@ jobs:
           node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json
           node scripts/test-reference-adapters.mjs --json
 
+      - name: Compound component state and evidence integrity
+        run: |
+          node scripts/validate-component-state.mjs --json
+          node scripts/test-validate-component-state.mjs --json
+          node scripts/test-validate-component-state-artifacts.mjs
+          node scripts/generate-consumer-reference-evidence.mjs --check --json
+          node scripts/test-generate-consumer-reference-evidence.mjs --json
+
       - name: Chromium baseline manifest integrity
         run: |
           node scripts/validate-baseline-manifest.mjs --json
@@ -150,10 +181,10 @@ jobs:
       options: --platform linux/amd64
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Setup Node 22
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
 
@@ -166,6 +197,58 @@ jobs:
       - name: Run Chromium sentinel semantic negative controls
         run: node scripts/test-consumer-reference-sentinel.mjs
 
+  component-state-evidence:
+    name: Chromium component-state evidence (nonblocking)
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
+      options: --platform linux/amd64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Install exact component-state dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Capture and validate closed component-state evidence
+        shell: bash
+        env:
+          STATE_ARTIFACT_DIR: ${{ runner.temp }}/consumer-reference-state/runtime
+          SENTINEL_CONTAINER_IMAGE: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
+        run: |
+          set -o pipefail
+          node scripts/create-component-state-session.mjs \
+            --output "${{ runner.temp }}/consumer-reference-state/capture-session.json" \
+            --json
+          STATE_SESSION_RECEIPT="${{ runner.temp }}/consumer-reference-state/capture-session.json" \
+            npm run test:component-state:runtime -- --reporter=line
+          node scripts/finalize-component-state-evidence.mjs \
+            --artifact-root "${{ runner.temp }}/consumer-reference-state" \
+            --output "${{ runner.temp }}/consumer-reference-state/runtime-manifest.json" \
+            --json
+          node scripts/validate-component-state.mjs \
+            --artifact-root "${{ runner.temp }}/consumer-reference-state" \
+            --runtime-manifest "${{ runner.temp }}/consumer-reference-state/runtime-manifest.json" \
+            --json
+
+      - name: Run component-state runtime negative controls
+        run: npm run test:component-state:runtime-negative
+
+      - name: Upload claim-scoped component-state evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: consumer-reference-state-${{ github.run_id }}-${{ github.sha }}
+          path: ${{ runner.temp }}/consumer-reference-state/
+          if-no-files-found: error
+          retention-days: 14
+
   chromium-calibration:
     name: Chromium 20-run calibration (nonblocking)
     if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
@@ -176,10 +259,10 @@ jobs:
       options: --platform linux/amd64
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Setup Node 22
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
 
@@ -231,7 +314,7 @@ jobs:
 
       - name: Upload raw Chromium calibration evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: chromium-sentinel-calibration-${{ github.run_id }}-${{ github.sha }}
           path: calibration-artifacts/

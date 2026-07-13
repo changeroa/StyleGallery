@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "state_set",
+  "component_id": "button",
+  "profile_id": "terminal-reference-profile",
+  "scenarios": [
+    {
+      "id": "action-disabled-busy",
+      "semantic_mode": "action",
+      "states": [
+        "busy",
+        "disabled"
+      ],
+      "aria": {
+        "busy": "true",
+        "disabled": "true"
+      },
+      "expected": {
+        "visual": [
+          "busy",
+          "disabled"
+        ],
+        "dom": {
+          "active": "false",
+          "aria-busy": "true",
+          "disabled": "true",
+          "role": "button"
+        },
+        "ax": {
+          "busy": true,
+          "disabled": true,
+          "focused": false,
+          "role": "button"
+        },
+        "activation": "suppressed"
+      }
+    },
+    {
+      "id": "action-focused",
+      "semantic_mode": "action",
+      "states": [
+        "focus"
+      ],
+      "aria": {},
+      "expected": {
+        "visual": [
+          "focus",
+          "ready"
+        ],
+        "dom": {
+          "active": "true",
+          "role": "button"
+        },
+        "ax": {
+          "focused": true,
+          "role": "button"
+        },
+        "activation": "allowed"
+      }
+    },
+    {
+      "id": "action-loading-busy",
+      "semantic_mode": "action",
+      "states": [
+        "busy",
+        "focus",
+        "loading"
+      ],
+      "aria": {
+        "busy": "true"
+      },
+      "expected": {
+        "visual": [
+          "busy",
+          "focus",
+          "loading"
+        ],
+        "dom": {
+          "active": "true",
+          "aria-busy": "true",
+          "role": "button"
+        },
+        "ax": {
+          "busy": true,
+          "focused": true,
+          "role": "button"
+        },
+        "activation": "suppressed"
+      }
+    },
+    {
+      "id": "disclosure-expanded-loading",
+      "semantic_mode": "disclosure",
+      "states": [
+        "busy",
+        "expanded",
+        "focus",
+        "loading"
+      ],
+      "aria": {
+        "busy": "true",
+        "expanded": "true"
+      },
+      "expected": {
+        "visual": [
+          "busy",
+          "expanded",
+          "focus",
+          "loading"
+        ],
+        "dom": {
+          "active": "true",
+          "aria-busy": "true",
+          "aria-expanded": "true",
+          "role": "button"
+        },
+        "ax": {
+          "busy": true,
+          "expanded": true,
+          "focused": true,
+          "role": "button"
+        },
+        "activation": "allowed"
+      }
+    },
+    {
+      "id": "toggle-focused-pressed",
+      "semantic_mode": "toggle",
+      "states": [
+        "focus",
+        "pressed"
+      ],
+      "aria": {
+        "pressed": "true"
+      },
+      "expected": {
+        "visual": [
+          "focus",
+          "pressed"
+        ],
+        "dom": {
+          "active": "true",
+          "aria-pressed": "true",
+          "role": "button"
+        },
+        "ax": {
+          "focused": true,
+          "pressed": true,
+          "role": "button"
+        },
+        "activation": "allowed"
+      }
+    }
+  ]
+}

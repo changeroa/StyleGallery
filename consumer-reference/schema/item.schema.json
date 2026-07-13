@@ -37,11 +37,16 @@
           "default",
           "environment_assumptions",
           "example_only",
+          "component_records",
+          "evidence_records",
+          "fixture_records",
+          "generated_records",
           "layout_source_sha",
           "local_foundations",
           "profile_kind",
           "related_fixture_set_id",
           "selection",
+          "state_records",
           "tokens"
         ]
       }
@@ -50,6 +55,12 @@
   "properties": {
     "artifact_mode": {
       "enum": ["consumer_local", "external_consumer", "governed_local", "schema_only"]
+    },
+    "component_records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "components/button.component.json" }
     },
     "default": { "const": false },
     "environment_assumptions": {
@@ -71,7 +82,25 @@
       "type": "object"
     },
     "example_only": { "const": true },
+    "evidence_records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "evidence/button.evidence.json" }
+    },
     "fixture_independence": { "const": "related" },
+    "fixture_records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "fixtures/button.fixture.json" }
+    },
+    "generated_records": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": { "enum": ["generated/state-matrix.md", "generated/keyboard-matrix.md", "generated/evidence-coverage.md"] }
+    },
     "handoff": {
       "oneOf": [
         {
@@ -134,6 +163,12 @@
       "properties": { "status": { "enum": ["active", "ended"] } },
       "required": ["status"],
       "type": "object"
+    },
+    "state_records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "states/button.states.json" }
     },
     "tokens": { "const": "tokens.dtcg.json" }
   },

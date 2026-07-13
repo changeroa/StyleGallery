@@ -1,5 +1,6 @@
 {
   "artifact_mode": "governed_local",
+  "component_records": ["components/button.component.json"],
   "default": false,
   "environment_assumptions": {
     "reset": {
@@ -10,7 +11,10 @@
     "user_agent_styles": "Preserve semantic browser defaults except for the declared reset."
   },
   "example_only": true,
+  "evidence_records": ["evidence/button.evidence.json"],
   "fixture_independence": "related",
+  "fixture_records": ["fixtures/button.fixture.json"],
+  "generated_records": ["generated/evidence-coverage.md", "generated/keyboard-matrix.md", "generated/state-matrix.md"],
   "handoff": {
     "record": "design-engineering/reference-profiles/governed-local/editorial/profile.json",
     "status": "declared"
@@ -34,5 +38,6 @@
   "support": {
     "status": "active"
   },
+  "state_records": ["states/button.states.json"],
   "tokens": "tokens.dtcg.json"
 }

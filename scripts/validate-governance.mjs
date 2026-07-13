@@ -46,6 +46,11 @@ const requiredCodeowners = [
   "/scripts/validate-*.mjs @changeroa",
   "/scripts/test-validate-*.mjs @changeroa",
 ];
+const immutableActionPins = [
+  "uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4",
+  "uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4",
+  "uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4",
+];
 
 function read(relative) {
   const target = path.join(root, relative);
@@ -86,6 +91,7 @@ function requireGovernanceMatrix() {
     "Layout recipes",
     "Quality gates and evidence",
     "Consumer reference contract",
+    "Component-state evidence matrices",
     "Proposed Chromium sentinel",
     "Domain manifest and scope decision",
     "Layout domain hub",
@@ -104,6 +110,14 @@ function requireGovernanceMatrix() {
   requireIncludes("GOVERNANCE.md", "`scripts/validate-patterns.mjs`, `scripts/validate-catalog.mjs`, `scripts/validate-governance.mjs`");
   requireIncludes("GOVERNANCE.md", "Source-lineage URL changes, generated drift, category changes, or pattern count changes.");
   requireIncludes("GOVERNANCE.md", "Generated structure changes, generated-warning changes, or generated metadata changes.");
+  requireIncludes("GOVERNANCE.md", "`scripts/generate-consumer-reference-evidence.mjs`");
+  requireIncludes("GOVERNANCE.md", "Browser state evidence begins with `scripts/create-component-state-session.mjs`");
+  requireIncludes("GOVERNANCE.md", "Validation uses the receipt and completed manifest interval, not a wall-clock maximum age");
+  for (const profile of ["editorial", "terminal"]) {
+    for (const artifact of ["state-matrix.md", "keyboard-matrix.md", "evidence-coverage.md"]) {
+      requireIncludes("GOVERNANCE.md", `design-engineering/reference-profiles/governed-local/${profile}/generated/${artifact}`);
+    }
+  }
 }
 
 function requireLifecycleStates() {
@@ -143,6 +157,10 @@ function requireCiwiring() {
   requireIncludes(".github/workflows/validate.yml", "node scripts/validate-consumer-reference.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-validate-consumer-reference.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-consumer-reference-sentinel.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/create-component-state-session.mjs");
+  requireIncludes(".github/workflows/validate.yml", "STATE_SESSION_RECEIPT=");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/finalize-component-state-evidence.mjs");
+  requireIncludes(".github/workflows/validate.yml", "--runtime-manifest");
   requireIncludes(".github/workflows/validate.yml", "node scripts/validate-baseline-manifest.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-validate-baseline-manifest.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-summarize-sentinel-calibration.mjs");
@@ -157,6 +175,15 @@ function requireCiwiring() {
   }
   requireIncludes(".github/workflows/validate.yml", "permissions:");
   requireIncludes(".github/workflows/validate.yml", "contents: read");
+}
+
+function requireImmutableActions() {
+  const relative = ".github/workflows/validate.yml";
+  const workflow = read(relative);
+  for (const line of workflow.split("\n").filter((entry) => /^\s*uses:\s+actions\//.test(entry))) {
+    if (!/^\s*uses:\s+actions\/[a-z0-9-]+@[a-f0-9]{40}\s+#\s+v\d+\s*$/.test(line)) failures.push(`${relative}: floating or unlabeled action ref ${line.trim()}`);
+  }
+  for (const pin of immutableActionPins) if (!workflow.includes(pin)) failures.push(`${relative}: missing immutable action pin ${pin}`);
 }
 
 function requireRootLinks() {
@@ -196,6 +223,7 @@ requireLifecycleStates();
 requireOwnership();
 requireStalenessDecision();
 requireCiwiring();
+requireImmutableActions();
 requireRootLinks();
 requireEvidenceMap();
 requireSentinelProvenanceBoundary();

@@ -184,10 +184,12 @@ function checkLeaf(domain, relative, expectedSourcePath, titles) {
 }
 
 function rejectUndeclaredDomainDocuments() {
+  const generatedReference = /^design-engineering\/reference-profiles\/governed-local\/(?:editorial|terminal)\/generated\/(?:state-matrix|keyboard-matrix|evidence-coverage)\.md$/;
   for (const domain of domains) {
     const declared = new Set([`${domain.slug}/index.md`, ...domain.leaves.map(([leaf]) => leaf), ...(domain.referenceDocuments ?? [])]);
     for (const absolute of walkMarkdown(path.join(root, domain.slug))) {
       const relative = path.relative(root, absolute);
+      if (generatedReference.test(relative)) continue;
       if (!declared.has(relative)) failures.push(`${relative}: undeclared governed domain document`);
     }
   }

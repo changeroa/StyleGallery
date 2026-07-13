@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/capture-session.schema.json",
+  "title": "Component-state capture session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_kind", "session_id", "nonce", "started_at", "repository", "revision", "branch", "attempt", "environment", "intended"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "record_kind": { "const": "component_state_capture_session" },
+    "session_id": { "type": "string", "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$" },
+    "nonce": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "started_at": { "type": "string", "format": "date-time" },
+    "repository": { "type": "string", "minLength": 1 },
+    "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "branch": { "type": "string", "minLength": 1 },
+    "attempt": { "type": "integer", "minimum": 1 },
+    "environment": { "$ref": "#/$defs/environment" },
+    "intended": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["profile_name", "profile_id", "scenarios"],
+        "properties": {
+          "profile_name": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "profile_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "scenarios": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "channels"],
+              "properties": {
+                "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+                "channels": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["visual", "dom", "ax"] } }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "platform", "node", "browser", "browser_revision", "playwright", "lockfile_sha256", "container_image", "viewport"],
+      "properties": {
+        "kind": { "const": "browser" },
+        "platform": { "type": "string", "minLength": 1 },
+        "node": { "type": "string", "pattern": "^v\\d+\\.\\d+\\.\\d+$" },
+        "browser": { "type": "string", "minLength": 1 },
+        "browser_revision": { "type": "string", "minLength": 1 },
+        "playwright": { "type": "string", "minLength": 1 },
+        "lockfile_sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "container_image": { "type": "string", "minLength": 1 },
+        "viewport": { "type": "string", "pattern": "^\\d+x\\d+$" }
+      }
+    },
+    "session_link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session_id", "nonce", "receipt_sha256", "started_at", "revision", "branch", "attempt", "environment"],
+      "properties": {
+        "session_id": { "type": "string", "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$" },
+        "nonce": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "receipt_sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "started_at": { "type": "string", "format": "date-time" },
+        "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "branch": { "type": "string", "minLength": 1 },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "environment": { "$ref": "#/$defs/environment" }
+      }
+    },
+    "receipt_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "byte_length", "media_type"],
+      "properties": {
+        "path": { "const": "capture-session.json" },
+        "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "byte_length": { "type": "integer", "minimum": 1 },
+        "media_type": { "const": "application/json" }
+      }
+    },
+    "completed_session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session_id", "nonce", "receipt_sha256", "receipt", "started_at", "completed_at", "repository", "revision", "branch", "attempt", "environment", "intended"],
+      "properties": {
+        "session_id": { "type": "string", "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$" },
+        "nonce": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "receipt_sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "receipt": { "$ref": "#/$defs/receipt_artifact" },
+        "started_at": { "type": "string", "format": "date-time" },
+        "completed_at": { "type": "string", "format": "date-time" },
+        "repository": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "branch": { "type": "string", "minLength": 1 },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "environment": { "$ref": "#/$defs/environment" },
+        "intended": { "$ref": "#/$defs/intended" }
+      }
+    },
+    "intended": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["profile_name", "profile_id", "scenarios"],
+        "properties": {
+          "profile_name": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "profile_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "scenarios": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "channels"],
+              "properties": {
+                "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+                "channels": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["visual", "dom", "ax"] } }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
