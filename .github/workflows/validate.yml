@@ -195,7 +195,7 @@ jobs:
           failed=0
           mkdir -p calibration-artifacts
           artifact_name="chromium-sentinel-calibration-${GITHUB_RUN_ID}-${GITHUB_SHA}"
-          checkout_sha="$(git rev-parse HEAD)"
+          checkout_sha="$(git -c safe.directory="$GITHUB_WORKSPACE" rev-parse HEAD)"
           for run in $(seq 1 20); do
             run_dir="calibration-artifacts/run-$(printf '%02d' "$run")"
             mkdir -p "$run_dir"

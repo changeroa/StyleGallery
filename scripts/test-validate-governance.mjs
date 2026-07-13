@@ -96,6 +96,7 @@ const files = {
     "node scripts/test-validate-baseline-manifest.mjs --json",
     "node scripts/test-summarize-sentinel-calibration.mjs",
     "node scripts/validate-renderer-purity.mjs --json",
+    "checkout_sha=\"$(git -c safe.directory=\"$GITHUB_WORKSPACE\" rev-parse HEAD)\"",
     "permissions:",
     "contents: read",
     "",
@@ -215,6 +216,26 @@ const cases = [
   { name: "missing_domain_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail.", "Domain fixtures must fail.") }, expect: "quality/evidence/executable-evidence.md: missing Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail." },
   { name: "missing_sentinel_ci_wiring", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("node scripts/test-consumer-reference-sentinel.mjs\n", "") }, expect: ".github/workflows/validate.yml: missing node scripts/test-consumer-reference-sentinel.mjs" },
   { name: "missing_sentinel_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.", "Chromium evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence." },
+  {
+    name: "missing_scoped_checkout_sha_trust",
+    mutate: {
+      ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace(
+        "checkout_sha=\"$(git -c safe.directory=\"$GITHUB_WORKSPACE\" rev-parse HEAD)\"",
+        "checkout_sha=\"$(git rev-parse HEAD)\"",
+      ),
+    },
+    expect: ".github/workflows/validate.yml: missing checkout_sha=\"$(git -c safe.directory=\"$GITHUB_WORKSPACE\" rev-parse HEAD)\"",
+  },
+  {
+    name: "reject_broad_checkout_sha_trust",
+    mutate: {
+      ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace(
+        "checkout_sha=\"$(git -c safe.directory=\"$GITHUB_WORKSPACE\" rev-parse HEAD)\"",
+        "checkout_sha=\"$(git -c safe.directory='*' rev-parse HEAD)\"",
+      ),
+    },
+    expect: ".github/workflows/validate.yml: broad Git safe.directory wildcard is forbidden",
+  },
   { name: "success_path", expect: null },
 ];
 

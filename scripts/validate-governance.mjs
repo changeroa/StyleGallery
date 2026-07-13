@@ -145,6 +145,10 @@ function requireCiwiring() {
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-validate-baseline-manifest.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-summarize-sentinel-calibration.mjs");
   requireIncludes(".github/workflows/validate.yml", "node scripts/validate-renderer-purity.mjs --json");
+  requireIncludes(".github/workflows/validate.yml", "checkout_sha=\"$(git -c safe.directory=\"$GITHUB_WORKSPACE\" rev-parse HEAD)\"");
+  if (/safe\.directory(?:=|\s+)["']?\*["']?/.test(read(".github/workflows/validate.yml"))) {
+    failures.push(".github/workflows/validate.yml: broad Git safe.directory wildcard is forbidden");
+  }
   requireIncludes(".github/workflows/validate.yml", "permissions:");
   requireIncludes(".github/workflows/validate.yml", "contents: read");
 }
