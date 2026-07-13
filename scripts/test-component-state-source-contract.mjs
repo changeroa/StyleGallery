@@ -9,9 +9,11 @@ import {
   canonicalSourceManifest,
   sourceManifestMatches,
 } from "./capture-session-contract.mjs";
+import { compileSchemas } from "./component-state-contract.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const profileRoot = path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local");
+const schemaRoot = path.join(repositoryRoot, "consumer-reference/schema");
 const first = canonicalSourceManifest(repositoryRoot, profileRoot);
 const second = canonicalSourceManifest(repositoryRoot, profileRoot);
 
@@ -50,6 +52,17 @@ try {
   const config = fs.readFileSync(configFile, "utf8").replace("viewport: { height: 768, width: 1024 },", "deviceScaleFactor: 2,\n    viewport: { height: 768, width: 1024 },");
   fs.writeFileSync(configFile, config);
   assert.equal(sourceManifestMatches(copied, copiedRepository, copiedProfiles), false, "deviceScaleFactor drift must invalidate the source manifest before it can double screenshot pixels");
+
+  const copiedSchemas = path.join(tempRoot, "schemas");
+  fs.cpSync(schemaRoot, copiedSchemas, { recursive: true });
+  const captureSchema = path.join(copiedSchemas, "capture-session.schema.json");
+  const schemaSource = fs.readFileSync(captureSchema, "utf8");
+  fs.writeFileSync(captureSchema, schemaSource.replace('"title":', '"title": "shadowed title",\n  "title":'));
+  assert.throws(
+    () => compileSchemas(copiedSchemas),
+    (error) => error?.code === "component_schema_json_invalid" && error?.path === captureSchema,
+    "duplicate component schema properties must fail strict compilation with a named error",
+  );
 } finally {
   fs.rmSync(tempRoot, { force: true, recursive: true });
 }

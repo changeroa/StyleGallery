@@ -4,7 +4,7 @@
   "title": "Component-state capture session",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "record_kind", "session_id", "nonce", "started_at", "repository", "revision", "branch", "attempt", "environment", "intended"],
+  "required": ["schema_version", "record_kind", "session_id", "nonce", "started_at", "repository", "revision", "branch", "attempt", "environment", "source", "intended"],
   "properties": {
     "schema_version": { "const": "1.0" },
     "record_kind": { "const": "component_state_capture_session" },
@@ -64,7 +64,7 @@
     "session_link": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["session_id", "nonce", "receipt_sha256", "started_at", "revision", "branch", "attempt", "environment"],
+      "required": ["session_id", "nonce", "receipt_sha256", "started_at", "revision", "branch", "attempt", "environment", "source"],
       "properties": {
         "session_id": { "type": "string", "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$" },
         "nonce": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
@@ -91,7 +91,7 @@
     "completed_session": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["session_id", "nonce", "receipt_sha256", "receipt", "started_at", "completed_at", "repository", "revision", "branch", "attempt", "environment", "intended"],
+      "required": ["session_id", "nonce", "receipt_sha256", "receipt", "started_at", "completed_at", "repository", "revision", "branch", "attempt", "environment", "source", "intended"],
       "properties": {
         "session_id": { "type": "string", "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$" },
         "nonce": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
