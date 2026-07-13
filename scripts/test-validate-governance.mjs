@@ -6,6 +6,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { files, generatedWarning, sentinelProvenanceClauses } from "./governance-test-fixture.mjs";
+import { workflowSafetyCases } from "./governance-workflow-negative-cases.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(root, "scripts", "validate-governance.mjs");
@@ -146,16 +147,6 @@ const cases = [
   { name: "missing_sentinel_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.", "Chromium evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence." },
   { name: "missing_component_state_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles.", "Component evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles." },
   {
-    name: "floating_action_ref",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4", "uses: actions/checkout@v4") },
-    expect: ".github/workflows/validate.yml: floating or unlabeled action ref uses: actions/checkout@v4",
-  },
-  {
-    name: "checkout_credentials_persisted",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("    persist-credentials: false\n", "") },
-    expect: ".github/workflows/validate.yml: every actions/checkout step must set persist-credentials: false",
-  },
-  {
     name: "missing_scoped_checkout_sha_trust",
     mutate: {
       ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace(
@@ -190,6 +181,7 @@ const cases = [
     mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("\"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"", "\"$GITHUB_REPOSITORY\" \"changeroa/StyleGallery\" \"$GITHUB_RUN_ID\"") },
     expect: ".github/workflows/validate.yml: missing \"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"",
   },
+  ...workflowSafetyCases(files[".github/workflows/validate.yml"]),
   { name: "success_path", expect: null },
 ];
 

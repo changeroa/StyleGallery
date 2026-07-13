@@ -5,7 +5,7 @@ import path from "node:path";
 import { componentStateWorkflowFailures } from "./component-state-workflow-contract.mjs";
 import { immutableActionPins, requiredCodeowners, sentinelProvenanceClauses } from "./governance-policy-contract.mjs";
 import { promotionGovernanceFailures } from "./promotion-governance-contract.mjs";
-import { checkoutCredentialFailures } from "./workflow-action-contract.mjs";
+import { workflowActionFailures } from "./workflow-action-contract.mjs";
 
 const json = new Set(process.argv.slice(2)).has("--json");
 const root = process.cwd();
@@ -162,11 +162,8 @@ function requireComponentStateCiIsolation() {
 function requireImmutableActions() {
   const relative = ".github/workflows/validate.yml";
   const workflow = read(relative);
-  for (const line of workflow.split("\n").filter((entry) => /^\s*uses:\s+actions\//.test(entry))) {
-    if (!/^\s*uses:\s+actions\/[a-z0-9-]+@[a-f0-9]{40}\s+#\s+v\d+\s*$/.test(line)) failures.push(`${relative}: floating or unlabeled action ref ${line.trim()}`);
-  }
   for (const pin of immutableActionPins) if (!workflow.includes(pin)) failures.push(`${relative}: missing immutable action pin ${pin}`);
-  failures.push(...checkoutCredentialFailures(workflow, relative));
+  failures.push(...workflowActionFailures(workflow, relative));
 }
 
 function requireRootLinks() {
