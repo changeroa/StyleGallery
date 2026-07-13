@@ -8,12 +8,20 @@ import { spawnSync } from "node:child_process";
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const validator = path.join(root, "scripts", "validate-governance.mjs");
 const generatedWarning = "<!-- Generated from `scripts/generate-patterns.mjs` and `scripts/pattern-data.mjs`. Do not hand-edit generated catalog or pattern docs; edit the source files and regenerate. -->";
+const sentinelProvenanceClauses = [
+  "Completed-CI repository, workflow, run ID and attempt, SHA, and artifact-name fields are workflow-recorded, self-asserted metadata, not an external attestation.",
+  "Verification against the uploaded GitHub Actions run and artifact ID and digest remains pending.",
+  "Linux/amd64 repeatability remains unclaimed until that external verification succeeds.",
+  "Baseline-owner approval remains unclaimed until the named owner explicitly approves it.",
+  "Synthetic fixtures validate rejection and acceptance behavior only; they are not authenticated provenance.",
+];
 
 const files = {
   "AGENTS.md": "# Agent Instructions\n\nSee [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md) and [StyleGallery Domains](DOMAINS.md).\n",
   "README.md": "# StyleGallery\n\n- [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md)\n- [StyleGallery Domains](DOMAINS.md)\n",
   "index.md": "# StyleGallery\n\n- [Governance, lifecycle, and docs-as-code](GOVERNANCE.md)\n- [StyleGallery Domains](DOMAINS.md)\n",
   "DOMAINS.md": "# StyleGallery Domains\n",
+  "consumer-reference/contract.md": `${sentinelProvenanceClauses.join("\n")}\n`,
   "CATALOG.md": `# Layout Pattern Catalog\n\n${generatedWarning}\n`,
   "patterns/index.md": `# Pattern Categories\n\n${generatedWarning}\n`,
   "patterns/stacking/index.md": `# Stacking\n\n${generatedWarning}\n`,
@@ -33,6 +41,9 @@ const files = {
     "| Governance, lifecycle, generated-file, ownership, and stale-content policy remain discoverable and CI-enforced. | `scripts/validate-governance.mjs` and `scripts/test-validate-governance.mjs` | `node scripts/validate-governance.mjs --json`; `node scripts/test-validate-governance.mjs --json` | `GOVERNANCE.md`, `.github/CODEOWNERS`, generated warnings, generated metadata, root links, lifecycle states, stale-audit decision, and CI wiring are present. | Missing governance file, generated warning, generated metadata, CODEOWNERS coverage, or stale policy fixtures must fail. | Proves governance policy is present and linked, not that CODEOWNERS users have verified repository write access. |",
     "| Domain topology, metadata, provenance, scope boundaries, and root routes remain enforced. | `scripts/validate-domains.mjs` and `scripts/test-validate-domains.mjs` | `node scripts/validate-domains.mjs --json`; `node scripts/test-validate-domains.mjs` | Four governed domains and their declared leaves are reachable and attributed. | Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail. | A full SHA proves content identity syntax, not publisher authenticity or local quality. |",
     "Consumer-reference handoffs, schema/runtime parity, and containment remain enforced; repository handoff omissions must fail.",
+    "The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.",
+    "Linux/amd64 20-run calibration and `baseline_owner_approval` remain pending.",
+    ...sentinelProvenanceClauses,
     "",
   ].join("\n"),
   ".github/CODEOWNERS": [
@@ -51,6 +62,9 @@ const files = {
     "/design-engineering/ @changeroa",
     "/platform-guides/ @changeroa",
     "/consumer-reference/ @changeroa",
+    "/consumer-reference/baselines/ @changeroa",
+    "/tests/ @changeroa",
+    "/playwright.config.mjs @changeroa",
     "/scripts/pattern-data.mjs @changeroa",
     "/scripts/generate-patterns.mjs @changeroa",
     "/patterns/ @changeroa",
@@ -77,6 +91,11 @@ const files = {
     "node -c scripts/test-validate-consumer-reference.mjs",
     "node scripts/validate-consumer-reference.mjs --json",
     "node scripts/test-validate-consumer-reference.mjs --json",
+    "node scripts/test-consumer-reference-sentinel.mjs",
+    "node scripts/validate-baseline-manifest.mjs --json",
+    "node scripts/test-validate-baseline-manifest.mjs --json",
+    "node scripts/test-summarize-sentinel-calibration.mjs",
+    "node scripts/validate-renderer-purity.mjs --json",
     "permissions:",
     "contents: read",
     "",
@@ -96,6 +115,7 @@ const files = {
     "| Layout recipes | `recipes/*.md` | Manual | None | `scripts/validate-okf.mjs` | Recipe owner |",
     "| Quality gates and evidence | `quality/**/*.md` | Manual | None | `scripts/validate-okf.mjs` | Quality owner |",
     "| Consumer reference contract | `consumer-reference/contract.md` | Manual | None | `stable` | Receiver changes. | `scripts/validate-consumer-reference.mjs` | Validation owner |",
+    "| Proposed Chromium sentinel | `tests/helpers/render-consumer-reference.mjs`, `consumer-reference/schema/calibration-record.schema.json`, `consumer-reference/baselines/*.json` | Playwright | Snapshot and raw calibration evidence | `experimental` | Renderer or baseline changes. | `scripts/validate-baseline-manifest.mjs` | Validation owner |",
     "| Domain manifest and scope decision | `DOMAINS.md`, `quality/claim-records/stylegallery-multidomain-scope.md` | Manual | None | `stable` | Domain membership, repository-scope, or provenance-policy changes. | `scripts/validate-domains.mjs`, `scripts/validate-governance.mjs` | Repository governance owner |",
     "| Layout domain hub | `layout/index.md` | Manual | None | `stable` | Layout route or ownership changes. | `scripts/validate-domains.mjs`, `scripts/validate-ia.mjs` | Pattern-data owner |",
     "| Motion domain guidance | `motion/*.md` | Manual | None | `experimental` | Upstream revision, evidence boundary, or guidance changes. | `scripts/validate-domains.mjs` | Motion domain owner |",
@@ -123,6 +143,8 @@ const files = {
     "Decision: no scheduled stale-content workflow yet.",
     "Audit trigger:",
     "node scripts/validate-links.mjs --json",
+    "node scripts/test-consumer-reference-sentinel.mjs",
+    ...sentinelProvenanceClauses,
     "",
   ].join("\n"),
 };
@@ -187,11 +209,23 @@ const cases = [
   { name: "paraphrased_governance_link_label", mutate: { "README.md": files["README.md"].replace("[Governance, Lifecycle, And Docs-As-Code]", "[Governance reference]") }, expectWarning: "README.md: recommended link label missing [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md)" },
   { name: "missing_motion_codeowner", mutate: { ".github/CODEOWNERS": files[".github/CODEOWNERS"].replace("/motion/ @changeroa\n", "") }, expect: ".github/CODEOWNERS: missing /motion/ @changeroa" },
   { name: "missing_consumer_reference_codeowner", mutate: { ".github/CODEOWNERS": files[".github/CODEOWNERS"].replace("/consumer-reference/ @changeroa\n", "") }, expect: ".github/CODEOWNERS: missing /consumer-reference/ @changeroa" },
+  { name: "missing_baseline_codeowner", mutate: { ".github/CODEOWNERS": files[".github/CODEOWNERS"].replace("/consumer-reference/baselines/ @changeroa\n", "") }, expect: ".github/CODEOWNERS: missing /consumer-reference/baselines/ @changeroa" },
   { name: "missing_domain_family", mutate: { "GOVERNANCE.md": files["GOVERNANCE.md"].replace("| Motion domain guidance |", "| Motion reference notes |") }, expect: "GOVERNANCE.md: missing Motion domain guidance" },
   { name: "missing_domain_ci_wiring", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("node scripts/validate-domains.mjs --json\n", "") }, expect: ".github/workflows/validate.yml: missing node scripts/validate-domains.mjs --json" },
   { name: "missing_domain_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail.", "Domain fixtures must fail.") }, expect: "quality/evidence/executable-evidence.md: missing Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail." },
+  { name: "missing_sentinel_ci_wiring", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("node scripts/test-consumer-reference-sentinel.mjs\n", "") }, expect: ".github/workflows/validate.yml: missing node scripts/test-consumer-reference-sentinel.mjs" },
+  { name: "missing_sentinel_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.", "Chromium evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence." },
   { name: "success_path", expect: null },
 ];
+
+for (const [pathIndex, relative] of ["consumer-reference/contract.md", "quality/evidence/executable-evidence.md", "GOVERNANCE.md"].entries()) {
+  for (const [clauseIndex, clause] of sentinelProvenanceClauses.entries()) {
+    cases.splice(cases.length - 1, 0,
+      { name: `provenance_clause_deleted_${pathIndex}_${clauseIndex}`, mutate: { [relative]: files[relative].replace(clause, "") }, expect: `${relative}: missing ${clause}` },
+      { name: `provenance_clause_misworded_${pathIndex}_${clauseIndex}`, mutate: { [relative]: files[relative].replace(clause, `Misworded ${clause.slice(1)}`) }, expect: `${relative}: missing ${clause}` },
+    );
+  }
+}
 
 function writeFixture(testCase) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), `layout-gallery-governance-${testCase.name}-`));

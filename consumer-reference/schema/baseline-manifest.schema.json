@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/baseline-manifest.schema.json",
+  "title": "Proposed Chromium baseline manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "baseline_owner_approval", "platform", "architecture", "container_image", "node", "os", "playwright", "browser_revision", "browser_version", "viewport", "source", "baseline", "calibration"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "status": { "const": "proposed" },
+    "baseline_owner_approval": { "const": "pending" },
+    "platform": { "const": "linux/amd64" },
+    "architecture": { "const": "amd64" },
+    "container_image": { "const": "mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a" },
+    "node": { "const": "22" },
+    "os": { "const": "Ubuntu 24.04" },
+    "playwright": { "const": "1.61.0" },
+    "browser_revision": { "const": "1228" },
+    "browser_version": { "const": "149.0.7827.55" },
+    "viewport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": { "width": { "const": 1024 }, "height": { "const": 768 } }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "const": "tests/helpers/render-consumer-reference.mjs" },
+        "sha256": { "const": "88802a948909d5e40470be6b5481766ce2de498e59c053ac68af370b46e72ca9" }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "const": "tests/snapshots/consumer-reference-card-grid.png" },
+        "sha256": { "const": "5528358e957a6115793155e501f62716f7db31dc1c86856d9e1234868d672837" }
+      }
+    },
+    "calibration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record", "required_runs", "workflow_artifact_name"],
+      "properties": {
+        "record": { "const": "consumer-reference/baselines/calibration.json" },
+        "required_runs": { "const": 20 },
+        "workflow_artifact_name": { "const": "chromium-sentinel-calibration-${run_id}-${sha}" }
+      }
+    }
+  }
+}

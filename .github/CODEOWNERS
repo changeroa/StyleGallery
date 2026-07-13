@@ -16,6 +16,9 @@
 /consumer-reference/ @changeroa
 /consumer-reference/adapters/ @changeroa
 /consumer-reference/generated/ @changeroa
+/consumer-reference/baselines/ @changeroa
+/tests/ @changeroa
+/playwright.config.mjs @changeroa
 
 /GUIDE.md @changeroa
 /guides/ @changeroa

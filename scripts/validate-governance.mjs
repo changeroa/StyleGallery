@@ -8,6 +8,13 @@ const json = args.has("--json");
 const root = process.cwd();
 const failures = [];
 const warnings = [];
+const sentinelProvenanceClauses = [
+  "Completed-CI repository, workflow, run ID and attempt, SHA, and artifact-name fields are workflow-recorded, self-asserted metadata, not an external attestation.",
+  "Verification against the uploaded GitHub Actions run and artifact ID and digest remains pending.",
+  "Linux/amd64 repeatability remains unclaimed until that external verification succeeds.",
+  "Baseline-owner approval remains unclaimed until the named owner explicitly approves it.",
+  "Synthetic fixtures validate rejection and acceptance behavior only; they are not authenticated provenance.",
+];
 const requiredCodeowners = [
   "* @changeroa",
   "/GOVERNANCE.md @changeroa",
@@ -20,6 +27,9 @@ const requiredCodeowners = [
   "/design-engineering/ @changeroa",
   "/platform-guides/ @changeroa",
   "/consumer-reference/ @changeroa",
+  "/consumer-reference/baselines/ @changeroa",
+  "/tests/ @changeroa",
+  "/playwright.config.mjs @changeroa",
   "/GUIDE.md @changeroa",
   "/guides/ @changeroa",
   "/recipes/ @changeroa",
@@ -74,6 +84,7 @@ function requireGovernanceMatrix() {
     "Layout recipes",
     "Quality gates and evidence",
     "Consumer reference contract",
+    "Proposed Chromium sentinel",
     "Domain manifest and scope decision",
     "Layout domain hub",
     "Motion domain guidance",
@@ -129,6 +140,11 @@ function requireCiwiring() {
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/test-validate-consumer-reference.mjs");
   requireIncludes(".github/workflows/validate.yml", "node scripts/validate-consumer-reference.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-validate-consumer-reference.mjs --json");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/test-consumer-reference-sentinel.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/validate-baseline-manifest.mjs --json");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/test-validate-baseline-manifest.mjs --json");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/test-summarize-sentinel-calibration.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/validate-renderer-purity.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "permissions:");
   requireIncludes(".github/workflows/validate.yml", "contents: read");
 }
@@ -153,8 +169,16 @@ function requireEvidenceMap() {
   requireIncludes("quality/evidence/executable-evidence.md", "Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail.");
   requireIncludes("quality/evidence/executable-evidence.md", "Consumer-reference handoffs, schema/runtime parity");
   requireIncludes("quality/evidence/executable-evidence.md", "repository handoff omissions must fail");
+  requireIncludes("quality/evidence/executable-evidence.md", "The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.");
+  requireIncludes("GOVERNANCE.md", "node scripts/test-consumer-reference-sentinel.mjs");
   requireIncludes("GOVERNANCE.md", "owner.enforcement: \"placeholder\"");
   requireIncludes("GOVERNANCE.md", "review_independence: \"single_account\"");
+}
+
+function requireSentinelProvenanceBoundary() {
+  for (const relative of ["consumer-reference/contract.md", "quality/evidence/executable-evidence.md", "GOVERNANCE.md"]) {
+    for (const clause of sentinelProvenanceClauses) requireIncludes(relative, clause);
+  }
 }
 
 requireGovernanceMatrix();
@@ -164,6 +188,7 @@ requireStalenessDecision();
 requireCiwiring();
 requireRootLinks();
 requireEvidenceMap();
+requireSentinelProvenanceBoundary();
 requireGeneratedWarning("CATALOG.md");
 requireGeneratedWarning("patterns/index.md");
 requireGeneratedWarning("patterns/stacking/index.md");

@@ -1,6 +1,7 @@
 name: Validate StyleGallery
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -8,6 +9,10 @@ on:
 
 permissions:
   contents: read
+
+concurrency:
+  group: stylegallery-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
@@ -52,6 +57,21 @@ jobs:
           node -c scripts/build-reference-artifacts.mjs
           node -c scripts/validate-reference-artifacts.mjs
           node -c scripts/test-reference-adapters.mjs
+          node -c playwright.config.mjs
+          node -c tests/helpers/render-consumer-reference.mjs
+          node -c tests/consumer-reference-sentinels.spec.mjs
+          node -c scripts/baseline-contract.mjs
+          node -c scripts/strict-json.mjs
+          node -c scripts/calibration-raw-contract.mjs
+          node -c scripts/validate-baseline-manifest.mjs
+          node -c scripts/test-validate-baseline-manifest.mjs
+          node -c scripts/summarize-sentinel-calibration.mjs
+          node -c scripts/test-summarize-sentinel-calibration.mjs
+          node -c scripts/validate-renderer-purity.mjs
+          node -c scripts/test-renderer-purity.mjs
+          node -c scripts/test-consumer-reference-sentinel.mjs
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/baseline-manifest.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/calibration-record.schema.json"))'
           git diff --check
 
       - name: Generated artifacts are current
@@ -102,6 +122,14 @@ jobs:
           node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json
           node scripts/test-reference-adapters.mjs --json
 
+      - name: Chromium baseline manifest integrity
+        run: |
+          node scripts/validate-baseline-manifest.mjs --json
+          node scripts/test-validate-baseline-manifest.mjs --json
+          node scripts/test-summarize-sentinel-calibration.mjs
+          node scripts/validate-renderer-purity.mjs --json
+          node scripts/test-renderer-purity.mjs
+
       - name: Webpage workflow check
         run: |
           node scripts/validate-webpage-workflow.mjs --json
@@ -112,3 +140,99 @@ jobs:
 
       - name: Pattern adversarial fixtures
         run: node scripts/test-validate-patterns.mjs --json
+
+  chromium-sentinel:
+    name: Chromium reference sentinel (nonblocking)
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
+      options: --platform linux/amd64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install exact sentinel dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Run ordinary immutable Chromium sentinel
+        run: npm run test:sentinel -- --reporter=line
+
+      - name: Run Chromium sentinel semantic negative controls
+        run: node scripts/test-consumer-reference-sentinel.mjs
+
+  chromium-calibration:
+    name: Chromium 20-run calibration (nonblocking)
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
+      options: --platform linux/amd64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install exact calibration dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Capture 20 unique raw calibration runs
+        shell: bash
+        env:
+          SENTINEL_CONTAINER_IMAGE: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
+        run: |
+          set +e
+          failed=0
+          mkdir -p calibration-artifacts
+          artifact_name="chromium-sentinel-calibration-${GITHUB_RUN_ID}-${GITHUB_SHA}"
+          checkout_sha="$(git rev-parse HEAD)"
+          for run in $(seq 1 20); do
+            run_dir="calibration-artifacts/run-$(printf '%02d' "$run")"
+            mkdir -p "$run_dir"
+            SENTINEL_ARTIFACT_DIR="$run_dir" SENTINEL_CALIBRATION_RUN="$run" \
+              npx playwright test tests/consumer-reference-sentinels.spec.mjs \
+                --project=chromium --grep "canonical consumer reference" --reporter=json \
+                > "$run_dir/playwright.json" 2> "$run_dir/playwright.stderr"
+            test_exit=$?
+            if [ "$test_exit" -ne 0 ]; then failed=1; fi
+            printf '{"schema_version":"1.0","run":%s,"exit_code":%s}\n' "$run" "$test_exit" > "$run_dir/exit.json"
+          done
+          validation_output="${RUNNER_TEMP}/chromium-calibration-validation-${GITHUB_RUN_ID}.json"
+          node scripts/summarize-sentinel-calibration.mjs \
+            --input calibration-artifacts \
+            --output calibration-artifacts/calibration.json \
+            --repository "$GITHUB_REPOSITORY" \
+            --workflow ".github/workflows/validate.yml" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --sha "$GITHUB_SHA" \
+            --checkout-sha "$checkout_sha" \
+            --head-sha "${{ github.event.pull_request.head.sha || github.sha }}" \
+            --artifact-name "$artifact_name" \
+            --json > "$validation_output"
+          summary_exit=$?
+          mv "$validation_output" calibration-artifacts/calibration-validation.json
+          printf '{"run_id":"%s","sha":"%s","artifact_name":"%s","platform":"linux/amd64","architecture":"amd64","container_image":"%s"}\n' \
+            "$GITHUB_RUN_ID" "$GITHUB_SHA" "$artifact_name" "$SENTINEL_CONTAINER_IMAGE" \
+            > calibration-artifacts/workflow-metadata.json
+          if [ "$summary_exit" -ne 0 ]; then failed=1; fi
+          exit "$failed"
+
+      - name: Upload raw Chromium calibration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chromium-sentinel-calibration-${{ github.run_id }}-${{ github.sha }}
+          path: calibration-artifacts/
+          if-no-files-found: error
+          retention-days: 14

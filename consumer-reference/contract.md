@@ -48,6 +48,10 @@ Consumer-reference infrastructure is owned by repository governance and validati
 
 Dependency flows from a consumer or profile to Layout. `layout/**`, `patterns/**`, `scripts/pattern-data.mjs`, and `CATALOG.md` must not import consumer-reference records, profile data, tokens, decorative values, or themes.
 
+The Chromium reference sentinel is an evidence probe, not a Layout theme or product conformance claim. Its proposed baseline is compared in the immutable `linux/amd64` Playwright image, CI never updates snapshots, and the ordinary sentinel remains nonblocking while `baseline_owner_approval` is `pending`. Twenty identical committed-workflow repeats calibrate repeatability; they do not substitute for explicit `@changeroa` baseline approval. Each aggregate run is derived from a zero exit record, the exact passing Playwright test identity, hash-verified PNG/DOM/AX bytes, and comparator proof written only after the zero-diff assertion passes; producer metadata cannot claim completion or a diff.
+
+Completed-CI repository, workflow, run ID and attempt, SHA, and artifact-name fields are workflow-recorded, self-asserted metadata, not an external attestation. Verification against the uploaded GitHub Actions run and artifact ID and digest remains pending. Linux/amd64 repeatability remains unclaimed until that external verification succeeds. Baseline-owner approval remains unclaimed until the named owner explicitly approves it. Synthetic fixtures validate rejection and acceptance behavior only; they are not authenticated provenance.
+
 The no-dependency validator blocks direct spellings and literal fragments assembled through concatenation, template literals, or `path.join`. This bounded static check does not claim general JavaScript data-flow analysis; guarded sources must not hide reference paths behind variables or runtime computation.
 
 ## IA Navigation

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "status": "awaiting_committed_ci",
+  "baseline_owner_approval": "pending",
+  "required_runs": 20,
+  "committed_ci": null,
+  "environment": {
+    "platform": "linux/amd64",
+    "architecture": "amd64",
+    "container_image": "mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a",
+    "node": "22",
+    "os": "Ubuntu 24.04",
+    "playwright": "1.61.0",
+    "browser_revision": "1228",
+    "browser_version": "149.0.7827.55",
+    "viewport": { "width": 1024, "height": 768 }
+  },
+  "reference": {
+    "source": { "path": "tests/helpers/render-consumer-reference.mjs", "sha256": "88802a948909d5e40470be6b5481766ce2de498e59c053ac68af370b46e72ca9" },
+    "baseline": { "path": "tests/snapshots/consumer-reference-card-grid.png", "sha256": "5528358e957a6115793155e501f62716f7db31dc1c86856d9e1234868d672837" }
+  },
+  "runs": []
+}

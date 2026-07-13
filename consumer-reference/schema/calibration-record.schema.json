@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/calibration-record.schema.json",
+  "title": "Chromium sentinel calibration record",
+  "$comment": "This schema owns recursive shape and exact scalar identity. scripts/baseline-contract.mjs additionally enforces committed_ci tuple correlation and cross-run DOM/AX/hash equality.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "baseline_owner_approval", "required_runs", "committed_ci", "environment", "reference", "runs"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "status": { "enum": ["awaiting_committed_ci", "completed"] },
+    "baseline_owner_approval": { "const": "pending" },
+    "required_runs": { "const": 20 },
+    "committed_ci": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["artifact_name", "checkout_sha", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"],
+          "properties": {
+            "run_id": { "type": "string", "pattern": "^[0-9]+$" },
+            "run_attempt": { "type": "string", "pattern": "^[0-9]+$" },
+            "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+            "checkout_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+            "head_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+            "raw_evidence_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            "repository": { "const": "changeroa/StyleGallery" },
+            "workflow": { "const": ".github/workflows/validate.yml" },
+            "artifact_name": { "type": "string", "pattern": "^chromium-sentinel-calibration-[0-9]+-[0-9a-f]{40}$" }
+          }
+        }
+      ]
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "architecture", "container_image", "node", "os", "playwright", "browser_revision", "browser_version", "viewport"],
+      "properties": {
+        "platform": { "const": "linux/amd64" },
+        "architecture": { "const": "amd64" },
+        "container_image": { "const": "mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a" },
+        "node": { "const": "22" },
+        "os": { "const": "Ubuntu 24.04" },
+        "playwright": { "const": "1.61.0" },
+        "browser_revision": { "const": "1228" },
+        "browser_version": { "const": "149.0.7827.55" },
+        "viewport": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height"],
+          "properties": { "width": { "const": 1024 }, "height": { "const": 768 } }
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "baseline"],
+      "properties": {
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "sha256"],
+          "properties": {
+            "path": { "const": "tests/helpers/render-consumer-reference.mjs" },
+            "sha256": { "const": "88802a948909d5e40470be6b5481766ce2de498e59c053ac68af370b46e72ca9" }
+          }
+        },
+        "baseline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "sha256"],
+          "properties": {
+            "path": { "const": "tests/snapshots/consumer-reference-card-grid.png" },
+            "sha256": { "const": "5528358e957a6115793155e501f62716f7db31dc1c86856d9e1234868d672837" }
+          }
+        }
+      }
+    },
+    "runs": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["run", "completed", "architecture", "png_sha256", "dom_sha256", "ax_sha256", "metadata_sha256", "screenshot_diff_pixels"],
+        "properties": {
+          "run": { "type": "integer", "minimum": 1, "maximum": 20 },
+          "completed": { "const": true },
+          "architecture": { "const": "amd64" },
+          "png_sha256": { "const": "5528358e957a6115793155e501f62716f7db31dc1c86856d9e1234868d672837" },
+          "dom_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "ax_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "metadata_sha256": { "const": "43a98d03b473e29c78ba2d359cf5f39346288d55564e5bfe65bc4a4fd78ebc2c" },
+          "screenshot_diff_pixels": { "const": 0 }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "awaiting_committed_ci" } } },
+      "then": { "properties": { "committed_ci": { "type": "null" }, "runs": { "maxItems": 0 } } },
+      "else": {
+        "properties": {
+          "committed_ci": { "type": "object" },
+          "runs": {
+            "minItems": 20,
+            "maxItems": 20,
+            "allOf": [
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 1 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 2 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 3 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 4 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 5 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 6 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 7 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 8 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 9 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 10 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 11 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 12 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 13 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 14 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 15 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 16 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 17 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 18 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 19 } } }, "minContains": 1, "maxContains": 1 },
+              { "contains": { "required": ["run"], "properties": { "run": { "const": 20 } } }, "minContains": 1, "maxContains": 1 }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

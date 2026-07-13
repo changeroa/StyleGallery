@@ -21,9 +21,10 @@ Use this file before editing repository documentation. It names which file is au
 | Planning guides | `GUIDE.md`, `guides/*.md` | Manual | None | `stable` | Workflow changes, route changes, source-lineage changes, or broken guide links. | `scripts/validate-okf.mjs`, `scripts/validate-links.mjs`, `scripts/validate-ia.mjs` | Planning-doc owner |
 | Layout recipes | `recipes/*.md` | Manual | None | `stable` | Pattern-stack changes, route changes, or broken recipe links. | `scripts/validate-okf.mjs`, `scripts/validate-links.mjs`, `scripts/validate-ia.mjs` | Recipe owner |
 | Quality gates and evidence | `quality/**/*.md` | Manual | None | `stable` | Claim-boundary changes, evidence-family changes, or broken quality links. | `scripts/validate-okf.mjs`, `scripts/validate-links.mjs`, `scripts/validate-ia.mjs` | Quality owner |
-| Consumer reference contract | `consumer-reference/contract.md`, `consumer-reference/schema/*.json` | Manual | None | `stable` contract with related fixtures | Handoff shape, path boundary, lifecycle, ownership, or dependency-direction changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Repository governance owner with Validation owner |
+| Consumer reference contract | `consumer-reference/contract.md`, `consumer-reference/schema/item.schema.json` | Manual | None | `stable` contract with related fixtures | Handoff shape, path boundary, lifecycle, ownership, or dependency-direction changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Repository governance owner with Validation owner |
 | Portable token source | `consumer-reference/fixtures/token-portability/valid-reference.json`, `consumer-reference/schema/portable-tokens.schema.json` | `scripts/build-reference-artifacts.mjs` with Style Dictionary `5.5.0` | `consumer-reference/generated/tokens.css`, `consumer-reference/generated/manifest.json` | `stable` restricted adapter contract, `generated` output | Allowed token shape, adapter/version pin, source token count, warning, declaration, or content hash changes. | `scripts/validate-reference-artifacts.mjs`, `scripts/test-reference-adapters.mjs` | Repository governance owner with Validation owner |
 | Governed local reference profiles | `design-engineering/reference-profiles/governed-local/**` | Manual | None | `experimental`, `example_only`, non-default related fixtures | Layout revision, identity values, UA/reset assumptions, explicit selection, or fixture relationship changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Design Engineering owner with Validation owner |
+| Proposed Chromium sentinel | `tests/helpers/render-consumer-reference.mjs`, `consumer-reference/schema/{baseline-manifest,calibration-record}.schema.json`, `consumer-reference/baselines/*.json` | Playwright `1.61.0` in the digest-pinned `linux/amd64` image | `tests/snapshots/consumer-reference-card-grid.png`, raw GitHub Actions calibration artifact | `experimental`, nonblocking while owner approval is pending | Renderer source, exact image/platform/tool pin, baseline bytes, computed layout contract, or calibration metadata changes. | `scripts/validate-baseline-manifest.mjs`, `scripts/test-validate-baseline-manifest.mjs`, `scripts/test-summarize-sentinel-calibration.mjs`, Playwright | Repository governance owner with Validation owner |
 | Domain manifest and scope decision | `DOMAINS.md`, `quality/claim-records/stylegallery-multidomain-scope.md` | Manual | None | `stable` | Domain membership, repository-scope, or provenance-policy changes. | `scripts/validate-domains.mjs`, `scripts/validate-governance.mjs` | Repository governance owner |
 | Layout domain hub | `layout/index.md` | Manual | None | `stable` | Layout route or ownership changes. | `scripts/validate-domains.mjs`, `scripts/validate-ia.mjs` | Pattern-data owner |
 | Motion domain guidance | `motion/*.md` | Manual | None | `experimental` | Upstream revision, evidence boundary, or guidance changes. | `scripts/validate-domains.mjs` | Motion domain owner |
@@ -52,6 +53,7 @@ Current generated artifacts:
 - `patterns/**/*.md`
 - `consumer-reference/generated/tokens.css`
 - `consumer-reference/generated/manifest.json`
+- `tests/snapshots/consumer-reference-card-grid.png` (proposed; update only by an explicit local baseline proposal, never in CI)
 
 Portable token artifacts are regenerated only from the restricted fixture through the pinned adapter. Run `npm run build`; never broaden the allowed token subset to accommodate an adapter false-success, and revert the adapter with both generated files if the pin regresses.
 
@@ -92,6 +94,7 @@ Consumer-reference ownership records the current truth as `owner.enforcement: "p
 | `motion/**` | Motion domain owner | Motion terminology, review procedure, practice classification, and evidence boundaries. |
 | `design-engineering/**` | Design Engineering domain owner | Separation of product heuristics from shared quality gates. |
 | `design-engineering/reference-profiles/**` | Design Engineering owner with Validation owner | Profile-local identity and values, pinned Layout provenance, explicit non-default selection, and related-fixture truth. |
+| `tests/**`, `playwright.config.mjs`, `consumer-reference/baselines/**`, `scripts/*baseline*.mjs`, `scripts/*sentinel*.mjs`, `scripts/*renderer-purity.mjs` | Repository governance owner with Validation owner | Pure rendering, computed semantics before screenshots, immutable browser pins, nonblocking status, calibration cardinality, and pending owner approval. |
 | `platform-guides/**` | Platform Guides domain owner | Platform/source/version limits, comparison boundaries, and stale review. |
 | `scripts/validate-*.mjs`, `scripts/test-validate-*.mjs`, `.github/workflows/validate.yml` | Validation owner | Validator scope, negative fixtures, CI parity. |
 
@@ -139,3 +142,19 @@ node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/gene
 node scripts/test-reference-adapters.mjs --json
 git diff --exit-code -- consumer-reference/generated
 ```
+
+For the proposed Chromium sentinel, also run:
+
+```sh
+npm run test:sentinel
+node scripts/test-consumer-reference-sentinel.mjs
+node scripts/validate-baseline-manifest.mjs --json
+node scripts/test-validate-baseline-manifest.mjs --json
+node scripts/test-summarize-sentinel-calibration.mjs
+node scripts/validate-renderer-purity.mjs --json
+node scripts/test-renderer-purity.mjs
+```
+
+Do not pass `--update-snapshots` in CI. Calibration runs exactly 20 times on the manifest's digest-pinned `linux/amd64` container and uploads raw Playwright JSON, strict exit records, PNG, DOM, AX, metadata, and post-assertion comparison evidence. Failed or incomplete calibration still uploads its truthful raw evidence without writing a completed aggregate. It remains nonblocking until the named owner explicitly approves the baseline.
+
+Completed-CI repository, workflow, run ID and attempt, SHA, and artifact-name fields are workflow-recorded, self-asserted metadata, not an external attestation. Verification against the uploaded GitHub Actions run and artifact ID and digest remains pending. Linux/amd64 repeatability remains unclaimed until that external verification succeeds. Baseline-owner approval remains unclaimed until the named owner explicitly approves it. Synthetic fixtures validate rejection and acceptance behavior only; they are not authenticated provenance.
