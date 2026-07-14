@@ -24,16 +24,16 @@
         "viewport": "1024x768"
       },
       "id": "action-disabled-busy-visual",
-      "recorded_at": "2026-07-13T23:12:59.346Z",
+      "recorded_at": "2026-07-14T06:33:49.115Z",
       "result": {
         "observed": "Recorded visual evidence for action-disabled-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "action-disabled-busy",
@@ -51,10 +51,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -178,9 +178,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -193,9 +193,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -223,9 +223,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -241,7 +241,7 @@
         "path": "runtime/terminal-action-disabled-busy.dom.json",
         "byte_length": 8289,
         "media_type": "application/json",
-        "sha256": "sha256:43526b9a748c8c1d0f62aa6941fd4e570d75fe0392d7f8371cc35b69be8937b0"
+        "sha256": "sha256:e775814ee40672cf5a86d312d6409a89ad24250ed04bdb3687a0c5bc4186e907"
       },
       "channel": "dom",
       "environment": {
@@ -256,16 +256,16 @@
         "viewport": "1024x768"
       },
       "id": "action-disabled-busy-dom",
-      "recorded_at": "2026-07-13T23:12:59.346Z",
+      "recorded_at": "2026-07-14T06:33:49.115Z",
       "result": {
         "observed": "Recorded dom evidence for action-disabled-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "action-disabled-busy",
@@ -283,10 +283,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -410,9 +410,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -425,9 +425,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -455,9 +455,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -473,7 +473,7 @@
         "path": "runtime/terminal-action-disabled-busy.ax.json",
         "byte_length": 8208,
         "media_type": "application/json",
-        "sha256": "sha256:f83050d61458d6731184e9ccd3463b8cc421fb889566c2f5c506026bbb918f8b"
+        "sha256": "sha256:07da1033e729a695631458754b9f53d8671b0e4b511c74372bc6543e4f352b50"
       },
       "channel": "ax",
       "environment": {
@@ -488,16 +488,16 @@
         "viewport": "1024x768"
       },
       "id": "action-disabled-busy-ax",
-      "recorded_at": "2026-07-13T23:12:59.346Z",
+      "recorded_at": "2026-07-14T06:33:49.115Z",
       "result": {
         "observed": "Recorded ax evidence for action-disabled-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "action-disabled-busy",
@@ -515,10 +515,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -642,9 +642,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -657,9 +657,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -687,9 +687,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -722,16 +722,16 @@
         "viewport": "1024x768"
       },
       "id": "action-focused-visual",
-      "recorded_at": "2026-07-13T23:12:59.442Z",
+      "recorded_at": "2026-07-14T06:33:49.228Z",
       "result": {
         "observed": "Recorded visual evidence for action-focused; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "action-focused",
@@ -749,10 +749,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -876,9 +876,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -891,9 +891,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -921,9 +921,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -938,7 +938,7 @@
         "path": "runtime/terminal-action-focused.dom.json",
         "byte_length": 8229,
         "media_type": "application/json",
-        "sha256": "sha256:f120a28e85dab701b86245560e42697f3e46a34e7f947be171118a14516f28f0"
+        "sha256": "sha256:f71be6585f1ca78794f3baf6742bd25839e4ea9d6a2809b644aa2e2a811d30ae"
       },
       "channel": "dom",
       "environment": {
@@ -953,16 +953,16 @@
         "viewport": "1024x768"
       },
       "id": "action-focused-dom",
-      "recorded_at": "2026-07-13T23:12:59.442Z",
+      "recorded_at": "2026-07-14T06:33:49.228Z",
       "result": {
         "observed": "Recorded dom evidence for action-focused; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "action-focused",
@@ -980,10 +980,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -1107,9 +1107,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -1122,9 +1122,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -1152,9 +1152,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -1169,7 +1169,7 @@
         "path": "runtime/terminal-action-focused.ax.json",
         "byte_length": 8153,
         "media_type": "application/json",
-        "sha256": "sha256:b6cf8fec865510678be60f26c600641d43d63efb1e2a0ed1cb240b3c65936858"
+        "sha256": "sha256:0192632a1c95628b3515536a9e90606ee04e1d217031a8f1c5358a97cc32cc4f"
       },
       "channel": "ax",
       "environment": {
@@ -1184,16 +1184,16 @@
         "viewport": "1024x768"
       },
       "id": "action-focused-ax",
-      "recorded_at": "2026-07-13T23:12:59.442Z",
+      "recorded_at": "2026-07-14T06:33:49.228Z",
       "result": {
         "observed": "Recorded ax evidence for action-focused; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "action-focused",
@@ -1211,10 +1211,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -1338,9 +1338,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -1353,9 +1353,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -1383,9 +1383,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -1417,16 +1417,16 @@
         "viewport": "1024x768"
       },
       "id": "action-loading-busy-visual",
-      "recorded_at": "2026-07-13T23:12:59.548Z",
+      "recorded_at": "2026-07-14T06:33:49.354Z",
       "result": {
         "observed": "Recorded visual evidence for action-loading-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "action-loading-busy",
@@ -1444,10 +1444,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -1571,9 +1571,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -1586,9 +1586,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -1616,9 +1616,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -1635,7 +1635,7 @@
         "path": "runtime/terminal-action-loading-busy.dom.json",
         "byte_length": 8275,
         "media_type": "application/json",
-        "sha256": "sha256:71d97da3c895cb1b4ec9cda5339b9583fc08874df4ee5136da8696cef97f7d54"
+        "sha256": "sha256:ca53cb29c53b267fc92cc68475fe4c2ea2c3dcccd31c1c6e858dc8a17198e358"
       },
       "channel": "dom",
       "environment": {
@@ -1650,16 +1650,16 @@
         "viewport": "1024x768"
       },
       "id": "action-loading-busy-dom",
-      "recorded_at": "2026-07-13T23:12:59.548Z",
+      "recorded_at": "2026-07-14T06:33:49.354Z",
       "result": {
         "observed": "Recorded dom evidence for action-loading-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "action-loading-busy",
@@ -1677,10 +1677,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -1804,9 +1804,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -1819,9 +1819,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -1849,9 +1849,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -1868,7 +1868,7 @@
         "path": "runtime/terminal-action-loading-busy.ax.json",
         "byte_length": 8180,
         "media_type": "application/json",
-        "sha256": "sha256:9a827efa4fdd43287af5cd28ea80386b7c6a22b98922474d194a6d780faf6302"
+        "sha256": "sha256:2ff34baf906c25aae5984939ac89a1b78464755dbd0bd8f2aa8313ec5eb6b357"
       },
       "channel": "ax",
       "environment": {
@@ -1883,16 +1883,16 @@
         "viewport": "1024x768"
       },
       "id": "action-loading-busy-ax",
-      "recorded_at": "2026-07-13T23:12:59.548Z",
+      "recorded_at": "2026-07-14T06:33:49.354Z",
       "result": {
         "observed": "Recorded ax evidence for action-loading-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "action-loading-busy",
@@ -1910,10 +1910,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -2037,9 +2037,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -2052,9 +2052,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -2082,9 +2082,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -2118,16 +2118,16 @@
         "viewport": "1024x768"
       },
       "id": "disclosure-expanded-loading-visual",
-      "recorded_at": "2026-07-13T23:12:59.723Z",
+      "recorded_at": "2026-07-14T06:33:49.484Z",
       "result": {
         "observed": "Recorded visual evidence for disclosure-expanded-loading; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "disclosure-expanded-loading",
@@ -2145,10 +2145,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -2272,9 +2272,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -2287,9 +2287,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -2317,9 +2317,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -2337,7 +2337,7 @@
         "path": "runtime/terminal-disclosure-expanded-loading.dom.json",
         "byte_length": 8332,
         "media_type": "application/json",
-        "sha256": "sha256:4b84d8de3b79ab76b7cef9929f8fceda0423784227047ac9a61c0691f87dbafc"
+        "sha256": "sha256:1ddd7f1de3ad2c34d9e8d718c7b3128593a99e4207dce33ffb89f2fcc8f7d5b7"
       },
       "channel": "dom",
       "environment": {
@@ -2352,16 +2352,16 @@
         "viewport": "1024x768"
       },
       "id": "disclosure-expanded-loading-dom",
-      "recorded_at": "2026-07-13T23:12:59.723Z",
+      "recorded_at": "2026-07-14T06:33:49.484Z",
       "result": {
         "observed": "Recorded dom evidence for disclosure-expanded-loading; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "disclosure-expanded-loading",
@@ -2379,10 +2379,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -2506,9 +2506,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -2521,9 +2521,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -2551,9 +2551,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -2571,7 +2571,7 @@
         "path": "runtime/terminal-disclosure-expanded-loading.ax.json",
         "byte_length": 8215,
         "media_type": "application/json",
-        "sha256": "sha256:135cdd6dd399394c0c9f7fa423744397fff38a9b6dbfb8507b71a6ce348cf240"
+        "sha256": "sha256:33371b0445ae51fc297e51103a8fd04060cc35dfd4c6abc08675463fee675c3e"
       },
       "channel": "ax",
       "environment": {
@@ -2586,16 +2586,16 @@
         "viewport": "1024x768"
       },
       "id": "disclosure-expanded-loading-ax",
-      "recorded_at": "2026-07-13T23:12:59.723Z",
+      "recorded_at": "2026-07-14T06:33:49.484Z",
       "result": {
         "observed": "Recorded ax evidence for disclosure-expanded-loading; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "disclosure-expanded-loading",
@@ -2613,10 +2613,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -2740,9 +2740,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -2755,9 +2755,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -2785,9 +2785,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -2822,16 +2822,16 @@
         "viewport": "1024x768"
       },
       "id": "toggle-focused-pressed-visual",
-      "recorded_at": "2026-07-13T23:12:59.872Z",
+      "recorded_at": "2026-07-14T06:33:49.592Z",
       "result": {
         "observed": "Recorded visual evidence for toggle-focused-pressed; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "toggle-focused-pressed",
@@ -2849,10 +2849,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -2976,9 +2976,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -2991,9 +2991,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -3021,9 +3021,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -3039,7 +3039,7 @@
         "path": "runtime/terminal-toggle-focused-pressed.dom.json",
         "byte_length": 8269,
         "media_type": "application/json",
-        "sha256": "sha256:f957638c87f9093a99b49865af6e85ab8efef6a56376dbc6061187ffac217dcd"
+        "sha256": "sha256:5d16f2f75dddd358a1f9d9839045ae3bc73d9d9d029b4f76af8ae42d3469bab4"
       },
       "channel": "dom",
       "environment": {
@@ -3054,16 +3054,16 @@
         "viewport": "1024x768"
       },
       "id": "toggle-focused-pressed-dom",
-      "recorded_at": "2026-07-13T23:12:59.872Z",
+      "recorded_at": "2026-07-14T06:33:49.592Z",
       "result": {
         "observed": "Recorded dom evidence for toggle-focused-pressed; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "toggle-focused-pressed",
@@ -3081,10 +3081,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -3208,9 +3208,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -3223,9 +3223,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -3253,9 +3253,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
@@ -3271,7 +3271,7 @@
         "path": "runtime/terminal-toggle-focused-pressed.ax.json",
         "byte_length": 8181,
         "media_type": "application/json",
-        "sha256": "sha256:0328282033d16b9b8dfa29e31c2702feb5aabb405b6ae9fb806401fa68032ee1"
+        "sha256": "sha256:596da3c726e836ad0f5a09f4c456981bb76627110b7f806f7cafad34f60ac55c"
       },
       "channel": "ax",
       "environment": {
@@ -3286,16 +3286,16 @@
         "viewport": "1024x768"
       },
       "id": "toggle-focused-pressed-ax",
-      "recorded_at": "2026-07-13T23:12:59.872Z",
+      "recorded_at": "2026-07-14T06:33:49.592Z",
       "result": {
         "observed": "Recorded ax evidence for toggle-focused-pressed; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "repository": "changeroa/StyleGallery",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
         "source": "local"
       },
       "scenario_id": "toggle-focused-pressed",
@@ -3313,10 +3313,10 @@
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "d9a6c12a45294216433dc66fc8bde5b4b5fc3f8df8130c6534ac007ab254c3d4",
-        "receipt_sha256": "sha256:696690679fc673c15de4aefb8bf43154e950622f9020f908183fbce972ba401a",
-        "revision": "ad602d1b58a48857748a115e9d5746cef2990e49",
-        "session_id": "59e34d42-44cc-4058-bf24-8a57d39f13cc",
+        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
+        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
+        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
         "source": {
           "files": [
             {
@@ -3440,9 +3440,9 @@
               "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
             },
             {
-              "byte_length": 7527,
+              "byte_length": 7686,
               "path": "scripts/capture-session-contract.mjs",
-              "sha256": "sha256:aa212fe478dc118eee787b4d52b70d2e803350fe807bdeba299cc3530203aed9"
+              "sha256": "sha256:59ab740e9ceb39e1665805dd789746d91977fe190a7868e08a6f8fd57f43863f"
             },
             {
               "byte_length": 5181,
@@ -3455,9 +3455,9 @@
               "sha256": "sha256:7c51786051d8a1cdc0d09e77d2c06845dd8f21e36a68dbb8c09953c9eb768ae5"
             },
             {
-              "byte_length": 5367,
+              "byte_length": 5426,
               "path": "scripts/create-component-state-session.mjs",
-              "sha256": "sha256:c38943e984282331d991f6fba61e5cb169bf2c7d5e632b4ca5b9cb1c171e719e"
+              "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
             },
             {
               "byte_length": 6909,
@@ -3485,9 +3485,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:2b2a16fd11b29aa7af1c4a55c1adac9adb00bc4a0dff2a750337b910a2674fc9"
+          "sha256": "sha256:b3c88210f186b8c662666f73187dd7bd1cb02012079096516cb27a3142fd80bf"
         },
-        "started_at": "2026-07-13T23:12:45.252Z"
+        "started_at": "2026-07-14T06:33:47.214Z"
       },
       "scope": {
         "component": "button",
