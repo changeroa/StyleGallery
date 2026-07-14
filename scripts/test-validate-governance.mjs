@@ -7,6 +7,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { files, generatedWarning, sentinelProvenanceClauses } from "./governance-test-fixture.mjs";
 import { governanceMatrixCases } from "./governance-matrix-negative-cases.mjs";
+import { componentStateWorkflowCases } from "./component-state-workflow-negative-cases.mjs";
 import { workflowSafetyCases } from "./governance-workflow-negative-cases.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -86,71 +87,7 @@ const cases = [
   { name: "missing_sentinel_ci_wiring", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replaceAll("node scripts/test-consumer-reference-sentinel.mjs", "") }, expect: ".github/workflows/validate.yml: missing node scripts/test-consumer-reference-sentinel.mjs" },
   { name: "missing_component_source_contract_ci", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("node scripts/test-component-state-source-contract.mjs", "") }, expect: ".github/workflows/validate.yml: missing node scripts/test-component-state-source-contract.mjs" },
   { name: "missing_visual_schema_ci", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("consumer-reference/schema/visual-evidence.schema.json", "") }, expect: ".github/workflows/validate.yml: missing consumer-reference/schema/visual-evidence.schema.json" },
-  {
-    name: "browser_artifact_harness_in_static_job",
-    mutate: {
-      ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace(
-        "  validate:\n",
-        "  validate:\nnode scripts/test-validate-component-state-artifacts.mjs\n",
-      ),
-    },
-    expect: ".github/workflows/validate.yml: browser-dependent artifact/session harness must not run in validate job",
-  },
-  {
-    name: "browser_artifact_harness_missing_container_job",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("        run: node scripts/test-validate-component-state-artifacts.mjs\n", "") },
-    expect: ".github/workflows/validate.yml: component-state artifact/session harness must run in Playwright container job",
-  },
-  {
-    name: "duplicate_artifact_harness_in_chromium_sentinel",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: node scripts/test-consumer-reference-sentinel.mjs\n", "      - run: node scripts/test-consumer-reference-sentinel.mjs\n      - run: node scripts/test-validate-component-state-artifacts.mjs\n") },
-    expect: ".github/workflows/validate.yml: artifact/session harness must run exactly once and only in component-state-evidence job",
-  },
-  {
-    name: "unpinned_component_container_with_pinned_env",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a", "      image: mcr.microsoft.com/playwright:v1.61.0-noble") },
-    expect: ".github/workflows/validate.yml: component-state container.image must equal pinned Playwright digest",
-  },
-  {
-    name: "session_receipt_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("            STATE_SESSION_RECEIPT=\"$STATE_EVIDENCE_ROOT/capture-session.json\" \\\n", "            STATE_SESSION_RECEIPT=\"/tmp/capture-session.json\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state runtime must bind receipt under shared root",
-  },
-  {
-    name: "finalizer_output_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("            --output \"$STATE_EVIDENCE_ROOT/runtime-manifest.json\" \\\n", "            --output \"/tmp/runtime-manifest.json\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state finalizer must write manifest under shared root",
-  },
-  {
-    name: "validator_manifest_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("            --runtime-manifest \"$STATE_EVIDENCE_ROOT/runtime-manifest.json\" \\\n", "            --runtime-manifest \"/tmp/runtime-manifest.json\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state validator must read manifest under shared root",
-  },
-  {
-    name: "finalizer_artifact_root_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("          node scripts/finalize-component-state-evidence.mjs \\\n            --artifact-root \"$STATE_EVIDENCE_ROOT\" \\\n", "          node scripts/finalize-component-state-evidence.mjs \\\n            --artifact-root \"/tmp/consumer-reference-state\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state finalizer must use shared artifact root",
-  },
-  {
-    name: "validator_artifact_root_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("          node scripts/validate-component-state.mjs \\\n            --artifact-root \"$STATE_EVIDENCE_ROOT\" \\\n", "          node scripts/validate-component-state.mjs \\\n            --artifact-root \"/tmp/consumer-reference-state\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state validator must use shared artifact root",
-  },
-  {
-    name: "runner_temp_in_component_job",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state", "STATE_EVIDENCE_ROOT: ${{ runner.temp }}/consumer-reference-state") },
-    expect: ".github/workflows/validate.yml: component-state Playwright container job must not use runner temp paths",
-  },
-  {
-    name: "component_state_workspace_root_drift",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replaceAll(".tmp/consumer-reference-state", "state-output") },
-    expect: ".github/workflows/validate.yml: missing shared component-state workspace path STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state",
-  },
-  {
-    name: "missing_component_state_image_identity",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      SENTINEL_CONTAINER_IMAGE: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a\n", "") },
-    expect: ".github/workflows/validate.yml: component-state job must export the pinned Playwright image identity",
-  },
+  ...componentStateWorkflowCases(files[".github/workflows/validate.yml"]),
   { name: "missing_sentinel_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.", "Chromium evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence." },
   { name: "missing_component_state_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles.", "Component evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles." },
   {
