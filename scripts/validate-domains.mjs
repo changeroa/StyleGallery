@@ -2,6 +2,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { collectDomainBoundaryFailures } from "./domain-document-boundaries.mjs";
 import { isOmoDependency, markdownLinkDestinations, stripFencedCodeBlocks } from "./markdown-structure.mjs";
 
 const args = new Set(process.argv.slice(2));
@@ -183,36 +184,6 @@ function checkLeaf(domain, relative, expectedSourcePath, titles) {
   }
 }
 
-function rejectUndeclaredDomainDocuments() {
-  const generatedReference = /^design-engineering\/reference-profiles\/governed-local\/(?:editorial|terminal)\/generated\/(?:state-matrix|keyboard-matrix|evidence-coverage)\.md$/;
-  for (const domain of domains) {
-    const declared = new Set([`${domain.slug}/index.md`, ...domain.leaves.map(([leaf]) => leaf), ...(domain.referenceDocuments ?? [])]);
-    for (const absolute of walkMarkdown(path.join(root, domain.slug))) {
-      const relative = path.relative(root, absolute);
-      if (generatedReference.test(relative)) continue;
-      if (!declared.has(relative)) failures.push(`${relative}: undeclared governed domain document`);
-    }
-  }
-}
-
-function walkMarkdown(dir) {
-  if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    if ([".git", ".omo", "node_modules"].includes(entry.name)) return [];
-    const target = path.join(dir, entry.name);
-    if (entry.isDirectory()) return walkMarkdown(target);
-    return entry.isFile() && entry.name.endsWith(".md") ? [target] : [];
-  });
-}
-
-function rejectOmoDependencies() {
-  for (const absolute of walkMarkdown(root)) {
-    const relative = path.relative(root, absolute);
-    const content = fs.readFileSync(absolute, "utf8");
-    if (markdownLinkDestinations(content).some(isOmoDependency)) failures.push(`${relative}: tracked document must not depend on .omo`);
-  }
-}
-
 function checkReferenceDocuments() {
   const index = stripFencedCodeBlocks(read(referenceDocuments[0]));
   if (!/Domain classification:\s*design-engineering\./i.test(index)) {
@@ -255,8 +226,7 @@ for (const domain of domains) {
     checkLeaf(domain, relative, sourcePath, titles);
   }
 }
-rejectUndeclaredDomainDocuments();
-rejectOmoDependencies();
+failures.push(...collectDomainBoundaryFailures(root, domains));
 checkReferenceDocuments();
 checkPromotionBoundary();
 
