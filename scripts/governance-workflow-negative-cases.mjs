@@ -105,6 +105,80 @@ export function workflowSafetyCases(workflow) {
       mutate: { ".github/workflows/validate.yml": workflow.replace("  validate:\n", "  validate:\n    \"permi\\u0073sions\":\n      contents: write\n") },
       expect: ".github/workflows/validate.yml: escape sequences in double-quoted mapping keys are forbidden",
     },
+    {
+      name: "explicit_action_mapping_key",
+      mutate: { ".github/workflows/validate.yml": replaceSetupNode(workflow, "        ? uses\n        : attacker/action@main") },
+      expect: ".github/workflows/validate.yml: explicit mapping keys are forbidden",
+    },
+    {
+      name: "explicit_checkout_mapping_key",
+      mutate: { ".github/workflows/validate.yml": replaceCheckout(workflow, "      - ? uses\n        : actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5\n        with:\n          persist-credentials: true") },
+      expect: ".github/workflows/validate.yml: explicit mapping keys are forbidden",
+    },
+    {
+      name: "explicit_permissions_mapping_key",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("permissions:\n  contents: read", "? permissions\n:\n  contents: write") },
+      expect: ".github/workflows/validate.yml: explicit mapping keys are forbidden",
+    },
+    {
+      name: "explicit_duplicate_checkout_credentials_key",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("          persist-credentials: false\n", "          ? persist-credentials\n          : false\n          persist-credentials: true\n") },
+      expect: ".github/workflows/validate.yml: explicit mapping keys are forbidden",
+    },
+    {
+      name: "tagged_action_key",
+      mutate: { ".github/workflows/validate.yml": replaceCheckout(workflow, "      - name: Checkout\n        !!str uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5") },
+      expect: ".github/workflows/validate.yml: YAML tags are forbidden",
+    },
+    {
+      name: "anchored_action_key",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "&name uses: attacker/action@main") },
+      expect: ".github/workflows/validate.yml: YAML anchors and aliases are forbidden",
+    },
+    {
+      name: "aliased_action_value",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("name: Validate StyleGallery", "x-action: &action attacker/action@main\nname: Validate StyleGallery").replace("uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "uses: *action") },
+      expect: ".github/workflows/validate.yml: YAML anchors and aliases are forbidden",
+    },
+    {
+      name: "merged_checkout_step",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("name: Validate StyleGallery", "x-checkout: &checkout\n  uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5\n  with:\n    persist-credentials: false\nname: Validate StyleGallery").replace("        with:\n          persist-credentials: false", "        <<: *checkout\n        with:\n          persist-credentials: true") },
+      expect: ".github/workflows/validate.yml: YAML merge keys are forbidden",
+    },
+    {
+      name: "literal_block_scalar_action_ref",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "uses: |-\n          attacker/action@main") },
+      expect: ".github/workflows/validate.yml: block scalar action refs are forbidden",
+    },
+    {
+      name: "folded_block_scalar_checkout_ref",
+      mutate: { ".github/workflows/validate.yml": replaceCheckout(workflow, "      - name: Checkout\n        uses: >-\n          actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5\n        with:\n          persist-credentials: true") },
+      expect: ".github/workflows/validate.yml: block scalar action refs are forbidden",
+    },
+    {
+      name: "yaml_directive",
+      mutate: { ".github/workflows/validate.yml": `%YAML 1.2\n---\n${workflow}` },
+      expect: ".github/workflows/validate.yml: YAML directives are forbidden",
+    },
+    {
+      name: "yaml_tag_directive",
+      mutate: { ".github/workflows/validate.yml": `%TAG !e! tag:example.com,2026:\n---\n${workflow}` },
+      expect: ".github/workflows/validate.yml: YAML directives are forbidden",
+    },
+    {
+      name: "yaml_document_start_marker",
+      mutate: { ".github/workflows/validate.yml": `---\n${workflow}` },
+      expect: ".github/workflows/validate.yml: YAML document markers are forbidden",
+    },
+    {
+      name: "yaml_document_end_marker",
+      mutate: { ".github/workflows/validate.yml": `${workflow}\n...\n` },
+      expect: ".github/workflows/validate.yml: YAML document markers are forbidden",
+    },
+    {
+      name: "block_scalar_body_structural_notation_ignored",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("        run: |\n          node scripts/create-component-state-session.mjs", "        run: |\n          ? uses\n          : attacker/action@main\n          !!str uses: attacker/action@main\n          &action uses: attacker/action@main\n          <<: *action\n          uses: |\n            attacker/action@main\n          ---\n          node scripts/create-component-state-session.mjs") },
+    },
   ];
 }
 
@@ -115,8 +189,20 @@ function quotedCheckout(workflow, quote) {
 }
 
 function flowCheckout(workflow) {
-  return workflow.replace(
-    "      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4\n        with:\n          persist-credentials: false",
+  return replaceCheckout(
+    workflow,
     "      - { uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5, with: { persist-credentials: false } }",
   );
+}
+
+function replaceCheckout(workflow, replacement) {
+  const named = "      - name: Checkout\n        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4\n        with:\n          persist-credentials: false";
+  const unnamed = "      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4\n        with:\n          persist-credentials: false";
+  return workflow.includes(named) ? workflow.replace(named, replacement) : workflow.replace(unnamed, replacement);
+}
+
+function replaceSetupNode(workflow, replacement) {
+  const named = "      - name: Setup Node\n        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4";
+  const unnamed = "      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4";
+  return workflow.includes(named) ? workflow.replace(named, `      - name: Setup Node\n${replacement}`) : workflow.replace(unnamed, `      - ${replacement.trimStart()}`);
 }

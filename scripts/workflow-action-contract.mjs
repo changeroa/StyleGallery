@@ -17,25 +17,60 @@ function isMappingHeader(entry, key) {
   return entry?.key === key && (entry.value === "" || entry.value.startsWith("#"));
 }
 
-function notationFailures(lines, relative) {
+function isBlockScalarHeader(value) {
+  return /^[|>](?:[+-]?[1-9]|[1-9]?[+-])?(?:\s+#.*)?$/.test(value);
+}
+
+function structuralLines(lines) {
   let blockScalarIndentation = null;
+  return lines.map((line) => {
+    if (line.trim() === "" || line.trimStart().startsWith("#")) return line;
+    const lineIndentation = indentation(line);
+    if (blockScalarIndentation !== null && lineIndentation > blockScalarIndentation) return "";
+    blockScalarIndentation = null;
+    const entry = mappingEntry(line);
+    if (entry && isBlockScalarHeader(entry.value)) blockScalarIndentation = lineIndentation;
+    return line;
+  });
+}
+
+function notationFailures(lines, relative) {
+  let actionBlockScalar = false;
+  let anchorsOrAliases = false;
+  let directives = false;
+  let documentMarkers = false;
   let escapedDoubleQuotedKey = false;
+  let explicitMappingKey = false;
   let flowSequenceMapping = false;
+  let mergeKey = false;
+  let tags = false;
   for (const line of lines) {
     if (line.trim() === "" || line.trimStart().startsWith("#")) continue;
     const lineIndentation = indentation(line);
-    if (blockScalarIndentation !== null && lineIndentation > blockScalarIndentation) continue;
-    blockScalarIndentation = null;
     const trimmed = line.trim();
+    const structural = trimmed.replace(/^-\s+/, "");
+    if (lineIndentation === 0 && /^%(?:YAML|TAG)\b/.test(trimmed)) directives = true;
+    if (lineIndentation === 0 && /^(?:---|\.\.\.)(?:\s+#.*)?$/.test(trimmed)) documentMarkers = true;
+    if (/^\?(?:\s|$)/.test(structural)) explicitMappingKey = true;
+    if (/^!\S*(?:\s|$)/.test(structural)) tags = true;
+    if (/^[&*][^\s:[\]{},]+(?:\s|:|$)/.test(structural)) anchorsOrAliases = true;
+    if (/^<<\s*:/.test(structural)) mergeKey = true;
     const quotedKey = trimmed.match(/^(?:-\s+)?"((?:[^"\\]|\\.)*)"\s*:/)?.[1];
     if (quotedKey?.includes("\\")) escapedDoubleQuotedKey = true;
     if (/^-\s*\{/.test(trimmed)) flowSequenceMapping = true;
     const entry = mappingEntry(line);
-    if (entry && /^[|>](?:[+-]?[1-9]|[1-9]?[+-])?(?:\s+#.*)?$/.test(entry.value)) {
-      blockScalarIndentation = lineIndentation;
-    }
+    if (/^!\S*(?:\s|$)/.test(entry?.value ?? "")) tags = true;
+    if (/^[&*][^\s[\]{},]+(?:\s|$)/.test(entry?.value ?? "")) anchorsOrAliases = true;
+    if (entry?.key === "uses" && isBlockScalarHeader(entry.value)) actionBlockScalar = true;
   }
   const failures = [];
+  if (directives) failures.push(`${relative}: YAML directives are forbidden`);
+  if (documentMarkers) failures.push(`${relative}: YAML document markers are forbidden`);
+  if (explicitMappingKey) failures.push(`${relative}: explicit mapping keys are forbidden`);
+  if (tags) failures.push(`${relative}: YAML tags are forbidden`);
+  if (anchorsOrAliases) failures.push(`${relative}: YAML anchors and aliases are forbidden`);
+  if (mergeKey) failures.push(`${relative}: YAML merge keys are forbidden`);
+  if (actionBlockScalar) failures.push(`${relative}: block scalar action refs are forbidden`);
   if (flowSequenceMapping) failures.push(`${relative}: flow-style sequence mappings are forbidden`);
   if (escapedDoubleQuotedKey) failures.push(`${relative}: escape sequences in double-quoted mapping keys are forbidden`);
   return failures;
@@ -69,7 +104,7 @@ function actionRefFailures(lines, relative) {
 
 export function checkoutCredentialFailures(workflow, relative) {
   const failures = [];
-  const lines = workflow.split("\n");
+  const lines = structuralLines(workflow.split("\n"));
   for (const [index, line] of lines.entries()) {
     const usesEntry = mappingEntry(line);
     if (usesEntry?.key !== "uses" || !usesEntry.value.startsWith("actions/checkout@")) continue;
@@ -111,7 +146,7 @@ function permissionFailures(lines, relative) {
 }
 
 export function workflowActionFailures(workflow, relative) {
-  const lines = workflow.split("\n");
+  const lines = structuralLines(workflow.split("\n"));
   return [
     ...notationFailures(lines, relative),
     ...actionRefFailures(lines, relative),
