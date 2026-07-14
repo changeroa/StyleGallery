@@ -181,6 +181,8 @@ node scripts/test-renderer-purity.mjs
 For capture-session-bound component-state evidence, also run:
 
 ```sh
+STATE_EVIDENCE_ROOT=".tmp/consumer-reference-state"
+mkdir -p "$STATE_EVIDENCE_ROOT"
 node scripts/create-component-state-session.mjs --output "$STATE_EVIDENCE_ROOT/capture-session.json" --json
 STATE_SESSION_RECEIPT="$STATE_EVIDENCE_ROOT/capture-session.json" \
   STATE_ARTIFACT_DIR="$STATE_EVIDENCE_ROOT/runtime" \
