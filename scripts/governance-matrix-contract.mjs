@@ -17,7 +17,7 @@ const componentStateArtifacts = ["editorial", "terminal"].flatMap((profile) =>
 function matrixRows(governance, family) {
   return governance
     .split("\n")
-    .filter((candidate) => candidate.startsWith(`| ${family} |`))
+    .filter((candidate) => /^ {0,3}\|/.test(candidate) && candidate.trimStart().startsWith(`| ${family} |`))
     .map((line) => line.split("|").slice(1, -1).map((cell) => cell.trim()));
 }
 

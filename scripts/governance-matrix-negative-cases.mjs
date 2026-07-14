@@ -45,14 +45,45 @@ export function governanceMatrixCases(governance) {
       expect: "GOVERNANCE.md: Governed local reference profiles row must appear exactly once",
     },
     {
+      name: "one_space_duplicate_governed_profile_row",
+      mutate: { "GOVERNANCE.md": duplicateRow(governance, profileRow, ` ${profileRow}`) },
+      expect: "GOVERNANCE.md: Governed local reference profiles row must appear exactly once",
+    },
+    {
+      name: "three_space_conflicting_governed_profile_row",
+      mutate: { "GOVERNANCE.md": duplicateRow(governance, profileRow, `   ${conflictingProfileRow}`) },
+      expect: "GOVERNANCE.md: Governed local reference profiles row must appear exactly once",
+    },
+    {
       name: "duplicate_component_state_row",
       mutate: { "GOVERNANCE.md": duplicateRow(governance, stateRow) },
+      expect: "GOVERNANCE.md: Component-state evidence matrices row must appear exactly once",
+    },
+    {
+      name: "one_space_duplicate_component_state_row",
+      mutate: { "GOVERNANCE.md": duplicateRow(governance, stateRow, ` ${stateRow}`) },
+      expect: "GOVERNANCE.md: Component-state evidence matrices row must appear exactly once",
+    },
+    {
+      name: "three_space_conflicting_component_state_row",
+      mutate: { "GOVERNANCE.md": duplicateRow(governance, stateRow, `   ${mutateCell(stateRow, 2, () => "Each profile's declared `components/**` records")}`) },
       expect: "GOVERNANCE.md: Component-state evidence matrices row must appear exactly once",
     },
     {
       name: "duplicate_both_reference_rows",
       mutate: { "GOVERNANCE.md": duplicateRow(duplicateRow(governance, profileRow), stateRow) },
       expect: "GOVERNANCE.md: Governed local reference profiles row must appear exactly once",
+    },
+    {
+      name: "four_space_reference_rows_are_code_blocks",
+      mutate: {
+        "GOVERNANCE.md": duplicateRow(
+          duplicateRow(governance, profileRow, `    ${conflictingProfileRow}`),
+          stateRow,
+          `    ${mutateCell(stateRow, 2, () => "Each profile's declared `components/**` records")}`,
+        ),
+      },
+      expect: null,
     },
     {
       name: "profile_source_extra_prose",
