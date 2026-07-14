@@ -4,9 +4,11 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import {
   canonicalSourceManifest,
+  repositoryGitArgs,
   sourceManifestMatches,
 } from "./capture-session-contract.mjs";
 import { compileSchemas } from "./component-state-contract.mjs";
@@ -30,6 +32,15 @@ assert(!first.files.some((entry) => entry.path === "scripts/validate-component-s
 assert(first.files.some((entry) => entry.path.endsWith("/profile.json")), "profile declarations must be bound");
 assert(first.files.some((entry) => entry.path.endsWith("/tokens.dtcg.json")), "profile token inputs must be bound");
 assert.equal(sourceManifestMatches(first, repositoryRoot, profileRoot), true, "canonical source manifest must match itself");
+assert.equal(
+  execFileSync("git", repositoryGitArgs(repositoryRoot, "rev-parse", "HEAD"), {
+    cwd: repositoryRoot,
+    encoding: "utf8",
+    env: { ...process.env, GIT_TEST_ASSUME_DIFFERENT_OWNER: "1" },
+  }).trim(),
+  execFileSync("git", ["rev-parse", "HEAD"], { cwd: repositoryRoot, encoding: "utf8" }).trim(),
+  "repository Git reads must trust only the exact checkout when container ownership differs",
+);
 
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-source-contract-"));
 try {

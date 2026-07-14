@@ -37,6 +37,10 @@ export function sha256(bytes) {
   return `sha256:${crypto.createHash("sha256").update(bytes).digest("hex")}`;
 }
 
+export function repositoryGitArgs(repositoryRoot, ...args) {
+  return ["-c", `safe.directory=${repositoryRoot}`, ...args];
+}
+
 function compare(left, right) {
   return left < right ? -1 : left > right ? 1 : 0;
 }
@@ -104,7 +108,7 @@ export function dirtyRelevantSources(repositoryRoot, profileRoot) {
     .filter((file) => file.startsWith(repositoryPrefix))
     .map((file) => path.relative(repositoryRoot, file));
   if (tracked.length === 0) return [];
-  const output = execFileSync("git", ["status", "--porcelain=v1", "--untracked-files=all", "--", ...tracked], { cwd: repositoryRoot, encoding: "utf8" });
+  const output = execFileSync("git", repositoryGitArgs(repositoryRoot, "status", "--porcelain=v1", "--untracked-files=all", "--", ...tracked), { cwd: repositoryRoot, encoding: "utf8" });
   return output.split("\n").filter(Boolean).sort(compare);
 }
 

@@ -11,6 +11,7 @@ import {
   canonicalIntended,
   canonicalSourceManifest,
   dirtyRelevantSources,
+  repositoryGitArgs,
   sha256,
 } from "./capture-session-contract.mjs";
 import { compileSchemas } from "./component-state-contract.mjs";
@@ -42,7 +43,7 @@ else if (path.basename(options.output) !== "capture-session.json") failures.push
 else if (fs.existsSync(options.output)) failures.push({ code: "capture_session_replay", message: "capture session receipt already exists and cannot be overwritten", path: options.output });
 
 function git(...args) {
-  return execFileSync("git", args, { cwd: repositoryRoot, encoding: "utf8" }).trim();
+  return execFileSync("git", repositoryGitArgs(repositoryRoot, ...args), { cwd: repositoryRoot, encoding: "utf8" }).trim();
 }
 
 const executable = chromium.executablePath();
