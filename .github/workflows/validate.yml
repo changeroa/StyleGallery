@@ -234,6 +234,7 @@ jobs:
     continue-on-error: true
     env:
       STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state
+      SENTINEL_CONTAINER_IMAGE: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
     container:
       image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
       options: --platform linux/amd64
@@ -256,8 +257,6 @@ jobs:
 
       - name: Capture and validate closed component-state evidence
         shell: bash
-        env:
-          SENTINEL_CONTAINER_IMAGE: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
         run: |
           set -o pipefail
           node scripts/create-component-state-session.mjs \
