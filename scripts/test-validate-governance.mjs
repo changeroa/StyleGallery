@@ -6,6 +6,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { files, generatedWarning, sentinelProvenanceClauses } from "./governance-test-fixture.mjs";
+import { governanceMatrixCases } from "./governance-matrix-negative-cases.mjs";
 import { workflowSafetyCases } from "./governance-workflow-negative-cases.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -182,6 +183,7 @@ const cases = [
     mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("\"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"", "\"$GITHUB_REPOSITORY\" \"changeroa/StyleGallery\" \"$GITHUB_RUN_ID\"") },
     expect: ".github/workflows/validate.yml: missing \"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"",
   },
+  ...governanceMatrixCases(files["GOVERNANCE.md"]),
   ...workflowSafetyCases(files[".github/workflows/validate.yml"]),
   { name: "success_path", expect: null },
 ];
