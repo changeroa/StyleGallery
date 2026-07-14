@@ -45,5 +45,51 @@ export function workflowSafetyCases(workflow) {
       mutate: { ".github/workflows/validate.yml": workflow.replace("  validate:\n", "  validate:\n    permissions:\n      contents: read\n") },
       expect: ".github/workflows/validate.yml: job-level permissions overrides are forbidden",
     },
+    {
+      name: "single_quoted_third_party_floating_action_ref",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "'uses': attacker/action@main") },
+      expect: ".github/workflows/validate.yml: floating or unlabeled action ref 'uses': attacker/action@main",
+    },
+    {
+      name: "double_quoted_third_party_floating_action_ref",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "\"uses\": attacker/action@main") },
+      expect: ".github/workflows/validate.yml: floating or unlabeled action ref \"uses\": attacker/action@main",
+    },
+    {
+      name: "single_quoted_checkout_floating_ref",
+      mutate: { ".github/workflows/validate.yml": quotedCheckout(workflow, "'") },
+      expect: ".github/workflows/validate.yml: floating or unlabeled action ref 'uses': actions/checkout@v4",
+    },
+    {
+      name: "single_quoted_checkout_credentials_persisted",
+      mutate: { ".github/workflows/validate.yml": quotedCheckout(workflow, "'") },
+      expect: ".github/workflows/validate.yml: every actions/checkout step must set persist-credentials: false",
+    },
+    {
+      name: "double_quoted_checkout_floating_ref",
+      mutate: { ".github/workflows/validate.yml": quotedCheckout(workflow, "\"") },
+      expect: ".github/workflows/validate.yml: floating or unlabeled action ref \"uses\": actions/checkout@v4",
+    },
+    {
+      name: "double_quoted_checkout_credentials_persisted",
+      mutate: { ".github/workflows/validate.yml": quotedCheckout(workflow, "\"") },
+      expect: ".github/workflows/validate.yml: every actions/checkout step must set persist-credentials: false",
+    },
+    {
+      name: "single_quoted_job_level_permission_override",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("  validate:\n", "  validate:\n    'permissions':\n      contents: read\n") },
+      expect: ".github/workflows/validate.yml: job-level permissions overrides are forbidden",
+    },
+    {
+      name: "double_quoted_job_level_permission_override",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("  validate:\n", "  validate:\n    \"permissions\":\n      contents: read\n") },
+      expect: ".github/workflows/validate.yml: job-level permissions overrides are forbidden",
+    },
   ];
+}
+
+function quotedCheckout(workflow, quote) {
+  return workflow
+    .replace("uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4", `${quote}uses${quote}: actions/checkout@v4`)
+    .replace("        with:\n          persist-credentials: false", `        ${quote}with${quote}:\n          ${quote}persist-credentials${quote}: true`);
 }
