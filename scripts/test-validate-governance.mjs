@@ -15,6 +15,7 @@ const adapterPipeParser = 'let output = ""; process.stdin.setEncoding("utf8"); p
 
 const cases = [
   { name: "missing_governance", omit: ["GOVERNANCE.md"], expect: "GOVERNANCE.md: missing file" },
+  { name: "broad_profile_sources_claim_no_generated_artifacts", mutate: { "GOVERNANCE.md": files["GOVERNANCE.md"].replace(/`design-engineering\/reference-profiles\/governed-local\/editorial\/profile\.json`[^|]+/, "`design-engineering/reference-profiles/governed-local/**`") }, expect: "GOVERNANCE.md: governed local reference profile sources must be the six explicit canonical profile files" },
   { name: "missing_matrix_stale_trigger", mutate: { "GOVERNANCE.md": files["GOVERNANCE.md"].replace("Generated structure changes, generated-warning changes, or generated metadata changes.", "Generated structure changes.") }, expect: "GOVERNANCE.md: missing Generated structure changes, generated-warning changes, or generated metadata changes." },
   { name: "missing_evidence_fixture_coverage", mutate: { "quality/evidence/executable-evidence.md": "Missing governance file or generated warning fixtures must fail." }, expect: "quality/evidence/executable-evidence.md: missing Missing governance file, generated warning, generated metadata, CODEOWNERS coverage, or stale policy fixtures must fail." },
   {

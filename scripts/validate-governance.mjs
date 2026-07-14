@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { componentStateWorkflowFailures } from "./component-state-workflow-contract.mjs";
+import { referenceOwnershipFailures } from "./governance-matrix-contract.mjs";
 import { immutableActionPins, requiredCodeowners, sentinelProvenanceClauses } from "./governance-policy-contract.mjs";
 import { promotionGovernanceFailures } from "./promotion-governance-contract.mjs";
 import { workflowActionFailures } from "./workflow-action-contract.mjs";
@@ -50,6 +51,7 @@ function requireGovernanceMatrix() {
     "Layout recipes",
     "Quality gates and evidence",
     "Consumer reference contract",
+    "Governed local reference profiles",
     "Component-state evidence matrices",
     "Shared promotion policy",
     "Proposed Chromium sentinel",
@@ -202,6 +204,7 @@ function requireSentinelProvenanceBoundary() {
 }
 
 requireGovernanceMatrix();
+failures.push(...referenceOwnershipFailures(read("GOVERNANCE.md")));
 requireLifecycleStates();
 requireOwnership();
 requireStalenessDecision();
