@@ -17,6 +17,30 @@ function isMappingHeader(entry, key) {
   return entry?.key === key && (entry.value === "" || entry.value.startsWith("#"));
 }
 
+function notationFailures(lines, relative) {
+  let blockScalarIndentation = null;
+  let escapedDoubleQuotedKey = false;
+  let flowSequenceMapping = false;
+  for (const line of lines) {
+    if (line.trim() === "" || line.trimStart().startsWith("#")) continue;
+    const lineIndentation = indentation(line);
+    if (blockScalarIndentation !== null && lineIndentation > blockScalarIndentation) continue;
+    blockScalarIndentation = null;
+    const trimmed = line.trim();
+    const quotedKey = trimmed.match(/^(?:-\s+)?"((?:[^"\\]|\\.)*)"\s*:/)?.[1];
+    if (quotedKey?.includes("\\")) escapedDoubleQuotedKey = true;
+    if (/^-\s*\{/.test(trimmed)) flowSequenceMapping = true;
+    const entry = mappingEntry(line);
+    if (entry && /^[|>](?:[+-]?[1-9]|[1-9]?[+-])?(?:\s+#.*)?$/.test(entry.value)) {
+      blockScalarIndentation = lineIndentation;
+    }
+  }
+  const failures = [];
+  if (flowSequenceMapping) failures.push(`${relative}: flow-style sequence mappings are forbidden`);
+  if (escapedDoubleQuotedKey) failures.push(`${relative}: escape sequences in double-quoted mapping keys are forbidden`);
+  return failures;
+}
+
 function directMappingLines(lines, headerIndex, headerIndentation) {
   const nested = [];
   for (const line of lines.slice(headerIndex + 1)) {
@@ -89,6 +113,7 @@ function permissionFailures(lines, relative) {
 export function workflowActionFailures(workflow, relative) {
   const lines = workflow.split("\n");
   return [
+    ...notationFailures(lines, relative),
     ...actionRefFailures(lines, relative),
     ...checkoutCredentialFailures(workflow, relative),
     ...permissionFailures(lines, relative),
