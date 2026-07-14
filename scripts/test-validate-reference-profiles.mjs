@@ -167,4 +167,4 @@ const results = cases.map(runCase);
 const failures = results.filter((result) => !result.ok).map((result) => `missing_semantic:${result.name}:${result.expected}`);
 const report = { failures, ok: failures.length === 0, results };
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

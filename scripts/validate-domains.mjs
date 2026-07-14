@@ -264,4 +264,4 @@ const result = { ok: failures.length === 0, checkedDomains: domains.length, chec
 if (json) console.log(JSON.stringify(result, null, 2));
 else if (result.ok) console.log(`ok: ${result.checkedDomains} domains, ${result.checkedLeaves} governed leaves`);
 else console.error(result.failures.join("\n"));
-process.exit(result.ok ? 0 : 1);
+process.exitCode = result.ok ? 0 : 1;

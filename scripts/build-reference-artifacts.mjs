@@ -47,23 +47,21 @@ function emit(report, json) {
 }
 
 const parsed = parseArguments();
-if (parsed.failure) {
-  emit({ failures: [parsed.failure], ok: false, warnings: [] }, parsed.options.json);
-  process.exit(1);
-}
 const options = parsed.options;
 const source = path.resolve(root, options.source);
 const output = path.resolve(root, options.output);
 const manifestPath = path.resolve(root, options.manifest);
-const failures = [];
+const failures = parsed.failure ? [parsed.failure] : [];
 const warnings = [];
-for (const [code, target] of [
-  ["token_source_untrusted", source],
-  ["artifact_output_untrusted", output],
-  ["artifact_manifest_untrusted", manifestPath],
-]) {
-  const inspection = inspectArtifactPath(root, target, code !== "token_source_untrusted");
-  if (!inspection.ok) failures.push({ code, message: `${target} must be a contained regular non-symlink file`, path: path.relative(root, target) || "." });
+if (!parsed.failure) {
+  for (const [code, target] of [
+    ["token_source_untrusted", source],
+    ["artifact_output_untrusted", output],
+    ["artifact_manifest_untrusted", manifestPath],
+  ]) {
+    const inspection = inspectArtifactPath(root, target, code !== "token_source_untrusted");
+    if (!inspection.ok) failures.push({ code, message: `${target} must be a contained regular non-symlink file`, path: path.relative(root, target) || "." });
+  }
 }
 let sourceBytes;
 let document;
@@ -122,6 +120,8 @@ if (failures.length === 0) {
     fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
   }
 }
-const report = { adapter, failures, manifest: options.manifest, ok: failures.length === 0, output: options.output, outputCount: failures.length === 0 ? contract.tokens.length : 0, warnings };
+const report = parsed.failure
+  ? { failures: [parsed.failure], ok: false, warnings }
+  : { adapter, failures, manifest: options.manifest, ok: failures.length === 0, output: options.output, outputCount: failures.length === 0 ? contract.tokens.length : 0, warnings };
 emit(report, options.json);
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

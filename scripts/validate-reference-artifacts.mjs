@@ -122,4 +122,4 @@ const uniqueFailures = [...new Map(failures.map((item) => [`${item.code}:${item.
 const report = { failures: uniqueFailures, manifest: options.manifest, ok: uniqueFailures.length === 0, warnings };
 const text = options.json ? JSON.stringify(report, null, 2) : report.ok ? "ok: reference artifacts" : uniqueFailures.map((item) => `${item.code}: ${item.message}`).join("\n");
 (options.json || report.ok ? console.log : console.error)(text);
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

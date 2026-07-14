@@ -242,4 +242,4 @@ const result = { checkedHandoffs, checkedItems: options.items.length, failures: 
 if (options.json) console.log(JSON.stringify(result, null, 2));
 else if (result.ok) console.log(`ok: ${result.checkedItems} consumer reference items`);
 else console.error(result.failures.map((failure) => `${failure.code}: ${failure.path}: ${failure.message}`).join("\n"));
-process.exit(result.ok ? 0 : 1);
+process.exitCode = result.ok ? 0 : 1;

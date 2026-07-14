@@ -70,4 +70,4 @@ const report = {
 };
 
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

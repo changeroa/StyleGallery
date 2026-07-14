@@ -62,6 +62,7 @@ jobs:
           node -c scripts/test-validate-webpage-workflow.mjs
           node -c scripts/validate-consumer-reference.mjs
           node -c scripts/test-validate-consumer-reference.mjs
+          node -c scripts/test-json-cli-output.mjs
           node -c scripts/consumer-reference-case-runner.mjs
           node -c scripts/validate-promotion-rfc.mjs
           node -c scripts/test-validate-promotion-rfc.mjs
@@ -159,6 +160,9 @@ jobs:
         run: |
           node scripts/validate-consumer-reference.mjs --json
           node scripts/test-validate-consumer-reference.mjs --json
+
+      - name: JSON CLI output integrity
+        run: node scripts/test-json-cli-output.mjs
 
       - name: Shared promotion policy contract
         run: |
