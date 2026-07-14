@@ -32,13 +32,15 @@ assert(!first.files.some((entry) => entry.path === "scripts/validate-component-s
 assert(first.files.some((entry) => entry.path.endsWith("/profile.json")), "profile declarations must be bound");
 assert(first.files.some((entry) => entry.path.endsWith("/tokens.dtcg.json")), "profile token inputs must be bound");
 assert.equal(sourceManifestMatches(first, repositoryRoot, profileRoot), true, "canonical source manifest must match itself");
+const revisionArgs = repositoryGitArgs(repositoryRoot, "rev-parse", "HEAD");
+assert.deepEqual(revisionArgs, ["-c", `safe.directory=${repositoryRoot}`, "rev-parse", "HEAD"], "repository Git trust must be scoped to the exact checkout");
 assert.equal(
-  execFileSync("git", repositoryGitArgs(repositoryRoot, "rev-parse", "HEAD"), {
+  execFileSync("git", revisionArgs, {
     cwd: repositoryRoot,
     encoding: "utf8",
     env: { ...process.env, GIT_TEST_ASSUME_DIFFERENT_OWNER: "1" },
   }).trim(),
-  execFileSync("git", ["rev-parse", "HEAD"], { cwd: repositoryRoot, encoding: "utf8" }).trim(),
+  execFileSync("git", revisionArgs, { cwd: repositoryRoot, encoding: "utf8" }).trim(),
   "repository Git reads must trust only the exact checkout when container ownership differs",
 );
 
