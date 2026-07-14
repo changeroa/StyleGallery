@@ -11,9 +11,32 @@ export function workflowSafetyCases(workflow) {
       expect: ".github/workflows/validate.yml: every actions/checkout step must set persist-credentials: false",
     },
     {
+      name: "mixed_case_checkout_credentials_missing",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "      - uses: Actions/Checkout@34e114876b0b11c390a56381ad16ebd13914f8d5\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4") },
+      expect: ".github/workflows/validate.yml: every actions/checkout step must set persist-credentials: false",
+    },
+    {
+      name: "mixed_case_checkout_credentials_true",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "      - uses: Actions/Checkout@34e114876b0b11c390a56381ad16ebd13914f8d5\n        with:\n          persist-credentials: true\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4") },
+      expect: ".github/workflows/validate.yml: every actions/checkout step must set persist-credentials: false",
+    },
+    {
+      name: "mixed_case_checkout_credentials_false",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "      - uses: Actions/Checkout@34e114876b0b11c390a56381ad16ebd13914f8d5\n        with:\n          persist-credentials: false\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4") },
+    },
+    {
       name: "third_party_floating_action_ref",
       mutate: { ".github/workflows/validate.yml": workflow.replace("uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "uses: attacker/action@main") },
       expect: ".github/workflows/validate.yml: floating or unlabeled action ref uses: attacker/action@main",
+    },
+    {
+      name: "docker_action_ref",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "      - uses: docker://alpine:latest\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4") },
+      expect: ".github/workflows/validate.yml: docker action refs are forbidden uses: docker://alpine:latest",
+    },
+    {
+      name: "repository_local_action_ref",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4", "      - uses: ./.github/actions/local\n      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4") },
     },
     {
       name: "checkout_true_with_later_env_false",
@@ -94,6 +117,16 @@ export function workflowSafetyCases(workflow) {
       name: "flow_sequence_checkout_with_inline_map",
       mutate: { ".github/workflows/validate.yml": flowCheckout(workflow) },
       expect: ".github/workflows/validate.yml: flow-style sequence mappings are forbidden",
+    },
+    {
+      name: "flow_collection_mapping_value",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("    steps:\n", "    steps: [{ uses: attacker/action@main }]\n") },
+      expect: ".github/workflows/validate.yml: flow-style collection values are forbidden",
+    },
+    {
+      name: "flow_collection_continuation_value",
+      mutate: { ".github/workflows/validate.yml": workflow.replace("    steps:\n", "    steps:\n      [{ uses: attacker/action@main }]\n") },
+      expect: ".github/workflows/validate.yml: flow-style collection values are forbidden",
     },
     {
       name: "double_quoted_escaped_action_key",
@@ -177,7 +210,7 @@ export function workflowSafetyCases(workflow) {
     },
     {
       name: "block_scalar_body_structural_notation_ignored",
-      mutate: { ".github/workflows/validate.yml": workflow.replace("        run: |\n          node scripts/create-component-state-session.mjs", "        run: |\n          ? uses\n          : attacker/action@main\n          !!str uses: attacker/action@main\n          &action uses: attacker/action@main\n          <<: *action\n          uses: |\n            attacker/action@main\n          ---\n          node scripts/create-component-state-session.mjs") },
+      mutate: { ".github/workflows/validate.yml": workflow.replace("        run: |\n          node scripts/create-component-state-session.mjs", "        run: |\n          ? uses\n          : attacker/action@main\n          !!str uses: attacker/action@main\n          &action uses: attacker/action@main\n          <<: *action\n          uses: |\n            attacker/action@main\n          steps: [{ uses: attacker/action@main }]\n          ---\n          node scripts/create-component-state-session.mjs") },
     },
   ];
 }

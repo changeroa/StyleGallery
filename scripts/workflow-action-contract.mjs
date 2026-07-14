@@ -41,6 +41,7 @@ function notationFailures(lines, relative) {
   let documentMarkers = false;
   let escapedDoubleQuotedKey = false;
   let explicitMappingKey = false;
+  let flowCollectionValue = false;
   let flowSequenceMapping = false;
   let mergeKey = false;
   let tags = false;
@@ -59,6 +60,7 @@ function notationFailures(lines, relative) {
     if (quotedKey?.includes("\\")) escapedDoubleQuotedKey = true;
     if (/^-\s*\{/.test(trimmed)) flowSequenceMapping = true;
     const entry = mappingEntry(line);
+    if (/^[\[{]/.test(entry?.value ?? "") || (!/^-\s*\{/.test(trimmed) && /^[\[{]/.test(structural))) flowCollectionValue = true;
     if (/^!\S*(?:\s|$)/.test(entry?.value ?? "")) tags = true;
     if (/^[&*][^\s[\]{},]+(?:\s|$)/.test(entry?.value ?? "")) anchorsOrAliases = true;
     if (entry?.key === "uses" && isBlockScalarHeader(entry.value)) actionBlockScalar = true;
@@ -71,6 +73,7 @@ function notationFailures(lines, relative) {
   if (anchorsOrAliases) failures.push(`${relative}: YAML anchors and aliases are forbidden`);
   if (mergeKey) failures.push(`${relative}: YAML merge keys are forbidden`);
   if (actionBlockScalar) failures.push(`${relative}: block scalar action refs are forbidden`);
+  if (flowCollectionValue) failures.push(`${relative}: flow-style collection values are forbidden`);
   if (flowSequenceMapping) failures.push(`${relative}: flow-style sequence mappings are forbidden`);
   if (escapedDoubleQuotedKey) failures.push(`${relative}: escape sequences in double-quoted mapping keys are forbidden`);
   return failures;
@@ -96,7 +99,11 @@ function actionRefFailures(lines, relative) {
     if (entry?.key !== "uses") continue;
     const reference = entry.value.match(/^([^\s#]+)/)?.[1];
     if (!reference) continue;
-    if (reference.startsWith("./") || reference.startsWith("docker://")) continue;
+    if (reference.startsWith("./")) continue;
+    if (reference.startsWith("docker://")) {
+      failures.push(`${relative}: docker action refs are forbidden ${line.trim().replace(/^-\s*/, "")}`);
+      continue;
+    }
     if (!/^[^@\s]+@[a-f0-9]{40}$/i.test(reference)) failures.push(`${relative}: floating or unlabeled action ref ${line.trim().replace(/^-\s*/, "")}`);
   }
   return failures;
@@ -107,7 +114,7 @@ export function checkoutCredentialFailures(workflow, relative) {
   const lines = structuralLines(workflow.split("\n"));
   for (const [index, line] of lines.entries()) {
     const usesEntry = mappingEntry(line);
-    if (usesEntry?.key !== "uses" || !usesEntry.value.startsWith("actions/checkout@")) continue;
+    if (usesEntry?.key !== "uses" || !/^actions\/checkout@/i.test(usesEntry.value)) continue;
     const usesIndentation = mappingKeyIndentation(line);
     const withHeaders = [];
     for (const [offset, following] of lines.slice(index + 1).entries()) {
