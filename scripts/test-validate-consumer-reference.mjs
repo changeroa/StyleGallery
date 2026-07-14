@@ -176,7 +176,14 @@ const profileHarness = spawnSync(process.execPath, [path.join(repositoryRoot, "s
 });
 const profileReport = JSON.parse(profileHarness.stdout);
 if (profileHarness.status !== 0 || profileReport.ok !== true) failures.push("missing_semantic:governed_local_reference_profiles");
+const cliHarness = spawnSync(process.execPath, [path.join(repositoryRoot, "scripts", "test-validate-consumer-reference-cli.mjs")], {
+  cwd: repositoryRoot,
+  encoding: "utf8",
+});
+const cliReport = JSON.parse(cliHarness.stdout);
+if (cliHarness.status !== 0 || cliReport.ok !== true) failures.push("missing_semantic:consumer_reference_cli_arguments");
 const report = {
+  cliReport,
   failures,
   ok: failures.length === 0,
   profileReport,

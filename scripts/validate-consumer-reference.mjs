@@ -57,7 +57,7 @@ function parseArguments() {
     }
     if (argument === "--item" || argument === "--profile") {
       const value = process.argv[index + 1];
-      if (!value) {
+      if (!value || value.startsWith("--")) {
         addFailure("argument_value_required", "<cli>", `${argument} requires a repository-relative JSON path`);
       } else {
         items.push(value);
