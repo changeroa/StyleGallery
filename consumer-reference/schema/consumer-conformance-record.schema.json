@@ -149,6 +149,46 @@
       "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?![A-Za-z][A-Za-z0-9+.-]*:)(?!.*\\/$)[^\\\\?#]+$",
       "type": "string"
     },
+    "argv": {
+      "items": { "minLength": 1, "type": "string" },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "runtimeResult": {
+      "additionalProperties": false,
+      "properties": {
+        "argv": { "$ref": "#/$defs/argv" },
+        "evidence_method": { "enum": ["unit", "integration", "browser"] },
+        "exit_code": { "const": 0 },
+        "record_kind": { "const": "consumer_migration_scenario_result" },
+        "recorded_at": { "format": "date-time", "type": "string" },
+        "repository": { "minLength": 3, "pattern": "^\\S+/\\S+$", "type": "string" },
+        "revision": { "pattern": "^[a-f0-9]{40}$", "type": "string" },
+        "run_id": { "minLength": 1, "pattern": "^\\S+$", "type": "string" },
+        "scenario_id": { "$ref": "#/$defs/slug" },
+        "schema_version": { "const": "1.0" },
+        "session_id": { "minLength": 1, "pattern": "^\\S+$", "type": "string" },
+        "source_digest": { "$ref": "#/$defs/sha256" },
+        "status": { "const": "passed" }
+      },
+      "required": [
+        "argv",
+        "evidence_method",
+        "exit_code",
+        "record_kind",
+        "recorded_at",
+        "repository",
+        "revision",
+        "run_id",
+        "scenario_id",
+        "schema_version",
+        "session_id",
+        "source_digest",
+        "status"
+      ],
+      "type": "object"
+    },
     "scenario": {
       "additionalProperties": false,
       "properties": {
@@ -157,7 +197,7 @@
           "minItems": 1,
           "type": "array"
         },
-        "command": { "minLength": 1, "type": "string" },
+        "argv": { "$ref": "#/$defs/argv" },
         "evidence_method": { "enum": ["unit", "integration", "browser"] },
         "exit_code": { "const": 0 },
         "id": { "$ref": "#/$defs/slug" },
@@ -173,7 +213,7 @@
       },
       "required": [
         "assertions",
-        "command",
+        "argv",
         "evidence_method",
         "exit_code",
         "id",
@@ -227,6 +267,7 @@
   "properties": {
     "adoption_mappings": {
       "items": { "$ref": "#/$defs/adoptionMapping" },
+      "maxItems": 256,
       "minItems": 1,
       "type": "array"
     },
@@ -245,6 +286,7 @@
       "properties": {
         "relevant_sources": {
           "items": { "$ref": "#/$defs/repositoryPath" },
+          "maxItems": 1024,
           "minItems": 1,
           "type": "array",
           "uniqueItems": true
@@ -301,6 +343,7 @@
     "record_kind": { "const": "consumer_migration_conformance" },
     "scenarios": {
       "items": { "$ref": "#/$defs/scenario" },
+      "maxItems": 256,
       "minItems": 1,
       "type": "array"
     },

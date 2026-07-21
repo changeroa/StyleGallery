@@ -16,9 +16,9 @@
         "migration-round-trip"
       ],
       "stylegallery": {
-        "anchor": "#implementation-handoff",
-        "path": "recipes/app-shell/index.md",
-        "revision": "2222222222222222222222222222222222222222"
+        "anchor": "#recommended-pattern-stack",
+        "path": "recipes/dashboard.md",
+        "revision": "66601da6e81c69674edf5c1b9b1b0862d4597fe9"
       }
     }
   ],
@@ -29,11 +29,13 @@
   },
   "consumer": {
     "relevant_sources": [
-      "src/app.js",
-      "src/styles.css"
+      "consumer-reference/fixtures/consumer-conformance/runtime-proof.mjs",
+      "consumer-reference/schema/consumer-conformance-record.schema.json",
+      "scripts/consumer-conformance-contract.mjs",
+      "scripts/validate-consumer-conformance.mjs"
     ],
-    "repository": "example/consumer-web",
-    "revision": "1111111111111111111111111111111111111111"
+    "repository": "changeroa/StyleGallery",
+    "revision": "84bf420d568f68021117f8142e6d982b4966de2f"
   },
   "id": "example-consumer-migration",
   "migration_dimensions": {
@@ -120,17 +122,20 @@
       "assertions": [
         "The drawer state and persisted route data match after a reload."
       ],
-      "command": "npm run test:migration -- --reporter=json",
-      "evidence_method": "browser",
+      "argv": [
+        "node",
+        "consumer-reference/fixtures/consumer-conformance/runtime-proof.mjs"
+      ],
+      "evidence_method": "integration",
       "exit_code": 0,
       "id": "migration-round-trip",
       "observable_actions": [
-        "Open the gallery route, toggle the drawer, save, and reload."
+        "Run the synthetic migration fixture and inspect its machine-readable result."
       ],
-      "result_artifact": "evidence/results/migration-round-trip.json",
+      "result_artifact": "consumer-reference/fixtures/consumer-conformance/valid-migration-result.json",
       "run_id": "run-20260721-001",
       "session_id": "session-20260721-001",
-      "source_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "source_digest": "6d90893774e2228ffe9ae0286f5b3392b103ea1bf5e571fcde2f7a861d76372c"
     }
   ],
   "schema_version": "1.0"

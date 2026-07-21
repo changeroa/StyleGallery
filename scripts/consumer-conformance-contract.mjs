@@ -31,6 +31,14 @@ function uniqueFindings(findings) {
   return [...new Map(findings.map((entry) => [`${entry.code}:${entry.path}:${entry.message}`, entry])).values()];
 }
 
+function sameStringSet(left, right) {
+  return Array.isArray(left)
+    && Array.isArray(right)
+    && left.length === right.length
+    && new Set(left).size === left.length
+    && left.every((entry) => right.includes(entry));
+}
+
 export function isNormalizedRepositoryPath(value, { jsonOnly = false } = {}) {
   if (typeof value !== "string" || value.length === 0 || value.startsWith("/") || value.endsWith("/") || value.includes("\\") || value.includes("//") || value.includes("?") || value.includes("#")) return false;
   if (/^[A-Za-z][A-Za-z0-9+.-]*:/.test(value)) return false;
@@ -84,6 +92,7 @@ export function validateConsumerConformanceSemantics(value, recordPath) {
   if (scenarioIds.length !== scenarioSet.size) add("runtime_scenario_id_duplicate", "runtime scenario IDs must be unique");
   for (const scenario of scenarios) {
     if (!RUNTIME_EVIDENCE_METHODS.includes(scenario.evidence_method)) add("runtime_evidence_method_invalid", "runtime evidence must use unit, integration, or browser execution");
+    if (["unit", "integration"].includes(scenario.evidence_method) && scenario.argv?.[0] !== "node") add("runtime_command_executable_invalid", "unit and integration evidence must use the governed Node runtime");
     if (scenario.exit_code !== 0) add("runtime_evidence_exit_nonzero", `scenario ${scenario.id ?? "<unknown>"} must record exit code zero`);
     if (!isNormalizedRepositoryPath(scenario.result_artifact, { jsonOnly: true })) add("runtime_result_artifact_invalid", `scenario ${scenario.id ?? "<unknown>"} requires a normalized JSON result artifact`);
   }
@@ -125,6 +134,65 @@ export function validateConsumerConformanceSemantics(value, recordPath) {
 
   if (value.page_evidence?.status === "applicable" && !isNormalizedRepositoryPath(value.page_evidence.manifest, { jsonOnly: true })) {
     add("page_evidence_manifest_path_invalid", "applicable page evidence requires a normalized JSON manifest path");
+  }
+  return uniqueFindings(findings);
+}
+
+export function validateConsumerPageIntentSemantics(value, recordPath) {
+  if (!isPlainObject(value) || value.page_evidence?.status !== "applicable") return [];
+  const findings = [];
+  const add = (code, message) => findings.push(finding(code, message, recordPath));
+  const scenarios = Array.isArray(value.scenarios) ? value.scenarios.filter(isPlainObject) : [];
+  const browserIds = scenarios.filter((scenario) => scenario.evidence_method === "browser").map((scenario) => scenario.id);
+  if (browserIds.length === 0) {
+    add("page_evidence_runtime_scenario_required", "applicable page evidence requires at least one browser runtime scenario");
+    return findings;
+  }
+  const mappingIds = new Set((Array.isArray(value.adoption_mappings) ? value.adoption_mappings : [])
+    .flatMap((mapping) => Array.isArray(mapping?.scenario_ids) ? mapping.scenario_ids : []));
+  for (const scenarioId of browserIds) {
+    if (!mappingIds.has(scenarioId)) add("page_evidence_adoption_mapping_missing", `browser scenario ${scenarioId} requires an adoption mapping`);
+  }
+  return uniqueFindings(findings);
+}
+
+export function validateConsumerPageEvidenceSemantics(value, manifest, recordPath) {
+  if (!isPlainObject(value) || !isPlainObject(manifest) || value.page_evidence?.status !== "applicable") return [];
+  const findings = [];
+  const add = (code, message) => findings.push(finding(code, message, recordPath));
+  const scenarios = Array.isArray(value.scenarios) ? value.scenarios.filter(isPlainObject) : [];
+  const scenarioById = new Map(scenarios.map((scenario) => [scenario.id, scenario]));
+  const browserScenarios = scenarios.filter((scenario) => scenario.evidence_method === "browser");
+  const browserIds = browserScenarios.map((scenario) => scenario.id);
+  const intendedIds = manifest.session?.intended_scenario_ids;
+  if (!sameStringSet(browserIds, intendedIds)) add("page_evidence_intent_scenario_mismatch", "page session intent must exactly match the conformance browser scenario catalog");
+
+  const sourcePaths = manifest.session?.source?.files?.map((entry) => entry.path);
+  if (!sameStringSet(value.consumer?.relevant_sources, sourcePaths)) add("page_evidence_source_set_mismatch", "conformance relevant sources must exactly match the page session source set");
+  if (value.consumer?.repository !== manifest.repository || value.consumer?.repository !== manifest.session?.repository || value.consumer?.repository !== manifest.run?.repository) {
+    add("page_evidence_repository_mismatch", "conformance, page session, manifest, and run repositories must agree");
+  }
+  if (value.consumer?.revision !== manifest.revision || value.consumer?.revision !== manifest.session?.revision || value.consumer?.revision !== manifest.run?.revision) {
+    add("page_evidence_revision_mismatch", "conformance, page session, manifest, and run revisions must agree");
+  }
+  if (typeof manifest.review_by !== "string" || manifest.review_by.length === 0) add("page_evidence_review_by_required", "page evidence manifest requires review_by");
+
+  const pageScenarioById = new Map((Array.isArray(manifest.scenarios) ? manifest.scenarios : []).map((scenario) => [scenario.id, scenario]));
+  const manifestDirectory = value.page_evidence.manifest.split("/").slice(0, -1).join("/");
+  for (const scenario of browserScenarios) {
+    if (scenario.source_digest !== manifest.session?.source?.sha256) add("page_evidence_source_mismatch", `browser scenario ${scenario.id} source digest must equal the page session source digest`);
+    if (scenario.session_id !== manifest.session?.session_id) add("page_evidence_session_mismatch", `browser scenario ${scenario.id} session identity must equal the page session`);
+    if (scenario.run_id !== manifest.run?.id) add("page_evidence_run_mismatch", `browser scenario ${scenario.id} run identity must equal the page run`);
+    const runnerPath = pageScenarioById.get(scenario.id)?.runner_result?.path;
+    if (scenario.result_artifact !== (runnerPath ? `${manifestDirectory}/${runnerPath}` : undefined)) add("page_evidence_result_artifact_mismatch", `browser scenario ${scenario.id} result artifact must equal its page runner result`);
+  }
+
+  const dimensions = isPlainObject(value.migration_dimensions) ? Object.values(value.migration_dimensions) : [];
+  for (const scenarioId of dimensions.flatMap((dimension) => dimension?.status === "applicable" && Array.isArray(dimension.scenario_ids) ? dimension.scenario_ids : [])) {
+    if (scenarioById.get(scenarioId)?.evidence_method === "browser" && !intendedIds?.includes(scenarioId)) add("page_evidence_dimension_scenario_missing", `browser scenario ${scenarioId} used by an applicable dimension is absent from page intent`);
+  }
+  for (const scenarioId of (Array.isArray(value.adoption_mappings) ? value.adoption_mappings : []).flatMap((mapping) => Array.isArray(mapping?.scenario_ids) ? mapping.scenario_ids : [])) {
+    if (scenarioById.get(scenarioId)?.evidence_method === "browser" && !intendedIds?.includes(scenarioId)) add("page_evidence_adoption_scenario_missing", `browser scenario ${scenarioId} used by an adoption mapping is absent from page intent`);
   }
   return uniqueFindings(findings);
 }
