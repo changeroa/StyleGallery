@@ -6,7 +6,7 @@ description: Rules coding agents must follow when editing this governed multi-do
 
 # Agent Instructions
 
-This repository is StyleGallery: a governed gallery with Layout, Motion, Design Engineering, and Platform Guides domains. Read [StyleGallery Domains](DOMAINS.md) before adding a domain, changing a domain boundary, or adapting an external source.
+This repository is StyleGallery: a governed gallery with Layout, Motion, Design Engineering, Game UI, and Platform Guides domains. Read [StyleGallery Domains](DOMAINS.md) before adding a domain, changing a domain boundary, or adapting an external source.
 
 Before editing generated artifacts, validators, lifecycle state, or ownership policy, read [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md).
 
@@ -30,7 +30,7 @@ Before editing generated artifacts, validators, lifecycle state, or ownership po
 - Make scroll responsibility obvious in both class names and CSS.
 - Keep decorative styling out of reusable pattern CSS.
 
-The remaining pattern, CSS, naming, token, checklist, and verification rules apply to the Layout domain. Motion, Design Engineering, and Platform Guides documents may discuss product-layer behavior, but they do not authorize decorative or motion properties in reusable Layout pattern CSS.
+The remaining pattern, CSS, naming, token, checklist, and verification rules apply to the Layout domain. Non-Layout domain documents may discuss product-layer behavior, but they do not authorize decorative or motion properties in reusable Layout pattern CSS.
 
 ## Pattern Boundary Gate
 

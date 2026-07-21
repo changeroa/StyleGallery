@@ -19,8 +19,16 @@ export function stripFencedCodeBlocks(content) {
   return kept.join("\n");
 }
 
+export function stripHtmlComments(content) {
+  return content.replace(/<!--[\s\S]*?(?:-->|$)/g, "");
+}
+
+export function structuralMarkdown(content) {
+  return stripFencedCodeBlocks(stripHtmlComments(content));
+}
+
 export function markdownLinkDestinations(content) {
-  const body = stripFencedCodeBlocks(content);
+  const body = structuralMarkdown(content);
   const destinations = [];
   const inline = /!?\[[^\]]*\]\(\s*<?([^\s)>]+)>?(?:\s+[^)]*)?\)/g;
   const reference = /^ {0,3}\[[^\]]+\]:\s*<?([^\s>]+)>?(?:\s+.*)?$/gm;

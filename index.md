@@ -4,7 +4,7 @@ okf_version: "0.1"
 
 # StyleGallery
 
-StyleGallery is an OKF-style knowledge bundle organized into governed interface-knowledge domains. Existing Layout paths remain canonical while Motion, Design Engineering, and Platform Guides own separate product and reference boundaries.
+StyleGallery is an OKF-style knowledge bundle organized into governed interface-knowledge domains. Existing Layout paths remain canonical while Motion, Design Engineering, Game UI, and Platform Guides own separate product and reference boundaries.
 
 Primary role: OKF bundle map.
 
@@ -14,6 +14,7 @@ Primary role: OKF bundle map.
 - [Layout](layout/index.md) - Existing spatial patterns, recipes, planning guides, and layout quality routes.
 - [Motion](motion/index.md) - Motion terminology, review workflow, and evidence-bounded practice reference.
 - [Design Engineering](design-engineering/index.md) - Product-layer interface-craft decisions and verification questions.
+- [Game UI](game-ui/index.md) - Game-interface classification, hierarchy, reference records, and named engine implementation guides.
 - [Platform Guides](platform-guides/index.md) - Bounded comparative references for named platforms.
 - [Consumer reference](consumer-reference/index.md) - Shared non-domain receiver contract for declared repository-local JSON records or reasoned non-applicability.
 - [Repository guide](README.md) - StyleGallery domain routes, shared policy, and Layout authoring principles.
