@@ -6,6 +6,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "audit:evidence": "node scripts/audit-evidence-freshness.mjs",
     "build": "node scripts/build-reference-artifacts.mjs --adapter style-dictionary --fail-on-warning --json",
     "create:component-state-session": "node scripts/create-component-state-session.mjs",
     "test": "node scripts/test-reference-adapters.mjs --json",
