@@ -85,6 +85,7 @@ Implementation handoff:
 - Which viewport, content-stress, accessibility, and visual-evidence checks must pass before shipping?
 - Consumer reference: `not_applicable`.
 - Consumer reference reason: This blank planning template declares no consumer-specific reference record.
+- Consumer migration conformance: omit for ordinary work; for an elected migration method, use `declared` plus one normalized consumer-local JSON record path.
 
 ## Minimum Required Fields By Use Case
 

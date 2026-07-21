@@ -43,6 +43,7 @@ const runtimeCases = Object.freeze([
   ["forged-noop-result", "runtime_command_result_missing"],
   ["github-repository-spoof", "consumer_repository_mismatch", { GITHUB_REPOSITORY: "example/spoof" }],
 ]);
+const documentedLifecycleCase = "documented-page-evidence-lifecycle";
 
 function parseArguments(argv) {
   const options = { caseName: undefined, json: false };
@@ -197,6 +198,23 @@ function mutatedRuntimeRecord(name, source, fixture) {
   else if (name === "github-repository-spoof") value.consumer.repository = "example/spoof";
   else throw new Error(`unknown runtime fixture case ${name}`);
   return value;
+}
+
+function documentedLifecycleIsExecutable() {
+  const document = fs.readFileSync(path.join(repositoryRoot, "design-engineering", "consumer-migration-readiness.md"), "utf8");
+  const start = document.indexOf("## Verification Contract");
+  const end = document.indexOf("## Source, License, And Attribution");
+  const verification = document.slice(start, end);
+  return [
+    "create-page-evidence-session.mjs",
+    "finalize-page-evidence.mjs",
+    "validate-consumer-conformance.mjs",
+    "--root <consumer-root>",
+    "--record <record.json>",
+    "--artifact-root <artifact-root>",
+    "--runner-result <runner-result.json>",
+    "--review-by <RFC3339-date-time>",
+  ].every((fragment) => verification.includes(fragment));
 }
 
 function mutatedRecord(name, source) {
@@ -375,10 +393,15 @@ try {
     const ok = child.status !== 0 && codes.includes("runtime_command_result_missing") && child.output.checkedRuntimeCommands === 0;
     results.push({ actual: { checkedRuntimeCommands: child.output.checkedRuntimeCommands, codes, status: child.status }, expected: "oversized command result rejected before read", name: "oversized-command-result", ok });
   }
+  if (selected === "all" || selected === documentedLifecycleCase) {
+    const actual = documentedLifecycleIsExecutable();
+    results.push({ actual, expected: true, name: documentedLifecycleCase, ok: actual });
+  }
   const knownCase = selected === "all"
     || selected === "valid-migration"
     || selected === "valid-runtime-proof"
     || selected === "stale-template-rebound"
+    || selected === documentedLifecycleCase
     || selected === "child-process-denied-cleanup"
     || selected === "timed-out-command-cleanup"
     || selected === "permission-override-denied"

@@ -25,7 +25,7 @@ This manifest is the source of truth for top-level StyleGallery domains. A domai
 | --- | --- | --- |
 | Layout | `layout/index.md` | Existing `GUIDE.md`, Layout-specific `guides/*.md`, and `recipes/*.md`; generated `patterns/**/*.md` and `CATALOG.md` remain at current paths. Shared `quality/**/*.md` infrastructure governs every domain without becoming a Layout leaf. |
 | Motion | `motion/index.md` | `motion/vocabulary.md`, `motion/review-workflow.md`, `motion/practice-reference.md` |
-| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md` |
+| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/consumer-migration-readiness.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md` |
 | Platform Guides | `platform-guides/index.md` | `platform-guides/apple-interaction.md` |
 
 ## Shared Non-Domain Infrastructure
@@ -42,6 +42,8 @@ All five new domain leaves are independent method rewrites inspired by [emilkowa
 - Apple/WWDC-derived expression and quotations attributed to other authors, including the Paul Graham quotation noted during review, are excluded.
 - If recognizable upstream expression is added later, preserve the full upstream MIT notice and record the copied material separately before merge.
 - Tracked repository documents must not depend on `.omo/`; stable upstream blob links and tracked repository contracts carry contributor-facing provenance.
+
+`design-engineering/consumer-migration-readiness.md` is the separately declared StyleGallery-local leaf. It uses `provenance_kind: local`, carries no external source fields, and remains experimental. Its presence does not change the external-adaptation inventory or make its consumer-local method universal policy.
 
 ## Promotion And Staleness
 

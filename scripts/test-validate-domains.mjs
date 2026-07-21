@@ -133,7 +133,7 @@ const baseFiles = {
     "| --- | --- | --- |",
     "| Layout | `layout/index.md` | Existing Layout corpus. |",
     "| Motion | `motion/index.md` | `motion/vocabulary.md`, `motion/review-workflow.md`, `motion/practice-reference.md` |",
-    "| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md` |",
+    "| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/consumer-migration-readiness.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md` |",
     "| Platform Guides | `platform-guides/index.md` | `platform-guides/apple-interaction.md` |",
     "",
     `Source snapshot \`${revision}\`.`,
@@ -157,8 +157,9 @@ const baseFiles = {
   "motion/vocabulary.md": leafPage({ title: "Motion Vocabulary", domain: "motion", sourcePath: "skills/animation-vocabulary/SKILL.md", parent: "index.md", next: "review-workflow.md" }),
   "motion/review-workflow.md": leafPage({ title: "Motion Review Workflow", domain: "motion", sourcePath: "skills/review-animations/SKILL.md", parent: "index.md", next: "practice-reference.md" }),
   "motion/practice-reference.md": leafPage({ title: "Motion Practice Reference", domain: "motion", sourcePath: "skills/review-animations/STANDARDS.md", parent: "index.md", next: "../design-engineering/index.md" }),
-  "design-engineering/index.md": indexPage("Design Engineering", [["Interface Craft", "interface-craft.md"], ["Reference Profiles", "reference-profiles/index.md"]]),
+  "design-engineering/index.md": indexPage("Design Engineering", [["Interface Craft", "interface-craft.md"], ["Consumer Migration Readiness", "consumer-migration-readiness.md"], ["Reference Profiles", "reference-profiles/index.md"]]),
   "design-engineering/interface-craft.md": leafPage({ title: "Interface Craft", domain: "design-engineering", sourcePath: "skills/emil-design-eng/SKILL.md", parent: "index.md", next: "../platform-guides/index.md" }),
+  [localLeafPath]: localLeaf,
   "design-engineering/reference-profiles/index.md": "# Reference Profiles\n\nDomain classification: design-engineering.\n\n- [Governed Local Profiles](governed-local/index.md)\n\nParent: [Design Engineering](../index.md).\nNext: [External adaptation](external-adaptation/index.md).\n",
   "design-engineering/reference-profiles/governed-local/index.md": "# Governed Local Profiles\n\nParent: [Reference Profiles](../index.md).\nNext: [External adaptation](../external-adaptation/index.md).\n",
   "design-engineering/reference-profiles/external-adaptation/index.md": "# External Adaptation\n\nSynthetic validator coverage only; no durable adopter record.\n\nParent: [Reference Profiles](../index.md).\nNext: [Platform Guides](../../../platform-guides/index.md).\n",
@@ -226,14 +227,6 @@ function writeFixture(testCase) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), `stylegallery-domains-${testCase.name}-`));
   const omitted = new Set(testCase.omit ?? []);
   const entries = { ...baseFiles };
-  if (testCase.registry) {
-    entries[localLeafPath] = localLeaf;
-    entries["DOMAINS.md"] = entries["DOMAINS.md"].replace(
-      "`design-engineering/interface-craft.md`, `design-engineering/reference-profiles/index.md`",
-      "`design-engineering/interface-craft.md`, `design-engineering/consumer-migration-readiness.md`, `design-engineering/reference-profiles/index.md`",
-    );
-    entries["design-engineering/index.md"] = indexPage("Design Engineering", [["Interface Craft", "interface-craft.md"], ["Consumer Migration Readiness", "consumer-migration-readiness.md"], ["Reference Profiles", "reference-profiles/index.md"]]);
-  }
   const mutations = testCase.mutations ?? (testCase.mutate ? [testCase.mutate] : []);
   for (const [relative, before, after] of mutations) entries[relative] = entries[relative].replace(before, after);
   if (testCase.add) {

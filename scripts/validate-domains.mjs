@@ -31,6 +31,7 @@ export const canonicalDomains = [
     label: "Design Engineering",
     leaves: [
       { path: "design-engineering/interface-craft.md", provenance: "external", sourcePath: "skills/emil-design-eng/SKILL.md" },
+      { path: "design-engineering/consumer-migration-readiness.md", provenance: "local" },
     ],
     referenceDocuments,
   },

@@ -16,6 +16,7 @@ Primary role: OKF bundle map.
 - [Design Engineering](design-engineering/index.md) - Product-layer interface-craft decisions and verification questions.
 - [Platform Guides](platform-guides/index.md) - Bounded comparative references for named platforms.
 - [Consumer reference](consumer-reference/index.md) - Shared non-domain receiver contract for declared repository-local JSON records or reasoned non-applicability.
+- [Consumer migration readiness](design-engineering/consumer-migration-readiness.md) - Experimental Design Engineering method for consumer-owned conformance, runtime proof, and source-bound page evidence.
 - [Repository guide](README.md) - StyleGallery domain routes, shared policy, and Layout authoring principles.
 - [Layout planning guide](GUIDE.md) - Pre-design entry point for choosing and composing StyleGallery Layout patterns.
 - [Webpage generation workflow](guides/webpage-generation-workflow.md) - Intake-to-implementation workflow for homepage and webpage creation.
@@ -29,4 +30,5 @@ Primary role: OKF bundle map.
 - [Layout pattern catalog](CATALOG.md) - Generated index of Layout-domain patterns.
 - [Pattern categories](patterns/index.md) - Category index for generated layout patterns.
 - [Quality gates](quality/index.md) - Principle-backed gates for admissible layout and design evidence claims.
+- [Consumer migration evidence gate](quality/gates/consumer-migration-evidence.md) - Blocking contract for declared migration evidence.
 - [Update log](log.md) - Bundle update history.
