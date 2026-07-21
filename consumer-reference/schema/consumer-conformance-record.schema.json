@@ -1,0 +1,322 @@
+{
+  "$defs": {
+    "adoptionMapping": {
+      "additionalProperties": false,
+      "properties": {
+        "consumer_target": { "$ref": "#/$defs/consumerTarget" },
+        "debt": {
+          "items": { "$ref": "#/$defs/debt" },
+          "type": "array"
+        },
+        "deviations": {
+          "items": { "$ref": "#/$defs/deviation" },
+          "type": "array"
+        },
+        "local_decision": { "$ref": "#/$defs/localDecision" },
+        "scenario_ids": { "$ref": "#/$defs/scenarioIds" },
+        "stylegallery": { "$ref": "#/$defs/stylegallerySource" }
+      },
+      "required": [
+        "consumer_target",
+        "debt",
+        "deviations",
+        "local_decision",
+        "scenario_ids",
+        "stylegallery"
+      ],
+      "type": "object"
+    },
+    "consumerTarget": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "identity": {
+              "pattern": "^[A-Z][A-Za-z0-9]*(?:[._/-][A-Za-z0-9_-]+)*$",
+              "type": "string"
+            },
+            "kind": { "const": "component" }
+          },
+          "required": ["identity", "kind"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "identity": {
+              "pattern": "^(?:[.#][A-Za-z_][A-Za-z0-9_-]*|\\[[A-Za-z_:][-A-Za-z0-9_:.]*(?:=[^\\]\\r\\n]+)?\\])$",
+              "type": "string"
+            },
+            "kind": { "const": "selector" }
+          },
+          "required": ["identity", "kind"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "identity": { "$ref": "#/$defs/repositoryPath" },
+            "kind": { "const": "module" }
+          },
+          "required": ["identity", "kind"],
+          "type": "object"
+        }
+      ]
+    },
+    "debt": {
+      "additionalProperties": false,
+      "properties": {
+        "owner": { "minLength": 1, "type": "string" },
+        "review_by": { "format": "date-time", "type": "string" },
+        "review_trigger": { "$ref": "#/$defs/sentence" },
+        "summary": { "$ref": "#/$defs/sentence" }
+      },
+      "required": ["owner", "review_by", "review_trigger", "summary"],
+      "type": "object"
+    },
+    "deviation": {
+      "additionalProperties": false,
+      "properties": {
+        "reason": { "$ref": "#/$defs/sentence" },
+        "summary": { "$ref": "#/$defs/sentence" }
+      },
+      "required": ["reason", "summary"],
+      "type": "object"
+    },
+    "dimension": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "scenario_ids": { "$ref": "#/$defs/scenarioIds" },
+            "status": { "const": "applicable" }
+          },
+          "required": ["scenario_ids", "status"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "reason": { "$ref": "#/$defs/sentence" },
+            "status": { "const": "not_applicable" }
+          },
+          "required": ["reason", "status"],
+          "type": "object"
+        }
+      ]
+    },
+    "jsonPath": {
+      "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?![A-Za-z][A-Za-z0-9+.-]*:)(?!.*\\/$)[^\\\\?#]+\\.json$",
+      "type": "string"
+    },
+    "localDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "decision": { "$ref": "#/$defs/sentence" },
+        "identity": {
+          "minLength": 1,
+          "pattern": "^\\S(?:.*\\S)?$",
+          "type": "string"
+        },
+        "kind": { "enum": ["token", "unit"] }
+      },
+      "required": ["decision", "identity", "kind"],
+      "type": "object"
+    },
+    "pageEvidence": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "manifest": { "$ref": "#/$defs/jsonPath" },
+            "status": { "const": "applicable" }
+          },
+          "required": ["manifest", "status"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "reason": { "$ref": "#/$defs/sentence" },
+            "status": { "const": "not_applicable" }
+          },
+          "required": ["reason", "status"],
+          "type": "object"
+        }
+      ]
+    },
+    "repositoryPath": {
+      "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?![A-Za-z][A-Za-z0-9+.-]*:)(?!.*\\/$)[^\\\\?#]+$",
+      "type": "string"
+    },
+    "scenario": {
+      "additionalProperties": false,
+      "properties": {
+        "assertions": {
+          "items": { "minLength": 1, "type": "string" },
+          "minItems": 1,
+          "type": "array"
+        },
+        "command": { "minLength": 1, "type": "string" },
+        "evidence_method": { "enum": ["unit", "integration", "browser"] },
+        "exit_code": { "const": 0 },
+        "id": { "$ref": "#/$defs/slug" },
+        "observable_actions": {
+          "items": { "minLength": 1, "type": "string" },
+          "minItems": 1,
+          "type": "array"
+        },
+        "result_artifact": { "$ref": "#/$defs/jsonPath" },
+        "run_id": { "minLength": 1, "pattern": "^\\S+$", "type": "string" },
+        "session_id": { "minLength": 1, "pattern": "^\\S+$", "type": "string" },
+        "source_digest": { "$ref": "#/$defs/sha256" }
+      },
+      "required": [
+        "assertions",
+        "command",
+        "evidence_method",
+        "exit_code",
+        "id",
+        "observable_actions",
+        "result_artifact",
+        "run_id",
+        "session_id",
+        "source_digest"
+      ],
+      "type": "object"
+    },
+    "scenarioIds": {
+      "items": { "$ref": "#/$defs/slug" },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "sentence": {
+      "minLength": 10,
+      "pattern": "^\\S+(?:\\s+\\S+){2,}\\s*[.!?]$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "slug": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "type": "string"
+    },
+    "stylegallerySource": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor": {
+          "pattern": "^#[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "path": { "$ref": "#/$defs/repositoryPath" },
+        "revision": {
+          "pattern": "^[a-f0-9]{40}$",
+          "type": "string"
+        }
+      },
+      "required": ["anchor", "path", "revision"],
+      "type": "object"
+    }
+  },
+  "$id": "https://stylegallery.example/consumer-reference/schema/consumer-conformance-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "adoption_mappings": {
+      "items": { "$ref": "#/$defs/adoptionMapping" },
+      "minItems": 1,
+      "type": "array"
+    },
+    "claim_boundary": {
+      "additionalProperties": false,
+      "properties": {
+        "certifies_accessibility": { "const": false },
+        "certifies_product_correctness": { "const": false },
+        "scope": { "$ref": "#/$defs/sentence" }
+      },
+      "required": ["certifies_accessibility", "certifies_product_correctness", "scope"],
+      "type": "object"
+    },
+    "consumer": {
+      "additionalProperties": false,
+      "properties": {
+        "relevant_sources": {
+          "items": { "$ref": "#/$defs/repositoryPath" },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "repository": {
+          "minLength": 3,
+          "pattern": "^\\S+/\\S+$",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[a-f0-9]{40}$",
+          "type": "string"
+        }
+      },
+      "required": ["relevant_sources", "repository", "revision"],
+      "type": "object"
+    },
+    "id": { "$ref": "#/$defs/slug" },
+    "migration_dimensions": {
+      "additionalProperties": false,
+      "properties": {
+        "action_parity": { "$ref": "#/$defs/dimension" },
+        "atomic_batch_behavior": { "$ref": "#/$defs/dimension" },
+        "behavior_inventory": { "$ref": "#/$defs/dimension" },
+        "contract_precedence": { "$ref": "#/$defs/dimension" },
+        "defaults_tri_state_mapping": { "$ref": "#/$defs/dimension" },
+        "direct_mutation": { "$ref": "#/$defs/dimension" },
+        "exact_time_boundary": { "$ref": "#/$defs/dimension" },
+        "field_parity": { "$ref": "#/$defs/dimension" },
+        "indirect_mutation": { "$ref": "#/$defs/dimension" },
+        "persistence_round_trip": { "$ref": "#/$defs/dimension" },
+        "reset_boundary": { "$ref": "#/$defs/dimension" },
+        "route_parity": { "$ref": "#/$defs/dimension" },
+        "state_transitions": { "$ref": "#/$defs/dimension" }
+      },
+      "required": [
+        "action_parity",
+        "atomic_batch_behavior",
+        "behavior_inventory",
+        "contract_precedence",
+        "defaults_tri_state_mapping",
+        "direct_mutation",
+        "exact_time_boundary",
+        "field_parity",
+        "indirect_mutation",
+        "persistence_round_trip",
+        "reset_boundary",
+        "route_parity",
+        "state_transitions"
+      ],
+      "type": "object"
+    },
+    "page_evidence": { "$ref": "#/$defs/pageEvidence" },
+    "record_kind": { "const": "consumer_migration_conformance" },
+    "scenarios": {
+      "items": { "$ref": "#/$defs/scenario" },
+      "minItems": 1,
+      "type": "array"
+    },
+    "schema_version": { "const": "1.0" }
+  },
+  "required": [
+    "adoption_mappings",
+    "claim_boundary",
+    "consumer",
+    "id",
+    "migration_dimensions",
+    "page_evidence",
+    "record_kind",
+    "scenarios",
+    "schema_version"
+  ],
+  "title": "Consumer migration conformance record",
+  "type": "object"
+}

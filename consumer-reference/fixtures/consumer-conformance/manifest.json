@@ -1,0 +1,38 @@
+{
+  "id": "consumer-conformance-fixture-inventory",
+  "invalid_cases": [
+    {
+      "expected_code": "migration_dimension_required",
+      "name": "omitted-dimension"
+    },
+    {
+      "expected_code": "migration_dimension_scenario_required",
+      "name": "applicable-without-scenario"
+    },
+    {
+      "expected_code": "runtime_evidence_method_invalid",
+      "name": "source-regex-runtime-proof"
+    },
+    {
+      "expected_code": "adoption_scenario_unknown",
+      "name": "orphan-adoption-scenario"
+    },
+    {
+      "expected_code": "adoption_consumer_target_invalid",
+      "name": "malformed-local-target"
+    },
+    {
+      "expected_code": "adoption_stylegallery_revision_unpinned",
+      "name": "unpinned-stylegallery-revision"
+    },
+    {
+      "expected_code": "adoption_debt_incomplete",
+      "name": "debt-without-lifecycle"
+    }
+  ],
+  "schema_record": "consumer-reference/schema/consumer-conformance-record.schema.json",
+  "schema_version": "1.0",
+  "valid_records": [
+    "valid-migration.json"
+  ]
+}

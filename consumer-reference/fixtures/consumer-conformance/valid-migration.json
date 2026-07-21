@@ -1,0 +1,137 @@
+{
+  "adoption_mappings": [
+    {
+      "consumer_target": {
+        "identity": "GalleryShell",
+        "kind": "component"
+      },
+      "debt": [],
+      "deviations": [],
+      "local_decision": {
+        "decision": "Keep the spacing value consumer-local and map only the layout unit role.",
+        "identity": "--space-shell-gap",
+        "kind": "token"
+      },
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "stylegallery": {
+        "anchor": "#implementation-handoff",
+        "path": "recipes/app-shell/index.md",
+        "revision": "2222222222222222222222222222222222222222"
+      }
+    }
+  ],
+  "claim_boundary": {
+    "certifies_accessibility": false,
+    "certifies_product_correctness": false,
+    "scope": "This record binds migration scenarios to consumer-owned runtime evidence only."
+  },
+  "consumer": {
+    "relevant_sources": [
+      "src/app.js",
+      "src/styles.css"
+    ],
+    "repository": "example/consumer-web",
+    "revision": "1111111111111111111111111111111111111111"
+  },
+  "id": "example-consumer-migration",
+  "migration_dimensions": {
+    "action_parity": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "atomic_batch_behavior": {
+      "reason": "The migrated surface exposes no batch operation in this scope.",
+      "status": "not_applicable"
+    },
+    "behavior_inventory": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "contract_precedence": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "defaults_tri_state_mapping": {
+      "reason": "The migrated fields do not have defaults or tri-state semantics.",
+      "status": "not_applicable"
+    },
+    "direct_mutation": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "exact_time_boundary": {
+      "reason": "The migrated behavior has no exact-time scheduling boundary.",
+      "status": "not_applicable"
+    },
+    "field_parity": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "indirect_mutation": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "persistence_round_trip": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "reset_boundary": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "route_parity": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "state_transitions": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    }
+  },
+  "page_evidence": {
+    "reason": "Page evidence is supplied by the consumer during end-to-end composition.",
+    "status": "not_applicable"
+  },
+  "record_kind": "consumer_migration_conformance",
+  "scenarios": [
+    {
+      "assertions": [
+        "The drawer state and persisted route data match after a reload."
+      ],
+      "command": "npm run test:migration -- --reporter=json",
+      "evidence_method": "browser",
+      "exit_code": 0,
+      "id": "migration-round-trip",
+      "observable_actions": [
+        "Open the gallery route, toggle the drawer, save, and reload."
+      ],
+      "result_artifact": "evidence/results/migration-round-trip.json",
+      "run_id": "run-20260721-001",
+      "session_id": "session-20260721-001",
+      "source_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "schema_version": "1.0"
+}
