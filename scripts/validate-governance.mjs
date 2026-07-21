@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { componentStateWorkflowFailures } from "./component-state-workflow-contract.mjs";
+import { consumerEvidenceGovernanceFailures } from "./consumer-evidence-governance-contract.mjs";
 import { referenceOwnershipFailures } from "./governance-matrix-contract.mjs";
 import { immutableActionPins, requiredCodeowners, sentinelProvenanceClauses } from "./governance-policy-contract.mjs";
 import { promotionGovernanceFailures } from "./promotion-governance-contract.mjs";
@@ -53,6 +54,10 @@ function requireGovernanceMatrix() {
     "Consumer reference contract",
     "Governed local reference profiles",
     "Component-state evidence matrices",
+    "Consumer migration conformance",
+    "Consumer page-evidence lifecycle",
+    "Explicit evidence freshness schedule",
+    "Deterministic consumer browser conformance",
     "Shared promotion policy",
     "Proposed Chromium sentinel",
     "Domain manifest and scope decision",
@@ -100,8 +105,6 @@ function requireOwnership() {
 }
 
 function requireStalenessDecision() {
-  requireIncludes("GOVERNANCE.md", "scheduled_stale_audit: deferred");
-  recommendIncludes("GOVERNANCE.md", "Decision: no scheduled stale-content workflow yet.");
   requireIncludes("GOVERNANCE.md", "Audit trigger:");
   requireIncludes("GOVERNANCE.md", "node scripts/validate-links.mjs --json");
 }
@@ -209,6 +212,12 @@ requireLifecycleStates();
 requireOwnership();
 requireStalenessDecision();
 requireCiwiring();
+failures.push(...consumerEvidenceGovernanceFailures({
+  evidence: read("quality/evidence/executable-evidence.md"),
+  freshnessWorkflow: read(".github/workflows/evidence-freshness.yml"),
+  governance: read("GOVERNANCE.md"),
+  validationWorkflow: read(".github/workflows/validate.yml"),
+}));
 requireComponentStateCiIsolation();
 requireImmutableActions();
 requireRootLinks();
