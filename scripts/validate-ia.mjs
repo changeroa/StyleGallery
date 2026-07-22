@@ -27,6 +27,25 @@ const nestedIndexes = [
   "design-engineering/reference-profiles/governed-local/index.md",
   "design-engineering/reference-profiles/external-adaptation/index.md",
 ];
+const governedProfileLinks = [
+  "[Editorial profile](editorial/profile.json)",
+  "[Editorial state matrix](editorial/generated/state-matrix.md)",
+  "[Editorial keyboard matrix](editorial/generated/keyboard-matrix.md)",
+  "[Editorial evidence coverage](editorial/generated/evidence-coverage.md)",
+  "[Terminal profile](terminal/profile.json)",
+  "[Terminal state matrix](terminal/generated/state-matrix.md)",
+  "[Terminal keyboard matrix](terminal/generated/keyboard-matrix.md)",
+  "[Terminal evidence coverage](terminal/generated/evidence-coverage.md)",
+];
+const migrationRoutes = [
+  ["README.md", "[Consumer Migration Readiness](design-engineering/consumer-migration-readiness.md)"],
+  ["index.md", "[Consumer migration readiness](design-engineering/consumer-migration-readiness.md)"],
+  ["design-engineering/index.md", "[Consumer Migration Readiness](consumer-migration-readiness.md)"],
+  ["consumer-reference/index.md", "[Consumer Migration Readiness](../design-engineering/consumer-migration-readiness.md)"],
+  ["quality/index.md", "[Consumer migration evidence gate](gates/consumer-migration-evidence.md)"],
+  ["quality/gates/index.md", "[Consumer migration evidence gate](consumer-migration-evidence.md)"],
+  ["quality/evidence/index.md", "[Consumer migration evidence](consumer-migration.md)"],
+];
 
 function read(relative) {
   const target = path.join(root, relative);
@@ -68,6 +87,10 @@ function requireRootRoles() {
   requireIncludes("design-engineering/index.md", "[Reference Profiles](reference-profiles/index.md)");
   requireIncludes("design-engineering/reference-profiles/index.md", "[External Adaptation](external-adaptation/index.md)");
   requireIncludes("design-engineering/reference-profiles/index.md", "[Governed Local Profiles](governed-local/index.md)");
+  for (const link of governedProfileLinks) {
+    requireIncludes("design-engineering/reference-profiles/governed-local/index.md", link);
+  }
+  for (const [relative, link] of migrationRoutes) requireIncludes(relative, link);
 }
 
 function requireTaskRoutes() {
@@ -110,4 +133,4 @@ if (json) {
   console.error(result.failures.join("\n"));
 }
 
-process.exit(result.ok ? 0 : 1);
+process.exitCode = result.ok ? 0 : 1;

@@ -5,8 +5,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const builder = path.join(repositoryRoot, "scripts", "build-reference-artifacts.mjs");
 const validator = path.join(repositoryRoot, "scripts", "validate-reference-artifacts.mjs");
 const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference/schema/portable-tokens.schema.json"), "utf8"));
@@ -25,7 +26,7 @@ function codes(output) {
     : [];
 }
 
-const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-reference-adapter-"));
+const tempRoot = fs.mkdtempSync(path.join(repositoryRoot, ".tmp-stylegallery-reference-adapter-"));
 const results = [];
 
 function run(command, args) {
@@ -109,6 +110,9 @@ try {
   const invalidTokenDescription = path.join(tempRoot, "invalid-token-description.json");
   fs.writeFileSync(invalidTokenDescription, '{"space":{"$type":"dimension","small":{"$description":42,"$value":{"value":1,"unit":"px"}}}}\n');
   recordRejected("invalid_token_description", run(builder, ["--source", invalidTokenDescription, "--output", output, "--manifest", manifest, "--fail-on-warning"]), "token_description_invalid");
+  const duplicateSourceProperty = path.join(tempRoot, "invalid-duplicate-source-property.json");
+  fs.writeFileSync(duplicateSourceProperty, '{"space":{"$type":"dimension","$type":"dimension","small":{"$value":{"value":1,"unit":"px"}}}}\n');
+  recordRejected("duplicate_source_property", run(builder, ["--source", duplicateSourceProperty, "--output", output, "--manifest", manifest, "--fail-on-warning"]), "token_json_invalid");
   for (const [name, sourceText] of [
     ["constructor", '{"constructor":{"$type":"dimension","small":{"$value":{"value":1,"unit":"px"}}}}\n'],
     ["prototype", '{"prototype":{"$type":"dimension","small":{"$value":{"value":1,"unit":"px"}}}}\n'],
@@ -125,6 +129,42 @@ try {
   recordAccepted("artifact_baseline", baselineBuild);
   const baselineCss = fs.readFileSync(output, "utf8");
   const baselineManifest = fs.readFileSync(manifest, "utf8");
+  fs.writeFileSync(manifest, baselineManifest.replace('"schemaVersion": "1.0",', '"schemaVersion": "1.0",\n  "schemaVersion": "1.0",'));
+  recordRejected("duplicate_manifest_property", run(validator, ["--manifest", manifest]), "artifact_manifest_invalid");
+  const duplicateValidatorSource = baselineSource.replace('"$type": "color",', '"$type": "color",\n    "$type": "color",');
+  fs.writeFileSync(path.join(tempRoot, "source.json"), duplicateValidatorSource);
+  const duplicateSourceManifest = JSON.parse(baselineManifest);
+  duplicateSourceManifest.inputHash = `sha256:${crypto.createHash("sha256").update(duplicateValidatorSource).digest("hex")}`;
+  fs.writeFileSync(manifest, `${JSON.stringify(duplicateSourceManifest, null, 2)}\n`);
+  recordRejected("duplicate_validator_source_property", run(validator, ["--manifest", manifest]), "artifact_source_invalid");
+  fs.writeFileSync(path.join(tempRoot, "source.json"), baselineSource);
+  fs.writeFileSync(manifest, baselineManifest);
+  const symlinkSource = path.join(tempRoot, "symlink-source.json");
+  fs.symlinkSync(path.join(tempRoot, "source.json"), symlinkSource);
+  recordRejected("symlink_source", run(builder, ["--source", symlinkSource, "--output", output, "--manifest", manifest, "--fail-on-warning"]), "token_source_untrusted");
+  const realOutput = path.join(tempRoot, "real-tokens.css");
+  fs.renameSync(output, realOutput);
+  fs.symlinkSync(realOutput, output);
+  recordRejected("symlink_validator_output", run(validator, ["--manifest", manifest]), "artifact_output_untrusted");
+  recordRejected("symlink_builder_output", run(builder, ["--source", path.join(tempRoot, "source.json"), "--output", output, "--manifest", manifest, "--fail-on-warning"]), "artifact_output_untrusted");
+  fs.rmSync(output);
+  fs.renameSync(realOutput, output);
+  const realManifest = path.join(tempRoot, "real-manifest.json");
+  fs.renameSync(manifest, realManifest);
+  fs.symlinkSync(realManifest, manifest);
+  recordRejected("symlink_validator_manifest", run(validator, ["--manifest", manifest]), "artifact_manifest_untrusted");
+  recordRejected("symlink_builder_manifest", run(builder, ["--source", path.join(tempRoot, "source.json"), "--output", output, "--manifest", manifest, "--fail-on-warning"]), "artifact_manifest_untrusted");
+  fs.rmSync(manifest);
+  fs.renameSync(realManifest, manifest);
+  const outsideRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-reference-escape-"));
+  const escapedSource = path.join(outsideRoot, "source.json");
+  fs.writeFileSync(escapedSource, baselineSource);
+  recordRejected("escaped_source", run(builder, ["--source", escapedSource, "--output", output, "--manifest", manifest, "--fail-on-warning"]), "token_source_untrusted");
+  const escapedOutput = path.join(outsideRoot, "tokens.css");
+  recordRejected("escaped_output", run(builder, ["--source", path.join(tempRoot, "source.json"), "--output", escapedOutput, "--manifest", manifest, "--fail-on-warning"]), "artifact_output_untrusted");
+  const escapedManifest = path.join(outsideRoot, "manifest.json");
+  recordRejected("escaped_manifest", run(builder, ["--source", path.join(tempRoot, "source.json"), "--output", output, "--manifest", escapedManifest, "--fail-on-warning"]), "artifact_manifest_untrusted");
+  fs.rmSync(outsideRoot, { force: true, recursive: true });
   const artifactCases = [
     ["no_output", "artifact_output_missing", () => fs.rmSync(output)],
     ["zero_count", "artifact_zero_count", (item) => { item.sourceCount = 0; item.outputCount = 0; item.declarations = []; }],
@@ -146,7 +186,7 @@ try {
     fs.writeFileSync(output, baselineCss);
     const item = JSON.parse(baselineManifest);
     mutate(item);
-    if (fs.existsSync(output)) fs.writeFileSync(manifest, `${JSON.stringify(item, null, 2)}\n`);
+    fs.writeFileSync(manifest, `${JSON.stringify(item, null, 2)}\n`);
     recordRejected(name, run(validator, ["--manifest", manifest]), expected);
   }
 } finally {
@@ -156,4 +196,4 @@ try {
 const failures = results.filter((result) => !result.ok).map((result) => `missing_semantic:${result.name}:${result.expected}`);
 const report = { failures, ok: failures.length === 0, results };
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

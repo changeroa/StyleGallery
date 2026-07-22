@@ -16,6 +16,12 @@
 /consumer-reference/ @changeroa
 /consumer-reference/adapters/ @changeroa
 /consumer-reference/generated/ @changeroa
+/consumer-reference/baselines/ @changeroa
+/consumer-reference/policies/ @changeroa
+/consumer-reference/fixtures/promotion/ @changeroa
+/consumer-reference/schema/promotion-rfc.schema.json @changeroa
+/tests/ @changeroa
+/playwright.config.mjs @changeroa
 
 /GUIDE.md @changeroa
 /guides/ @changeroa

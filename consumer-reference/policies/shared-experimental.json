@@ -1,0 +1,37 @@
+{
+  "artifact_mode": "schema_only",
+  "boundaries": {
+    "excluded_content": ["component_skin", "imagery", "motion_character", "palette", "typography"],
+    "promoted_content": ["claim_scoped_evidence", "invariant_behavior", "invariant_semantics"]
+  },
+  "claims": {
+    "adopter_attestations": 0,
+    "promotion_occurred": false
+  },
+  "gateway": {
+    "applies_to": "invariant_eligibility_only",
+    "minimum_independent_consumers": 2,
+    "stable_numeric_threshold": null,
+    "transition": {
+      "from": "consumer_local",
+      "to": "shared_experimental"
+    }
+  },
+  "id": "shared-experimental-policy",
+  "lifecycle": {
+    "failure_actions": ["deprecate_with_migration", "maintain", "restrict", "rollback"],
+    "stable_relabel": "forbidden"
+  },
+  "normative_bypass": {
+    "categories": ["accessibility", "correctness", "security", "standards"],
+    "retains": ["compatibility", "deprecation", "migration", "owner_acceptance", "regression_proof", "rollback", "scope_control", "support_capacity"],
+    "waives": ["adoption_count"]
+  },
+  "owner": {
+    "enforcement": "placeholder",
+    "name": "Repository governance owner"
+  },
+  "review_independence": "single_account",
+  "schema_version": "1.0",
+  "status": "active"
+}

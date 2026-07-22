@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "fixture_id": "editorial-button-runtime",
+  "component_id": "button",
+  "profile_id": "editorial-reference-profile",
+  "component_record": "../components/button.component.json",
+  "state_record": "../states/button.states.json",
+  "scenarios": [
+    {
+      "id": "action-disabled-busy",
+      "semantic_mode": "action",
+      "label": "Publish unavailable",
+      "activation_key": "Enter",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    },
+    {
+      "id": "action-focused",
+      "semantic_mode": "action",
+      "label": "Publish",
+      "activation_key": "Enter",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    },
+    {
+      "id": "action-loading-busy",
+      "semantic_mode": "action",
+      "label": "Publishing",
+      "activation_key": "Enter",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    },
+    {
+      "id": "disclosure-expanded-loading",
+      "semantic_mode": "disclosure",
+      "label": "Show footnotes",
+      "activation_key": "Enter",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    },
+    {
+      "id": "toggle-focused-pressed",
+      "semantic_mode": "toggle",
+      "label": "Save article",
+      "activation_key": "Space",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    }
+  ]
+}

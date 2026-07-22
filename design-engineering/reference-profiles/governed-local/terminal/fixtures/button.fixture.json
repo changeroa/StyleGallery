@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "fixture_id": "terminal-button-runtime",
+  "component_id": "button",
+  "profile_id": "terminal-reference-profile",
+  "component_record": "../components/button.component.json",
+  "state_record": "../states/button.states.json",
+  "scenarios": [
+    {
+      "id": "action-disabled-busy",
+      "semantic_mode": "action",
+      "label": "Command unavailable",
+      "activation_key": "Enter",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    },
+    {
+      "id": "action-focused",
+      "semantic_mode": "action",
+      "label": "Run command",
+      "activation_key": "Enter",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    },
+    {
+      "id": "action-loading-busy",
+      "semantic_mode": "action",
+      "label": "Command running",
+      "activation_key": "Enter",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    },
+    {
+      "id": "disclosure-expanded-loading",
+      "semantic_mode": "disclosure",
+      "label": "Show process log",
+      "activation_key": "Enter",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    },
+    {
+      "id": "toggle-focused-pressed",
+      "semantic_mode": "toggle",
+      "label": "Pin output",
+      "activation_key": "Space",
+      "required_channels": [
+        "visual",
+        "dom",
+        "ax"
+      ]
+    }
+  ]
+}

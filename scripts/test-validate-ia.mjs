@@ -4,9 +4,20 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(root, "scripts", "validate-ia.mjs");
+const governedProfileRoutes = [
+  ["Editorial profile", "editorial/profile.json"],
+  ["Editorial state matrix", "editorial/generated/state-matrix.md"],
+  ["Editorial keyboard matrix", "editorial/generated/keyboard-matrix.md"],
+  ["Editorial evidence coverage", "editorial/generated/evidence-coverage.md"],
+  ["Terminal profile", "terminal/profile.json"],
+  ["Terminal state matrix", "terminal/generated/state-matrix.md"],
+  ["Terminal keyboard matrix", "terminal/generated/keyboard-matrix.md"],
+  ["Terminal evidence coverage", "terminal/generated/evidence-coverage.md"],
+];
 
 const baseFiles = {
   "README.md": [
@@ -24,6 +35,7 @@ const baseFiles = {
     "| [Design Engineering](design-engineering/index.md) | Design Engineering domain |",
     "| [Platform Guides](platform-guides/index.md) | Platform Guides domain |",
     "| [Consumer Reference](consumer-reference/index.md) | Shared infrastructure contract |",
+    "| [Consumer Migration Readiness](design-engineering/consumer-migration-readiness.md) | Migration method |",
     "",
     "## Task Routes",
     "",
@@ -57,6 +69,7 @@ const baseFiles = {
     "- [Design Engineering](design-engineering/index.md)",
     "- [Platform Guides](platform-guides/index.md)",
     "- [Consumer reference](consumer-reference/index.md)",
+    "- [Consumer migration readiness](design-engineering/consumer-migration-readiness.md)",
     "",
   ].join("\n"),
   "GUIDE.md": "# Guide\n\nPrimary role: planning workflow.\n",
@@ -66,21 +79,32 @@ const baseFiles = {
   "patterns/stacking/stack.md": leaf("Stack", "index.md", "../../recipes/index.md"),
   "recipes/index.md": "# Recipes\n",
   "recipes/homepage.md": leaf("Homepage", "index.md", "../quality/index.md"),
-  "quality/index.md": "# Quality\n\n## Tree-Test Findability QA\n",
-  "quality/gates/index.md": "# Gates\n",
+  "quality/index.md": "# Quality\n\n- [Consumer migration evidence gate](gates/consumer-migration-evidence.md)\n\n## Tree-Test Findability QA\n",
+  "quality/gates/index.md": "# Gates\n\n- [Consumer migration evidence gate](consumer-migration-evidence.md)\n",
   "quality/gates/layout.md": leaf("Layout", "index.md", "../evidence/index.md"),
-  "quality/evidence/index.md": "# Evidence\n",
+  "quality/gates/consumer-migration-evidence.md": leaf("Consumer Migration Evidence Gate", "index.md", "../evidence/consumer-migration.md"),
+  "quality/evidence/index.md": "# Evidence\n\n- [Consumer migration evidence](consumer-migration.md)\n",
+  "quality/evidence/consumer-migration.md": leaf("Consumer Migration Evidence", "index.md", "../../design-engineering/consumer-migration-readiness.md"),
   "layout/index.md": "# Layout\n\n- [Catalog](../CATALOG.md)\n",
   "motion/index.md": "# Motion\n\n- [Review](review.md)\n",
   "motion/review.md": leaf("Motion review", "index.md", "../design-engineering/index.md"),
-  "design-engineering/index.md": "# Design Engineering\n\n- [Craft](craft.md)\n- [Reference Profiles](reference-profiles/index.md)\n",
+  "design-engineering/index.md": "# Design Engineering\n\n- [Craft](craft.md)\n- [Consumer Migration Readiness](consumer-migration-readiness.md)\n- [Reference Profiles](reference-profiles/index.md)\n",
   "design-engineering/craft.md": leaf("Craft", "index.md", "../platform-guides/index.md"),
+  "design-engineering/consumer-migration-readiness.md": leaf("Consumer Migration Readiness", "index.md", "../quality/gates/consumer-migration-evidence.md"),
   "design-engineering/reference-profiles/index.md": "# Reference Profiles\n\n- [Governed Local Profiles](governed-local/index.md)\n- [External Adaptation](external-adaptation/index.md)\n\nParent: [Design Engineering](../index.md).\nNext: [Governed Local Profiles](governed-local/index.md).\n",
-  "design-engineering/reference-profiles/governed-local/index.md": "# Governed Local Profiles\n\nParent: [Reference Profiles](../index.md).\nNext: [External Adaptation](../external-adaptation/index.md).\n",
+  "design-engineering/reference-profiles/governed-local/index.md": [
+    "# Governed Local Profiles",
+    "",
+    ...governedProfileRoutes.map(([label, target]) => `- [${label}](${target})`),
+    "",
+    "Parent: [Reference Profiles](../index.md).",
+    "Next: [External Adaptation](../external-adaptation/index.md).",
+    "",
+  ].join("\n"),
   "design-engineering/reference-profiles/external-adaptation/index.md": "# External Adaptation\n\nParent: [Reference Profiles](../index.md).\nNext: [Platform Guides](../../../platform-guides/index.md).\n",
   "platform-guides/index.md": "# Platform Guides\n\n- [Apple](apple.md)\n",
   "platform-guides/apple.md": leaf("Apple", "index.md", "../layout/index.md"),
-  "consumer-reference/index.md": "# Consumer Reference\n\n- [Contract](contract.md)\n",
+  "consumer-reference/index.md": "# Consumer Reference\n\n- [Contract](contract.md)\n- [Consumer Migration Readiness](../design-engineering/consumer-migration-readiness.md)\n",
   "consumer-reference/contract.md": leaf("Consumer Reference Contract", "index.md", "../quality/index.md"),
 };
 
@@ -141,6 +165,13 @@ const cases = [
     },
     expect: "design-engineering/index.md: missing [Reference Profiles](reference-profiles/index.md)",
   },
+  ...governedProfileRoutes.map(([label, target]) => ({
+    name: `missing_governed_route_${target.replace(/[^a-z]+/g, "_").replace(/^_|_$/g, "")}`,
+    mutate: {
+      "design-engineering/reference-profiles/governed-local/index.md": baseFiles["design-engineering/reference-profiles/governed-local/index.md"].replace(`- [${label}](${target})\n`, ""),
+    },
+    expect: `design-engineering/reference-profiles/governed-local/index.md: missing [${label}](${target})`,
+  })),
   {
     name: "missing_external_adaptation_parent",
     mutate: {
@@ -154,6 +185,20 @@ const cases = [
       "index.md": baseFiles["index.md"].replace("- [Consumer reference](consumer-reference/index.md)\n", ""),
     },
     expect: "index.md: missing [Consumer reference](consumer-reference/index.md)",
+  },
+  {
+    name: "missing_consumer_migration_root_route",
+    mutate: {
+      "README.md": baseFiles["README.md"].replace("| [Consumer Migration Readiness](design-engineering/consumer-migration-readiness.md) | Migration method |\n", ""),
+    },
+    expect: "README.md: missing [Consumer Migration Readiness](design-engineering/consumer-migration-readiness.md)",
+  },
+  {
+    name: "missing_consumer_migration_gate_route",
+    mutate: {
+      "quality/index.md": "# Quality\n\n## Tree-Test Findability QA\n",
+    },
+    expect: "quality/index.md: missing [Consumer migration evidence gate](gates/consumer-migration-evidence.md)",
   },
   {
     name: "missing_domain_leaf_parent",
@@ -214,4 +259,4 @@ const report = {
 };
 
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

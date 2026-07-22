@@ -63,4 +63,4 @@ if (json) {
   console.error(result.failures.join("\n"));
 }
 
-process.exit(result.ok ? 0 : 1);
+process.exitCode = result.ok ? 0 : 1;

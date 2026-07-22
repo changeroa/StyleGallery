@@ -11,6 +11,7 @@ Out of scope: a second universal principle set, unsupported claims of beauty or 
 ## Documents
 
 - [Interface Craft Decisions](interface-craft.md) connects product purpose, implementation detail, and verification without treating taste as proof.
+- [Consumer Migration Readiness](consumer-migration-readiness.md) turns migration intent into a consumer-owned thirteen-dimension conformance record and executable evidence chain.
 - [Reference Profiles](reference-profiles/index.md) provides two explicitly selected, related adversarial examples and a documentation-only external adaptation route.
 
 ## Relationship To Shared Quality
@@ -24,4 +25,4 @@ See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page member
 ## IA Navigation
 
 Parent: [StyleGallery](../index.md).
-Next: [Interface Craft Decisions](interface-craft.md).
+Next: [Consumer Migration Readiness](consumer-migration-readiness.md).

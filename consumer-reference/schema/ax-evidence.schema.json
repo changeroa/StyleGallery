@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/ax-evidence.schema.json",
+  "title": "Closed AX capture artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "channel", "capture_session", "captured_at", "profile_id", "scenario_id", "semantic_mode", "name", "role", "properties"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "channel": { "const": "ax" },
+    "capture_session": { "$ref": "https://stylegallery.local/consumer-reference/schema/capture-session.schema.json#/$defs/session_link" },
+    "captured_at": { "type": "string", "format": "date-time" },
+    "profile_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "scenario_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "semantic_mode": { "enum": ["action", "toggle", "disclosure", "switch"] },
+    "name": { "type": "string", "minLength": 1 },
+    "role": { "enum": ["button", "link", "switch"] },
+    "properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "busy": { "type": "boolean" },
+        "disabled": { "type": "boolean" },
+        "expanded": { "type": "boolean" },
+        "focused": { "type": "boolean" },
+        "pressed": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -6,10 +6,19 @@ Their token and foundation values intentionally differ. Their shared relationshi
 
 ## Profile Records
 
-- `editorial/profile.json` describes a warm publication identity.
-- `terminal/profile.json` describes a dark operator-console identity.
+- [Editorial profile](editorial/profile.json) describes a warm publication identity.
+- [Terminal profile](terminal/profile.json) describes a dark operator-console identity.
 
 The sibling `tokens.dtcg.json` files use the restricted portable token subset. The sibling `local-foundations.json` files keep identity bindings local to each profile.
+
+## Generated Evidence Routes
+
+The generated matrices expose the declared component states, keyboard expectations, and evidence coverage without making a profile the default.
+
+| Profile | State matrix | Keyboard matrix | Evidence coverage |
+| --- | --- | --- | --- |
+| Editorial | [Editorial state matrix](editorial/generated/state-matrix.md) | [Editorial keyboard matrix](editorial/generated/keyboard-matrix.md) | [Editorial evidence coverage](editorial/generated/evidence-coverage.md) |
+| Terminal | [Terminal state matrix](terminal/generated/state-matrix.md) | [Terminal keyboard matrix](terminal/generated/keyboard-matrix.md) | [Terminal evidence coverage](terminal/generated/evidence-coverage.md) |
 
 ## IA Navigation
 

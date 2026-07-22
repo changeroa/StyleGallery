@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "state_set",
+  "component_id": "button",
+  "profile_id": "terminal-reference-profile",
+  "visual_environments": [
+    {
+      "id": "darwin-arm64-chromium-1228",
+      "browser": "Google Chrome for Testing 149.0.7827.55",
+      "browser_revision": "chromium-1228",
+      "container_image": "local-host:25.5.0",
+      "platform": "darwin/arm64",
+      "playwright": "1.61.0",
+      "viewport": "1024x768"
+    },
+    {
+      "id": "linux-amd64-chromium-1228",
+      "browser": "Google Chrome for Testing 149.0.7827.55",
+      "browser_revision": "chromium-1228",
+      "container_image": "mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a",
+      "platform": "linux/amd64",
+      "playwright": "1.61.0",
+      "viewport": "1024x768"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "action-disabled-busy",
+      "semantic_mode": "action",
+      "states": [
+        "busy",
+        "disabled"
+      ],
+      "aria": {
+        "busy": "true",
+        "disabled": "true"
+      },
+      "expected": {
+        "visual": [
+          "busy",
+          "disabled"
+        ],
+        "visual_image": [
+          { "environment_id": "darwin-arm64-chromium-1228", "sha256": "sha256:d346be9e96750f636f29078d17d9871a04c2f4442b6849b029fa754c2795674e", "width": 640, "height": 56 },
+          { "environment_id": "linux-amd64-chromium-1228", "sha256": "sha256:f28ac192821773d5d692ad978075da5b1480971e3b3bc9be8983e3eb2cd43484", "width": 640, "height": 56 }
+        ],
+        "dom": {
+          "active": "false",
+          "aria-busy": "true",
+          "disabled": "true",
+          "role": "button"
+        },
+        "ax": {
+          "busy": true,
+          "disabled": true,
+          "focused": false,
+          "role": "button"
+        },
+        "activation": "suppressed"
+      }
+    },
+    {
+      "id": "action-focused",
+      "semantic_mode": "action",
+      "states": [
+        "focus"
+      ],
+      "aria": {},
+      "expected": {
+        "visual": [
+          "focus",
+          "ready"
+        ],
+        "visual_image": [
+          { "environment_id": "darwin-arm64-chromium-1228", "sha256": "sha256:39b96bc2459e2f0f442ce7b709f22e46b44f49b17c52d61940dff0246108ec48", "width": 640, "height": 56 },
+          { "environment_id": "linux-amd64-chromium-1228", "sha256": "sha256:7497f0542e2a4b77749ee47cfa7f575b640bad737c652a71610e9f86f8e5f2b8", "width": 640, "height": 56 }
+        ],
+        "dom": {
+          "active": "true",
+          "role": "button"
+        },
+        "ax": {
+          "focused": true,
+          "role": "button"
+        },
+        "activation": "allowed"
+      }
+    },
+    {
+      "id": "action-loading-busy",
+      "semantic_mode": "action",
+      "states": [
+        "busy",
+        "focus",
+        "loading"
+      ],
+      "aria": {
+        "busy": "true"
+      },
+      "expected": {
+        "visual": [
+          "busy",
+          "focus",
+          "loading"
+        ],
+        "visual_image": [
+          { "environment_id": "darwin-arm64-chromium-1228", "sha256": "sha256:05cbe173a8274cfa7e6aab05713d1cb925820a7412bffceadb94d83498c17747", "width": 640, "height": 56 },
+          { "environment_id": "linux-amd64-chromium-1228", "sha256": "sha256:1521023b829210f899d2f56750e362cbfc30e8d6045f6f78a6c553a43bf610c4", "width": 640, "height": 56 }
+        ],
+        "dom": {
+          "active": "true",
+          "aria-busy": "true",
+          "role": "button"
+        },
+        "ax": {
+          "busy": true,
+          "focused": true,
+          "role": "button"
+        },
+        "activation": "suppressed"
+      }
+    },
+    {
+      "id": "disclosure-expanded-loading",
+      "semantic_mode": "disclosure",
+      "states": [
+        "busy",
+        "expanded",
+        "focus",
+        "loading"
+      ],
+      "aria": {
+        "busy": "true",
+        "expanded": "true"
+      },
+      "expected": {
+        "visual": [
+          "busy",
+          "expanded",
+          "focus",
+          "loading"
+        ],
+        "visual_image": [
+          { "environment_id": "darwin-arm64-chromium-1228", "sha256": "sha256:d8c7ba056dd2a61ce6c85d8ec6bf56733cdc34da07678dd9b4175c7de9ab926a", "width": 640, "height": 88 },
+          { "environment_id": "linux-amd64-chromium-1228", "sha256": "sha256:7cef4e68a5a3df50c1705c7b88936bf0988317e2f6bed92ae5c04992388126a3", "width": 640, "height": 91 }
+        ],
+        "dom": {
+          "active": "true",
+          "aria-busy": "true",
+          "aria-expanded": "true",
+          "role": "button"
+        },
+        "ax": {
+          "busy": true,
+          "expanded": true,
+          "focused": true,
+          "role": "button"
+        },
+        "activation": "allowed"
+      }
+    },
+    {
+      "id": "toggle-focused-pressed",
+      "semantic_mode": "toggle",
+      "states": [
+        "focus",
+        "pressed"
+      ],
+      "aria": {
+        "pressed": "true"
+      },
+      "expected": {
+        "visual": [
+          "focus",
+          "pressed"
+        ],
+        "visual_image": [
+          { "environment_id": "darwin-arm64-chromium-1228", "sha256": "sha256:838229be984b8bda1ebfe6095564f1093df18fdd2ca1e6c3d5b5c086162d4692", "width": 640, "height": 56 },
+          { "environment_id": "linux-amd64-chromium-1228", "sha256": "sha256:1c105821f16a028e974bdf00590e3d9aee8042016ee341f4efe56b4a525b867d", "width": 640, "height": 56 }
+        ],
+        "dom": {
+          "active": "true",
+          "aria-pressed": "true",
+          "role": "button"
+        },
+        "ax": {
+          "focused": true,
+          "pressed": true,
+          "role": "button"
+        },
+        "activation": "allowed"
+      }
+    }
+  ]
+}
