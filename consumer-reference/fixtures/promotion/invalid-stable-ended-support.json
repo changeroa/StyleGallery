@@ -1,0 +1,26 @@
+{
+  "attestations": [],
+  "compatibility": { "breaking": false, "surface": "Synthetic stable contract surface." },
+  "decision": "deferred",
+  "deprecation": { "plan": "A consumed stable contract requires a named migration before deprecation.", "required": true },
+  "eligibility_basis": "full_contract",
+  "evidence": [
+    { "id": "claim", "kind": "claim_scoped", "reference": "synthetic-fixture:claim", "status": "passed" },
+    { "id": "regression", "kind": "regression", "reference": "synthetic-fixture:regression", "status": "passed" }
+  ],
+  "example_only": true,
+  "exceptions": [],
+  "id": "invalid-stable-ended-support",
+  "known_issues": [],
+  "migration": { "plan": "Migrate every consumed surface before removal.", "required": true },
+  "normative_bypass": "none",
+  "owner": { "enforcement": "placeholder", "migration": "Synthetic migration owner", "rollback": "Synthetic rollback owner", "scope": "Repository governance owner", "support": "Synthetic support owner" },
+  "provenance": { "debt_resolved": true, "source": "Synthetic fixture only" },
+  "review_independence": "single_account",
+  "rollback": { "action": "Maintain or deprecate with migration.", "triggers": ["Stable support capacity ends."] },
+  "schema_version": "1.0",
+  "scope": { "aesthetic": false, "kind": "invariant", "summary": "Incorrectly propose stable status after support has ended." },
+  "stable_scope_decision": true,
+  "support": { "capacity": "No remaining support capacity", "status": "ended" },
+  "transition": { "from": "shared_experimental", "to": "stable" }
+}

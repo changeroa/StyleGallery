@@ -1,0 +1,26 @@
+{
+  "attestations": [],
+  "compatibility": { "breaking": false, "surface": "Synthetic invariant contract surface." },
+  "decision": "deferred",
+  "deprecation": { "plan": "No deprecation while deferred.", "required": false },
+  "eligibility_basis": "full_contract",
+  "evidence": [
+    { "id": "blocking", "kind": "blocking", "reference": "synthetic-fixture:blocking", "status": "failed" },
+    { "id": "regression", "kind": "regression", "reference": "synthetic-fixture:regression", "status": "passed" }
+  ],
+  "example_only": true,
+  "exceptions": [],
+  "id": "invalid-blocking-evidence",
+  "known_issues": ["The blocking evidence failed."],
+  "migration": { "plan": "No migration while deferred.", "required": false },
+  "normative_bypass": "none",
+  "owner": { "enforcement": "placeholder", "migration": "Synthetic migration owner", "rollback": "Synthetic rollback owner", "scope": "Repository governance owner", "support": "Synthetic support owner" },
+  "provenance": { "debt_resolved": false, "source": "Synthetic fixture only" },
+  "review_independence": "single_account",
+  "rollback": { "action": "Keep deferred.", "triggers": ["Blocking evidence fails."] },
+  "schema_version": "1.0",
+  "scope": { "aesthetic": false, "kind": "invariant", "summary": "Incorrectly proceed while blocking evidence is failed." },
+  "stable_scope_decision": false,
+  "support": { "capacity": "committed", "status": "active" },
+  "transition": { "from": "consumer_local", "to": "shared_experimental" }
+}

@@ -1,0 +1,45 @@
+{
+  "attestations": [
+    {
+      "attested_by": "Synthetic owner",
+      "context_id": "editorial",
+      "consumer_id": "editorial-reference-profile",
+      "count_toward_gate": true,
+      "organization_id": "stylegallery",
+      "profile_record": "design-engineering/reference-profiles/governed-local/editorial/profile.json",
+      "relationship": "independent"
+    },
+    {
+      "attested_by": "Synthetic owner",
+      "context_id": "terminal",
+      "consumer_id": "terminal-reference-profile",
+      "count_toward_gate": true,
+      "organization_id": "stylegallery",
+      "profile_record": "design-engineering/reference-profiles/governed-local/terminal/profile.json",
+      "relationship": "independent"
+    }
+  ],
+  "compatibility": { "breaking": false, "surface": "Synthetic invariant contract surface." },
+  "decision": "deferred",
+  "deprecation": { "plan": "No deprecation while deferred.", "required": false },
+  "eligibility_basis": "full_contract",
+  "evidence": [
+    { "id": "claim", "kind": "claim_scoped", "reference": "synthetic-fixture:claim", "status": "passed" },
+    { "id": "regression", "kind": "regression", "reference": "synthetic-fixture:regression", "status": "passed" }
+  ],
+  "example_only": true,
+  "exceptions": [],
+  "id": "invalid-related-counted-independent",
+  "known_issues": [],
+  "migration": { "plan": "No migration while deferred.", "required": false },
+  "normative_bypass": "none",
+  "owner": { "enforcement": "placeholder", "migration": "Synthetic migration owner", "rollback": "Synthetic rollback owner", "scope": "Repository governance owner", "support": "Synthetic support owner" },
+  "provenance": { "debt_resolved": false, "source": "Synthetic fixture only" },
+  "review_independence": "single_account",
+  "rollback": { "action": "Keep deferred.", "triggers": ["Independence is not proven."] },
+  "schema_version": "1.0",
+  "scope": { "aesthetic": false, "kind": "invariant", "summary": "Incorrectly count related local profiles as independent consumers." },
+  "stable_scope_decision": false,
+  "support": { "capacity": "committed", "status": "active" },
+  "transition": { "from": "consumer_local", "to": "shared_experimental" }
+}

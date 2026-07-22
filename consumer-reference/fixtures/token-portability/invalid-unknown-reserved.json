@@ -1,0 +1,6 @@
+{
+  "size": {
+    "$type": "dimension",
+    "small": { "$value": { "value": 4, "unit": "px" }, "$future": true }
+  }
+}

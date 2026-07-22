@@ -1,0 +1,12 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-accent: #2060df;
+  --duration-quick: 120ms;
+  --space-small: 8px;
+  --color-action: var(--color-accent);
+  --space-control: var(--space-small);
+  --border-focus: var(--space-control) solid var(--color-action);
+}

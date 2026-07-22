@@ -1,0 +1,40 @@
+{
+  "adapter": {
+    "name": "style-dictionary",
+    "version": "5.5.0"
+  },
+  "declarations": [
+    {
+      "name": "--color-accent",
+      "value": "#2060df"
+    },
+    {
+      "name": "--duration-quick",
+      "value": "120ms"
+    },
+    {
+      "name": "--space-small",
+      "value": "8px"
+    },
+    {
+      "name": "--color-action",
+      "value": "var(--color-accent)"
+    },
+    {
+      "name": "--space-control",
+      "value": "var(--space-small)"
+    },
+    {
+      "name": "--border-focus",
+      "value": "var(--space-control) solid var(--color-action)"
+    }
+  ],
+  "inputHash": "sha256:660f1b752eccd4045af6ed0ae37f17f1eb436aec95302bf161687d9fa5e79a5f",
+  "outputCount": 6,
+  "outputFile": "tokens.css",
+  "outputHash": "sha256:a479ba780046bb5c1c393766ee47292049ca0515210c495081ef8cb3853f52a4",
+  "schemaVersion": "1.0",
+  "sourceCount": 6,
+  "sourceFile": "../fixtures/token-portability/valid-reference.json",
+  "warnings": []
+}

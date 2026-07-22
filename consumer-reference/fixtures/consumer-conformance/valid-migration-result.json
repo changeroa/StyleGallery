@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "node",
+    "consumer-reference/fixtures/consumer-conformance/runtime-proof.mjs"
+  ],
+  "evidence_method": "integration",
+  "exit_code": 0,
+  "record_kind": "consumer_migration_scenario_result",
+  "recorded_at": "2026-07-21T00:00:00Z",
+  "repository": "changeroa/StyleGallery",
+  "revision": "84bf420d568f68021117f8142e6d982b4966de2f",
+  "run_id": "run-20260721-001",
+  "scenario_id": "migration-round-trip",
+  "schema_version": "1.0",
+  "session_id": "session-20260721-001",
+  "source_digest": "6d90893774e2228ffe9ae0286f5b3392b103ea1bf5e571fcde2f7a861d76372c",
+  "status": "passed"
+}

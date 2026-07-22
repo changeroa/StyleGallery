@@ -1,0 +1,6 @@
+{
+  "font": {
+    "$type": "fontFamily",
+    "body": { "$value": ["Inter", "sans-serif"] }
+  }
+}

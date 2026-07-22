@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/page-evidence-manifest.schema.json",
+  "title": "Closed consumer-local page evidence manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_kind", "claim_boundary", "completed_at", "review_by", "repository", "revision", "run", "session", "scenarios"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "record_kind": { "const": "page_evidence_manifest" },
+    "claim_boundary": { "const": "Page evidence is claim-scoped runtime evidence, not visual-regression approval or accessibility certification." },
+    "completed_at": { "type": "string", "format": "date-time" },
+    "review_by": { "type": "string", "format": "date-time" },
+    "repository": { "type": "string", "minLength": 1 },
+    "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "run": { "$ref": "#/$defs/run" },
+    "session": { "$ref": "https://stylegallery.local/consumer-reference/schema/page-evidence-session.schema.json#/$defs/completed_session" },
+    "scenarios": {
+      "type": "array",
+      "maxItems": 256,
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/manifest_scenario" }
+    }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "identity": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$" },
+    "scenario_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "normalized_path": { "type": "string", "minLength": 1, "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*[?#]).+$" },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source", "repository", "revision", "attempt", "status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identity" },
+        "source": { "enum": ["local", "github_actions"] },
+        "repository": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "status": { "const": "passed" }
+      }
+    },
+    "semantic_environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["browser", "browser_revision", "platform", "viewport", "page_scale_factor", "locale", "color_scheme", "reduced_motion"],
+      "properties": {
+        "browser": { "type": "string", "minLength": 1 },
+        "browser_revision": { "type": "string", "minLength": 1 },
+        "platform": { "type": "string", "minLength": 1 },
+        "viewport": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height"],
+          "properties": {
+            "width": { "type": "integer", "minimum": 1 },
+            "height": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "page_scale_factor": { "type": "number", "exclusiveMinimum": 0, "maximum": 10 },
+        "locale": { "type": "string", "minLength": 1 },
+        "color_scheme": { "enum": ["light", "dark", "no-preference"] },
+        "reduced_motion": { "enum": ["reduce", "no-preference"] }
+      }
+    },
+    "artifact_declaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "media_type"],
+      "properties": {
+        "path": { "$ref": "#/$defs/normalized_path" },
+        "media_type": { "enum": ["application/json", "image/png", "text/plain"] }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "byte_length", "media_type"],
+      "properties": {
+        "path": { "$ref": "#/$defs/normalized_path" },
+        "sha256": { "$ref": "#/$defs/hash" },
+        "byte_length": { "type": "integer", "minimum": 1 },
+        "media_type": { "enum": ["application/json", "image/png", "text/plain"] },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "media_type": { "const": "image/png" } }, "required": ["media_type"] },
+          "then": {
+            "required": ["width", "height"],
+            "properties": {
+              "width": { "type": "integer", "minimum": 1 },
+              "height": { "type": "integer", "minimum": 1 }
+            }
+          }
+        }
+      ]
+    },
+    "reuse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "prior_manifest_sha256", "prior_session_id", "prior_run_id", "prior_scenario_id"],
+      "properties": {
+        "kind": { "const": "reused" },
+        "prior_manifest_sha256": { "$ref": "#/$defs/hash" },
+        "prior_session_id": { "$ref": "#/$defs/identity" },
+        "prior_run_id": { "$ref": "#/$defs/identity" },
+        "prior_scenario_id": { "$ref": "#/$defs/scenario_id" }
+      }
+    },
+    "runner_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "record_kind", "session_id", "nonce", "receipt_sha256", "repository", "revision", "source_sha256", "run", "scenario_id", "recorded_at", "semantic_environment", "status", "evidence"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "record_kind": { "const": "page_evidence_runner_result" },
+        "session_id": { "$ref": "#/$defs/identity" },
+        "nonce": { "$ref": "#/$defs/hash" },
+        "receipt_sha256": { "$ref": "#/$defs/hash" },
+        "repository": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "source_sha256": { "$ref": "#/$defs/hash" },
+        "run": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "source", "repository", "revision", "attempt"],
+          "properties": {
+            "id": { "$ref": "#/$defs/identity" },
+            "source": { "enum": ["local", "github_actions"] },
+            "repository": { "type": "string", "minLength": 1 },
+            "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+            "attempt": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "scenario_id": { "$ref": "#/$defs/scenario_id" },
+        "recorded_at": { "type": "string", "format": "date-time" },
+        "semantic_environment": { "$ref": "#/$defs/semantic_environment" },
+        "status": { "enum": ["passed", "failed"] },
+        "evidence": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "artifacts"],
+              "properties": {
+                "kind": { "const": "captured" },
+                "artifacts": { "type": "array", "minItems": 1, "maxItems": 128, "items": { "$ref": "#/$defs/artifact_declaration" } }
+              }
+            },
+            { "$ref": "#/$defs/reuse" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "reason"],
+              "properties": {
+                "kind": { "const": "failed" },
+                "reason": { "type": "string", "minLength": 1 }
+              }
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "passed" } }, "required": ["status"] },
+          "then": {
+            "properties": {
+              "evidence": {
+                "type": "object",
+                "oneOf": [
+                  { "$ref": "#/$defs/reuse" },
+                  { "type": "object", "properties": { "kind": { "const": "captured" } }, "required": ["kind"] }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "status": { "const": "failed" } }, "required": ["status"] },
+          "then": {
+            "properties": {
+              "evidence": { "type": "object", "properties": { "kind": { "const": "failed" } }, "required": ["kind"] }
+            }
+          }
+        }
+      ]
+    },
+    "manifest_scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "recorded_at", "semantic_environment", "runner_result", "evidence"],
+      "properties": {
+        "id": { "$ref": "#/$defs/scenario_id" },
+        "recorded_at": { "type": "string", "format": "date-time" },
+        "semantic_environment": { "$ref": "#/$defs/semantic_environment" },
+        "runner_result": { "$ref": "#/$defs/artifact" },
+        "evidence": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "artifacts"],
+              "properties": {
+                "kind": { "const": "captured" },
+                "artifacts": { "type": "array", "minItems": 1, "maxItems": 128, "items": { "$ref": "#/$defs/artifact" } }
+              }
+            },
+            { "$ref": "#/$defs/reuse" }
+          ]
+        }
+      }
+    }
+  }
+}

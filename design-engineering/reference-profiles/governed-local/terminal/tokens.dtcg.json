@@ -1,0 +1,17 @@
+{
+  "color": {
+    "$type": "color",
+    "accent": { "$value": { "alpha": 1, "colorSpace": "srgb", "components": [0.25, 0.92, 0.55] } },
+    "ink": { "$value": { "alpha": 1, "colorSpace": "srgb", "components": [0.76, 0.95, 0.83] } },
+    "screen": { "$value": { "alpha": 1, "colorSpace": "srgb", "components": [0.02, 0.05, 0.04] } }
+  },
+  "duration": {
+    "$type": "duration",
+    "feedback": { "$value": { "unit": "ms", "value": 80 } }
+  },
+  "space": {
+    "$type": "dimension",
+    "page": { "$value": { "unit": "rem", "value": 1 } },
+    "rhythm": { "$value": { "unit": "rem", "value": 0.5 } }
+  }
+}

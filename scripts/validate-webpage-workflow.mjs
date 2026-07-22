@@ -79,6 +79,40 @@ const requiredIncludes = {
     "Source order, accessibility, brand correctness, and usability cannot be inferred from the image.",
     "Final implementation proof:",
   ],
+  "design-engineering/consumer-migration-readiness.md": [
+    "lifecycle: experimental",
+    "provenance_kind: local",
+    "# Consumer Migration Readiness",
+    "## Migration Dimension Contract",
+    "`behavior_inventory`",
+    "`route_parity`",
+    "`field_parity`",
+    "`action_parity`",
+    "`state_transitions`",
+    "`contract_precedence`",
+    "`direct_mutation`",
+    "`indirect_mutation`",
+    "`persistence_round_trip`",
+    "`reset_boundary`",
+    "`exact_time_boundary`",
+    "`defaults_tri_state_mapping`",
+    "`atomic_batch_behavior`",
+    "Consumer migration conformance: declared",
+    "Passing this method does not prove complete accessibility, product correctness, usability, visual quality, independent adoption, cross-browser equivalence, or owner approval.",
+  ],
+  "consumer-reference/contract.md": [
+    "### Migration-Only Extension",
+    "This field is migration-only.",
+    "Do not add it to generic blank handoffs",
+    "Consumer migration conformance: declared",
+  ],
+  "quality/gates/consumer-migration-evidence.md": [
+    "# Consumer Migration Evidence Gate",
+    "## Required Contract",
+    "## Blocking Conditions",
+    "thirteen migration dimensions",
+    "Decision: pass | block",
+  ],
 };
 
 const requiredLinks = {
@@ -193,6 +227,12 @@ for (const route of workflowRoutes) {
   requireRouteOrder("guides/webpage-generation-workflow.md", route);
 }
 
+for (const relative of ["guides/layout-brief.md", "guides/webpage-generation-workflow.md", "quality/gates/harmony-evaluation.md"]) {
+  if (/^Consumer migration conformance: declared$/m.test(read(relative))) {
+    failures.push(`${relative}: ordinary handoff must not declare consumer migration conformance`);
+  }
+}
+
 const result = {
   ok: failures.length === 0,
   checkedFiles: [...new Set([...Object.keys(requiredIncludes), ...Object.keys(requiredLinks), ...Object.keys(recommendedIncludes)])],
@@ -211,4 +251,4 @@ if (json) {
   console.error(result.failures.join("\n"));
 }
 
-process.exit(result.ok ? 0 : 1);
+process.exitCode = result.ok ? 0 : 1;
