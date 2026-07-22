@@ -1,5 +1,11 @@
 # StyleGallery Log
 
+## 2026-07-13
+
+- Added Game UI as an experimental domain for engine-neutral classification and hierarchy plus named engine implementation subtrees.
+- Added a nested Unity Game UI guide for Scene, Canvas, prefab, runtime-instance, input, sorting, and motion ownership.
+- Extended domain validation to support per-guide external source repositories and revisions.
+
 ## 2026-07-11
 
 - Expanded the repository into a governed StyleGallery umbrella while preserving the existing Layout paths.

@@ -15,7 +15,7 @@ Primary role: vocabulary and scannability contract.
 - Canonical: `domain`
   - Concept: top-level knowledge ownership
   - Definition: A governed StyleGallery decision surface with a named scope, exclusions, lifecycle, source-of-truth, validator, and review owner.
-  - Use for: Layout, Motion, Design Engineering, Platform Guides, root routing, and `domain` frontmatter on governed leaves.
+  - Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, root routing, and `domain` frontmatter on governed leaves.
 - Canonical: `category`
   - Concept: domain-local browse placement
   - Definition: A canonical grouping inside one domain; it cannot change the owning domain or its evidence boundary.

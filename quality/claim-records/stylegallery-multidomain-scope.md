@@ -8,11 +8,11 @@ description: Decision to supersede the layout-only repository identity with a go
 
 ## Decision
 
-StyleGallery supersedes the repository-wide `layout-gallery` identity with four explicit domains: Layout, Motion, Design Engineering, and Platform Guides. The prior layout-only rules remain authoritative inside Layout instead of being deleted or silently weakened.
+StyleGallery supersedes the repository-wide `layout-gallery` identity with five explicit domains: Layout, Motion, Design Engineering, Game UI, and Platform Guides. The prior layout-only rules remain authoritative inside Layout instead of being deleted or silently weakened.
 
 ## Context
 
-The repository name and intended collection now exceed a single spatial corpus. Treating motion, interface craft, or platform comparison as Layout patterns would violate the existing pattern boundary, while leaving them ungoverned would bypass source-of-truth, ownership, lifecycle, and evidence rules.
+The repository name and intended collection now exceed a single spatial corpus. Treating motion, interface craft, game-interface knowledge, engine-specific Game UI implementation, or platform comparison as Layout patterns would violate the existing pattern boundary, while leaving them ungoverned would bypass source-of-truth, ownership, lifecycle, and evidence rules.
 
 ## Warrant
 
