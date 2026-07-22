@@ -2,30 +2,46 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { collectDomainBoundaryFailures } from "./domain-document-boundaries.mjs";
 import { isOmoDependency, markdownLinkDestinations, stripFencedCodeBlocks } from "./markdown-structure.mjs";
 
-const args = new Set(process.argv.slice(2));
-const json = args.has("--json");
-const root = process.cwd();
-const failures = [];
 const repository = "https://github.com/emilkowalski/skills";
 const revision = "220e8607c90b17337d210125777b7b695f26c221";
 const revisionPattern = /^[0-9a-f]{40}$/;
+const referenceDocuments = [
+  "design-engineering/reference-profiles/index.md",
+  "design-engineering/reference-profiles/governed-local/index.md",
+  "design-engineering/reference-profiles/external-adaptation/index.md",
+];
 
-const domains = [
+export const canonicalDomains = [
   { slug: "layout", label: "Layout", leaves: [] },
   {
     slug: "motion",
     label: "Motion",
     leaves: [
-      ["motion/vocabulary.md", "skills/animation-vocabulary/SKILL.md"],
-      ["motion/review-workflow.md", "skills/review-animations/SKILL.md"],
-      ["motion/practice-reference.md", "skills/review-animations/STANDARDS.md"],
+      { path: "motion/vocabulary.md", provenance: "external", sourcePath: "skills/animation-vocabulary/SKILL.md" },
+      { path: "motion/review-workflow.md", provenance: "external", sourcePath: "skills/review-animations/SKILL.md" },
+      { path: "motion/practice-reference.md", provenance: "external", sourcePath: "skills/review-animations/STANDARDS.md" },
     ],
   },
-  { slug: "design-engineering", label: "Design Engineering", leaves: [["design-engineering/interface-craft.md", "skills/emil-design-eng/SKILL.md"]] },
-  { slug: "platform-guides", label: "Platform Guides", leaves: [["platform-guides/apple-interaction.md", "skills/apple-design/SKILL.md"]] },
+  {
+    slug: "design-engineering",
+    label: "Design Engineering",
+    leaves: [
+      { path: "design-engineering/interface-craft.md", provenance: "external", sourcePath: "skills/emil-design-eng/SKILL.md" },
+      { path: "design-engineering/consumer-migration-readiness.md", provenance: "local" },
+    ],
+    referenceDocuments,
+  },
+  { slug: "platform-guides", label: "Platform Guides", leaves: [{ path: "platform-guides/apple-interaction.md", provenance: "external", sourcePath: "skills/apple-design/SKILL.md" }] },
 ];
+export const domainRegistry = canonicalDomains;
+
+let domains = canonicalDomains;
+let root = process.cwd();
+let failures = [];
 
 const requiredLeafSections = [
   "Repository Boundary",
@@ -109,7 +125,7 @@ function checkManifest() {
     if (!pageRow || pageRow[1] !== expectedManualHub) valid = false;
     if (domain.leaves.length > 0 && pageRow) {
       const declaredLeaves = [...pageRow[2].matchAll(/`([^`]+\.md)`/g)].map((match) => match[1]).sort();
-      const expectedLeaves = domain.leaves.map(([leaf]) => leaf).sort();
+      const expectedLeaves = [...domain.leaves.map((leaf) => leaf.path), ...(domain.referenceDocuments ?? [])].sort();
       if (JSON.stringify(declaredLeaves) !== JSON.stringify(expectedLeaves)) valid = false;
     }
   }
@@ -128,31 +144,47 @@ function checkIndex(domain) {
   if (!/^Out of scope:\s*\S/m.test(content)) failures.push(`${relative}: missing Out of scope declaration`);
   if (!/^Parent: \[[^\]]+\]\([^)]+\)/m.test(content)) failures.push(`${relative}: missing Parent navigation link`);
   if (!/^Next: \[[^\]]+\]\([^)]+\)/m.test(content)) failures.push(`${relative}: missing Next navigation link`);
-  for (const [leaf] of domain.leaves) {
-    const target = path.basename(leaf);
+  for (const leaf of domain.leaves) {
+    const target = path.basename(leaf.path);
     if (!content.match(new RegExp(`\\[[^\\]]+\\]\\(${target.replaceAll(".", "\\.")}\\)`))) {
       failures.push(`${relative}: missing leaf route ${target}`);
     }
   }
+  if (domain.referenceDocuments?.length > 0 && !content.includes("[Reference Profiles](reference-profiles/index.md)")) {
+    failures.push(`${relative}: missing reference profile route`);
+  }
 }
 
-function checkLeaf(domain, relative, expectedSourcePath, titles) {
+function checkLeaf(domain, leaf, titles) {
+  const { path: relative, provenance, sourcePath: expectedSourcePath } = leaf;
   const content = read(relative);
   if (!content) return;
   const metadata = parseFrontmatter(relative, content);
-  for (const field of ["type", "title", "description", "domain", "lifecycle", "source_repository", "source_path", "source_revision"]) {
+  const requiredFields = ["type", "title", "description", "domain", "lifecycle"];
+  if (provenance === "external") requiredFields.push("source_repository", "source_path", "source_revision");
+  if (provenance === "local") requiredFields.push("provenance_kind");
+  for (const field of requiredFields) {
     if (!metadata[field]) failures.push(`${relative}: missing ${field}`);
   }
   const knownDomain = domains.some((candidate) => candidate.slug === metadata.domain);
   if (metadata.domain && !knownDomain) failures.push(`${relative}: unknown domain ${metadata.domain}`);
   else if (metadata.domain && metadata.domain !== domain.slug) failures.push(`${relative}: domain ${metadata.domain} does not match ${domain.slug}`);
-  if (metadata.lifecycle && metadata.lifecycle !== "experimental") failures.push(`${relative}: external adaptation lifecycle must be experimental`);
-  if (metadata.source_repository && metadata.source_repository !== repository) failures.push(`${relative}: unexpected source_repository ${metadata.source_repository}`);
-  if (metadata.source_path && metadata.source_path !== expectedSourcePath) failures.push(`${relative}: unexpected source_path ${metadata.source_path}`);
-  if (metadata.source_revision && !revisionPattern.test(metadata.source_revision)) {
-    failures.push(`${relative}: source_revision must be a full 40-character lowercase Git SHA`);
-  } else if (metadata.source_revision && metadata.source_revision !== revision) {
-    failures.push(`${relative}: unexpected source_revision ${metadata.source_revision}`);
+  if (metadata.lifecycle && metadata.lifecycle !== "experimental") {
+    failures.push(`${relative}: ${provenance === "local" ? "local leaf" : "external adaptation"} lifecycle must be experimental`);
+  }
+  if (provenance === "external") {
+    if (metadata.source_repository && metadata.source_repository !== repository) failures.push(`${relative}: unexpected source_repository ${metadata.source_repository}`);
+    if (metadata.source_path && metadata.source_path !== expectedSourcePath) failures.push(`${relative}: unexpected source_path ${metadata.source_path}`);
+    if (metadata.source_revision && !revisionPattern.test(metadata.source_revision)) {
+      failures.push(`${relative}: source_revision must be a full 40-character lowercase Git SHA`);
+    } else if (metadata.source_revision && metadata.source_revision !== revision) {
+      failures.push(`${relative}: unexpected source_revision ${metadata.source_revision}`);
+    }
+  } else if (provenance === "local") {
+    if (metadata.provenance_kind && metadata.provenance_kind !== "local") failures.push(`${relative}: local leaf provenance_kind must be local`);
+    for (const field of ["source_repository", "source_path", "source_revision"]) {
+      if (Object.hasOwn(metadata, field)) failures.push(`${relative}: local leaf must not declare ${field}`);
+    }
   }
   if (metadata.title) {
     if (titles.has(metadata.title)) failures.push(`${relative}: duplicate title ${metadata.title}`);
@@ -170,51 +202,78 @@ function checkLeaf(domain, relative, expectedSourcePath, titles) {
   }
 }
 
-function rejectUndeclaredDomainDocuments() {
+function checkReferenceDocuments() {
+  const index = stripFencedCodeBlocks(read(referenceDocuments[0]));
+  if (!/Domain classification:\s*design-engineering\./i.test(index)) {
+    failures.push(`${referenceDocuments[0]}: reference profiles must remain in the Design Engineering domain`);
+  }
+  if (!index.includes("[Governed Local Profiles](governed-local/index.md)")) {
+    failures.push(`${referenceDocuments[0]}: missing governed-local route`);
+  }
+  const external = stripFencedCodeBlocks(read(referenceDocuments[2]));
+  if (!external.includes("Synthetic validator coverage only") || !external.includes("no durable adopter record")) {
+    failures.push(`${referenceDocuments[1]}: external adaptation must remain documentation-only`);
+  }
+}
+
+function checkPromotionBoundary() {
+  const relative = "DOMAINS.md";
+  const content = stripFencedCodeBlocks(read(relative));
+  const required = [
+    "### Consumer Reference Promotion",
+    "applies only to consumer-local → shared-experimental invariant eligibility",
+    "Editorial and terminal are related examples in one fixture set",
+    "Shared stable has no numeric adoption threshold",
+    "Normative correctness may waive adoption count only",
+    "never silently relabeled experimental",
+    "Promotion records are JSON-only",
+    "zero adopter attestations",
+  ];
+  for (const clause of required) if (!content.includes(clause)) failures.push(`${relative}: missing promotion boundary ${clause}`);
+}
+
+function boundaryRegistry(registry) {
+  return registry.map((domain) => ({
+    ...domain,
+    leaves: domain.leaves.map((leaf) => [leaf.path, leaf.sourcePath]),
+  }));
+}
+
+export function validateDomains({ root: nextRoot = process.cwd(), domains: nextDomains = canonicalDomains } = {}) {
+  const previousRoot = root;
+  const previousDomains = domains;
+  const previousFailures = failures;
+  root = nextRoot;
+  domains = nextDomains;
+  failures = [];
+  checkManifest();
+  read("quality/claim-records/stylegallery-multidomain-scope.md");
+  requireRootRoutes();
+  const titles = new Set();
+  let checkedLeaves = 0;
   for (const domain of domains) {
-    const declared = new Set([`${domain.slug}/index.md`, ...domain.leaves.map(([leaf]) => leaf)]);
-    for (const absolute of walkMarkdown(path.join(root, domain.slug))) {
-      const relative = path.relative(root, absolute);
-      if (!declared.has(relative)) failures.push(`${relative}: undeclared governed domain document`);
+    checkIndex(domain);
+    for (const leaf of domain.leaves) {
+      checkedLeaves += 1;
+      checkLeaf(domain, leaf, titles);
     }
   }
+  failures.push(...collectDomainBoundaryFailures(root, boundaryRegistry(domains)));
+  checkReferenceDocuments();
+  checkPromotionBoundary();
+
+  const result = { ok: failures.length === 0, checkedDomains: domains.length, checkedLeaves, failures: [...new Set(failures)] };
+  root = previousRoot;
+  domains = previousDomains;
+  failures = previousFailures;
+  return result;
 }
 
-function walkMarkdown(dir) {
-  if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    if ([".git", ".omo", "node_modules"].includes(entry.name)) return [];
-    const target = path.join(dir, entry.name);
-    if (entry.isDirectory()) return walkMarkdown(target);
-    return entry.isFile() && entry.name.endsWith(".md") ? [target] : [];
-  });
+const isMainModule = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url));
+if (isMainModule) {
+  const result = validateDomains();
+  if (process.argv.includes("--json")) console.log(JSON.stringify(result, null, 2));
+  else if (result.ok) console.log(`ok: ${result.checkedDomains} domains, ${result.checkedLeaves} governed leaves`);
+  else console.error(result.failures.join("\n"));
+  process.exitCode = result.ok ? 0 : 1;
 }
-
-function rejectOmoDependencies() {
-  for (const absolute of walkMarkdown(root)) {
-    const relative = path.relative(root, absolute);
-    const content = fs.readFileSync(absolute, "utf8");
-    if (markdownLinkDestinations(content).some(isOmoDependency)) failures.push(`${relative}: tracked document must not depend on .omo`);
-  }
-}
-
-checkManifest();
-read("quality/claim-records/stylegallery-multidomain-scope.md");
-requireRootRoutes();
-const titles = new Set();
-let checkedLeaves = 0;
-for (const domain of domains) {
-  checkIndex(domain);
-  for (const [relative, sourcePath] of domain.leaves) {
-    checkedLeaves += 1;
-    checkLeaf(domain, relative, sourcePath, titles);
-  }
-}
-rejectUndeclaredDomainDocuments();
-rejectOmoDependencies();
-
-const result = { ok: failures.length === 0, checkedDomains: domains.length, checkedLeaves, failures: [...new Set(failures)] };
-if (json) console.log(JSON.stringify(result, null, 2));
-else if (result.ok) console.log(`ok: ${result.checkedDomains} domains, ${result.checkedLeaves} governed leaves`);
-else console.error(result.failures.join("\n"));
-process.exit(result.ok ? 0 : 1);

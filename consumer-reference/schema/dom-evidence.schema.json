@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/dom-evidence.schema.json",
+  "title": "Closed DOM capture artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "channel", "capture_session", "captured_at", "profile_id", "scenario_id", "semantic_mode", "role", "active", "activation_key", "activation_count", "attributes", "visual_states"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "channel": { "const": "dom" },
+    "capture_session": { "$ref": "https://stylegallery.local/consumer-reference/schema/capture-session.schema.json#/$defs/session_link" },
+    "captured_at": { "type": "string", "format": "date-time" },
+    "profile_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "scenario_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "semantic_mode": { "enum": ["action", "toggle", "disclosure", "switch"] },
+    "role": { "enum": ["button", "link", "switch"] },
+    "active": { "type": "boolean" },
+    "activation_key": { "enum": ["Enter", "Space"] },
+    "activation_count": { "type": "integer", "minimum": 0 },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "aria-busy": { "enum": ["true", "false"] },
+        "aria-disabled": { "enum": ["true", "false"] },
+        "aria-expanded": { "enum": ["true", "false"] },
+        "aria-pressed": { "enum": ["true", "false"] },
+        "disabled": { "enum": ["true", "false"] }
+      }
+    },
+    "visual_states": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["ready", "focus", "pressed", "expanded", "loading", "busy", "disabled"] }
+    }
+  }
+}

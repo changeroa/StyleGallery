@@ -1,0 +1,62 @@
+name: Audit explicit evidence deadlines
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 5 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: evidence-freshness-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  evidence-freshness:
+    name: Advisory evidence freshness audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Install pinned validation dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Audit declared deadlines and emit annotations
+        shell: bash
+        run: |
+          as_of="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          set +e
+          node scripts/audit-evidence-freshness.mjs \
+            --record consumer-reference/baselines/calibration.json \
+            --as-of "$as_of" \
+            --mode advisory \
+            --json > evidence-freshness-report.json
+          audit_status=$?
+          set -e
+          AUDIT_STATUS="$audit_status" node -e '
+            const fs = require("node:fs");
+            const report = JSON.parse(fs.readFileSync("evidence-freshness-report.json", "utf8"));
+            for (const warning of report.warnings ?? []) {
+              console.log(`::warning file=${warning.source_path}::${warning.code}: ${warning.message}`);
+            }
+            const status = Number(process.env.AUDIT_STATUS);
+            if (status !== 0 || report.ok !== true) process.exit(1);
+          '
+
+      - name: Upload freshness report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: evidence-freshness-${{ github.run_id }}
+          path: evidence-freshness-report.json
+          if-no-files-found: error
+          retention-days: 14

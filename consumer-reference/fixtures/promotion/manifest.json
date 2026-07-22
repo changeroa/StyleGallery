@@ -1,0 +1,15 @@
+{
+  "id": "promotion-fixture-inventory",
+  "invalid_records": [
+    { "expected_code": "promotion_blocking_evidence_failed", "file": "invalid-blocking-evidence.json" },
+    { "expected_code": "promotion_count_only_forbidden", "file": "invalid-count-only.json" },
+    { "expected_code": "promotion_owner_migration_required", "file": "invalid-missing-owner-migration.json" },
+    { "expected_code": "promotion_normative_regression_required", "file": "invalid-normative-bypass-no-regression.json" },
+    { "expected_code": "promotion_related_consumer_counted", "file": "invalid-related-counted-independent.json" },
+    { "expected_code": "stable_support_ended", "file": "invalid-stable-ended-support.json" }
+  ],
+  "policy_record": "consumer-reference/policies/shared-experimental.json",
+  "schema_record": "consumer-reference/schema/promotion-rfc.schema.json",
+  "schema_version": "1.0",
+  "valid_records": ["valid-deferred-example.json", "valid-normative-bypass.json"]
+}

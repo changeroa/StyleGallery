@@ -70,6 +70,8 @@ This gate decides whether a webpage composition is coherent enough to guide impl
 
 Use a [structured claim record](../claims.md) when the harmony decision approves, blocks, or redirects implementation. Harmony records must include the use case and implementation handoff because they decide what the implementer may safely carry from a visual reference into product-level styling.
 
+If the work is an existing-consumer migration that declares conformance, route the separate migration evidence decision through the [Consumer Migration Evidence Gate](consumer-migration-evidence.md). Harmony cannot substitute for runtime parity or source-bound page evidence.
+
 ## IA Navigation
 
 Parent: [Gate Contracts](index.md).

@@ -1,0 +1,43 @@
+{
+  "artifact_mode": "governed_local",
+  "component_records": ["components/button.component.json"],
+  "default": false,
+  "environment_assumptions": {
+    "reset": {
+      "body_margin": "0",
+      "box_sizing": "border-box",
+      "figure_margin": "0"
+    },
+    "user_agent_styles": "Preserve semantic browser defaults except for the declared reset."
+  },
+  "example_only": true,
+  "evidence_records": ["evidence/button.evidence.json"],
+  "fixture_independence": "related",
+  "fixture_records": ["fixtures/button.fixture.json"],
+  "generated_records": ["generated/evidence-coverage.md", "generated/keyboard-matrix.md", "generated/state-matrix.md"],
+  "handoff": {
+    "record": "design-engineering/reference-profiles/governed-local/terminal/profile.json",
+    "status": "declared"
+  },
+  "id": "terminal-reference-profile",
+  "layout_source_sha": "775430bbaf4ee208a642220f440f6926d79c90a3",
+  "local_foundations": "local-foundations.json",
+  "maturity": "experimental",
+  "owner": {
+    "enforcement": "placeholder",
+    "name": "Design Engineering owner"
+  },
+  "profile_kind": "governed_local",
+  "related_fixture_set_id": "layout-identity-adversarial-pair",
+  "review_independence": "single_account",
+  "schema_version": "1.0",
+  "selection": {
+    "method": "profile_path",
+    "required": true
+  },
+  "support": {
+    "status": "active"
+  },
+  "state_records": ["states/button.states.json"],
+  "tokens": "tokens.dtcg.json"
+}

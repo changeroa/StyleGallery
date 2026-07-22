@@ -1,0 +1,12 @@
+{
+  "bindings": {
+    "accent": "{color.accent}",
+    "body_font_family": "Georgia, Times New Roman, serif",
+    "canvas": "{color.paper}",
+    "content_rhythm": "{space.rhythm}",
+    "text": "{color.ink}"
+  },
+  "identity": "Warm long-form editorial publication",
+  "profile_id": "editorial-reference-profile",
+  "schema_version": "1.0"
+}
