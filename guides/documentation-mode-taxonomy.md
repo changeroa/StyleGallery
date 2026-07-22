@@ -37,6 +37,7 @@ Do not use `mixed` as a mode. If a page has more than one reading posture, keep 
 | `motion/*.md` | Reference or How-to | Explanation | Apply experimental motion terminology and review guidance inside its evidence boundary. |
 | `design-engineering/index.md` | Reference | Explanation | Enter Design Engineering product-level decision guidance. |
 | `design-engineering/*.md` | Explanation | How-to | Apply experimental practitioner methods without treating taste as proof. |
+| `design-engineering/consumer-migration-readiness.md` | How-to | Policy/procedure | Build a consumer-owned migration evidence chain without claiming universal authority. |
 | `platform-guides/index.md` | Reference | Explanation | Enter bounded comparative platform references. |
 | `platform-guides/*.md` | Explanation | Reference | Compare a named platform with explicit source, version, adaptation, and evidence limits. |
 | `guides/decision-tree.md` | How-to | Reference | Route from constraints to pattern families and recipes. |
@@ -73,11 +74,13 @@ Do not use `mixed` as a mode. If a page has more than one reading posture, keep 
 | `quality/gates/accessibility-evidence.md` | Policy/procedure | Reference | Decide whether accessibility evidence supports a claim. |
 | `quality/gates/design-claim.md` | Policy/procedure | Reference | Decide whether a non-layout design claim is admissible. |
 | `quality/gates/harmony-evaluation.md` | Policy/procedure | Reference | Decide whether a webpage composition can guide implementation. |
+| `quality/gates/consumer-migration-evidence.md` | Policy/procedure | Reference | Decide whether declared consumer migration evidence is sufficient. |
 | `quality/gates/layout.md` | Policy/procedure | Reference | Decide whether a layout claim satisfies the pattern contract. |
 | `quality/gates/rationale.md` | Policy/procedure | Reference | Decide whether a rationale exposes options, warrant, and debt. |
 | `quality/gates/visual-evidence.md` | Policy/procedure | Reference | Decide whether rendered evidence supports a visual claim. |
 | `quality/evidence/index.md` | Reference | None | Look up evidence reference families. |
 | `quality/evidence/accessibility.md` | Reference | Explanation | Understand accessibility evidence boundaries. |
+| `quality/evidence/consumer-migration.md` | Reference | Explanation | Understand runtime, browser, session, adoption, freshness, and review boundaries for a migration. |
 | `quality/evidence/design-rationale.md` | Reference | Explanation | Understand design-rationale evidence boundaries. |
 | `quality/evidence/executable-evidence.md` | Reference | Policy/procedure | Map validators, tests, rendered QA, review, and source citations to claim boundaries. |
 | `quality/evidence/families.md` | Reference | Explanation | Look up normalized evidence-family names and boundaries. |
@@ -123,6 +126,7 @@ The wildcard rows are intentional. Generated pattern pages share one stable refe
 | Choose the owning StyleGallery domain. | `DOMAINS.md` | The selected domain `index.md` |
 | Name or review product motion. | `motion/index.md` | The matching Motion reference or workflow |
 | Review a product-level craft decision. | `design-engineering/index.md` | `design-engineering/interface-craft.md`, then the relevant quality gate |
+| Prove an existing consumer migration. | `design-engineering/consumer-migration-readiness.md` | `quality/gates/consumer-migration-evidence.md`, then the consumer-owned conformance record |
 | Compare an Apple interaction convention. | `platform-guides/index.md` | `platform-guides/apple-interaction.md` and current official sources |
 | Choose a layout when the pattern name is unknown. | `GUIDE.md` | `guides/decision-tree.md` |
 | Turn raw content into a homepage or webpage. | `guides/webpage-generation-workflow.md` | `recipes/homepage.md`, `quality/gates/harmony-evaluation.md` |

@@ -4,13 +4,20 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { files, generatedWarning, sentinelProvenanceClauses } from "./governance-test-fixture.mjs";
+import { governanceMatrixCases } from "./governance-matrix-negative-cases.mjs";
+import { componentStateWorkflowCases } from "./component-state-workflow-negative-cases.mjs";
+import { workflowSafetyCases } from "./governance-workflow-negative-cases.mjs";
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(root, "scripts", "validate-governance.mjs");
+const adapterHarness = path.join(root, "scripts", "test-reference-adapters.mjs");
+const adapterPipeParser = 'let output = ""; process.stdin.setEncoding("utf8"); process.stdin.on("data", (chunk) => { output += chunk; }); process.stdin.on("end", () => { const report = JSON.parse(output); const complete = report.ok === true && report.failures.length === 0 && report.results.length === 42; process.stdout.write(complete ? "42\\n" : "incomplete\\n"); process.exitCode = complete ? 0 : 1; });';
 
 const cases = [
   { name: "missing_governance", omit: ["GOVERNANCE.md"], expect: "GOVERNANCE.md: missing file" },
+  { name: "broad_profile_sources_claim_no_generated_artifacts", mutate: { "GOVERNANCE.md": files["GOVERNANCE.md"].replace(/`design-engineering\/reference-profiles\/governed-local\/editorial\/profile\.json`[^|]+/, "`design-engineering/reference-profiles/governed-local/**`") }, expect: "GOVERNANCE.md: governed local reference profile sources must be the six explicit canonical profile files" },
   { name: "missing_matrix_stale_trigger", mutate: { "GOVERNANCE.md": files["GOVERNANCE.md"].replace("Generated structure changes, generated-warning changes, or generated metadata changes.", "Generated structure changes.") }, expect: "GOVERNANCE.md: missing Generated structure changes, generated-warning changes, or generated metadata changes." },
   { name: "missing_evidence_fixture_coverage", mutate: { "quality/evidence/executable-evidence.md": "Missing governance file or generated warning fixtures must fail." }, expect: "quality/evidence/executable-evidence.md: missing Missing governance file, generated warning, generated metadata, CODEOWNERS coverage, or stale policy fixtures must fail." },
   {
@@ -56,16 +63,114 @@ const cases = [
     expect: ".github/workflows/validate.yml: missing permissions:",
   },
   { name: "missing_stale_policy", mutate: { "GOVERNANCE.md": files["GOVERNANCE.md"].replace("scheduled_stale_audit: deferred\n", "") }, expect: "GOVERNANCE.md: missing scheduled_stale_audit: deferred" },
+  { name: "missing_evidence_audit_policy", mutate: { "GOVERNANCE.md": files["GOVERNANCE.md"].replace("scheduled_evidence_audit: active_advisory\n", "") }, expect: "GOVERNANCE.md: missing scheduled_evidence_audit: active_advisory" },
   {
     name: "paraphrased_stale_policy",
     mutate: {
       "GOVERNANCE.md": files["GOVERNANCE.md"].replace(
-        "Decision: no scheduled stale-content workflow yet.",
-        "Decision: a scheduled stale-content workflow is not needed yet.",
+        "Decision: run a weekly advisory audit only for evidence records that already declare `expires_at` or `review_by`.",
+        "Decision: inspect old evidence from time to time.",
       ),
     },
-    expectWarning: "GOVERNANCE.md: recommended wording missing Decision: no scheduled stale-content workflow yet.",
+    expect: "GOVERNANCE.md: missing Decision: run a weekly advisory audit only for evidence records that already declare `expires_at` or `review_by`.",
   },
+  { name: "missing_no_universal_age_boundary", mutate: { "GOVERNANCE.md": files["GOVERNANCE.md"].replace("No repository-wide maximum age or inferred time-to-live applies.", "Evidence gets old after 30 days.") }, expect: "GOVERNANCE.md: missing No repository-wide maximum age or inferred time-to-live applies." },
+  { name: "missing_freshness_workflow", omit: [".github/workflows/evidence-freshness.yml"], expect: ".github/workflows/evidence-freshness.yml: missing file" },
+  { name: "freshness_schedule_drift", mutate: { ".github/workflows/evidence-freshness.yml": files[".github/workflows/evidence-freshness.yml"].replace("cron: '0 5 * * 1'", "cron: '0 5 * * 2'") }, expect: ".github/workflows/evidence-freshness.yml: missing Monday 05:00 UTC schedule" },
+  { name: "freshness_mode_became_blocking", mutate: { ".github/workflows/evidence-freshness.yml": files[".github/workflows/evidence-freshness.yml"].replace("--mode advisory", "--mode blocking") }, expect: ".github/workflows/evidence-freshness.yml: missing --mode advisory" },
+  { name: "freshness_blanket_continue", mutate: { ".github/workflows/evidence-freshness.yml": `${files[".github/workflows/evidence-freshness.yml"]}\ncontinue-on-error: true\n` }, expect: ".github/workflows/evidence-freshness.yml: continue-on-error is forbidden because malformed records and tool failures must block" },
+  { name: "consumer_browser_became_nonblocking", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("  consumer-conformance:\n", "  consumer-conformance:\n    continue-on-error: true\n") }, expect: ".github/workflows/validate.yml: consumer-conformance must be blocking" },
+  {
+    name: "consumer_browser_command_commented_out",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: |\n        # npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line\n        true") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_relocated",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: true").replace("  chromium-sentinel:\n", "  chromium-sentinel:\n    steps:\n      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line\n") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_hidden_in_env",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - name: Hidden browser command\n        env:\n          run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line\n        run: true") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_hidden_in_inline_comment",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: true # npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_in_disabled_step",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - name: Disabled browser command\n        if: false\n        run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_hidden_in_heredoc",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: |\n          cat <<'PROBE'\n          npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line\n          PROBE\n          true") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_hidden_in_numeric_heredoc",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: |\n          cat <<'123'\n          npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line\n          123\n          true") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_echo_only",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: echo npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_shell_builtin_echo",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: command echo npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_short_circuited",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: false && npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_failure_ignored",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line || true") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_split_failure_ignored",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: |\n          npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line \\\n          || true") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_folded_failure_ignored",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - run: >-\n          npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line\n          || true") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_command_compound_false_step",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - if: ${{ false && true }}\n        run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: required command steps must be unconditional",
+  },
+  {
+    name: "consumer_browser_job_compound_false",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("  consumer-conformance:\n", "  consumer-conformance:\n    if: ${{ false && true }}\n") },
+    expect: ".github/workflows/validate.yml: consumer-conformance job must be unconditional",
+  },
+  {
+    name: "consumer_browser_command_quoted_disabled_step",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line", "      - name: Disabled browser command\n        \"if\": false # disabled\n        run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line") },
+    expect: ".github/workflows/validate.yml: consumer-conformance: missing npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line",
+  },
+  {
+    name: "consumer_browser_job_disabled",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("  consumer-conformance:\n", "  consumer-conformance:\n    if: false\n") },
+    expect: ".github/workflows/validate.yml: consumer-conformance job must be enabled",
+  },
+  {
+    name: "page_lifecycle_command_commented_out",
+    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: node scripts/finalize-page-evidence.mjs --json", "      - run: |\n        # node scripts/finalize-page-evidence.mjs --json\n        true") },
+    expect: ".github/workflows/validate.yml: consumer-page-evidence: missing node scripts/finalize-page-evidence.mjs",
+  },
+  { name: "page_capture_became_blocking", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("    continue-on-error: true\n    env:\n      CONSUMER_CONFORMANCE_CAPTURE_DIR", "    env:\n      CONSUMER_CONFORMANCE_CAPTURE_DIR") }, expect: ".github/workflows/validate.yml: consumer-page-evidence must be nonblocking" },
   { name: "paraphrased_governance_link_label", mutate: { "README.md": files["README.md"].replace("[Governance, Lifecycle, And Docs-As-Code]", "[Governance reference]") }, expectWarning: "README.md: recommended link label missing [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md)" },
   { name: "missing_motion_codeowner", mutate: { ".github/CODEOWNERS": files[".github/CODEOWNERS"].replace("/motion/ @changeroa\n", "") }, expect: ".github/CODEOWNERS: missing /motion/ @changeroa" },
   { name: "missing_consumer_reference_codeowner", mutate: { ".github/CODEOWNERS": files[".github/CODEOWNERS"].replace("/consumer-reference/ @changeroa\n", "") }, expect: ".github/CODEOWNERS: missing /consumer-reference/ @changeroa" },
@@ -78,67 +183,11 @@ const cases = [
   { name: "missing_domain_ci_wiring", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("node scripts/validate-domains.mjs --json\n", "") }, expect: ".github/workflows/validate.yml: missing node scripts/validate-domains.mjs --json" },
   { name: "missing_domain_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail.", "Domain fixtures must fail.") }, expect: "quality/evidence/executable-evidence.md: missing Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail." },
   { name: "missing_sentinel_ci_wiring", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replaceAll("node scripts/test-consumer-reference-sentinel.mjs", "") }, expect: ".github/workflows/validate.yml: missing node scripts/test-consumer-reference-sentinel.mjs" },
-  {
-    name: "browser_artifact_harness_in_static_job",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("  component-state-evidence:\n", "node scripts/test-validate-component-state-artifacts.mjs\n  component-state-evidence:\n") },
-    expect: ".github/workflows/validate.yml: browser-dependent artifact/session harness must not run in validate job",
-  },
-  {
-    name: "browser_artifact_harness_missing_container_job",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("        run: node scripts/test-validate-component-state-artifacts.mjs\n", "") },
-    expect: ".github/workflows/validate.yml: component-state artifact/session harness must run in Playwright container job",
-  },
-  {
-    name: "duplicate_artifact_harness_in_chromium_sentinel",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      - run: node scripts/test-consumer-reference-sentinel.mjs\n", "      - run: node scripts/test-consumer-reference-sentinel.mjs\n      - run: node scripts/test-validate-component-state-artifacts.mjs\n") },
-    expect: ".github/workflows/validate.yml: artifact/session harness must run exactly once and only in component-state-evidence job",
-  },
-  {
-    name: "unpinned_component_container_with_pinned_env",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("      image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a", "      image: mcr.microsoft.com/playwright:v1.61.0-noble") },
-    expect: ".github/workflows/validate.yml: component-state container.image must equal pinned Playwright digest",
-  },
-  {
-    name: "session_receipt_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("            STATE_SESSION_RECEIPT=\"$STATE_EVIDENCE_ROOT/capture-session.json\" \\\n", "            STATE_SESSION_RECEIPT=\"/tmp/capture-session.json\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state runtime must bind receipt under shared root",
-  },
-  {
-    name: "finalizer_output_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("            --output \"$STATE_EVIDENCE_ROOT/runtime-manifest.json\" \\\n", "            --output \"/tmp/runtime-manifest.json\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state finalizer must write manifest under shared root",
-  },
-  {
-    name: "validator_manifest_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("            --runtime-manifest \"$STATE_EVIDENCE_ROOT/runtime-manifest.json\" \\\n", "            --runtime-manifest \"/tmp/runtime-manifest.json\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state validator must read manifest under shared root",
-  },
-  {
-    name: "finalizer_artifact_root_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("          node scripts/finalize-component-state-evidence.mjs \\\n            --artifact-root \"$STATE_EVIDENCE_ROOT\" \\\n", "          node scripts/finalize-component-state-evidence.mjs \\\n            --artifact-root \"/tmp/consumer-reference-state\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state finalizer must use shared artifact root",
-  },
-  {
-    name: "validator_artifact_root_outside_shared_root",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("          node scripts/validate-component-state.mjs \\\n            --artifact-root \"$STATE_EVIDENCE_ROOT\" \\\n", "          node scripts/validate-component-state.mjs \\\n            --artifact-root \"/tmp/consumer-reference-state\" \\\n") },
-    expect: ".github/workflows/validate.yml: component-state validator must use shared artifact root",
-  },
-  {
-    name: "runner_temp_in_component_job",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state", "STATE_EVIDENCE_ROOT: ${{ runner.temp }}/consumer-reference-state") },
-    expect: ".github/workflows/validate.yml: component-state Playwright container job must not use runner temp paths",
-  },
-  {
-    name: "component_state_workspace_root_drift",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replaceAll(".tmp/consumer-reference-state", "state-output") },
-    expect: ".github/workflows/validate.yml: missing shared component-state workspace path STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state",
-  },
+  { name: "missing_component_source_contract_ci", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("node scripts/test-component-state-source-contract.mjs", "") }, expect: ".github/workflows/validate.yml: missing node scripts/test-component-state-source-contract.mjs" },
+  { name: "missing_visual_schema_ci", mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("consumer-reference/schema/visual-evidence.schema.json", "") }, expect: ".github/workflows/validate.yml: missing consumer-reference/schema/visual-evidence.schema.json" },
+  ...componentStateWorkflowCases(files[".github/workflows/validate.yml"]),
   { name: "missing_sentinel_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.", "Chromium evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence." },
-  {
-    name: "floating_action_ref",
-    mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4", "uses: actions/checkout@v4") },
-    expect: ".github/workflows/validate.yml: floating or unlabeled action ref uses: actions/checkout@v4",
-  },
+  { name: "missing_component_state_evidence_coverage", mutate: { "quality/evidence/executable-evidence.md": files["quality/evidence/executable-evidence.md"].replace("Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles.", "Component evidence exists.") }, expect: "quality/evidence/executable-evidence.md: missing Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles." },
   {
     name: "missing_scoped_checkout_sha_trust",
     mutate: {
@@ -174,6 +223,8 @@ const cases = [
     mutate: { ".github/workflows/validate.yml": files[".github/workflows/validate.yml"].replace("\"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"", "\"$GITHUB_REPOSITORY\" \"changeroa/StyleGallery\" \"$GITHUB_RUN_ID\"") },
     expect: ".github/workflows/validate.yml: missing \"changeroa/StyleGallery\" \"$GITHUB_REPOSITORY\" \"$GITHUB_RUN_ID\"",
   },
+  ...governanceMatrixCases(files["GOVERNANCE.md"]),
+  ...workflowSafetyCases(files[".github/workflows/validate.yml"]),
   { name: "success_path", expect: null },
 ];
 
@@ -221,6 +272,15 @@ function runCase(testCase) {
 }
 
 const results = cases.map(runCase);
+const adapterPipeCheck = spawnSync("sh", ["-c", '"$NODE_BIN" "$ADAPTER_HARNESS" --json | "$NODE_BIN" -e "$ADAPTER_PIPE_PARSER"'], {
+  cwd: root, encoding: "utf8", env: { ...process.env, ADAPTER_HARNESS: adapterHarness, ADAPTER_PIPE_PARSER: adapterPipeParser, NODE_BIN: process.execPath },
+});
+results.push({
+  actual: { status: adapterPipeCheck.status, stdout: adapterPipeCheck.stdout.trim() },
+  expected: "complete 42-result JSON report through a pipe",
+  name: "adapter_json_pipe_complete",
+  ok: adapterPipeCheck.status === 0 && adapterPipeCheck.stdout.trim() === "42",
+});
 const report = {
   ok: results.every((result) => result.ok),
   results,

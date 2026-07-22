@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/page-evidence-session.schema.json",
+  "title": "Consumer-local page evidence start receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_kind", "session_id", "run_id", "nonce", "started_at", "repository", "revision", "branch", "attempt", "environment", "conformance_record", "source", "intended_scenario_ids"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "record_kind": { "const": "page_evidence_session" },
+    "session_id": { "$ref": "#/$defs/identity" },
+    "run_id": { "$ref": "#/$defs/identity" },
+    "nonce": { "$ref": "#/$defs/hash" },
+    "started_at": { "type": "string", "format": "date-time" },
+    "repository": { "type": "string", "minLength": 1 },
+    "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "branch": { "type": "string", "minLength": 1 },
+    "attempt": { "type": "integer", "minimum": 1 },
+    "environment": { "$ref": "#/$defs/producer_environment" },
+    "conformance_record": { "$ref": "#/$defs/json_artifact" },
+    "source": { "$ref": "#/$defs/source_manifest" },
+    "intended_scenario_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/scenario_id" }
+    }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "identity": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$" },
+    "scenario_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "normalized_path": { "type": "string", "minLength": 1, "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*[?#]).+$" },
+    "producer_environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "node", "platform", "producer"],
+      "properties": {
+        "kind": { "const": "browser_evidence" },
+        "node": { "type": "string", "pattern": "^v\\d+\\.\\d+\\.\\d+$" },
+        "platform": { "type": "string", "minLength": 1 },
+        "producer": { "const": "stylegallery_page_evidence" }
+      }
+    },
+    "file_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "byte_length"],
+      "properties": {
+        "path": { "$ref": "#/$defs/normalized_path" },
+        "sha256": { "$ref": "#/$defs/hash" },
+        "byte_length": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "json_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "byte_length", "media_type"],
+      "properties": {
+        "path": { "$ref": "#/$defs/normalized_path" },
+        "sha256": { "$ref": "#/$defs/hash" },
+        "byte_length": { "type": "integer", "minimum": 1 },
+        "media_type": { "const": "application/json" }
+      }
+    },
+    "source_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "files"],
+      "properties": {
+        "sha256": { "$ref": "#/$defs/hash" },
+        "files": {
+          "type": "array",
+          "maxItems": 1024,
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/file_artifact" }
+        }
+      }
+    },
+    "receipt_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "byte_length", "media_type"],
+      "properties": {
+        "path": { "const": "page-evidence-session.json" },
+        "sha256": { "$ref": "#/$defs/hash" },
+        "byte_length": { "type": "integer", "minimum": 1 },
+        "media_type": { "const": "application/json" }
+      }
+    },
+    "completed_session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session_id", "run_id", "nonce", "receipt_sha256", "receipt", "started_at", "completed_at", "repository", "revision", "branch", "attempt", "environment", "conformance_record", "source", "intended_scenario_ids"],
+      "properties": {
+        "session_id": { "$ref": "#/$defs/identity" },
+        "run_id": { "$ref": "#/$defs/identity" },
+        "nonce": { "$ref": "#/$defs/hash" },
+        "receipt_sha256": { "$ref": "#/$defs/hash" },
+        "receipt": { "$ref": "#/$defs/receipt_artifact" },
+        "started_at": { "type": "string", "format": "date-time" },
+        "completed_at": { "type": "string", "format": "date-time" },
+        "repository": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "branch": { "type": "string", "minLength": 1 },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "environment": { "$ref": "#/$defs/producer_environment" },
+        "conformance_record": { "$ref": "#/$defs/json_artifact" },
+        "source": { "$ref": "#/$defs/source_manifest" },
+        "intended_scenario_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/scenario_id" }
+        }
+      }
+    }
+  }
+}

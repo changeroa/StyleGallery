@@ -2,8 +2,9 @@
 
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const cases = [
   ["hidden_layout", "hidden-layout", "computed_layout_visible"],
   ["long_content_reflow", "long-content-reflow", "computed_long_content_reflow"],

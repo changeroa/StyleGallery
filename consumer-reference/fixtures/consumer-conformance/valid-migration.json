@@ -1,0 +1,142 @@
+{
+  "adoption_mappings": [
+    {
+      "consumer_target": {
+        "identity": "GalleryShell",
+        "kind": "component"
+      },
+      "debt": [],
+      "deviations": [],
+      "local_decision": {
+        "decision": "Keep the spacing value consumer-local and map only the layout unit role.",
+        "identity": "--space-shell-gap",
+        "kind": "token"
+      },
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "stylegallery": {
+        "anchor": "#recommended-pattern-stack",
+        "path": "recipes/dashboard.md",
+        "revision": "66601da6e81c69674edf5c1b9b1b0862d4597fe9"
+      }
+    }
+  ],
+  "claim_boundary": {
+    "certifies_accessibility": false,
+    "certifies_product_correctness": false,
+    "scope": "This record binds migration scenarios to consumer-owned runtime evidence only."
+  },
+  "consumer": {
+    "relevant_sources": [
+      "consumer-reference/fixtures/consumer-conformance/runtime-proof.mjs",
+      "consumer-reference/schema/consumer-conformance-record.schema.json",
+      "scripts/consumer-conformance-contract.mjs",
+      "scripts/validate-consumer-conformance.mjs"
+    ],
+    "repository": "changeroa/StyleGallery",
+    "revision": "84bf420d568f68021117f8142e6d982b4966de2f"
+  },
+  "id": "example-consumer-migration",
+  "migration_dimensions": {
+    "action_parity": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "atomic_batch_behavior": {
+      "reason": "The migrated surface exposes no batch operation in this scope.",
+      "status": "not_applicable"
+    },
+    "behavior_inventory": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "contract_precedence": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "defaults_tri_state_mapping": {
+      "reason": "The migrated fields do not have defaults or tri-state semantics.",
+      "status": "not_applicable"
+    },
+    "direct_mutation": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "exact_time_boundary": {
+      "reason": "The migrated behavior has no exact-time scheduling boundary.",
+      "status": "not_applicable"
+    },
+    "field_parity": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "indirect_mutation": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "persistence_round_trip": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "reset_boundary": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "route_parity": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    },
+    "state_transitions": {
+      "scenario_ids": [
+        "migration-round-trip"
+      ],
+      "status": "applicable"
+    }
+  },
+  "page_evidence": {
+    "reason": "Page evidence is supplied by the consumer during end-to-end composition.",
+    "status": "not_applicable"
+  },
+  "record_kind": "consumer_migration_conformance",
+  "scenarios": [
+    {
+      "assertions": [
+        "The drawer state and persisted route data match after a reload."
+      ],
+      "argv": [
+        "node",
+        "consumer-reference/fixtures/consumer-conformance/runtime-proof.mjs"
+      ],
+      "evidence_method": "integration",
+      "exit_code": 0,
+      "id": "migration-round-trip",
+      "observable_actions": [
+        "Run the synthetic migration fixture and inspect its machine-readable result."
+      ],
+      "result_artifact": "consumer-reference/fixtures/consumer-conformance/valid-migration-result.json",
+      "run_id": "run-20260721-001",
+      "session_id": "session-20260721-001",
+      "source_digest": "6d90893774e2228ffe9ae0286f5b3392b103ea1bf5e571fcde2f7a861d76372c"
+    }
+  ],
+  "schema_version": "1.0"
+}

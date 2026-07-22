@@ -2,8 +2,9 @@
 
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const cases = [
   ["key_runtime_mismatch", "runtime-key-mismatch", "state_activation_key_parity", "action-focused"],
   ["pressed_false", "runtime-pressed-false", "pressed_surface_mismatch", "toggle-focused-pressed"],

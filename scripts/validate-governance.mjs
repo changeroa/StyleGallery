@@ -3,60 +3,16 @@
 import fs from "node:fs";
 import path from "node:path";
 import { componentStateWorkflowFailures } from "./component-state-workflow-contract.mjs";
+import { consumerEvidenceGovernanceFailures } from "./consumer-evidence-governance-contract.mjs";
+import { referenceOwnershipFailures } from "./governance-matrix-contract.mjs";
+import { immutableActionPins, requiredCodeowners, sentinelProvenanceClauses } from "./governance-policy-contract.mjs";
 import { promotionGovernanceFailures } from "./promotion-governance-contract.mjs";
+import { workflowActionFailures } from "./workflow-action-contract.mjs";
 
-const args = new Set(process.argv.slice(2));
-const json = args.has("--json");
+const json = new Set(process.argv.slice(2)).has("--json");
 const root = process.cwd();
 const failures = [];
 const warnings = [];
-const sentinelProvenanceClauses = [
-  "Completed-CI repository, workflow, run ID and attempt, SHA, and artifact-name fields are workflow-recorded, self-asserted metadata, not an external attestation.",
-  "The self-asserted repository field names the canonical upstream changeroa/StyleGallery; the self-asserted execution_repository field names the actual GitHub Actions repository and is limited to changeroa/StyleGallery or ark-jo/StyleGallery.",
-  "The committed calibration's external_verification object records an independently checked GitHub Actions run and artifact API identity; artifact.api_digest is distinct from committed_ci.raw_evidence_sha256.",
-  "Future CI aggregates remain awaiting_external_verification until their uploaded artifact API identity is independently checked.",
-  "Linux/amd64 repeatability is externally verified only for committed run 29260372260; it does not establish baseline-owner approval or product suitability.",
-  "Baseline-owner approval remains unclaimed until the named owner explicitly approves it.",
-  "Synthetic fixtures validate rejection and acceptance behavior only; they are not authenticated provenance.",
-];
-const requiredCodeowners = [
-  "* @changeroa",
-  "/GOVERNANCE.md @changeroa",
-  "/README.md @changeroa",
-  "/index.md @changeroa",
-  "/AGENTS.md @changeroa",
-  "/DOMAINS.md @changeroa",
-  "/layout/ @changeroa",
-  "/motion/ @changeroa",
-  "/design-engineering/ @changeroa",
-  "/platform-guides/ @changeroa",
-  "/consumer-reference/ @changeroa",
-  "/consumer-reference/baselines/ @changeroa",
-  "/consumer-reference/policies/ @changeroa",
-  "/consumer-reference/fixtures/promotion/ @changeroa",
-  "/consumer-reference/schema/promotion-rfc.schema.json @changeroa",
-  "/tests/ @changeroa",
-  "/playwright.config.mjs @changeroa",
-  "/GUIDE.md @changeroa",
-  "/guides/ @changeroa",
-  "/recipes/ @changeroa",
-  "/quality/ @changeroa",
-  "/scripts/pattern-data.mjs @changeroa",
-  "/scripts/generate-patterns.mjs @changeroa",
-  "/patterns/ @changeroa",
-  "/CATALOG.md @changeroa",
-  "/.github/workflows/validate.yml @changeroa",
-  "/.github/ @changeroa",
-  "/scripts/ @changeroa",
-  "/scripts/validate-*.mjs @changeroa",
-  "/scripts/test-validate-*.mjs @changeroa",
-];
-const immutableActionPins = [
-  "uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4",
-  "uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4",
-  "uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4",
-];
-
 function read(relative) {
   const target = path.join(root, relative);
   if (!fs.existsSync(target)) {
@@ -96,7 +52,12 @@ function requireGovernanceMatrix() {
     "Layout recipes",
     "Quality gates and evidence",
     "Consumer reference contract",
+    "Governed local reference profiles",
     "Component-state evidence matrices",
+    "Consumer migration conformance",
+    "Consumer page-evidence lifecycle",
+    "Explicit evidence freshness schedule",
+    "Deterministic consumer browser conformance",
     "Shared promotion policy",
     "Proposed Chromium sentinel",
     "Domain manifest and scope decision",
@@ -118,6 +79,9 @@ function requireGovernanceMatrix() {
   requireIncludes("GOVERNANCE.md", "Generated structure changes, generated-warning changes, or generated metadata changes.");
   requireIncludes("GOVERNANCE.md", "`scripts/generate-consumer-reference-evidence.mjs`");
   requireIncludes("GOVERNANCE.md", "Browser state evidence begins with `scripts/create-component-state-session.mjs`");
+  requireIncludes("GOVERNANCE.md", "Receipt creation rejects dirty relevant sources.");
+  requireIncludes("GOVERNANCE.md", "browser-authored visual sidecars bind the same session, scenario, capture time, source digest, PNG bytes, dimensions, and hash");
+  requireIncludes("GOVERNANCE.md", "exactly 30 channel passes over the closed 40-file runtime set");
   requireIncludes("GOVERNANCE.md", "Validation uses the receipt and completed manifest interval, not a wall-clock maximum age");
   for (const profile of ["editorial", "terminal"]) {
     for (const artifact of ["state-matrix.md", "keyboard-matrix.md", "evidence-coverage.md"]) {
@@ -141,8 +105,6 @@ function requireOwnership() {
 }
 
 function requireStalenessDecision() {
-  requireIncludes("GOVERNANCE.md", "scheduled_stale_audit: deferred");
-  recommendIncludes("GOVERNANCE.md", "Decision: no scheduled stale-content workflow yet.");
   requireIncludes("GOVERNANCE.md", "Audit trigger:");
   requireIncludes("GOVERNANCE.md", "node scripts/validate-links.mjs --json");
 }
@@ -161,6 +123,7 @@ function requireCiwiring() {
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-validate-webpage-workflow.mjs --json");
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/validate-consumer-reference.mjs");
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/test-validate-consumer-reference.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node -c scripts/consumer-reference-case-runner.mjs");
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/governed-profile-registry.mjs");
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/promotion-attestation-contract.mjs");
   requireIncludes(".github/workflows/validate.yml", "node -c scripts/validate-promotion-rfc.mjs");
@@ -172,6 +135,10 @@ function requireCiwiring() {
   requireIncludes(".github/workflows/validate.yml", "consumer-reference/schema/promotion-rfc.schema.json");
   requireIncludes(".github/workflows/validate.yml", "consumer-reference/policies/shared-experimental.json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/test-consumer-reference-sentinel.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node -c scripts/baseline-schema-parity.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node -c scripts/test-component-state-source-contract.mjs");
+  requireIncludes(".github/workflows/validate.yml", "node scripts/test-component-state-source-contract.mjs");
+  requireIncludes(".github/workflows/validate.yml", "consumer-reference/schema/visual-evidence.schema.json");
   requireIncludes(".github/workflows/validate.yml", "node scripts/create-component-state-session.mjs");
   requireIncludes(".github/workflows/validate.yml", "STATE_SESSION_RECEIPT=");
   requireIncludes(".github/workflows/validate.yml", "node scripts/finalize-component-state-evidence.mjs");
@@ -200,10 +167,8 @@ function requireComponentStateCiIsolation() {
 function requireImmutableActions() {
   const relative = ".github/workflows/validate.yml";
   const workflow = read(relative);
-  for (const line of workflow.split("\n").filter((entry) => /^\s*uses:\s+actions\//.test(entry))) {
-    if (!/^\s*uses:\s+actions\/[a-z0-9-]+@[a-f0-9]{40}\s+#\s+v\d+\s*$/.test(line)) failures.push(`${relative}: floating or unlabeled action ref ${line.trim()}`);
-  }
   for (const pin of immutableActionPins) if (!workflow.includes(pin)) failures.push(`${relative}: missing immutable action pin ${pin}`);
+  failures.push(...workflowActionFailures(workflow, relative));
 }
 
 function requireRootLinks() {
@@ -227,6 +192,9 @@ function requireEvidenceMap() {
   requireIncludes("quality/evidence/executable-evidence.md", "Consumer-reference handoffs, schema/runtime parity");
   requireIncludes("quality/evidence/executable-evidence.md", "repository handoff omissions must fail");
   requireIncludes("quality/evidence/executable-evidence.md", "The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.");
+  requireIncludes("quality/evidence/executable-evidence.md", "Governed-local button states retain source-bound visual, DOM, and accessibility-tree evidence across both example profiles.");
+  requireIncludes("quality/evidence/executable-evidence.md", "one clean capture session binds the browser artifacts to the governed source inventory");
+  requireIncludes("quality/evidence/executable-evidence.md", "It does not prove product suitability, independent adoption, full accessibility, cross-browser behavior, or owner approval");
   requireIncludes("GOVERNANCE.md", "node scripts/test-consumer-reference-sentinel.mjs");
   requireIncludes("GOVERNANCE.md", "owner.enforcement: \"placeholder\"");
   requireIncludes("GOVERNANCE.md", "review_independence: \"single_account\"");
@@ -239,10 +207,17 @@ function requireSentinelProvenanceBoundary() {
 }
 
 requireGovernanceMatrix();
+failures.push(...referenceOwnershipFailures(read("GOVERNANCE.md")));
 requireLifecycleStates();
 requireOwnership();
 requireStalenessDecision();
 requireCiwiring();
+failures.push(...consumerEvidenceGovernanceFailures({
+  evidence: read("quality/evidence/executable-evidence.md"),
+  freshnessWorkflow: read(".github/workflows/evidence-freshness.yml"),
+  governance: read("GOVERNANCE.md"),
+  validationWorkflow: read(".github/workflows/validate.yml"),
+}));
 requireComponentStateCiIsolation();
 requireImmutableActions();
 requireRootLinks();
@@ -269,4 +244,4 @@ if (json) {
   console.error(result.failures.join("\n"));
 }
 
-process.exit(result.ok ? 0 : 1);
+process.exitCode = result.ok ? 0 : 1;

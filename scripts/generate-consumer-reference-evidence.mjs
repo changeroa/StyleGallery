@@ -2,9 +2,10 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { resolveProfileRecords } from "./profile-record-contract.mjs";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const options = { check: false, json: false, root: path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local") };
 const failures = [];
 for (let index = 2; index < process.argv.length; index += 1) {

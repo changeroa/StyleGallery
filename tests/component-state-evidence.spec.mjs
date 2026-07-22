@@ -1,16 +1,20 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { expect, test } from "@playwright/test";
+import { artifactMetadata } from "../scripts/artifact-metadata.mjs";
 import { readCaptureSession } from "../scripts/capture-session-contract.mjs";
 import { compileSchemas } from "../scripts/component-state-contract.mjs";
+import { visualExpectationFor } from "../scripts/visual-expectation-contract.mjs";
 import { componentStateFixture, componentStateProfiles, renderComponentState } from "./helpers/render-component-state.mjs";
 
 const mutation = process.env.STATE_MUTATION ?? "none";
 const artifactRoot = process.env.STATE_ARTIFACT_DIR;
 const sessionFile = process.env.STATE_SESSION_RECEIPT;
-const playwrightVersion = JSON.parse(fs.readFileSync(path.resolve(path.dirname(new URL(import.meta.url).pathname), "../package.json"), "utf8")).devDependencies["@playwright/test"];
+const testRoot = path.dirname(fileURLToPath(import.meta.url));
+const playwrightVersion = JSON.parse(fs.readFileSync(path.resolve(testRoot, "../package.json"), "utf8")).devDependencies["@playwright/test"];
 const sessionFailures = [];
-const schemas = compileSchemas(path.resolve(path.dirname(new URL(import.meta.url).pathname), "../consumer-reference/schema"));
+const schemas = compileSchemas(path.resolve(testRoot, "../consumer-reference/schema"));
 const captureSession = sessionFile ? readCaptureSession(path.resolve(sessionFile), schemas.capture, sessionFailures) : undefined;
 if (artifactRoot && (!captureSession || sessionFailures.length > 0)) throw new Error(`valid STATE_SESSION_RECEIPT is required for capture: ${JSON.stringify(sessionFailures)}`);
 
@@ -67,9 +71,27 @@ async function captureEvidence(page, fixture, scenario, session) {
   const control = page.locator("#control");
   const stem = `${fixture.profileName}-${scenario.id}`;
   const png = await page.locator(".capture").screenshot({ animations: "disabled", caret: "hide" });
+  const image = { path: `${stem}.png`, ...artifactMetadata(png, "image/png") };
+  const expectation = visualExpectationFor(scenario, captureSession.receipt.environment, fixture.visualEnvironments);
+  expect(image.sha256, "visual_image_hash_mismatch").toBe(expectation.sha256);
+  expect(image.width, "visual_image_width_mismatch").toBe(expectation.width);
+  expect(image.height, "visual_image_height_mismatch").toBe(expectation.height);
+  const visual = {
+    capture_session: captureSession.link,
+    captured_at: capturedAt,
+    channel: "visual",
+    image,
+    profile_id: fixture.profileId,
+    scenario_id: scenario.id,
+    schema_version: "1.0",
+    semantic_mode: scenario.semantic_mode,
+    source_sha256: captureSession.receipt.source.sha256,
+  };
+  expect(schemas.visual(visual), JSON.stringify(schemas.visual.errors)).toBe(true);
   const dom = await domObservation(control, fixture, scenario, capturedAt, captureSession.link);
   const ax = await axObservation(session, fixture, scenario, capturedAt, captureSession.link);
   fs.writeFileSync(path.join(artifactRoot, `${stem}.png`), png);
+  fs.writeFileSync(path.join(artifactRoot, `${stem}.visual.json`), `${JSON.stringify(visual, null, 2)}\n`);
   fs.writeFileSync(path.join(artifactRoot, `${stem}.dom.json`), `${JSON.stringify(dom, null, 2)}\n`);
   fs.writeFileSync(path.join(artifactRoot, `${stem}.ax.json`), `${JSON.stringify(ax, null, 2)}\n`);
 }

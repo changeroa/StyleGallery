@@ -1,0 +1,102 @@
+{
+  "id": "consumer-conformance-fixture-inventory",
+  "invalid_cases": [
+    {
+      "expected_code": "migration_dimension_required",
+      "name": "omitted-dimension"
+    },
+    {
+      "expected_code": "migration_dimension_scenario_required",
+      "name": "applicable-without-scenario"
+    },
+    {
+      "expected_code": "runtime_evidence_method_invalid",
+      "name": "source-regex-runtime-proof"
+    },
+    {
+      "expected_code": "adoption_scenario_unknown",
+      "name": "orphan-adoption-scenario"
+    },
+    {
+      "expected_code": "adoption_consumer_target_invalid",
+      "name": "malformed-local-target"
+    },
+    {
+      "expected_code": "adoption_stylegallery_revision_unpinned",
+      "name": "unpinned-stylegallery-revision"
+    },
+    {
+      "expected_code": "adoption_stylegallery_revision_unknown",
+      "name": "unknown-stylegallery-revision"
+    },
+    {
+      "expected_code": "adoption_stylegallery_path_missing",
+      "name": "missing-stylegallery-path"
+    },
+    {
+      "expected_code": "adoption_stylegallery_anchor_missing",
+      "name": "missing-stylegallery-anchor"
+    },
+    {
+      "expected_code": "adoption_debt_incomplete",
+      "name": "debt-without-lifecycle"
+    },
+    {
+      "expected_code": "consumer_source_missing",
+      "name": "missing-source"
+    },
+    {
+      "expected_code": "consumer_source_symlink",
+      "name": "symlink-source"
+    },
+    {
+      "expected_code": "runtime_command_checkout_symlink",
+      "name": "checkout-symlink"
+    },
+    {
+      "expected_code": "runtime_result_artifact_missing",
+      "name": "missing-result-artifact"
+    },
+    {
+      "expected_code": "runtime_result_artifact_symlink",
+      "name": "symlink-result-artifact"
+    },
+    {
+      "expected_code": "runtime_result_artifact_json_invalid",
+      "name": "invalid-result-artifact-json"
+    },
+    {
+      "expected_code": "runtime_result_artifact_mismatch",
+      "name": "fabricated-result-artifact"
+    },
+    {
+      "expected_code": "consumer_repository_mismatch",
+      "name": "fabricated-repository"
+    },
+    {
+      "expected_code": "consumer_revision_unknown",
+      "name": "fabricated-revision"
+    },
+    {
+      "expected_code": "runtime_source_digest_mismatch",
+      "name": "fabricated-source-digest"
+    },
+    {
+      "expected_code": "runtime_command_failed",
+      "name": "nonzero-command"
+    },
+    {
+      "expected_code": "runtime_command_result_missing",
+      "name": "forged-noop-result"
+    },
+    {
+      "expected_code": "consumer_repository_mismatch",
+      "name": "github-repository-spoof"
+    }
+  ],
+  "schema_record": "consumer-reference/schema/consumer-conformance-record.schema.json",
+  "schema_version": "1.0",
+  "valid_records": [
+    "valid-migration.json"
+  ]
+}

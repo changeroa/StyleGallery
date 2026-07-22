@@ -1,8 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { resolveProfileRecords } from "../../scripts/profile-record-contract.mjs";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const governedRoot = path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local");
 
 function readJson(file) {
@@ -68,6 +69,7 @@ export function componentStateFixture(profileName) {
       page: cssDimension(tokens.space.page.$value),
       rhythm: cssDimension(tokenValue(tokens, foundations.bindings.content_rhythm)),
     },
+    visualEnvironments: states.visual_environments,
   };
 }
 

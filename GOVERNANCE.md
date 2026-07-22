@@ -3,6 +3,7 @@ type: Governance Reference
 title: Governance, Lifecycle, And Docs-As-Code
 description: Source-of-truth, generated artifact, domain, lifecycle, ownership, and stale-content policy for StyleGallery.
 scheduled_stale_audit: deferred
+scheduled_evidence_audit: active_advisory
 ---
 
 # Governance, Lifecycle, And Docs-As-Code
@@ -23,8 +24,12 @@ Use this file before editing repository documentation. It names which file is au
 | Quality gates and evidence | `quality/**/*.md` | Manual | None | `stable` | Claim-boundary changes, evidence-family changes, or broken quality links. | `scripts/validate-okf.mjs`, `scripts/validate-links.mjs`, `scripts/validate-ia.mjs` | Quality owner |
 | Consumer reference contract | `consumer-reference/contract.md`, `consumer-reference/schema/item.schema.json` | Manual | None | `stable` contract with related fixtures | Handoff shape, path boundary, lifecycle, ownership, or dependency-direction changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Repository governance owner with Validation owner |
 | Portable token source | `consumer-reference/fixtures/token-portability/valid-reference.json`, `consumer-reference/schema/portable-tokens.schema.json` | `scripts/build-reference-artifacts.mjs` with Style Dictionary `5.5.0` | `consumer-reference/generated/tokens.css`, `consumer-reference/generated/manifest.json` | `stable` restricted adapter contract, `generated` output | Allowed token shape, adapter/version pin, source token count, warning, declaration, or content hash changes. | `scripts/validate-reference-artifacts.mjs`, `scripts/test-reference-adapters.mjs` | Repository governance owner with Validation owner |
-| Governed local reference profiles | `design-engineering/reference-profiles/governed-local/**` | Manual | None | `experimental`, `example_only`, non-default related fixtures | Layout revision, identity values, UA/reset assumptions, explicit selection, or fixture relationship changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Design Engineering owner with Validation owner |
+| Governed local reference profiles | `design-engineering/reference-profiles/governed-local/editorial/profile.json`, `design-engineering/reference-profiles/governed-local/editorial/tokens.dtcg.json`, `design-engineering/reference-profiles/governed-local/editorial/local-foundations.json`, `design-engineering/reference-profiles/governed-local/terminal/profile.json`, `design-engineering/reference-profiles/governed-local/terminal/tokens.dtcg.json`, `design-engineering/reference-profiles/governed-local/terminal/local-foundations.json` | Manual | None | `experimental`, `example_only`, non-default related fixtures | Layout revision, identity values, UA/reset assumptions, explicit selection, or fixture relationship changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Design Engineering owner with Validation owner |
 | Component-state evidence matrices | Each profile's declared `components/*.component.json`, `states/*.states.json`, `fixtures/*.fixture.json`, and `evidence/*.evidence.json` records | `scripts/generate-consumer-reference-evidence.mjs` | `design-engineering/reference-profiles/governed-local/editorial/generated/state-matrix.md`, `design-engineering/reference-profiles/governed-local/editorial/generated/keyboard-matrix.md`, `design-engineering/reference-profiles/governed-local/editorial/generated/evidence-coverage.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/state-matrix.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/keyboard-matrix.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/evidence-coverage.md` | `generated` output from `experimental` canonical records | Declared record paths, capture-session identity, scenario/mode/channel counts, claim boundary, generated escaping, or generator output changes. | `scripts/validate-component-state.mjs`, `scripts/test-validate-component-state.mjs`, `scripts/test-validate-component-state-artifacts.mjs`, `scripts/test-generate-consumer-reference-evidence.mjs` | Design Engineering owner with Validation owner |
+| Consumer migration conformance | `consumer-reference/schema/consumer-conformance-record.schema.json`, `design-engineering/consumer-migration-readiness.md` | Manual | Consumer-owned conformance records | `experimental` method | Method, dimension, scenario, mapping, or ownership changes. | `scripts/validate-consumer-conformance.mjs`, `scripts/test-validate-consumer-conformance.mjs` | Design Engineering owner with Validation owner |
+| Consumer page-evidence lifecycle | `consumer-reference/schema/page-evidence-session.schema.json`, `consumer-reference/schema/page-evidence-manifest.schema.json` | Browser/session tooling | Consumer-owned session, runner, manifest, and raster artifacts | `experimental` evidence protocol | Source, revision, session, run, scenario, review deadline, or artifact integrity changes. | `scripts/test-validate-page-evidence.mjs`, deterministic Chromium consumer-conformance job | Validation owner with consumer owner |
+| Explicit evidence freshness schedule | Evidence records that declare `expires_at` or `review_by` | `.github/workflows/evidence-freshness.yml` | Advisory JSON audit artifact | `stable` narrow schedule | Explicit deadline, auditor, schedule, or inventory changes. | `scripts/audit-evidence-freshness.mjs`, `scripts/test-audit-evidence-freshness.mjs` | Validation owner |
+| Deterministic consumer browser conformance | `tests/consumer-conformance.spec.mjs`, `tests/fixtures/consumer-conformance-scenarios.mjs`, `tests/helpers/render-consumer-conformance.mjs` | Playwright `1.61.0` in the digest-pinned `linux/amd64` image | Optional page-evidence raster artifact | `experimental` contract with blocking semantic gate and nonblocking raster capture | Viewport, container, content, state, overlay, page-scale, focus, overflow, contrast, semantics, or runtime-error changes. | Playwright matrix and `scripts/test-consumer-conformance-sentinel.mjs` | Validation owner with Design Engineering owner |
 | Shared promotion policy | `consumer-reference/policies/shared-experimental.json`, `consumer-reference/schema/promotion-rfc.schema.json` | Manual | None; promotion fixtures are synthetic examples | `stable` policy with `example_only`, deferred fixtures | Gateway scope, independence basis, evidence, ownership, support, compatibility, migration, deprecation, rollback, provenance, or decision changes. | `scripts/validate-promotion-rfc.mjs`, `scripts/test-validate-promotion-rfc.mjs` | Repository governance owner with actual consumer, support, migration, rollback, and Validation owners |
 | Proposed Chromium sentinel | `tests/helpers/render-consumer-reference.mjs`, `consumer-reference/schema/{baseline-manifest,calibration-record}.schema.json`, `consumer-reference/baselines/*.json` | Playwright `1.61.0` in the digest-pinned `linux/amd64` image | `tests/snapshots/consumer-reference-card-grid.png`, raw GitHub Actions calibration artifact | `experimental`, nonblocking while owner approval is pending | Renderer source, exact image/platform/tool pin, baseline bytes, computed layout contract, or calibration metadata changes. | `scripts/validate-baseline-manifest.mjs`, `scripts/test-validate-baseline-manifest.mjs`, `scripts/test-summarize-sentinel-calibration.mjs`, Playwright | Repository governance owner with Validation owner |
 | Domain manifest and scope decision | `DOMAINS.md`, `quality/claim-records/stylegallery-multidomain-scope.md` | Manual | None | `stable` | Domain membership, repository-scope, or provenance-policy changes. | `scripts/validate-domains.mjs`, `scripts/validate-governance.mjs` | Repository governance owner |
@@ -35,7 +40,7 @@ Use this file before editing repository documentation. It names which file is au
 | Pattern data and examples | `scripts/pattern-data.mjs` | Manual data source | `patterns/**/*.md`, `patterns/**/index.md`, `patterns/index.md`, `CATALOG.md` | `generated` output from `stable` source | Source-lineage URL changes, generated drift, category changes, or pattern count changes. | `scripts/validate-patterns.mjs`, `scripts/validate-catalog.mjs`, `scripts/validate-governance.mjs` | Pattern-data owner |
 | Pattern generator | `scripts/generate-patterns.mjs` | Manual code source | `patterns/**/*.md`, `patterns/**/index.md`, `patterns/index.md`, `CATALOG.md` | `stable` generator, `generated` output | Generated structure changes, generated-warning changes, or generated metadata changes. | `node -c scripts/generate-patterns.mjs`, generated drift check, `scripts/validate-governance.mjs` | Pattern-data owner |
 | Validation scripts | `scripts/validate-*.mjs`, `scripts/test-validate-*.mjs` | Manual code source | CI validation output | `stable` | Validator scope changes, fixture changes, or CI parity changes. | `node -c`, matching fixture tests, `.github/workflows/validate.yml` | Validation owner |
-| CI workflow | `.github/workflows/validate.yml` | Manual | GitHub Actions run | `stable` | Validation step changes, generated drift policy changes, or owner changes. | GitHub Actions, `scripts/validate-governance.mjs` | Repository governance owner |
+| CI workflows | `.github/workflows/validate.yml`, `.github/workflows/evidence-freshness.yml` | Manual | GitHub Actions runs and audit artifacts | `stable` | Validation step, explicit-deadline schedule, generated drift policy, or owner changes. | GitHub Actions, `scripts/validate-governance.mjs` | Repository governance owner |
 
 ## Generated Artifact Policy
 
@@ -67,7 +72,7 @@ Portable token artifacts are regenerated only from the restricted fixture throug
 
 Component-state evidence matrices are regenerated only from the records declared by each `profile.json`. Run `node scripts/generate-consumer-reference-evidence.mjs --json`; never hand-edit any of the six matrices or substitute undeclared record paths.
 
-Browser state evidence begins with `scripts/create-component-state-session.mjs`. Its closed receipt binds a random nonce and session ID to the checked-out revision, branch, attempt, exact runtime pins, viewport, and intended profile/scenario/channel set before capture. DOM and AX artifacts embed the receipt digest and session identity; the finalizer derives pass timestamps from those artifacts and binds the visual artifact hash to the same scenario triple. Validation uses the receipt and completed manifest interval, not a wall-clock maximum age, so an unchanged downloaded session remains verifiable later.
+Browser state evidence begins with `scripts/create-component-state-session.mjs`. Its closed receipt binds a random nonce and session ID to the checked-out revision, branch, attempt, exact runtime pins, viewport, intended profile/scenario/channel set, and a deterministic digest of the relevant capture sources before capture. Receipt creation rejects dirty relevant sources. DOM and AX artifacts embed the receipt digest and session identity; browser-authored visual sidecars bind the same session, scenario, capture time, source digest, PNG bytes, dimensions, and hash. Finalization accepts exactly 30 channel passes over the closed 40-file runtime set. Validation uses the receipt and completed manifest interval, not a wall-clock maximum age, so an unchanged downloaded session remains verifiable later.
 
 ## Lifecycle States
 
@@ -101,15 +106,16 @@ Consumer-reference ownership records the current truth as `owner.enforcement: "p
 | `guides/**`, `GUIDE.md`, `recipes/**` | Planning-doc owner | Planning flow, task routes, recipe composition boundaries. |
 | `quality/**` | Quality owner | Claim boundaries, executable evidence, review gates. |
 | `consumer-reference/**` | Repository governance owner with Validation owner | Required handoff, repository-local record safety, lifecycle separation, ownership truth, and reverse-dependency guard. |
+| `consumer-reference/schema/{consumer-conformance-record,page-evidence-session,page-evidence-manifest}.schema.json`, `scripts/*consumer-conformance*.mjs`, `scripts/*page-evidence*.mjs` | Validation owner with Design Engineering owner | Closed migration dimensions, source/revision/session/run binding, artifact containment, executable scenario coverage, and consumer-owned adoption mapping. |
 | `consumer-reference/policies/**`, `consumer-reference/fixtures/promotion/**`, `consumer-reference/schema/promotion-rfc.schema.json`, `scripts/*promotion-rfc.mjs` | Repository governance owner with actual consumer, support, migration, rollback, and Validation owners | Invariant-only scope, independence truth, claim-scoped evidence, compatibility, support capacity, lifecycle duties, and zero promotion/adoption overclaim. |
 | `consumer-reference/adapters/**`, `consumer-reference/generated/**`, `scripts/*reference-artifacts.mjs`, `scripts/test-reference-adapters.mjs` | Repository governance owner with Validation owner | Restricted token ingress, exact adapter pin, warning handling, token/declaration counts, hashes, preserved aliases, and generated drift. |
 | `DOMAINS.md`, `layout/**` | Repository governance owner with Pattern-data owner | Domain routing and preservation of the stable Layout path contract. |
 | `motion/**` | Motion domain owner | Motion terminology, review procedure, practice classification, and evidence boundaries. |
 | `design-engineering/**` | Design Engineering domain owner | Separation of product heuristics from shared quality gates. |
 | `design-engineering/reference-profiles/**` | Design Engineering owner with Validation owner | Profile-local identity and values, pinned Layout provenance, explicit non-default selection, and related-fixture truth. |
-| `tests/**`, `playwright.config.mjs`, `consumer-reference/baselines/**`, `scripts/*baseline*.mjs`, `scripts/*sentinel*.mjs`, `scripts/*renderer-purity.mjs` | Repository governance owner with Validation owner | Pure rendering, computed semantics before screenshots, immutable browser pins, nonblocking status, calibration cardinality, and pending owner approval. |
+| `tests/**`, `playwright.config.mjs`, `consumer-reference/baselines/**`, `scripts/*baseline*.mjs`, `scripts/*sentinel*.mjs`, `scripts/*renderer-purity.mjs` | Repository governance owner with Validation owner | Pure rendering, computed semantics before screenshots, immutable browser pins, required consumer-conformance semantics, optional raster capture, calibration cardinality, and pending owner approval. |
 | `platform-guides/**` | Platform Guides domain owner | Platform/source/version limits, comparison boundaries, and stale review. |
-| `scripts/validate-*.mjs`, `scripts/test-validate-*.mjs`, `.github/workflows/validate.yml` | Validation owner | Validator scope, negative fixtures, CI parity. |
+| `scripts/validate-*.mjs`, `scripts/test-validate-*.mjs`, `.github/workflows/validate.yml`, `.github/workflows/evidence-freshness.yml` | Validation owner | Validator scope, negative fixtures, blocking/advisory boundaries, CI parity. |
 
 ## Shared Promotion Governance
 
@@ -123,15 +129,17 @@ If evidence fails, restrict, maintain, or roll back the candidate. A consumed st
 
 ## Staleness Control
 
-Decision: no scheduled stale-content workflow yet.
+Decision: run a weekly advisory audit only for evidence records that already declare `expires_at` or `review_by`.
 
-Reason: the current repository is small, CI already checks local links and generated drift on pull requests and pushes, and a scheduled workflow would add notification noise without a clear owner rotation.
+The independent `.github/workflows/evidence-freshness.yml` schedule runs Monday at 05:00 UTC and also supports manual dispatch. It currently inventories the committed Chromium calibration record; consumer-owned page-evidence manifests enter the same audit by passing their explicit record path to `scripts/audit-evidence-freshness.mjs`.
+
+No repository-wide maximum age or inferred time-to-live applies. Evidence without an explicit deadline remains outside this schedule. An expired `expires_at` or due `review_by` emits an advisory annotation and a JSON report without failing solely because the date passed. Malformed records and auditor failures remain blocking even though due-date findings are advisory.
 
 Audit trigger:
 
 - Run `node scripts/validate-links.mjs --json` and `node scripts/validate-governance.mjs --json` when external source lineage, generated policy, root navigation, or validation ownership changes.
 - Run `node scripts/validate-domains.mjs --json` and `node scripts/test-validate-domains.mjs` when domain membership, scope boundaries, source paths, source revisions, platform context, or promotion state changes.
-- Reconsider a scheduled stale audit when source-lineage URLs exceed 50 entries, when an external-link failure escapes a pull request, or when ownership changes away from a single maintainer.
+- Run `node scripts/test-audit-evidence-freshness.mjs --json` when `expires_at`, `review_by`, record inventory, advisory classification, or the scheduled workflow changes.
 
 ## Required Verification
 
@@ -145,6 +153,10 @@ node scripts/validate-domains.mjs --json
 node scripts/test-validate-domains.mjs
 node scripts/validate-consumer-reference.mjs --json
 node scripts/test-validate-consumer-reference.mjs --json
+node scripts/test-validate-consumer-conformance.mjs --case valid-runtime-proof --json
+node scripts/test-validate-consumer-conformance.mjs --json
+node scripts/test-validate-page-evidence.mjs --json
+node scripts/test-audit-evidence-freshness.mjs --json
 ```
 
 For generated pattern or catalog changes, also run:
@@ -181,6 +193,8 @@ node scripts/test-renderer-purity.mjs
 For capture-session-bound component-state evidence, also run:
 
 ```sh
+STATE_EVIDENCE_ROOT=".tmp/consumer-reference-state"
+mkdir -p "$STATE_EVIDENCE_ROOT"
 node scripts/create-component-state-session.mjs --output "$STATE_EVIDENCE_ROOT/capture-session.json" --json
 STATE_SESSION_RECEIPT="$STATE_EVIDENCE_ROOT/capture-session.json" \
   STATE_ARTIFACT_DIR="$STATE_EVIDENCE_ROOT/runtime" \

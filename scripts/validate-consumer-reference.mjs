@@ -2,13 +2,16 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import { isPlainObject, validateItemSchema } from "./consumer-reference-schema.mjs";
 import { canonicalGovernedProfilePaths } from "./governed-profile-registry.mjs";
 import { validateReferenceProfile, validateReferenceProfileSet } from "./reference-profile-contract.mjs";
 
 const root = process.cwd();
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const conformanceValidator = path.join(repositoryRoot, "scripts", "validate-consumer-conformance.mjs");
 const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "schema", "item.schema.json"), "utf8"));
 const validateFullItemSchema = new Ajv2020({ allErrors: true, strict: false }).compile(schema);
 const failures = [];
@@ -21,6 +24,7 @@ const defaultItems = [
 ];
 const reverseMarkers = ["consumerreference", "designengineeringreferenceprofiles", "profilejson", "tokensdtcgjson", "relatedfixturesetid"];
 const profileSummaries = [];
+let checkedMigrationRecords = 0;
 
 function addFailure(code, relative, message) {
   failures.push({ code, message, path: relative });
@@ -56,7 +60,7 @@ function parseArguments() {
     }
     if (argument === "--item" || argument === "--profile") {
       const value = process.argv[index + 1];
-      if (!value) {
+      if (!value || value.startsWith("--")) {
         addFailure("argument_value_required", "<cli>", `${argument} requires a repository-relative JSON path`);
       } else {
         items.push(value);
@@ -72,63 +76,89 @@ function parseArguments() {
   return { items: requiresCanonicalPair ? [...new Set([...canonicalized, ...canonicalProfilePaths])] : canonicalized, json };
 }
 
-function validateRecordPath(record, itemPath) {
+function validateRecordPath(record, itemPath, prefix = "record") {
+  const reject = (suffix, message) => addFailure(`${prefix}_${suffix}`, itemPath, message);
   if (typeof record !== "string" || record.length === 0) {
-    addFailure("record_required", itemPath, "declared handoff requires record");
-    return;
+    reject("required", "declared handoff requires record");
+    return undefined;
   }
   if (record.startsWith("//") || record.startsWith("\\\\")) {
-    addFailure("record_network_path", itemPath, "record must not use a network path");
-    return;
+    reject("network_path", "record must not use a network path");
+    return undefined;
   }
   if (path.posix.isAbsolute(record) || path.win32.isAbsolute(record)) {
-    addFailure("record_absolute", itemPath, "record must be repository-relative");
-    return;
+    reject("absolute", "record must be repository-relative");
+    return undefined;
   }
   if (/^[A-Za-z][A-Za-z\d+.-]*:/.test(record)) {
-    addFailure("record_uri_scheme", itemPath, "record must not use a URI scheme");
-    return;
+    reject("uri_scheme", "record must not use a URI scheme");
+    return undefined;
   }
   if (record.split(/[\\/]/).includes("..")) {
-    addFailure("record_parent_segment", itemPath, "record must not contain a parent segment");
-    return;
+    reject("parent_segment", "record must not contain a parent segment");
+    return undefined;
   }
   if (record.includes("\\") || record.includes("?") || record.includes("#") || path.posix.normalize(record) !== record || record.startsWith("./")) {
-    addFailure("record_not_normalized", itemPath, "record must be a normalized POSIX repository path");
-    return;
+    reject("not_normalized", "record must be a normalized POSIX repository path");
+    return undefined;
   }
   if (!record.endsWith(".json")) {
-    addFailure("record_not_json", itemPath, "record must target a JSON file");
-    return;
+    reject("not_json", "record must target a JSON file");
+    return undefined;
   }
   const target = path.resolve(root, record);
   if (!isInside(root, target)) {
-    addFailure("record_escape", itemPath, "record resolves outside the repository root");
-    return;
+    reject("escape", "record resolves outside the repository root");
+    return undefined;
   }
   if (!fs.existsSync(target) || !fs.statSync(target).isFile()) {
-    addFailure("record_unresolved", itemPath, `record does not resolve: ${record}`);
-    return;
+    reject("unresolved", `record does not resolve: ${record}`);
+    return undefined;
   }
   const realRoot = fs.realpathSync(root);
   const realTarget = fs.realpathSync(target);
   if (!isInside(realRoot, realTarget)) {
-    addFailure("record_symlink_escape", itemPath, "record resolves through a symlink outside the repository root");
-    return;
+    reject("symlink_escape", "record resolves through a symlink outside the repository root");
+    return undefined;
   }
   if (realTarget !== path.join(realRoot, record)) {
-    addFailure("record_redirect", itemPath, "record must not resolve through a filesystem redirect");
-    return;
+    reject("redirect", "record must not resolve through a filesystem redirect");
+    return undefined;
   }
   try {
-    JSON.parse(fs.readFileSync(realTarget, "utf8"));
+    return { record, value: JSON.parse(fs.readFileSync(realTarget, "utf8")) };
   } catch (error) {
     if (error instanceof SyntaxError) {
-      addFailure("record_invalid_json", itemPath, `record is not valid JSON: ${record}`);
-      return;
+      reject("invalid_json", `record is not valid JSON: ${record}`);
+      return undefined;
     }
     throw error;
   }
+}
+
+function runMigrationConformance(packet, relative) {
+  const args = [conformanceValidator, "--root", root, "--record", packet.record];
+  const manifest = packet.value?.page_evidence?.status === "applicable" ? packet.value.page_evidence.manifest : undefined;
+  if (typeof manifest === "string") args.push("--artifact-root", path.posix.dirname(manifest));
+  args.push("--json");
+  checkedMigrationRecords += 1;
+  const child = spawnSync(process.execPath, args, { cwd: repositoryRoot, encoding: "utf8" });
+  let report;
+  try { report = JSON.parse(child.stdout); }
+  catch (error) {
+    addFailure("migration_conformance_validator_output_invalid", relative, error instanceof Error ? error.message : String(error));
+    return;
+  }
+  const childFailures = Array.isArray(report.failures) ? report.failures : [];
+  for (const failure of childFailures) {
+    addFailure(
+      typeof failure?.code === "string" ? failure.code : "migration_conformance_validator_output_invalid",
+      typeof failure?.path === "string" ? failure.path : relative,
+      typeof failure?.message === "string" ? failure.message : "consumer conformance validator returned a malformed finding",
+    );
+  }
+  if (child.status !== 0 && childFailures.length === 0) addFailure("migration_conformance_validator_failed", relative, "consumer conformance validator exited without a finding");
+  if (child.status === 0 && report.ok !== true) addFailure("migration_conformance_validator_output_invalid", relative, "consumer conformance validator exited zero without ok:true");
 }
 
 function validateHandoff(item, relative) {
@@ -224,6 +254,20 @@ function validateHandoffCoverage() {
       } else if (!/Consumer reference record:\s*\S+\.json/i.test(window)) {
         addFailure("handoff_consumer_record_required", relative, `declared handoff at line ${index + 1} requires one JSON record`);
       }
+      const migrationDeclarations = [...window.matchAll(/^Consumer migration conformance:\s*(\S+)\s*$/gim)];
+      const migrationRecords = [...window.matchAll(/^Consumer migration conformance record:\s*([^\n]+)\s*$/gim)];
+      if (migrationDeclarations.length === 0 && migrationRecords.length > 0) {
+        addFailure("migration_conformance_declaration_required", relative, `migration record at line ${index + 1} requires an exact declared conformance field`);
+      } else if (migrationDeclarations.length > 0) {
+        if (migrationDeclarations.length !== 1 || migrationDeclarations[0][1].toLowerCase() !== "declared") {
+          addFailure("migration_conformance_status_invalid", relative, `migration handoff at line ${index + 1} accepts exactly one declared status`);
+        } else if (migrationRecords.length !== 1) {
+          addFailure("migration_conformance_record_required", relative, `declared migration handoff at line ${index + 1} requires exactly one JSON record`);
+        } else {
+          const packet = validateRecordPath(migrationRecords[0][1].trim(), relative, "migration_conformance_record");
+          if (packet) runMigrationConformance(packet, relative);
+        }
+      }
     }
   }
   return checked;
@@ -237,8 +281,8 @@ for (const finding of validateReferenceProfileSet(profileSummaries)) addFailure(
 const checkedHandoffs = validateHandoffCoverage();
 
 const uniqueFailures = [...new Map(failures.map((failure) => [`${failure.code}:${failure.path}:${failure.message}`, failure])).values()];
-const result = { checkedHandoffs, checkedItems: options.items.length, failures: uniqueFailures, ok: uniqueFailures.length === 0, profiles: profileSummaries, warnings };
+const result = { checkedHandoffs, checkedItems: options.items.length, checkedMigrationRecords, failures: uniqueFailures, ok: uniqueFailures.length === 0, profiles: profileSummaries, warnings };
 if (options.json) console.log(JSON.stringify(result, null, 2));
 else if (result.ok) console.log(`ok: ${result.checkedItems} consumer reference items`);
 else console.error(result.failures.map((failure) => `${failure.code}: ${failure.path}: ${failure.message}`).join("\n"));
-process.exit(result.ok ? 0 : 1);
+process.exitCode = result.ok ? 0 : 1;
