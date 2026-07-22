@@ -4,15 +4,16 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { BASELINE_METADATA_SHA256, BASELINE_REFERENCE, sha256 } from "./baseline-contract.mjs";
+import { baselineSchemaParity } from "./baseline-schema-parity.mjs";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(repositoryRoot, "scripts", "validate-baseline-manifest.mjs");
 const canonical = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "baselines", "calibration.json"), "utf8"));
 const canonicalManifest = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "baselines", "manifest.json"), "utf8"));
 const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "schema", "calibration-record.schema.json"), "utf8"));
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-pr4-calibration-"));
-const executionRepositories = ["ark-jo/StyleGallery", "changeroa/StyleGallery"];
 const completedEvidence = {
   artifactId: "8283099324",
   artifactName: "chromium-sentinel-calibration-29260372260-18229be570766d3b42f5600955120bfcba690b76",
@@ -116,40 +117,7 @@ const cases = [
 
 const results = [];
 try {
-  const committedSchema = schema.properties.committed_ci.oneOf.find((entry) => entry.type === "object");
-  const externalSchema = committedSchema.properties.external_verification?.oneOf?.find((entry) => entry.type === "object") ?? {};
-  const artifactSchema = externalSchema.properties?.artifact ?? {};
-  const relationshipSchema = externalSchema.properties?.repository_relationship ?? {};
-  const runSchema = schema.properties.runs.items;
-  const runContains = schema.allOf[0].else.properties.runs.allOf;
-  const schemaParity = schema.additionalProperties === false
-    && committedSchema.additionalProperties === false
-    && schema.properties.environment.additionalProperties === false
-    && Object.entries(canonical.environment).every(([key, value]) => key === "viewport"
-      ? JSON.stringify(schema.properties.environment.properties.viewport.properties) === JSON.stringify({ width: { const: value.width }, height: { const: value.height } })
-      : schema.properties.environment.properties[key].const === value)
-    && schema.properties.reference.additionalProperties === false
-    && schema.properties.reference.properties.source.additionalProperties === false
-    && schema.properties.reference.properties.source.properties.sha256.const === BASELINE_REFERENCE.source.sha256
-    && schema.properties.reference.properties.baseline.properties.sha256.const === BASELINE_REFERENCE.baseline.sha256
-    && runSchema.additionalProperties === false
-    && runSchema.properties.png_sha256.const === BASELINE_REFERENCE.baseline.sha256
-    && runSchema.properties.metadata_sha256.const === BASELINE_METADATA_SHA256
-    && committedSchema.properties.repository.const === "changeroa/StyleGallery"
-    && JSON.stringify(committedSchema.properties.execution_repository?.enum ?? []) === JSON.stringify(executionRepositories)
-    && externalSchema.additionalProperties === false
-    && artifactSchema.additionalProperties === false
-    && relationshipSchema.additionalProperties === false
-    && artifactSchema.properties?.api_digest?.const === completedEvidence.artifactApiDigest
-    && artifactSchema.properties?.id?.const === completedEvidence.artifactId
-    && artifactSchema.properties?.name?.const === completedEvidence.artifactName
-    && artifactSchema.properties?.size_in_bytes?.const === completedEvidence.artifactSize
-    && artifactSchema.properties?.expires_at?.const === completedEvidence.artifactExpiresAt
-    && externalSchema.properties?.source?.const === completedEvidence.source
-    && externalSchema.properties?.verified_at?.const === completedEvidence.verifiedAt
-    && JSON.stringify(runContains.map((entry) => entry.contains.properties.run.const).sort((left, right) => left - right)) === JSON.stringify(Array.from({ length: 20 }, (_, index) => index + 1))
-    && runContains.every((entry) => entry.minContains === 1 && entry.maxContains === 1)
-    && JSON.stringify([...committedSchema.required].sort()) === JSON.stringify(["artifact_name", "checkout_sha", "execution_repository", "external_verification", "head_sha", "raw_evidence_sha256", "repository", "run_attempt", "run_id", "sha", "workflow"].sort());
+  const schemaParity = baselineSchemaParity(schema, canonical, completedEvidence);
   results.push({ actual: { schemaParity }, expected: "recursive schema/runtime identity parity", name: "schema_runtime_parity", ok: schemaParity });
   const validFixture = path.join(tempRoot, "valid-completed.json");
   fs.writeFileSync(validFixture, `${JSON.stringify(completeRecord(), null, 2)}\n`);

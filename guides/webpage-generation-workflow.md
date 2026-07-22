@@ -180,4 +180,6 @@ Accepted debt:
 
 Every handoff keeps the consumer-reference field. Replace the default `not_applicable` pair only when the consuming repository has one canonical record; then use `Consumer reference: declared` and a normalized repository-relative `.json` path under that repository root. See the [Consumer Reference Receiver Contract](../consumer-reference/contract.md).
 
+Do not add a migration-conformance field to ordinary webpage work. When an existing consumer is explicitly being migrated, add `Consumer migration conformance: declared` and a normalized consumer-local JSON path, then follow [Consumer Migration Readiness](../design-engineering/consumer-migration-readiness.md). This extension does not change the ordinary `not_applicable` default.
+
 The implementer builds from semantic HTML and layout patterns first, then applies product-level visual styling from the image reference outside reusable pattern CSS. The final page must still pass layout stress checks, accessibility evidence, and any visual-evidence protocol declared by the consuming product.

@@ -27,6 +27,17 @@ Consumer reference reason: This handoff does not require consumer-specific visua
 
 `not_applicable` requires a sentence reason. A declared handoff points to exactly one canonical record and does not duplicate its owner, maturity, support, scope, or artifact data.
 
+### Migration-Only Extension
+
+An ordinary implementation handoff uses only the shape above. When an existing consumer is being migrated and explicitly elects the experimental [Consumer Migration Readiness](../design-engineering/consumer-migration-readiness.md) method, add:
+
+```txt
+Consumer migration conformance: declared
+Consumer migration conformance record: path/to/consumer-conformance.json
+```
+
+This field is migration-only. Do not add it to generic blank handoffs, and do not replace their `Consumer reference: not_applicable` declaration. The conformance record is consumer-owned, follows `schema/consumer-conformance-record.schema.json`, and resolves relative to the consumer repository root. The consumer-reference validator resolves and executes every declared migration conformance record; it propagates conformance findings and, for applicable page evidence, derives the artifact root from the record's manifest path. Ordinary handoffs without this declaration do not execute the migration validator.
+
 ## Repository-Local Record Boundary
 
 `declared` accepts only a normalized POSIX repository-relative path ending in `.json`. The path must exist beneath the current repository root and contain valid JSON. Absolute paths, URI schemes, network paths, query or fragment redirects, `..` segments, non-normalized paths, filesystem redirects, and symlink escapes are rejected.
@@ -42,11 +53,23 @@ External consumers keep their canonical record in their own repository and apply
 - Repository-owned fixtures disclose `fixture_independence: "related"`; they do not count as independent consumers.
 - Current ownership truth is `owner.enforcement: "placeholder"` and `review_independence: "single_account"`. Boolean aliases are not accepted.
 
+Every runtime scenario binds to regular files at the pinned consumer revision and to a strict JSON result receipt. The validator resolves the declared consumer repository and revision, recomputes each source digest from Git blobs, and checks the receipt against the scenario and consumer identity even when page evidence is `not_applicable`. Every adopted StyleGallery source must likewise resolve to a real path and heading anchor at its pinned StyleGallery revision.
+
 ## Ownership And Dependency
 
 Consumer-reference infrastructure is owned by repository governance and validation review, currently represented by the same `@changeroa` placeholder account. This is one account, not independent review.
 
 Dependency flows from a consumer or profile to Layout. `layout/**`, `patterns/**`, `scripts/pattern-data.mjs`, and `CATALOG.md` must not import consumer-reference records, profile data, tokens, decorative values, or themes.
+
+## Promotion Boundary
+
+`consumer-reference/policies/shared-experimental.json` is the canonical StyleGallery-local promotion policy. Its `>=2` independent-consumer gateway applies only to consumer-local → shared-experimental invariant eligibility. It does not promote visual identity and it does not define a stable threshold. Shared stable has no numeric adoption threshold.
+
+An RFC must record invariant scope, claim-scoped and regression evidence, canonical independence basis, actual owner and support capacity, compatibility, known issues and exceptions, migration and deprecation readiness, rollback triggers, provenance debt, and an explicit deferred or rejected decision. Normative accessibility, security, standards, or correctness fixes may waive adoption count only; every other duty remains binding.
+
+The tracked examples are synthetic `example_only: true`, `decision: "deferred"`, and have zero adopter attestations. They are not accepted or promoted RFCs. Editorial and terminal share one related fixture set and cannot be counted as independent. Review truth is the enum `review_independence: "single_account"`; boolean aliases are invalid.
+
+Promotion data is JSON-only. Palette, typography, imagery, motion character, and component skin remain consumer-local. A stable contract whose evidence later fails must be restricted, maintained, rolled back, or deprecated with migration; it cannot be silently relabeled experimental.
 
 The Chromium reference sentinel is an evidence probe, not a Layout theme or product conformance claim. Its proposed baseline is compared in the immutable `linux/amd64` Playwright image, CI never updates snapshots, and the ordinary sentinel remains nonblocking while `baseline_owner_approval` is `pending`. Twenty identical committed-workflow repeats calibrate repeatability; they do not substitute for explicit `@changeroa` baseline approval. Each aggregate run is derived from a zero exit record, the exact passing Playwright test identity, hash-verified PNG/DOM/AX bytes, and comparator proof written only after the zero-diff assertion passes; producer metadata cannot claim completion or a diff.
 

@@ -4,8 +4,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(repositoryRoot, "scripts", "validate-consumer-reference.mjs");
 const profilePath = "design-engineering/reference-profiles/governed-local/editorial/profile.json";
 const terminalProfilePath = "design-engineering/reference-profiles/governed-local/terminal/profile.json";
@@ -14,14 +15,18 @@ const layoutSha = "775430bbaf4ee208a642220f440f6926d79c90a3";
 
 const baseProfile = {
   artifact_mode: "governed_local",
+  component_records: ["components/button.component.json"],
   default: false,
   environment_assumptions: {
     reset: { body_margin: "0", box_sizing: "border-box", figure_margin: "0" },
     user_agent_styles: "Preserve browser defaults except for the declared reset.",
   },
   example_only: true,
+  evidence_records: ["evidence/button.evidence.json"],
+  fixture_records: ["fixtures/button.fixture.json"],
   fixture_independence: "related",
   handoff: { record: profilePath, status: "declared" },
+  generated_records: ["generated/evidence-coverage.md", "generated/keyboard-matrix.md", "generated/state-matrix.md"],
   id: "editorial-reference-profile",
   layout_source_sha: layoutSha,
   local_foundations: "local-foundations.json",
@@ -32,6 +37,7 @@ const baseProfile = {
   review_independence: "single_account",
   schema_version: "1.0",
   selection: { method: "profile_path", required: true },
+  state_records: ["states/button.states.json"],
   support: { status: "active" },
   tokens: "tokens.dtcg.json",
 };
@@ -161,4 +167,4 @@ const results = cases.map(runCase);
 const failures = results.filter((result) => !result.ok).map((result) => `missing_semantic:${result.name}:${result.expected}`);
 const report = { failures, ok: failures.length === 0, results };
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

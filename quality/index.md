@@ -16,6 +16,8 @@ The [Consumer Reference Receiver Contract](../consumer-reference/contract.md) is
 - [Claim records](claim-records/index.md) - Filled examples for high-impact claims.
 - [Accessibility evidence register](evidence/accessibility.md) - Classification for accessibility claims: automated, manual, user, or debt.
 - [Executable evidence coverage](evidence/executable-evidence.md) - Validator, fixture, CI, rendered-evidence, and review boundaries.
+- [Consumer migration evidence gate](gates/consumer-migration-evidence.md) - Blocking contract for a declared consumer migration.
+- [Consumer migration evidence](evidence/consumer-migration.md) - Claim boundaries for runtime and source-bound page evidence.
 
 ## Admission Model
 
@@ -47,5 +49,6 @@ Use this script for lightweight tree tests:
 | Review product-level interface craft. | [README](../README.md) | [Interface Craft Decisions](../design-engineering/interface-craft.md) | The first selected route is Design Engineering and shared quality gates remain visible. |
 | Compare an Apple interaction convention. | [README](../README.md) | [Apple Interaction](../platform-guides/apple-interaction.md) | The first selected route is Platform Guides and source/version limits are reached within two hops. |
 | Declare whether a consumer reference applies. | [README](../README.md) | [Consumer Reference](../consumer-reference/index.md) | The handoff reaches the shared contract without classifying it as a fifth domain. |
+| Prove a consumer migration preserves declared behavior. | [README](../README.md) | [Consumer Migration Readiness](../design-engineering/consumer-migration-readiness.md) | The reader reaches the Design Engineering method and its evidence gate within two hops. |
 
 Record `PASS` only when the expected primary route is the first route selected. A link resolving successfully is not enough; the selected route must match the task intent.
