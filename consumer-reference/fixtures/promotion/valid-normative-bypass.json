@@ -1,0 +1,67 @@
+{
+  "attestations": [],
+  "compatibility": {
+    "breaking": false,
+    "surface": "Synthetic correctness contract surface."
+  },
+  "decision": "deferred",
+  "deprecation": {
+    "plan": "No deprecation is required for this deferred synthetic correction.",
+    "required": false
+  },
+  "eligibility_basis": "full_contract",
+  "evidence": [
+    {
+      "id": "claim-scoped-correctness",
+      "kind": "claim_scoped",
+      "reference": "synthetic-fixture:claim-scoped-correctness",
+      "status": "passed"
+    },
+    {
+      "id": "regression-correctness",
+      "kind": "regression",
+      "reference": "synthetic-fixture:regression-correctness",
+      "status": "passed"
+    }
+  ],
+  "example_only": true,
+  "exceptions": [],
+  "id": "valid-normative-bypass",
+  "known_issues": [],
+  "migration": {
+    "plan": "Apply only after compatibility review; keep a bounded rollback path.",
+    "required": false
+  },
+  "normative_bypass": "normative_correctness",
+  "owner": {
+    "enforcement": "placeholder",
+    "migration": "Synthetic migration owner",
+    "rollback": "Synthetic rollback owner",
+    "scope": "Repository governance owner",
+    "support": "Synthetic support owner"
+  },
+  "provenance": {
+    "debt_resolved": false,
+    "source": "Synthetic fixture only"
+  },
+  "review_independence": "single_account",
+  "rollback": {
+    "action": "Keep the correction deferred or revert it if regression evidence fails.",
+    "triggers": ["Regression evidence fails or compatibility review finds an unsupported impact."]
+  },
+  "schema_version": "1.0",
+  "scope": {
+    "aesthetic": false,
+    "kind": "normative_correctness",
+    "summary": "Demonstrate the adoption-count bypass without waiving regression or lifecycle duties."
+  },
+  "stable_scope_decision": false,
+  "support": {
+    "capacity": "committed",
+    "status": "active"
+  },
+  "transition": {
+    "from": "consumer_local",
+    "to": "shared_experimental"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "attestations": [],
+  "compatibility": { "breaking": true, "surface": "Synthetic breaking contract surface." },
+  "decision": "deferred",
+  "deprecation": { "plan": "A migration is required before deprecation.", "required": true },
+  "eligibility_basis": "full_contract",
+  "evidence": [
+    { "id": "claim", "kind": "claim_scoped", "reference": "synthetic-fixture:claim", "status": "passed" },
+    { "id": "regression", "kind": "regression", "reference": "synthetic-fixture:regression", "status": "passed" }
+  ],
+  "example_only": true,
+  "exceptions": [],
+  "id": "invalid-missing-owner-migration",
+  "known_issues": [],
+  "normative_bypass": "none",
+  "owner": { "enforcement": "placeholder", "rollback": "Synthetic rollback owner", "scope": "Repository governance owner", "support": "Synthetic support owner" },
+  "provenance": { "debt_resolved": false, "source": "Synthetic fixture only" },
+  "review_independence": "single_account",
+  "rollback": { "action": "Keep deferred.", "triggers": ["Migration duty is unowned."] },
+  "schema_version": "1.0",
+  "scope": { "aesthetic": false, "kind": "invariant", "summary": "Incorrectly omit migration plan and migration ownership." },
+  "stable_scope_decision": false,
+  "support": { "capacity": "committed", "status": "active" },
+  "transition": { "from": "consumer_local", "to": "shared_experimental" }
+}

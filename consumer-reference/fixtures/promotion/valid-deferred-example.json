@@ -1,0 +1,67 @@
+{
+  "attestations": [],
+  "compatibility": {
+    "breaking": false,
+    "surface": "Synthetic invariant contract surface."
+  },
+  "decision": "deferred",
+  "deprecation": {
+    "plan": "No deprecation is required while this synthetic proposal remains deferred.",
+    "required": false
+  },
+  "eligibility_basis": "full_contract",
+  "evidence": [
+    {
+      "id": "claim-scoped-example",
+      "kind": "claim_scoped",
+      "reference": "synthetic-fixture:claim-scoped-example",
+      "status": "passed"
+    },
+    {
+      "id": "regression-example",
+      "kind": "regression",
+      "reference": "synthetic-fixture:regression-example",
+      "status": "passed"
+    }
+  ],
+  "example_only": true,
+  "exceptions": [],
+  "id": "valid-deferred-example",
+  "known_issues": [],
+  "migration": {
+    "plan": "No migration begins unless a later separately reviewed decision changes the deferred status.",
+    "required": false
+  },
+  "normative_bypass": "none",
+  "owner": {
+    "enforcement": "placeholder",
+    "migration": "Synthetic migration owner",
+    "rollback": "Synthetic rollback owner",
+    "scope": "Repository governance owner",
+    "support": "Synthetic support owner"
+  },
+  "provenance": {
+    "debt_resolved": false,
+    "source": "Synthetic fixture only"
+  },
+  "review_independence": "single_account",
+  "rollback": {
+    "action": "Keep the proposal deferred and remove any unsupported shared routing.",
+    "triggers": ["Blocking evidence fails or the scope expands beyond the reviewed invariant."]
+  },
+  "schema_version": "1.0",
+  "scope": {
+    "aesthetic": false,
+    "kind": "invariant",
+    "summary": "Demonstrate a synthetic invariant promotion proposal without claiming adoption."
+  },
+  "stable_scope_decision": false,
+  "support": {
+    "capacity": "committed",
+    "status": "active"
+  },
+  "transition": {
+    "from": "consumer_local",
+    "to": "shared_experimental"
+  }
+}

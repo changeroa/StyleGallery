@@ -5,11 +5,18 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
-import { canonicalIntended, sha256 } from "./capture-session-contract.mjs";
+import {
+  canonicalIntended,
+  canonicalSourceManifest,
+  dirtyRelevantSources,
+  repositoryGitArgs,
+  sha256,
+} from "./capture-session-contract.mjs";
 import { compileSchemas } from "./component-state-contract.mjs";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const options = {
   json: false,
   output: undefined,
@@ -36,13 +43,23 @@ else if (path.basename(options.output) !== "capture-session.json") failures.push
 else if (fs.existsSync(options.output)) failures.push({ code: "capture_session_replay", message: "capture session receipt already exists and cannot be overwritten", path: options.output });
 
 function git(...args) {
-  return execFileSync("git", args, { cwd: repositoryRoot, encoding: "utf8" }).trim();
+  return execFileSync("git", repositoryGitArgs(repositoryRoot, ...args), { cwd: repositoryRoot, encoding: "utf8" }).trim();
 }
 
 const executable = chromium.executablePath();
 const revisionSegment = executable.split(path.sep).find((segment) => /^chromium(?:_headless_shell)?-\d+$/.test(segment));
 const packageJson = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "package.json"), "utf8"));
 const intended = canonicalIntended(options.profileRoot, failures);
+const revision = git("rev-parse", "HEAD");
+if (process.env.GITHUB_SHA && process.env.GITHUB_SHA !== revision) failures.push({ code: "capture_revision_mismatch", message: `GITHUB_SHA ${process.env.GITHUB_SHA} does not match checked-out HEAD ${revision}`, path: repositoryRoot });
+let source;
+try {
+  source = canonicalSourceManifest(repositoryRoot, options.profileRoot);
+  const dirty = dirtyRelevantSources(repositoryRoot, options.profileRoot);
+  if (dirty.length > 0) failures.push({ code: "capture_source_dirty", message: `relevant capture sources must be committed: ${dirty.join(", ")}`, path: repositoryRoot });
+} catch (error) {
+  failures.push({ code: "capture_source_unreadable", message: error instanceof Error ? error.message : String(error), path: options.profileRoot });
+}
 const receipt = {
   attempt: Number(process.env.GITHUB_RUN_ATTEMPT ?? 1),
   branch: process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME || git("branch", "--show-current") || "detached",
@@ -61,9 +78,10 @@ const receipt = {
   nonce: crypto.randomBytes(32).toString("hex"),
   record_kind: "component_state_capture_session",
   repository: process.env.GITHUB_REPOSITORY ?? "changeroa/StyleGallery",
-  revision: process.env.GITHUB_SHA ?? git("rev-parse", "HEAD"),
+  revision,
   schema_version: "1.0",
   session_id: crypto.randomUUID(),
+  source,
   started_at: new Date().toISOString(),
 };
 

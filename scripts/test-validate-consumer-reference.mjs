@@ -1,15 +1,20 @@
 #!/usr/bin/env node
 
 import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { validateItemSchema } from "./consumer-reference-schema.mjs";
+import { fileURLToPath } from "node:url";
+import {
+  cleanupCompletedConsumer,
+  initializeCompletedConsumer,
+} from "../consumer-reference/fixtures/consumer-conformance/e2e-fixture.mjs";
+import { makeConsumerReferenceCaseRunner } from "./consumer-reference-case-runner.mjs";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(repositoryRoot, "scripts", "validate-consumer-reference.mjs");
 const itemPath = "consumer-reference/fixtures/item.json";
 const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "schema", "item.schema.json"), "utf8"));
+const conformanceTemplate = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "fixtures", "consumer-conformance", "valid-migration.json"), "utf8"));
 
 const baseItem = {
   artifact_mode: "schema_only",
@@ -82,6 +87,69 @@ const behaviorCases = [
   { expect: "reverse_import", name: "reverse_import_template", patternData: "import(`../${\"consumer\"}-${\"reference\"}/fixtures/item.json`);\n" },
   { expect: "reverse_import", name: "reverse_import_path_join", patternData: "import(path.join(\"..\", \"consumer-\", \"reference\", \"fixtures\", \"item.json\"));\n" },
   { expect: "handoff_consumer_reference_required", extraFiles: { "quality/claim.md": "Implementation handoff:\nBoundary: none.\n" }, name: "repository_handoff_omission" },
+];
+
+function writeReceiverFile(root, relative, content) {
+  const file = path.join(root, relative);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, content);
+}
+
+function receiverHandoff(recordLine, declarationLine = "Consumer migration conformance: declared") {
+  return [
+    "Implementation handoff:",
+    "Consumer reference: not_applicable",
+    "Consumer reference reason: This fixture has no consumer-specific reference record.",
+    declarationLine,
+    recordLine,
+    "",
+  ].filter(Boolean).join("\n");
+}
+
+function runMigrationReceiverCase(testCase) {
+  const fixture = initializeCompletedConsumer(conformanceTemplate);
+  try {
+    writeReceiverFile(fixture.root, itemPath, `${JSON.stringify(baseItem, null, 2)}\n`);
+    writeReceiverFile(fixture.root, "CATALOG.md", "# Catalog\n");
+    writeReceiverFile(fixture.root, "layout/index.md", "# Layout\n");
+    writeReceiverFile(fixture.root, "patterns/index.md", "# Patterns\n");
+    writeReceiverFile(fixture.root, "scripts/pattern-data.mjs", "export const patterns = [];\n");
+    const handoff = testCase.handoff ?? receiverHandoff(`Consumer migration conformance record: ${fixture.recordReference}`);
+    writeReceiverFile(fixture.root, "quality/handoff.md", handoff);
+    testCase.mutate?.(fixture);
+    const child = spawnSync(process.execPath, [validator, "--item", itemPath, "--json"], { cwd: fixture.root, encoding: "utf8" });
+    const output = JSON.parse(child.stdout);
+    const codes = output.failures?.map((failure) => failure.code) ?? [];
+    const ok = testCase.expect === null
+      ? child.status === 0 && output.ok === true
+      : testCase.expect === "checkedMigrationRecords:1"
+        ? child.status === 0 && output.ok === true && output.checkedMigrationRecords === 1
+        : child.status !== 0 && output.ok === false && codes.includes(testCase.expect);
+    return { actual: { checkedMigrationRecords: output.checkedMigrationRecords, codes, status: child.status }, expected: testCase.expect ?? "ok:true and exit:0", name: testCase.name, ok, rules: [] };
+  } finally {
+    cleanupCompletedConsumer(fixture);
+  }
+}
+
+const migrationReceiverCases = [
+  { expect: "checkedMigrationRecords:1", name: "migration_declared_record_executes" },
+  {
+    expect: "consumer_repository_mismatch",
+    mutate: (fixture) => {
+      const file = path.join(fixture.root, fixture.recordReference);
+      const record = JSON.parse(fs.readFileSync(file, "utf8"));
+      record.consumer.repository = "fabricated/consumer";
+      fs.writeFileSync(file, `${JSON.stringify(record, null, 2)}\n`);
+    },
+    name: "migration_invalid_record_blocks_handoff",
+  },
+  { expect: "migration_conformance_record_unresolved", handoff: receiverHandoff("Consumer migration conformance record: records/missing.json"), name: "migration_missing_record_blocks_handoff" },
+  { expect: "migration_conformance_declaration_required", handoff: receiverHandoff("Consumer migration conformance record: records/migration.json", ""), name: "migration_orphan_record_blocks_handoff" },
+  {
+    expect: null,
+    handoff: ["Implementation handoff:", "Consumer reference: not_applicable", "Consumer reference reason: This ordinary handoff has no consumer-specific reference record.", ""].join("\n"),
+    name: "ordinary_not_applicable_skips_migration_receiver",
+  },
 ];
 
 const requiredParityCases = schema.required.map((field) => ({
@@ -161,92 +229,8 @@ const expectedSchemaRuleNames = [
   "generated_records.uniqueItems",
 ];
 
-function cloneItem() {
-  return JSON.parse(JSON.stringify(baseItem));
-}
-
-function findingCodes(output) {
-  if (!Array.isArray(output.failures)) return [];
-  return output.failures.flatMap((failure) => {
-    if (typeof failure === "string") return [failure];
-    return typeof failure?.code === "string" ? [failure.code] : [];
-  });
-}
-
-function writeFixture(testCase) {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), `stylegallery-consumer-reference-${testCase.name}-`));
-  let externalRoot;
-  const item = Object.hasOwn(testCase, "value") ? structuredClone(testCase.value) : cloneItem();
-  testCase.mutate?.(item);
-  const files = {
-    "CATALOG.md": "# Catalog\n",
-    [itemPath]: `${JSON.stringify(item, null, 2)}\n`,
-    "layout/index.md": testCase.layout ?? "# Layout\n",
-    "patterns/index.md": "# Patterns\n",
-    "quality/handoff.md": "Implementation handoff:\nConsumer reference: not_applicable\nConsumer reference reason: This fixture has no consumer-specific reference record.\n",
-    "scripts/pattern-data.mjs": testCase.patternData ?? "export const patterns = [];\n",
-    ...(testCase.extraFiles ?? {}),
-  };
-  for (const [relative, content] of Object.entries(files)) {
-    const target = path.join(root, relative);
-    fs.mkdirSync(path.dirname(target), { recursive: true });
-    fs.writeFileSync(target, content);
-  }
-  if (testCase.link) {
-    const link = path.join(root, "consumer-reference", "fixtures", "redirect.json");
-    if (testCase.link === "inside") {
-      fs.symlinkSync(path.join(root, itemPath), link);
-    } else {
-      externalRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-consumer-reference-outside-"));
-      const external = path.join(externalRoot, "record.json");
-      fs.writeFileSync(external, "{}\n");
-      fs.symlinkSync(external, link);
-    }
-  }
-  if (testCase.itemLink) {
-    const itemTarget = path.join(root, itemPath);
-    fs.rmSync(itemTarget);
-    if (testCase.itemLink === "inside") {
-      const actual = path.join(root, "consumer-reference", "fixtures", "actual-item.json");
-      fs.writeFileSync(actual, `${JSON.stringify(item, null, 2)}\n`);
-      fs.symlinkSync(actual, itemTarget);
-    } else {
-      externalRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-consumer-reference-item-outside-"));
-      const external = path.join(externalRoot, "item.json");
-      fs.writeFileSync(external, `${JSON.stringify(item, null, 2)}\n`);
-      fs.symlinkSync(external, itemTarget);
-    }
-  }
-  return { externalRoot, item, root };
-}
-
-function runCase(testCase) {
-  const fixture = writeFixture(testCase);
-  try {
-    const child = spawnSync(process.execPath, [validator, "--item", itemPath, "--json"], {
-      cwd: fixture.root,
-      encoding: "utf8",
-    });
-    const output = JSON.parse(child.stdout);
-    const codes = findingCodes(output);
-    const accepted = child.status === 0 && output.ok && output.scaffold !== true;
-    const rejected = child.status !== 0 && !output.ok && codes.includes(testCase.expect);
-    const schemaCodes = validateItemSchema(fixture.item, schema).map((finding) => finding.code);
-    const schemaParity = testCase.schemaValid === undefined || (schemaCodes.length === 0) === testCase.schemaValid;
-    return {
-      actual: { codes, ok: output.ok, scaffold: output.scaffold === true, schemaCodes, status: child.status },
-      expected: testCase.expect ?? "ok:true and exit:0",
-      name: testCase.name,
-      ok: (testCase.expect === null ? accepted : rejected) && schemaParity,
-      rules: testCase.rules ?? [],
-    };
-  } finally {
-    fs.rmSync(fixture.root, { force: true, recursive: true });
-    if (fixture.externalRoot) fs.rmSync(fixture.externalRoot, { force: true, recursive: true });
-  }
-}
-
-const results = cases.map(runCase);
+const runCase = makeConsumerReferenceCaseRunner({ baseItem, schema });
+const results = [...cases.map(runCase), ...migrationReceiverCases.map(runMigrationReceiverCase)];
 const failures = results
   .filter((result) => !result.ok)
   .map((result) => `missing_semantic:${result.name}:${result.expected}`);
@@ -260,7 +244,14 @@ const profileHarness = spawnSync(process.execPath, [path.join(repositoryRoot, "s
 });
 const profileReport = JSON.parse(profileHarness.stdout);
 if (profileHarness.status !== 0 || profileReport.ok !== true) failures.push("missing_semantic:governed_local_reference_profiles");
+const cliHarness = spawnSync(process.execPath, [path.join(repositoryRoot, "scripts", "test-validate-consumer-reference-cli.mjs")], {
+  cwd: repositoryRoot,
+  encoding: "utf8",
+});
+const cliReport = JSON.parse(cliHarness.stdout);
+if (cliHarness.status !== 0 || cliReport.ok !== true) failures.push("missing_semantic:consumer_reference_cli_arguments");
 const report = {
+  cliReport,
   failures,
   ok: failures.length === 0,
   profileReport,
@@ -269,4 +260,4 @@ const report = {
 };
 
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

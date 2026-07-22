@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { isPlainObject } from "./consumer-reference-schema.mjs";
 import { validatePortableTokens } from "./reference-token-contract.mjs";
+import { parseStrictJson } from "./strict-json.mjs";
 
 const layoutSourceSha = "775430bbaf4ee208a642220f440f6926d79c90a3";
 const requiredResetFields = ["body_margin", "box_sizing", "figure_margin"];
@@ -42,7 +43,7 @@ function readJson({ failures, kind, relative, root }) {
   }
   const bytes = fs.readFileSync(realTarget);
   try {
-    return { bytes, value: JSON.parse(bytes.toString("utf8")) };
+    return { bytes, value: parseStrictJson(bytes.toString("utf8")) };
   } catch (error) {
     failures.push(finding(`${kind}_json_invalid`, relative, error instanceof Error ? error.message : String(error)));
     return null;

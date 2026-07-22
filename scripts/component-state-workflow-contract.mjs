@@ -50,6 +50,7 @@ export function componentStateWorkflowFailures(workflow) {
   if (!hasAdjacentLines(componentJob, "    container:", `      image: ${pinnedContainer}`)) failures.push("component-state container.image must equal pinned Playwright digest");
   if (/runner\.temp|RUNNER_TEMP/.test(componentJob)) failures.push("component-state Playwright container job must not use runner temp paths");
   if (!hasAdjacentLines(componentJob, "    env:", "      STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state")) failures.push("missing shared component-state workspace path STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state");
+  if (!componentJob.includes(`    env:\n      STATE_EVIDENCE_ROOT: .tmp/consumer-reference-state\n      SENTINEL_CONTAINER_IMAGE: ${pinnedContainer}`)) failures.push("component-state job must export the pinned Playwright image identity");
 
   const runtime = invocation(componentJob, `STATE_ARTIFACT_DIR="${sharedRoot}/runtime"`);
   if (!runtime.includes(`STATE_SESSION_RECEIPT="${sharedRoot}/capture-session.json"`)) failures.push("component-state runtime must bind receipt under shared root");

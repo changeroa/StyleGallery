@@ -24,21 +24,34 @@ export function readRecord(file, failures) {
   }
 }
 
+function readSchema(schemaRoot, name) {
+  const file = path.join(schemaRoot, name);
+  try {
+    return parseStrictJson(fs.readFileSync(file, "utf8"));
+  } catch (cause) {
+    const error = new Error(`component schema is not strict JSON: ${cause instanceof Error ? cause.message : String(cause)}`, { cause });
+    error.code = "component_schema_json_invalid";
+    error.path = file;
+    throw error;
+  }
+}
+
 export function compileSchemas(schemaRoot) {
   const ajv = new Ajv2020({ allErrors: true, formats: { "date-time": true }, strict: false });
-  const captureSchema = JSON.parse(fs.readFileSync(path.join(schemaRoot, "capture-session.schema.json"), "utf8"));
+  const captureSchema = readSchema(schemaRoot, "capture-session.schema.json");
   ajv.addSchema(captureSchema);
-  const evidenceSchema = JSON.parse(fs.readFileSync(path.join(schemaRoot, "evidence-record.schema.json"), "utf8"));
+  const evidenceSchema = readSchema(schemaRoot, "evidence-record.schema.json");
   const validateEvidence = ajv.compile(evidenceSchema);
   return {
-    ax: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "ax-evidence.schema.json"), "utf8"))),
+    ax: ajv.compile(readSchema(schemaRoot, "ax-evidence.schema.json")),
     capture: ajv.getSchema(captureSchema.$id),
-    component: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "component-state.schema.json"), "utf8"))),
-    dom: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "dom-evidence.schema.json"), "utf8"))),
+    component: ajv.compile(readSchema(schemaRoot, "component-state.schema.json")),
+    dom: ajv.compile(readSchema(schemaRoot, "dom-evidence.schema.json")),
     evidence: validateEvidence,
-    fixture: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "fixture-manifest.schema.json"), "utf8"))),
-    item: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "item.schema.json"), "utf8"))),
-    runtime: ajv.compile(JSON.parse(fs.readFileSync(path.join(schemaRoot, "runtime-evidence-manifest.schema.json"), "utf8"))),
+    fixture: ajv.compile(readSchema(schemaRoot, "fixture-manifest.schema.json")),
+    item: ajv.compile(readSchema(schemaRoot, "item.schema.json")),
+    runtime: ajv.compile(readSchema(schemaRoot, "runtime-evidence-manifest.schema.json")),
+    visual: ajv.compile(readSchema(schemaRoot, "visual-evidence.schema.json")),
   };
 }
 

@@ -4,8 +4,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(root, "scripts", "validate-domains.mjs");
 const revision = "220e8607c90b17337d210125777b7b695f26c221";
 const repository = "https://github.com/emilkowalski/skills";
@@ -31,17 +32,28 @@ function indexPage(title, links) {
   ].join("\n");
 }
 
-function leafPage({ title, domain, sourcePath, parent, next, lifecycle = "experimental", body = "" }) {
-  return [
+function leafPage({ title, domain, sourcePath, parent, next, lifecycle = "experimental", body = "", provenanceKind, forgedSourceFields = false, omitSourceFields = false }) {
+  const frontmatter = [
     "---",
     "type: Domain Guide",
     `title: ${title}`,
     `description: Bounded ${title} guidance.`,
     `domain: ${domain}`,
     `lifecycle: ${lifecycle}`,
-    `source_repository: ${repository}`,
-    `source_path: ${sourcePath}`,
-    `source_revision: ${revision}`,
+  ];
+  if (provenanceKind) frontmatter.push(`provenance_kind: ${provenanceKind}`);
+  if ((!provenanceKind && !omitSourceFields) || forgedSourceFields) {
+    frontmatter.push(`source_repository: ${repository}`, `source_path: ${sourcePath}`, `source_revision: ${revision}`);
+  }
+  const attribution = provenanceKind === "local"
+    ? ["- Local StyleGallery method; no upstream attribution."]
+    : [
+      `- Upstream inspiration: ${repository}/blob/${revision}/${sourcePath}`,
+      `- Snapshot: \`${revision}\``,
+      "- Reuse form: independent method rewrite.",
+    ];
+  return [
+    ...frontmatter,
     "---",
     "",
     `# ${title}`,
@@ -73,9 +85,7 @@ function leafPage({ title, domain, sourcePath, parent, next, lifecycle = "experi
     "",
     "## Source, License, And Attribution",
     "",
-    `- Upstream inspiration: ${repository}/blob/${revision}/${sourcePath}`,
-    `- Snapshot: \`${revision}\``,
-    "- Reuse form: independent method rewrite.",
+    ...attribution,
     "",
     "## IA Navigation",
     "",
@@ -84,6 +94,23 @@ function leafPage({ title, domain, sourcePath, parent, next, lifecycle = "experi
     "",
   ].join("\n");
 }
+
+const localLeafPath = "design-engineering/consumer-migration-readiness.md";
+const localLeafRegistry = (canonicalDomains) => {
+  const registry = structuredClone(canonicalDomains);
+  const designEngineering = registry.find((domain) => domain.slug === "design-engineering");
+  if (!designEngineering.leaves.some((leaf) => leaf.path === localLeafPath)) designEngineering.leaves.push({ path: localLeafPath, provenance: "local" });
+  return registry;
+};
+
+const localLeaf = leafPage({
+  title: "Consumer Migration Readiness",
+  domain: "design-engineering",
+  parent: "index.md",
+  next: "../platform-guides/index.md",
+  provenanceKind: "local",
+  sourcePath: "unused/local-source.md",
+});
 
 const baseFiles = {
   "README.md": "# StyleGallery\n\n- [Layout](layout/index.md)\n- [Motion](motion/index.md)\n- [Design Engineering](design-engineering/index.md)\n- [Platform Guides](platform-guides/index.md)\n",
@@ -106,7 +133,7 @@ const baseFiles = {
     "| --- | --- | --- |",
     "| Layout | `layout/index.md` | Existing Layout corpus. |",
     "| Motion | `motion/index.md` | `motion/vocabulary.md`, `motion/review-workflow.md`, `motion/practice-reference.md` |",
-    "| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md` |",
+    "| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/consumer-migration-readiness.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md` |",
     "| Platform Guides | `platform-guides/index.md` | `platform-guides/apple-interaction.md` |",
     "",
     `Source snapshot \`${revision}\`.`,
@@ -115,14 +142,24 @@ const baseFiles = {
     "",
     "[Consumer Reference](consumer-reference/index.md) is shared infrastructure and not a fifth domain.",
     "",
+    "### Consumer Reference Promotion",
+    "",
+    "The gateway applies only to consumer-local → shared-experimental invariant eligibility.",
+    "Editorial and terminal are related examples in one fixture set.",
+    "Shared stable has no numeric adoption threshold.",
+    "Normative correctness may waive adoption count only.",
+    "A stable contract is never silently relabeled experimental.",
+    "Promotion records are JSON-only and examples have zero adopter attestations.",
+    "",
   ].join("\n"),
   "layout/index.md": indexPage("Layout", [["Catalog", "../CATALOG.md"]]),
   "motion/index.md": indexPage("Motion", [["Motion Vocabulary", "vocabulary.md"], ["Motion Review Workflow", "review-workflow.md"], ["Motion Practice Reference", "practice-reference.md"]]),
   "motion/vocabulary.md": leafPage({ title: "Motion Vocabulary", domain: "motion", sourcePath: "skills/animation-vocabulary/SKILL.md", parent: "index.md", next: "review-workflow.md" }),
   "motion/review-workflow.md": leafPage({ title: "Motion Review Workflow", domain: "motion", sourcePath: "skills/review-animations/SKILL.md", parent: "index.md", next: "practice-reference.md" }),
   "motion/practice-reference.md": leafPage({ title: "Motion Practice Reference", domain: "motion", sourcePath: "skills/review-animations/STANDARDS.md", parent: "index.md", next: "../design-engineering/index.md" }),
-  "design-engineering/index.md": indexPage("Design Engineering", [["Interface Craft", "interface-craft.md"], ["Reference Profiles", "reference-profiles/index.md"]]),
+  "design-engineering/index.md": indexPage("Design Engineering", [["Interface Craft", "interface-craft.md"], ["Consumer Migration Readiness", "consumer-migration-readiness.md"], ["Reference Profiles", "reference-profiles/index.md"]]),
   "design-engineering/interface-craft.md": leafPage({ title: "Interface Craft", domain: "design-engineering", sourcePath: "skills/emil-design-eng/SKILL.md", parent: "index.md", next: "../platform-guides/index.md" }),
+  [localLeafPath]: localLeaf,
   "design-engineering/reference-profiles/index.md": "# Reference Profiles\n\nDomain classification: design-engineering.\n\n- [Governed Local Profiles](governed-local/index.md)\n\nParent: [Design Engineering](../index.md).\nNext: [External adaptation](external-adaptation/index.md).\n",
   "design-engineering/reference-profiles/governed-local/index.md": "# Governed Local Profiles\n\nParent: [Reference Profiles](../index.md).\nNext: [External adaptation](../external-adaptation/index.md).\n",
   "design-engineering/reference-profiles/external-adaptation/index.md": "# External Adaptation\n\nSynthetic validator coverage only; no durable adopter record.\n\nParent: [Reference Profiles](../index.md).\nNext: [Platform Guides](../../../platform-guides/index.md).\n",
@@ -136,12 +173,33 @@ const cases = [
   { name: "empty_manifest", mutate: ["DOMAINS.md", baseFiles["DOMAINS.md"], "# Empty manifest\n"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "manifest_extra_domain", mutate: ["DOMAINS.md", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |\n| Other | [Other](other/index.md) | `experimental` |"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "consumer_reference_fifth_domain", mutate: ["DOMAINS.md", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |\n| Consumer Reference | [Consumer Reference](consumer-reference/index.md) | `stable` |"], expect: "DOMAINS.md: missing canonical domain contract" },
+  { name: "promotion_stable_by_count", mutate: ["DOMAINS.md", "Shared stable has no numeric adoption threshold.", "Shared stable uses a numeric adoption threshold."], expect: "DOMAINS.md: missing promotion boundary Shared stable has no numeric adoption threshold" },
+  { name: "promotion_related_as_independent", mutate: ["DOMAINS.md", "Editorial and terminal are related examples in one fixture set.", "Editorial and terminal are independent consumers."], expect: "DOMAINS.md: missing promotion boundary Editorial and terminal are related examples in one fixture set" },
+  { name: "promotion_yaml_route", mutate: ["DOMAINS.md", "Promotion records are JSON-only", "Promotion records may use YAML"], expect: "DOMAINS.md: missing promotion boundary Promotion records are JSON-only" },
   { name: "reference_profiles_fifth_domain", mutate: ["design-engineering/reference-profiles/index.md", "Domain classification: design-engineering.", "Domain classification: reference-profiles."], expect: "design-engineering/reference-profiles/index.md: reference profiles must remain in the Design Engineering domain" },
   { name: "manifest_extra_leaf", mutate: ["DOMAINS.md", "`motion/vocabulary.md`,", "`motion/vocabulary.md`, `motion/ghost.md`,"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "manifest_wrong_lifecycle", mutate: ["DOMAINS.md", "| Motion | [Motion](motion/index.md) | `experimental` |", "| Motion | [Motion](motion/index.md) | `stable` |"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "missing_domain_index", omit: ["design-engineering/index.md"], expect: "design-engineering/index.md: missing file" },
   { name: "missing_domain_leaf", omit: ["motion/vocabulary.md"], expect: "motion/vocabulary.md: missing file" },
   { name: "undeclared_domain_leaf", add: ["motion/rogue.md", "# Rogue\n"], expect: "motion/rogue.md: undeclared governed domain document" },
+  {
+    name: "local_leaf_success",
+    registry: localLeafRegistry,
+    expect: null,
+  },
+  {
+    name: "local_leaf_missing_provenance",
+    registry: localLeafRegistry,
+    mutate: [localLeafPath, "provenance_kind: local\n", ""],
+    expect: "design-engineering/consumer-migration-readiness.md: missing provenance_kind",
+  },
+  {
+    name: "local_leaf_forged_source",
+    registry: localLeafRegistry,
+    add: [localLeafPath, leafPage({ title: "Consumer Migration Readiness", domain: "design-engineering", parent: "index.md", next: "../platform-guides/index.md", sourcePath: "unused/local-source.md", provenanceKind: "local", forgedSourceFields: true })],
+    expect: "design-engineering/consumer-migration-readiness.md: local leaf must not declare source_repository",
+  },
+  { name: "undeclared_local_leaf", add: ["design-engineering/rogue-local.md", localLeaf.replace("title: Consumer Migration Readiness", "title: Rogue Local Method")], expect: "design-engineering/rogue-local.md: undeclared governed domain document" },
   { name: "unknown_domain", mutate: ["motion/vocabulary.md", "domain: motion", "domain: unknown"], expect: "motion/vocabulary.md: unknown domain unknown" },
   { name: "wrong_domain", mutate: ["motion/vocabulary.md", "domain: motion", "domain: platform-guides"], expect: "motion/vocabulary.md: domain platform-guides does not match motion" },
   { name: "missing_lifecycle", mutate: ["motion/vocabulary.md", "lifecycle: experimental\n", ""], expect: "motion/vocabulary.md: missing lifecycle" },
@@ -169,13 +227,11 @@ function writeFixture(testCase) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), `stylegallery-domains-${testCase.name}-`));
   const omitted = new Set(testCase.omit ?? []);
   const entries = { ...baseFiles };
-  if (testCase.mutate) {
-    const [relative, before, after] = testCase.mutate;
-    entries[relative] = entries[relative].replace(before, after);
-  }
+  const mutations = testCase.mutations ?? (testCase.mutate ? [testCase.mutate] : []);
+  for (const [relative, before, after] of mutations) entries[relative] = entries[relative].replace(before, after);
   if (testCase.add) {
-    const [relative, content] = testCase.add;
-    entries[relative] = content;
+    const additions = Array.isArray(testCase.add[0]) ? testCase.add : [testCase.add];
+    for (const [relative, content] of additions) entries[relative] = content;
   }
   for (const [relative, content] of Object.entries(entries)) {
     if (omitted.has(relative)) continue;
@@ -186,21 +242,62 @@ function writeFixture(testCase) {
   return dir;
 }
 
-function runCase(testCase) {
-  const dir = writeFixture(testCase);
-  const result = spawnSync(process.execPath, [validator, "--json"], { cwd: dir, encoding: "utf8" });
-  fs.rmSync(dir, { force: true, recursive: true });
-  let output;
-  try {
-    output = JSON.parse(result.stdout);
-  } catch {
-    output = { ok: false, failures: ["validator unavailable or returned non-JSON output"] };
+let validatorModulePromise;
+async function loadValidatorModule() {
+  if (!validatorModulePromise) {
+    validatorModulePromise = (async () => {
+      const previousExitCode = process.exitCode;
+      const originalLog = console.log;
+      const originalError = console.error;
+      console.log = () => {};
+      console.error = () => {};
+      try {
+        return await import(pathToFileURL(validator).href);
+      } catch {
+        return null;
+      } finally {
+        console.log = originalLog;
+        console.error = originalError;
+        process.exitCode = previousExitCode;
+      }
+    })();
   }
+  return validatorModulePromise;
+}
+
+async function runCase(testCase) {
+  const dir = writeFixture(testCase);
+  let output;
+  if (testCase.registry) {
+    const module = await loadValidatorModule();
+    if (module?.validateDomains && module.canonicalDomains) {
+      output = module.validateDomains({ root: dir, domains: testCase.registry(module.canonicalDomains) });
+    } else {
+      output = { ok: false, failures: ["validator does not expose a registry injection function"] };
+    }
+  } else {
+    const result = spawnSync(process.execPath, [validator, "--json"], { cwd: dir, encoding: "utf8" });
+    try {
+      output = JSON.parse(result.stdout);
+    } catch {
+      output = { ok: false, failures: ["validator unavailable or returned non-JSON output"] };
+    }
+  }
+  fs.rmSync(dir, { force: true, recursive: true });
   const passed = testCase.expect ? !output.ok && output.failures.includes(testCase.expect) : output.ok;
   return { name: testCase.name, ok: passed, expected: testCase.expect ?? "ok:true", actual: output };
 }
 
-const results = cases.map(runCase);
+const caseIndex = process.argv.indexOf("--case");
+const requestedCase = caseIndex === -1 ? null : process.argv[caseIndex + 1];
+const selectedCases = requestedCase ? cases.filter((testCase) => testCase.name === requestedCase) : cases;
+if (requestedCase && selectedCases.length === 0) {
+  console.error(`unknown case: ${requestedCase}`);
+  process.exitCode = 1;
+  process.exit();
+}
+
+const results = await Promise.all(selectedCases.map(runCase));
 const report = { ok: results.every((result) => result.ok), results };
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

@@ -1,0 +1,29 @@
+{
+  "attestations": [
+    { "attested_by": "Synthetic owner A", "context_id": "context-a", "consumer_id": "consumer-a", "count_toward_gate": true, "organization_id": "organization-a", "relationship": "independent" },
+    { "attested_by": "Synthetic owner B", "context_id": "context-b", "consumer_id": "consumer-b", "count_toward_gate": true, "organization_id": "organization-b", "relationship": "independent" }
+  ],
+  "compatibility": { "breaking": false, "surface": "Synthetic invariant contract surface." },
+  "decision": "deferred",
+  "deprecation": { "plan": "No deprecation while deferred.", "required": false },
+  "eligibility_basis": "consumer_count_only",
+  "evidence": [
+    { "id": "claim", "kind": "claim_scoped", "reference": "synthetic-fixture:claim", "status": "passed" },
+    { "id": "regression", "kind": "regression", "reference": "synthetic-fixture:regression", "status": "passed" }
+  ],
+  "example_only": true,
+  "exceptions": [],
+  "id": "invalid-count-only",
+  "known_issues": [],
+  "migration": { "plan": "No migration while deferred.", "required": false },
+  "normative_bypass": "none",
+  "owner": { "enforcement": "placeholder", "migration": "Synthetic migration owner", "rollback": "Synthetic rollback owner", "scope": "Repository governance owner", "support": "Synthetic support owner" },
+  "provenance": { "debt_resolved": false, "source": "Synthetic fixture only" },
+  "review_independence": "single_account",
+  "rollback": { "action": "Keep deferred.", "triggers": ["Operational duties are incomplete."] },
+  "schema_version": "1.0",
+  "scope": { "aesthetic": false, "kind": "invariant", "summary": "Incorrectly use adoption count as the whole promotion decision." },
+  "stable_scope_decision": false,
+  "support": { "capacity": "committed", "status": "active" },
+  "transition": { "from": "consumer_local", "to": "shared_experimental" }
+}

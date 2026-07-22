@@ -1,0 +1,219 @@
+{
+  "$defs": {
+    "attestation": {
+      "additionalProperties": false,
+      "properties": {
+        "attested_by": { "minLength": 1, "type": "string" },
+        "context_id": { "$ref": "#/$defs/slug" },
+        "consumer_id": { "$ref": "#/$defs/slug" },
+        "count_toward_gate": { "type": "boolean" },
+        "organization_id": { "$ref": "#/$defs/slug" },
+        "profile_record": {
+          "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?![A-Za-z][A-Za-z0-9+.-]*:)[^\\\\?#]+\\.json$",
+          "type": "string"
+        },
+        "relationship": { "enum": ["independent", "related"] }
+      },
+      "required": ["attested_by", "context_id", "consumer_id", "count_toward_gate", "organization_id", "relationship"],
+      "type": "object"
+    },
+    "evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/slug" },
+        "kind": { "enum": ["blocking", "claim_scoped", "regression"] },
+        "reference": { "minLength": 1, "type": "string" },
+        "status": { "enum": ["failed", "passed"] }
+      },
+      "required": ["id", "kind", "reference", "status"],
+      "type": "object"
+    },
+    "slug": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "type": "string"
+    }
+  },
+  "$id": "https://stylegallery.example/consumer-reference/schema/promotion-rfc.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": { "transition": { "properties": { "to": { "const": "stable" } }, "required": ["to"], "type": "object" } },
+        "required": ["transition"]
+      },
+      "then": {
+        "properties": {
+          "provenance": { "properties": { "debt_resolved": { "const": true } }, "required": ["debt_resolved"], "type": "object" },
+          "stable_scope_decision": { "const": true },
+          "support": { "properties": { "status": { "const": "active" } }, "required": ["status"], "type": "object" },
+          "evidence": {
+            "allOf": [
+              { "contains": { "properties": { "kind": { "const": "claim_scoped" }, "status": { "const": "passed" } }, "required": ["kind", "status"], "type": "object" } },
+              { "contains": { "properties": { "kind": { "const": "regression" }, "status": { "const": "passed" } }, "required": ["kind", "status"], "type": "object" } }
+            ],
+            "type": "array"
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "normative_bypass": { "const": "normative_correctness" } }, "required": ["normative_bypass"] },
+      "then": { "properties": { "scope": { "properties": { "kind": { "const": "normative_correctness" } }, "required": ["kind"], "type": "object" } } }
+    },
+    {
+      "if": { "properties": { "compatibility": { "properties": { "breaking": { "const": true } }, "required": ["breaking"], "type": "object" } }, "required": ["compatibility"] },
+      "then": { "properties": { "migration": { "properties": { "required": { "const": true } }, "required": ["required"], "type": "object" } } }
+    }
+  ],
+  "properties": {
+    "attestations": {
+      "items": { "$ref": "#/$defs/attestation" },
+      "type": "array"
+    },
+    "compatibility": {
+      "additionalProperties": false,
+      "properties": {
+        "breaking": { "type": "boolean" },
+        "surface": { "minLength": 1, "type": "string" }
+      },
+      "required": ["breaking", "surface"],
+      "type": "object"
+    },
+    "decision": { "enum": ["deferred", "rejected"] },
+    "deprecation": {
+      "additionalProperties": false,
+      "properties": {
+        "plan": { "minLength": 1, "type": "string" },
+        "required": { "type": "boolean" }
+      },
+      "required": ["plan", "required"],
+      "type": "object"
+    },
+    "eligibility_basis": { "const": "full_contract" },
+    "evidence": {
+      "items": { "$ref": "#/$defs/evidence" },
+      "minItems": 1,
+      "type": "array"
+    },
+    "example_only": { "const": true },
+    "exceptions": {
+      "items": { "minLength": 1, "type": "string" },
+      "type": "array"
+    },
+    "id": { "$ref": "#/$defs/slug" },
+    "known_issues": {
+      "items": { "minLength": 1, "type": "string" },
+      "type": "array"
+    },
+    "migration": {
+      "additionalProperties": false,
+      "properties": {
+        "plan": { "minLength": 1, "type": "string" },
+        "required": { "type": "boolean" }
+      },
+      "required": ["plan", "required"],
+      "type": "object"
+    },
+    "normative_bypass": { "enum": ["none", "normative_correctness"] },
+    "owner": {
+      "additionalProperties": false,
+      "properties": {
+        "enforcement": { "const": "placeholder" },
+        "migration": { "minLength": 1, "type": "string" },
+        "rollback": { "minLength": 1, "type": "string" },
+        "scope": { "minLength": 1, "type": "string" },
+        "support": { "minLength": 1, "type": "string" }
+      },
+      "required": ["enforcement", "migration", "rollback", "scope", "support"],
+      "type": "object"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "debt_resolved": { "type": "boolean" },
+        "source": { "minLength": 1, "type": "string" }
+      },
+      "required": ["debt_resolved", "source"],
+      "type": "object"
+    },
+    "review_independence": { "const": "single_account" },
+    "rollback": {
+      "additionalProperties": false,
+      "properties": {
+        "action": { "minLength": 1, "type": "string" },
+        "triggers": {
+          "items": { "minLength": 1, "type": "string" },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": ["action", "triggers"],
+      "type": "object"
+    },
+    "schema_version": { "const": "1.0" },
+    "scope": {
+      "additionalProperties": false,
+      "properties": {
+        "aesthetic": { "const": false },
+        "kind": { "enum": ["invariant", "normative_correctness"] },
+        "summary": { "minLength": 1, "type": "string" }
+      },
+      "required": ["aesthetic", "kind", "summary"],
+      "type": "object"
+    },
+    "stable_scope_decision": { "type": "boolean" },
+    "support": {
+      "additionalProperties": false,
+      "properties": {
+        "capacity": { "const": "committed" },
+        "status": { "const": "active" }
+      },
+      "required": ["capacity", "status"],
+      "type": "object"
+    },
+    "transition": {
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": { "from": { "const": "consumer_local" }, "to": { "const": "shared_experimental" } },
+          "required": ["from", "to"]
+        },
+        {
+          "properties": { "from": { "const": "shared_experimental" }, "to": { "const": "stable" } },
+          "required": ["from", "to"]
+        }
+      ],
+      "properties": {
+        "from": { "enum": ["consumer_local", "shared_experimental", "stable"] },
+        "to": { "enum": ["shared_experimental", "stable"] }
+      },
+      "required": ["from", "to"],
+      "type": "object"
+    }
+  },
+  "required": [
+    "attestations",
+    "compatibility",
+    "decision",
+    "deprecation",
+    "eligibility_basis",
+    "evidence",
+    "example_only",
+    "exceptions",
+    "id",
+    "known_issues",
+    "migration",
+    "normative_bypass",
+    "owner",
+    "provenance",
+    "review_independence",
+    "rollback",
+    "schema_version",
+    "scope",
+    "stable_scope_decision",
+    "support",
+    "transition"
+  ],
+  "type": "object"
+}

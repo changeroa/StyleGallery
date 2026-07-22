@@ -4,8 +4,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(repositoryRoot, "scripts", "validate-consumer-reference.mjs");
 const profilePath = "design-engineering/reference-profiles/governed-local/editorial/profile.json";
 const terminalProfilePath = "design-engineering/reference-profiles/governed-local/terminal/profile.json";
@@ -166,4 +167,4 @@ const results = cases.map(runCase);
 const failures = results.filter((result) => !result.ok).map((result) => `missing_semantic:${result.name}:${result.expected}`);
 const report = { failures, ok: failures.length === 0, results };
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

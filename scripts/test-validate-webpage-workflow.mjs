@@ -4,8 +4,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(root, "scripts", "validate-webpage-workflow.mjs");
 
 const files = {
@@ -129,6 +130,42 @@ const files = {
     "Final implementation proof:",
     "",
   ].join("\n"),
+  "design-engineering/consumer-migration-readiness.md": [
+    "---",
+    "lifecycle: experimental",
+    "provenance_kind: local",
+    "---",
+    "# Consumer Migration Readiness",
+    "## Migration Dimension Contract",
+    "`behavior_inventory`",
+    "`route_parity`",
+    "`field_parity`",
+    "`action_parity`",
+    "`state_transitions`",
+    "`contract_precedence`",
+    "`direct_mutation`",
+    "`indirect_mutation`",
+    "`persistence_round_trip`",
+    "`reset_boundary`",
+    "`exact_time_boundary`",
+    "`defaults_tri_state_mapping`",
+    "`atomic_batch_behavior`",
+    "Consumer migration conformance: declared",
+    "Passing this method does not prove complete accessibility, product correctness, usability, visual quality, independent adoption, cross-browser equivalence, or owner approval.",
+  ].join("\n"),
+  "consumer-reference/contract.md": [
+    "### Migration-Only Extension",
+    "This field is migration-only.",
+    "Do not add it to generic blank handoffs",
+    "Consumer migration conformance: declared",
+  ].join("\n"),
+  "quality/gates/consumer-migration-evidence.md": [
+    "# Consumer Migration Evidence Gate",
+    "## Required Contract",
+    "## Blocking Conditions",
+    "thirteen migration dimensions",
+    "Decision: pass | block",
+  ].join("\n"),
 };
 
 const cases = [
@@ -186,6 +223,20 @@ const cases = [
     expect: "guides/webpage-generation-workflow.md: missing Consumer reference reason:",
   },
   {
+    name: "missing_migration_dimension",
+    mutate: {
+      "design-engineering/consumer-migration-readiness.md": files["design-engineering/consumer-migration-readiness.md"].replace("`atomic_batch_behavior`", "`batch_behavior`"),
+    },
+    expect: "design-engineering/consumer-migration-readiness.md: missing `atomic_batch_behavior`",
+  },
+  {
+    name: "migration_field_in_ordinary_handoff",
+    mutate: {
+      "guides/webpage-generation-workflow.md": `${files["guides/webpage-generation-workflow.md"]}\nConsumer migration conformance: declared\n`,
+    },
+    expect: "guides/webpage-generation-workflow.md: ordinary handoff must not declare consumer migration conformance",
+  },
+  {
     name: "paraphrased_navigation_label",
     mutate: {
       "README.md": files["README.md"].replace("[Webpage Generation Workflow]", "[Webpage planning workflow]"),
@@ -239,4 +290,4 @@ const report = {
 };
 
 console.log(JSON.stringify(report, null, 2));
-process.exit(report.ok ? 0 : 1);
+process.exitCode = report.ok ? 0 : 1;

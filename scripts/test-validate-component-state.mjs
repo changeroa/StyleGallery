@@ -5,8 +5,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const repositoryRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const sourceRoot = path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local");
 const validator = path.join(repositoryRoot, "scripts/validate-component-state.mjs");
 
@@ -46,6 +47,9 @@ const cases = [
   ["missing_role_required_state", "role_required_aria_state", (root) => edit(root, "editorial", "components/button.component.json", (value) => { value.semantic_modes[1].aria_states = value.semantic_modes[1].aria_states.filter((state) => state.name !== "pressed"); })],
   ["switch_mixed", "switch_mixed_prohibited", (root) => edit(root, "editorial", "components/button.component.json", (value) => { value.semantic_modes[1] = { ...value.semantic_modes[1], aria_states: [{ name: "checked", status: "required", values: ["false", "mixed"] }], id: "switch", role: "switch" }; })],
   ["missing_environment", "evidence_schema_invalid", (root) => edit(root, "editorial", "evidence/button.evidence.json", (value) => { delete value.passes[0].environment; })],
+  ["committed_visual_expectation_mismatch", "evidence_visual_expectation_mismatch", (root) => edit(root, "editorial", "evidence/button.evidence.json", (value) => { pass(value, "action-disabled-busy", "visual").artifact.sha256 = `sha256:${"0".repeat(64)}`; })],
+  ["missing_committed_source", "capture_source_missing", (root) => edit(root, "editorial", "evidence/button.evidence.json", (value) => { delete value.passes[0].session.source; })],
+  ["committed_source_drift", "capture_source_drift", (root) => fs.appendFileSync(path.join(root, "editorial/tokens.dtcg.json"), "\n")],
   ["false_aggregate_pass", "aggregate_pass_forbidden", (root) => edit(root, "editorial", "evidence/button.evidence.json", (value) => { value.aggregate_pass = true; })],
   ["normative_conflict", "normative_activation_conflict", (root) => edit(root, "editorial", "states/button.states.json", (value) => { scenario(value, "action-focused").expected.activation = "suppressed"; })],
   ["preview_rolled_stable", "preview_rolled_stable", (root) => edit(root, "editorial", "components/button.component.json", (value) => { value.versions.delivery_channel = "stable"; })],
@@ -58,6 +62,9 @@ const cases = [
   ["duplicate_mode", "semantic_mode_duplicate", (root) => edit(root, "editorial", "components/button.component.json", (value) => { value.semantic_modes.push(structuredClone(value.semantic_modes[0])); })],
   ["duplicate_pass", "evidence_pass_duplicate", (root) => edit(root, "editorial", "evidence/button.evidence.json", (value) => { value.passes.push(structuredClone(value.passes[0])); })],
   ["duplicate_state_set", "state_set_duplicate", (root) => edit(root, "editorial", "states/button.states.json", (value) => { const copy = structuredClone(value.scenarios[0]); copy.id = "duplicate-disabled-busy"; copy.states.reverse(); value.scenarios.push(copy); })],
+  ["duplicate_visual_environment", "visual_environment_duplicate", (root) => edit(root, "editorial", "states/button.states.json", (value) => { value.visual_environments.push(structuredClone(value.visual_environments[0])); })],
+  ["missing_visual_expectation", "visual_expectation_missing", (root) => edit(root, "editorial", "states/button.states.json", (value) => { scenario(value, "action-focused").expected.visual_image.pop(); })],
+  ["unknown_visual_environment", "visual_environment_unknown", (root) => edit(root, "editorial", "states/button.states.json", (value) => { scenario(value, "action-focused").expected.visual_image[0].environment_id = "unknown-environment"; })],
   ["pressed_surface", "pressed_surface_mismatch", (root) => edit(root, "editorial", "states/button.states.json", (value) => { scenario(value, "toggle-focused-pressed").expected.dom["aria-pressed"] = "false"; })],
   ["busy_surface", "busy_surface_mismatch", (root) => edit(root, "editorial", "states/button.states.json", (value) => { scenario(value, "action-loading-busy").expected.ax.busy = false; })],
   ["disabled_surface", "disabled_surface_mismatch", (root) => edit(root, "editorial", "states/button.states.json", (value) => { scenario(value, "action-disabled-busy").expected.dom.disabled = "false"; })],
