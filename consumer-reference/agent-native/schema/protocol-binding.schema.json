@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/schema/protocol-binding.schema.json",
+  "title": "StyleGallery cross-protocol binding and A2A Agent Card",
+  "oneOf": [
+    { "$ref": "agent-native.schema.json#/$defs/protocolBinding" },
+    { "$ref": "agent-native.schema.json#/$defs/agentCard" }
+  ]
+}

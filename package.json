@@ -5,6 +5,9 @@
   "engines": {
     "node": ">=22"
   },
+  "bin": {
+    "sg": "scripts/sg.mjs"
+  },
   "scripts": {
     "audit:evidence": "node scripts/audit-evidence-freshness.mjs",
     "build": "node scripts/build-reference-artifacts.mjs --adapter style-dictionary --fail-on-warning --json",
@@ -15,6 +18,9 @@
     "test:component-state:runtime": "playwright test tests/component-state-evidence.spec.mjs --project=chromium",
     "test:component-state:runtime-negative": "node scripts/test-component-state-sentinel.mjs",
     "test:sentinel": "playwright test tests/consumer-reference-sentinels.spec.mjs --project=chromium",
+    "sg": "node scripts/sg.mjs",
+    "sg:mcp": "node scripts/sg-mcp.mjs",
+    "test:agent-native": "node scripts/test-agent-knowledge-kernel.mjs --json && node scripts/test-agent-execution-kernel.mjs --json && node scripts/test-agent-execution-safety.mjs --json && node scripts/test-agent-events.mjs --json && node scripts/test-agent-learning.mjs --json && node scripts/test-agent-native-schemas.mjs --json && node scripts/test-sg-cli.mjs --json && node scripts/test-agent-conformance-receipt.mjs --json && node scripts/test-agent-mcp.mjs --json && node scripts/test-agent-registry-mcp-integrity.mjs --json && node scripts/test-agent-registry-mutations.mjs --json && node scripts/test-agent-adapter-conformance.mjs --json && node scripts/test-agent-projections.mjs --json",
     "validate": "node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json",
     "validate:component-state": "node scripts/validate-component-state.mjs --json && node scripts/generate-consumer-reference-evidence.mjs --check --json"
   },
@@ -25,6 +31,7 @@
     "ajv-formats": "3.0.1"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
     "style-dictionary": "5.5.0"
   }
 }

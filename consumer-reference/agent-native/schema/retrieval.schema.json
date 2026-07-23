@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/schema/retrieval.schema.json",
+  "title": "StyleGallery retrieval ViewSnapshot and ContextPackage",
+  "oneOf": [
+    { "$ref": "agent-native.schema.json#/$defs/viewSnapshot" },
+    { "$ref": "agent-native.schema.json#/$defs/contextPackage" },
+    { "$ref": "agent-native.schema.json#/$defs/memberReference" }
+  ]
+}

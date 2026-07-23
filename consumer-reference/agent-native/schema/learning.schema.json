@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/schema/learning.schema.json",
+  "title": "StyleGallery governed learning artifacts",
+  "oneOf": [
+    { "$ref": "agent-native.schema.json#/$defs/learningProposal" },
+    { "$ref": "agent-native.schema.json#/$defs/learningVerification" },
+    { "$ref": "agent-native.schema.json#/$defs/governedVersion" },
+    { "$ref": "agent-native.schema.json#/$defs/promotionReceipt" },
+    { "$ref": "agent-native.schema.json#/$defs/governanceDecision" }
+  ]
+}

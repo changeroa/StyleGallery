@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/schema/execution.schema.json",
+  "title": "StyleGallery Task, Run, effect, receipt, and causal event records",
+  "oneOf": [
+    { "$ref": "agent-native.schema.json#/$defs/task" },
+    { "$ref": "agent-native.schema.json#/$defs/run" },
+    { "$ref": "agent-native.schema.json#/$defs/effect" },
+    { "$ref": "agent-native.schema.json#/$defs/invocationReceipt" },
+    { "$ref": "agent-native.schema.json#/$defs/event" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/schema/identity.schema.json",
+  "title": "StyleGallery StableRef, VersionID, and immutable manifest",
+  "oneOf": [
+    { "$ref": "agent-native.schema.json#/$defs/stableRef" },
+    { "$ref": "agent-native.schema.json#/$defs/versionId" },
+    { "$ref": "agent-native.schema.json#/$defs/manifest" }
+  ]
+}

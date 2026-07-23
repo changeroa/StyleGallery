@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/schema/operation.schema.json",
+  "title": "StyleGallery operation and capability records",
+  "oneOf": [
+    { "$ref": "agent-native.schema.json#/$defs/operationSpec" },
+    { "$ref": "agent-native.schema.json#/$defs/capabilityGrant" },
+    { "$ref": "agent-native.schema.json#/$defs/policyDecision" },
+    { "$ref": "agent-native.schema.json#/$defs/authorizationResult" },
+    { "$ref": "agent-native.schema.json#/$defs/invocationReceipt" }
+  ]
+}

@@ -98,6 +98,45 @@ jobs:
           node -c playwright.config.mjs
           node -c tests/helpers/render-consumer-reference.mjs
           node -c tests/consumer-reference-sentinels.spec.mjs
+          node -c scripts/sg.mjs
+          node -c scripts/sg-mcp.mjs
+          node -c scripts/agent-native/a2a-projection.mjs
+          node -c scripts/agent-native/agui-projection.mjs
+          node -c scripts/agent-native/canonical-json.mjs
+          node -c scripts/agent-native/cli-adapter.mjs
+          node -c scripts/agent-native/events.mjs
+          node -c scripts/agent-native/execution.mjs
+          node -c scripts/agent-native/fixture.mjs
+          node -c scripts/agent-native/identity.mjs
+          node -c scripts/agent-native/immutable-store.mjs
+          node -c scripts/agent-native/knowledge.mjs
+          node -c scripts/agent-native/learning.mjs
+          node -c scripts/agent-native/learning-records.mjs
+          node -c scripts/agent-native/mcp-adapter.mjs
+          node -c scripts/agent-native/queries.mjs
+          node -c scripts/agent-native/registry.mjs
+          node -c scripts/agent-native/retrieval.mjs
+          node -c scripts/agent-native/self-description.mjs
+          node -c scripts/test-agent-adapter-conformance.mjs
+          node -c scripts/test-agent-conformance-receipt.mjs
+          node -c scripts/test-agent-events.mjs
+          node -c scripts/test-agent-execution-effects.mjs
+          node -c scripts/test-agent-execution-fixtures.mjs
+          node -c scripts/test-agent-execution-kernel.mjs
+          node -c scripts/test-agent-execution-learning.mjs
+          node -c scripts/test-agent-execution-lifecycle.mjs
+          node -c scripts/test-agent-execution-safety.mjs
+          node -c scripts/test-agent-execution-views.mjs
+          node -c scripts/test-agent-identity-integrity-cases.mjs
+          node -c scripts/test-agent-knowledge-kernel.mjs
+          node -c scripts/test-agent-learning.mjs
+          node -c scripts/test-agent-mcp.mjs
+          node -c scripts/test-agent-native-schemas.mjs
+          node -c scripts/test-agent-registry-mcp-integrity.mjs
+          node -c scripts/test-agent-registry-mutations.mjs
+          node -c scripts/test-agent-projections.mjs
+          node -c scripts/test-sg-cli.mjs
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/agent-native/registry.json"))'
           node -c scripts/baseline-contract.mjs
           node -c scripts/strict-json.mjs
           node -c scripts/calibration-raw-contract.mjs
@@ -199,6 +238,9 @@ jobs:
 
       - name: JSON CLI output integrity
         run: node scripts/test-json-cli-output.mjs
+
+      - name: Agent-native operation and protocol contracts
+        run: npm run test:agent-native
 
       - name: Shared promotion policy contract
         run: |

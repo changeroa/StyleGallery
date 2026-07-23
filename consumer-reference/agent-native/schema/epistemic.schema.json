@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/schema/epistemic.schema.json",
+  "title": "StyleGallery claim, evidence, validation, and governance records",
+  "oneOf": [
+    { "$ref": "agent-native.schema.json#/$defs/claim" },
+    { "$ref": "agent-native.schema.json#/$defs/evidenceLink" },
+    { "$ref": "agent-native.schema.json#/$defs/attestation" },
+    { "$ref": "agent-native.schema.json#/$defs/validationReport" },
+    { "$ref": "agent-native.schema.json#/$defs/governanceDecision" },
+    { "$ref": "agent-native.schema.json#/$defs/policyDisposition" },
+    { "$ref": "agent-native.schema.json#/$defs/evidenceAggregation" }
+  ]
+}
