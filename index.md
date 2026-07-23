@@ -17,6 +17,7 @@ Primary role: OKF bundle map.
 - [Game UI](game-ui/index.md) - Game-interface classification, hierarchy, reference records, and named engine implementation guides.
 - [Platform Guides](platform-guides/index.md) - Bounded comparative references for named platforms.
 - [Consumer reference](consumer-reference/index.md) - Shared non-domain receiver contract for declared repository-local JSON records or reasoned non-applicability.
+- [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) - Machine-facing identity, retrieval, operation, CLI, read-only MCP, task projection, and governed-learning contracts.
 - [Consumer migration readiness](design-engineering/consumer-migration-readiness.md) - Experimental Design Engineering method for consumer-owned conformance, runtime proof, and source-bound page evidence.
 - [Repository guide](README.md) - StyleGallery domain routes, shared policy, and Layout authoring principles.
 - [Layout planning guide](GUIDE.md) - Pre-design entry point for choosing and composing StyleGallery Layout patterns.

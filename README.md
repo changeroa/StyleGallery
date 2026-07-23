@@ -14,6 +14,8 @@ The existing Layout corpus remains a gallery of minimal, portable CSS layout pat
 
 [Consumer Reference](consumer-reference/index.md) is shared non-domain infrastructure for optional consumer-owned reference handoffs. It carries schema, routing, provenance, and evidence metadata without owning profiles, visual values, components, or a sixth domain.
 
+[Agent-Native StyleGallery](consumer-reference/agent-native/README.md) is the machine-facing entry point over that governed knowledge. It provides content-addressed identity, claim/evidence/governance records, deterministic retrieval, a shared operation registry, the `sg` CLI, and a read-only MCP projection. It does not create a sixth domain, replace the Markdown corpus, or permit MCP clients to mutate governed knowledge.
+
 ## Domains
 
 | Domain | Owns | Does not own |
@@ -39,6 +41,7 @@ Use each root hub for one primary job.
 | [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md) | Governance reference | You need the source of truth, lifecycle, generated-file, ownership, or stale-audit rule. |
 | [StyleGallery Domains](DOMAINS.md) | Domain manifest | You need domain ownership, scope, lifecycle, page membership, or provenance. |
 | [Consumer Reference](consumer-reference/index.md) | Shared infrastructure contract | You need to declare a consumer-owned record or explain why one is not applicable. |
+| [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) | Machine interface guide | A person or agent needs to discover, resolve, retrieve, or inspect governed StyleGallery knowledge through CLI or MCP. |
 | [Layout](layout/index.md) | Layout domain hub | You need reusable spatial patterns, recipes, or planning routes. |
 | [Motion](motion/index.md) | Motion domain hub | You need motion terminology, review procedure, or practice evidence. |
 | [Design Engineering](design-engineering/index.md) | Design Engineering domain hub | You need product-level interface-craft decision guidance. |
@@ -70,6 +73,7 @@ Each common task has one primary route. Use secondary links only after the prima
 | `check whether a layout or design claim is admissible` | [Quality Gates](quality/index.md) | It routes claims to gates and evidence boundaries. |
 | `prove repository checks and evidence coverage` | [Executable Evidence Coverage](quality/evidence/executable-evidence.md) | It maps validators, fixtures, CI commands, and their boundaries. |
 | `declare consumer reference applicability` | [Consumer Reference](consumer-reference/index.md) | It provides the required handoff field without moving consumer values into Layout. |
+| `use StyleGallery from an agent or automation` | [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) | It explains StableRef resolution, CLI commands, read-only MCP resources/tools, receipts, and mutation boundaries. |
 | `prove an existing consumer migration` | [Consumer Migration Readiness](design-engineering/consumer-migration-readiness.md) | It requires thirteen explicit behavior classifications, runtime proof, adoption mappings, and source-bound page evidence when applicable. |
 | `change generated patterns, catalog, or governance policy` | [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md) | It identifies source files, generated artifacts, validators, lifecycle state, and review ownership. |
 | `run findability QA` | [Tree-Test Findability QA](quality/index.md#tree-test-findability-qa) | It tests whether task routes are discoverable, not just linked. |
@@ -94,6 +98,7 @@ Each common task has one primary route. Use secondary links only after the prima
 - Use [Layout Pattern Catalog](CATALOG.md) when you already know the spatial problem.
 - Use [Quality Gates](quality/index.md) when a claim needs principle-backed evidence, visual QA boundaries, accessibility precedence, or design rationale.
 - Use [Consumer Reference](consumer-reference/index.md) when an implementation handoff must declare one repository-local JSON reference or a sentence explaining non-applicability.
+- Use [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) when a person, script, or agent needs deterministic JSON discovery, StableRef/VersionID resolution, bounded context, operation metadata, or read-only MCP access.
 - Use [Consumer Migration Readiness](design-engineering/consumer-migration-readiness.md) only for a migration that declares a consumer-local conformance record; ordinary handoffs keep the existing `not_applicable` path.
 - Use [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md) before changing generated artifacts, validators, lifecycle state, or ownership policy.
 
