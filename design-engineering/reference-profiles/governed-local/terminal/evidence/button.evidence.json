@@ -17,44 +17,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "action-disabled-busy-visual",
-      "recorded_at": "2026-07-14T06:33:49.115Z",
+      "recorded_at": "2026-07-23T01:54:39.692Z",
       "result": {
         "observed": "Recorded visual evidence for action-disabled-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "action-disabled-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -98,14 +98,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -223,9 +223,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -239,9 +239,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-disabled-busy.dom.json",
-        "byte_length": 8289,
+        "byte_length": 8261,
         "media_type": "application/json",
-        "sha256": "sha256:e775814ee40672cf5a86d312d6409a89ad24250ed04bdb3687a0c5bc4186e907"
+        "sha256": "sha256:20da4192469ddf588a13e528068dce9aaa305a61baa8794d2344c1da78911ead"
       },
       "channel": "dom",
       "environment": {
@@ -249,44 +249,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "action-disabled-busy-dom",
-      "recorded_at": "2026-07-14T06:33:49.115Z",
+      "recorded_at": "2026-07-23T01:54:39.692Z",
       "result": {
         "observed": "Recorded dom evidence for action-disabled-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "action-disabled-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -330,14 +330,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -455,9 +455,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -471,9 +471,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-disabled-busy.ax.json",
-        "byte_length": 8208,
+        "byte_length": 8180,
         "media_type": "application/json",
-        "sha256": "sha256:07da1033e729a695631458754b9f53d8671b0e4b511c74372bc6543e4f352b50"
+        "sha256": "sha256:997c457a660d4dd2edae13dca05adec6ba3459dd3e88abdb51fe793ebcad3d03"
       },
       "channel": "ax",
       "environment": {
@@ -481,44 +481,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "action-disabled-busy-ax",
-      "recorded_at": "2026-07-14T06:33:49.115Z",
+      "recorded_at": "2026-07-23T01:54:39.692Z",
       "result": {
         "observed": "Recorded ax evidence for action-disabled-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "action-disabled-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -562,14 +562,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -687,9 +687,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -715,44 +715,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "action-focused-visual",
-      "recorded_at": "2026-07-14T06:33:49.228Z",
+      "recorded_at": "2026-07-23T01:54:39.815Z",
       "result": {
         "observed": "Recorded visual evidence for action-focused; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "action-focused",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -796,14 +796,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -921,9 +921,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -936,9 +936,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-focused.dom.json",
-        "byte_length": 8229,
+        "byte_length": 8201,
         "media_type": "application/json",
-        "sha256": "sha256:f71be6585f1ca78794f3baf6742bd25839e4ea9d6a2809b644aa2e2a811d30ae"
+        "sha256": "sha256:b08486707a40e4bacd1e84ea65649f4987220ee060c2fedd230bc52534ff8a3a"
       },
       "channel": "dom",
       "environment": {
@@ -946,44 +946,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "action-focused-dom",
-      "recorded_at": "2026-07-14T06:33:49.228Z",
+      "recorded_at": "2026-07-23T01:54:39.815Z",
       "result": {
         "observed": "Recorded dom evidence for action-focused; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "action-focused",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -1027,14 +1027,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -1152,9 +1152,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -1167,9 +1167,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-focused.ax.json",
-        "byte_length": 8153,
+        "byte_length": 8125,
         "media_type": "application/json",
-        "sha256": "sha256:0192632a1c95628b3515536a9e90606ee04e1d217031a8f1c5358a97cc32cc4f"
+        "sha256": "sha256:cbb4e19ce2efad824272c83ea6459c3c05a99e75a917068e5cb387d94dc46801"
       },
       "channel": "ax",
       "environment": {
@@ -1177,44 +1177,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "action-focused-ax",
-      "recorded_at": "2026-07-14T06:33:49.228Z",
+      "recorded_at": "2026-07-23T01:54:39.815Z",
       "result": {
         "observed": "Recorded ax evidence for action-focused; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "action-focused",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -1258,14 +1258,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -1383,9 +1383,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -1410,44 +1410,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "action-loading-busy-visual",
-      "recorded_at": "2026-07-14T06:33:49.354Z",
+      "recorded_at": "2026-07-23T01:54:39.937Z",
       "result": {
         "observed": "Recorded visual evidence for action-loading-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "action-loading-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -1491,14 +1491,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -1616,9 +1616,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -1633,9 +1633,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-loading-busy.dom.json",
-        "byte_length": 8275,
+        "byte_length": 8247,
         "media_type": "application/json",
-        "sha256": "sha256:ca53cb29c53b267fc92cc68475fe4c2ea2c3dcccd31c1c6e858dc8a17198e358"
+        "sha256": "sha256:b8abb2b2e21067fd3172915a7d03e2db216692ea817941d8a3f7617e69a082d8"
       },
       "channel": "dom",
       "environment": {
@@ -1643,44 +1643,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "action-loading-busy-dom",
-      "recorded_at": "2026-07-14T06:33:49.354Z",
+      "recorded_at": "2026-07-23T01:54:39.937Z",
       "result": {
         "observed": "Recorded dom evidence for action-loading-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "action-loading-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -1724,14 +1724,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -1849,9 +1849,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -1866,9 +1866,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-action-loading-busy.ax.json",
-        "byte_length": 8180,
+        "byte_length": 8152,
         "media_type": "application/json",
-        "sha256": "sha256:2ff34baf906c25aae5984939ac89a1b78464755dbd0bd8f2aa8313ec5eb6b357"
+        "sha256": "sha256:dcb41ba6b9405cbfb08bbdee92bc8c201163f31f552c9b01c94ef5cc91bb2b54"
       },
       "channel": "ax",
       "environment": {
@@ -1876,44 +1876,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "action-loading-busy-ax",
-      "recorded_at": "2026-07-14T06:33:49.354Z",
+      "recorded_at": "2026-07-23T01:54:39.937Z",
       "result": {
         "observed": "Recorded ax evidence for action-loading-busy; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "action-loading-busy",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -1957,14 +1957,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -2082,9 +2082,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -2111,44 +2111,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "disclosure-expanded-loading-visual",
-      "recorded_at": "2026-07-14T06:33:49.484Z",
+      "recorded_at": "2026-07-23T01:54:40.086Z",
       "result": {
         "observed": "Recorded visual evidence for disclosure-expanded-loading; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "disclosure-expanded-loading",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -2192,14 +2192,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -2317,9 +2317,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -2335,9 +2335,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-disclosure-expanded-loading.dom.json",
-        "byte_length": 8332,
+        "byte_length": 8304,
         "media_type": "application/json",
-        "sha256": "sha256:1ddd7f1de3ad2c34d9e8d718c7b3128593a99e4207dce33ffb89f2fcc8f7d5b7"
+        "sha256": "sha256:14a4b7f7618ba5be65b144d6fca0d191be2760f8959993857101565876ff5c90"
       },
       "channel": "dom",
       "environment": {
@@ -2345,44 +2345,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "disclosure-expanded-loading-dom",
-      "recorded_at": "2026-07-14T06:33:49.484Z",
+      "recorded_at": "2026-07-23T01:54:40.086Z",
       "result": {
         "observed": "Recorded dom evidence for disclosure-expanded-loading; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "disclosure-expanded-loading",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -2426,14 +2426,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -2551,9 +2551,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -2569,9 +2569,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-disclosure-expanded-loading.ax.json",
-        "byte_length": 8215,
+        "byte_length": 8187,
         "media_type": "application/json",
-        "sha256": "sha256:33371b0445ae51fc297e51103a8fd04060cc35dfd4c6abc08675463fee675c3e"
+        "sha256": "sha256:ae237e7035e93dcb3d865e683d709e9702b344ee1050b24320e0873670691718"
       },
       "channel": "ax",
       "environment": {
@@ -2579,44 +2579,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "disclosure-expanded-loading-ax",
-      "recorded_at": "2026-07-14T06:33:49.484Z",
+      "recorded_at": "2026-07-23T01:54:40.086Z",
       "result": {
         "observed": "Recorded ax evidence for disclosure-expanded-loading; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "disclosure-expanded-loading",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -2660,14 +2660,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -2785,9 +2785,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -2815,44 +2815,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "toggle-focused-pressed-visual",
-      "recorded_at": "2026-07-14T06:33:49.592Z",
+      "recorded_at": "2026-07-23T01:54:40.213Z",
       "result": {
         "observed": "Recorded visual evidence for toggle-focused-pressed; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "toggle-focused-pressed",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -2896,14 +2896,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -3021,9 +3021,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -3037,9 +3037,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-toggle-focused-pressed.dom.json",
-        "byte_length": 8269,
+        "byte_length": 8241,
         "media_type": "application/json",
-        "sha256": "sha256:5d16f2f75dddd358a1f9d9839045ae3bc73d9d9d029b4f76af8ae42d3469bab4"
+        "sha256": "sha256:3041fccbca89fb3f3eeb944c7317247a69eb51db5e8c65885f612d366007c8a4"
       },
       "channel": "dom",
       "environment": {
@@ -3047,44 +3047,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "toggle-focused-pressed-dom",
-      "recorded_at": "2026-07-14T06:33:49.592Z",
+      "recorded_at": "2026-07-23T01:54:40.213Z",
       "result": {
         "observed": "Recorded dom evidence for toggle-focused-pressed; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "toggle-focused-pressed",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -3128,14 +3128,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -3253,9 +3253,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",
@@ -3269,9 +3269,9 @@
     {
       "artifact": {
         "path": "runtime/terminal-toggle-focused-pressed.ax.json",
-        "byte_length": 8181,
+        "byte_length": 8153,
         "media_type": "application/json",
-        "sha256": "sha256:596da3c726e836ad0f5a09f4c456981bb76627110b7f806f7cafad34f60ac55c"
+        "sha256": "sha256:b634f8ee825ef3df5c694f5a755c4103205bbd9143f28ffbc3c8d0fbef11d161"
       },
       "channel": "ax",
       "environment": {
@@ -3279,44 +3279,44 @@
         "browser_revision": "chromium-1228",
         "container_image": "local-host:25.5.0",
         "kind": "browser",
-        "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-        "node": "v22.23.1",
+        "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+        "node": "v24.18.0",
         "platform": "darwin/arm64",
         "playwright": "1.61.0",
         "viewport": "1024x768"
       },
       "id": "toggle-focused-pressed-ax",
-      "recorded_at": "2026-07-14T06:33:49.592Z",
+      "recorded_at": "2026-07-23T01:54:40.213Z",
       "result": {
         "observed": "Recorded ax evidence for toggle-focused-pressed; this is not certification.",
         "status": "passed"
       },
       "run": {
         "attempt": 1,
-        "id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "repository": "changeroa/StyleGallery",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
         "source": "local"
       },
       "scenario_id": "toggle-focused-pressed",
       "session": {
         "attempt": 1,
-        "branch": "codex/roadmap-07-final-hardening",
+        "branch": "main",
         "environment": {
           "browser": "Google Chrome for Testing 149.0.7827.55",
           "browser_revision": "chromium-1228",
           "container_image": "local-host:25.5.0",
           "kind": "browser",
-          "lockfile_sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80",
-          "node": "v22.23.1",
+          "lockfile_sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed",
+          "node": "v24.18.0",
           "platform": "darwin/arm64",
           "playwright": "1.61.0",
           "viewport": "1024x768"
         },
-        "nonce": "e9a2d4be58843c97ed9b5090c70f70e6db82510f84d2545ccb09e3cc3d6d46eb",
-        "receipt_sha256": "sha256:8d691f1a8c15f6d974e68a18281c206574207f34028e955bd3488890433c0cb2",
-        "revision": "017b96e26be60bfffb410c1994ab2acfd09beaaa",
-        "session_id": "8e81d617-4087-4350-9100-6e03798d1ff8",
+        "nonce": "f7161dfe3172419bab305e6f468c84af54fbfb7c34b23f76d6022ed79792e0b6",
+        "receipt_sha256": "sha256:7685465e5dcc3a9e7942c9dae85d374823c65fdc9da2951aa989fc5a86f2381d",
+        "revision": "7825a0de8e9bd52577c1d82620ae208b7f05c2fd",
+        "session_id": "e613fa3e-1857-4da5-9909-4bf71b4276dd",
         "source": {
           "files": [
             {
@@ -3360,14 +3360,14 @@
               "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
             },
             {
-              "byte_length": 60458,
+              "byte_length": 89496,
               "path": "package-lock.json",
-              "sha256": "sha256:d3f737b3aee4dffe053129c197ecc38393cd45123f0986d068655df34177ce80"
+              "sha256": "sha256:7dbb44b9c8f840a4f9bc79add9eab73534763aab45179e3c24ed4eddc896e3ed"
             },
             {
-              "byte_length": 1625,
+              "byte_length": 2485,
               "path": "package.json",
-              "sha256": "sha256:0ce4b2d065b7b3ebdcf6ab818939bea8e1595b99515b00fbc72586b12a056146"
+              "sha256": "sha256:bc84918b0be6f4389fab733e269077f2ebff9d7140cb4ff9035d8406cb5bb7cb"
             },
             {
               "byte_length": 532,
@@ -3485,9 +3485,9 @@
               "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
             }
           ],
-          "sha256": "sha256:dfc234bdeae8e90ac33cc5724893b9235a0898c85d5aff7cea349da354e53406"
+          "sha256": "sha256:cce35d423426049f09649f4cad2e838f0b00e8d2abb923f0cf739598055d3815"
         },
-        "started_at": "2026-07-14T06:33:47.214Z"
+        "started_at": "2026-07-23T01:54:37.813Z"
       },
       "scope": {
         "component": "button",

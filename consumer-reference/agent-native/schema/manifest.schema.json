@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/schema/manifest.schema.json",
+  "title": "StyleGallery immutable manifest",
+  "$ref": "agent-native.schema.json#/$defs/manifest"
+}

@@ -1,0 +1,848 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/schema/agent-native.schema.json",
+  "title": "StyleGallery agent-native closed record family",
+  "description": "Closed machine-readable contracts for immutable identity, epistemic records, operations, execution, protocol bindings, retrieval, and governed learning. Canonical hashes and cross-record joins are checked by the runtime kernel in addition to this structural schema.",
+  "$defs": {
+    "stableRef": { "type": "string", "pattern": "^sg:[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "versionId": { "type": "string", "pattern": "^sg:[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*@sha256:[a-f0-9]{64}$" },
+    "hexDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "sha256Digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "nonEmpty": { "type": "string", "minLength": 1 },
+    "jsonValue": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "boolean" },
+        { "type": "number" },
+        { "type": "string" },
+        { "type": "array", "items": { "$ref": "#/$defs/jsonValue" } },
+        { "type": "object", "additionalProperties": { "$ref": "#/$defs/jsonValue" } }
+      ]
+    },
+    "jsonObject": { "type": "object", "additionalProperties": { "$ref": "#/$defs/jsonValue" } },
+    "stableRefList": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/stableRef" } },
+    "versionIdList": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/versionId" } },
+    "recordIdentity": {
+      "type": "object",
+      "required": ["schema_version", "record_kind", "stable_ref", "version_id"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "record_kind": { "type": "string", "minLength": 1 },
+        "stable_ref": { "$ref": "#/$defs/stableRef" },
+        "version_id": { "$ref": "#/$defs/versionId" }
+      }
+    },
+    "manifestEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stable_ref", "version_id", "content_sha256"],
+      "properties": {
+        "stable_ref": { "$ref": "#/$defs/stableRef" },
+        "version_id": { "$ref": "#/$defs/versionId" },
+        "content_sha256": { "$ref": "#/$defs/hexDigest" }
+      }
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "manifest_ref", "version_id", "entries", "sha256"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "manifest_ref": { "$ref": "#/$defs/stableRef" },
+        "version_id": { "$ref": "#/$defs/versionId" },
+        "entries": { "type": "array", "minItems": 0, "items": { "$ref": "#/$defs/manifestEntry" } },
+        "sha256": { "$ref": "#/$defs/hexDigest" }
+      }
+    },
+    "artifactProjection": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "artifact_projection" },
+          "canonical_sha256": { "$ref": "#/$defs/hexDigest" },
+          "media_type": { "$ref": "#/$defs/nonEmpty" },
+          "repository_path": { "$ref": "#/$defs/nonEmpty" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "executableFixture": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "executable_fixture" },
+          "command": { "$ref": "#/$defs/nonEmpty" },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "exit_code": { "type": "integer" },
+              "report_ok": { "type": "boolean" },
+              "stderr": { "type": "string" }
+            }
+          }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "profileProjection": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "profile_projection" },
+          "id": { "$ref": "#/$defs/nonEmpty" },
+          "title": { "$ref": "#/$defs/nonEmpty" },
+          "profile_kind": { "$ref": "#/$defs/nonEmpty" },
+          "maturity": { "$ref": "#/$defs/nonEmpty" },
+          "support_status": { "$ref": "#/$defs/nonEmpty" },
+          "example_only": { "type": "boolean" },
+          "source_ref": { "$ref": "#/$defs/stableRef" },
+          "claim_refs": { "$ref": "#/$defs/stableRefList" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "agentDescription": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "agent_description" },
+          "name": { "$ref": "#/$defs/nonEmpty" },
+          "conformance_profile_ref": { "$ref": "#/$defs/stableRef" },
+          "protocol_surfaces": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "a2a": { "$ref": "#/$defs/nonEmpty" },
+              "ag_ui": { "$ref": "#/$defs/nonEmpty" },
+              "cli": { "$ref": "#/$defs/nonEmpty" },
+              "mcp": { "$ref": "#/$defs/nonEmpty" }
+            }
+          }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "validator": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "validator" },
+          "name": { "$ref": "#/$defs/nonEmpty" },
+          "validator_version": { "$ref": "#/$defs/nonEmpty" },
+          "verification_scope": { "$ref": "#/$defs/nonEmpty" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "executionReceipt": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "execution_receipt" },
+          "command": { "$ref": "#/$defs/nonEmpty" },
+          "fixture_ref": { "$ref": "#/$defs/stableRef" },
+          "fixture_record_ref": { "$ref": "#/$defs/stableRef" },
+          "fixture_version_id": { "$ref": "#/$defs/versionId" },
+          "result": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["exit_code", "report_ok", "stderr_sha256"],
+            "properties": {
+              "exit_code": { "type": "integer" },
+              "report_ok": { "type": "boolean" },
+              "stderr_sha256": { "$ref": "#/$defs/hexDigest" }
+            }
+          },
+          "result_sha256": { "$ref": "#/$defs/sha256Digest" },
+          "verification": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["method", "status", "verifier_ref", "verifier_version"],
+            "properties": {
+              "method": { "$ref": "#/$defs/nonEmpty" },
+              "status": { "$ref": "#/$defs/nonEmpty" },
+              "verifier_ref": { "$ref": "#/$defs/stableRef" },
+              "verifier_version": { "$ref": "#/$defs/nonEmpty" }
+            }
+          }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "conformanceProfile": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "conformance_profile" },
+          "profile_id": { "$ref": "#/$defs/nonEmpty" },
+          "conformance_level": { "$ref": "#/$defs/nonEmpty" },
+          "claim_refs": { "$ref": "#/$defs/stableRefList" },
+          "operation_refs": { "$ref": "#/$defs/stableRefList" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "claim": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "claim" },
+          "statement": { "$ref": "#/$defs/nonEmpty" },
+          "title": { "$ref": "#/$defs/nonEmpty" },
+          "description": { "type": "string" },
+          "scope": { "$ref": "#/$defs/jsonValue" },
+          "subject": { "$ref": "#/$defs/jsonValue" },
+          "subject_ref": { "$ref": "#/$defs/stableRef" },
+          "actor": { "$ref": "#/$defs/nonEmpty" },
+          "claim_ref": { "$ref": "#/$defs/stableRef" },
+          "claim_version": { "$ref": "#/$defs/versionId" },
+          "evidence_refs": { "$ref": "#/$defs/stableRefList" },
+          "validation_refs": { "$ref": "#/$defs/stableRefList" },
+          "governance_refs": { "$ref": "#/$defs/stableRefList" },
+          "policy_refs": { "$ref": "#/$defs/stableRefList" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "status": { "$ref": "#/$defs/nonEmpty" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "evidenceLink": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "evidence_link" },
+          "claim_ref": { "$ref": "#/$defs/stableRef" },
+          "claim_version": { "$ref": "#/$defs/versionId" },
+          "source_ref": { "$ref": "#/$defs/stableRef" },
+          "source_version": { "$ref": "#/$defs/versionId" },
+          "selector": { "$ref": "#/$defs/jsonValue" },
+          "independence_group": { "$ref": "#/$defs/nonEmpty" },
+          "polarity": { "enum": ["SUPPORT", "REFUTE", "SUPPORTED", "REFUTED"] },
+          "actor": { "$ref": "#/$defs/nonEmpty" },
+          "method": { "$ref": "#/$defs/nonEmpty" },
+          "observed_at": { "type": "string", "format": "date-time" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "attestation": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "attestation" },
+          "claim_ref": { "$ref": "#/$defs/stableRef" },
+          "claim_version": { "$ref": "#/$defs/versionId" },
+          "polarity": { "enum": ["SUPPORT", "REFUTE", "SUPPORTED", "REFUTED"] },
+          "attestor": { "$ref": "#/$defs/nonEmpty" },
+          "actor": { "$ref": "#/$defs/nonEmpty" },
+          "method": { "$ref": "#/$defs/nonEmpty" },
+          "statement": { "$ref": "#/$defs/nonEmpty" },
+          "independence_group": { "$ref": "#/$defs/nonEmpty" },
+          "observed_at": { "type": "string", "format": "date-time" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "validationReport": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "validation_report" },
+          "claim_ref": { "$ref": "#/$defs/stableRef" },
+          "claim_version": { "$ref": "#/$defs/versionId" },
+          "validator_ref": { "$ref": "#/$defs/stableRef" },
+          "validator": { "$ref": "#/$defs/nonEmpty" },
+          "validator_version": { "$ref": "#/$defs/nonEmpty" },
+          "status": { "enum": ["PASS", "PASSED", "FAIL", "FAILED", "UNKNOWN"] },
+          "suite": { "$ref": "#/$defs/nonEmpty" },
+          "inputs": { "type": "array", "items": { "$ref": "#/$defs/jsonValue" } },
+          "findings": { "type": "array", "items": { "$ref": "#/$defs/jsonValue" } },
+          "result": { "$ref": "#/$defs/jsonValue" },
+          "evaluated_at": { "type": "string", "format": "date-time" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "governanceDecision": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "governance_decision" },
+          "claim_ref": { "$ref": "#/$defs/stableRef" },
+          "claim_version": { "$ref": "#/$defs/versionId" },
+          "governor_ref": { "$ref": "#/$defs/stableRef" },
+          "actor": { "$ref": "#/$defs/nonEmpty" },
+          "decision": { "enum": ["ACCEPT", "ACCEPTED", "APPROVE", "APPROVED", "REJECT", "REJECTED", "DENY", "DENIED", "DEFER", "DEFERRED"] },
+          "status": { "$ref": "#/$defs/nonEmpty" },
+          "scope": { "$ref": "#/$defs/jsonValue" },
+          "policy_version": { "$ref": "#/$defs/nonEmpty" },
+          "proposal_ref": { "$ref": "#/$defs/stableRef" },
+          "proposal_version_id": { "$ref": "#/$defs/versionId" },
+          "verification_ref": { "$ref": "#/$defs/stableRef" },
+          "verification_version_id": { "$ref": "#/$defs/versionId" },
+          "decided_at": { "type": "string", "format": "date-time" },
+          "reason": { "type": "string" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "policyDisposition": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "policy_disposition" },
+          "claim_ref": { "$ref": "#/$defs/stableRef" },
+          "claim_version": { "$ref": "#/$defs/versionId" },
+          "policy_version": { "$ref": "#/$defs/nonEmpty" },
+          "disposition": { "$ref": "#/$defs/nonEmpty" },
+          "subject": { "$ref": "#/$defs/nonEmpty" },
+          "subject_ref": { "$ref": "#/$defs/stableRef" },
+          "task_ref": { "$ref": "#/$defs/stableRef" },
+          "actor_ref": { "$ref": "#/$defs/stableRef" },
+          "scope": { "$ref": "#/$defs/jsonValue" },
+          "expires_at": { "type": "string", "format": "date-time" },
+          "reason": { "type": "string" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "evidenceAggregation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence_state", "support_count", "refute_count", "support_groups", "refute_groups", "evidence_links"],
+      "properties": {
+        "claim_ref": { "$ref": "#/$defs/stableRef" },
+        "claim_version": { "$ref": "#/$defs/versionId" },
+        "state": { "enum": ["SUPPORTED", "REFUTED", "BOTH", "NEITHER"] },
+        "evidence_state": { "enum": ["SUPPORTED", "REFUTED", "BOTH", "NEITHER"] },
+        "support_count": { "type": "integer", "minimum": 0 },
+        "refute_count": { "type": "integer", "minimum": 0 },
+        "support_groups": { "type": "array", "items": { "type": "string" } },
+        "refute_groups": { "type": "array", "items": { "type": "string" } },
+        "evidence_links": { "type": "array", "items": { "$ref": "#/$defs/evidenceLink" } }
+      }
+    },
+    "operationSpec": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "operation" },
+          "name": { "$ref": "#/$defs/nonEmpty" },
+          "operation": { "$ref": "#/$defs/nonEmpty" },
+          "description": { "type": "string" },
+          "adapters": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/nonEmpty" } },
+          "effect_class": { "enum": ["NONE", "LOCAL", "EXTERNAL"] },
+          "idempotent": { "type": "boolean" },
+          "read_only": { "type": "boolean" },
+          "required_capability": { "oneOf": [{ "$ref": "#/$defs/nonEmpty" }, { "type": "null" }] },
+          "input_schema": { "$ref": "#/$defs/jsonObject" },
+          "output_schema": { "$ref": "#/$defs/jsonObject" },
+          "preconditions": { "type": "array", "items": { "$ref": "#/$defs/jsonValue" } },
+          "retry": { "$ref": "#/$defs/jsonValue" },
+          "reconcile": { "$ref": "#/$defs/jsonValue" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "capabilityGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "capability"],
+      "properties": {
+        "stable_ref": { "$ref": "#/$defs/stableRef" },
+        "version_id": { "$ref": "#/$defs/versionId" },
+        "subject": { "$ref": "#/$defs/nonEmpty" },
+        "capability": { "$ref": "#/$defs/nonEmpty" },
+        "operations": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" }, "uniqueItems": true },
+        "operation": { "$ref": "#/$defs/nonEmpty" },
+        "resource_scope": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" }, "uniqueItems": true },
+        "resources": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" }, "uniqueItems": true },
+        "purpose": { "type": "string" },
+        "delegation_chain": { "type": "array", "items": { "$ref": "#/$defs/stableRef" } },
+        "revocation_ref": { "$ref": "#/$defs/stableRef" },
+        "expires_at": { "type": "string", "format": "date-time" },
+        "used": { "type": "integer", "minimum": 0 },
+        "used_calls": { "type": "integer", "minimum": 0 },
+        "max_calls": { "type": "integer", "minimum": 0 },
+        "limits": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "policyDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed", "capability", "evaluated_at", "operation", "reason", "resource", "subject"],
+      "properties": {
+        "allowed": { "type": "boolean" },
+        "capability": { "oneOf": [{ "$ref": "#/$defs/nonEmpty" }, { "type": "null" }] },
+        "evaluated_at": { "$ref": "#/$defs/nonEmpty" },
+        "operation": { "oneOf": [{ "$ref": "#/$defs/nonEmpty" }, { "type": "null" }] },
+        "reason": { "$ref": "#/$defs/nonEmpty" },
+        "resource": { "oneOf": [{ "$ref": "#/$defs/nonEmpty" }, { "type": "null" }] },
+        "subject": { "oneOf": [{ "$ref": "#/$defs/nonEmpty" }, { "type": "null" }] }
+      }
+    },
+    "authorizationResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed", "decision", "policy_decision", "failures"],
+      "properties": {
+        "allowed": { "type": "boolean" },
+        "decision": { "$ref": "#/$defs/policyDecision" },
+        "policy_decision": { "$ref": "#/$defs/policyDecision" },
+        "failures": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "task": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "task" },
+          "task_id": { "$ref": "#/$defs/stableRef" },
+          "intent": { "$ref": "#/$defs/jsonObject" },
+          "required_result": { "$ref": "#/$defs/jsonObject" },
+          "state": { "enum": ["SUBMITTED", "RUNNING", "COMPLETED", "FAILED", "CANCELED", "REJECTED", "AUTH_REQUIRED", "UNKNOWN"] },
+          "operation": { "$ref": "#/$defs/nonEmpty" },
+          "parent_task_id": { "$ref": "#/$defs/stableRef" },
+          "context_ref": { "$ref": "#/$defs/stableRef" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "run": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "run" },
+          "run_id": { "$ref": "#/$defs/stableRef" },
+          "task_id": { "$ref": "#/$defs/stableRef" },
+          "input": { "$ref": "#/$defs/jsonObject" },
+          "state": { "enum": ["RUNNING", "COMPLETED", "FAILED", "CANCELED", "REJECTED", "AUTH_REQUIRED", "UNKNOWN"] },
+          "attempt": { "type": "integer", "minimum": 0 },
+          "started_at": { "type": "string", "format": "date-time" },
+          "finished_at": { "type": "string", "format": "date-time" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "effect": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "effect" },
+          "effect_id": { "$ref": "#/$defs/stableRef" },
+          "effect_class": { "enum": ["NONE", "LOCAL", "EXTERNAL"] },
+          "task_id": { "oneOf": [{ "$ref": "#/$defs/stableRef" }, { "type": "null" }] },
+          "run_id": { "oneOf": [{ "$ref": "#/$defs/stableRef" }, { "type": "null" }] },
+          "task": { "$ref": "#/$defs/jsonObject" },
+          "run": { "$ref": "#/$defs/jsonObject" },
+          "attempt": { "$ref": "#/$defs/jsonValue" },
+          "idempotency_key": { "oneOf": [{ "$ref": "#/$defs/nonEmpty" }, { "type": "null" }] },
+          "connector_receipt": { "oneOf": [{ "$ref": "#/$defs/nonEmpty" }, { "type": "null" }] },
+          "state": { "enum": ["PLANNED", "COMMITTED", "FAILED", "UNCERTAIN", "COMPENSATED"] },
+          "observation_refs": { "$ref": "#/$defs/stableRefList" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "invocationReceipt": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "invocation_receipt" },
+          "input_digest": { "$ref": "#/$defs/sha256Digest" },
+          "output_digest": { "$ref": "#/$defs/sha256Digest" },
+          "operation": { "oneOf": [{ "$ref": "#/$defs/nonEmpty" }, { "type": "null" }] },
+          "task_id": { "oneOf": [{ "$ref": "#/$defs/stableRef" }, { "type": "null" }] },
+          "run_id": { "oneOf": [{ "$ref": "#/$defs/stableRef" }, { "type": "null" }] },
+          "effect_ids": { "$ref": "#/$defs/stableRefList" },
+          "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+          "causal_parents": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" }, "uniqueItems": true },
+          "policy_decision": { "oneOf": [{ "$ref": "#/$defs/policyDecision" }, { "type": "null" }] }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_id", "parents"],
+      "properties": {
+        "event_id": { "$ref": "#/$defs/nonEmpty" },
+        "parents": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/nonEmpty" } },
+        "stable_ref": { "$ref": "#/$defs/stableRef" },
+        "type": { "$ref": "#/$defs/nonEmpty" },
+        "event_type": { "$ref": "#/$defs/nonEmpty" },
+        "task_id": { "$ref": "#/$defs/stableRef" },
+        "run_id": { "$ref": "#/$defs/stableRef" },
+        "effect_id": { "$ref": "#/$defs/stableRef" },
+        "taskId": { "$ref": "#/$defs/nonEmpty" },
+        "runId": { "$ref": "#/$defs/nonEmpty" },
+        "effectState": { "$ref": "#/$defs/nonEmpty" },
+        "payload": { "$ref": "#/$defs/jsonValue" },
+        "data": { "$ref": "#/$defs/jsonValue" },
+        "metadata": { "$ref": "#/$defs/jsonObject" },
+        "timestamp": { "type": "string" }
+      }
+    },
+    "protocolBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol"],
+      "anyOf": [
+        { "required": ["protocolBindingId"] },
+        { "required": ["bindingId"] },
+        { "required": ["binding_id"] }
+      ],
+      "properties": {
+        "protocol": { "$ref": "#/$defs/nonEmpty" },
+        "protocolBindingId": { "$ref": "#/$defs/nonEmpty" },
+        "bindingId": { "$ref": "#/$defs/nonEmpty" },
+        "binding_id": { "$ref": "#/$defs/nonEmpty" },
+        "protocolTaskId": { "$ref": "#/$defs/nonEmpty" },
+        "protocolContextId": { "$ref": "#/$defs/nonEmpty" },
+        "protocolRunId": { "$ref": "#/$defs/nonEmpty" },
+        "taskId": { "$ref": "#/$defs/nonEmpty" },
+        "runId": { "$ref": "#/$defs/nonEmpty" },
+        "domainTaskId": { "$ref": "#/$defs/nonEmpty" },
+        "domainRunId": { "$ref": "#/$defs/nonEmpty" },
+        "threadId": { "$ref": "#/$defs/nonEmpty" },
+        "protocol_task_id": { "$ref": "#/$defs/nonEmpty" },
+        "protocol_context_id": { "$ref": "#/$defs/nonEmpty" },
+        "protocol_binding_id": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "a2aTask": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifacts", "contextId", "history", "id", "kind", "metadata", "protocolBinding", "status"],
+      "properties": {
+        "artifacts": { "type": "array", "items": { "$ref": "#/$defs/jsonValue" } },
+        "contextId": { "$ref": "#/$defs/nonEmpty" },
+        "history": { "type": "array", "items": { "$ref": "#/$defs/jsonValue" } },
+        "id": { "$ref": "#/$defs/nonEmpty" },
+        "kind": { "const": "task" },
+        "metadata": { "$ref": "#/$defs/jsonObject" },
+        "protocolBinding": { "$ref": "#/$defs/protocolBinding" },
+        "status": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "aguiEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "runId"],
+      "properties": {
+        "type": { "$ref": "#/$defs/nonEmpty" },
+        "runId": { "$ref": "#/$defs/nonEmpty" },
+        "threadId": { "$ref": "#/$defs/nonEmpty" },
+        "messageId": { "$ref": "#/$defs/nonEmpty" },
+        "role": { "$ref": "#/$defs/nonEmpty" },
+        "delta": { "type": "string" },
+        "toolCallId": { "$ref": "#/$defs/nonEmpty" },
+        "toolCallName": { "$ref": "#/$defs/nonEmpty" },
+        "input": { "$ref": "#/$defs/jsonValue" },
+        "metadata": { "$ref": "#/$defs/jsonObject" },
+        "snapshot": { "$ref": "#/$defs/jsonValue" },
+        "result": { "$ref": "#/$defs/jsonValue" },
+        "message": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "aguiProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "events", "protocolBinding", "protocolIds"],
+      "properties": {
+        "ok": { "const": true },
+        "events": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/aguiEvent" } },
+        "protocolBinding": { "$ref": "#/$defs/protocolBinding" },
+        "protocolIds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["threadId", "taskId", "runId"],
+          "properties": {
+            "threadId": { "$ref": "#/$defs/nonEmpty" },
+            "taskId": { "$ref": "#/$defs/nonEmpty" },
+            "runId": { "$ref": "#/$defs/nonEmpty" }
+          }
+        }
+      }
+    },
+    "agentCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capabilities", "defaultInputModes", "defaultOutputModes", "description", "name", "protocolVersion", "skills", "url", "version"],
+      "properties": {
+        "capabilities": { "$ref": "#/$defs/jsonObject" },
+        "defaultInputModes": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } },
+        "defaultOutputModes": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } },
+        "description": { "$ref": "#/$defs/nonEmpty" },
+        "name": { "$ref": "#/$defs/nonEmpty" },
+        "protocolVersion": { "$ref": "#/$defs/nonEmpty" },
+        "skills": { "type": "array", "items": { "$ref": "#/$defs/jsonObject" } },
+        "supportsAuthenticatedExtendedCard": { "type": "boolean" },
+        "url": { "$ref": "#/$defs/nonEmpty" },
+        "version": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "viewSnapshot": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "view_snapshot" },
+          "snapshot_ref": { "$ref": "#/$defs/stableRef" },
+          "version_id": { "$ref": "#/$defs/versionId" },
+          "sha256": { "$ref": "#/$defs/sha256Digest" },
+          "cache_key": { "$ref": "#/$defs/nonEmpty" },
+          "as_of": { "type": "string" },
+          "builder_version": { "$ref": "#/$defs/nonEmpty" },
+          "heads": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/nonEmpty" } },
+          "members": { "type": "array", "items": { "$ref": "#/$defs/jsonObject" } },
+          "policy": { "$ref": "#/$defs/jsonValue" },
+          "truncated": { "type": "boolean" },
+          "transaction_at": { "type": "string" },
+          "valid_at": { "type": "string" },
+          "view_spec": { "$ref": "#/$defs/jsonObject" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "memberReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "anyOf": [{ "required": ["stable_ref"] }, { "required": ["version_id"] }, { "required": ["content_sha256"] }],
+      "properties": {
+        "stable_ref": { "$ref": "#/$defs/stableRef" },
+        "version_id": { "$ref": "#/$defs/versionId" },
+        "content_sha256": { "$ref": "#/$defs/hexDigest" }
+      }
+    },
+    "contextPackage": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "context_package" },
+          "sha256": { "$ref": "#/$defs/sha256Digest" },
+          "cache_key": { "$ref": "#/$defs/nonEmpty" },
+          "budget": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["tokens", "used_tokens", "truncated"],
+            "properties": {
+              "tokens": { "type": "integer", "minimum": 0 },
+              "used_tokens": { "type": "integer", "minimum": 0 },
+              "truncated": { "type": "boolean" }
+            }
+          },
+          "members": { "type": "array", "items": { "$ref": "#/$defs/jsonObject" } },
+          "member_refs": { "type": "array", "items": { "$ref": "#/$defs/memberReference" } },
+          "member_manifest": { "type": "array", "items": { "$ref": "#/$defs/memberReference" } },
+          "policy": { "$ref": "#/$defs/jsonValue" },
+          "query": { "type": "string" },
+          "query_class": { "$ref": "#/$defs/nonEmpty" },
+          "retriever": { "$ref": "#/$defs/nonEmpty" },
+          "selectors": { "$ref": "#/$defs/jsonValue" },
+          "snapshot": { "$ref": "#/$defs/jsonValue" },
+          "snapshot_ref": { "$ref": "#/$defs/stableRef" },
+          "snapshot_version_id": { "$ref": "#/$defs/versionId" },
+          "assembly_receipt": { "$ref": "#/$defs/jsonValue" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "learningProposal": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "learning_proposal" },
+          "proposal_id": { "$ref": "#/$defs/stableRef" },
+          "claim": { "$ref": "#/$defs/jsonObject" },
+          "changes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/jsonValue" } },
+          "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/jsonValue" } },
+          "proposer": { "$ref": "#/$defs/nonEmpty" },
+          "source_task": { "$ref": "#/$defs/jsonValue" },
+          "status": { "const": "PROPOSED" },
+          "validation": { "$ref": "#/$defs/jsonObject" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "learningVerification": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "learning_verification" },
+          "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/jsonValue" } },
+          "independent": { "const": true },
+          "independent_of": { "$ref": "#/$defs/nonEmpty" },
+          "proposal_ref": { "$ref": "#/$defs/stableRef" },
+          "proposal_version_id": { "$ref": "#/$defs/versionId" },
+          "validation": { "$ref": "#/$defs/jsonObject" },
+          "verified": { "const": true },
+          "verifier": { "$ref": "#/$defs/nonEmpty" },
+          "verifier_actor": { "$ref": "#/$defs/nonEmpty" },
+          "status": { "const": "VERIFIED" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "governedVersion": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/recordIdentity" },
+        { "type": "object", "properties": {
+          "record_kind": { "const": "governed_version" },
+          "changes": { "type": "array", "items": { "$ref": "#/$defs/jsonValue" } },
+          "claim": { "$ref": "#/$defs/jsonObject" },
+          "evidence": { "type": "array", "items": { "$ref": "#/$defs/jsonValue" } },
+          "proposal_ref": { "$ref": "#/$defs/stableRef" },
+          "proposal_version_id": { "$ref": "#/$defs/versionId" },
+          "verification_version_id": { "$ref": "#/$defs/versionId" },
+          "governance_decision_version_id": { "$ref": "#/$defs/versionId" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "promotionReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "record_kind", "outcome", "proposal_ref", "stable_ref", "version_id"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "record_kind": { "const": "promotion_receipt" },
+        "outcome": { "const": "PROMOTED" },
+        "proposal_ref": { "$ref": "#/$defs/stableRef" },
+        "stable_ref": { "$ref": "#/$defs/stableRef" },
+        "version_id": { "$ref": "#/$defs/versionId" },
+        "receipt_id": { "$ref": "#/$defs/versionId" },
+        "governed_version_id": { "$ref": "#/$defs/versionId" },
+        "governance_decision_version_id": { "$ref": "#/$defs/versionId" },
+        "proposal_version_id": { "$ref": "#/$defs/versionId" },
+        "verification_version_id": { "$ref": "#/$defs/versionId" }
+      }
+    },
+    "operationSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapters", "effect_class", "idempotent", "name", "stable_ref", "version_id"],
+      "properties": {
+        "adapters": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } },
+        "effect_class": { "enum": ["NONE", "LOCAL", "EXTERNAL"] },
+        "idempotent": { "type": "boolean" },
+        "read_only": { "type": "boolean" },
+        "name": { "$ref": "#/$defs/nonEmpty" },
+        "stable_ref": { "$ref": "#/$defs/stableRef" },
+        "version_id": { "$ref": "#/$defs/versionId" }
+      }
+    },
+    "selfDescription": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent", "conformance", "manifest", "operation_digest", "operations", "protocol_surfaces", "schema_version"],
+      "properties": {
+        "agent": { "$ref": "#/$defs/agentDescription" },
+        "conformance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["claims", "profile", "status"],
+          "properties": {
+            "claims": { "type": "array", "items": { "$ref": "#/$defs/jsonObject" } },
+            "profile": { "$ref": "#/$defs/conformanceProfile" },
+            "status": { "$ref": "#/$defs/nonEmpty" }
+          }
+        },
+        "manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["entry_count", "manifest_ref", "sha256", "version_id"],
+          "properties": {
+            "entry_count": { "type": "integer", "minimum": 0 },
+            "manifest_ref": { "$ref": "#/$defs/stableRef" },
+            "sha256": { "$ref": "#/$defs/hexDigest" },
+            "version_id": { "$ref": "#/$defs/versionId" }
+          }
+        },
+        "operation_digest": { "$ref": "#/$defs/sha256Digest" },
+        "operations": { "type": "array", "items": { "$ref": "#/$defs/operationSummary" } },
+        "protocol_surfaces": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["a2a", "ag_ui", "cli", "mcp"],
+          "properties": {
+            "a2a": { "$ref": "#/$defs/jsonObject" },
+            "ag_ui": { "$ref": "#/$defs/jsonObject" },
+            "cli": { "$ref": "#/$defs/jsonObject" },
+            "mcp": { "$ref": "#/$defs/jsonObject" }
+          }
+        },
+        "schema_version": { "const": "1.0" }
+      }
+    },
+    "record": {
+      "oneOf": [
+        { "$ref": "#/$defs/artifactProjection" },
+        { "$ref": "#/$defs/executableFixture" },
+        { "$ref": "#/$defs/profileProjection" },
+        { "$ref": "#/$defs/agentDescription" },
+        { "$ref": "#/$defs/validator" },
+        { "$ref": "#/$defs/executionReceipt" },
+        { "$ref": "#/$defs/conformanceProfile" },
+        { "$ref": "#/$defs/claim" },
+        { "$ref": "#/$defs/evidenceLink" },
+        { "$ref": "#/$defs/attestation" },
+        { "$ref": "#/$defs/validationReport" },
+        { "$ref": "#/$defs/governanceDecision" },
+        { "$ref": "#/$defs/policyDisposition" },
+        { "$ref": "#/$defs/operationSpec" },
+        { "$ref": "#/$defs/task" },
+        { "$ref": "#/$defs/run" },
+        { "$ref": "#/$defs/effect" },
+        { "$ref": "#/$defs/invocationReceipt" },
+        { "$ref": "#/$defs/viewSnapshot" },
+        { "$ref": "#/$defs/contextPackage" },
+        { "$ref": "#/$defs/learningProposal" },
+        { "$ref": "#/$defs/learningVerification" },
+        { "$ref": "#/$defs/governedVersion" }
+      ]
+    },
+    "root": {
+      "oneOf": [
+        { "$ref": "#/$defs/manifest" },
+        { "$ref": "#/$defs/record" },
+        { "$ref": "#/$defs/evidenceAggregation" },
+        { "$ref": "#/$defs/authorizationResult" },
+        { "$ref": "#/$defs/capabilityGrant" },
+        { "$ref": "#/$defs/event" },
+        { "$ref": "#/$defs/protocolBinding" },
+        { "$ref": "#/$defs/agentCard" },
+        { "$ref": "#/$defs/a2aTask" },
+        { "$ref": "#/$defs/aguiEvent" },
+        { "$ref": "#/$defs/aguiProjection" },
+        { "$ref": "#/$defs/selfDescription" },
+        { "$ref": "#/$defs/promotionReceipt" }
+      ]
+    }
+  },
+  "$ref": "#/$defs/root"
+}

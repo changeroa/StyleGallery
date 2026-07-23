@@ -1,0 +1,640 @@
+{
+  "fixture_ref": "sg:manifest/agent-native-fixture",
+  "records": [
+    {
+      "canonical_sha256": "d554c0754123354b09b237a9c0ebd9d203da57e7158342b092f877fb73b12ad2",
+      "media_type": "application/json",
+      "record_kind": "artifact_projection",
+      "repository_path": "design-engineering/reference-profiles/governed-local/editorial/profile.json",
+      "stable_ref": "sg:artifact/editorial-profile-source"
+    },
+    {
+      "claim_refs": [
+        "sg:claim/editorial-profile-addressable"
+      ],
+      "example_only": true,
+      "id": "editorial-reference-profile",
+      "maturity": "experimental",
+      "profile_kind": "governed_local",
+      "record_kind": "profile_projection",
+      "source_ref": "sg:artifact/editorial-profile-source",
+      "stable_ref": "sg:profile/editorial-reference-profile",
+      "support_status": "active",
+      "title": "Editorial reference profile"
+    },
+    {
+      "evidence_refs": [
+        "sg:evidence/editorial-profile-source"
+      ],
+      "governance_refs": [
+        "sg:governance/editorial-profile-addressable"
+      ],
+      "record_kind": "claim",
+      "scope": "repository_fixture",
+      "stable_ref": "sg:claim/editorial-profile-addressable",
+      "statement": "The governed editorial profile is addressable through an immutable StableRef and source projection.",
+      "subject_ref": "sg:profile/editorial-reference-profile",
+      "validation_refs": [
+        "sg:validation/editorial-profile-addressable"
+      ]
+    },
+    {
+      "claim_ref": "sg:claim/editorial-profile-addressable",
+      "independence_group": "governed-profile-source",
+      "polarity": "SUPPORT",
+      "record_kind": "evidence_link",
+      "source_ref": "sg:artifact/editorial-profile-source",
+      "stable_ref": "sg:evidence/editorial-profile-source"
+    },
+    {
+      "claim_ref": "sg:claim/editorial-profile-addressable",
+      "record_kind": "validation_report",
+      "stable_ref": "sg:validation/editorial-profile-addressable",
+      "status": "PASS",
+      "suite": "agent-native-fixture",
+      "validator_ref": "sg:validator/agent-native-fixture",
+      "validator_version": "agent-native-fixture-validator@1"
+    },
+    {
+      "claim_ref": "sg:claim/editorial-profile-addressable",
+      "decision": "ACCEPT",
+      "governor_ref": "sg:governor/stylegallery-maintainers",
+      "policy_version": "agent-native-read-policy@1",
+      "record_kind": "governance_decision",
+      "stable_ref": "sg:governance/editorial-profile-addressable"
+    },
+    {
+      "claim_ref": "sg:claim/editorial-profile-addressable",
+      "disposition": "ALLOW_READ",
+      "policy_version": "agent-native-read-policy@1",
+      "record_kind": "policy_disposition",
+      "stable_ref": "sg:policy/editorial-profile-read"
+    },
+    {
+      "command": "node scripts/test-sg-cli.mjs --json",
+      "expected": {
+        "exit_code": 0,
+        "report_ok": true,
+        "stderr": ""
+      },
+      "record_kind": "executable_fixture",
+      "stable_ref": "sg:artifact/sg-cli-conformance-test"
+    },
+    {
+      "record_kind": "validator",
+      "stable_ref": "sg:validator/agent-native-fixture",
+      "name": "StyleGallery agent-native fixture verifier",
+      "validator_version": "agent-native-fixture-validator@1",
+      "verification_scope": "immutable_fixture_execution_receipts"
+    },
+    {
+      "command": "node scripts/test-sg-cli.mjs --json",
+      "fixture_ref": "sg:manifest/agent-native-fixture",
+      "fixture_record_ref": "sg:artifact/sg-cli-conformance-test",
+      "fixture_version_id": "sg:artifact/sg-cli-conformance-test@sha256:451cda8812f954da0a50efd7faf2a12a635f3be1d3df431c541dafeb8b9df2dc",
+      "record_kind": "execution_receipt",
+      "result": {
+        "exit_code": 0,
+        "report_ok": true,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "result_sha256": "sha256:540eaa0982f28b71d3e7a819163e3ca9d664323bab960fd9b3ea095a242bc277",
+      "stable_ref": "sg:receipt/sg-cli-conformance",
+      "verification": {
+        "method": "captured-command-result",
+        "status": "PASS",
+        "verifier_ref": "sg:validator/agent-native-fixture",
+        "verifier_version": "agent-native-fixture-validator@1"
+      }
+    },
+    {
+      "claim_refs": [
+        "sg:claim/agent-native-read-conformance"
+      ],
+      "conformance_level": "fixture_verified",
+      "operation_refs": [
+        "sg:operation/claims",
+        "sg:operation/context",
+        "sg:operation/discover",
+        "sg:operation/ops",
+        "sg:operation/resolve",
+        "sg:operation/retrieve"
+      ],
+      "profile_id": "stylegallery-agent-native-read-v1",
+      "record_kind": "conformance_profile",
+      "stable_ref": "sg:profile/agent-native-read-conformance"
+    },
+    {
+      "evidence_refs": [
+        "sg:evidence/agent-native-read-conformance"
+      ],
+      "record_kind": "claim",
+      "scope": "committed_fixture",
+      "stable_ref": "sg:claim/agent-native-read-conformance",
+      "statement": "The public read operations share one deterministic immutable fixture registry.",
+      "subject_ref": "sg:profile/agent-native-read-conformance",
+      "validation_refs": [
+        "sg:validation/agent-native-read-conformance"
+      ]
+    },
+    {
+      "claim_ref": "sg:claim/agent-native-read-conformance",
+      "independence_group": "executable-cli-fixture",
+      "polarity": "SUPPORT",
+      "record_kind": "evidence_link",
+      "source_ref": "sg:artifact/sg-cli-conformance-test",
+      "stable_ref": "sg:evidence/agent-native-read-conformance"
+    },
+    {
+      "claim_ref": "sg:claim/agent-native-read-conformance",
+      "record_kind": "validation_report",
+      "stable_ref": "sg:validation/agent-native-read-conformance",
+      "status": "PASS",
+      "suite": "sg-cli-contract",
+      "validator_ref": "sg:validator/agent-native-fixture",
+      "validator_version": "agent-native-fixture-validator@1"
+    },
+    {
+      "conformance_profile_ref": "sg:profile/agent-native-read-conformance",
+      "name": "StyleGallery",
+      "protocol_surfaces": {
+        "a2a": "task_projection",
+        "ag_ui": "event_projection",
+        "cli": "json_read_commands",
+        "mcp": "read_only"
+      },
+      "record_kind": "agent_description",
+      "stable_ref": "sg:agent/stylegallery"
+    },
+    {
+      "adapters": [
+        "cli",
+        "mcp"
+      ],
+      "description": "Describe the agent-native StyleGallery surface and conformance profile.",
+      "effect_class": "NONE",
+      "idempotent": true,
+      "read_only": true,
+      "input_schema": {
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "name": "discover",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "stable_ref": "sg:operation/discover"
+    },
+    {
+      "adapters": [
+        "cli",
+        "mcp"
+      ],
+      "description": "Resolve one StableRef or VersionID to an immutable record.",
+      "effect_class": "NONE",
+      "idempotent": true,
+      "read_only": true,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "reference": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reference"
+        ],
+        "type": "object"
+      },
+      "name": "resolve",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "stable_ref": "sg:operation/resolve"
+    },
+    {
+      "adapters": [
+        "cli",
+        "mcp"
+      ],
+      "description": "Return claims and their separate evidence, validation, governance, and policy records.",
+      "effect_class": "NONE",
+      "idempotent": true,
+      "read_only": true,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "reference": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reference"
+        ],
+        "type": "object"
+      },
+      "name": "claims",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "stable_ref": "sg:operation/claims"
+    },
+    {
+      "adapters": [
+        "cli",
+        "mcp"
+      ],
+      "description": "Build a deterministic bounded context package for one reference.",
+      "effect_class": "NONE",
+      "idempotent": true,
+      "read_only": true,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "reference": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reference"
+        ],
+        "type": "object"
+      },
+      "name": "context",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "stable_ref": "sg:operation/context"
+    },
+    {
+      "adapters": [
+        "cli",
+        "mcp"
+      ],
+      "description": "List deterministic operation specifications.",
+      "effect_class": "NONE",
+      "idempotent": true,
+      "read_only": true,
+      "input_schema": {
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "name": "ops",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "stable_ref": "sg:operation/ops"
+    },
+    {
+      "adapters": [
+        "mcp"
+      ],
+      "description": "Project a deterministic bounded retrieval view over fixture records.",
+      "effect_class": "NONE",
+      "idempotent": true,
+      "read_only": true,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "limit": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "query": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "name": "retrieve",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "stable_ref": "sg:operation/retrieve"
+    },
+    {
+      "adapters": [
+        "internal"
+      ],
+      "description": "Create an immutable governed-learning proposal without promoting it.",
+      "effect_class": "LOCAL",
+      "idempotent": true,
+      "read_only": false,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "changes": {
+            "type": "array"
+          },
+          "claim": {
+            "type": "object"
+          },
+          "evidence": {
+            "type": "array"
+          },
+          "proposer": {
+            "type": "string"
+          },
+          "stable_ref": {
+            "type": "string"
+          },
+          "validation": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "changes",
+          "claim",
+          "evidence",
+          "proposer",
+          "stable_ref",
+          "validation"
+        ],
+        "type": "object"
+      },
+      "name": "proposal.create",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "required_capability": "sg:capability/proposal-create",
+      "stable_ref": "sg:operation/proposal-create"
+    },
+    {
+      "adapters": [
+        "internal"
+      ],
+      "description": "Verify a proposal with evidence from an independent actor.",
+      "effect_class": "LOCAL",
+      "idempotent": true,
+      "read_only": false,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence": {
+            "type": "array"
+          },
+          "proposal": {
+            "type": "object"
+          },
+          "validation": {
+            "type": "object"
+          },
+          "verifier": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence",
+          "proposal",
+          "validation",
+          "verifier"
+        ],
+        "type": "object"
+      },
+      "name": "proposal.verify",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "required_capability": "sg:capability/proposal-verify",
+      "stable_ref": "sg:operation/proposal-verify"
+    },
+    {
+      "adapters": [
+        "internal"
+      ],
+      "description": "Record an attributed governance decision for a verified proposal.",
+      "effect_class": "LOCAL",
+      "idempotent": true,
+      "read_only": false,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "governance_decision": {
+            "type": "object"
+          },
+          "proposal": {
+            "type": "object"
+          },
+          "verification": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "governance_decision",
+          "proposal",
+          "verification"
+        ],
+        "type": "object"
+      },
+      "name": "proposal.decide",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "required_capability": "sg:capability/proposal-decide",
+      "stable_ref": "sg:operation/proposal-decide"
+    },
+    {
+      "adapters": [
+        "internal"
+      ],
+      "description": "Promote only an independently verified and accepted proposal.",
+      "effect_class": "LOCAL",
+      "idempotent": true,
+      "read_only": false,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "governance_decision": {
+            "type": "object"
+          },
+          "proposal": {
+            "type": "object"
+          },
+          "registry": {
+            "type": "object"
+          },
+          "target_stable_ref": {
+            "type": "string"
+          },
+          "verification": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "governance_decision",
+          "proposal",
+          "target_stable_ref",
+          "verification"
+        ],
+        "type": "object"
+      },
+      "name": "proposal.promote",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "required_capability": "sg:capability/proposal-promote",
+      "stable_ref": "sg:operation/proposal-promote"
+    },
+    {
+      "adapters": [
+        "internal"
+      ],
+      "description": "Create one immutable Task intent and required-result record.",
+      "effect_class": "LOCAL",
+      "idempotent": true,
+      "read_only": false,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "intent": {
+            "type": "object"
+          },
+          "required_result": {
+            "type": "object"
+          },
+          "stable_ref": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "intent",
+          "required_result",
+          "stable_ref"
+        ],
+        "type": "object"
+      },
+      "name": "task.create",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "required_capability": "sg:capability/task-create",
+      "stable_ref": "sg:operation/task-create"
+    },
+    {
+      "adapters": [
+        "internal"
+      ],
+      "description": "Start one immutable Run attempt bound to a Task.",
+      "effect_class": "LOCAL",
+      "idempotent": false,
+      "read_only": false,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "input": {
+            "type": "object"
+          },
+          "stable_ref": {
+            "type": "string"
+          },
+          "task": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "stable_ref",
+          "task"
+        ],
+        "type": "object"
+      },
+      "name": "run.start",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "required_capability": "sg:capability/run-start",
+      "stable_ref": "sg:operation/run-start"
+    },
+    {
+      "adapters": [
+        "internal"
+      ],
+      "description": "Record an external effect attempt and its durable connector receipt, if any.",
+      "effect_class": "EXTERNAL",
+      "idempotent": false,
+      "read_only": false,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "connector_receipt": {
+            "type": "string"
+          },
+          "effect_class": {
+            "type": "string"
+          },
+          "idempotency_key": {
+            "type": "string"
+          },
+          "run_id": {
+            "type": "string"
+          },
+          "stable_ref": {
+            "type": "string"
+          },
+          "task_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "effect_class",
+          "stable_ref"
+        ],
+        "type": "object"
+      },
+      "name": "effect.record",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "required_capability": "sg:capability/effect-record",
+      "stable_ref": "sg:operation/effect-record"
+    },
+    {
+      "adapters": [
+        "internal"
+      ],
+      "description": "Reconcile an uncertain effect from explicit connector observations.",
+      "effect_class": "LOCAL",
+      "idempotent": true,
+      "read_only": false,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "effect": {
+            "type": "object"
+          },
+          "observations": {
+            "type": "array"
+          },
+          "strategy": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "effect",
+          "observations"
+        ],
+        "type": "object"
+      },
+      "name": "effect.reconcile",
+      "output_schema": {
+        "type": "object"
+      },
+      "record_kind": "operation",
+      "required_capability": "sg:capability/effect-reconcile",
+      "stable_ref": "sg:operation/effect-reconcile"
+    }
+  ],
+  "schema_version": "1.0"
+}
