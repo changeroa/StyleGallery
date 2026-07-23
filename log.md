@@ -1,5 +1,11 @@
 # StyleGallery Log
 
+## 2026-07-23
+
+- Added the agent-native knowledge interface with content-addressed identity, epistemic and execution records, deterministic retrieval, and governed learning.
+- Added the `sg` CLI and a read-only MCP surface derived from one operation registry.
+- Added A2A Task and AG-UI event projections, closed schemas, executable conformance receipts, adversarial tests, and CI coverage.
+
 ## 2026-07-13
 
 - Added Game UI as an experimental domain for engine-neutral classification and hierarchy plus named engine implementation subtrees.

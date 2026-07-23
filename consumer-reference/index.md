@@ -6,13 +6,16 @@ Primary role: shared non-domain infrastructure index.
 
 ## Scope Boundary
 
-In scope: the receiver contract, JSON schema, validator fixtures, path-safety rules, ownership truth, and evidence boundaries.
+In scope: the receiver contract, JSON schema, validator fixtures, path-safety rules, ownership truth, evidence boundaries, and the agent-native read/query interface over governed records.
 
-Out of scope: profiles, themes, components, browser runtime, decorative styling, and claims of independent adoption.
+Out of scope: profiles, themes, components, browser runtime, decorative styling, automatic truth or promotion, and claims of independent adoption.
 
 ## Documents
 
 - [Receiver contract](contract.md) - Required handoff shape, record-path boundary, lifecycle fields, ownership truth, and dependency direction.
+- [Agent-Native StyleGallery](agent-native/README.md) - StableRef/VersionID identity, immutable registry, CLI, read-only MCP, Task/Run/effect reconciliation, protocol projections, deterministic retrieval, and governed-learning boundaries.
+- [Agent-native registry](agent-native/registry.json) - Canonical fixture and operation inventory consumed by both CLI and MCP adapters.
+- [Agent-native schemas](agent-native/schema/agent-native.schema.json) - Closed Draft 2020-12 contracts for identity, knowledge, execution, protocol bindings, retrieval, and learning records.
 - [Consumer migration conformance schema](schema/consumer-conformance-record.schema.json) - Closed consumer-local record with thirteen explicit migration dimensions, runtime scenarios, adoption mappings, and optional page evidence.
 - [Page evidence session schema](schema/page-evidence-session.schema.json) and [manifest schema](schema/page-evidence-manifest.schema.json) - Source-bound capture lifecycle for an applicable migration page.
 - [Consumer reference item schema](schema/item.schema.json) - Machine-readable shape for the current receiver item.
