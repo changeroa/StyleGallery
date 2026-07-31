@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/governed-button-component-state.schema.json",
+  "title": "Governed button component and compound-state records",
+  "oneOf": [
+    { "$ref": "#/$defs/component" },
+    { "$ref": "#/$defs/stateSet" }
+  ],
+  "$defs": {
+    "applicability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "status": { "enum": ["required", "conditional", "not_applicable", "prohibited"] },
+        "condition": { "type": "string", "minLength": 1 },
+        "resolution": { "enum": ["required", "not_applicable", "prohibited"] },
+        "reason": { "type": "string", "minLength": 10, "pattern": "^\\S+(?:\\s+\\S+){2,}\\s*[.!?]$" },
+        "values": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": ["string", "boolean"] } }
+      }
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "record_kind", "component_id", "profile_id", "anatomy", "semantic_modes", "versions"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "record_kind": { "const": "component" },
+        "component_id": { "const": "button" },
+        "profile_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "anatomy": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" } },
+        "semantic_modes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "element", "role", "keys", "aria_states", "activation"],
+            "properties": {
+              "id": { "enum": ["action", "toggle", "disclosure", "switch"] },
+              "element": { "const": "button" },
+              "role": { "enum": ["button", "switch"] },
+              "keys": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["Enter", "Space"] } },
+              "aria_states": { "type": "array", "items": { "$ref": "#/$defs/applicability" } },
+              "activation": { "enum": ["invoke", "toggle", "control"] }
+            }
+          }
+        },
+        "versions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["design_revision", "package_version", "api_version", "delivery_channel", "lifecycle"],
+          "properties": {
+            "design_revision": { "type": "string", "pattern": "^\\d{4}\\.\\d{2}\\.\\d{2}$" },
+            "package_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[a-z0-9.-]+)?$" },
+            "api_version": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+            "delivery_channel": { "enum": ["preview", "stable"] },
+            "lifecycle": { "enum": ["experimental", "stable", "deprecated"] }
+          }
+        }
+      }
+    },
+    "stateSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "record_kind", "component_id", "profile_id", "visual_environments", "scenarios"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "record_kind": { "const": "state_set" },
+        "component_id": { "const": "button" },
+        "profile_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "visual_environments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "browser", "browser_revision", "container_image", "platform", "playwright", "viewport"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+              "browser": { "type": "string", "minLength": 1 },
+              "browser_revision": { "type": "string", "minLength": 1 },
+              "container_image": { "type": "string", "minLength": 1 },
+              "platform": { "enum": ["darwin/arm64", "linux/amd64"] },
+              "playwright": { "const": "1.61.0" },
+              "viewport": { "const": "1024x768" }
+            }
+          }
+        },
+        "scenarios": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "semantic_mode", "states", "aria", "expected"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+              "semantic_mode": { "enum": ["action", "toggle", "disclosure", "switch"] },
+              "states": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["focus", "pressed", "expanded", "loading", "busy", "disabled", "invalid", "selected", "current", "reduced_motion"] } },
+              "aria": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "pressed": { "enum": ["true", "false"] },
+                  "expanded": { "enum": ["true", "false"] },
+                  "busy": { "enum": ["true", "false"] },
+                  "disabled": { "enum": ["true", "false"] },
+                  "checked": { "enum": ["true", "false"] }
+                }
+              },
+              "expected": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["visual", "visual_image", "dom", "ax", "activation"],
+                "properties": {
+                  "visual": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": { "enum": ["ready", "focus", "pressed", "expanded", "loading", "busy", "disabled"] }
+                  },
+                  "visual_image": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["environment_id", "sha256", "width", "height"],
+                      "properties": {
+                        "environment_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+                        "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+                        "width": { "type": "integer", "minimum": 44 },
+                        "height": { "type": "integer", "minimum": 44 }
+                      }
+                    }
+                  },
+                  "dom": { "type": "object", "additionalProperties": { "type": "string" } },
+                  "ax": { "type": "object", "additionalProperties": { "type": ["string", "boolean"] } },
+                  "activation": { "enum": ["allowed", "suppressed"] }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

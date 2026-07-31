@@ -7,13 +7,17 @@ import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import { isPlainObject, validateItemSchema } from "./consumer-reference-schema.mjs";
 import { canonicalGovernedProfilePaths } from "./governed-profile-registry.mjs";
+import { writeJsonOutput } from "./json-output.mjs";
 import { validateReferenceProfile, validateReferenceProfileSet } from "./reference-profile-contract.mjs";
 
 const root = process.cwd();
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const conformanceValidator = path.join(repositoryRoot, "scripts", "validate-consumer-conformance.mjs");
 const schema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "schema", "item.schema.json"), "utf8"));
-const validateFullItemSchema = new Ajv2020({ allErrors: true, strict: false }).compile(schema);
+const governedButtonSchema = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference", "schema", "governed-button-profile.schema.json"), "utf8"));
+const ajv = new Ajv2020({ allErrors: true, strict: false });
+const validateFullItemSchema = ajv.compile(schema);
+const validateGovernedButtonSchema = ajv.compile(governedButtonSchema);
 const failures = [];
 const warnings = [];
 const canonicalProfilePaths = canonicalGovernedProfilePaths;
@@ -191,13 +195,18 @@ function validateItem(relative) {
     }
     throw error;
   }
-  if (!validateFullItemSchema(item)) {
-    for (const error of validateFullItemSchema.errors ?? []) addFailure("item_schema_invalid", relative, `${error.instancePath || "/"} ${error.message}`);
+  const governedPath = /^design-engineering\/reference-profiles\/governed-local\/[^/]+\/profile\.json$/.test(relative);
+  const validateSelectedSchema = governedPath ? validateGovernedButtonSchema : validateFullItemSchema;
+  if (!validateSelectedSchema(item)) {
+    for (const error of validateSelectedSchema.errors ?? []) addFailure("item_schema_invalid", relative, `${error.instancePath || "/"} ${error.message}`);
   }
   for (const finding of validateItemSchema(item, schema)) addFailure(finding.code, relative, finding.message);
   if (!isPlainObject(item)) return;
+  if (!governedPath && item.profile_kind === "governed_local" && item.component_records?.includes("components/button.component.json")) {
+    addFailure("generic_receiver_governed_button_forbidden", relative, "governed button profiles must be loaded through the named governed profile route");
+  }
   validateHandoff(item, relative);
-  if (/^design-engineering\/reference-profiles\/governed-local\/[^/]+\/profile\.json$/.test(relative)) {
+  if (governedPath) {
     const result = validateReferenceProfile({ item, relative, root });
     for (const finding of result.failures) addFailure(finding.code, finding.path, finding.message);
     if (result.summary) profileSummaries.push(result.summary);
@@ -282,7 +291,7 @@ const checkedHandoffs = validateHandoffCoverage();
 
 const uniqueFailures = [...new Map(failures.map((failure) => [`${failure.code}:${failure.path}:${failure.message}`, failure])).values()];
 const result = { checkedHandoffs, checkedItems: options.items.length, checkedMigrationRecords, failures: uniqueFailures, ok: uniqueFailures.length === 0, profiles: profileSummaries, warnings };
-if (options.json) console.log(JSON.stringify(result, null, 2));
+if (options.json) await writeJsonOutput(result);
 else if (result.ok) console.log(`ok: ${result.checkedItems} consumer reference items`);
 else console.error(result.failures.map((failure) => `${failure.code}: ${failure.path}: ${failure.message}`).join("\n"));
 process.exitCode = result.ok ? 0 : 1;

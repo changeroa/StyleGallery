@@ -1,5 +1,6 @@
 {
   "name": "stylegallery-validation",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -18,6 +19,8 @@
     "test:component-state:runtime": "playwright test tests/component-state-evidence.spec.mjs --project=chromium",
     "test:component-state:runtime-negative": "node scripts/test-component-state-sentinel.mjs",
     "test:sentinel": "playwright test tests/consumer-reference-sentinels.spec.mjs --project=chromium",
+    "test:source-inventory": "node --test scripts/test-repository-source-inventory.mjs",
+    "test:json-schema-formats": "node --test scripts/test-json-schema-formats.mjs",
     "sg": "node scripts/sg.mjs",
     "sg:mcp": "node scripts/sg-mcp.mjs",
     "test:agent-native": "node scripts/test-agent-knowledge-kernel.mjs --json && node scripts/test-agent-execution-kernel.mjs --json && node scripts/test-agent-execution-safety.mjs --json && node scripts/test-agent-events.mjs --json && node scripts/test-agent-learning.mjs --json && node scripts/test-agent-native-schemas.mjs --json && node scripts/test-sg-cli.mjs --json && node scripts/test-agent-conformance-receipt.mjs --json && node scripts/test-agent-mcp.mjs --json && node scripts/test-agent-registry-mcp-integrity.mjs --json && node scripts/test-agent-registry-mutations.mjs --json && node scripts/test-agent-adapter-conformance.mjs --json && node scripts/test-agent-projections.mjs --json",

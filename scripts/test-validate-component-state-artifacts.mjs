@@ -11,6 +11,7 @@ import { makePng, syntheticImage } from "./component-state-artifact-fixture.mjs"
 import { resolveProfileRecords } from "./profile-record-contract.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const fixtureRoot = path.join(repositoryRoot, "consumer-reference/fixtures/component-evidence-v1");
 const sourceProfiles = path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local");
 const validator = path.join(repositoryRoot, "scripts/validate-component-state.mjs");
 const finalizer = path.join(repositoryRoot, "scripts/finalize-component-state-evidence.mjs");
@@ -23,12 +24,24 @@ function writeJson(file, value) {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
 }
 
+function materializeArchivedV1Evidence(profileRoot) {
+  for (const profile of ["editorial", "terminal"]) {
+    fs.copyFileSync(path.join(fixtureRoot, `${profile}.button.evidence.json`), path.join(profileRoot, profile, "evidence/button.evidence.json"));
+  }
+}
+
+function profileEntries(profileRoot) {
+  return fs.readdirSync(profileRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(profileRoot, entry.name, "profile.json")));
+}
+
 function prepareCanonical() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-state-artifacts-base-"));
   const profileRoot = path.join(root, "profiles");
   const artifactRoot = path.join(root, "artifacts");
   fs.cpSync(sourceProfiles, profileRoot, { recursive: true });
-  for (const entry of fs.readdirSync(profileRoot, { withFileTypes: true }).filter((item) => item.isDirectory())) {
+  materializeArchivedV1Evidence(profileRoot);
+  for (const entry of profileEntries(profileRoot)) {
     const resolved = resolveProfileRecords(path.join(profileRoot, entry.name), []);
     const statesRecord = resolved.records.states[0];
     for (const scenario of statesRecord.value.scenarios) {
@@ -44,7 +57,7 @@ function prepareCanonical() {
   const receipt = JSON.parse(receiptBytes);
   const captureLink = sessionLink(receipt, sha256(receiptBytes));
   const capturedAt = new Date().toISOString();
-  for (const entry of fs.readdirSync(profileRoot, { withFileTypes: true }).filter((item) => item.isDirectory())) {
+  for (const entry of profileEntries(profileRoot)) {
     const resolved = resolveProfileRecords(path.join(profileRoot, entry.name), []);
     const fixtures = resolved.records.fixture[0].value;
     const states = new Map(resolved.records.states[0].value.scenarios.map((scenario) => [scenario.id, scenario]));
@@ -96,11 +109,30 @@ function prepareCanonical() {
     }
   }
   const manifest = path.join(artifactRoot, "runtime-manifest.json");
-  const child = spawnSync(process.execPath, [finalizer, "--root", profileRoot, "--artifact-root", artifactRoot, "--output", manifest, "--write-canonical", "--json"], { cwd: repositoryRoot, encoding: "utf8" });
+  const child = spawnSync(process.execPath, [finalizer, "--root", profileRoot, "--artifact-root", artifactRoot, "--output", manifest, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
   if (child.status !== 0) throw new Error(`canonical artifact finalization failed: ${child.stdout}${child.stderr}`);
   const finalization = JSON.parse(child.stdout);
   if (finalization.artifactCount !== 40) throw new Error(`canonical finalization must close 40 runtime files, found ${finalization.artifactCount}`);
-  const passCount = JSON.parse(fs.readFileSync(manifest, "utf8")).records.flatMap((record) => record.passes).length;
+  const v2 = JSON.parse(fs.readFileSync(manifest, "utf8"));
+  const captureRecord = JSON.parse(fs.readFileSync(path.join(artifactRoot, v2.capture.path), "utf8"));
+  const legacy = {
+    claim_boundary: v2.claim_boundary,
+    environment: captureRecord.environment,
+    recorded_at: v2.recorded_at,
+    record_kind: "component_state_runtime_manifest",
+    records: v2.records.map((record) => ({
+      claim_boundary: record.claim_boundary,
+      component_id: record.component_id,
+      passes: record.passes.map((passRecord) => ({ ...passRecord, environment: captureRecord.environment, run: captureRecord.run, session: sessionLink(captureRecord.session, captureRecord.session.receipt_sha256) })),
+      profile_id: record.profile_id,
+      schema_version: "1.0",
+    })),
+    run: captureRecord.run,
+    schema_version: "1.0",
+    session: captureRecord.session,
+  };
+  writeJson(manifest, legacy);
+  const passCount = legacy.records.flatMap((record) => record.passes).length;
   if (passCount !== 30) throw new Error(`canonical finalization must retain 30 channel passes, found ${passCount}`);
   return { artifactRoot, manifest, profileRoot, root };
 }
@@ -129,6 +161,7 @@ function mutateJsonArtifact(manifest, artifactRoot, scenario, channel, mutate) {
   refresh(pass, artifactRoot);
   return pass;
 }
+
 
 const cases = [
   { name: "canonical", valid: true },
