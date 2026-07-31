@@ -1,0 +1,371 @@
+{
+  "schema_version": "2.0",
+  "record_kind": "component_capture",
+  "capture_id": "sha256:e27bbe4fd3a7ae69d1c67ad6be3c5d688a8b87bae9fc62339e3bd89d96e31ee3",
+  "profile_id": "shared-component-state",
+  "environment": {
+    "browser": "Google Chrome for Testing 149.0.7827.55",
+    "browser_revision": "chromium-1228",
+    "container_image": "mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a",
+    "kind": "browser",
+    "lockfile_sha256": "sha256:cab8d2ee9d17bc88ea6273e779b01cc837c23bea0dafc27cc2b430966d0ee374",
+    "node": "v24.16.0",
+    "platform": "linux/amd64",
+    "playwright": "1.61.0",
+    "viewport": "1024x768"
+  },
+  "run": {
+    "attempt": 1,
+    "id": "278e606b-f44a-467c-a171-369a5abb323b",
+    "repository": "changeroa/StyleGallery",
+    "revision": "c6d074dc9e5a2eb856855df24a75cf2cf9644716",
+    "source": "local"
+  },
+  "session": {
+    "attempt": 1,
+    "branch": "detached",
+    "completed_at": "2026-07-31T07:10:09.884Z",
+    "environment": {
+      "browser": "Google Chrome for Testing 149.0.7827.55",
+      "browser_revision": "chromium-1228",
+      "container_image": "mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a",
+      "kind": "browser",
+      "lockfile_sha256": "sha256:cab8d2ee9d17bc88ea6273e779b01cc837c23bea0dafc27cc2b430966d0ee374",
+      "node": "v24.16.0",
+      "platform": "linux/amd64",
+      "playwright": "1.61.0",
+      "viewport": "1024x768"
+    },
+    "intended": [
+      {
+        "profile_id": "editorial-reference-profile",
+        "profile_name": "editorial",
+        "scenarios": [
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "action-disabled-busy"
+          },
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "action-focused"
+          },
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "action-loading-busy"
+          },
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "disclosure-expanded-loading"
+          },
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "toggle-focused-pressed"
+          }
+        ]
+      },
+      {
+        "profile_id": "terminal-reference-profile",
+        "profile_name": "terminal",
+        "scenarios": [
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "action-disabled-busy"
+          },
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "action-focused"
+          },
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "action-loading-busy"
+          },
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "disclosure-expanded-loading"
+          },
+          {
+            "channels": [
+              "ax",
+              "dom",
+              "visual"
+            ],
+            "id": "toggle-focused-pressed"
+          }
+        ]
+      }
+    ],
+    "nonce": "895908451eb35b4b081125b82eba6b855d73382995737ca32f5f688656ce31b3",
+    "receipt": {
+      "byte_length": 11714,
+      "media_type": "application/json",
+      "path": "capture-session.json",
+      "sha256": "sha256:be8f6a3aa6197067f0f6c24530054e9ded3c52b84b2bcfcaae4fd0b172a4e647"
+    },
+    "receipt_sha256": "sha256:be8f6a3aa6197067f0f6c24530054e9ded3c52b84b2bcfcaae4fd0b172a4e647",
+    "repository": "changeroa/StyleGallery",
+    "revision": "c6d074dc9e5a2eb856855df24a75cf2cf9644716",
+    "session_id": "278e606b-f44a-467c-a171-369a5abb323b",
+    "source": {
+      "files": [
+        {
+          "byte_length": 1375,
+          "path": "consumer-reference/schema/ax-evidence.schema.json",
+          "sha256": "sha256:15e9e7f777c2929ac5a5474a5d94baef2dc6c1adb94bee5610fed488f00ea20f"
+        },
+        {
+          "byte_length": 7291,
+          "path": "consumer-reference/schema/capture-session.schema.json",
+          "sha256": "sha256:cc3010fa76b06b3109417184cb30a98492ca2ad6aa56f4ba27505c1b228821f8"
+        },
+        {
+          "byte_length": 2143,
+          "path": "consumer-reference/schema/component-capture-record.v2.schema.json",
+          "sha256": "sha256:3eaa970428bfa4abda5817955a5005fd3207563acc69c38fac72011cc5dd83fd"
+        },
+        {
+          "byte_length": 3077,
+          "path": "consumer-reference/schema/component-evidence-record.v2.schema.json",
+          "sha256": "sha256:d00e4cbb370c177619762840c4a5df3505ee6b66877659b7f526a5e86668347c"
+        },
+        {
+          "byte_length": 1061,
+          "path": "consumer-reference/schema/component-runtime-manifest.v2.schema.json",
+          "sha256": "sha256:03a1555396599cd545b5233063ab4a0b3737c3fc942cee2f7ca6d8c4f7ecf17c"
+        },
+        {
+          "byte_length": 1799,
+          "path": "consumer-reference/schema/dom-evidence.schema.json",
+          "sha256": "sha256:5b0e67d44f0592b729642e58580ddc7d3386c77a9cc61dd33e9f0538fcb3b850"
+        },
+        {
+          "byte_length": 3807,
+          "path": "consumer-reference/schema/evidence-record.schema.json",
+          "sha256": "sha256:5f32dce2352a304d19eac923f538ad105edf04f7743128cb30eee07c9c071290"
+        },
+        {
+          "byte_length": 7124,
+          "path": "consumer-reference/schema/governed-button-component-state.schema.json",
+          "sha256": "sha256:b594ef8a099b80c25c92870dd758a797f66a2d9aab2b501a6da9b319be03c59d"
+        },
+        {
+          "byte_length": 5830,
+          "path": "consumer-reference/schema/governed-button-profile.schema.json",
+          "sha256": "sha256:fd985deb9a2dbf8ad1212ab1593043fb14849572d0baeccfe0e6fa84ab39ae9f"
+        },
+        {
+          "byte_length": 1549,
+          "path": "consumer-reference/schema/governed-button-runtime-fixture.schema.json",
+          "sha256": "sha256:5fcf9e5dc1dc8d7633d7e73ba90244aba0d5f4f4d5571fe9c14a3194b263b350"
+        },
+        {
+          "byte_length": 1669,
+          "path": "consumer-reference/schema/runtime-evidence-manifest.schema.json",
+          "sha256": "sha256:7a273cae646efff8652da92d52448d94dd93046feefd4b6db96b12332bb0ac94"
+        },
+        {
+          "byte_length": 1620,
+          "path": "consumer-reference/schema/visual-evidence.schema.json",
+          "sha256": "sha256:5fe9bf91ec1198441169dc1aa0773c9f4d278b2e345d111c453c34bd0c575d49"
+        },
+        {
+          "byte_length": 89522,
+          "path": "package-lock.json",
+          "sha256": "sha256:cab8d2ee9d17bc88ea6273e779b01cc837c23bea0dafc27cc2b430966d0ee374"
+        },
+        {
+          "byte_length": 2680,
+          "path": "package.json",
+          "sha256": "sha256:66247d94db3113c9f186bbd0ee5f3c092582459ae07ddbd44298520d572835b8"
+        },
+        {
+          "byte_length": 532,
+          "path": "playwright.config.mjs",
+          "sha256": "sha256:7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae"
+        },
+        {
+          "byte_length": 3069,
+          "path": "profiles/editorial/components/button.component.json",
+          "sha256": "sha256:fb3888e451783aba0c6ac86abcb7d4f361b6c88904f66f412551afea62f33f67"
+        },
+        {
+          "byte_length": 1434,
+          "path": "profiles/editorial/fixtures/button.fixture.json",
+          "sha256": "sha256:9f4f1971d44b5d3d432658d0e15321536ed2741d71e368bb80cfdd4413ed3779"
+        },
+        {
+          "byte_length": 340,
+          "path": "profiles/editorial/local-foundations.json",
+          "sha256": "sha256:467f948969076ccd1226cafa069741d3a693ff66357f610d9c6eda7554bdcf8f"
+        },
+        {
+          "byte_length": 1434,
+          "path": "profiles/editorial/profile.json",
+          "sha256": "sha256:9f22cfc4306ee1002017762915aa6ff8ce1400868a1e1e00e1353015ba8c4997"
+        },
+        {
+          "byte_length": 5710,
+          "path": "profiles/editorial/states/button.states.json",
+          "sha256": "sha256:7217f3af17af24d7fde05e4e6207b7234e80bb431415ff8095450c33e91b8560"
+        },
+        {
+          "byte_length": 608,
+          "path": "profiles/editorial/tokens.dtcg.json",
+          "sha256": "sha256:807c2f1ed2db489b4ffa3ee86b991f5b34decdc279dfd0c75f29b4b65d86c34f"
+        },
+        {
+          "byte_length": 3068,
+          "path": "profiles/terminal/components/button.component.json",
+          "sha256": "sha256:fd9ce393498649125b7e9490f9f00ab95b14ddd59762076af599d22887daa42a"
+        },
+        {
+          "byte_length": 1441,
+          "path": "profiles/terminal/fixtures/button.fixture.json",
+          "sha256": "sha256:c56f157ed0c297da747c1a352ede820cfe493d4617d52977dbd506e9e05b2332"
+        },
+        {
+          "byte_length": 343,
+          "path": "profiles/terminal/local-foundations.json",
+          "sha256": "sha256:a91a72ae29cab8eeef6d3d2fff6b0917246e0a2d478410eca8eeef73db414b8c"
+        },
+        {
+          "byte_length": 1432,
+          "path": "profiles/terminal/profile.json",
+          "sha256": "sha256:26194b0094eac1f721679cbe43794c9372480cb916a12ba6ede0558e1bd2ff55"
+        },
+        {
+          "byte_length": 5709,
+          "path": "profiles/terminal/states/button.states.json",
+          "sha256": "sha256:b56f534a904bff67a41f1cb015ea22b420318a1a7b2421ad6f403b027d582bbf"
+        },
+        {
+          "byte_length": 606,
+          "path": "profiles/terminal/tokens.dtcg.json",
+          "sha256": "sha256:2fe2ac25708c77efcc662b9bbec9147624cd11f3711d70e96ff604e9602d91c2"
+        },
+        {
+          "byte_length": 741,
+          "path": "scripts/artifact-metadata.mjs",
+          "sha256": "sha256:060a67cd2ae1412b950509bce72fbba8d0eabbbeba0fdf3d06edc1790ac01f6e"
+        },
+        {
+          "byte_length": 8344,
+          "path": "scripts/capture-session-contract.mjs",
+          "sha256": "sha256:4488e5cfabce6e6a4f0f6a5caafe3ce612b1f01158b3c2aab98de00229079260"
+        },
+        {
+          "byte_length": 7127,
+          "path": "scripts/component-state-contract.mjs",
+          "sha256": "sha256:4d0d419a83e2de8df8db2a24b29b1fe5b28daaa536098f7b9dcd2db4f9b2922e"
+        },
+        {
+          "byte_length": 13453,
+          "path": "scripts/component-state-semantics.mjs",
+          "sha256": "sha256:62dd6cde7dbb18a928030a79f8821a3fb805b10e82f689c66c7ce6ac055dac85"
+        },
+        {
+          "byte_length": 5426,
+          "path": "scripts/create-component-state-session.mjs",
+          "sha256": "sha256:1b56b74573af591b917dcf36ca147d6e4e8d4e1ebcb01a77ae2c6637ae311eae"
+        },
+        {
+          "byte_length": 13617,
+          "path": "scripts/evidence-artifact-contract.mjs",
+          "sha256": "sha256:48e9dda964732e5f116c3e87d4200e168f62837142f085f4baf75a676c3960e6"
+        },
+        {
+          "byte_length": 13838,
+          "path": "scripts/evidence-capture-contract.mjs",
+          "sha256": "sha256:80c50d84d19e3755dce83b1aab045fc74791828ed8048173d06c57b00621027a"
+        },
+        {
+          "byte_length": 10957,
+          "path": "scripts/evidence-version-projection.mjs",
+          "sha256": "sha256:efe654015dc864827837167796de1f8d38bf547cbb99e3fc4268858d01cd71e2"
+        },
+        {
+          "byte_length": 6909,
+          "path": "scripts/profile-record-contract.mjs",
+          "sha256": "sha256:b216e6a939362198bfc0628d0856842891c8e2e5be02b0b298110424de1d8bf7"
+        },
+        {
+          "byte_length": 1592,
+          "path": "scripts/strict-json.mjs",
+          "sha256": "sha256:d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3"
+        },
+        {
+          "byte_length": 4237,
+          "path": "scripts/test-component-evidence-v2-integration.mjs",
+          "sha256": "sha256:b424bfbf701529a4babb8e16d3c9c78193ae37d5a19077fe825111da74dae611"
+        },
+        {
+          "byte_length": 13022,
+          "path": "scripts/test-evidence-v2-projection.mjs",
+          "sha256": "sha256:ff447a7a5e909ef0c938ea0c43baa4b7fd1454e51cdf6830f86c487e894cdc72"
+        },
+        {
+          "byte_length": 22071,
+          "path": "scripts/test-validate-component-state-artifacts.mjs",
+          "sha256": "sha256:9447b86b61d5134060acbf61461035c2214ed1847616cc8121599366f91dfa81"
+        },
+        {
+          "byte_length": 11995,
+          "path": "scripts/test-validate-component-state.mjs",
+          "sha256": "sha256:a6fa069834ac2a4dbf96e405c3dad51d2de447d674a1421649c11d6bc5d17dad"
+        },
+        {
+          "byte_length": 953,
+          "path": "scripts/visual-expectation-contract.mjs",
+          "sha256": "sha256:4279a66c607ff3eb99fa86054fcc27658f93108d80c0cdadf9ceb40bb79cc62c"
+        },
+        {
+          "byte_length": 9388,
+          "path": "tests/component-state-evidence.spec.mjs",
+          "sha256": "sha256:f10bfb2cf7ea37f07ca1af6c160a33b22cb5bcf31eeb60f338f121f1cdc057fa"
+        },
+        {
+          "byte_length": 7039,
+          "path": "tests/helpers/render-component-state.mjs",
+          "sha256": "sha256:51c09abb671b615d075ba74b8578efc500fc000d1e39a62d9fc20a76a27a5a46"
+        }
+      ],
+      "sha256": "sha256:ad79c99976e51acd1825431f740b78639103622584852258270072a39308240e"
+    },
+    "started_at": "2026-07-31T07:09:47.275Z"
+  }
+}
