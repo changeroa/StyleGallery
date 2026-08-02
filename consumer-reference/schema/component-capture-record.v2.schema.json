@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/component-capture-record.v2.schema.json",
+  "title": "Shared component evidence capture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_kind", "capture_id", "profile_id", "environment", "run", "session"],
+  "properties": {
+    "schema_version": { "const": "2.0" },
+    "record_kind": { "const": "component_capture" },
+    "capture_id": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "profile_id": { "const": "shared-component-state" },
+    "environment": { "$ref": "https://stylegallery.local/consumer-reference/schema/capture-session.schema.json#/$defs/environment" },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source", "repository", "revision", "attempt"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "source": { "enum": ["local", "github_actions"] },
+        "repository": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "attempt": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "session": {
+      "oneOf": [
+        { "$ref": "https://stylegallery.local/consumer-reference/schema/capture-session.schema.json#/$defs/session_link" },
+        { "$ref": "https://stylegallery.local/consumer-reference/schema/capture-session.schema.json#/$defs/completed_session" }
+      ]
+    }
+  },
+  "$defs": {
+    "capture_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capture_id", "path", "sha256", "byte_length"],
+      "properties": {
+        "capture_id": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "path": { "type": "string", "pattern": "^design-engineering/reference-profiles/governed-local/captures/sha256-[a-f0-9]{64}\\.capture\\.json$" },
+        "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "byte_length": { "type": "integer", "minimum": 1, "maximum": 1048576 }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/governed-button-runtime-fixture.schema.json",
+  "title": "Governed button runtime fixture manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "fixture_id", "component_id", "profile_id", "component_record", "state_record", "scenarios"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "fixture_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "component_id": { "const": "button" },
+    "profile_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "component_record": { "const": "../components/button.component.json" },
+    "state_record": { "const": "../states/button.states.json" },
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "semantic_mode", "label", "activation_key", "required_channels"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "semantic_mode": { "enum": ["action", "toggle", "disclosure", "switch"] },
+          "label": { "type": "string", "minLength": 1 },
+          "activation_key": { "enum": ["Enter", "Space"] },
+          "required_channels": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["static", "browser", "visual", "dom", "ax", "human"] } }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,646 @@
+{
+  "schema_version": "2.0",
+  "record_kind": "material_admission_policy",
+  "stable_ref": "sg:policy/material-admission-v2",
+  "media_type": "text/markdown",
+  "allowed_materials": [
+    {
+      "repository_path": "AGENTS.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "CATALOG.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "DOMAINS.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "GOVERNANCE.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "GUIDE.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "README.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "consumer-reference/agent-native/README.md",
+      "domain": "shared",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "consumer-reference/contract.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "consumer-reference/index.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "design-engineering/index.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/index.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "guides/decision-tree.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "guides/documentation-mode-taxonomy.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "guides/layout-brief.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "guides/vocabulary.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "guides/webpage-generation-workflow.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "index.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "layout/index.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "log.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "motion/index.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "patterns/centering/center.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/centering/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/centering/super-center.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/containment/box.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/containment/clamped-card.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/containment/content-limiter.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/containment/fluid-styles.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/containment/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/grid-repetition/card-grid.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/grid-repetition/columns.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/grid-repetition/dense-grid.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/grid-repetition/grid-wrapper.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/grid-repetition/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/grid-repetition/masonry-approx.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/grid-repetition/page-grid.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/grid-repetition/ram-grid.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/grid-repetition/twelve-span-grid.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/badge-list.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/breadcrumb.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/cluster.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/deconstructed-pancake.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/pagination.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/reel.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/split-nav.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/tab-strip.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/in-line-grouping/wrap-row.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/media-fit/frame.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/media-fit/icon-frame.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/media-fit/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/overlay-exception/imposter.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/overlay-exception/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/overlay-exception/overlay-stack.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/split-sidebar/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/split-sidebar/list-detail.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/split-sidebar/main-with-rail.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/split-sidebar/media-object.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/split-sidebar/sidebar.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/split-sidebar/split-screen.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/split-sidebar/sticky-aside.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/split-sidebar/supporting-pane.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/split-sidebar/switcher.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/stacking/feed.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/stacking/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/stacking/line-up.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/stacking/stack.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/stacking/step-nav.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/viewport-shell/cover.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/viewport-shell/fixed-sidenav-shell.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/viewport-shell/holy-grail.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/viewport-shell/index.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/viewport-shell/panel-layout.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/viewport-shell/scroll-body-shell.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/viewport-shell/sticky-footer.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "patterns/viewport-shell/sticky-header.md",
+      "domain": "layout",
+      "lifecycle": "generated"
+    },
+    {
+      "repository_path": "platform-guides/index.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "quality/claim-records/index.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/claim-records/samples.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/claim-records/stylegallery-multidomain-scope.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/claims.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/accessibility.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/consumer-migration.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/design-rationale.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/executable-evidence.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/families.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/hci-evaluation.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/index.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/pattern-contract-audit.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/search-metadata-polyhierarchy.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/sources.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/tokens.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/evidence/visual-qa.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/gates/accessibility-evidence.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/gates/consumer-migration-evidence.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/gates/design-claim.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/gates/harmony-evaluation.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/gates/index.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/gates/layout.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/gates/rationale.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/gates/visual-evidence.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/index.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/principles.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "recipes/article-page.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "recipes/command-surface.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "recipes/dashboard.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "recipes/form-flow.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "recipes/homepage.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "recipes/index.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "recipes/list-detail.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "recipes/primitive-to-recipe-matrix.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "recipes/saas-settings.md",
+      "domain": "layout",
+      "lifecycle": "stable"
+    }
+  ],
+  "exclusions": [
+    {
+      "kind": "path_prefix",
+      "value": ".omo/",
+      "code": "material_path_omo_excluded"
+    },
+    {
+      "kind": "path_prefix",
+      "value": "tests/",
+      "code": "material_path_test_excluded"
+    },
+    {
+      "kind": "path_segment",
+      "value": "fixture",
+      "code": "material_path_fixture_excluded"
+    },
+    {
+      "kind": "path_segment",
+      "value": "fixtures",
+      "code": "material_path_fixture_excluded"
+    },
+    {
+      "kind": "path_segment",
+      "value": "schema",
+      "code": "material_path_schema_excluded"
+    },
+    {
+      "kind": "path_segment",
+      "value": "schemas",
+      "code": "material_path_schema_excluded"
+    },
+    {
+      "kind": "path_segment",
+      "value": "baseline",
+      "code": "material_path_baseline_excluded"
+    },
+    {
+      "kind": "path_segment",
+      "value": "baselines",
+      "code": "material_path_baseline_excluded"
+    },
+    {
+      "kind": "path_prefix",
+      "value": "design-engineering/reference-profiles/",
+      "code": "material_profile_values_excluded"
+    },
+    {
+      "kind": "path_prefix",
+      "value": "scripts/",
+      "code": "material_path_internal_excluded"
+    },
+    {
+      "kind": "path_prefix",
+      "value": ".github/",
+      "code": "material_path_internal_excluded"
+    },
+    {
+      "kind": "path_prefix",
+      "value": "node_modules/",
+      "code": "material_path_internal_excluded"
+    },
+    {
+      "kind": "path_prefix",
+      "value": "test-results/",
+      "code": "material_path_internal_excluded"
+    },
+    {
+      "kind": "path_segment",
+      "value": "internal",
+      "code": "material_path_internal_excluded"
+    },
+    {
+      "kind": "path_segment",
+      "value": "tmp",
+      "code": "material_path_internal_excluded"
+    }
+  ],
+  "version_id": "sg:policy/material-admission-v2@sha256:c866cf112525130508252d2303207da9057c0f3a239f0e056cce9ef2d5a96f1d"
+}

@@ -6,8 +6,10 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { canonicalSourceManifest } from "./capture-session-contract.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const fixtureRoot = path.join(repositoryRoot, "consumer-reference/fixtures/component-evidence-v1");
 const sourceRoot = path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local");
 const validator = path.join(repositoryRoot, "scripts/validate-component-state.mjs");
 
@@ -35,10 +37,23 @@ function pass(value, scenarioId, channel) {
 }
 
 function run(root) {
-  const child = spawnSync(process.execPath, [validator, "--root", root, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
+  const child = spawnSync(process.execPath, [validator, "--root", root, "--source-mode", "current-authoring", "--json"], { cwd: repositoryRoot, encoding: "utf8" });
   let report = { failures: [], ok: false, parse_error: true };
   try { report = JSON.parse(child.stdout); } catch { report = { failures: [], ok: false, parse_error: true }; }
   return { report, status: child.status };
+}
+
+function materializeArchivedV1Evidence(root) {
+  for (const profile of ["editorial", "terminal"]) {
+    fs.copyFileSync(path.join(fixtureRoot, `${profile}.button.evidence.json`), path.join(root, profile, "evidence/button.evidence.json"));
+  }
+}
+
+function refreshV1Sources(root) {
+  const source = canonicalSourceManifest(repositoryRoot, root);
+  for (const profile of ["editorial", "terminal"]) edit(root, profile, "evidence/button.evidence.json", (value) => {
+    for (const passRecord of value.passes) passRecord.session.source = structuredClone(source);
+  });
 }
 
 const cases = [
@@ -89,12 +104,18 @@ try {
   for (const [name, expected, mutate] of cases) {
     const root = path.join(tempRoot, name);
     fs.cpSync(sourceRoot, root, { recursive: true });
+    materializeArchivedV1Evidence(root);
+    refreshV1Sources(root);
     mutate(root);
     const child = run(root);
     const codes = child.report.failures.map((failure) => failure.code);
     results.push({ actual: { codes, scaffold: child.report.scaffold === true, status: child.status }, expected, name, ok: child.status > 0 && codes.includes(expected) && child.report.scaffold !== true });
   }
-  const canonical = run(sourceRoot);
+  const canonicalRoot = path.join(tempRoot, "canonical");
+  fs.cpSync(sourceRoot, canonicalRoot, { recursive: true });
+  materializeArchivedV1Evidence(canonicalRoot);
+  refreshV1Sources(canonicalRoot);
+  const canonical = run(canonicalRoot);
   results.push({ actual: { status: canonical.status }, expected: "canonical_valid", name: "canonical", ok: canonical.status === 0 && canonical.report.ok === true && canonical.report.scaffold !== true });
 } finally {
   fs.rmSync(tempRoot, { recursive: true, force: true });

@@ -1,0 +1,234 @@
+{
+  "family": "sentinel-calibration",
+  "owner_ref": "sg:governor/stylegallery-maintainers",
+  "baseline_recorded_at": "2026-07-30T08:52:29Z",
+  "decision_window_days": 60,
+  "due_at": "2026-09-28T08:52:29Z",
+  "evidence_refs": [
+    ".github/workflows/validate.yml",
+    "consumer-reference/baselines/calibration.json",
+    "consumer-reference/baselines/manifest.json",
+    "consumer-reference/schema/baseline-manifest.schema.json",
+    "consumer-reference/schema/calibration-record.schema.json",
+    "scripts/baseline-contract.mjs",
+    "scripts/baseline-schema-parity.mjs",
+    "scripts/calibration-raw-contract.mjs",
+    "scripts/calibration-test-fixture.mjs",
+    "scripts/strict-json.mjs",
+    "scripts/summarize-sentinel-calibration.mjs",
+    "scripts/test-calibration-raw-contract.mjs",
+    "scripts/test-consumer-reference-sentinel.mjs",
+    "scripts/test-summarize-sentinel-calibration.mjs",
+    "scripts/test-validate-baseline-manifest.mjs",
+    "scripts/validate-baseline-manifest.mjs",
+    "tests/consumer-reference-sentinels.spec.mjs",
+    "tests/helpers/render-consumer-reference.mjs",
+    "tests/snapshots/consumer-reference-card-grid.png"
+  ],
+  "caller_status": "unknown",
+  "decision": "pending_owner",
+  "post_deadline_action": "retire_recurring",
+  "archive_paths": [
+    "consumer-reference/baselines/calibration.json",
+    "consumer-reference/baselines/manifest.json",
+    "consumer-reference/schema/baseline-manifest.schema.json",
+    "consumer-reference/schema/calibration-record.schema.json",
+    "scripts/baseline-contract.mjs",
+    "scripts/baseline-schema-parity.mjs",
+    "scripts/calibration-raw-contract.mjs",
+    "scripts/calibration-test-fixture.mjs",
+    "scripts/strict-json.mjs",
+    "scripts/summarize-sentinel-calibration.mjs",
+    "scripts/test-calibration-raw-contract.mjs",
+    "scripts/test-consumer-reference-sentinel.mjs",
+    "scripts/test-summarize-sentinel-calibration.mjs",
+    "scripts/test-validate-baseline-manifest.mjs",
+    "scripts/validate-baseline-manifest.mjs",
+    "tests/consumer-reference-sentinels.spec.mjs",
+    "tests/helpers/render-consumer-reference.mjs",
+    "tests/snapshots/consumer-reference-card-grid.png"
+  ],
+  "retirement": {
+    "schema_version": "1.0",
+    "workflow": {
+      "path": ".github/workflows/validate.yml",
+      "mode": "100644",
+      "active_sha256": "846417a45a462a51ba28028621ff9fe82cf018be15b8a433a661d7d0d7af3017",
+      "retired_sha256": "421c63222db3dfb5af03630c437a4b8b0f755a6146abec4e5d213eb2b0369620",
+      "job_id": "chromium-calibration",
+      "job_name": "Chromium 20-run calibration (nonblocking)",
+      "job_sha256": "86228e7fb44c2ba5d0abe160d6bd3c4f5228e7c1ec40189b3b4f528acfd45e62",
+      "triggers": [
+        "pull_request",
+        "workflow_dispatch"
+      ],
+      "required_runs": 20
+    },
+    "raw_evidence": {
+      "record": "consumer-reference/baselines/calibration.json",
+      "sha256": "b537b0c3acb3ac55e4b926b1d12b41d2cb8050a85de2410ad4b42e1b7b53f88e",
+      "raw_evidence_sha256": "1f125d5b321063b364e19283897c78c126d73eb1b3368d14686c494b1296dfab",
+      "required_runs": 20,
+      "artifact_api_digest": "sha256:3f11a517b447e1b5a1da17d9ee66ba2dd947fc8a0a482c447556ef00652e6074"
+    },
+    "baseline_manifest": {
+      "path": "consumer-reference/baselines/manifest.json",
+      "sha256": "3396593e1486583d55313098ed26c3b2e048c55eb5589d11e7cfbf026709d6d3"
+    },
+    "approval": {
+      "authorized_commits": [],
+      "owner_ref": "sg:governor/stylegallery-maintainers",
+      "decision": "pending_owner"
+    },
+    "protected_paths": [
+      {
+        "path": "consumer-reference/baselines/calibration.json",
+        "mode": "100644",
+        "sha256": "b537b0c3acb3ac55e4b926b1d12b41d2cb8050a85de2410ad4b42e1b7b53f88e",
+        "role": "raw_20_run_aggregate_and_provenance"
+      },
+      {
+        "path": "consumer-reference/baselines/manifest.json",
+        "mode": "100644",
+        "sha256": "3396593e1486583d55313098ed26c3b2e048c55eb5589d11e7cfbf026709d6d3",
+        "role": "baseline_manifest"
+      },
+      {
+        "path": "consumer-reference/schema/baseline-manifest.schema.json",
+        "mode": "100644",
+        "sha256": "ad489462abcd705f73b1e686b3aa1f1ebd20e5b12d366ee1971d76bc456f2e17",
+        "role": "baseline_manifest_schema"
+      },
+      {
+        "path": "consumer-reference/schema/calibration-record.schema.json",
+        "mode": "100644",
+        "sha256": "444517a0c9ce7d176d0a3f22934afed6f4befe941ba4447cff2b9cc72a90997b",
+        "role": "calibration_record_schema"
+      },
+      {
+        "path": "scripts/baseline-contract.mjs",
+        "mode": "100644",
+        "sha256": "c2a289daabd26074b240efdef4d1ee06e06e0457b060e325be809f8a938202ff",
+        "role": "baseline_runtime_validator"
+      },
+      {
+        "path": "scripts/baseline-schema-parity.mjs",
+        "mode": "100644",
+        "sha256": "f852b067bb99466f978ebd0b7dbb76587706ba52803745f3849ba9e0cf04987c",
+        "role": "schema_runtime_parity_control"
+      },
+      {
+        "path": "scripts/calibration-raw-contract.mjs",
+        "mode": "100644",
+        "sha256": "d88c1e36213b4067850806cc9cbf66c3286c37c81e43a395c372d6ec088195e1",
+        "role": "raw_run_parser"
+      },
+      {
+        "path": "scripts/calibration-test-fixture.mjs",
+        "mode": "100644",
+        "sha256": "cc5c216c68e4d98624116e13909cb6dd55fd23a26d2a9027ed3ebc3ee912aa3b",
+        "role": "raw_mutation_fixture"
+      },
+      {
+        "path": "scripts/strict-json.mjs",
+        "mode": "100644",
+        "sha256": "d203dab02d4fb74866663bdfd7bc58beb120bd5d0e8e145b3bfe62c1bc5091a3",
+        "role": "duplicate_property_control"
+      },
+      {
+        "path": "scripts/summarize-sentinel-calibration.mjs",
+        "mode": "100644",
+        "sha256": "32e3e0f6caeaa64f3782d1a8d61b8a142aaaeb0449dad22ed57d93eeeb9b7391",
+        "role": "twenty_run_summarizer"
+      },
+      {
+        "path": "scripts/test-calibration-raw-contract.mjs",
+        "mode": "100644",
+        "sha256": "4370fc7557cf860d5b2818246441368ddaf4d99829bdc774c20c6c0e328c6172",
+        "role": "raw_parser_mutation_controls"
+      },
+      {
+        "path": "scripts/test-consumer-reference-sentinel.mjs",
+        "mode": "100644",
+        "sha256": "4eaf9991c5a9b869c237b68b4360d0d7a218babbb2b4171a9f7b8a8c86448b5e",
+        "role": "semantic_sentinel_contract"
+      },
+      {
+        "path": "scripts/test-summarize-sentinel-calibration.mjs",
+        "mode": "100644",
+        "sha256": "3ab23f8d6b2bde33ea321d6d51c979b1956587143c69d695b4eb65e6a7b017f4",
+        "role": "summarizer_mutation_controls"
+      },
+      {
+        "path": "scripts/test-validate-baseline-manifest.mjs",
+        "mode": "100644",
+        "sha256": "be771cc0fe892afa3ea66298502f0b555bf6724681591b7af79b070cce00e32d",
+        "role": "baseline_mutation_controls"
+      },
+      {
+        "path": "scripts/validate-baseline-manifest.mjs",
+        "mode": "100644",
+        "sha256": "a673450e8cd5890d663f7ac2378089aa3c988a431adc24219972f83a4f3854ef",
+        "role": "baseline_validator"
+      },
+      {
+        "path": "tests/consumer-reference-sentinels.spec.mjs",
+        "mode": "100644",
+        "sha256": "fd1a7bb897a9a93a27aab4931d3d04746ec3d641602226608fd6125632d13d28",
+        "role": "browser_semantic_sentinel"
+      },
+      {
+        "path": "tests/helpers/render-consumer-reference.mjs",
+        "mode": "100644",
+        "sha256": "88802a948909d5e40470be6b5481766ce2de498e59c053ac68af370b46e72ca9",
+        "role": "sentinel_renderer_source"
+      },
+      {
+        "path": "tests/snapshots/consumer-reference-card-grid.png",
+        "mode": "100644",
+        "sha256": "5528358e957a6115793155e501f62716f7db31dc1c86856d9e1234868d672837",
+        "role": "historical_baseline_bytes"
+      }
+    ],
+    "archive_retrieval": {
+      "source": "https://github.com/ark-jo/StyleGallery/actions/runs/29260372260",
+      "repository": "ark-jo/StyleGallery",
+      "run_id": "29260372260",
+      "artifact_id": "8283099324",
+      "artifact_name": "chromium-sentinel-calibration-29260372260-18229be570766d3b42f5600955120bfcba690b76",
+      "artifact_expires_at": "2026-07-27T15:01:36Z",
+      "artifact_status": "expired_upstream",
+      "archive_status": "recovered_immutable_local",
+      "recovery_receipt_sha256": "ae5e576d708fcb51e474de7485454717d13c89f163f41f96bf7435facb8113e3",
+      "immutable_archive_commit": "5b5a5b6656c32b73411e902c760bbbea9e669126",
+      "immutable_archive_tree": "5c3a67f88ac3a51537c137e58a04cc7bfa752621",
+      "artifact_files": 163,
+      "raw_files": 160,
+      "artifact_api_digest": "sha256:3f11a517b447e1b5a1da17d9ee66ba2dd947fc8a0a482c447556ef00652e6074",
+      "raw_evidence_sha256": "1f125d5b321063b364e19283897c78c126d73eb1b3368d14686c494b1296dfab",
+      "download_command": [
+        "gh",
+        "run",
+        "download",
+        "29260372260",
+        "--repo",
+        "ark-jo/StyleGallery",
+        "--name",
+        "chromium-sentinel-calibration-29260372260-18229be570766d3b42f5600955120bfcba690b76",
+        "--dir",
+        "calibration-artifacts"
+      ],
+      "verify_command": [
+        "node",
+        "scripts/validate-lifecycle-disposition.mjs",
+        "--sentinel-archive-repository",
+        ".omo/evidence/stylegallery-ai-slop-removal/task-28-stylegallery-ai-slop-removal/recovered-raw-20-run/immutable-archive.git",
+        "--sentinel-archive-commit",
+        "5b5a5b6656c32b73411e902c760bbbea9e669126",
+        "--sentinel-archive-tree",
+        "5c3a67f88ac3a51537c137e58a04cc7bfa752621",
+        "--json"
+      ]
+    }
+  }
+}

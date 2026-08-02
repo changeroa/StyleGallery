@@ -1,0 +1,189 @@
+{
+  "$id": "https://stylegallery.local/consumer-reference/schema/governed-button-profile.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "maturity": { "const": "stable" },
+          "support": {
+            "properties": { "status": { "const": "ended" } },
+            "required": ["status"]
+          }
+        },
+        "required": ["maturity", "support"]
+      },
+      "then": false
+    },
+    {
+      "if": {
+        "properties": { "maturity": { "const": "deprecated" } },
+        "required": ["maturity"]
+      },
+      "then": { "required": ["removal_trigger", "replacement"] }
+    },
+    {
+      "if": { "required": ["profile_kind"] },
+      "then": {
+        "properties": {
+          "artifact_mode": { "const": "governed_local" },
+          "default": { "const": false },
+          "example_only": { "const": true },
+          "maturity": { "const": "experimental" },
+          "profile_kind": { "const": "governed_local" }
+        },
+        "required": [
+          "default",
+          "environment_assumptions",
+          "example_only",
+          "component_records",
+          "evidence_records",
+          "fixture_records",
+          "generated_records",
+          "layout_source_sha",
+          "local_foundations",
+          "profile_kind",
+          "related_fixture_set_id",
+          "selection",
+          "state_records",
+          "tokens"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "artifact_mode": {
+      "enum": ["consumer_local", "external_consumer", "governed_local", "schema_only"]
+    },
+    "component_records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "components/button.component.json" }
+    },
+    "default": { "const": false },
+    "environment_assumptions": {
+      "additionalProperties": false,
+      "properties": {
+        "reset": {
+          "additionalProperties": false,
+          "properties": {
+            "body_margin": { "minLength": 1, "type": "string" },
+            "box_sizing": { "minLength": 1, "type": "string" },
+            "figure_margin": { "minLength": 1, "type": "string" }
+          },
+          "required": ["body_margin", "box_sizing", "figure_margin"],
+          "type": "object"
+        },
+        "user_agent_styles": { "minLength": 1, "type": "string" }
+      },
+      "required": ["reset", "user_agent_styles"],
+      "type": "object"
+    },
+    "example_only": { "const": true },
+    "evidence_records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "evidence/button.evidence.json" }
+    },
+    "fixture_independence": { "const": "related" },
+    "fixture_records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "fixtures/button.fixture.json" }
+    },
+    "generated_records": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": { "enum": ["generated/state-matrix.md", "generated/keyboard-matrix.md", "generated/evidence-coverage.md"] }
+    },
+    "handoff": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "record": {
+              "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?![A-Za-z][A-Za-z0-9+.-]*:)[^\\\\?#]+\\.json$",
+              "type": "string"
+            },
+            "status": { "const": "declared" }
+          },
+          "required": ["record", "status"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "minLength": 10,
+              "pattern": "^\\S+(?:\\s+\\S+){2,}\\s*[.!?]$",
+              "type": "string"
+            },
+            "status": { "const": "not_applicable" }
+          },
+          "required": ["reason", "status"],
+          "type": "object"
+        }
+      ]
+    },
+    "id": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "type": "string" },
+    "layout_source_sha": { "const": "775430bbaf4ee208a642220f440f6926d79c90a3" },
+    "local_foundations": { "const": "local-foundations.json" },
+    "maturity": { "enum": ["deprecated", "experimental", "stable"] },
+    "owner": {
+      "additionalProperties": false,
+      "properties": {
+        "enforcement": { "const": "placeholder" },
+        "name": { "minLength": 1, "type": "string" }
+      },
+      "required": ["enforcement", "name"],
+      "type": "object"
+    },
+    "removal_trigger": { "minLength": 1, "type": "string" },
+    "profile_kind": { "const": "governed_local" },
+    "related_fixture_set_id": { "minLength": 1, "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "type": "string" },
+    "replacement": { "minLength": 1, "type": "string" },
+    "review_independence": { "const": "single_account" },
+    "schema_version": { "const": "1.0" },
+    "selection": {
+      "additionalProperties": false,
+      "properties": {
+        "method": { "const": "profile_path" },
+        "required": { "const": true }
+      },
+      "required": ["method", "required"],
+      "type": "object"
+    },
+    "support": {
+      "additionalProperties": false,
+      "properties": { "status": { "enum": ["active", "ended"] } },
+      "required": ["status"],
+      "type": "object"
+    },
+    "state_records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "states/button.states.json" }
+    },
+    "tokens": { "const": "tokens.dtcg.json" }
+  },
+  "required": [
+    "artifact_mode",
+    "fixture_independence",
+    "handoff",
+    "id",
+    "maturity",
+    "owner",
+    "profile_kind",
+    "review_independence",
+    "schema_version",
+    "support"
+  ],
+  "title": "Governed button reference profile",
+  "type": "object"
+}

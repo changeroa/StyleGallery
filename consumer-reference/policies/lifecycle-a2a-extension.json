@@ -1,0 +1,482 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "protocol-extension-disposition",
+  "extension_id": "a2a",
+  "protocol": "a2a",
+  "current_version": "1.0",
+  "owner_ref": "sg:governor/stylegallery-maintainers",
+  "review": {
+    "baseline_recorded_at": "2026-07-30T08:52:29Z",
+    "decision_window_days": 60,
+    "due_at": "2026-09-28T08:52:29Z",
+    "next_review_at": "2026-09-28T08:52:29Z",
+    "deadline_effect": "owner_review_only",
+    "automatic_removal": false
+  },
+  "external_callers": {
+    "status": "unknown",
+    "provenance": null,
+    "migration_instructions": null
+  },
+  "lifecycle": {
+    "state": "retain",
+    "current_action": "retain",
+    "deadline_effect": "owner_review_only",
+    "automatic_removal": false
+  },
+  "replacement": {
+    "status": "retained-current-implementation",
+    "protocol": "a2a",
+    "version": "1.0",
+    "path": "scripts/agent-native/v2/extensions/a2a-projection.mjs",
+    "compatibility": "behavior-preserving"
+  },
+  "migration": {
+    "status": "not-required-retained",
+    "current_path": "scripts/agent-native/a2a-projection.mjs",
+    "replacement_path": "scripts/agent-native/v2/extensions/a2a-projection.mjs",
+    "instructions": [
+      "Replace imports of scripts/agent-native/a2a-projection.mjs with scripts/agent-native/v2/extensions/a2a-projection.mjs.",
+      "Register a2a@1.0 explicitly through scripts/agent-native/v2/experimental-extension-registry.mjs.",
+      "Run projection, extension-boundary, schema, v1 compatibility, package, and lifecycle suites before release."
+    ]
+  },
+  "approval": {
+    "required_for": [
+      "deprecate",
+      "migration-ready",
+      "removal-authorized"
+    ],
+    "immutable_receipt_trust": "commit-tree-blob-sha256-codeowners-allowlist",
+    "approved_major_version_receipt": null
+  },
+  "inventory": {
+    "source_revision": "f8728fb7cbed152d35a01753d92e2b3f4b295c59",
+    "discovery": {
+      "authority": "todo8-git-index-and-approved-worktree-inventory",
+      "contract": {
+        "path": "scripts/repository-source-inventory.mjs",
+        "role": "todo8_tracked_source_inventory_contract",
+        "lines": {
+          "start": 1,
+          "end": 209
+        },
+        "file_sha256": "2259d4bc89bc98dfabf12fec57ae18ea7bf4addf09ab49b5ad347b4aaac300a8",
+        "content_id": "sha256:2259d4bc89bc98dfabf12fec57ae18ea7bf4addf09ab49b5ad347b4aaac300a8"
+      },
+      "eligible_extensions": [
+        ".cjs",
+        ".js",
+        ".json",
+        ".md",
+        ".mjs",
+        ".yaml",
+        ".yml"
+      ],
+      "excluded_prefixes": [
+        ".omo/",
+        ".tmp",
+        "blob-report/",
+        "consumer-reference/fixtures/lifecycle-disposition/",
+        "consumer-reference/generated/",
+        "consumer-reference/policies/lifecycle-",
+        "design-engineering/reference-profiles/governed-local/captures/",
+        "design-engineering/reference-profiles/governed-local/editorial/evidence/",
+        "design-engineering/reference-profiles/governed-local/editorial/generated/",
+        "design-engineering/reference-profiles/governed-local/terminal/evidence/",
+        "design-engineering/reference-profiles/governed-local/terminal/generated/",
+        "node_modules/",
+        "playwright-report/",
+        "test-results/"
+      ],
+      "excluded_paths": [
+        "consumer-reference/schema/lifecycle-disposition.schema.json",
+        "scripts/test-lifecycle-disposition.mjs",
+        "scripts/validate-lifecycle-disposition.mjs"
+      ],
+      "scanned_file_count": 400,
+      "scanned_paths_content_id": "sha256:e568a2d02c31da41ed2ddd1e20d5a9264e30a23845185a36cc52f4c1504c7c01"
+    },
+    "implementation": {
+      "path": "scripts/agent-native/v2/extensions/a2a-projection.mjs",
+      "role": "canonical_implementation",
+      "lines": {
+        "start": 1,
+        "end": 264
+      },
+      "file_sha256": "bd4257b8f7c2c82343b3c0785fff46f4b445b507efa5d0e1c686e4eeb585b3d2",
+      "content_id": "sha256:bd4257b8f7c2c82343b3c0785fff46f4b445b507efa5d0e1c686e4eeb585b3d2"
+    },
+    "callers": [
+      {
+        "path": "consumer-reference/agent-native/README.md",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 157
+        },
+        "file_sha256": "959509d4539f4b7bb7d193bfdfb949b4cf25ab53317e072aaad7657f04b8779e",
+        "content_id": "sha256:959509d4539f4b7bb7d193bfdfb949b4cf25ab53317e072aaad7657f04b8779e",
+        "reference_lines": [
+          130
+        ],
+        "reference_kinds": [
+          "documentation_reference"
+        ]
+      },
+      {
+        "path": "consumer-reference/agent-native/registry.json",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 640
+        },
+        "file_sha256": "70107a28225ee893b0d32df8e2a3c69bed747992bf7e92a0ca5431df4605d8b0",
+        "content_id": "sha256:70107a28225ee893b0d32df8e2a3c69bed747992bf7e92a0ca5431df4605d8b0",
+        "reference_lines": [
+          161
+        ],
+        "reference_kinds": [
+          "registry_surface"
+        ]
+      },
+      {
+        "path": "package.json",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 214
+        },
+        "file_sha256": "14192aed5ea339af6b7fc10ea60f49480a4f02d4a14569a2441d250c0acfb808",
+        "content_id": "sha256:14192aed5ea339af6b7fc10ea60f49480a4f02d4a14569a2441d250c0acfb808",
+        "reference_lines": [
+          140,
+          156
+        ],
+        "reference_kinds": [
+          "forwarder_path",
+          "projection_path"
+        ]
+      },
+      {
+        "path": "scripts/agent-native/a2a-projection.mjs",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 248
+        },
+        "file_sha256": "a60c9887b27ea66b6c7311efa8443315535cd72656a494070535a99bcb1ea995",
+        "content_id": "sha256:a60c9887b27ea66b6c7311efa8443315535cd72656a494070535a99bcb1ea995",
+        "reference_lines": [
+          99
+        ],
+        "reference_kinds": [
+          "protocol_request"
+        ]
+      },
+      {
+        "path": "scripts/agent-native/self-description.mjs",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 160
+        },
+        "file_sha256": "ef9b68bd9f16d26d0b86109cd362e9fac49a091eca1c55e1ccba5d7c8979dae9",
+        "content_id": "sha256:ef9b68bd9f16d26d0b86109cd362e9fac49a091eca1c55e1ccba5d7c8979dae9",
+        "reference_lines": [
+          150
+        ],
+        "reference_kinds": [
+          "documentation_reference"
+        ]
+      },
+      {
+        "path": "scripts/agent-native/v2/experimental-extension-registry.mjs",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 143
+        },
+        "file_sha256": "5c5d4e9f94a47fbccabd6f3c64ab2b33a57057218cafefc202a34bb7db38f501",
+        "content_id": "sha256:5c5d4e9f94a47fbccabd6f3c64ab2b33a57057218cafefc202a34bb7db38f501",
+        "reference_lines": [
+          3,
+          8
+        ],
+        "reference_kinds": [
+          "extension_descriptor",
+          "forwarder_path",
+          "projection_path"
+        ]
+      },
+      {
+        "path": "scripts/agent-native/v2/test-agent-extension-boundary.mjs",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 164
+        },
+        "file_sha256": "7f95dac5dba4a3ed40b2d466cf4792b351e644eb2c22e4f9b548ceae1fc2a791",
+        "content_id": "sha256:7f95dac5dba4a3ed40b2d466cf4792b351e644eb2c22e4f9b548ceae1fc2a791",
+        "reference_lines": [
+          7,
+          9,
+          11,
+          35,
+          37,
+          40,
+          45,
+          50,
+          52,
+          53,
+          63,
+          91,
+          92,
+          96,
+          97,
+          101,
+          102,
+          107,
+          111,
+          115,
+          118,
+          142,
+          144,
+          152,
+          155,
+          158,
+          159,
+          160
+        ],
+        "reference_kinds": [
+          "extension_descriptor",
+          "forwarder_path",
+          "projection_path",
+          "protocol_request",
+          "registration_call",
+          "version_reference"
+        ]
+      },
+      {
+        "path": "scripts/agent-native/v2/test-agent-v1-compatibility.mjs",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 129
+        },
+        "file_sha256": "567a55b72d1133fba49f81d3e2ece3352e7687a0081cbf0a80803005b7a7e982",
+        "content_id": "sha256:567a55b72d1133fba49f81d3e2ece3352e7687a0081cbf0a80803005b7a7e982",
+        "reference_lines": [
+          77
+        ],
+        "reference_kinds": [
+          "forwarder_path",
+          "projection_path"
+        ]
+      },
+      {
+        "path": "scripts/agent-native/v2/test-sg-material-package.mjs",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 209
+        },
+        "file_sha256": "4fb3c63bc3372d598c3b131eac80e71916c59239743f54dff090a17510dfa8f8",
+        "content_id": "sha256:4fb3c63bc3372d598c3b131eac80e71916c59239743f54dff090a17510dfa8f8",
+        "reference_lines": [
+          48
+        ],
+        "reference_kinds": [
+          "forwarder_path",
+          "projection_path"
+        ]
+      },
+      {
+        "path": "scripts/test-agent-native-schemas.mjs",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 215
+        },
+        "file_sha256": "efbd09093fca9c7b2099675fcc69d75a937858c58ce41fa8a11e691fc05879b8",
+        "content_id": "sha256:efbd09093fca9c7b2099675fcc69d75a937858c58ce41fa8a11e691fc05879b8",
+        "reference_lines": [
+          33,
+          181,
+          193
+        ],
+        "reference_kinds": [
+          "forwarder_path",
+          "projection_path",
+          "protocol_request"
+        ]
+      },
+      {
+        "path": "scripts/test-agent-projections.mjs",
+        "role": "repository_reference",
+        "lines": {
+          "start": 1,
+          "end": 250
+        },
+        "file_sha256": "706bf0b6247cf4dd1558e7abb1f5a44e3302b81baa1d8893acd8cd0f59c99872",
+        "content_id": "sha256:706bf0b6247cf4dd1558e7abb1f5a44e3302b81baa1d8893acd8cd0f59c99872",
+        "reference_lines": [
+          4,
+          19,
+          55
+        ],
+        "reference_kinds": [
+          "forwarder_path",
+          "projection_path",
+          "protocol_request",
+          "registration_call"
+        ]
+      }
+    ],
+    "projection_adapter_conformance_tests": [
+      {
+        "path": "scripts/test-agent-adapter-conformance.mjs",
+        "role": "projection_adapter_conformance_test",
+        "lines": {
+          "start": 1,
+          "end": 250
+        },
+        "file_sha256": "44addf41152ff859365e5a896caaed9c48fd7f0ba56dfb3498de143ab5372e0d",
+        "content_id": "sha256:44addf41152ff859365e5a896caaed9c48fd7f0ba56dfb3498de143ab5372e0d"
+      },
+      {
+        "path": "scripts/agent-native/v2/test-agent-extension-boundary.mjs",
+        "role": "projection_adapter_conformance_test",
+        "lines": {
+          "start": 1,
+          "end": 164
+        },
+        "file_sha256": "7f95dac5dba4a3ed40b2d466cf4792b351e644eb2c22e4f9b548ceae1fc2a791",
+        "content_id": "sha256:7f95dac5dba4a3ed40b2d466cf4792b351e644eb2c22e4f9b548ceae1fc2a791"
+      },
+      {
+        "path": "scripts/test-agent-native-schemas.mjs",
+        "role": "projection_adapter_conformance_test",
+        "lines": {
+          "start": 1,
+          "end": 215
+        },
+        "file_sha256": "efbd09093fca9c7b2099675fcc69d75a937858c58ce41fa8a11e691fc05879b8",
+        "content_id": "sha256:efbd09093fca9c7b2099675fcc69d75a937858c58ce41fa8a11e691fc05879b8"
+      },
+      {
+        "path": "scripts/test-agent-projections.mjs",
+        "role": "projection_adapter_conformance_test",
+        "lines": {
+          "start": 1,
+          "end": 250
+        },
+        "file_sha256": "706bf0b6247cf4dd1558e7abb1f5a44e3302b81baa1d8893acd8cd0f59c99872",
+        "content_id": "sha256:706bf0b6247cf4dd1558e7abb1f5a44e3302b81baa1d8893acd8cd0f59c99872"
+      },
+      {
+        "path": "scripts/agent-native/v2/test-agent-v1-compatibility.mjs",
+        "role": "projection_adapter_conformance_test",
+        "lines": {
+          "start": 1,
+          "end": 129
+        },
+        "file_sha256": "567a55b72d1133fba49f81d3e2ece3352e7687a0081cbf0a80803005b7a7e982",
+        "content_id": "sha256:567a55b72d1133fba49f81d3e2ece3352e7687a0081cbf0a80803005b7a7e982"
+      },
+      {
+        "path": "scripts/agent-native/v2/test-sg-material-package.mjs",
+        "role": "projection_adapter_conformance_test",
+        "lines": {
+          "start": 1,
+          "end": 209
+        },
+        "file_sha256": "4fb3c63bc3372d598c3b131eac80e71916c59239743f54dff090a17510dfa8f8",
+        "content_id": "sha256:4fb3c63bc3372d598c3b131eac80e71916c59239743f54dff090a17510dfa8f8"
+      }
+    ],
+    "docs_and_registry": [
+      {
+        "path": "consumer-reference/agent-native/README.md",
+        "role": "documentation",
+        "lines": {
+          "start": 1,
+          "end": 157
+        },
+        "file_sha256": "959509d4539f4b7bb7d193bfdfb949b4cf25ab53317e072aaad7657f04b8779e",
+        "content_id": "sha256:959509d4539f4b7bb7d193bfdfb949b4cf25ab53317e072aaad7657f04b8779e"
+      },
+      {
+        "path": "consumer-reference/agent-native/registry.json",
+        "role": "v1_registry_entry",
+        "lines": {
+          "start": 1,
+          "end": 640
+        },
+        "file_sha256": "70107a28225ee893b0d32df8e2a3c69bed747992bf7e92a0ca5431df4605d8b0",
+        "content_id": "sha256:70107a28225ee893b0d32df8e2a3c69bed747992bf7e92a0ca5431df4605d8b0"
+      },
+      {
+        "path": "scripts/agent-native/self-description.mjs",
+        "role": "documentation",
+        "lines": {
+          "start": 1,
+          "end": 160
+        },
+        "file_sha256": "ef9b68bd9f16d26d0b86109cd362e9fac49a091eca1c55e1ccba5d7c8979dae9",
+        "content_id": "sha256:ef9b68bd9f16d26d0b86109cd362e9fac49a091eca1c55e1ccba5d7c8979dae9"
+      }
+    ],
+    "package_exposure": {
+      "path": "package.json",
+      "role": "installed_package_exposure",
+      "lines": {
+        "start": 1,
+        "end": 214
+      },
+      "file_sha256": "14192aed5ea339af6b7fc10ea60f49480a4f02d4a14569a2441d250c0acfb808",
+      "content_id": "sha256:14192aed5ea339af6b7fc10ea60f49480a4f02d4a14569a2441d250c0acfb808"
+    },
+    "forwarding": {
+      "path": "scripts/agent-native/a2a-projection.mjs",
+      "role": "v1_compatibility_path",
+      "lines": {
+        "start": 1,
+        "end": 248
+      },
+      "file_sha256": "a60c9887b27ea66b6c7311efa8443315535cd72656a494070535a99bcb1ea995",
+      "content_id": "sha256:a60c9887b27ea66b6c7311efa8443315535cd72656a494070535a99bcb1ea995",
+      "target": "scripts/agent-native/v2/extensions/a2a-projection.mjs",
+      "expected_exports": [
+        "A2AProjectionError",
+        "agentCard",
+        "buildAgentCard",
+        "cancelTask",
+        "createAgentCard",
+        "getTask",
+        "handleCancelTask",
+        "handleGetTask",
+        "handleSendMessage",
+        "mapTaskState",
+        "projectAgentCard",
+        "projectCancelTask",
+        "projectGetTask",
+        "projectSendMessage",
+        "projectTaskState",
+        "sendMessage",
+        "toA2ATaskState"
+      ],
+      "behavior_golden": {
+        "path": "scripts/agent-native/v2/test-agent-extension-boundary.mjs",
+        "role": "forwarder_behavior_golden",
+        "lines": {
+          "start": 1,
+          "end": 164
+        },
+        "file_sha256": "7f95dac5dba4a3ed40b2d466cf4792b351e644eb2c22e4f9b548ceae1fc2a791",
+        "content_id": "sha256:7f95dac5dba4a3ed40b2d466cf4792b351e644eb2c22e4f9b548ceae1fc2a791"
+      }
+    },
+    "protocol_version": "1.0"
+  }
+}

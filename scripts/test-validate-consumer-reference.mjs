@@ -9,6 +9,7 @@ import {
   initializeCompletedConsumer,
 } from "../consumer-reference/fixtures/consumer-conformance/e2e-fixture.mjs";
 import { makeConsumerReferenceCaseRunner } from "./consumer-reference-case-runner.mjs";
+import { writeJsonOutput } from "./json-output.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validator = path.join(repositoryRoot, "scripts", "validate-consumer-reference.mjs");
@@ -58,6 +59,7 @@ function applyGovernedProfile(item) {
 
 const behaviorCases = [
   { expect: null, name: "valid_declared_handoff" },
+  { expect: "generic_receiver_governed_button_forbidden", mutate: applyGovernedProfile, name: "generic_receiver_rejects_governed_button_profile", schemaValid: true },
   { expect: null, mutate: (item) => { item.handoff = { reason: "This fixture has no consumer-specific reference requirement.", status: "not_applicable" }; }, name: "valid_not_applicable_handoff" },
   { expect: "handoff_required", mutate: (item) => { delete item.handoff; }, name: "missing_handoff" },
   { expect: "not_applicable_reason_sentence", mutate: (item) => { item.handoff = { reason: "none", status: "not_applicable" }; }, name: "missing_not_applicable_reason" },
@@ -259,5 +261,5 @@ const report = {
   schemaParity: { coveredRules: [...coveredSchemaRules].sort(), missingRules: missingSchemaRules },
 };
 
-console.log(JSON.stringify(report, null, 2));
+await writeJsonOutput(report);
 process.exitCode = report.ok ? 0 : 1;

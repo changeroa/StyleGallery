@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/v2/schema/material-manifest.schema.json",
+  "title": "StyleGallery v2 governed material manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_kind", "stable_ref", "version_id", "admission_policy_ref", "admission_policy_version_id", "materials"],
+  "properties": {
+    "schema_version": { "const": "2.0" },
+    "record_kind": { "const": "material_manifest" },
+    "stable_ref": { "const": "sg:manifest/material-admission-v2" },
+    "version_id": { "type": "string", "pattern": "^sg:manifest/material-admission-v2@sha256:[a-f0-9]{64}$" },
+    "admission_policy_ref": { "const": "sg:policy/material-admission-v2" },
+    "admission_policy_version_id": { "type": "string", "pattern": "^sg:policy/material-admission-v2@sha256:[a-f0-9]{64}$" },
+    "materials": { "type": "array", "minItems": 1, "items": { "$ref": "material-record.schema.json" } }
+  }
+}
