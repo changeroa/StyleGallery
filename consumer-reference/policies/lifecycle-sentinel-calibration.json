@@ -53,8 +53,8 @@
     "workflow": {
       "path": ".github/workflows/validate.yml",
       "mode": "100644",
-      "active_sha256": "39069130f5553f7d0c34847642a7c06263674cfcbdc4cccb2cdb5fa6db85577f",
-      "retired_sha256": "cd26e102e856bab726964c36d88aef58c034e0fc538d33855fc3d8bae2622315",
+      "active_sha256": "846417a45a462a51ba28028621ff9fe82cf018be15b8a433a661d7d0d7af3017",
+      "retired_sha256": "421c63222db3dfb5af03630c437a4b8b0f755a6146abec4e5d213eb2b0369620",
       "job_id": "chromium-calibration",
       "job_name": "Chromium 20-run calibration (nonblocking)",
       "job_sha256": "86228e7fb44c2ba5d0abe160d6bd3c4f5228e7c1ec40189b3b4f528acfd45e62",

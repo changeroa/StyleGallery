@@ -39,8 +39,8 @@
     "workflow": {
       "path": ".github/workflows/validate.yml",
       "mode": "100644",
-      "active_sha256": "39069130f5553f7d0c34847642a7c06263674cfcbdc4cccb2cdb5fa6db85577f",
-      "retired_sha256": "ec5b0b98724b0dbdc053cc4540b2f17b197e52cbf9f6eaa4aee641bfebc87090",
+      "active_sha256": "846417a45a462a51ba28028621ff9fe82cf018be15b8a433a661d7d0d7af3017",
+      "retired_sha256": "e68fe15654d5830d918e8adfda4b8dcedcb0340b286d6e42058831c1d1c44f58",
       "job_id": "consumer-page-evidence",
       "job_name": "Consumer page-evidence raster capture (nonblocking)",
       "job_sha256": "11d0fe7ea2880c5d32d32bb419493600afdfd221aef728f3c0e36e22cf52b116",
