@@ -37,7 +37,7 @@ function pass(value, scenarioId, channel) {
 }
 
 function run(root) {
-  const child = spawnSync(process.execPath, [validator, "--root", root, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
+  const child = spawnSync(process.execPath, [validator, "--root", root, "--source-mode", "current-authoring", "--json"], { cwd: repositoryRoot, encoding: "utf8" });
   let report = { failures: [], ok: false, parse_error: true };
   try { report = JSON.parse(child.stdout); } catch { report = { failures: [], ok: false, parse_error: true }; }
   return { report, status: child.status };

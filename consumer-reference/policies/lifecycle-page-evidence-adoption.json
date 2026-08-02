@@ -1,0 +1,200 @@
+{
+  "family": "page-evidence-adoption",
+  "owner_ref": "sg:governor/stylegallery-maintainers",
+  "baseline_recorded_at": "2026-07-30T08:52:29Z",
+  "decision_window_days": 90,
+  "due_at": "2026-10-28T08:52:29Z",
+  "evidence_refs": [
+    ".github/workflows/validate.yml",
+    "scripts/create-page-evidence-session.mjs",
+    "scripts/finalize-page-evidence.mjs",
+    "scripts/run-consumer-page-evidence-ci.mjs",
+    "scripts/test-validate-page-evidence.mjs",
+    "scripts/validate-page-evidence.mjs"
+  ],
+  "caller_status": "unknown",
+  "decision": "pending_owner",
+  "post_deadline_action": "retire_recurring",
+  "archive_paths": [
+    "consumer-reference/contract.md",
+    "consumer-reference/schema/page-evidence-manifest.schema.json",
+    "consumer-reference/schema/page-evidence-session.schema.json",
+    "playwright.config.mjs",
+    "quality/evidence/executable-evidence.md",
+    "scripts/create-page-evidence-session.mjs",
+    "scripts/finalize-page-evidence.mjs",
+    "scripts/page-artifact-metadata.mjs",
+    "scripts/page-evidence-contract.mjs",
+    "scripts/page-evidence-fixture.mjs",
+    "scripts/run-consumer-page-evidence-ci.mjs",
+    "scripts/test-consumer-conformance-sentinel.mjs",
+    "scripts/test-validate-page-evidence.mjs",
+    "scripts/validate-page-evidence.mjs",
+    "tests/consumer-conformance.spec.mjs",
+    "tests/fixtures/consumer-conformance-scenarios.mjs",
+    "tests/helpers/render-consumer-conformance.mjs"
+  ],
+  "retirement": {
+    "schema_version": "1.0",
+    "workflow": {
+      "path": ".github/workflows/validate.yml",
+      "mode": "100644",
+      "active_sha256": "39069130f5553f7d0c34847642a7c06263674cfcbdc4cccb2cdb5fa6db85577f",
+      "retired_sha256": "ec5b0b98724b0dbdc053cc4540b2f17b197e52cbf9f6eaa4aee641bfebc87090",
+      "job_id": "consumer-page-evidence",
+      "job_name": "Consumer page-evidence raster capture (nonblocking)",
+      "job_sha256": "11d0fe7ea2880c5d32d32bb419493600afdfd221aef728f3c0e36e22cf52b116",
+      "triggers": [
+        "pull_request",
+        "workflow_dispatch"
+      ],
+      "scenario_id": "state-w1024-focus",
+      "synthetic_repository": "example/stylegallery-page-evidence-ci",
+      "adapter_version": "1.0"
+    },
+    "adoption": {
+      "authorized_receipt_commits": [],
+      "status": "unknown",
+      "synthetic_identities": [
+        "ark-jo/StyleGallery",
+        "changeroa/StyleGallery",
+        "example/stylegallery-page-evidence-ci"
+      ],
+      "receipt_schema": "#/$defs/pageEvidenceAdopterReceipt",
+      "trust_root_contract": {
+        "configuration": "validator_source_only",
+        "repository_boundary": "canonical_realpath_device_inode",
+        "remote_identity": "exact_origin_url_and_normalized_owner_repo",
+        "lineage": "authenticated_ref_to_consumer_to_evidence_to_receipt",
+        "packet_validation": "actual_schema_source_session_finalization_capture"
+      }
+    },
+    "protected_paths": [
+      {
+        "path": "consumer-reference/contract.md",
+        "mode": "100644",
+        "sha256": "b914920989ff2ce08ebc67fa3167d0da766c260c93f03257a9144c6093ff6713",
+        "role": "lifecycle_documentation"
+      },
+      {
+        "path": "consumer-reference/schema/page-evidence-manifest.schema.json",
+        "mode": "100644",
+        "sha256": "eb856f164bca20e43eff1b705b78407d38443b34695f9686f5a6102cd9213173",
+        "role": "manifest_schema"
+      },
+      {
+        "path": "consumer-reference/schema/page-evidence-session.schema.json",
+        "mode": "100644",
+        "sha256": "30175d9ba46d2705d72c89b02ceb09c6f0e790f3512bbe0e198a984d64393b32",
+        "role": "session_schema"
+      },
+      {
+        "path": "scripts/create-page-evidence-session.mjs",
+        "mode": "100644",
+        "sha256": "74ac67c53ab945fd7244c227d5c5b74cb545bfb170af9aadf3ce9decc201332e",
+        "role": "session_creator"
+      },
+      {
+        "path": "scripts/finalize-page-evidence.mjs",
+        "mode": "100644",
+        "sha256": "141719203511c96c2dc70b8d25721680f027fac2485cc78e67a73638dc0ad54e",
+        "role": "session_finalizer"
+      },
+      {
+        "path": "scripts/page-artifact-metadata.mjs",
+        "mode": "100644",
+        "sha256": "59c57b0da5b8a503d6f14fb507c57680d5854c59c8bc2838856e50d15eb7260b",
+        "role": "artifact_metadata_validator"
+      },
+      {
+        "path": "scripts/page-evidence-contract.mjs",
+        "mode": "100644",
+        "sha256": "9ec6b6c5167dae75e5b106cfcbb2078be9f89d0f9e45a640dbc1efda2e47bc9e",
+        "role": "source_and_packet_contract"
+      },
+      {
+        "path": "scripts/page-evidence-fixture.mjs",
+        "mode": "100644",
+        "sha256": "efa0a17d90d010953c98a0957ab1c6936d2a80a82f2958d6080523298c78eafa",
+        "role": "closed_fixture_provider"
+      },
+      {
+        "path": "scripts/run-consumer-page-evidence-ci.mjs",
+        "mode": "100644",
+        "sha256": "2a5f58aacd3ebf2985b3115c492f0a9a39e849c0e619fca3464b47b6eaf400e8",
+        "role": "synthetic_ci_adapter"
+      },
+      {
+        "path": "scripts/test-consumer-conformance-sentinel.mjs",
+        "mode": "100644",
+        "sha256": "9f524b45592c4cd89ffee7cef7b04790f73544dc9dd1f25d8cc1df9504bb5ce5",
+        "role": "state_capture_negative_controls"
+      },
+      {
+        "path": "scripts/test-validate-page-evidence.mjs",
+        "mode": "100644",
+        "sha256": "2db7bffabf9a92c6f6fccb3fce3f902f219027915a02cb1d710eee169560022a",
+        "role": "page_evidence_negative_controls"
+      },
+      {
+        "path": "scripts/validate-page-evidence.mjs",
+        "mode": "100644",
+        "sha256": "39be91eeb532a015f54d5a542a2bfe0fc641d79a2e18e7fe88f06800258831f0",
+        "role": "packet_validator"
+      },
+      {
+        "path": "tests/consumer-conformance.spec.mjs",
+        "mode": "100644",
+        "sha256": "e19df0d1131b7a65fd6e5b7b79c993d05f4a4559b64a18da673e1beede5421a3",
+        "role": "browser_capture_surface"
+      },
+      {
+        "path": "tests/fixtures/consumer-conformance-scenarios.mjs",
+        "mode": "100644",
+        "sha256": "927d185f523e70e7f2e1fccee0013360d126e02aa532c2367670e64cdef43f12",
+        "role": "state_w1024_focus_contract"
+      },
+      {
+        "path": "tests/helpers/render-consumer-conformance.mjs",
+        "mode": "100644",
+        "sha256": "6d5db609aaadb2f68fec1a0f1f51af1c17157cf1364631a42b35da2d6c1a0865",
+        "role": "capture_renderer"
+      },
+      {
+        "path": "quality/evidence/executable-evidence.md",
+        "mode": "100644",
+        "sha256": "a0ae7f2c355ab26293cdb9e96b31d91d50a024ed404aa0c8297a65b91af73a33",
+        "role": "archive_and_retrieval_documentation"
+      },
+      {
+        "path": "playwright.config.mjs",
+        "mode": "100644",
+        "sha256": "7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae",
+        "role": "pinned_browser_configuration"
+      }
+    ],
+    "archive_retrieval": {
+      "status": "prepared_evidence_only",
+      "packet_kind": "page_evidence_manifest",
+      "capture_scenario_id": "state-w1024-focus",
+      "evidence_root": ".omo/evidence/stylegallery-ai-slop-removal/task-29-stylegallery-ai-slop-removal/",
+      "immutable_archive_commit": "634414a591fbfd35c99d90710c7a2c23ef2d0677",
+      "immutable_archive_tree": "09b89d4609bc3f5514941877950f72934e054f2c",
+      "artifact_files": 23,
+      "packet_sha256": "ae15a272a6f952db2f0090e07e0d07d47d352b138ba97aa29dbfbec451f23cbe",
+      "capture_sha256": "2496b1cf9d3ac6dcda8d255ed7c606f8994836892614c9f8eccdd3206a8f933b",
+      "source_sha256": "bb6c565e287908dfa0966870535fc0ba7cdba0cd55852aaad45b90d00b6003dd",
+      "verify_command": [
+        "node",
+        "scripts/validate-lifecycle-disposition.mjs",
+        "--page-archive-repository",
+        ".omo/evidence/stylegallery-ai-slop-removal/task-29-stylegallery-ai-slop-removal/immutable-page-evidence.git",
+        "--page-archive-commit",
+        "634414a591fbfd35c99d90710c7a2c23ef2d0677",
+        "--page-archive-tree",
+        "09b89d4609bc3f5514941877950f72934e054f2c",
+        "--json"
+      ]
+    }
+  }
+}

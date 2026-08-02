@@ -32,7 +32,7 @@ This manifest is the source of truth for top-level StyleGallery domains. A domai
 
 ## Shared Non-Domain Infrastructure
 
-[Consumer Reference](consumer-reference/index.md) is shared schema, provenance, routing, and evidence infrastructure outside the five-domain contract. It owns no profile implementation or visual values and cannot add a sixth domain row. Consumer or profile records may depend on Layout; Layout and its generated corpus cannot import those records.
+[Consumer Reference](consumer-reference/index.md) is shared schema, provenance, routing, evidence, lifecycle, and machine-retrieval infrastructure outside the five-domain contract. Its source-bound material v2 index classifies admitted pages by these five domains but does not own their prose. It owns no profile implementation, visual values, or product CSS and cannot add a sixth domain row. Consumer or profile records may depend on Layout; Layout and its generated corpus cannot import consumer-reference, profile, material-registry, or transport records.
 
 ## External Adaptation Contract
 
@@ -53,11 +53,7 @@ External adaptations begin `experimental`. Promotion to `stable` requires a demo
 
 ### Consumer Reference Promotion
 
-Consumer-reference promotion does not add a domain. The StyleGallery-local `>=2` independent-consumer gateway applies only to consumer-local → shared-experimental invariant eligibility. Editorial and terminal are related examples in one fixture set, so neither counts as an independent consumer. Shared stable has no numeric adoption threshold.
-
-Normative correctness may waive adoption count only; regression evidence, invariant scope, owner and support capacity, compatibility, migration, deprecation, rollback, and provenance duties remain required. A failed stable contract is restricted, maintained, rolled back, or deprecated with migration, never silently relabeled experimental. Promotion records are JSON-only; the committed examples are synthetic, `example_only`, deferred, and contain zero adopter attestations.
-
-Consumer-reference maturity is governed independently from artifact mode. Stable records cannot have ended support, and related repository fixtures are not independent adoption evidence.
+Consumer-reference promotion does not add a domain. The [canonical promotion contract](consumer-reference/contract.md#promotion-boundary) owns the full human-readable boundary, and the [canonical JSON promotion policy](consumer-reference/policies/shared-experimental.json) owns machine policy. As a boundary summary: the `>=2` gateway applies only to consumer-local → shared-experimental invariant eligibility; Editorial and terminal are related examples in one fixture set; Shared stable has no numeric adoption threshold; and Normative correctness may waive adoption count only. A failed stable contract is never silently relabeled experimental. Promotion records are JSON-only, and the committed examples remain synthetic with zero adopter attestations.
 
 ## IA Navigation
 

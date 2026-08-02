@@ -1,0 +1,27 @@
+{
+  "family": "protocol-owner-review",
+  "owner_ref": "sg:governor/stylegallery-maintainers",
+  "baseline_recorded_at": "2026-07-30T08:52:29Z",
+  "decision_window_days": 60,
+  "due_at": "2026-09-28T08:52:29Z",
+  "evidence_refs": [
+    "consumer-reference/agent-native/README.md",
+    "consumer-reference/agent-native/registry.json",
+    "scripts/agent-native/a2a-projection.mjs",
+    "scripts/agent-native/agui-projection.mjs",
+    "scripts/test-agent-projections.mjs"
+  ],
+  "caller_status": "unknown",
+  "decision": "pending_owner",
+  "post_deadline_action": "retain_archive",
+  "archive_paths": [
+    "consumer-reference/agent-native/README.md",
+    "scripts/agent-native/a2a-projection.mjs",
+    "scripts/agent-native/agui-projection.mjs",
+    "scripts/agent-native/v2/experimental-extension-registry.mjs",
+    "scripts/agent-native/v2/extensions/a2a-projection.mjs",
+    "scripts/agent-native/v2/extensions/agui-projection.mjs",
+    "scripts/agent-native/v2/test-agent-extension-boundary.mjs",
+    "scripts/test-agent-projections.mjs"
+  ]
+}

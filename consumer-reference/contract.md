@@ -63,7 +63,7 @@ Dependency flows from a consumer or profile to Layout. `layout/**`, `patterns/**
 
 ## Promotion Boundary
 
-`consumer-reference/policies/shared-experimental.json` is the canonical StyleGallery-local promotion policy. Its `>=2` independent-consumer gateway applies only to consumer-local → shared-experimental invariant eligibility. It does not promote visual identity and it does not define a stable threshold. Shared stable has no numeric adoption threshold.
+The [shared-experimental promotion policy](policies/shared-experimental.json) is the canonical machine-readable StyleGallery-local promotion policy, and the [promotion RFC schema](schema/promotion-rfc.schema.json) owns the RFC record shape. Its `>=2` independent-consumer gateway applies only to consumer-local → shared-experimental invariant eligibility. It does not promote visual identity and it does not define a stable threshold. Shared stable has no numeric adoption threshold.
 
 An RFC must record invariant scope, claim-scoped and regression evidence, canonical independence basis, actual owner and support capacity, compatibility, known issues and exceptions, migration and deprecation readiness, rollback triggers, provenance debt, and an explicit deferred or rejected decision. Normative accessibility, security, standards, or correctness fixes may waive adoption count only; every other duty remains binding.
 

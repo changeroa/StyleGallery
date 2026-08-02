@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "schema_record": "consumer-reference/schema/lifecycle-disposition.schema.json",
+  "baseline_commit": "f8728fb7cbed152d35a01753d92e2b3f4b295c59",
+  "baseline_tree": "c42c94e26510589bcd6355a0622dd5bc37f5498a",
+  "allowed_path_ledger_sha256": "3073cd7ca47858db1a8cbdf3082503ca464c48083928089ddb94ff8d66b0e530",
+  "owner_trust_root": {
+    "owner_ref": "sg:governor/stylegallery-maintainers",
+    "reviewer": "@changeroa",
+    "codeowners_path": ".github/CODEOWNERS",
+    "codeowners_blob": "ad867b03e3f0fcdd9f6d3fe775bbaa13aa7dae87",
+    "codeowners_sha256": "a5127ae85d4e9ee72593b6089229ddeecaeb6d6fcf10f6ab0d64a45691064c98"
+  },
+  "authorized_approval_commits": [],
+  "caller_registry": [
+    {
+      "caller_ref": "sg:caller/a2a-extension-v1",
+      "family": "protocol-owner-review",
+      "protocol": "a2a",
+      "version": "1.0",
+      "repository": "changeroa/StyleGallery",
+      "revision": "f8728fb7cbed152d35a01753d92e2b3f4b295c59",
+      "source_closure_id": "sha256:1cc2a58af9e7aa0c858def08fd8c65dca2ebf8c7ae7f0d4149f99fc827c5fbc5",
+      "source_closure": [
+        {
+          "path": "scripts/agent-native/v2/experimental-extension-registry.mjs",
+          "sha256": "5c5d4e9f94a47fbccabd6f3c64ab2b33a57057218cafefc202a34bb7db38f501"
+        },
+        {
+          "path": "scripts/agent-native/v2/extensions/a2a-projection.mjs",
+          "sha256": "bd4257b8f7c2c82343b3c0785fff46f4b445b507efa5d0e1c686e4eeb585b3d2"
+        },
+        {
+          "path": "scripts/agent-native/v2/test-agent-extension-boundary.mjs",
+          "sha256": "7f95dac5dba4a3ed40b2d466cf4792b351e644eb2c22e4f9b548ceae1fc2a791"
+        }
+      ]
+    },
+    {
+      "caller_ref": "sg:caller/ag-ui-extension-v0-0-57",
+      "family": "protocol-owner-review",
+      "protocol": "ag-ui",
+      "version": "0.0.57",
+      "repository": "changeroa/StyleGallery",
+      "revision": "f8728fb7cbed152d35a01753d92e2b3f4b295c59",
+      "source_closure_id": "sha256:fc377a0cdaa3eaf7b3e5b9425a5e0133ecb222d59fbdadb313ac6c0ba6d6c20e",
+      "source_closure": [
+        {
+          "path": "scripts/agent-native/v2/experimental-extension-registry.mjs",
+          "sha256": "5c5d4e9f94a47fbccabd6f3c64ab2b33a57057218cafefc202a34bb7db38f501"
+        },
+        {
+          "path": "scripts/agent-native/v2/extensions/agui-projection.mjs",
+          "sha256": "54cc1eddede4aa344be9cbd978a2a022772d9abdb6f92e1376193d603e26dc3e"
+        },
+        {
+          "path": "scripts/agent-native/v2/test-agent-extension-boundary.mjs",
+          "sha256": "7f95dac5dba4a3ed40b2d466cf4792b351e644eb2c22e4f9b548ceae1fc2a791"
+        }
+      ]
+    }
+  ],
+  "protocol_extension_approval_commits": [],
+  "records": [
+    "consumer-reference/policies/lifecycle-sentinel-calibration.json",
+    "consumer-reference/policies/lifecycle-page-evidence-adoption.json",
+    "consumer-reference/policies/lifecycle-protocol-owner-review.json"
+  ],
+  "extension_records": [
+    "consumer-reference/policies/lifecycle-a2a-extension.json",
+    "consumer-reference/policies/lifecycle-ag-ui-extension.json"
+  ]
+}

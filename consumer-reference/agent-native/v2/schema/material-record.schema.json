@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/v2/schema/material-record.schema.json",
+  "title": "StyleGallery v2 governed material record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_kind", "stable_ref", "version_id", "repository_path", "media_type", "source_sha256", "byte_length", "lifecycle", "domain"],
+  "properties": {
+    "schema_version": { "const": "2.0" },
+    "record_kind": { "const": "material" },
+    "stable_ref": { "type": "string", "pattern": "^sg:material/path-sha256-[a-f0-9]{64}$" },
+    "version_id": { "type": "string", "pattern": "^sg:material/path-sha256-[a-f0-9]{64}@sha256:[a-f0-9]{64}$" },
+    "repository_path": { "type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9._ -]+(?:/[A-Za-z0-9._ -]+)*\\.md$" },
+    "media_type": { "const": "text/markdown" },
+    "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "byte_length": { "type": "integer", "minimum": 0 },
+    "lifecycle": { "enum": ["draft", "stable", "deprecated", "experimental", "generated"] },
+    "domain": { "enum": ["layout", "motion", "design-engineering", "game-ui", "platform-guides", "shared"] }
+  }
+}

@@ -10,17 +10,8 @@ import { resolveProfileRecords } from "./profile-record-contract.mjs";
 import { visualExpectationFor } from "./visual-expectation-contract.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const options = { artifactRoot: undefined, json: false, root: path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local"), runtimeManifest: undefined };
+const options = { artifactRoot: undefined, json: false, root: path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local"), runtimeManifest: undefined, sourceMode: "recorded-revision" };
 const failures = [];
-
-function captureLink(session) {
-  if (!session) return undefined;
-  return {
-    attempt: session.attempt, branch: session.branch, environment: session.environment, nonce: session.nonce,
-    receipt_sha256: session.receipt_sha256, revision: session.revision, session_id: session.session_id,
-    source: session.source, started_at: session.started_at,
-  };
-}
 
 function addSchemaFailures(validate, value, file, code) {
   if (validate(value)) return;
@@ -48,13 +39,17 @@ function validateCommittedVisualExpectations(resolved, captureIdentity) {
 for (let index = 2; index < process.argv.length; index += 1) {
   const argument = process.argv[index];
   if (argument === "--json") options.json = true;
-  else if (["--artifact-root", "--runtime-manifest", "--root"].includes(argument)) {
+  else if (["--artifact-root", "--runtime-manifest", "--root", "--source-mode"].includes(argument)) {
     const value = process.argv[index + 1];
     if (!value) failures.push({ code: "argument_value_required", message: `${argument} requires a path`, path: "<cli>" });
     else {
       if (argument === "--artifact-root") options.artifactRoot = path.resolve(value);
       if (argument === "--runtime-manifest") options.runtimeManifest = path.resolve(value);
       if (argument === "--root") options.root = path.resolve(value);
+      if (argument === "--source-mode") {
+        if (!["recorded-revision", "current-authoring"].includes(value)) failures.push({ code: "source_mode_invalid", message: "--source-mode must be recorded-revision or current-authoring", path: "<cli>" });
+        else options.sourceMode = value;
+      }
       index += 1;
     }
   } else failures.push({ code: "argument_unknown", message: `unsupported argument ${argument}`, path: "<cli>" });
@@ -65,7 +60,7 @@ let runtimeManifest;
 let receipt;
 let canonicalSource;
 let resolvedCapture;
-if (!options.runtimeManifest) {
+if (!options.runtimeManifest && options.sourceMode === "current-authoring") {
   try { canonicalSource = canonicalSourceManifest(repositoryRoot, options.root); }
   catch (error) { failures.push({ code: "capture_source_unreadable", message: error instanceof Error ? error.message : String(error), path: options.root }); }
 }
@@ -157,8 +152,14 @@ if (!runtimeManifest && committed.some((resolved) => resolved.records.evidence[0
   const consumers = records.map((record) => ({ capture_id: record.capture?.capture_id, owner: record.profile_id, reference: record.capture }));
   if (records[0]) consumers.push({ capture_id: records[0].capture?.capture_id, owner: "runtime-manifest", reference: records[0].capture });
   try {
-    const resolved = resolveSharedEvidenceCapture({ artifactCaptureIds: records.map((record) => record.capture?.capture_id), consumers, expectedSource: canonicalSource, repositoryRoot });
+    const resolved = resolveSharedEvidenceCapture({
+      artifactCaptureIds: records.map((record) => record.capture?.capture_id), consumers,
+      expectedSource: options.sourceMode === "current-authoring" ? canonicalSource : undefined, repositoryRoot,
+    });
     resolvedCapture = resolved.use().capture;
+    if (options.sourceMode === "recorded-revision" && !sourceManifestMatches(resolvedCapture.session?.source, repositoryRoot, options.root, {
+      mode: "recorded-revision", revision: resolvedCapture.session?.revision,
+    })) failures.push({ code: "capture_source_drift", message: "capture sources differ from the immutable recorded revision", path: resolved.reference.path });
     for (const record of committed) validateCommittedVisualExpectations(record, resolvedCapture);
   } catch (error) {
     failures.push({ code: error?.code ?? "capture_resolution_failed", message: error instanceof Error ? error.message : String(error), path: error?.path ?? options.root });

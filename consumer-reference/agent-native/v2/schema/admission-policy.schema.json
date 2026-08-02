@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/agent-native/v2/schema/admission-policy.schema.json",
+  "title": "StyleGallery v2 material admission policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_kind", "stable_ref", "version_id", "media_type", "allowed_materials", "exclusions"],
+  "properties": {
+    "schema_version": { "const": "2.0" },
+    "record_kind": { "const": "material_admission_policy" },
+    "stable_ref": { "const": "sg:policy/material-admission-v2" },
+    "version_id": { "type": "string", "pattern": "^sg:policy/material-admission-v2@sha256:[a-f0-9]{64}$" },
+    "media_type": { "const": "text/markdown" },
+    "allowed_materials": {
+      "type": "array",
+      "minItems": 112,
+      "maxItems": 112,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["repository_path", "domain", "lifecycle"],
+        "properties": {
+          "repository_path": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9._ -]+(?:/[A-Za-z0-9._ -]+)*\\.md$" },
+          "domain": { "enum": ["layout", "motion", "design-engineering", "game-ui", "platform-guides", "shared"] },
+          "lifecycle": { "enum": ["draft", "stable", "deprecated", "experimental", "generated"] }
+        }
+      }
+    },
+    "exclusions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "value", "code"],
+        "properties": {
+          "kind": { "enum": ["path_prefix", "path_segment"] },
+          "value": { "type": "string", "minLength": 1 },
+          "code": {
+            "enum": [
+              "material_path_omo_excluded", "material_path_test_excluded", "material_path_fixture_excluded",
+              "material_path_schema_excluded", "material_path_baseline_excluded", "material_profile_values_excluded",
+              "material_path_internal_excluded"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

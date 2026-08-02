@@ -36,7 +36,47 @@ jobs:
       - name: Syntax and whitespace
         run: |
           node scripts/repository-source-inventory.mjs --json
+          node -c scripts/component-state-workflow-contract.mjs
+          node -c scripts/consumer-evidence-governance-contract.mjs
+          node -c scripts/validate-governance.mjs
+          node -c scripts/test-validate-governance.mjs
+          node -c scripts/validate-domains.mjs
+          node -c scripts/test-validate-domains.mjs
+          node -c scripts/validate-consumer-reference.mjs
+          node -c scripts/test-validate-consumer-reference.mjs
+          node -c scripts/consumer-reference-case-runner.mjs
+          node -c scripts/governed-profile-registry.mjs
+          node -c scripts/promotion-attestation-contract.mjs
+          node -c scripts/validate-promotion-rfc.mjs
+          node -c scripts/test-validate-promotion-rfc.mjs
+          node -c scripts/json-schema-formats.mjs
+          node -c scripts/consumer-conformance-contract.mjs
+          node -c scripts/validate-consumer-conformance.mjs
+          node -c scripts/test-validate-consumer-conformance.mjs
+          node -c consumer-reference/fixtures/consumer-conformance/e2e-fixture.mjs
+          node -c scripts/page-evidence-contract.mjs
+          node -c scripts/page-evidence-fixture.mjs
+          node -c scripts/create-page-evidence-session.mjs
+          node -c scripts/finalize-page-evidence.mjs
+          node -c scripts/validate-page-evidence.mjs
+          node -c scripts/test-validate-page-evidence.mjs
+          node -c scripts/audit-evidence-freshness.mjs
+          node -c scripts/test-audit-evidence-freshness.mjs
+          node -c tests/fixtures/consumer-conformance-scenarios.mjs
+          node -c tests/helpers/render-consumer-conformance.mjs
+          node -c tests/consumer-conformance.spec.mjs
+          node -c scripts/test-consumer-conformance-sentinel.mjs
+          node -c scripts/baseline-schema-parity.mjs
+          node -c scripts/test-component-state-source-contract.mjs
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/consumer-conformance-record.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/page-evidence-session.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/page-evidence-manifest.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/promotion-rfc.schema.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/policies/shared-experimental.json"))'
+          node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/visual-evidence.schema.json"))'
+          npm run test:source-inventory
           npm run test:json-schema-formats
+          npm run test:consumer-conformance:matrix
           git diff --check
 
       - name: Generated artifacts are current
@@ -44,6 +84,7 @@ jobs:
           node scripts/generate-patterns.mjs
           node scripts/build-reference-artifacts.mjs --adapter style-dictionary --fail-on-warning --json
           node scripts/generate-consumer-reference-evidence.mjs --json
+          node scripts/agent-native/v2/generate-material-registry.mjs
           git diff --exit-code
 
       - name: OKF structure validation
@@ -99,10 +140,24 @@ jobs:
       - name: Agent-native operation and protocol contracts
         run: npm run test:agent-native
 
-      - name: Shared promotion policy contract
+      - name: Source-bound material v2 contracts
+        run: |
+          node scripts/agent-native/v2/validate-material-registry.mjs
+          node scripts/agent-native/v2/test-material-admission.mjs
+          node scripts/agent-native/v2/test-material-registry.mjs
+          node scripts/agent-native/v2/test-material-query.mjs
+          node scripts/agent-native/v2/test-material-context.mjs
+          node scripts/agent-native/v2/test-sg-material-cli.mjs
+          node scripts/agent-native/v2/test-material-mcp.mjs
+          node scripts/agent-native/v2/test-material-mcp-stdio.mjs
+          node scripts/agent-native/v2/test-sg-material-package.mjs
+
+      - name: Shared promotion and experimental lifecycle policy contracts
         run: |
           node scripts/validate-promotion-rfc.mjs --json
           node scripts/test-validate-promotion-rfc.mjs --json
+          node scripts/validate-lifecycle-disposition.mjs --json
+          node scripts/test-lifecycle-disposition.mjs
 
       - name: Consumer migration and page-evidence contracts
         run: |
@@ -145,8 +200,10 @@ jobs:
         run: node scripts/test-validate-patterns.mjs --json
 
   consumer-conformance:
-    name: Consumer conformance Chromium matrix
+    name: Consumer conformance Chromium matrix comparison
     runs-on: ubuntu-24.04
+    env:
+      CONSUMER_CONFORMANCE_IMAGE_ID: sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
     container:
       image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
       options: --platform linux/amd64
@@ -157,19 +214,21 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Setup Node 22
+      - name: Setup pinned Node 22
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 22
+          node-version: 22.18.0
 
       - name: Install exact conformance dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
 
-      - name: Run deterministic browser matrix
-        run: npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line
+      - name: Verify default inventory and cleanup boundary
+        run: |
+          npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line --list
+          node scripts/test-consumer-conformance-sentinel.mjs --json --case ci-cleanup-symlink
 
-      - name: Run browser matrix semantic negative controls
-        run: node scripts/test-consumer-conformance-sentinel.mjs --json
+      - name: Execute authenticated full and candidate matrix comparison
+        run: npm run test:consumer-conformance:matrix:execute
 
   consumer-page-evidence:
     name: Consumer page-evidence raster capture (nonblocking)

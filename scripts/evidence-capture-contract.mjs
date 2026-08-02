@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { verifySourceManifest } from "./capture-session-contract.mjs";
 import { parseStrictJson } from "./strict-json.mjs";
 
 export const CAPTURE_DIRECTORY = "design-engineering/reference-profiles/governed-local/captures";
@@ -161,7 +162,24 @@ function validateCapture(capture, expected, capturePath) {
   if (capture.run?.id !== capture.session?.session_id || capture.run?.revision !== capture.session?.revision || capture.run?.attempt !== capture.session?.attempt) {
     fail("capture_run_mismatch", "capture run does not join its session", capturePath);
   }
-  if (expected.expectedSource !== undefined && !equal(capture.session.source, expected.expectedSource)) fail("capture_source_drift", "capture source differs from the expected source manifest", capturePath);
+  const gitMetadataPresent = fs.existsSync(path.join(expected.repositoryRoot, ".git"))
+    || fs.existsSync(path.join(expected.repositoryRoot, "..", ".git"));
+  const recordedRevision = expected.sourceValidationMode === "recorded-revision"
+    || (expected.sourceValidationMode === undefined
+      && expected.expectedSource === undefined
+      && gitMetadataPresent);
+  if (recordedRevision) {
+    const profileRoot = path.join(expected.repositoryRoot, "design-engineering/reference-profiles/governed-local");
+    const verified = verifySourceManifest(capture.session.source, expected.repositoryRoot, profileRoot, {
+      mode: "recorded-revision",
+      revision: capture.session.revision,
+    });
+    if (!verified.ok) fail("capture_source_drift", `capture source authentication failed: ${verified.code}`, capturePath);
+  } else if (expected.expectedSource === undefined && expected.sourceValidationMode !== undefined) {
+    fail("capture_source_drift", "capture source authentication requires an explicit expected source", capturePath);
+  } else if (expected.expectedSource !== undefined && !equal(capture.session.source, expected.expectedSource)) {
+    fail("capture_source_drift", "capture source differs from the expected authoring manifest", capturePath);
+  }
   if (expected.expectedSession !== undefined && !equal(capture.session, expected.expectedSession)) fail("capture_session_mismatch", "capture session differs from the expected session", capturePath);
   if (expected.expectedRun !== undefined && !equal(capture.run, expected.expectedRun)) fail("capture_run_mismatch", "capture run differs from the expected run", capturePath);
   if (expected.expectedEnvironment !== undefined && !equal(capture.environment, expected.expectedEnvironment)) fail("capture_environment_mismatch", "capture environment differs from the expected environment", capturePath);

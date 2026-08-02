@@ -1,0 +1,1092 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.example/consumer-reference/schema/lifecycle-disposition.schema.json",
+  "$defs": {
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?![A-Za-z][A-Za-z0-9+.-]*:)(?!.*[\\\\?#])[^/]+(?:/[^/]+)*$"
+    },
+    "decisionReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "path": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "blob_oid": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "commit",
+        "path",
+        "blob_oid",
+        "sha256"
+      ]
+    },
+    "immutableEvidenceObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "blob_oid", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/repositoryPath" },
+        "blob_oid": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "protocolExtensionSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "role", "lines", "file_sha256", "content_id"],
+      "properties": {
+        "path": { "$ref": "#/$defs/repositoryPath" },
+        "role": { "type": "string", "minLength": 1 },
+        "lines": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end"],
+          "properties": {
+            "start": { "type": "integer", "minimum": 1 },
+            "end": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "content_id": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "protocolExtensionApprovalReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit", "path", "blob_oid", "sha256", "approved_major_version", "protocol"],
+      "properties": {
+        "commit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "path": { "$ref": "#/$defs/repositoryPath" },
+        "blob_oid": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "approved_major_version": { "type": "integer", "minimum": 1 },
+        "protocol": { "enum": ["a2a", "ag-ui"] }
+      }
+    },
+    "protocolExtensionDisposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "record_kind", "extension_id", "protocol", "current_version", "owner_ref", "review", "external_callers", "lifecycle", "replacement", "migration", "approval", "inventory"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "record_kind": { "const": "protocol-extension-disposition" },
+        "extension_id": { "enum": ["a2a", "ag-ui"] },
+        "protocol": { "enum": ["a2a", "ag-ui"] },
+        "current_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$" },
+        "owner_ref": { "const": "sg:governor/stylegallery-maintainers" },
+        "review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["baseline_recorded_at", "decision_window_days", "due_at", "next_review_at", "deadline_effect", "automatic_removal"],
+          "properties": {
+            "baseline_recorded_at": { "type": "string", "const": "2026-07-30T08:52:29Z", "format": "date-time" },
+            "decision_window_days": { "const": 60 },
+            "due_at": { "type": "string", "const": "2026-09-28T08:52:29Z", "format": "date-time" },
+            "next_review_at": { "type": "string", "const": "2026-09-28T08:52:29Z", "format": "date-time" },
+            "deadline_effect": { "const": "owner_review_only" },
+            "automatic_removal": { "const": false }
+          }
+        },
+        "external_callers": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "provenance", "migration_instructions"],
+          "properties": {
+            "status": { "enum": ["unknown", "none", "verified"] },
+            "provenance": {
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["authenticated_by", "caller_ref", "repository", "revision", "protocol", "version", "source_closure_id", "receipt", "result", "migration"],
+                  "properties": {
+                    "authenticated_by": { "const": "todo27-immutable-receipt" },
+                    "caller_ref": { "type": "string", "minLength": 1 },
+                    "repository": { "type": "string", "pattern": "^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$" },
+                    "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+                    "protocol": { "enum": ["a2a", "ag-ui"] },
+                    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$" },
+                    "source_closure_id": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+                    "receipt": { "$ref": "#/$defs/decisionReceipt" },
+                    "result": { "$ref": "#/$defs/immutableEvidenceObject" },
+                    "migration": { "$ref": "#/$defs/immutableEvidenceObject" }
+                  }
+                }
+              ]
+            },
+            "migration_instructions": { "type": ["array", "null"], "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "lifecycle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "current_action", "deadline_effect", "automatic_removal"],
+          "properties": {
+            "state": { "enum": ["retain", "review", "deprecate", "migration-ready", "removal-authorized"] },
+            "current_action": { "enum": ["retain", "owner_review", "publish_deprecation", "migration_ready", "authorize_removal"] },
+            "deadline_effect": { "const": "owner_review_only" },
+            "automatic_removal": { "const": false }
+          }
+        },
+        "replacement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "protocol", "version", "path", "compatibility"],
+          "properties": {
+            "status": { "enum": ["retained-current-implementation", "approved-replacement"] },
+            "protocol": { "enum": ["a2a", "ag-ui"] },
+            "version": { "type": "string", "minLength": 1 },
+            "path": { "$ref": "#/$defs/repositoryPath" },
+            "compatibility": { "const": "behavior-preserving" }
+          }
+        },
+        "migration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "current_path", "replacement_path", "instructions"],
+          "properties": {
+            "status": { "enum": ["not-required-retained", "migration-ready"] },
+            "current_path": { "$ref": "#/$defs/repositoryPath" },
+            "replacement_path": { "$ref": "#/$defs/repositoryPath" },
+            "instructions": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "approval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required_for", "immutable_receipt_trust", "approved_major_version_receipt"],
+          "properties": {
+            "required_for": { "const": ["deprecate", "migration-ready", "removal-authorized"] },
+            "immutable_receipt_trust": { "const": "commit-tree-blob-sha256-codeowners-allowlist" },
+            "approved_major_version_receipt": {
+              "oneOf": [
+                { "type": "null" },
+                { "$ref": "#/$defs/protocolExtensionApprovalReference" }
+              ]
+            }
+          }
+        },
+        "inventory": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_revision", "discovery", "implementation", "callers", "projection_adapter_conformance_tests", "docs_and_registry", "package_exposure", "forwarding", "protocol_version"],
+          "properties": {
+            "source_revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+            "discovery": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["authority", "contract", "eligible_extensions", "excluded_prefixes", "excluded_paths", "scanned_file_count", "scanned_paths_content_id"],
+              "properties": {
+                "authority": { "const": "todo8-git-index-and-approved-worktree-inventory" },
+                "contract": { "$ref": "#/$defs/protocolExtensionSourceBinding" },
+                "eligible_extensions": { "const": [".cjs", ".js", ".json", ".md", ".mjs", ".yaml", ".yml"] },
+                "excluded_prefixes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+                "excluded_paths": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/repositoryPath" } },
+                "scanned_file_count": { "type": "integer", "minimum": 1 },
+                "scanned_paths_content_id": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+              }
+            },
+            "implementation": { "$ref": "#/$defs/protocolExtensionSourceBinding" },
+            "callers": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["path", "role", "lines", "file_sha256", "content_id", "reference_lines", "reference_kinds"],
+                "properties": {
+                  "path": { "$ref": "#/$defs/repositoryPath" },
+                  "role": { "const": "repository_reference" },
+                  "lines": { "type": "object", "additionalProperties": false, "required": ["start", "end"], "properties": { "start": { "type": "integer", "minimum": 1 }, "end": { "type": "integer", "minimum": 1 } } },
+                  "file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+                  "content_id": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+                  "reference_lines": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer", "minimum": 1 } },
+                  "reference_kinds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+                }
+              }
+            },
+            "projection_adapter_conformance_tests": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/protocolExtensionSourceBinding" } },
+            "docs_and_registry": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/protocolExtensionSourceBinding" } },
+            "package_exposure": { "$ref": "#/$defs/protocolExtensionSourceBinding" },
+            "forwarding": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "role", "lines", "file_sha256", "content_id", "target", "expected_exports", "behavior_golden"],
+              "properties": {
+                "path": { "$ref": "#/$defs/repositoryPath" },
+                "role": { "const": "v1_compatibility_path" },
+                "lines": { "type": "object", "additionalProperties": false, "required": ["start", "end"], "properties": { "start": { "type": "integer", "minimum": 1 }, "end": { "type": "integer", "minimum": 1 } } },
+                "file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+                "content_id": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+                "target": { "$ref": "#/$defs/repositoryPath" },
+                "expected_exports": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+                "behavior_golden": { "$ref": "#/$defs/protocolExtensionSourceBinding" }
+              }
+            },
+            "protocol_version": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "sentinelRetirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "workflow": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "const": ".github/workflows/validate.yml"
+            },
+            "mode": {
+              "const": "100644"
+            },
+            "active_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "retired_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "job_id": {
+              "const": "chromium-calibration"
+            },
+            "job_name": {
+              "const": "Chromium 20-run calibration (nonblocking)"
+            },
+            "job_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "triggers": {
+              "const": [
+                "pull_request",
+                "workflow_dispatch"
+              ]
+            },
+            "required_runs": {
+              "const": 20
+            }
+          },
+          "required": [
+            "path",
+            "mode",
+            "active_sha256",
+            "retired_sha256",
+            "job_id",
+            "job_name",
+            "job_sha256",
+            "triggers",
+            "required_runs"
+          ]
+        },
+        "raw_evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "record": {
+              "const": "consumer-reference/baselines/calibration.json"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "raw_evidence_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "required_runs": {
+              "const": 20
+            },
+            "artifact_api_digest": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "record",
+            "sha256",
+            "raw_evidence_sha256",
+            "required_runs",
+            "artifact_api_digest"
+          ]
+        },
+        "baseline_manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "const": "consumer-reference/baselines/manifest.json"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ]
+        },
+        "approval": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "authorized_commits": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{40}$"
+              },
+              "uniqueItems": true
+            },
+            "owner_ref": {
+              "const": "sg:governor/stylegallery-maintainers"
+            },
+            "decision": {
+              "enum": [
+                "pending_owner",
+                "approved"
+              ]
+            }
+          },
+          "required": [
+            "authorized_commits",
+            "owner_ref",
+            "decision"
+          ]
+        },
+        "protected_paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "$ref": "#/$defs/repositoryPath"
+              },
+              "mode": {
+                "const": "100644"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path",
+              "mode",
+              "sha256",
+              "role"
+            ]
+          }
+        },
+        "archive_retrieval": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "source": {
+              "const": "https://github.com/ark-jo/StyleGallery/actions/runs/29260372260"
+            },
+            "repository": {
+              "const": "ark-jo/StyleGallery"
+            },
+            "run_id": {
+              "const": "29260372260"
+            },
+            "artifact_id": {
+              "const": "8283099324"
+            },
+            "artifact_name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "artifact_expires_at": {
+              "const": "2026-07-27T15:01:36Z",
+              "type": "string",
+              "format": "date-time"
+            },
+            "artifact_status": {
+              "const": "expired_upstream"
+            },
+            "archive_status": {
+              "const": "recovered_immutable_local"
+            },
+            "recovery_receipt_sha256": {
+              "const": "ae5e576d708fcb51e474de7485454717d13c89f163f41f96bf7435facb8113e3"
+            },
+            "immutable_archive_commit": {
+              "const": "5b5a5b6656c32b73411e902c760bbbea9e669126"
+            },
+            "immutable_archive_tree": {
+              "const": "5c3a67f88ac3a51537c137e58a04cc7bfa752621"
+            },
+            "artifact_files": {
+              "const": 163
+            },
+            "raw_files": {
+              "const": 160
+            },
+            "artifact_api_digest": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            },
+            "raw_evidence_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "download_command": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "verify_command": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "source",
+            "repository",
+            "run_id",
+            "artifact_id",
+            "artifact_name",
+            "artifact_expires_at",
+            "artifact_status",
+            "archive_status",
+            "recovery_receipt_sha256",
+            "immutable_archive_commit",
+            "immutable_archive_tree",
+            "artifact_files",
+            "raw_files",
+            "artifact_api_digest",
+            "raw_evidence_sha256",
+            "download_command",
+            "verify_command"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "workflow",
+        "raw_evidence",
+        "baseline_manifest",
+        "approval",
+        "protected_paths",
+        "archive_retrieval"
+      ]
+    },
+    "pageEvidenceAdopterReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "receipt_kind",
+        "family",
+        "caller_owner",
+        "consumer",
+        "adapter_version",
+        "consumed",
+        "evidence",
+        "validation",
+        "recorded_at",
+        "migration"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "receipt_kind": {
+          "const": "page-evidence-real-consumer-adoption"
+        },
+        "family": {
+          "const": "page-evidence-adoption"
+        },
+        "caller_owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consumer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "commit",
+            "tree"
+          ],
+          "properties": {
+            "repository": {
+              "type": "string",
+              "minLength": 3
+            },
+            "commit": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "tree": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            }
+          }
+        },
+        "adapter_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+        },
+        "consumed": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "stable_refs",
+            "version_ids"
+          ],
+          "properties": {
+            "stable_refs": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "version_ids": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "packet",
+            "session",
+            "runner",
+            "capture",
+            "conformance",
+            "source_sha256",
+            "session_schema_sha256",
+            "manifest_schema_sha256"
+          ],
+          "properties": {
+            "packet": { "$ref": "#/$defs/immutableEvidenceObject" },
+            "session": { "$ref": "#/$defs/immutableEvidenceObject" },
+            "runner": { "$ref": "#/$defs/immutableEvidenceObject" },
+            "capture": { "$ref": "#/$defs/immutableEvidenceObject" },
+            "conformance": { "$ref": "#/$defs/immutableEvidenceObject" },
+            "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+            "session_schema_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+            "manifest_schema_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+          }
+        },
+        "validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "validator_version",
+            "result",
+            "validated_at"
+          ],
+          "properties": {
+            "validator_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "result": {
+              "const": "passed"
+            },
+            "validated_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "migration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "contact",
+            "instructions",
+            "target_version"
+          ],
+          "properties": {
+            "contact": {
+              "type": "string",
+              "minLength": 3
+            },
+            "instructions": {
+              "type": "string",
+              "minLength": 3
+            },
+            "target_version": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "pageEvidenceRetirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "workflow",
+        "adoption",
+        "protected_paths",
+        "archive_retrieval"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "workflow": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "mode",
+            "active_sha256",
+            "retired_sha256",
+            "job_id",
+            "job_name",
+            "job_sha256",
+            "triggers",
+            "scenario_id",
+            "synthetic_repository",
+            "adapter_version"
+          ],
+          "properties": {
+            "path": {
+              "const": ".github/workflows/validate.yml"
+            },
+            "mode": {
+              "const": "100644"
+            },
+            "active_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "retired_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "job_id": {
+              "const": "consumer-page-evidence"
+            },
+            "job_name": {
+              "const": "Consumer page-evidence raster capture (nonblocking)"
+            },
+            "job_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "triggers": {
+              "const": [
+                "pull_request",
+                "workflow_dispatch"
+              ]
+            },
+            "scenario_id": {
+              "const": "state-w1024-focus"
+            },
+            "synthetic_repository": {
+              "const": "example/stylegallery-page-evidence-ci"
+            },
+            "adapter_version": {
+              "const": "1.0"
+            }
+          }
+        },
+        "adoption": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "authorized_receipt_commits",
+            "status",
+            "synthetic_identities",
+            "receipt_schema",
+            "trust_root_contract"
+          ],
+          "properties": {
+            "authorized_receipt_commits": {
+              "type": "array",
+              "maxItems": 0
+            },
+            "status": {
+              "const": "unknown"
+            },
+            "synthetic_identities": {
+              "const": [
+                "ark-jo/StyleGallery",
+                "changeroa/StyleGallery",
+                "example/stylegallery-page-evidence-ci"
+              ]
+            },
+            "receipt_schema": {
+              "const": "#/$defs/pageEvidenceAdopterReceipt"
+            },
+            "trust_root_contract": {
+              "const": {
+                "configuration": "validator_source_only",
+                "repository_boundary": "canonical_realpath_device_inode",
+                "remote_identity": "exact_origin_url_and_normalized_owner_repo",
+                "lineage": "authenticated_ref_to_consumer_to_evidence_to_receipt",
+                "packet_validation": "actual_schema_source_session_finalization_capture"
+              }
+            }
+          }
+        },
+        "protected_paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "mode",
+              "sha256",
+              "role"
+            ],
+            "properties": {
+              "path": {
+                "$ref": "#/$defs/repositoryPath"
+              },
+              "mode": {
+                "const": "100644"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "archive_retrieval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "packet_kind",
+            "capture_scenario_id",
+            "evidence_root",
+            "immutable_archive_commit",
+            "immutable_archive_tree",
+            "artifact_files",
+            "packet_sha256",
+            "capture_sha256",
+            "source_sha256",
+            "verify_command"
+          ],
+          "properties": {
+            "status": {
+              "const": "prepared_evidence_only"
+            },
+            "packet_kind": {
+              "const": "page_evidence_manifest"
+            },
+            "capture_scenario_id": {
+              "const": "state-w1024-focus"
+            },
+            "evidence_root": {
+              "const": ".omo/evidence/stylegallery-ai-slop-removal/task-29-stylegallery-ai-slop-removal/"
+            },
+            "verify_command": {
+              "const": [
+                "node",
+                "scripts/validate-lifecycle-disposition.mjs",
+                "--page-archive-repository",
+                ".omo/evidence/stylegallery-ai-slop-removal/task-29-stylegallery-ai-slop-removal/immutable-page-evidence.git",
+                "--page-archive-commit",
+                "634414a591fbfd35c99d90710c7a2c23ef2d0677",
+                "--page-archive-tree",
+                "09b89d4609bc3f5514941877950f72934e054f2c",
+                "--json"
+              ]
+            },
+            "immutable_archive_commit": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "immutable_archive_tree": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "artifact_files": {
+              "const": 23
+            },
+            "packet_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "capture_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "source_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "approved"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "post_deadline_action": {
+            "const": "retain_archive"
+          },
+          "decision_receipt": {
+            "$ref": "#/$defs/decisionReceipt"
+          }
+        },
+        "required": [
+          "decision_receipt"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "family": {
+            "const": "protocol-owner-review"
+          }
+        },
+        "required": [
+          "family"
+        ]
+      },
+      "then": {
+        "properties": {
+          "post_deadline_action": {
+            "const": "retain_archive"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "caller_status": {
+            "const": "verified"
+          }
+        },
+        "required": [
+          "caller_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "post_deadline_action": {
+            "const": "retain_archive"
+          },
+          "decision_receipt": {
+            "$ref": "#/$defs/decisionReceipt"
+          }
+        },
+        "required": [
+          "decision_receipt"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "family": {
+            "const": "sentinel-calibration"
+          }
+        },
+        "required": [
+          "family"
+        ]
+      },
+      "then": {
+        "properties": {
+          "retirement": {
+            "$ref": "#/$defs/sentinelRetirement"
+          }
+        },
+        "required": [
+          "retirement"
+        ]
+      },
+      "else": {
+        "if": {
+          "properties": {
+            "family": {
+              "const": "page-evidence-adoption"
+            }
+          },
+          "required": [
+            "family"
+          ]
+        },
+        "then": {
+          "properties": {
+            "retirement": {
+              "$ref": "#/$defs/pageEvidenceRetirement"
+            }
+          },
+          "required": [
+            "retirement"
+          ]
+        },
+        "else": {
+          "not": {
+            "required": [
+              "retirement"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "family": {
+      "enum": [
+        "sentinel-calibration",
+        "page-evidence-adoption",
+        "protocol-owner-review"
+      ]
+    },
+    "owner_ref": {
+      "const": "sg:governor/stylegallery-maintainers"
+    },
+    "baseline_recorded_at": {
+      "const": "2026-07-30T08:52:29Z",
+      "type": "string",
+      "format": "date-time"
+    },
+    "decision_window_days": {
+      "enum": [
+        60,
+        90
+      ]
+    },
+    "due_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/repositoryPath"
+      }
+    },
+    "caller_status": {
+      "enum": [
+        "unknown",
+        "verified"
+      ]
+    },
+    "decision": {
+      "enum": [
+        "pending_owner",
+        "approved"
+      ]
+    },
+    "post_deadline_action": {
+      "enum": [
+        "retire_recurring",
+        "retain_archive"
+      ]
+    },
+    "archive_paths": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/repositoryPath"
+      }
+    },
+    "decision_receipt": {
+      "$ref": "#/$defs/decisionReceipt"
+    },
+    "retirement": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/sentinelRetirement"
+        },
+        {
+          "$ref": "#/$defs/pageEvidenceRetirement"
+        }
+      ]
+    }
+  },
+  "required": [
+    "family",
+    "owner_ref",
+    "baseline_recorded_at",
+    "decision_window_days",
+    "due_at",
+    "evidence_refs",
+    "caller_status",
+    "decision",
+    "post_deadline_action",
+    "archive_paths"
+  ]
+}
