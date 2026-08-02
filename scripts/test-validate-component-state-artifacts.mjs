@@ -37,6 +37,12 @@ function profileEntries(profileRoot) {
     .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(profileRoot, entry.name, "profile.json")));
 }
 
+function isolatedAuthoringEnvironment(overrides = {}) {
+  const environment = { ...process.env };
+  for (const name of ["GITHUB_HEAD_REF", "GITHUB_REF_NAME", "GITHUB_REPOSITORY", "GITHUB_RUN_ATTEMPT", "GITHUB_SHA"]) delete environment[name];
+  return { ...environment, ...overrides };
+}
+
 function isolatedAuthoringRepository() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-authoring-repository-"));
   for (const reference of captureSourcePaths) {
@@ -125,7 +131,11 @@ function prepareCanonical() {
   }
   const receiptFile = path.join(artifactRoot, "capture-session.json");
   const isolatedRepository = isolatedAuthoringRepository();
-  const created = spawnSync(process.execPath, [isolatedRepository.creator, "--root", profileRoot, "--output", receiptFile, "--json"], { cwd: isolatedRepository.root, encoding: "utf8" });
+  const created = spawnSync(process.execPath, [isolatedRepository.creator, "--root", profileRoot, "--output", receiptFile, "--json"], {
+    cwd: isolatedRepository.root,
+    encoding: "utf8",
+    env: isolatedAuthoringEnvironment(),
+  });
   fs.rmSync(isolatedRepository.root, { force: true, recursive: true });
   if (created.status !== 0) throw new Error(`canonical session creation failed: ${created.stdout}${created.stderr}`);
   const receiptBytes = fs.readFileSync(receiptFile);
@@ -426,7 +436,7 @@ try {
   const child = spawnSync(process.execPath, [isolatedRepository.creator, "--root", sourceProfiles, "--output", receiptFile, "--json"], {
     cwd: isolatedRepository.root,
     encoding: "utf8",
-    env: { ...process.env, GITHUB_SHA: "0".repeat(40) },
+    env: isolatedAuthoringEnvironment({ GITHUB_SHA: "0".repeat(40) }),
   });
   fs.rmSync(isolatedRepository.root, { force: true, recursive: true });
   const output = JSON.parse(child.stdout);

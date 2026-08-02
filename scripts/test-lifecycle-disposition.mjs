@@ -568,28 +568,57 @@ try {
     pageCase("page_evidence_forged_adopter_rejected", forged, "2026-08-01T00:00:00Z", "page_evidence_adopter_commit_untrusted");
 
     const archiveConfig = pageRecord.retirement.archive_retrieval;
-    const archiveGit = path.resolve(repositoryRoot, "../StyleGallery", archiveConfig.evidence_root, "immutable-page-evidence.git");
-    const pageArchive = contract.validatePageEvidenceArchive({ root: archiveGit, commit: archiveConfig.immutable_archive_commit, tree: archiveConfig.immutable_archive_tree });
-    rows.push({ name: "page_evidence_archive_exact_semantic_closure_valid", expected: "ok:true", actual: pageArchive, ok: pageArchive.ok && pageArchive.pathCount === archiveConfig.artifact_files });
-    const wrongPageArchiveTree = contract.validatePageEvidenceArchive({ root: archiveGit, commit: archiveConfig.immutable_archive_commit, tree: "f".repeat(40) });
-    rows.push({ name: "page_evidence_archive_tree_substitution_rejected", expected: "page_evidence_archive_tree_mismatch", actual: wrongPageArchiveTree.failures, ok: wrongPageArchiveTree.failures.some(({ code }) => code === "page_evidence_archive_tree_mismatch") });
-    function mutatedPageArchive(name, mutate) {
-      const root = path.join(tempRoot, `page-archive-${name}`); fs.mkdirSync(root); spawnSync("git", ["init", "-q"], { cwd: root }); spawnSync("git", ["fetch", "-q", archiveGit, archiveConfig.immutable_archive_commit], { cwd: root }); spawnSync("git", ["checkout", "-q", "--detach", "FETCH_HEAD"], { cwd: root }); mutate(root); spawnSync("git", ["add", "--all"], { cwd: root }); spawnSync("git", ["commit", "-q", "-m", name], { cwd: root, env: commitEnv }); const commit = gitText(root, ["rev-parse", "HEAD"]); return { root, commit, tree: gitText(root, ["rev-parse", "HEAD^{tree}"]) };
+    const archiveGit = path.resolve(repositoryRoot, archiveConfig.evidence_root, "immutable-page-evidence.git");
+    if (!fs.existsSync(archiveGit)) {
+      const unavailableArchive = contract.validatePageEvidenceArchive({ root: archiveGit, commit: archiveConfig.immutable_archive_commit, tree: archiveConfig.immutable_archive_tree });
+      const serializedUnavailable = JSON.stringify(unavailableArchive);
+      rows.push({
+        name: "page_evidence_archive_unavailable_fails_closed",
+        expected: "page_evidence_archive_invalid",
+        actual: unavailableArchive.failures,
+        ok: !unavailableArchive.ok
+          && unavailableArchive.failures.some(({ code }) => code === "page_evidence_archive_invalid")
+          && !serializedUnavailable.includes(tempRoot)
+          && !serializedUnavailable.includes(repositoryRoot)
+          && !serializedUnavailable.includes(os.homedir()),
+      });
+    } else {
+      const pageArchive = contract.validatePageEvidenceArchive({ root: archiveGit, commit: archiveConfig.immutable_archive_commit, tree: archiveConfig.immutable_archive_tree });
+      rows.push({ name: "page_evidence_archive_exact_semantic_closure_valid", expected: "ok:true", actual: pageArchive, ok: pageArchive.ok && pageArchive.pathCount === archiveConfig.artifact_files });
+      const wrongPageArchiveTree = contract.validatePageEvidenceArchive({ root: archiveGit, commit: archiveConfig.immutable_archive_commit, tree: "f".repeat(40) });
+      rows.push({ name: "page_evidence_archive_tree_substitution_rejected", expected: "page_evidence_archive_tree_mismatch", actual: wrongPageArchiveTree.failures, ok: wrongPageArchiveTree.failures.some(({ code }) => code === "page_evidence_archive_tree_mismatch") });
+      function mutatedPageArchive(name, mutate) {
+        const root = path.join(tempRoot, `page-archive-${name}`);
+        fs.mkdirSync(root);
+        for (const [command, args] of [
+          ["init", ["init", "-q"]],
+          ["fetch", ["fetch", "-q", archiveGit, archiveConfig.immutable_archive_commit]],
+          ["checkout", ["checkout", "-q", "--detach", "FETCH_HEAD"]],
+        ]) {
+          const result = spawnSync("git", args, { cwd: root, encoding: "utf8" });
+          assert.equal(result.status, 0, `page archive ${command} failed: ${result.stderr}`);
+        }
+        mutate(root);
+        spawnSync("git", ["add", "--all"], { cwd: root });
+        spawnSync("git", ["commit", "-q", "-m", name], { cwd: root, env: commitEnv });
+        const commit = gitText(root, ["rev-parse", "HEAD"]);
+        return { root, commit, tree: gitText(root, ["rev-parse", "HEAD^{tree}"]) };
+      }
+      for (const [name, mutate, expected] of [
+        ["extra", (root) => fs.writeFileSync(path.join(root, "extra.txt"), "extra\n"), "page_evidence_archive_inventory_invalid"],
+        ["omission", (root) => fs.rmSync(path.join(root, "packet/page-evidence-session.json")), "page_evidence_archive_inventory_invalid"],
+        ["protected_blob", (root) => fs.appendFileSync(path.join(root, "scripts/validate-page-evidence.mjs"), "// drift\n"), "page_evidence_archive_protected_mismatch"],
+        ["packet_swap", (root) => { const a = path.join(root, "packet/page-evidence-session.json"), b = path.join(root, "packet/runner/responsive-layout.json"), bytes = fs.readFileSync(a); fs.writeFileSync(a, fs.readFileSync(b)); fs.writeFileSync(b, bytes); }, "page_evidence_archive_source_invalid"],
+        ["hash_correct_semantically_invalid", (root) => { const file = path.join(root, "packet/page-evidence-manifest.json"), value = JSON.parse(fs.readFileSync(file)); value.untrusted = true; fs.writeFileSync(file, `${JSON.stringify(value)}\n`); }, "page_evidence_archive_packet_mismatch"],
+        ["source_commit_swap", (root) => fs.writeFileSync(path.join(root, "provenance/source-commit.txt"), "tree " + "f".repeat(40) + "\n"), "page_evidence_archive_source_invalid"],
+        ["mode", (root) => fs.chmodSync(path.join(root, "packet/page-evidence-session.json"), 0o755), "page_evidence_archive_mode_invalid"],
+        ["symlink", (root) => { const file = path.join(root, "packet/page-evidence-session.json"); fs.rmSync(file); fs.symlinkSync("page-evidence-manifest.json", file); }, "page_evidence_archive_mode_invalid"],
+      ]) {
+        const fixtureArchive = mutatedPageArchive(name, mutate); const result = contract.validatePageEvidenceArchive(fixtureArchive); rows.push({ name: `page_evidence_archive_${name}_rejected`, expected, actual: result.failures, ok: !result.ok && result.failures.some(({ code }) => code === expected) });
+      }
+      const worktreeArchive = mutatedPageArchive("worktree-substitution", () => {}); const manifestFile = path.join(worktreeArchive.root, "packet/page-evidence-manifest.json"); const originalManifest = fs.readFileSync(manifestFile); fs.writeFileSync(manifestFile, "{}\n"); const immutableWorktree = contract.validatePageEvidenceArchive(worktreeArchive); fs.writeFileSync(manifestFile, originalManifest); rows.push({ name: "page_evidence_archive_worktree_substitution_ignored", expected: "ok:true", actual: immutableWorktree.failures, ok: immutableWorktree.ok });
+      const serializedArchiveFailure = JSON.stringify(contract.validatePageEvidenceArchive({ root: archiveGit, commit: archiveConfig.immutable_archive_commit, tree: "f".repeat(40) })); rows.push({ name: "page_evidence_archive_errors_host_path_free", expected: "stable host-path-free", actual: serializedArchiveFailure, ok: !serializedArchiveFailure.includes(tempRoot) && !serializedArchiveFailure.includes(repositoryRoot) && !serializedArchiveFailure.includes(os.homedir()) });
     }
-    for (const [name, mutate, expected] of [
-      ["extra", (root) => fs.writeFileSync(path.join(root, "extra.txt"), "extra\n"), "page_evidence_archive_inventory_invalid"],
-      ["omission", (root) => fs.rmSync(path.join(root, "packet/page-evidence-session.json")), "page_evidence_archive_inventory_invalid"],
-      ["protected_blob", (root) => fs.appendFileSync(path.join(root, "scripts/validate-page-evidence.mjs"), "// drift\n"), "page_evidence_archive_protected_mismatch"],
-      ["packet_swap", (root) => { const a = path.join(root, "packet/page-evidence-session.json"), b = path.join(root, "packet/runner/responsive-layout.json"), bytes = fs.readFileSync(a); fs.writeFileSync(a, fs.readFileSync(b)); fs.writeFileSync(b, bytes); }, "page_evidence_archive_source_invalid"],
-      ["hash_correct_semantically_invalid", (root) => { const file = path.join(root, "packet/page-evidence-manifest.json"), value = JSON.parse(fs.readFileSync(file)); value.untrusted = true; fs.writeFileSync(file, `${JSON.stringify(value)}\n`); }, "page_evidence_archive_packet_mismatch"],
-      ["source_commit_swap", (root) => fs.writeFileSync(path.join(root, "provenance/source-commit.txt"), "tree " + "f".repeat(40) + "\n"), "page_evidence_archive_source_invalid"],
-      ["mode", (root) => fs.chmodSync(path.join(root, "packet/page-evidence-session.json"), 0o755), "page_evidence_archive_mode_invalid"],
-      ["symlink", (root) => { const file = path.join(root, "packet/page-evidence-session.json"); fs.rmSync(file); fs.symlinkSync("page-evidence-manifest.json", file); }, "page_evidence_archive_mode_invalid"],
-    ]) {
-      const fixtureArchive = mutatedPageArchive(name, mutate); const result = contract.validatePageEvidenceArchive(fixtureArchive); rows.push({ name: `page_evidence_archive_${name}_rejected`, expected, actual: result.failures, ok: !result.ok && result.failures.some(({ code }) => code === expected) });
-    }
-    const worktreeArchive = mutatedPageArchive("worktree-substitution", () => {}); const manifestFile = path.join(worktreeArchive.root, "packet/page-evidence-manifest.json"); const originalManifest = fs.readFileSync(manifestFile); fs.writeFileSync(manifestFile, "{}\n"); const immutableWorktree = contract.validatePageEvidenceArchive(worktreeArchive); fs.writeFileSync(manifestFile, originalManifest); rows.push({ name: "page_evidence_archive_worktree_substitution_ignored", expected: "ok:true", actual: immutableWorktree.failures, ok: immutableWorktree.ok });
-    const serializedArchiveFailure = JSON.stringify(contract.validatePageEvidenceArchive({ root: archiveGit, commit: archiveConfig.immutable_archive_commit, tree: "f".repeat(40) })); rows.push({ name: "page_evidence_archive_errors_host_path_free", expected: "stable host-path-free", actual: serializedArchiveFailure, ok: !serializedArchiveFailure.includes(tempRoot) && !serializedArchiveFailure.includes(repositoryRoot) && !serializedArchiveFailure.includes(os.homedir()) });
 
     const fixture = initializeConsumer();
     try {
