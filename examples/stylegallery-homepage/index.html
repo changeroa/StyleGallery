@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="StyleGallery — 사람과 에이전트를 위한 governed interface knowledge gallery.">
+  <meta name="theme-color" content="#10110f">
+  <title>StyleGallery — Governed Interface Knowledge</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2310110f'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Arial' font-size='20' font-weight='700' fill='%23dfff00'%3ESG%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="StyleGallery 홈">
+      <span class="brand-mark" aria-hidden="true">SG</span>
+      <span>StyleGallery</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+      <span class="sr-only">메뉴 열기</span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+
+    <nav class="site-navigation" id="site-navigation" aria-label="주요 탐색">
+      <a href="#domains">Domains</a>
+      <a href="#agent-native">Agent Native</a>
+      <a href="#principles">Principles</a>
+      <a class="nav-github" href="https://github.com/changeroa/StyleGallery">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span>01</span> Portable interface knowledge</p>
+        <h1 id="hero-title">인터페이스 지식을<br><em>재사용 가능한</em><br>구조로.</h1>
+        <p class="hero-summary">
+          StyleGallery는 레이아웃, 모션, 디자인 엔지니어링, 게임 UI, 플랫폼 가이드를
+          명확한 소유권과 근거 경계로 정리한 governed gallery입니다.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#get-started">바로 시작하기 <span aria-hidden="true">↘</span></a>
+          <a class="button button-secondary" href="https://github.com/changeroa/StyleGallery">저장소 보기 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <aside class="hero-console" aria-label="StyleGallery 명령어 미리보기">
+        <div class="console-toolbar">
+          <span class="console-status">LIVE PACKAGE</span>
+          <span>v0.1.1</span>
+        </div>
+        <div class="console-map" aria-hidden="true">
+          <span class="map-core">SG</span>
+          <span class="map-node map-node-layout">LAYOUT</span>
+          <span class="map-node map-node-motion">MOTION</span>
+          <span class="map-node map-node-engineering">DESIGN ENG.</span>
+          <span class="map-node map-node-game">GAME UI</span>
+          <span class="map-node map-node-platform">PLATFORM</span>
+        </div>
+        <div class="console-command">
+          <span aria-hidden="true">$</span>
+          <code tabindex="0">npx stylegallery discover --format json</code>
+          <button class="copy-button" type="button" data-copy="npx stylegallery discover --format json">COPY</button>
+        </div>
+        <p class="console-footnote">Deterministic JSON · Read-only · Evidence-aware</p>
+      </aside>
+    </section>
+
+    <section class="ticker" aria-label="StyleGallery 특성">
+      <div class="ticker-track">
+        <span>SEMANTIC FIRST</span><i aria-hidden="true">✦</i>
+        <span>EXPLICIT CONSTRAINTS</span><i aria-hidden="true">✦</i>
+        <span>READ-ONLY MCP</span><i aria-hidden="true">✦</i>
+        <span>PORTABLE PATTERNS</span><i aria-hidden="true">✦</i>
+        <span>EVIDENCE BOUNDARIES</span><i aria-hidden="true">✦</i>
+      </div>
+    </section>
+
+    <section class="intro section-shell" aria-labelledby="intro-title">
+      <p class="section-index">02 / WHY</p>
+      <div class="intro-grid">
+        <h2 id="intro-title">스타일을 모으는 대신,<br>판단 기준을 구조화합니다.</h2>
+        <div class="intro-copy">
+          <p>
+            화면을 복사하는 갤러리는 많습니다. StyleGallery는 무엇이 재사용 가능한 구조이고,
+            무엇이 제품 고유의 표현인지 먼저 구분합니다.
+          </p>
+          <dl class="stat-list">
+            <div><dt>5</dt><dd>명시적 도메인</dd></div>
+            <div><dt>2</dt><dd>에이전트 인터페이스</dd></div>
+            <div><dt>0</dt><dd>암묵적 쓰기 권한</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="domains section-shell" id="domains" aria-labelledby="domains-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">03 / DOMAINS</p>
+          <h2 id="domains-title">다섯 개의 경계.<br>하나의 언어.</h2>
+        </div>
+        <p>각 도메인은 자신이 책임지는 지식과 책임지지 않는 영역을 함께 선언합니다.</p>
+      </div>
+
+      <ol class="domain-grid">
+        <li class="domain-card domain-layout">
+          <div class="domain-card-head"><span>01</span><span class="domain-glyph" aria-hidden="true">▦</span></div>
+          <h3>Layout</h3>
+          <p>시맨틱 구조, 흐름, 크기, 정렬, 스크롤과 공간 구성을 다룹니다.</p>
+          <span class="domain-tag">SPATIAL STRUCTURE</span>
+        </li>
+        <li class="domain-card domain-motion">
+          <div class="domain-card-head"><span>02</span><span class="domain-glyph" aria-hidden="true">↝</span></div>
+          <h3>Motion</h3>
+          <p>보편 규칙을 가장하지 않고, 근거가 명시된 모션 실무를 정리합니다.</p>
+          <span class="domain-tag">BOUNDED PRACTICE</span>
+        </li>
+        <li class="domain-card domain-engineering">
+          <div class="domain-card-head"><span>03</span><span class="domain-glyph" aria-hidden="true">⌘</span></div>
+          <h3>Design<br>Engineering</h3>
+          <p>제품 레이어의 구현 완성도와 검증 질문을 연결합니다.</p>
+          <span class="domain-tag">PRODUCT CRAFT</span>
+        </li>
+        <li class="domain-card domain-game">
+          <div class="domain-card-head"><span>04</span><span class="domain-glyph" aria-hidden="true">◇</span></div>
+          <h3>Game UI</h3>
+          <p>게임 인터페이스의 역할, 계층과 엔진별 구현 경계를 분리합니다.</p>
+          <span class="domain-tag">INTERFACE HIERARCHY</span>
+        </li>
+        <li class="domain-card domain-platform">
+          <div class="domain-card-head"><span>05</span><span class="domain-glyph" aria-hidden="true">◎</span></div>
+          <h3>Platform<br>Guides</h3>
+          <p>플랫폼 관례를 모방이 아닌 제한된 비교 근거로 활용합니다.</p>
+          <span class="domain-tag">BOUNDED COMPARISON</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="agent-native" id="agent-native" aria-labelledby="agent-title">
+      <div class="agent-copy">
+        <p class="section-index section-index-light">04 / AGENT NATIVE</p>
+        <h2 id="agent-title">사람이 읽고,<br>에이전트가 조회합니다.</h2>
+        <p>
+          Markdown 원본은 그대로 유지하면서 CLI와 MCP가 동일한 지식을 결정적 JSON으로 제공합니다.
+          검색, 조회, 근거 확인은 가능하지만 저장소를 임의로 변경하지는 않습니다.
+        </p>
+        <ul class="agent-features">
+          <li><span>DISCOVER</span> 사용 가능한 인터페이스 탐색</li>
+          <li><span>RESOLVE</span> StableRef 기반 레코드 조회</li>
+          <li><span>CONTEXT</span> 토큰 예산 안에서 컨텍스트 구성</li>
+        </ul>
+      </div>
+
+      <div class="terminal" aria-label="CLI 사용 예제">
+        <div class="terminal-tabs" role="tablist" aria-label="CLI 예제 선택">
+          <button id="tab-discover" type="button" role="tab" aria-selected="true" aria-controls="panel-discover" data-tab="discover">discover</button>
+          <button id="tab-search" type="button" role="tab" aria-selected="false" aria-controls="panel-search" data-tab="search" tabindex="-1">search</button>
+          <button id="tab-mcp" type="button" role="tab" aria-selected="false" aria-controls="panel-mcp" data-tab="mcp" tabindex="-1">mcp</button>
+        </div>
+        <div class="terminal-panel" id="panel-discover" role="tabpanel" aria-labelledby="tab-discover" data-panel="discover">
+          <p tabindex="0"><span>$</span> npx stylegallery discover --format json</p>
+          <pre tabindex="0"><code>{
+  "ok": true,
+  "operation": "discover",
+  "access": "read-only",
+  "interfaces": ["cli", "mcp"]
+}</code></pre>
+        </div>
+        <div class="terminal-panel" id="panel-search" role="tabpanel" aria-labelledby="tab-search" data-panel="search" hidden>
+          <p tabindex="0"><span>$</span> sg-material search --query "sticky layout"</p>
+          <pre tabindex="0"><code>{
+  "ok": true,
+  "operation": "material-search",
+  "result": { "total_matches": 12 }
+}</code></pre>
+        </div>
+        <div class="terminal-panel" id="panel-mcp" role="tabpanel" aria-labelledby="tab-mcp" data-panel="mcp" hidden>
+          <p tabindex="0"><span>$</span> npx --package stylegallery stylegallery-mcp</p>
+          <pre tabindex="0"><code>{
+  "transport": "stdio",
+  "capability": "governed read operations",
+  "mutation": false
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="principles section-shell" id="principles" aria-labelledby="principles-title">
+      <p class="section-index">05 / PRINCIPLES</p>
+      <div class="principles-layout">
+        <h2 id="principles-title">복사하기 쉬운 코드보다,<br>틀리기 어려운 경계.</h2>
+        <ul class="principle-list">
+          <li><span>01</span><div><h3>Semantic first</h3><p>레이아웃 클래스보다 문서 구조와 읽기 순서를 먼저 결정합니다.</p></div></li>
+          <li><span>02</span><div><h3>One spatial problem</h3><p>각 패턴은 하나의 주요 공간 문제에 집중합니다.</p></div></li>
+          <li><span>03</span><div><h3>Explicit ownership</h3><p>스크롤, 제약, 근거와 변경 책임을 숨기지 않습니다.</p></div></li>
+          <li><span>04</span><div><h3>Portable by default</h3><p>프레임워크보다 평범하고 견고한 HTML과 CSS를 우선합니다.</p></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="get-started" id="get-started" aria-labelledby="start-title">
+      <div>
+        <p class="section-index">06 / START</p>
+        <h2 id="start-title">필요한 지식부터<br>바로 꺼내 쓰세요.</h2>
+      </div>
+      <div class="install-card">
+        <p>설치 없이 실행</p>
+        <div class="install-command">
+          <code tabindex="0">npx stylegallery discover --format json</code>
+          <button class="copy-button copy-button-dark" type="button" data-copy="npx stylegallery discover --format json">COPY</button>
+        </div>
+        <div class="install-links">
+          <a href="https://www.npmjs.com/package/stylegallery">npm 패키지 <span aria-hidden="true">↗</span></a>
+          <a href="https://github.com/changeroa/StyleGallery">GitHub 저장소 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">SG</span>
+      <p><strong>StyleGallery</strong><br>Governed interface knowledge.</p>
+    </div>
+    <p>Layout · Motion · Design Engineering · Game UI · Platform Guides</p>
+    <a href="#top">맨 위로 ↑</a>
+  </footer>
+</body>
+</html>

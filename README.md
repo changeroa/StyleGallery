@@ -54,6 +54,10 @@ sg-material search --query "sticky layout" --limit 5
 sg-material context --query "responsive sidebar" --budget-tokens 4096
 ```
 
+### Worked homepage example
+
+The [StyleGallery homepage example](examples/stylegallery-homepage/README.md) was planned from a clean install of the published npm package. It demonstrates the Homepage recipe, selected layout patterns, agent-native CLI access, responsive behavior, and Chrome CDP verification in a standalone product-layer implementation.
+
 ### Read-only MCP server
 
 Launch the packaged stdio server with:
