@@ -1,7 +1,7 @@
 {
-  "name": "stylegallery-validation",
-  "version": "0.0.0",
-  "private": true,
+  "name": "stylegallery",
+  "version": "0.1.1",
+  "description": "A governed gallery of portable interface knowledge with deterministic CLIs and read-only MCP servers.",
   "type": "module",
   "homepage": "https://github.com/changeroa/StyleGallery#readme",
   "bugs": {
@@ -187,7 +187,14 @@
   ],
   "bin": {
     "sg": "scripts/sg.mjs",
-    "sg-material": "scripts/sg-material.mjs"
+    "sg-material": "scripts/sg-material.mjs",
+    "stylegallery": "scripts/sg.mjs",
+    "stylegallery-material": "scripts/sg-material.mjs",
+    "stylegallery-material-mcp": "scripts/sg-material-mcp.mjs",
+    "stylegallery-mcp": "scripts/sg-mcp.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "audit:evidence": "node scripts/audit-evidence-freshness.mjs",
@@ -220,8 +227,7 @@
     "@axe-core/playwright": "4.12.1",
     "@playwright/test": "1.61.0",
     "ajv": "8.20.0",
-    "ajv-formats": "3.0.1",
-    "style-dictionary": "5.5.0"
+    "ajv-formats": "3.0.1"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.29.0",
