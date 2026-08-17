@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import AxeBuilder from '@axe-core/playwright';
 import { chromium } from 'playwright';
+import { measureTextLinesWithPretext, startPretextModuleServer } from './pretext-qa-adapter.mjs';
 
 const baseUrl = process.env.QA_BASE_URL ?? 'http://127.0.0.1:4173';
 const cdpUrl = process.env.QA_CDP_URL ?? 'http://127.0.0.1:9223';
@@ -11,6 +12,7 @@ await fs.mkdir(outputDirectory, { recursive: true });
 
 const browser = await chromium.connectOverCDP(cdpUrl);
 const context = browser.contexts()[0];
+const pretextModuleServer = await startPretextModuleServer();
 const results = [];
 
 async function verifyViewport(name, width, height) {
@@ -23,7 +25,6 @@ async function verifyViewport(name, width, height) {
   });
   page.on('pageerror', (error) => consoleErrors.push(String(error)));
   page.on('requestfailed', (request) => failedRequests.push(`${request.method()} ${request.url()}`));
-
   const cdp = await context.newCDPSession(page);
   await cdp.send('Emulation.setDeviceMetricsOverride', {
     deviceScaleFactor: 1,
@@ -35,10 +36,28 @@ async function verifyViewport(name, width, height) {
   });
   await page.goto(baseUrl, { waitUntil: 'networkidle' });
 
+  let pretextHeadingLines;
+  try {
+    pretextHeadingLines = await measureTextLinesWithPretext(page, pretextModuleServer.moduleUrl, '#hero-title > span');
+  } catch (error) {
+    throw new Error(`${name}: Pretext module load failed: ${error.message}; console=${consoleErrors.join(' | ')}; requests=${failedRequests.join(' | ')}`);
+  }
+  if (pretextHeadingLines.some(({ lineCount }) => lineCount !== 1)) {
+    throw new Error(`${name}: Pretext predicted an unintended hero heading wrap`);
+  }
+  if (pretextHeadingLines.some(({ availableWidth, measuredWidth }) => measuredWidth > availableWidth + 1)) {
+    throw new Error(`${name}: Pretext predicted hero heading overflow`);
+  }
+
   const layout = await page.evaluate(() => ({
     clientWidth: document.documentElement.clientWidth,
     domainColumns: getComputedStyle(document.querySelector('.domain-grid')).gridTemplateColumns,
     heading: document.querySelector('h1')?.innerText,
+    headingLines: [...document.querySelectorAll('#hero-title > span')].map((line) => ({
+      clientWidth: line.clientWidth,
+      scrollWidth: line.scrollWidth,
+      text: line.innerText,
+    })),
     innerHeight,
     innerWidth,
     navToggleDisplay: getComputedStyle(document.querySelector('.nav-toggle')).display,
@@ -47,6 +66,7 @@ async function verifyViewport(name, width, height) {
 
   if (layout.innerWidth !== width) throw new Error(`${name}: expected ${width}px viewport, got ${layout.innerWidth}px`);
   if (layout.scrollWidth > layout.clientWidth + 1) throw new Error(`${name}: horizontal overflow ${layout.scrollWidth}px > ${layout.clientWidth}px`);
+  if (layout.headingLines.some(({ clientWidth, scrollWidth }) => scrollWidth > clientWidth + 1)) throw new Error(`${name}: hero heading line wrapped or overflowed`);
   if (width < 700 && layout.navToggleDisplay === 'none') throw new Error(`${name}: mobile navigation toggle is hidden`);
   if (width >= 700 && layout.navToggleDisplay !== 'none') throw new Error(`${name}: desktop navigation toggle is visible`);
 
@@ -86,6 +106,7 @@ async function verifyViewport(name, width, height) {
     failedRequests,
     layout,
     name,
+    pretextHeadingLines,
     screenshot,
   });
 
@@ -95,10 +116,13 @@ async function verifyViewport(name, width, height) {
   await page.close();
 }
 
-await verifyViewport('desktop-1440', 1440, 900);
-await verifyViewport('tablet-768', 768, 900);
-await verifyViewport('mobile-375', 375, 812);
-await verifyViewport('mobile-320', 320, 700);
-
-console.log(JSON.stringify({ ok: true, results }, null, 2));
-await browser.close();
+try {
+  await verifyViewport('desktop-1440', 1440, 900);
+  await verifyViewport('tablet-768', 768, 900);
+  await verifyViewport('mobile-375', 375, 812);
+  await verifyViewport('mobile-320', 320, 700);
+  console.log(JSON.stringify({ ok: true, results }, null, 2));
+} finally {
+  await pretextModuleServer.close();
+  await browser.close();
+}

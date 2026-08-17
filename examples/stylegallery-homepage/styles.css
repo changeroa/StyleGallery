@@ -180,11 +180,15 @@ input {
 }
 
 .hero h1 {
-  font-size: clamp(3.6rem, 7.2vw, 8.4rem);
+  font-size: clamp(3.5rem, 5vw, 7rem);
   letter-spacing: -0.085em;
   line-height: 0.82;
   margin: 0;
-  max-width: 9ch;
+}
+
+.hero h1 > span {
+  display: block;
+  white-space: nowrap;
 }
 
 .hero h1 em {
@@ -815,7 +819,7 @@ input {
   }
 
   .hero h1 {
-    font-size: clamp(3.35rem, 17vw, 5.3rem);
+    font-size: clamp(2.2rem, 10vw, 3rem);
   }
 
   .hero-console {

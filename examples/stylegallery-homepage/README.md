@@ -14,6 +14,10 @@ sg-material context --query "homepage semantic order cover content limiter stack
 
 The tested package was `stylegallery@0.1.1`. Search returned the Homepage recipe and the selected `cover`, `content-limiter`, `stack`, `cluster`, `ram-grid`, and `frame` pattern guidance.
 
+## Text-layout verification
+
+`@chenglou/pretext` is pinned as a development-only dependency and loaded through `pretext-qa-adapter.mjs` during browser QA. It predicts whether each intended hero-heading row fits on one line before the same state is checked against the rendered DOM and Chrome CDP screenshot. Pretext is verification support only: it does not determine DOM structure, CSS layout, or runtime rendering.
+
 ## Run locally
 
 From this directory:
@@ -27,7 +31,7 @@ Then open `http://127.0.0.1:4173`.
 For the Chrome CDP QA matrix, launch Google Chrome with a remote-debugging port and run:
 
 ```sh
-node qa.mjs
+npm run test:homepage:cdp
 ```
 
 ## Implementation handoff
