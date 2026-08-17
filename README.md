@@ -16,6 +16,74 @@ The existing Layout corpus remains a gallery of minimal, portable CSS layout pat
 
 [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) is the machine-facing entry point over that governed knowledge. It provides content-addressed identity, claim/evidence/governance records, deterministic retrieval, a shared operation registry, the `sg` CLI, and a read-only MCP projection. It does not create a sixth domain, replace the Markdown corpus, or permit MCP clients to mutate governed knowledge.
 
+## Quick Start
+
+StyleGallery requires Node.js 22 or newer. Run a command without installing anything globally:
+
+```sh
+npx stylegallery discover --format json
+```
+
+Or install the CLI globally:
+
+```sh
+npm install --global stylegallery
+sg discover --format json
+```
+
+Common read-only commands:
+
+```sh
+sg resolve sg:profile/editorial-reference-profile --format json
+sg claims sg:profile/editorial-reference-profile --format json
+sg context sg:profile/editorial-reference-profile --format json
+sg ops --format json
+```
+
+Every command writes deterministic JSON to stdout. Invalid input returns an error object and a nonzero exit status. See [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) for the command contract, StableRef and VersionID model, MCP resources, and trust boundaries.
+
+### Read-only MCP server
+
+Launch the packaged stdio server with:
+
+```sh
+npx --package stylegallery stylegallery-mcp
+```
+
+Example MCP client configuration:
+
+```json
+{
+  "mcpServers": {
+    "stylegallery": {
+      "command": "npx",
+      "args": ["--yes", "--package", "stylegallery", "stylegallery-mcp"]
+    }
+  }
+}
+```
+
+The MCP surface exposes governed read operations only. It cannot modify repository knowledge.
+
+## 한국어 빠른 시작
+
+StyleGallery는 Node.js 22 이상에서 실행됩니다. 전역 설치 없이 바로 사용하려면 다음 명령을 실행하세요.
+
+```sh
+npx stylegallery discover --format json
+```
+
+자주 사용한다면 전역으로 설치할 수 있습니다.
+
+```sh
+npm install --global stylegallery
+sg discover --format json
+```
+
+`discover`는 사용 가능한 인터페이스를 보여주고, `resolve`는 하나의 레코드를 조회하며, `claims`는 관련 주장과 근거를 분리해서 보여줍니다. `context`는 에이전트에 전달할 수 있는 제한된 컨텍스트 패키지를 만들고, `ops`는 지원하는 작업 목록을 반환합니다. 모든 결과는 자동화에 바로 사용할 수 있는 JSON입니다.
+
+CLI와 MCP의 상세 사용법은 [Agent-Native StyleGallery 가이드](consumer-reference/agent-native/README.md)를 참고하세요. 사람이 문서를 탐색하려면 아래의 도메인 표에서 목적에 맞는 진입점을 선택하면 됩니다.
+
 ## Domains
 
 | Domain | Owns | Does not own |
