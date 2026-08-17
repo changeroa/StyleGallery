@@ -6,6 +6,10 @@ description: Governed gallery of portable interface knowledge organized by domai
 
 # StyleGallery
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/changeroa/StyleGallery/main/assets/stylegallery-hero.webp" alt="An illuminated central gallery connecting five geometric interface-knowledge chambers" width="100%">
+</p>
+
 StyleGallery is a governed gallery of portable interface knowledge. It separates reusable spatial patterns, product-layer motion guidance, design-engineering practice, and platform-specific references into explicit domains with different evidence and ownership boundaries.
 
 Primary role: repository guide.
