@@ -94,8 +94,8 @@
         "scripts/test-lifecycle-disposition.mjs",
         "scripts/validate-lifecycle-disposition.mjs"
       ],
-      "scanned_file_count": 400,
-      "scanned_paths_content_id": "sha256:e568a2d02c31da41ed2ddd1e20d5a9264e30a23845185a36cc52f4c1504c7c01"
+      "scanned_file_count": 404,
+      "scanned_paths_content_id": "sha256:f703200abad74add6fa9be06d1a6cc767726113cdd5ac4b92e6dadc9c354cee0"
     },
     "implementation": {
       "path": "scripts/agent-native/v2/extensions/a2a-projection.mjs",
@@ -145,10 +145,10 @@
         "role": "repository_reference",
         "lines": {
           "start": 1,
-          "end": 237
+          "end": 239
         },
-        "file_sha256": "059d1c943a5d453de0cd4b0cce8780acd505e4852c2cd25fb54e0b7a8e776a50",
-        "content_id": "sha256:059d1c943a5d453de0cd4b0cce8780acd505e4852c2cd25fb54e0b7a8e776a50",
+        "file_sha256": "c314fd5d1b41df5173ab0c861a83c0f4306b88738a0019d2128bf57cc5496834",
+        "content_id": "sha256:c314fd5d1b41df5173ab0c861a83c0f4306b88738a0019d2128bf57cc5496834",
         "reference_lines": [
           156,
           172
@@ -432,10 +432,10 @@
       "role": "installed_package_exposure",
       "lines": {
         "start": 1,
-        "end": 237
+        "end": 239
       },
-      "file_sha256": "059d1c943a5d453de0cd4b0cce8780acd505e4852c2cd25fb54e0b7a8e776a50",
-      "content_id": "sha256:059d1c943a5d453de0cd4b0cce8780acd505e4852c2cd25fb54e0b7a8e776a50"
+      "file_sha256": "c314fd5d1b41df5173ab0c861a83c0f4306b88738a0019d2128bf57cc5496834",
+      "content_id": "sha256:c314fd5d1b41df5173ab0c861a83c0f4306b88738a0019d2128bf57cc5496834"
     },
     "forwarding": {
       "path": "scripts/agent-native/a2a-projection.mjs",

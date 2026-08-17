@@ -35,6 +35,8 @@ npm install --global stylegallery
 sg discover --format json
 ```
 
+The npm package includes the pinned `@chenglou/pretext@0.0.8` browser text-layout engine. StyleGallery uses it as a measurement and verification dependency for text-fit QA; the Node CLI and MCP servers do not execute browser Canvas APIs.
+
 Common read-only commands:
 
 ```sh

@@ -1,5 +1,11 @@
 # StyleGallery Log
 
+## 2026-08-18
+
+- Added the StyleGallery homepage example planned from a clean npm installation and verified across desktop, tablet, and mobile Chrome CDP viewports.
+- Added pinned Pretext text-layout measurement as an npm-installed verification dependency while keeping browser Canvas execution outside the Node CLI and MCP surfaces.
+- Added deterministic hero-heading line-count, DOM overflow, accessibility, console, request, and screenshot checks.
+
 ## 2026-07-23
 
 - Added the agent-native knowledge interface with content-addressed identity, epistemic and execution records, deterministic retrieval, and governed learning.

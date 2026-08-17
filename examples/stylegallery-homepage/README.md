@@ -12,11 +12,11 @@ sg-material search --query "homepage cover content limiter stack cluster ram gri
 sg-material context --query "homepage semantic order cover content limiter stack cluster ram-grid frame accessibility responsive" --budget-tokens 6000
 ```
 
-The tested package was `stylegallery@0.1.1`. Search returned the Homepage recipe and the selected `cover`, `content-limiter`, `stack`, `cluster`, `ram-grid`, and `frame` pattern guidance.
+The tested package was `stylegallery@0.1.2`. Search returned the Homepage recipe and the selected `cover`, `content-limiter`, `stack`, `cluster`, `ram-grid`, and `frame` pattern guidance.
 
 ## Text-layout verification
 
-`@chenglou/pretext` is pinned as a development-only dependency and loaded through `pretext-qa-adapter.mjs` during browser QA. It predicts whether each intended hero-heading row fits on one line before the same state is checked against the rendered DOM and Chrome CDP screenshot. Pretext is verification support only: it does not determine DOM structure, CSS layout, or runtime rendering.
+`@chenglou/pretext@0.0.8` is pinned as a package dependency and loaded through `pretext-qa-adapter.mjs` during browser QA. It predicts whether each intended hero-heading row fits on one line before the same state is checked against the rendered DOM and Chrome CDP screenshot. Pretext is verification support only: it does not determine DOM structure, CSS layout, or runtime rendering, and the Node CLI/MCP surfaces do not invoke browser Canvas APIs.
 
 ## Run locally
 

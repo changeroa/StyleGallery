@@ -1,6 +1,6 @@
 {
   "name": "stylegallery",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A governed gallery of portable interface knowledge with deterministic CLIs and read-only MCP servers.",
   "type": "module",
   "homepage": "https://github.com/changeroa/StyleGallery#readme",
@@ -226,12 +226,12 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",
-    "@chenglou/pretext": "0.0.8",
     "@playwright/test": "1.61.0",
     "ajv": "8.20.0",
     "ajv-formats": "3.0.1"
   },
   "dependencies": {
+    "@chenglou/pretext": "0.0.8",
     "@modelcontextprotocol/sdk": "1.29.0",
     "style-dictionary": "5.5.0",
     "zod": "4.4.3"
