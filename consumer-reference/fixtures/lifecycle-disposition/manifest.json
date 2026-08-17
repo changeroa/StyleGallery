@@ -1,0 +1,63 @@
+{
+  "id": "lifecycle-disposition-fixture-inventory",
+  "invalid_records": [
+    {
+      "expected_code": "lifecycle_owner_unknown",
+      "file": "invalid-unknown-owner.json"
+    },
+    {
+      "expected_code": "lifecycle_chronology_invalid",
+      "file": "invalid-chronology.json"
+    },
+    {
+      "expected_code": "lifecycle_due_at_mismatch",
+      "file": "invalid-due-mismatch.json"
+    },
+    {
+      "expected_code": "lifecycle_caller_status_invalid",
+      "file": "invalid-caller-none.json"
+    },
+    {
+      "expected_code": "lifecycle_path_missing",
+      "file": "invalid-missing-archive.json"
+    },
+    {
+      "expected_code": "lifecycle_transition_invalid",
+      "file": "invalid-contradictory-transition.json"
+    },
+    {
+      "expected_code": "lifecycle_decision_invalid",
+      "file": "invalid-unsupported-decision.json"
+    },
+    {
+      "expected_code": "lifecycle_field_unknown",
+      "file": "invalid-unknown-field.json"
+    }
+  ],
+  "schema_record": "consumer-reference/schema/lifecycle-disposition.schema.json",
+  "schema_version": "1.0",
+  "extension_invalid_records": [
+    {
+      "expected_code": "protocol_extension_unknown_to_none_forbidden",
+      "file": "invalid-extension-caller-none.json"
+    },
+    {
+      "expected_code": "protocol_extension_caller_provenance_required",
+      "file": "invalid-extension-verified-without-migration.json"
+    },
+    {
+      "expected_code": "protocol_extension_immediate_removal_forbidden",
+      "file": "invalid-extension-immediate-removal.json"
+    },
+    {
+      "expected_code": "protocol_extension_approval_untrusted",
+      "file": "invalid-extension-self-signed-deprecate.json"
+    },
+    {
+      "expected_code": "protocol_extension_caller_inventory_mismatch",
+      "file": "invalid-extension-caller-omitted.json"
+    }
+  ],
+  "extension_schema_ref": "#/$defs/protocolExtensionDisposition",
+  "extension_schema_version": "1.0"
+}

@@ -1,20 +1,23 @@
 #!/usr/bin/env node
 
+import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { artifactMetadata } from "./artifact-metadata.mjs";
-import { sessionLink, sha256 } from "./capture-session-contract.mjs";
+import { captureSourcePaths, relevantSourceFiles, sessionLink, sha256, verifySourceManifest } from "./capture-session-contract.mjs";
 import { makePng, syntheticImage } from "./component-state-artifact-fixture.mjs";
+import { EvidenceCaptureError, resolveEvidenceCapture } from "./evidence-capture-contract.mjs";
 import { resolveProfileRecords } from "./profile-record-contract.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const fixtureRoot = path.join(repositoryRoot, "consumer-reference/fixtures/component-evidence-v1");
 const sourceProfiles = path.join(repositoryRoot, "design-engineering/reference-profiles/governed-local");
 const validator = path.join(repositoryRoot, "scripts/validate-component-state.mjs");
 const finalizer = path.join(repositoryRoot, "scripts/finalize-component-state-evidence.mjs");
-const creator = path.join(repositoryRoot, "scripts/create-component-state-session.mjs");
+const captureDirectory = "design-engineering/reference-profiles/governed-local/captures";
 
 const png = makePng(32);
 
@@ -23,12 +26,101 @@ function writeJson(file, value) {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
 }
 
+function materializeArchivedV1Evidence(profileRoot) {
+  for (const profile of ["editorial", "terminal"]) {
+    fs.copyFileSync(path.join(fixtureRoot, `${profile}.button.evidence.json`), path.join(profileRoot, profile, "evidence/button.evidence.json"));
+  }
+}
+
+function profileEntries(profileRoot) {
+  return fs.readdirSync(profileRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(profileRoot, entry.name, "profile.json")));
+}
+
+function isolatedAuthoringEnvironment(overrides = {}) {
+  const environment = { ...process.env };
+  for (const name of ["GITHUB_HEAD_REF", "GITHUB_REF_NAME", "GITHUB_REPOSITORY", "GITHUB_RUN_ATTEMPT", "GITHUB_SHA"]) delete environment[name];
+  return { ...environment, ...overrides };
+}
+
+function isolatedAuthoringRepository() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-authoring-repository-"));
+  for (const reference of captureSourcePaths) {
+    const target = path.join(root, reference);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.copyFileSync(path.join(repositoryRoot, reference), target);
+  }
+  fs.symlinkSync(path.join(repositoryRoot, "node_modules"), path.join(root, "node_modules"));
+  const git = (...args) => spawnSync("git", args, { cwd: root, encoding: "utf8" });
+  let result = git("init", "--quiet");
+  if (result.status !== 0) throw new Error(`isolated git init failed: ${result.stderr}`);
+  result = git("config", "user.name", "Source Contract");
+  if (result.status !== 0) throw new Error(`isolated git config failed: ${result.stderr}`);
+  result = git("config", "user.email", "source-contract@example.invalid");
+  if (result.status !== 0) throw new Error(`isolated git config failed: ${result.stderr}`);
+  result = git("add", "--", ...captureSourcePaths);
+  if (result.status !== 0) throw new Error(`isolated git add failed: ${result.stderr}`);
+  result = git("commit", "--quiet", "-m", "isolated current authoring sources");
+  if (result.status !== 0) throw new Error(`isolated git commit failed: ${result.stderr}`);
+  return { creator: path.join(root, "scripts/create-component-state-session.mjs"), root };
+}
+
+function commitHistoricalInventoryFixture() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-historical-inventory-"));
+  const profileRoot = path.join(root, "profiles");
+  const git = (...args) => {
+    const result = spawnSync("git", args, { cwd: root, encoding: "utf8" });
+    if (result.status !== 0) throw new Error(`historical inventory Git command failed: ${result.stderr}`);
+    return result.stdout.trim();
+  };
+  fs.mkdirSync(path.join(root, "scripts"), { recursive: true });
+  fs.mkdirSync(path.join(profileRoot, "archived"), { recursive: true });
+  fs.writeFileSync(path.join(root, "historical-extra.txt"), "historical bytes\n");
+  fs.writeFileSync(path.join(root, "scripts/capture-session-contract.mjs"), [
+    "export const captureSourcePaths = Object.freeze([",
+    '  "historical-extra.txt",',
+    '  "scripts/capture-session-contract.mjs",',
+    "]);",
+    "",
+  ].join("\n"));
+  writeJson(path.join(profileRoot, "archived/profile.json"), {
+    component_records: [], fixture_records: [], local_foundations: "local.json", state_records: [], tokens: "tokens.json",
+  });
+  writeJson(path.join(profileRoot, "archived/local.json"), { historical: true });
+  writeJson(path.join(profileRoot, "archived/tokens.json"), { historical: true });
+  git("init", "--quiet");
+  git("config", "user.name", "Historical Inventory");
+  git("config", "user.email", "historical-inventory@example.invalid");
+  git("add", ".");
+  git("commit", "--quiet", "-m", "historical inventory");
+  const revision = git("rev-parse", "HEAD");
+  const repositoryPaths = [
+    "historical-extra.txt",
+    "profiles/archived/local.json",
+    "profiles/archived/profile.json",
+    "profiles/archived/tokens.json",
+    "scripts/capture-session-contract.mjs",
+  ];
+  const files = repositoryPaths.map((repositoryPath) => {
+    const bytes = fs.readFileSync(path.join(root, repositoryPath));
+    return { byte_length: bytes.length, path: repositoryPath, sha256: sha256(bytes) };
+  }).sort((left, right) => left.path < right.path ? -1 : left.path > right.path ? 1 : 0);
+  const source = { files, sha256: sha256(Buffer.from(JSON.stringify(files))) };
+  fs.writeFileSync(path.join(root, "historical-extra.txt"), "new head bytes\n");
+  fs.writeFileSync(path.join(root, "scripts/capture-session-contract.mjs"), 'export const captureSourcePaths = Object.freeze(["new-head-only.txt"]);\n');
+  fs.writeFileSync(path.join(root, "new-head-only.txt"), "new head\n");
+  git("add", ".");
+  git("commit", "--quiet", "-m", "replace inventory");
+  return { profileRoot, revision, root, source };
+}
+
 function prepareCanonical() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-state-artifacts-base-"));
   const profileRoot = path.join(root, "profiles");
   const artifactRoot = path.join(root, "artifacts");
   fs.cpSync(sourceProfiles, profileRoot, { recursive: true });
-  for (const entry of fs.readdirSync(profileRoot, { withFileTypes: true }).filter((item) => item.isDirectory())) {
+  materializeArchivedV1Evidence(profileRoot);
+  for (const entry of profileEntries(profileRoot)) {
     const resolved = resolveProfileRecords(path.join(profileRoot, entry.name), []);
     const statesRecord = resolved.records.states[0];
     for (const scenario of statesRecord.value.scenarios) {
@@ -38,13 +130,19 @@ function prepareCanonical() {
     writeJson(statesRecord.path, statesRecord.value);
   }
   const receiptFile = path.join(artifactRoot, "capture-session.json");
-  const created = spawnSync(process.execPath, [creator, "--root", profileRoot, "--output", receiptFile, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
+  const isolatedRepository = isolatedAuthoringRepository();
+  const created = spawnSync(process.execPath, [isolatedRepository.creator, "--root", profileRoot, "--output", receiptFile, "--json"], {
+    cwd: isolatedRepository.root,
+    encoding: "utf8",
+    env: isolatedAuthoringEnvironment(),
+  });
+  fs.rmSync(isolatedRepository.root, { force: true, recursive: true });
   if (created.status !== 0) throw new Error(`canonical session creation failed: ${created.stdout}${created.stderr}`);
   const receiptBytes = fs.readFileSync(receiptFile);
   const receipt = JSON.parse(receiptBytes);
   const captureLink = sessionLink(receipt, sha256(receiptBytes));
   const capturedAt = new Date().toISOString();
-  for (const entry of fs.readdirSync(profileRoot, { withFileTypes: true }).filter((item) => item.isDirectory())) {
+  for (const entry of profileEntries(profileRoot)) {
     const resolved = resolveProfileRecords(path.join(profileRoot, entry.name), []);
     const fixtures = resolved.records.fixture[0].value;
     const states = new Map(resolved.records.states[0].value.scenarios.map((scenario) => [scenario.id, scenario]));
@@ -96,11 +194,30 @@ function prepareCanonical() {
     }
   }
   const manifest = path.join(artifactRoot, "runtime-manifest.json");
-  const child = spawnSync(process.execPath, [finalizer, "--root", profileRoot, "--artifact-root", artifactRoot, "--output", manifest, "--write-canonical", "--json"], { cwd: repositoryRoot, encoding: "utf8" });
+  const child = spawnSync(process.execPath, [finalizer, "--root", profileRoot, "--artifact-root", artifactRoot, "--output", manifest, "--json"], { cwd: repositoryRoot, encoding: "utf8" });
   if (child.status !== 0) throw new Error(`canonical artifact finalization failed: ${child.stdout}${child.stderr}`);
   const finalization = JSON.parse(child.stdout);
   if (finalization.artifactCount !== 40) throw new Error(`canonical finalization must close 40 runtime files, found ${finalization.artifactCount}`);
-  const passCount = JSON.parse(fs.readFileSync(manifest, "utf8")).records.flatMap((record) => record.passes).length;
+  const v2 = JSON.parse(fs.readFileSync(manifest, "utf8"));
+  const captureRecord = JSON.parse(fs.readFileSync(path.join(artifactRoot, v2.capture.path), "utf8"));
+  const legacy = {
+    claim_boundary: v2.claim_boundary,
+    environment: captureRecord.environment,
+    recorded_at: v2.recorded_at,
+    record_kind: "component_state_runtime_manifest",
+    records: v2.records.map((record) => ({
+      claim_boundary: record.claim_boundary,
+      component_id: record.component_id,
+      passes: record.passes.map((passRecord) => ({ ...passRecord, environment: captureRecord.environment, run: captureRecord.run, session: sessionLink(captureRecord.session, captureRecord.session.receipt_sha256) })),
+      profile_id: record.profile_id,
+      schema_version: "1.0",
+    })),
+    run: captureRecord.run,
+    schema_version: "1.0",
+    session: captureRecord.session,
+  };
+  writeJson(manifest, legacy);
+  const passCount = legacy.records.flatMap((record) => record.passes).length;
   if (passCount !== 30) throw new Error(`canonical finalization must retain 30 channel passes, found ${passCount}`);
   return { artifactRoot, manifest, profileRoot, root };
 }
@@ -130,6 +247,7 @@ function mutateJsonArtifact(manifest, artifactRoot, scenario, channel, mutate) {
   return pass;
 }
 
+
 const cases = [
   { name: "canonical", valid: true },
   { expect: "evidence_channel_duplicate", name: "channel_substitution", mutate: (m) => { findPass(m, "action-focused", "ax").channel = "dom"; } },
@@ -157,14 +275,14 @@ const cases = [
   { expect: "evidence_ax_schema_invalid", name: "ax_extra_nested_field", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "ax", (d) => { d.properties.certification = true; }); } },
   { expect: "evidence_ax_schema_invalid", name: "ax_null_type", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "ax", (d) => { d.properties.focused = null; }); } },
   { expect: "evidence_ax_schema_invalid", name: "ax_missing_key", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "ax", (d) => { delete d.role; }); } },
-  { expect: "capture_session_receipt_mismatch", name: "receipt_tamper", mutate: (m, a) => { const f = path.join(a, "capture-session.json"); const r = JSON.parse(fs.readFileSync(f)); r.nonce = "0".repeat(64); writeJson(f, r); } },
+  { expect: "capture_session_receipt_mismatch", name: "receipt_tamper", mutate: (_m, a) => { const f = path.join(a, "capture-session.json"); const r = JSON.parse(fs.readFileSync(f)); r.nonce = "0".repeat(64); writeJson(f, r); } },
   { expect: "capture_session_schema_invalid", name: "receipt_source_missing", mutate: (_m, a) => { const f = path.join(a, "capture-session.json"); const r = JSON.parse(fs.readFileSync(f)); delete r.source; writeJson(f, r); } },
   { expect: "runtime_manifest_schema_invalid", name: "completed_session_source_missing", mutate: (m) => { delete m.session.source; } },
   { expect: "evidence_visual_schema_invalid", name: "visual_session_source_missing", mutate: (m, a) => { const p = findPass(m, "action-focused", "visual"); const f = path.join(a, p.artifact.path.replace(/\.png$/, ".visual.json")); const d = JSON.parse(fs.readFileSync(f)); delete d.capture_session.source; writeJson(f, d); } },
   { expect: "evidence_dom_schema_invalid", name: "dom_session_source_missing", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "dom", (d) => { delete d.capture_session.source; }); } },
   { expect: "evidence_ax_schema_invalid", name: "ax_session_source_missing", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "ax", (d) => { delete d.capture_session.source; }); } },
   { expect: "capture_session_receipt_mismatch", name: "isolated_session_replay", mutate: (_m, a) => { fs.copyFileSync(path.join(alternate.artifactRoot, "capture-session.json"), path.join(a, "capture-session.json")); } },
-  { expect: "capture_session_missing", name: "receipt_missing", mutate: (m, a) => { fs.rmSync(path.join(a, "capture-session.json")); } },
+  { expect: "capture_session_missing", name: "receipt_missing", mutate: (_m, a) => { fs.rmSync(path.join(a, "capture-session.json")); } },
   { expect: "capture_session_mismatch", name: "cross_session_artifact_mix", mutate: (m, a) => { const target = findPass(m, "action-focused", "dom"); const sourceManifest = JSON.parse(fs.readFileSync(alternate.manifest)); const source = findPass(sourceManifest, "action-focused", "dom"); fs.copyFileSync(path.join(alternate.artifactRoot, source.artifact.path), path.join(a, target.artifact.path)); refresh(target, a); } },
   { expect: "capture_session_mismatch", name: "visual_cross_session_replay", mutate: (m, a) => { const target = findPass(m, "action-focused", "visual"); const sourceManifest = JSON.parse(fs.readFileSync(alternate.manifest)); const source = findPass(sourceManifest, "action-focused", "visual"); fs.copyFileSync(path.join(alternate.artifactRoot, source.artifact.path), path.join(a, target.artifact.path)); fs.copyFileSync(path.join(alternate.artifactRoot, source.artifact.path.replace(/\.png$/, ".visual.json")), path.join(a, target.artifact.path.replace(/\.png$/, ".visual.json"))); refresh(target, a); } },
   { expect: "capture_session_mismatch", name: "artifact_revision_drift", mutate: (m, a) => { mutateJsonArtifact(m, a, "action-focused", "dom", (d) => { d.capture_session.revision = "0".repeat(40); }); } },
@@ -207,6 +325,101 @@ const results = cases.map((testCase) => {
   }
 });
 
+const captureNames = fs.readdirSync(path.join(repositoryRoot, captureDirectory)).filter((name) => name.endsWith(".capture.json")).sort();
+assert.equal(captureNames.length, 1, "exactly one Commit-A capture fixture must exist");
+const recordedCapturePath = path.join(repositoryRoot, captureDirectory, captureNames[0]);
+const recordedCapture = JSON.parse(fs.readFileSync(recordedCapturePath, "utf8"));
+const omittedFiles = recordedCapture.session.source.files.filter((entry) => entry.path !== "package.json");
+const omittedSource = { files: omittedFiles, sha256: sha256(Buffer.from(JSON.stringify(omittedFiles))) };
+const omittedResult = verifySourceManifest(omittedSource, repositoryRoot, sourceProfiles, {
+  mode: "recorded-revision",
+  revision: recordedCapture.session.revision,
+});
+results.push({
+  actual: omittedResult.code,
+  expected: "source_inventory_mismatch",
+  name: "recorded_revision_source_inventory_closed_set",
+  ok: omittedResult.ok === false && omittedResult.code === "source_inventory_mismatch",
+});
+
+const rogueGitRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-rogue-git-"));
+const rogueGitDirectory = path.join(rogueGitRoot, "objects.git");
+const rogueObjectDirectory = path.join(rogueGitRoot, "objects");
+fs.mkdirSync(rogueObjectDirectory);
+const rogueInit = spawnSync("git", ["init", "--bare", "--quiet", rogueGitDirectory], { encoding: "utf8" });
+assert.equal(rogueInit.status, 0, `rogue Git fixture init failed: ${rogueInit.stderr}`);
+const hostileGit = {
+  GIT_ALTERNATE_OBJECT_DIRECTORIES: rogueObjectDirectory,
+  GIT_COMMON_DIR: rogueGitDirectory,
+  GIT_CONFIG_COUNT: "1",
+  GIT_CONFIG_KEY_0: "core.worktree",
+  GIT_CONFIG_VALUE_0: rogueGitRoot,
+  GIT_DIR: rogueGitDirectory,
+  GIT_INDEX_FILE: path.join(rogueGitRoot, "index"),
+  GIT_OBJECT_DIRECTORY: rogueObjectDirectory,
+  GIT_WORK_TREE: rogueGitRoot,
+};
+const previousGit = Object.fromEntries(Object.keys(hostileGit).map((key) => [key, process.env[key]]));
+Object.assign(process.env, hostileGit);
+const hostileResult = verifySourceManifest(recordedCapture.session.source, repositoryRoot, sourceProfiles, {
+  mode: "recorded-revision",
+  revision: recordedCapture.session.revision,
+});
+for (const [key, value] of Object.entries(previousGit)) {
+  if (value === undefined) delete process.env[key];
+  else process.env[key] = value;
+}
+fs.rmSync(rogueGitRoot, { force: true, recursive: true });
+results.push({
+  actual: hostileResult,
+  expected: "authenticated recorded revision despite hostile Git environment",
+  name: "recorded_revision_ignores_repository_redirect_environment",
+  ok: hostileResult.ok === true && hostileResult.revision === recordedCapture.session.revision,
+});
+
+const historical = commitHistoricalInventoryFixture();
+try {
+  const historicalResult = verifySourceManifest(historical.source, historical.root, historical.profileRoot, {
+    mode: "recorded-revision",
+    revision: historical.revision,
+  });
+  results.push({
+    actual: historicalResult,
+    expected: "historical inventory authenticated from recorded revision",
+    name: "recorded_revision_derives_historical_inventory",
+    ok: historicalResult.ok === true && historicalResult.revision === historical.revision,
+  });
+} finally {
+  fs.rmSync(historical.root, { force: true, recursive: true });
+}
+
+const noGitRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-recorded-capture-no-git-"));
+try {
+  const relativeCapture = path.posix.join(captureDirectory, captureNames[0]);
+  const copiedCapture = path.join(noGitRoot, relativeCapture);
+  fs.mkdirSync(path.dirname(copiedCapture), { recursive: true });
+  fs.copyFileSync(recordedCapturePath, copiedCapture);
+  const bytes = fs.readFileSync(copiedCapture);
+  let error;
+  try {
+    resolveEvidenceCapture({
+      reference: { byte_length: bytes.length, path: relativeCapture, sha256: sha256(bytes) },
+      repositoryRoot: noGitRoot,
+      sourceValidationMode: "recorded-revision",
+    });
+  } catch (caught) {
+    error = caught;
+  }
+  results.push({
+    actual: error instanceof EvidenceCaptureError ? error.code : String(error),
+    expected: "capture_source_drift",
+    name: "recorded_revision_without_git_fails_closed",
+    ok: error instanceof EvidenceCaptureError && error.code === "capture_source_drift" && !error.message.includes(noGitRoot),
+  });
+} finally {
+  fs.rmSync(noGitRoot, { force: true, recursive: true });
+}
+
 const closedRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-state-artifacts-closed-"));
 fs.cpSync(base.root, closedRoot, { recursive: true });
 fs.writeFileSync(path.join(closedRoot, "artifacts/runtime/unmanifested.txt"), "rogue");
@@ -219,11 +432,13 @@ fs.rmSync(closedRoot, { force: true, recursive: true });
 const revisionRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-state-revision-"));
 try {
   const receiptFile = path.join(revisionRoot, "capture-session.json");
-  const child = spawnSync(process.execPath, [creator, "--root", sourceProfiles, "--output", receiptFile, "--json"], {
-    cwd: repositoryRoot,
+  const isolatedRepository = isolatedAuthoringRepository();
+  const child = spawnSync(process.execPath, [isolatedRepository.creator, "--root", sourceProfiles, "--output", receiptFile, "--json"], {
+    cwd: isolatedRepository.root,
     encoding: "utf8",
-    env: { ...process.env, GITHUB_SHA: "0".repeat(40) },
+    env: isolatedAuthoringEnvironment({ GITHUB_SHA: "0".repeat(40) }),
   });
+  fs.rmSync(isolatedRepository.root, { force: true, recursive: true });
   const output = JSON.parse(child.stdout);
   results.push({
     actual: { codes: codes(output), receiptWritten: fs.existsSync(receiptFile), status: child.status },

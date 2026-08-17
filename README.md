@@ -14,7 +14,7 @@ The existing Layout corpus remains a gallery of minimal, portable CSS layout pat
 
 [Consumer Reference](consumer-reference/index.md) is shared non-domain infrastructure for optional consumer-owned reference handoffs. It carries schema, routing, provenance, and evidence metadata without owning profiles, visual values, components, or a sixth domain.
 
-[Agent-Native StyleGallery](consumer-reference/agent-native/README.md) is the machine-facing entry point over that governed knowledge. It provides content-addressed identity, claim/evidence/governance records, deterministic retrieval, a shared operation registry, the `sg` CLI, and a read-only MCP projection. It does not create a sixth domain, replace the Markdown corpus, or permit MCP clients to mutate governed knowledge.
+[Agent-Native StyleGallery](consumer-reference/agent-native/README.md) is the machine-facing entry point over that governed knowledge. Frozen v1 provides claim/evidence/governance records through `sg` and its MCP; isolated material v2 indexes admitted Markdown and exposes `sg-material` plus a separate read-only MCP. Lifecycle records own extension and archive dispositions. These material, trust/conformance, transport, and extension planes do not create a sixth domain, replace the Markdown corpus, permit mutation, or feed visual defaults back into Layout.
 
 ## Quick Start
 
@@ -141,7 +141,7 @@ Each common task has one primary route. Use secondary links only after the prima
 | `check whether a layout or design claim is admissible` | [Quality Gates](quality/index.md) | It routes claims to gates and evidence boundaries. |
 | `prove repository checks and evidence coverage` | [Executable Evidence Coverage](quality/evidence/executable-evidence.md) | It maps validators, fixtures, CI commands, and their boundaries. |
 | `declare consumer reference applicability` | [Consumer Reference](consumer-reference/index.md) | It provides the required handoff field without moving consumer values into Layout. |
-| `use StyleGallery from an agent or automation` | [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) | It explains StableRef resolution, CLI commands, read-only MCP resources/tools, receipts, and mutation boundaries. |
+| `use StyleGallery from an agent or automation` | [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) | It routes frozen v1 trust queries, material v2 discovery/search/get/context, both read-only MCPs, extensions, lifecycle dispositions, and archive boundaries. |
 | `prove an existing consumer migration` | [Consumer Migration Readiness](design-engineering/consumer-migration-readiness.md) | It requires thirteen explicit behavior classifications, runtime proof, adoption mappings, and source-bound page evidence when applicable. |
 | `change generated patterns, catalog, or governance policy` | [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md) | It identifies source files, generated artifacts, validators, lifecycle state, and review ownership. |
 | `run findability QA` | [Tree-Test Findability QA](quality/index.md#tree-test-findability-qa) | It tests whether task routes are discoverable, not just linked. |
@@ -172,142 +172,24 @@ Each common task has one primary route. Use secondary links only after the prima
 
 ## Layout Domain Principles
 
-1. Layout problems only
-   - Patterns exist to solve spatial problems, not to define a visual brand.
-   - Core CSS should stay focused on layout responsibilities.
-
-2. Semantic structure first
-   - Start with meaningful HTML before adding layout classes.
-   - Class names explain layout responsibility, but they do not replace landmarks, headings, lists, buttons, links, or form controls.
-   - DOM order, reading order, and focus order should remain logical.
-
-3. One primary spatial problem
-   - Each pattern should optimize one primary spatial problem.
-   - Secondary behavior is allowed when it is incidental or required for composition.
-   - If a pattern has multiple primary problems, split it into smaller primitives or mark it as a shell/composite.
-
-4. Minimum robust CSS
-   - Use the smallest set of declarations that keeps the pattern stable under real content and container constraints.
-   - Minimal does not mean fragile; constraints, overflow rules, intrinsic sizing, and fallbacks are valid when they carry declared responsibility.
-
-5. Portable plain HTML/CSS
-   - Plain HTML and CSS are the source of truth.
-   - Framework-specific versions are optional derivatives, not canonical patterns.
-
-6. Explicit constraints and change points
-   - Widths, heights, gaps, breakpoints, scroll containers, fixed/sticky anchors, and other constraints should be easy to find.
-   - Values users are expected to tune should be surfaced clearly.
-
-7. Named scroll ownership
-   - If a pattern scrolls, the scrolling element must be obvious.
-   - The pattern should make clear what scrolls, what stays fixed, and where height is determined.
-
-8. No decorative debt
-   - Decorative styling does not belong in reusable pattern CSS unless it is required to explain layout behavior.
-   - Demo-only visual aids should be separate from the reusable pattern.
+Layout patterns solve one primary spatial problem with semantic structure, robust plain HTML/CSS, explicit constraints, named scroll ownership, and no decorative debt. The detailed principles live in the [Layout domain contract](layout/index.md#layout-domain-principles).
 
 ## CSS Authoring Policy
 
-- Prefer low-specificity, single-class selectors.
-- Avoid ID selectors for styling or layout naming.
-- Avoid deep combinators, selector chaining, and nesting unless the pattern is specifically demonstrating that tradeoff.
-- Use cascade layers when the CSS surface grows beyond isolated snippets.
-- Keep CSS declarations in alphabetical order inside each rule.
-- Prefer intrinsic sizing and content/container-driven adaptation.
-- Use viewport breakpoints only when the spatial problem is viewport-level.
-- Prefer container queries for component-local responsiveness.
-- Prefer logical properties for spacing and sizing unless physical direction is required.
-- Treat exceptions as explicit and local; use state hooks or `data-*` attributes for variants instead of escalating selector specificity.
+Reusable Layout CSS favors low specificity, intrinsic sizing, logical properties, and responsiveness at the correct container or viewport boundary. See the [detailed CSS authoring policy](layout/index.md#css-authoring-policy).
 
 ## Class Naming Policy
 
-Class names should read like a map of the layout structure.
-
-- Name layout responsibility, not appearance.
-- Make root-child, parent-child, area-element, and fixed-scroll relationships obvious.
-- Prefer pattern-scoped names for related nodes.
-- Avoid vague names like `container`, `wrapper`, `box`, `top`, `content`, and `bottom` unless the surrounding pattern name makes their responsibility unambiguous.
-- Avoid DOM-depth names such as `card_header_title_icon`; describe stable roles instead.
-- Do not use IDs for layout naming. IDs are reserved for JavaScript hooks or document-level targets when needed.
-
-Prefer:
-
-```html
-<div class="app_shell">
-    <header class="app_shell_header"></header>
-    <main class="app_shell_scroll_area"></main>
-    <footer class="app_shell_footer"></footer>
-</div>
-```
-
-Avoid:
-
-```html
-<div class="container">
-    <div class="top"></div>
-    <div class="content"></div>
-    <div class="bottom"></div>
-</div>
-```
+Layout class names describe stable spatial responsibilities and relationships rather than appearance or DOM depth. See the [detailed class naming policy](layout/index.md#class-naming-policy).
 
 ## Value And Token Policy
 
-- Tokenize reusable design intent, not every layout number.
-- Use tokens for stable, shared values such as `content-width`, `gutter`, `stack-gap`, `section-gap`, or density steps.
-- Keep browser/context mechanics in raw CSS: `auto`, percentages, `min-content`, `max-content`, `fit-content`, `clamp()`, viewport units, container-query units, and intrinsic sizing.
-- Put tokens behind logical CSS, for example `padding-block: var(--space-4)`.
-- Use breakpoint names for layout states, not device names.
+Tokens represent stable shared design intent; browser and context mechanics remain explicit CSS values. See the [detailed value and token policy](layout/index.md#value-and-token-policy).
 
 ## Pattern Contract
 
-Use this shape when adding a new pattern:
-
-```txt
-Pattern name
-Category
-Primary spatial problem
-Secondary spatial problems
-When to use
-HTML structure
-CSS
-Core properties
-Properties that break the layout if removed
-Constraints and change points
-Scroll ownership
-Accessibility and source-order notes
-Browser/fallback notes
-Composition notes
-Anti-patterns
-```
-
-Suggested categories:
-
-- Containment
-- Centering
-- Stacking
-- In-line grouping
-- Split / Sidebar
-- Grid / Repetition
-- Viewport / Shell
-- Overlay / Exception
-- Media / Fit
-- Reveal / Density control
+Every pattern documents its primary problem, structure, constraints, scroll ownership, accessibility, fallbacks, composition, and failure boundaries. See the [detailed pattern contract](layout/index.md#pattern-contract), and use the generated [Pattern Categories](patterns/index.md) as the category inventory.
 
 ## Verification Matrix
 
-Before accepting a pattern, verify the smallest relevant matrix:
-
-- Viewports: `320px`, `375px`, `768px`, `1024px`, `1440px`
-- Containers: tight, medium, roomy, and `100%` parent
-- Content: empty, short, long label, long paragraph, unbroken string
-- Direction: `ltr` and `rtl`
-- Writing mode: default, plus vertical writing mode if the pattern claims support
-- Interaction: default, hover, focus, active, expanded, scroll top/middle/bottom when relevant
-
-Acceptance checks:
-
-- The layout reflows without unusable two-dimensional scrolling.
-- Long and empty content do not break alignment or hide essential content.
-- Focus order remains logical and visible.
-- Scrollable regions and sticky elements behave as declared.
-- Screenshot diffs are reviewed when the pattern has visual fixtures.
+Pattern verification covers the relevant viewport, container, content, direction, writing-mode, interaction, overflow, focus, and sticky/scroll cases. See the [detailed verification matrix](layout/index.md#verification-matrix).

@@ -96,26 +96,41 @@ export function validateFixtureSemantics(fixture, states, component, file, failu
   for (const id of canonical.keys()) if (!(fixture.scenarios ?? []).some((scenario) => scenario.id === id)) failures.push(finding("fixture_scenario_unexercised", file, `${id} lacks a runtime fixture`));
 }
 
-export function validateEvidenceSemantics(evidence, fixture, states, file, failures) {
+export function validateEvidenceSemantics(evidence, fixture, states, file, failures, resolvedCapture) {
   if (Object.hasOwn(evidence, "aggregate_pass") || Object.hasOwn(evidence, "certification")) failures.push(finding("aggregate_pass_forbidden", file, "aggregate pass and certification claims are forbidden"));
   const canonical = new Map((states.scenarios ?? []).map((scenario) => [scenario.id, scenario]));
   const fixtures = new Map((fixture.scenarios ?? []).map((scenario) => [scenario.id, scenario]));
   const passes = evidence.passes ?? [];
+  const v2 = evidence.schema_version === "2.0";
   for (const id of duplicateValues(passes.map((pass) => pass.id))) failures.push(finding("evidence_pass_duplicate", file, `evidence pass ${id} is duplicated`));
   for (const key of duplicateValues(passes, (pass) => `${pass.scenario_id}\u0000${pass.channel}`)) failures.push(finding("evidence_channel_duplicate", file, `scenario channel ${key} is duplicated`));
   for (const artifact of duplicateValues(passes.map((pass) => pass.artifact?.path).filter(Boolean))) failures.push(finding("evidence_artifact_reused", file, `artifact ${artifact} is reused`));
   for (const digest of duplicateValues(passes.map((pass) => pass.artifact?.sha256).filter(Boolean))) failures.push(finding("evidence_artifact_content_reused", file, `artifact content ${digest} is reused`));
-  const runIdentities = new Set(passes.map((pass) => JSON.stringify(pass.run)));
-  const environments = new Set(passes.map((pass) => JSON.stringify(pass.environment)));
-  if (runIdentities.size > 1 || environments.size > 1) failures.push(finding("evidence_runtime_identity_mismatch", file, "passes must share one actual run and environment"));
-  const sessions = new Set(passes.map((pass) => JSON.stringify(pass.session)));
-  if (sessions.size > 1) failures.push(finding("capture_session_mismatch", file, "passes must share one capture session"));
+  if (v2) {
+    if (!evidence.capture) failures.push(finding("evidence_capture_missing", file, "v2 evidence must reference one shared capture"));
+    if (resolvedCapture && evidence.capture?.capture_id !== resolvedCapture.capture_id) failures.push(finding("capture_identity_mismatch", file, "evidence capture reference differs from the resolved shared capture"));
+    for (const pass of passes) for (const field of ["environment", "run", "session", "capture_ref"]) {
+      if (Object.hasOwn(pass, field)) {
+        failures.push(finding("evidence_v2_pass_capture_identity_forbidden", file, `${pass.id} repeats ${field} capture identity`));
+        if (field === "run") failures.push(finding("runtime_manifest_identity_mismatch", file, `${pass.id} repeats a run outside the closed capture identity`));
+      }
+    }
+  } else {
+    const runIdentities = new Set(passes.map((pass) => JSON.stringify(pass.run)));
+    const environments = new Set(passes.map((pass) => JSON.stringify(pass.environment)));
+    if (runIdentities.size > 1 || environments.size > 1) failures.push(finding("evidence_runtime_identity_mismatch", file, "passes must share one actual run and environment"));
+    const sessions = new Set(passes.map((pass) => JSON.stringify(pass.session)));
+    if (sessions.size > 1) failures.push(finding("capture_session_mismatch", file, "passes must share one capture session"));
+  }
   for (const pass of passes) {
     const source = canonical.get(pass.scenario_id);
     const scenario = fixtures.get(pass.scenario_id);
+    const environment = v2 ? resolvedCapture?.environment : pass.environment;
+    const run = v2 ? resolvedCapture?.run : pass.run;
+    const session = v2 ? resolvedCapture?.session : pass.session;
     if (!source || !scenario) failures.push(finding("evidence_scenario_unknown", file, `${pass.id} references unknown scenario ${pass.scenario_id}`));
-    if (pass.channel === "at" || pass.environment?.kind === "assistive_technology") failures.push(finding("at_evidence_unverified", file, `${pass.id} self-asserts an AT run without external attestation`));
-    if (pass.session && (pass.run?.id !== pass.session.session_id || pass.run?.revision !== pass.session.revision || pass.run?.attempt !== pass.session.attempt || !sameSet([JSON.stringify(pass.environment)], [JSON.stringify(pass.session.environment)]))) failures.push(finding("capture_session_mismatch", file, `${pass.id} run or environment differs from its capture session`));
+    if (pass.channel === "at" || environment?.kind === "assistive_technology") failures.push(finding("at_evidence_unverified", file, `${pass.id} self-asserts an AT run without external attestation`));
+    if (session && (run?.id !== session.session_id || run?.revision !== session.revision || run?.attempt !== session.attempt || !sameSet([JSON.stringify(environment)], [JSON.stringify(session.environment)]))) failures.push(finding("capture_session_mismatch", file, `${pass.id} run or environment differs from its capture session`));
     if (scenario && !(scenario.required_channels ?? []).includes(pass.channel)) failures.push(finding("evidence_channel_mismatch", file, `${pass.id} channel is not required for its scenario`));
     if (source && (!sameSet(pass.scope?.state_set, source.states) || pass.scope?.semantic_mode !== source.semantic_mode)) failures.push(finding("evidence_scope_mismatch", file, `${pass.id} scope differs from canonical state JSON`));
     const expectedMedia = pass.channel === "visual" ? "image/png" : ["dom", "ax"].includes(pass.channel) ? "application/json" : undefined;

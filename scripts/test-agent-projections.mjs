@@ -1,13 +1,8 @@
 #!/usr/bin/env node
 
-import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
-
-const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const moduleFiles = Object.freeze({
-  a2a: path.join(repositoryRoot, "scripts", "agent-native", "a2a-projection.mjs"),
-  agui: path.join(repositoryRoot, "scripts", "agent-native", "agui-projection.mjs"),
-});
+import { createExperimentalExtensionRegistry } from "./agent-native/v2/experimental-extension-registry.mjs";
+import { registerA2AExtension } from "./agent-native/v2/extensions/a2a-projection.mjs";
+import { registerAgUiExtension } from "./agent-native/v2/extensions/agui-projection.mjs";
 
 const domainTask = Object.freeze({
   stableRef: "sg:task/projection-fixture",
@@ -56,17 +51,23 @@ function idOf(value, ...keys) {
 
 async function load(name) {
   try {
-    return { ok: true, module: await import(pathToFileURL(moduleFiles[name]).href) };
+    const registry = createExperimentalExtensionRegistry();
+    if (name === "a2a") registerA2AExtension(registry);
+    else if (name === "agui") registerAgUiExtension(registry);
+    else throw new Error(`unknown extension ${name}`);
+    const invoke = (protocol, version, operation) => (input) => registry.project({ protocol, version, operation, input });
+    return { ok: true, module: name === "a2a" ? {
+      createAgentCard: invoke("a2a", "1.0", "agent-card.create"),
+      mapTaskState: invoke("a2a", "1.0", "task.state"),
+      sendMessage: invoke("a2a", "1.0", "message.send"),
+      getTask: invoke("a2a", "1.0", "task.get"),
+      cancelTask: invoke("a2a", "1.0", "task.cancel"),
+    } : {
+      projectAgUiEvents: invoke("ag-ui", "0.0.57", "events.project"),
+      validateAgUiTransitions: invoke("ag-ui", "0.0.57", "events.validate"),
+    } };
   } catch (error) {
-    return {
-      ok: false,
-      error: {
-        code: "kernel_module_missing",
-        module: name,
-        path: moduleFiles[name],
-        message: error instanceof Error ? error.message : String(error),
-      },
-    };
+    return { ok: false, error: { code: error?.code ?? "kernel_module_missing", module: name, message: error instanceof Error ? error.message : String(error) } };
   }
 }
 

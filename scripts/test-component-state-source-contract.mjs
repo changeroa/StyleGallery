@@ -27,6 +27,16 @@ assert(first.files.some((entry) => entry.path === "package.json"), "capture depe
 assert(first.files.some((entry) => entry.path === "package-lock.json"), "exact capture dependencies must be bound");
 assert(first.files.some((entry) => entry.path === "scripts/artifact-metadata.mjs"), "capture artifact metadata code must be bound");
 assert(first.files.some((entry) => entry.path === "scripts/visual-expectation-contract.mjs"), "visual expectation selection must be bound");
+for (const fixturePath of [
+  "consumer-reference/fixtures/component-evidence-v1/editorial.button.evidence.json",
+  "consumer-reference/fixtures/component-evidence-v1/terminal.button.evidence.json",
+]) assert(!first.files.some((entry) => entry.path === fixturePath), `${fixturePath} must remain outside recursive capture identity`);
+for (const sourcePath of [
+  "scripts/test-component-evidence-v2-integration.mjs",
+  "scripts/test-evidence-v2-projection.mjs",
+  "scripts/test-validate-component-state-artifacts.mjs",
+  "scripts/test-validate-component-state.mjs",
+]) assert(first.files.some((entry) => entry.path === sourcePath), `${sourcePath} must be capture-bound`);
 assert(!first.files.some((entry) => entry.path === "scripts/finalize-component-state-evidence.mjs"), "post-capture finalization must not invalidate captured source identity");
 assert(!first.files.some((entry) => entry.path === "scripts/validate-component-state.mjs"), "post-capture enforcement must not invalidate captured source identity");
 assert(first.files.some((entry) => entry.path.endsWith("/profile.json")), "profile declarations must be bound");

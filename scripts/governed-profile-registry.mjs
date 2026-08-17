@@ -9,7 +9,8 @@ import { parseStrictJson } from "./strict-json.mjs";
 
 const moduleRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const itemSchema = parseStrictJson(fs.readFileSync(path.join(moduleRoot, "consumer-reference/schema/item.schema.json"), "utf8"));
-const validateFullItemSchema = new Ajv2020({ allErrors: true, strict: false }).compile(itemSchema);
+const governedButtonSchema = parseStrictJson(fs.readFileSync(path.join(moduleRoot, "consumer-reference/schema/governed-button-profile.schema.json"), "utf8"));
+const validateFullItemSchema = new Ajv2020({ allErrors: true, strict: false }).compile(governedButtonSchema);
 
 export const canonicalGovernedProfilePaths = Object.freeze([
   "design-engineering/reference-profiles/governed-local/editorial/profile.json",

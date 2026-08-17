@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.local/consumer-reference/schema/component-runtime-manifest.v2.schema.json",
+  "title": "Capture-normalized component runtime evidence manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_kind", "claim_boundary", "recorded_at", "capture", "records"],
+  "properties": {
+    "schema_version": { "const": "2.0" },
+    "record_kind": { "const": "component_runtime_manifest" },
+    "claim_boundary": { "const": "Scenario artifacts are evidence, not visual regression baselines or accessibility certification." },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "capture": { "$ref": "https://stylegallery.local/consumer-reference/schema/component-capture-record.v2.schema.json#/$defs/capture_reference" },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "https://stylegallery.local/consumer-reference/schema/component-evidence-record.v2.schema.json" }
+    }
+  }
+}

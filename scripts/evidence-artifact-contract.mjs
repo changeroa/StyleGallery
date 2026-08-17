@@ -66,22 +66,38 @@ function validateAx(document, pass, scenario, fixture, profileId, evidenceFile, 
   }
 }
 
-function validateVisual(document, pass, scenario, profileId, actual, visualEnvironments, evidenceFile, failures) {
+function captureSessionLink(capture) {
+  const session = capture?.session;
+  if (!session) return undefined;
+  return {
+    attempt: session.attempt,
+    branch: session.branch,
+    environment: session.environment,
+    nonce: session.nonce,
+    receipt_sha256: session.receipt_sha256,
+    revision: session.revision,
+    session_id: session.session_id,
+    source: session.source,
+    started_at: session.started_at,
+  };
+}
+
+function validateVisual(document, pass, scenario, profileId, actual, visualEnvironments, evidenceFile, failures, capture) {
   if (document.schema_version !== "1.0" || document.channel !== "visual" || document.profile_id !== profileId || document.scenario_id !== pass.scenario_id || document.semantic_mode !== scenario.semantic_mode) {
     failures.push(finding("evidence_visual_identity_mismatch", evidenceFile, `${pass.id} visual identity does not match its pass`));
   }
-  if (document.source_sha256 !== pass.session?.source?.sha256) failures.push(finding("capture_source_mismatch", evidenceFile, `${pass.id} visual source digest differs from its capture session`));
+  if (document.source_sha256 !== capture?.session?.source?.sha256) failures.push(finding("capture_source_mismatch", evidenceFile, `${pass.id} visual source digest differs from its capture session`));
   const expectedImage = { path: path.posix.basename(pass.artifact.path), ...actual };
   if (!sameJson(document.image, expectedImage)) failures.push(finding("evidence_visual_image_mismatch", evidenceFile, `${pass.id} visual metadata does not match its PNG`));
   try {
-    const expectation = visualExpectationFor(scenario, pass.environment, visualEnvironments);
+    const expectation = visualExpectationFor(scenario, capture?.environment, visualEnvironments);
     if (actual.sha256 !== expectation.sha256 || actual.width !== expectation.width || actual.height !== expectation.height) failures.push(finding("evidence_visual_expectation_mismatch", evidenceFile, `${pass.id} PNG differs from its pre-capture approved visual expectation`));
   } catch (error) {
     failures.push(finding("evidence_visual_expectation_invalid", evidenceFile, error instanceof Error ? error.message : String(error)));
   }
 }
 
-function parseArtifactJson(bytes, pass, scenario, fixture, profileId, evidenceFile, failures, schemas, session) {
+function parseArtifactJson(bytes, pass, scenario, fixture, profileId, evidenceFile, failures, schemas, capture) {
   let document;
   try {
     document = parseStrictJson(bytes.toString("utf8"));
@@ -95,9 +111,9 @@ function parseArtifactJson(bytes, pass, scenario, fixture, profileId, evidenceFi
     for (const error of validate.errors ?? []) failures.push(finding(code, evidenceFile, `${pass.id} ${error.instancePath || "/"} ${error.message}`));
     return undefined;
   }
-  if (!sameJson(document.capture_session, pass.session)) failures.push(finding("capture_session_mismatch", evidenceFile, `${pass.id} artifact session differs from its pass`));
+  if (!sameJson(document.capture_session, captureSessionLink(capture))) failures.push(finding("capture_session_mismatch", evidenceFile, `${pass.id} artifact session differs from its resolved capture`));
   if (document.captured_at !== pass.recorded_at) failures.push(finding("evidence_recorded_at_mismatch", evidenceFile, `${pass.id} recorded_at is not derived from artifact content`));
-  if (session && !withinSession(document.captured_at, session.started_at, session.completed_at)) failures.push(finding("capture_session_time_outside", evidenceFile, `${pass.id} was not captured within its session`));
+  if (capture?.session?.completed_at && !withinSession(document.captured_at, capture.session.started_at, capture.session.completed_at)) failures.push(finding("capture_session_time_outside", evidenceFile, `${pass.id} was not captured within its session`));
   if (pass.channel === "dom") validateDom(document, pass, scenario, fixture, profileId, evidenceFile, failures);
   else if (pass.channel === "ax") validateAx(document, pass, scenario, fixture, profileId, evidenceFile, failures);
   else failures.push(finding("evidence_channel_content_unknown", evidenceFile, `${pass.id} has no structured content contract`));
@@ -134,7 +150,7 @@ function readArtifact(pass, artifactRoot, evidenceFile, failures) {
   return fs.readFileSync(realTarget);
 }
 
-function parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, visualEnvironments, evidenceFile, failures, schemas, session) {
+function parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, visualEnvironments, evidenceFile, failures, schemas, capture) {
   const reference = pass.artifact.path.replace(/\.png$/, ".visual.json");
   const bytes = readArtifact({ artifact: { path: reference }, id: `${pass.id}-metadata` }, artifactRoot, evidenceFile, failures);
   if (!bytes) return undefined;
@@ -149,14 +165,14 @@ function parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, vi
     for (const error of schemas.visual.errors ?? []) failures.push(finding("evidence_visual_schema_invalid", evidenceFile, `${pass.id} ${error.instancePath || "/"} ${error.message}`));
     return undefined;
   }
-  if (!sameJson(document.capture_session, pass.session)) failures.push(finding("capture_session_mismatch", evidenceFile, `${pass.id} visual metadata session differs from its pass`));
+  if (!sameJson(document.capture_session, captureSessionLink(capture))) failures.push(finding("capture_session_mismatch", evidenceFile, `${pass.id} visual metadata session differs from its resolved capture`));
   if (document.captured_at !== pass.recorded_at) failures.push(finding("evidence_recorded_at_mismatch", evidenceFile, `${pass.id} recorded_at is not derived from visual metadata`));
-  if (session && !withinSession(document.captured_at, session.started_at, session.completed_at)) failures.push(finding("capture_session_time_outside", evidenceFile, `${pass.id} visual metadata was not captured within its session`));
-  validateVisual(document, pass, scenario, profileId, actual, visualEnvironments, evidenceFile, failures);
+  if (capture?.session?.completed_at && !withinSession(document.captured_at, capture.session.started_at, capture.session.completed_at)) failures.push(finding("capture_session_time_outside", evidenceFile, `${pass.id} visual metadata was not captured within its session`));
+  validateVisual(document, pass, scenario, profileId, actual, visualEnvironments, evidenceFile, failures, capture);
   return document;
 }
 
-export function validateEvidenceArtifacts({ artifactRoot, evidence, evidenceFile, fixture, profileId, schemas, session, states }) {
+export function validateEvidenceArtifacts({ artifactRoot, capture, evidence, evidenceFile, fixture, profileId, schemas, states }) {
   const failures = [];
   const scenarios = new Map(states.scenarios.map((scenario) => [scenario.id, scenario]));
   const fixtures = new Map(fixture.scenarios.map((scenario) => [scenario.id, scenario]));
@@ -164,18 +180,23 @@ export function validateEvidenceArtifacts({ artifactRoot, evidence, evidenceFile
   for (const pass of evidence.passes ?? []) {
     const scenario = scenarios.get(pass.scenario_id);
     const runtimeFixture = fixtures.get(pass.scenario_id);
+    const passCapture = evidence.schema_version === "2.0" ? capture : {
+      environment: pass.environment,
+      run: pass.run,
+      session: { ...(capture?.session ?? {}), ...(pass.session ?? {}) },
+    };
     if (!scenario || !runtimeFixture || !pass.artifact?.media_type) continue;
     const bytes = readArtifact(pass, artifactRoot, evidenceFile, failures);
     if (!bytes) continue;
     const actual = validateIntegrity(pass, bytes, evidenceFile, failures);
     if (pass.artifact.media_type === "application/json") {
-      const document = parseArtifactJson(bytes, pass, scenario, runtimeFixture, profileId, evidenceFile, failures, schemas, session);
+      const document = parseArtifactJson(bytes, pass, scenario, runtimeFixture, profileId, evidenceFile, failures, schemas, passCapture);
       if (document?.captured_at) {
         if (!capturedTimes.has(pass.scenario_id)) capturedTimes.set(pass.scenario_id, new Set());
         capturedTimes.get(pass.scenario_id).add(document.captured_at);
       }
     } else if (pass.channel === "visual") {
-      const document = parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, states.visual_environments, evidenceFile, failures, schemas, session);
+      const document = parseVisualMetadata(pass, artifactRoot, scenario, profileId, actual, states.visual_environments, evidenceFile, failures, schemas, passCapture);
       if (document?.captured_at) {
         if (!capturedTimes.has(pass.scenario_id)) capturedTimes.set(pass.scenario_id, new Set());
         capturedTimes.get(pass.scenario_id).add(document.captured_at);

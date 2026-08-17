@@ -19,7 +19,10 @@
 /consumer-reference/generated/ @changeroa
 /consumer-reference/baselines/ @changeroa
 /consumer-reference/policies/ @changeroa
+/consumer-reference/agent-native/v2/ @changeroa
+/consumer-reference/fixtures/lifecycle-disposition/ @changeroa
 /consumer-reference/fixtures/promotion/ @changeroa
+/consumer-reference/schema/lifecycle-disposition.schema.json @changeroa
 /consumer-reference/schema/promotion-rfc.schema.json @changeroa
 /tests/ @changeroa
 /playwright.config.mjs @changeroa
@@ -43,3 +46,11 @@
 /scripts/build-reference-artifacts.mjs @changeroa
 /scripts/validate-reference-artifacts.mjs @changeroa
 /scripts/test-reference-adapters.mjs @changeroa
+/scripts/agent-native/material-*.mjs @changeroa
+/scripts/agent-native/v2/experimental-extension-registry.mjs @changeroa
+/scripts/agent-native/v2/extensions/ @changeroa
+/scripts/agent-native/v2/generate-material-registry.mjs @changeroa
+/scripts/sg-material.mjs @changeroa
+/scripts/sg-material-mcp.mjs @changeroa
+/scripts/*lifecycle-disposition.mjs @changeroa
+/scripts/*material*.mjs @changeroa
