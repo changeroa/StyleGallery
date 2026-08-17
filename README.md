@@ -7,7 +7,7 @@ description: Governed gallery of portable interface knowledge organized by domai
 # StyleGallery
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/changeroa/StyleGallery@6fd4b13/assets/stylegallery-hero.webp" alt="An illuminated central gallery connecting five geometric interface-knowledge chambers" width="100%">
+  <img src="https://cdn.jsdelivr.net/gh/changeroa/StyleGallery@c18bc87/assets/stylegallery-hero-infographic.webp" alt="StyleGallery infographic connecting five governed interface-knowledge domains to shared consumer and agent infrastructure" width="100%">
 </p>
 
 StyleGallery is a governed gallery of portable interface knowledge. It separates reusable spatial patterns, product-layer motion guidance, design-engineering practice, and platform-specific references into explicit domains with different evidence and ownership boundaries.
