@@ -7,18 +7,18 @@ description: Governed gallery of portable interface knowledge organized by domai
 # StyleGallery
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/changeroa/StyleGallery@c18bc87/assets/stylegallery-hero-infographic.webp" alt="StyleGallery infographic connecting five governed interface-knowledge domains to shared consumer and agent infrastructure" width="100%">
+  <img src="https://cdn.jsdelivr.net/gh/changeroa/StyleGallery@c18bc87/assets/stylegallery-hero-infographic.webp" alt="StyleGallery infographic connecting six governed interface-knowledge domains to shared consumer and agent infrastructure" width="100%">
 </p>
 
-StyleGallery is a governed gallery of portable interface knowledge. It separates reusable spatial patterns, product-layer motion guidance, design-engineering practice, and platform-specific references into explicit domains with different evidence and ownership boundaries.
+StyleGallery is a governed gallery of portable interface knowledge. It separates reusable spatial patterns, product-layer motion guidance, design-engineering practice, platform-specific references, and comparative design terminology into explicit domains with different evidence and ownership boundaries.
 
 Primary role: repository guide.
 
 The existing Layout corpus remains a gallery of minimal, portable CSS layout patterns at its current paths. Each pattern documents one primary spatial problem and the smallest robust HTML/CSS structure that solves it. Motion, visual treatment, and platform guidance do not expand reusable Layout pattern CSS; they live in their own domains and carry explicit evidence boundaries.
 
-[Consumer Reference](consumer-reference/index.md) is shared non-domain infrastructure for optional consumer-owned reference handoffs. It carries schema, routing, provenance, and evidence metadata without owning profiles, visual values, components, or a sixth domain.
+[Consumer Reference](consumer-reference/index.md) is shared non-domain infrastructure for optional consumer-owned reference handoffs. It carries schema, routing, provenance, and evidence metadata without owning profiles, visual values, components, or a seventh domain.
 
-[Agent-Native StyleGallery](consumer-reference/agent-native/README.md) is the machine-facing entry point over that governed knowledge. Frozen v1 provides claim/evidence/governance records through `sg` and its MCP; isolated material v2 indexes admitted Markdown and exposes `sg-material` plus a separate read-only MCP. Lifecycle records own extension and archive dispositions. These material, trust/conformance, transport, and extension planes do not create a sixth domain, replace the Markdown corpus, permit mutation, or feed visual defaults back into Layout.
+[Agent-Native StyleGallery](consumer-reference/agent-native/README.md) is the machine-facing entry point over that governed knowledge. Frozen v1 provides claim/evidence/governance records through `sg` and its MCP; isolated material v2 indexes admitted Markdown and exposes `sg-material` plus a separate read-only MCP. Lifecycle records own extension and archive dispositions. These material, trust/conformance, transport, and extension planes do not create a seventh domain, replace the Markdown corpus, permit mutation, or feed visual defaults back into Layout.
 
 ## Quick Start
 
@@ -115,6 +115,7 @@ CLI와 MCP의 상세 사용법은 [Agent-Native StyleGallery 가이드](consumer
 | [Design Engineering](design-engineering/index.md) | Product-layer craft decisions and verification questions. | A second universal principle set or taste as evidence. |
 | [Game UI](game-ui/index.md) | Game-interface classification, hierarchy, reference records, and engine-specific implementation guides. | Reusable Layout CSS or claims that one engine structure is universal. |
 | [Platform Guides](platform-guides/index.md) | Bounded comparison with named platform conventions. | Affiliation, imitation, or authority over web and accessibility contracts. |
+| [Design Terminology](design-terminology/index.md) | Comparative design-term definitions, term families, and cross-system conflict cases for named systems. | StyleGallery's own vocabulary, motion terminology, visual token values, or authority over external vocabularies. |
 
 The canonical domain manifest and provenance policy are in [StyleGallery Domains](DOMAINS.md).
 
@@ -137,6 +138,7 @@ Use each root hub for one primary job.
 | [Design Engineering](design-engineering/index.md) | Design Engineering domain hub | You need product-level interface-craft decision guidance. |
 | [Game UI](game-ui/index.md) | Game UI domain hub | You need to classify a game interface or understand its screen hierarchy. |
 | [Platform Guides](platform-guides/index.md) | Platform Guides domain hub | You need a bounded platform comparison. |
+| [Design Terminology](design-terminology/index.md) | Design Terminology domain hub | You need to compare how named design systems define or classify design terms. |
 
 ## Task Routes
 
@@ -151,6 +153,7 @@ Each common task has one primary route. Use secondary links only after the prima
 | `compare adversarial consumer identities` | [Reference Profiles](design-engineering/reference-profiles/index.md) | It keeps non-default product values in related Design Engineering examples over one pinned Layout source. |
 | `classify a game interface or map it to an engine` | [Game UI](game-ui/index.md) | It separates engine-neutral roles from implementation-specific guidance. |
 | `compare a named platform convention` | [Platform Guides](platform-guides/index.md) | It requires platform and evidence boundaries before adaptation. |
+| `compare how design systems define a term` | [Design Terminology](design-terminology/index.md) | It separates external terminology comparison from StyleGallery's own controlled vocabulary. |
 | `turn raw content into a homepage or ordinary webpage` | [Webpage Generation Workflow](guides/webpage-generation-workflow.md) | It starts with use case, content-to-layout fit, harmony, and handoff. |
 | `plan a screen before the layout problem is obvious` | [Layout Planning Guide](GUIDE.md) | It sequences task, content, scroll, recipe, and verification choices. |
 | `choose a pattern when the name is unknown` | [Decision Tree](guides/decision-tree.md) | It routes from constraints to pattern categories. |
@@ -177,7 +180,7 @@ Each common task has one primary route. Use secondary links only after the prima
 ## How To Use This Repository
 
 - Start with [StyleGallery Domains](DOMAINS.md) when the owning domain is not already clear.
-- Use [Layout](layout/index.md), [Motion](motion/index.md), [Design Engineering](design-engineering/index.md), [Game UI](game-ui/index.md), or [Platform Guides](platform-guides/index.md) as the domain-local entry point.
+- Use [Layout](layout/index.md), [Motion](motion/index.md), [Design Engineering](design-engineering/index.md), [Game UI](game-ui/index.md), [Platform Guides](platform-guides/index.md), or [Design Terminology](design-terminology/index.md) as the domain-local entry point.
 - Start with [Layout Planning Guide](GUIDE.md) when you are designing a screen before a layout problem is obvious.
 - Use the [Webpage Generation Workflow](guides/webpage-generation-workflow.md) when raw content needs to become a homepage or ordinary webpage before a layout recipe is obvious.
 - Use the [Documentation Mode Taxonomy](guides/documentation-mode-taxonomy.md) when adding or reviewing docs so each page has a clear primary reading mode.

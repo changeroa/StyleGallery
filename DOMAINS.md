@@ -19,6 +19,7 @@ This manifest is the source of truth for top-level StyleGallery domains. A domai
 | Design Engineering | [Design Engineering](design-engineering/index.md) | `experimental` | Product-layer craft questions and evidence-bearing decisions. | A second shared principle system or taste as proof. | Design Engineering domain owner |
 | Game UI | [Game UI](game-ui/index.md) | `experimental` | Game-interface classification, hierarchy, reference records, and implementation guides nested by engine. | Reusable Layout CSS or claims that one engine structure is universal. | Game UI domain owner |
 | Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` | Comparative references for a named platform and version context. | Affiliation, brand imitation, or authority over web standards. | Platform Guides domain owner |
+| Design Terminology | [Design Terminology](design-terminology/index.md) | `experimental` | Source-kind classification, concept-family classification, typed term relations, and cross-system conflict cases for named vocabulary sources. | StyleGallery's own controlled vocabulary, motion terminology, visual token values, universal naming prescriptions, or authority over external vocabularies. | Design Terminology domain owner |
 
 ## Page Manifest
 
@@ -29,10 +30,11 @@ This manifest is the source of truth for top-level StyleGallery domains. A domai
 | Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/consumer-migration-readiness.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md` |
 | Game UI | `game-ui/index.md` | `game-ui/classification.md`, `game-ui/screen-hierarchy.md`, `game-ui/reference-record.md`, `game-ui/unity/architecture.md`, `game-ui/unity/ui-systems.md`, `game-ui/unity/cli-loop.md`, `game-ui/unity/repository-map.md`, `game-ui/unity/org-wiki.md` |
 | Platform Guides | `platform-guides/index.md` | `platform-guides/apple-interaction.md` |
+| Design Terminology | `design-terminology/index.md` | `design-terminology/source-kinds.md`, `design-terminology/source-vocabularies.md`, `design-terminology/concept-families.md`, `design-terminology/relation-types.md`, `design-terminology/conflict-cases.md` |
 
 ## Shared Non-Domain Infrastructure
 
-[Consumer Reference](consumer-reference/index.md) is shared schema, provenance, routing, evidence, lifecycle, and machine-retrieval infrastructure outside the five-domain contract. Its source-bound material v2 index classifies admitted pages by these five domains but does not own their prose. It owns no profile implementation, visual values, or product CSS and cannot add a sixth domain row. Consumer or profile records may depend on Layout; Layout and its generated corpus cannot import consumer-reference, profile, material-registry, or transport records.
+[Consumer Reference](consumer-reference/index.md) is shared schema, provenance, routing, evidence, lifecycle, and machine-retrieval infrastructure outside the six-domain contract. Its source-bound material v2 index classifies admitted pages by these six domains but does not own their prose. It owns no profile implementation, visual values, or product CSS and cannot add a seventh domain row. Consumer or profile records may depend on Layout; Layout and its generated corpus cannot import consumer-reference, profile, material-registry, or transport records.
 
 ## External Adaptation Contract
 

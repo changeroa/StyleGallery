@@ -6,7 +6,7 @@ description: Rules coding agents must follow when editing this governed multi-do
 
 # Agent Instructions
 
-This repository is StyleGallery: a governed gallery with Layout, Motion, Design Engineering, Game UI, and Platform Guides domains. Read [StyleGallery Domains](DOMAINS.md) before adding a domain, changing a domain boundary, or adapting an external source.
+This repository is StyleGallery: a governed gallery with Layout, Motion, Design Engineering, Game UI, Platform Guides, and Design Terminology domains. Read [StyleGallery Domains](DOMAINS.md) before adding a domain, changing a domain boundary, or adapting an external source.
 
 Before editing generated artifacts, validators, lifecycle state, or ownership policy, read [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md).
 

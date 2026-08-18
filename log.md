@@ -2,6 +2,11 @@
 
 ## 2026-08-18
 
+- Added Design Terminology as the sixth governed domain: source-kind and concept-family classification separated as distinct axes, a typed term relation model, freshness-bounded source vocabularies, and cross-system conflict cases with three representative scenarios.
+- Added the Design Terminology domain scope decision record comparing four placement alternatives and defining the domain's independent decision surface.
+- Recorded six-domain scope in the domain manifest, root routes, quality scope, controlled vocabulary domain list, and governance rows; recorded sealed-cardinality duplication as accepted technical debt in the scope decision.
+- Admitted the new domain pages and scope decision into material v2 and regenerated the material registry without modifying the git index.
+
 - Added the StyleGallery homepage example planned from a clean npm installation and verified across desktop, tablet, and mobile Chrome CDP viewports.
 - Added pinned Pretext text-layout measurement as an npm-installed verification dependency while keeping browser Canvas execution outside the Node CLI and MCP surfaces.
 - Added deterministic hero-heading line-count, DOM overflow, accessibility, console, request, and screenshot checks.
