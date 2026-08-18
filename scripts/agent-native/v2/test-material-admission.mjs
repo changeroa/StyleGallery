@@ -27,8 +27,8 @@ const v1SchemaDirectory = path.join(repositoryRoot, "consumer-reference", "agent
 const v2Directory = path.join(repositoryRoot, "consumer-reference", "agent-native", "v2");
 const temporaryRoots = new Set();
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const EXPECTED_PATH_COUNT = 126;
-const EXPECTED_PATHS_NEWLINE_SHA256 = "897c48cb3dec29fdb210e99c91d1fdfe24ea70562ba182143495b476909d2744";
+const EXPECTED_PATH_COUNT = 133;
+const EXPECTED_PATHS_NEWLINE_SHA256 = "4f6ed8314a5684ca9a1d198567f47e1bc158ae03b506c043210ba26f96b80a52";
 
 function run(command, args, options = {}) {
   return spawnSync(command, args, { encoding: "utf8", maxBuffer: 8 * 1024 * 1024, timeout: 30_000, ...options });
@@ -111,7 +111,7 @@ function policyVersion(policy) {
 
 test.after(() => { for (const root of temporaryRoots) fs.rmSync(root, { force: true, recursive: true }); });
 
-test("policy is closed, versioned, exact, and seals all 126 current paths", () => {
+test("policy is closed, versioned, exact, and seals all 133 current paths", () => {
   const policySchema = JSON.parse(fs.readFileSync(path.join(v2Directory, "schema", "admission-policy.schema.json"), "utf8"));
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   assert.equal(ajv.validate(policySchema, materialAdmissionPolicy), true, JSON.stringify(ajv.errors));
@@ -127,7 +127,7 @@ test("policy is closed, versioned, exact, and seals all 126 current paths", () =
   assert.equal(Object.hasOwn(materialAdmissionPolicy, "public_roots"), false);
 });
 
-test("actual repository manifest admits exactly 126 paths with deterministic identities and source versions", () => {
+test("actual repository manifest admits exactly 133 paths with deterministic identities and source versions", () => {
   const materials = materialAdmissionPolicy.allowed_materials.map(({ repository_path }) => sourceRecord(repositoryRoot, repository_path));
   const manifest = createMaterialManifest(materials);
   const result = validateMaterialManifest({ repositoryRoot, manifest });

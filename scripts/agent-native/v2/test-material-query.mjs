@@ -100,13 +100,13 @@ test("v2 identity grammar is closed and v1 rejects every v2 kind", () => {
   assert.throws(() => parseMaterialStableRef({ schema_version: "1.0", stable_ref: "sg:domain/layout" }), { code: "material_identity_version_invalid" });
 });
 
-test("material-discover returns exactly the five governed domains and deterministic projected identities", () => {
+test("material-discover returns exactly the six governed domains and deterministic projected identities", () => {
   const first = invoke("material-discover");
   const second = invoke("material-discover");
   assert.equal(first.ok, true);
   assert.equal(canonicalize(first), canonicalize(second));
   assert.deepEqual(first.result.domains.map(({ identity }) => identity.stable_ref), [
-    "sg:domain/design-engineering", "sg:domain/game-ui", "sg:domain/layout", "sg:domain/motion", "sg:domain/platform-guides",
+    "sg:domain/design-engineering", "sg:domain/design-terminology", "sg:domain/game-ui", "sg:domain/layout", "sg:domain/motion", "sg:domain/platform-guides",
   ]);
   const layout = recordForPath("layout/index.md");
   const page = recordForPath("patterns/index.md");

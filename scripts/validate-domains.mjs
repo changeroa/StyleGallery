@@ -18,28 +18,28 @@ const referenceDocuments = [
 const requiredCrossDomainStrings = [
   {
     relative: "guides/vocabulary.md",
-    required: "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, root routing, and `domain` frontmatter on governed leaves.",
-    failure: "guides/vocabulary.md: missing canonical five-domain vocabulary list",
+    required: "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, root routing, and `domain` frontmatter on governed leaves.",
+    failure: "guides/vocabulary.md: missing canonical domain vocabulary list",
   },
   {
     relative: "quality/index.md",
-    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, and Platform Guides claims are admissible.",
-    failure: "quality/index.md: missing canonical five-domain quality scope",
+    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, Platform Guides, and Design Terminology claims are admissible.",
+    failure: "quality/index.md: missing canonical domain quality scope",
   },
   {
     relative: "README.md",
-    required: "without owning profiles, visual values, components, or a sixth domain",
+    required: "without owning profiles, visual values, components, or a seventh domain",
     failure: "README.md: missing canonical Consumer Reference boundary",
   },
   {
     relative: "quality/index.md",
-    required: "without classifying it as a sixth domain",
+    required: "without classifying it as a seventh domain",
     failure: "quality/index.md: missing canonical Consumer Reference boundary",
   },
   {
     relative: "quality/evidence/executable-evidence.md",
-    required: "Five governed domains and their declared leaves are reachable and attributed.",
-    failure: "quality/evidence/executable-evidence.md: missing canonical five-domain validator coverage",
+    required: "Six governed domains and their declared leaves are reachable and attributed.",
+    failure: "quality/evidence/executable-evidence.md: missing canonical domain validator coverage",
   },
   {
     relative: "quality/index.md",
@@ -82,7 +82,22 @@ export const canonicalDomains = [
       { path: "game-ui/unity/org-wiki.md", provenance: "repository" },
     ],
   },
-  { slug: "platform-guides", label: "Platform Guides", leaves: [{ path: "platform-guides/apple-interaction.md", provenance: "external", sourcePath: "skills/apple-design/SKILL.md" }] },
+  {
+    slug: "platform-guides",
+    label: "Platform Guides",
+    leaves: [{ path: "platform-guides/apple-interaction.md", provenance: "external", sourcePath: "skills/apple-design/SKILL.md" }],
+  },
+  {
+    slug: "design-terminology",
+    label: "Design Terminology",
+    leaves: [
+      { path: "design-terminology/source-kinds.md", provenance: "repository" },
+      { path: "design-terminology/source-vocabularies.md", provenance: "repository" },
+      { path: "design-terminology/concept-families.md", provenance: "repository" },
+      { path: "design-terminology/relation-types.md", provenance: "repository" },
+      { path: "design-terminology/conflict-cases.md", provenance: "repository" },
+    ],
+  },
 ];
 export const domainRegistry = canonicalDomains;
 
@@ -155,8 +170,8 @@ function checkManifest() {
     && content.includes(`snapshot \`${revision}\``)
     && content.includes("## Shared Non-Domain Infrastructure")
     && content.includes("[Consumer Reference](consumer-reference/index.md)")
-    && content.includes("infrastructure outside the five-domain contract")
-    && content.includes("cannot add a sixth domain row");
+    && content.includes("infrastructure outside the six-domain contract")
+    && content.includes("cannot add a seventh domain row");
 
   for (const domain of domains) {
     const domainRow = domainRows.find((row) => row[0] === domain.label);
