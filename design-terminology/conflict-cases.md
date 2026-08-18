@@ -29,8 +29,10 @@ This page applies the typed relation model to recorded term records and conflict
 | `figma.variable` | Figma (`design-tool`) | named-design-value | current | file- or collection-bound | 2026-08-18 |
 | `figma.mode` | Figma (`design-tool`) | theme-context | current | variable collection | 2026-08-18 |
 | `figma.component` | Figma (`design-tool`) | tool-instance-model | current | file-bound | 2026-08-18 |
+| `component.code` | Codebases (`design-system`) | ui-building-block | current | codebase | 2026-08-18 |
+| `component.system` | Published system units (`design-system`) | published-ui-building-block | current | system-wide | 2026-08-18 |
 | `dtcg.token` | DTCG Format (`specification`) | interchange-record | current | format-bound | 2026-08-18 |
-| `css.custom-property` | CSS (web platform) | runtime-value-slot | current | document/runtime | 2026-08-18 |
+| `css.custom-property` | CSS (`web-platform`) | runtime-value-slot | current | document/runtime | 2026-08-18 |
 | `polaris.token` | Polaris (`design-system`) | published-design-value | current | system-wide | 2026-08-18 |
 | `carbon.pattern` | Carbon (`design-system`) | workflow-guidance | current | system-wide | 2026-08-18 |
 | `polaris.pattern` | Polaris (`design-system`) | workflow-guidance | current | system-wide | 2026-08-18 |
@@ -40,8 +42,8 @@ This page applies the typed relation model to recorded term records and conflict
 | `material.system` | Google (`design-system`) | system-collection-name | current | brand-wide | 2026-08-18 |
 | `styleguide` (historical) | industry history | visual-style-governance | historical | org-wide | 2026-08-18 |
 | `designsystem` (general) | industry usage | layered-system-collection | current | org-wide | 2026-08-18 |
-| `foundation` (layer label) | Material, Fluent, Carbon, Polaris | base-layer-label | current | per-system | 2026-08-18 |
-| `variant` / `mode` / `state` / `theme` | tool, code, tokens | theme-variant-context | current | per-surface | 2026-08-18 |
+| `foundation` (layer label) | Material, Fluent, Carbon, Polaris (`design-system`) | base-layer-label | current | per-system | 2026-08-18 |
+| `variant` (`mode`/`state`/`theme`) | tool, code, tokens | theme-variant-context | current | per-surface | 2026-08-18 |
 
 ## Recorded Relations
 
@@ -51,16 +53,16 @@ This page applies the typed relation model to recorded term records and conflict
 | `figma.variable` | `css.custom-property` | `implementation_representation` | Variables can bind to custom properties in codegen; the binding is a representation path, not semantic identity |
 | `dtcg.token` | `css.custom-property` | `implementation_representation` | Custom properties are one serialization target for token values and also hold non-design values |
 | `polaris.token` | `dtcg.token` | `implementation_representation` | The format is one representation of Polaris's published values; the system, not the format, owns the values |
-| `figma.mode` | `variant`/`theme` cluster | `near_equivalent` | Modes, tool variants, component states, and token themes overlap as context switching but diverge in binding level |
-| `figma.component` | code component | `same_label_different_meaning` | Tool instance model versus shipped code unit; swapping definitions breaks handoff |
-| `figma.component` | system component | `same_label_different_meaning` | A tool construct versus a published system unit with API and support |
+| `figma.mode` | `variant` | `near_equivalent` | Modes, tool variants, component states, and token themes overlap as context switching but diverge in binding level |
+| `figma.component` | `component.code` | `same_label_different_meaning` | Tool instance model versus shipped code unit; swapping definitions breaks handoff |
+| `figma.component` | `component.system` | `same_label_different_meaning` | A tool construct versus a published system unit with API and support |
 | `carbon.pattern` | `stylegallery.pattern` | `partial_overlap` | Both are reusable solutions above atomic controls; Carbon patterns are workflow guidance, StyleGallery patterns are spatial primitives |
 | `carbon.pattern` | `polaris.pattern` | `near_equivalent` | Both name system-level workflow guidance with content and maturity differences |
-| `carbon.pattern` | Carbon component | `broader_than` | Within Carbon, patterns compose components into flows; the containment is system-scoped |
-| `primitive` | `foundation` terms | `near_equivalent` | Shared base-layer usage across systems with unstable extension: sometimes tokens, sometimes atoms |
+| `carbon.pattern` | `component.system` | `broader_than` | Within Carbon, patterns compose components into flows; the containment is system-scoped |
+| `primitive` | `foundation` | `near_equivalent` | Shared base-layer usage across systems with unstable extension: sometimes tokens, sometimes atoms |
 | `hig.material` | `material.system` | `same_label_different_meaning` | HIG names visual surface treatments; Material names a design system; the shared label is coincidence |
 | `styleguide` | `designsystem` | `partial_overlap` | Era- and org-scoped: a historical style guide governs visual style; a design system layers foundations, code, and governance; both labels coexist |
-| `foundation` (Material) | `foundation` (Fluent, Carbon, Polaris) | `near_equivalent` | Near-equivalent layer labels whose contents each system decides independently |
+| `foundation` (Material) | `foundation` | `near_equivalent` | Near-equivalent layer labels whose contents each system decides independently |
 
 ## Scenario A: Component vs Pattern
 

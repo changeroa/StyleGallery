@@ -21,7 +21,7 @@ Representative questions this domain answers: are Figma's variable, the DTCG des
 Promotion beyond `experimental` requires all of the following, each pass/fail checkable:
 
 - A named review owner, secondary reviewer, freshness owner, and dispute resolver are recorded.
-- A machine-readable registry with schema exists for terms, concepts, sources, and relations.
+- A machine-readable registry with schema exists for terms, concepts, sources, and relations; until then `scripts/validate-design-terminology.mjs` enforces record consistency on the Markdown tables.
 - A relation invariant validator derived from the forbidden error states in [Design Term Relations](relation-types.md) passes.
 - Every term carries a direct source locator.
 - Every relation names both sources and a non-trivial boundary.
@@ -33,7 +33,7 @@ Promotion beyond `experimental` requires all of the following, each pass/fail ch
 
 ## Content Review Contract
 
-Before any merge or promotion, a full semantic review covers every term and relation (not a sample) against this checklist:
+Record consistency is enforced mechanically from v0.1 by `scripts/validate-design-terminology.mjs`, which parses the term and relation tables and rejects unknown types, unrecorded terms, empty boundaries, contradiction pairs, malformed dates, and orphan terms. Human semantic review is a **stable-promotion gate only**, not a merge gate for `experimental` content; it covers every term and relation (not a sample) against this checklist:
 
 - Is the source kind correct for each cited source?
 - Does each term description match what its source actually supports?
@@ -43,7 +43,9 @@ Before any merge or promotion, a full semantic review covers every term and rela
 - Is official-source authority overstated anywhere?
 - Is each historical/current status correct?
 
-The review result is recorded as: terms reviewed, relations reviewed, counts of accepted, revised, and unresolved items, reviewer name, and review date. Author self-audit alone does not satisfy this contract.
+The review result is recorded as: terms reviewed, relations reviewed, counts of accepted, revised, and unresolved items, reviewer name, and review date. Author self-audit alone does not satisfy promotion.
+
+This domain is a working method template: consumers may fork it and re-record their own sources, terms, and relations. Forked records are consumer-owned and never feed values back into StyleGallery.
 
 ## Available Guides
 

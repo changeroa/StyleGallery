@@ -31,6 +31,7 @@ This guide classifies what kind of thing a vocabulary source is before any of it
 | `platform-guideline` | A platform owner's rules for software on that platform | Terms are scoped to the platform's release cycle and certification context | Apple Human Interface Guidelines |
 | `specification` | A versioned interchange or conformance document | Terms are defined exactly for the version; meaning changes require a new version | W3C Design Tokens Format |
 | `design-tool` | A product whose data model exposes tool constructs | Terms name tool features, not industry definitions; product versions rename freely | Figma variables, modes, components |
+| `web-platform` | A browser or platform runtime mechanism | Terms name runtime behavior standardized across vendors, not one system's vocabulary | CSS custom properties |
 | `pattern-library` | A curated collection of reusable solutions, with or without a full system | Terms name the collection's own units; scope is the collection, not an organization | StyleGallery Layout patterns |
 | `brand-style-guide` | An organization's visual and voice governance document | Terms govern expression, not interface structure; often narrower than a design system | Historical print-lineage style guides |
 
