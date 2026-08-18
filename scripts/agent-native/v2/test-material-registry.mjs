@@ -85,14 +85,20 @@ test.after(() => { for (const root of temporaryRoots) fs.rmSync(root, { recursiv
 test("generated registry is canonical, exact, source-bound, complete, and v1-isolated", () => {
   const beforeV1 = fs.readFileSync(v1RegistryPath);
   const generated = generateMaterialRegistry({ repositoryRoot });
-  assert.equal(generated.materials.length, 112);
+  assert.equal(generated.materials.length, 126);
   assert.deepEqual(validateMaterialRegistry({ repositoryRoot, manifest: generated }), { ok: true, failures: [], materials: generated.materials });
   assert.equal(generated.version_id, recomputeManifestVersion(generated));
   assert.equal(generated.admission_policy_ref, materialAdmissionPolicy.stable_ref);
   assert.equal(generated.admission_policy_version_id, materialAdmissionPolicy.version_id);
   assert.deepEqual(generated.materials.map(({ stable_ref }) => stable_ref), [...generated.materials.map(({ stable_ref }) => stable_ref)].sort((a, b) => Buffer.compare(Buffer.from(a), Buffer.from(b))));
   for (const record of generated.materials) assertIndependentEntry(repositoryRoot, record);
-  const required = ["layout/index.md", "motion/index.md", "design-engineering/index.md", "game-ui/index.md", "platform-guides/index.md", "patterns/index.md", "patterns/centering/center.md"];
+  const required = [
+    "layout/index.md", "motion/index.md", "motion/practice-reference.md", "motion/review-workflow.md", "motion/vocabulary.md",
+    "design-engineering/index.md", "design-engineering/consumer-migration-readiness.md", "design-engineering/interface-craft.md",
+    "game-ui/index.md", "game-ui/classification.md", "game-ui/reference-record.md", "game-ui/screen-hierarchy.md",
+    "game-ui/unity/architecture.md", "game-ui/unity/cli-loop.md", "game-ui/unity/org-wiki.md", "game-ui/unity/repository-map.md", "game-ui/unity/ui-systems.md",
+    "platform-guides/index.md", "platform-guides/apple-interaction.md", "patterns/index.md", "patterns/centering/center.md",
+  ];
   assert.equal(required.every((entry) => generated.materials.some(({ repository_path }) => repository_path === entry)), true);
   const serialized = canonicalize(generated);
   assert.equal(generated.materials.every((record) => Object.keys(record).sort().join(",") === "byte_length,domain,lifecycle,media_type,record_kind,repository_path,schema_version,source_sha256,stable_ref,version_id"), true);

@@ -171,6 +171,22 @@ test("paths-only search preserves ranking while projecting repository-relative p
   assertStableFailure(invoke("material-search", { query: "Layout", paths_only: "true" }), "material_paths_only_invalid");
 });
 
+test("public domain leaf queries resolve to npm-portable repository paths", () => {
+  const cases = [
+    ["interface craft critique", "design-engineering/interface-craft.md"],
+    ["game screen hierarchy", "game-ui/screen-hierarchy.md"],
+    ["unity architecture", "game-ui/unity/architecture.md"],
+    ["unity cli loop", "game-ui/unity/cli-loop.md"],
+    ["motion review workflow", "motion/review-workflow.md"],
+    ["Apple interaction", "platform-guides/apple-interaction.md"],
+  ];
+  for (const [query, expected] of cases) {
+    const response = invoke("material-search", { query, limit: 5, paths_only: true });
+    assert.equal(response.ok, true);
+    assert.equal(response.result.paths[0], expected, query);
+  }
+});
+
 test("duplicate query and field occurrences are idempotent", () => {
   const single = invoke("material-search", { query: "layout", limit: 100 }).result;
   const duplicate = invoke("material-search", { query: "layout layout layout", limit: 100 }).result;

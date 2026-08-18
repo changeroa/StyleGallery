@@ -50,12 +50,62 @@
       "lifecycle": "stable"
     },
     {
+      "repository_path": "design-engineering/consumer-migration-readiness.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "design-engineering/index.md",
       "domain": "design-engineering",
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "design-engineering/interface-craft.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/classification.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "game-ui/index.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/reference-record.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/screen-hierarchy.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/unity/architecture.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/unity/cli-loop.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/unity/org-wiki.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/unity/repository-map.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/unity/ui-systems.md",
       "domain": "game-ui",
       "lifecycle": "experimental"
     },
@@ -101,6 +151,21 @@
     },
     {
       "repository_path": "motion/index.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/practice-reference.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/review-workflow.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/vocabulary.md",
       "domain": "motion",
       "lifecycle": "experimental"
     },
@@ -385,6 +450,11 @@
       "lifecycle": "generated"
     },
     {
+      "repository_path": "platform-guides/apple-interaction.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "platform-guides/index.md",
       "domain": "platform-guides",
       "lifecycle": "experimental"
@@ -642,5 +712,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:c866cf112525130508252d2303207da9057c0f3a239f0e056cce9ef2d5a96f1d"
+  "version_id": "sg:policy/material-admission-v2@sha256:017b5de61c5e98779ec9b32880b3cd897c5f7012e726bdb73392572800b1f837"
 }

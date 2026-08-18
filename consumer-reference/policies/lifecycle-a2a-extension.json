@@ -145,13 +145,13 @@
         "role": "repository_reference",
         "lines": {
           "start": 1,
-          "end": 239
+          "end": 253
         },
-        "file_sha256": "10073dd31ec6cc1c230f4d67b0588537bb23fddb59125b17557828e1d190a833",
-        "content_id": "sha256:10073dd31ec6cc1c230f4d67b0588537bb23fddb59125b17557828e1d190a833",
+        "file_sha256": "55a7787aa01b8d954782a24efd1df197231c67b776312fde861046aedafa9bca",
+        "content_id": "sha256:55a7787aa01b8d954782a24efd1df197231c67b776312fde861046aedafa9bca",
         "reference_lines": [
-          156,
-          172
+          170,
+          186
         ],
         "reference_kinds": [
           "forwarder_path",
@@ -281,8 +281,8 @@
           "start": 1,
           "end": 209
         },
-        "file_sha256": "4fb3c63bc3372d598c3b131eac80e71916c59239743f54dff090a17510dfa8f8",
-        "content_id": "sha256:4fb3c63bc3372d598c3b131eac80e71916c59239743f54dff090a17510dfa8f8",
+        "file_sha256": "897b2d4ea14dc8ab3b06b5a0a2bbf4aa22f3e9e33b2602bd82ca46ea5405033c",
+        "content_id": "sha256:897b2d4ea14dc8ab3b06b5a0a2bbf4aa22f3e9e33b2602bd82ca46ea5405033c",
         "reference_lines": [
           48
         ],
@@ -391,8 +391,8 @@
           "start": 1,
           "end": 209
         },
-        "file_sha256": "4fb3c63bc3372d598c3b131eac80e71916c59239743f54dff090a17510dfa8f8",
-        "content_id": "sha256:4fb3c63bc3372d598c3b131eac80e71916c59239743f54dff090a17510dfa8f8"
+        "file_sha256": "897b2d4ea14dc8ab3b06b5a0a2bbf4aa22f3e9e33b2602bd82ca46ea5405033c",
+        "content_id": "sha256:897b2d4ea14dc8ab3b06b5a0a2bbf4aa22f3e9e33b2602bd82ca46ea5405033c"
       }
     ],
     "docs_and_registry": [
@@ -432,10 +432,10 @@
       "role": "installed_package_exposure",
       "lines": {
         "start": 1,
-        "end": 239
+        "end": 253
       },
-      "file_sha256": "10073dd31ec6cc1c230f4d67b0588537bb23fddb59125b17557828e1d190a833",
-      "content_id": "sha256:10073dd31ec6cc1c230f4d67b0588537bb23fddb59125b17557828e1d190a833"
+      "file_sha256": "55a7787aa01b8d954782a24efd1df197231c67b776312fde861046aedafa9bca",
+      "content_id": "sha256:55a7787aa01b8d954782a24efd1df197231c67b776312fde861046aedafa9bca"
     },
     "forwarding": {
       "path": "scripts/agent-native/a2a-projection.mjs",
