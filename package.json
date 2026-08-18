@@ -1,6 +1,6 @@
 {
   "name": "stylegallery",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A governed gallery of portable interface knowledge with deterministic CLIs and read-only MCP servers.",
   "type": "module",
   "homepage": "https://github.com/changeroa/StyleGallery#readme",
