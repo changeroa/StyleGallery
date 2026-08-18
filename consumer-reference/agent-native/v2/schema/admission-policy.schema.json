@@ -13,15 +13,15 @@
     "media_type": { "const": "text/markdown" },
     "allowed_materials": {
       "type": "array",
-      "minItems": 126,
-      "maxItems": 126,
+      "minItems": 133,
+      "maxItems": 133,
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": ["repository_path", "domain", "lifecycle"],
         "properties": {
           "repository_path": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9._ -]+(?:/[A-Za-z0-9._ -]+)*\\.md$" },
-          "domain": { "enum": ["layout", "motion", "design-engineering", "game-ui", "platform-guides", "shared"] },
+          "domain": { "enum": ["layout", "motion", "design-engineering", "game-ui", "platform-guides", "design-terminology", "shared"] },
           "lifecycle": { "enum": ["draft", "stable", "deprecated", "experimental", "generated"] }
         }
       }

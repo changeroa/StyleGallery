@@ -15,6 +15,6 @@
     "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
     "byte_length": { "type": "integer", "minimum": 0 },
     "lifecycle": { "enum": ["draft", "stable", "deprecated", "experimental", "generated"] },
-    "domain": { "enum": ["layout", "motion", "design-engineering", "game-ui", "platform-guides", "shared"] }
+    "domain": { "enum": ["layout", "motion", "design-engineering", "game-ui", "platform-guides", "design-terminology", "shared"] }
   }
 }

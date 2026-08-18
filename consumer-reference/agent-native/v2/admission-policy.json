@@ -65,6 +65,36 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "design-terminology/concept-families.md",
+      "domain": "design-terminology",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-terminology/conflict-cases.md",
+      "domain": "design-terminology",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-terminology/index.md",
+      "domain": "design-terminology",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-terminology/relation-types.md",
+      "domain": "design-terminology",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-terminology/source-kinds.md",
+      "domain": "design-terminology",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-terminology/source-vocabularies.md",
+      "domain": "design-terminology",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "game-ui/classification.md",
       "domain": "game-ui",
       "lifecycle": "experimental"
@@ -460,6 +490,11 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "quality/claim-records/design-terminology-domain-scope.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
       "repository_path": "quality/claim-records/index.md",
       "domain": "shared",
       "lifecycle": "stable"
@@ -712,5 +747,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:017b5de61c5e98779ec9b32880b3cd897c5f7012e726bdb73392572800b1f837"
+  "version_id": "sg:policy/material-admission-v2@sha256:f306613097c233ca309a1360fa736233dfe5858c8828c5238b956fff8e253870"
 }
