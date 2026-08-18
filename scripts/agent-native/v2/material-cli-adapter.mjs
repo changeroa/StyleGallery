@@ -17,6 +17,7 @@ const optionSpecs = Object.freeze({
   "--limit": { commands: new Set(["search"]), field: "limit", integer: true },
   "--limit-bytes": { commands: new Set(["get"]), field: "length", integer: true },
   "--offset": { commands: new Set(["get"]), field: "offset", integer: true },
+  "--paths-only": { commands: new Set(["search"]), field: "paths_only", flag: true },
   "--query": { commands: new Set(["context", "search"]), field: "query" },
   "--reference": { commands: new Set(["get"]), field: "reference" },
 });
@@ -25,7 +26,7 @@ const inputOrder = Object.freeze({
   context: ["--query", "--budget-tokens"],
   discover: [],
   get: ["--reference", "--offset", "--limit-bytes"],
-  search: ["--query", "--limit"],
+  search: ["--query", "--paths-only", "--limit"],
 });
 
 function issue(code, message) { return { code, message }; }
@@ -53,6 +54,10 @@ export function parseMaterialCliArguments(args) {
       const spec = optionSpecs[argument];
       if (!spec) return failed(command ?? null, issue("argument_unknown", "unknown option"));
       if (values.has(argument)) return failed(command ?? null, issue("argument_duplicate", "an option was supplied more than once"));
+      if (spec.flag) {
+        values.set(argument, true);
+        continue;
+      }
       const value = args[index + 1];
       if (value === undefined || typeof value !== "string" || value.startsWith("--")) {
         return failed(command ?? null, issue("argument_value_required", "an option value is required"));
@@ -82,7 +87,7 @@ export function parseMaterialCliArguments(args) {
   for (const option of inputOrder[command]) {
     if (!values.has(option)) continue;
     const spec = optionSpecs[option];
-    input[spec.field] = spec.integer ? parseInteger(values.get(option)) : values.get(option);
+    input[spec.field] = spec.flag ? true : spec.integer ? parseInteger(values.get(option)) : values.get(option);
   }
   return deepFreeze({ command, input, ok: true });
 }
@@ -90,11 +95,11 @@ export function parseMaterialCliArguments(args) {
 const helpResult = deepFreeze({
   commands: [
     { name: "discover", options: [] },
-    { name: "search", options: ["--query", "--limit"] },
+    { name: "search", options: ["--query", "--paths-only", "--limit"] },
     { name: "get", options: ["--reference", "--offset", "--limit-bytes"] },
     { name: "context", options: ["--query", "--budget-tokens"] },
   ],
-  options: ["--query", "--reference", "--offset", "--limit-bytes", "--limit", "--budget-tokens", "--help"],
+  options: ["--query", "--reference", "--offset", "--limit-bytes", "--limit", "--paths-only", "--budget-tokens", "--help"],
 });
 
 function packagedInventoryRunner(root) {

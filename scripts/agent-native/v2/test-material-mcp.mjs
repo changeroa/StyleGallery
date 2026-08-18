@@ -113,6 +113,7 @@ try {
   const calls = [
     ["material-discover", {}, ["discover"]],
     ["material-search", { query: "layout", limit: 2 }, ["search", "--query", "layout", "--limit", "2"]],
+    ["material-search", { query: "layout", paths_only: true, limit: 2 }, ["search", "--query", "layout", "--paths-only", "--limit", "2"]],
     ["material-get", { reference: manifest.materials[0].stable_ref }, ["get", "--reference", manifest.materials[0].stable_ref]],
     ["material-context", { query: "layout", budget_tokens: 256 }, ["context", "--query", "layout", "--budget-tokens", "256"]],
   ];

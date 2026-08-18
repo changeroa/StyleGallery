@@ -70,7 +70,7 @@ export function tokenizeMaterialText(value, { query = false } = {}) {
 
 function validateQueryInput(input) {
   assertObject(input);
-  assertOnly(input, new Set(["query", "limit"]));
+  assertOnly(input, new Set(["query", "limit", "paths_only"]));
   if (typeof input.query !== "string" || hasUnpairedSurrogate(input.query)) fail("material_query_invalid", "query must be a valid Unicode string");
   const queryBytes = Buffer.byteLength(input.query, "utf8");
   if (queryBytes > MATERIAL_QUERY_MAX_BYTES) fail("material_query_oversized", "query exceeds 4096 UTF-8 bytes");
@@ -78,7 +78,8 @@ function validateQueryInput(input) {
   if (queryBytes === 0 || tokens.length === 0) fail("material_query_empty", "query must contain an alphanumeric token");
   const limit = input.limit ?? 20;
   if (!Number.isInteger(limit) || limit < 1 || limit > 100) fail("material_search_limit_invalid", "limit must be an integer from 1 to 100");
-  return { query: input.query, limit, tokens, scoringTokens: [...new Set(tokens)] };
+  if (input.paths_only !== undefined && typeof input.paths_only !== "boolean") fail("material_paths_only_invalid", "paths_only must be a boolean");
+  return { query: input.query, limit, pathsOnly: input.paths_only === true, tokens, scoringTokens: [...new Set(tokens)] };
 }
 
 function inspectRoot(repositoryRoot, fileSystem) {
@@ -333,7 +334,7 @@ export function materialSearch({ repositoryRoot, input, fileSystem = fs, sourceR
   const state = snapshot ? requireSnapshot(snapshot) : loadMetadata(repositoryRoot, fileSystem);
   const { root, manifest } = state;
   const beforeInventory = snapshot ? state.inventory : trackedInventory(repositoryRoot, gitRunner);
-  const results = [];
+  const ranked = [];
   for (const record of manifest.materials) {
     const bytes = readRecord({ repositoryRoot, root, record, fileSystem, sourceReader, gitRunner, inventory: beforeInventory });
     let body;
@@ -344,21 +345,26 @@ export function materialSearch({ repositoryRoot, input, fileSystem = fs, sourceR
     const bodyCount = fieldMembership(tokenizeMaterialText(body), normalized.scoringTokens);
     const score = titleCount * MATERIAL_SEARCH_WEIGHTS.title + pathCount * MATERIAL_SEARCH_WEIGHTS.path + bodyCount * MATERIAL_SEARCH_WEIGHTS.body;
     if (score === 0) continue;
-    results.push({ identity: materialIdentityForRecord(record), source: sourceIdentity(record), title, score, match_counts: { title: titleCount, path: pathCount, body: bodyCount } });
+    ranked.push({
+      repositoryPath: record.repository_path,
+      result: { identity: materialIdentityForRecord(record), source: sourceIdentity(record), title, score, match_counts: { title: titleCount, path: pathCount, body: bodyCount } },
+    });
   }
   const afterInventory = trackedInventory(repositoryRoot, gitRunner);
   for (const record of manifest.materials) {
     assertTracked(record, afterInventory);
     if (canonicalize(beforeInventory.get(record.repository_path)) !== canonicalize(afterInventory.get(record.repository_path))) fail("material_source_race", "material source tracking changed during read");
   }
-  results.sort((left, right) => right.score - left.score || compare(left.identity.stable_ref, right.identity.stable_ref));
-  return deepFreeze({
+  ranked.sort((left, right) => right.result.score - left.result.score || compare(left.result.identity.stable_ref, right.result.identity.stable_ref));
+  const selected = ranked.slice(0, normalized.limit);
+  const envelope = {
     schema_version: "2.0", manifest_version_id: manifest.version_id,
     normalization: "Unicode NFKC; ECMAScript locale-independent lowercase; Letter/Number-led Unicode words retaining attached Marks; unique query-token field membership",
     query: normalized.query.normalize("NFKC").toLowerCase(), tokens: normalized.tokens,
     scoring_tokens: normalized.scoringTokens, weights: MATERIAL_SEARCH_WEIGHTS,
-    results: results.slice(0, normalized.limit), total_matches: results.length,
-  });
+  };
+  if (normalized.pathsOnly) return deepFreeze({ ...envelope, paths_only: true, paths: selected.map(({ repositoryPath }) => repositoryPath), total_matches: ranked.length });
+  return deepFreeze({ ...envelope, results: selected.map(({ result }) => result), total_matches: ranked.length });
 }
 
 function validateGetInput(input) {

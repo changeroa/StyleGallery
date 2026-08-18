@@ -28,7 +28,7 @@ const operations = deepFreeze([
   {
     schema_version: "2.0", name: "material-search", stable_ref: "sg:operation/material-search",
     read_only: true, effect_class: "NONE",
-    input_schema: { type: "object", additionalProperties: false, required: ["query"], properties: { query: { type: "string" }, limit: { type: "integer", minimum: 1, maximum: 100 } } },
+    input_schema: { type: "object", additionalProperties: false, required: ["query"], properties: { query: { type: "string" }, limit: { type: "integer", minimum: 1, maximum: 100 }, paths_only: { type: "boolean" } } },
   },
 ].sort((left, right) => left.name < right.name ? -1 : 1));
 
@@ -65,6 +65,7 @@ const PUBLIC_MESSAGES = Object.freeze({
   material_path_symlink: "material source type is invalid",
   material_path_unavailable: "material source is unavailable",
   material_path_untracked: "material source tracking is invalid",
+  material_paths_only_invalid: "paths_only must be a boolean",
   material_query_empty: "query must contain a Unicode word token",
   material_query_invalid: "query must be a valid Unicode string",
   material_query_oversized: "query exceeds 4096 UTF-8 bytes",

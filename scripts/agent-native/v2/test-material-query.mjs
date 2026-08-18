@@ -154,6 +154,23 @@ test("known Layout ranking uses title=16 path=8 body=1 unique-token field member
   assert.deepEqual(layout.match_counts, { title: 1, path: 1, body: 1 });
 });
 
+test("paths-only search preserves ranking while projecting repository-relative paths", () => {
+  const standard = invoke("material-search", { query: "Layout", limit: 5 });
+  const projected = invoke("material-search", { query: "Layout", limit: 5, paths_only: true });
+  assert.equal(projected.ok, true);
+  assert.equal(projected.result.paths_only, true);
+  assert.equal(Object.hasOwn(projected.result, "results"), false);
+  assert.deepEqual(projected.result.paths, standard.result.results.map(({ identity }) => {
+    const record = manifest.materials.find((candidate) => candidate.stable_ref === identity.source_ref || candidate.stable_ref === identity.stable_ref);
+    assert(record);
+    return record.repository_path;
+  }));
+  assert.ok(projected.result.paths.every((candidate) => !path.isAbsolute(candidate) && !candidate.split("/").includes("..")));
+  assert.equal(canonicalize(projected), canonicalize(invoke("material-search", { paths_only: true, limit: 5, query: "Layout" })));
+  assert.equal(Object.hasOwn(invoke("material-search", { query: "Layout", paths_only: false }).result, "paths_only"), false);
+  assertStableFailure(invoke("material-search", { query: "Layout", paths_only: "true" }), "material_paths_only_invalid");
+});
+
 test("duplicate query and field occurrences are idempotent", () => {
   const single = invoke("material-search", { query: "layout", limit: 100 }).result;
   const duplicate = invoke("material-search", { query: "layout layout layout", limit: 100 }).result;

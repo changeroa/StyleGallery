@@ -52,9 +52,11 @@ Material v2 searches the admitted Markdown corpus and returns JSON without an ad
 
 ```sh
 sg-material discover
-sg-material search --query "sticky layout" --limit 5
+sg-material search --query "sticky layout" --paths-only --limit 5
 sg-material context --query "responsive sidebar" --budget-tokens 4096
 ```
+
+For a coding agent with repository filesystem access, local guided traversal is the default: read `AGENTS.md` and this README, follow the narrowest relevant task route or domain index, and inspect the selected Markdown files directly. Use `search --paths-only` only when the path is unclear; it returns a deterministic `paths` array of repository-relative candidates without full result metadata. Reserve `context` for environments that cannot read repository files or for transferring a bounded, provenance-linked package.
 
 ### Worked homepage example
 
@@ -100,7 +102,7 @@ npm install --global stylegallery
 sg discover --format json
 ```
 
-`discover`는 사용 가능한 인터페이스를 보여주고, `resolve`는 하나의 레코드를 조회하며, `claims`는 관련 주장과 근거를 분리해서 보여줍니다. `context`는 에이전트에 전달할 수 있는 제한된 컨텍스트 패키지를 만들고, `ops`는 지원하는 작업 목록을 반환합니다. `sg-material search --query "검색어"`를 사용하면 Material v2에 등록된 Markdown 문서를 검색할 수 있습니다. 모든 결과는 자동화에 바로 사용할 수 있는 JSON입니다.
+`discover`는 사용 가능한 인터페이스를 보여주고, `resolve`는 하나의 레코드를 조회하며, `claims`는 관련 주장과 근거를 분리해서 보여줍니다. `context`는 에이전트에 전달할 수 있는 제한된 컨텍스트 패키지를 만들고, `ops`는 지원하는 작업 목록을 반환합니다. 저장소를 직접 읽을 수 있는 에이전트는 `AGENTS.md`와 이 README의 작업 경로에서 시작해 로컬 Markdown을 따라가는 방식이 기본입니다. 경로가 불명확할 때만 `sg-material search --query "검색어" --paths-only --limit 5`로 후보 경로를 좁히고, `context`는 파일에 직접 접근할 수 없거나 제한된 패키지를 전달해야 할 때 사용합니다. 모든 결과는 자동화에 바로 사용할 수 있는 JSON입니다.
 
 CLI와 MCP의 상세 사용법은 [Agent-Native StyleGallery 가이드](consumer-reference/agent-native/README.md)를 참고하세요. 사람이 문서를 탐색하려면 아래의 도메인 표에서 목적에 맞는 진입점을 선택하면 됩니다.
 

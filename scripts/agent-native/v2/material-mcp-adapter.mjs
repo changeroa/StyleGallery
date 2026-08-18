@@ -18,13 +18,13 @@ const descriptions = Object.freeze({
   "material-context": "Build a deterministic, provenance-bound material context within a token budget.",
   "material-discover": "Discover the five governed StyleGallery domain entries.",
   "material-get": "Read bounded UTF-8 bytes for one canonical v2 material StableRef.",
-  "material-search": "Search admitted material deterministically using normalized Unicode terms.",
+  "material-search": "Search admitted material deterministically, optionally returning only repository-relative paths.",
 });
 const inputSchemas = Object.freeze({
   "material-context": z.strictObject({ query: z.string(), budget_tokens: z.number().int().min(256).max(32768).default(8192) }),
   "material-discover": z.strictObject({}),
   "material-get": z.strictObject({ reference: z.string(), offset: z.number().int().min(0).optional(), length: z.number().int().min(1).max(65536).optional() }),
-  "material-search": z.strictObject({ query: z.string(), limit: z.number().int().min(1).max(100).optional() }),
+  "material-search": z.strictObject({ query: z.string(), limit: z.number().int().min(1).max(100).optional(), paths_only: z.boolean().optional() }),
 });
 const outputSchema = z.strictObject({
   ok: z.boolean(),

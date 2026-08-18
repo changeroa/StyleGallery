@@ -49,6 +49,7 @@ const parserCases = [
   { args: ["discover"], ok: true, command: "discover", input: {} },
   { args: ["search", "--query", "Layout", "--limit", "5"], ok: true, command: "search", input: { query: "Layout", limit: 5 } },
   { args: ["--limit", "5", "--query", "Layout", "search"], ok: true, command: "search", input: { query: "Layout", limit: 5 } },
+  { args: ["search", "--paths-only", "--query", "Layout", "--limit", "5"], ok: true, command: "search", input: { query: "Layout", paths_only: true, limit: 5 } },
   { args: ["get", "--reference", layout.stable_ref, "--offset", "0", "--limit-bytes", "64"], ok: true, command: "get", input: { reference: layout.stable_ref, offset: 0, length: 64 } },
   { args: ["context", "--budget-tokens", "256", "--query", "Layout"], ok: true, command: "context", input: { query: "Layout", budget_tokens: 256 } },
   { args: ["--help"], ok: true, command: "help", input: {} },
@@ -68,11 +69,13 @@ const parserFailures = [
   [["search"], "argument_value_required"],
   [["search", "--query"], "argument_value_required"],
   [["search", "--query", "x", "--query", "y"], "argument_duplicate"],
+  [["search", "--query", "x", "--paths-only", "--paths-only"], "argument_duplicate"],
   [["search", "--wat", "x"], "argument_unknown"],
   [["search", "--query", "x", "--offset", "0"], "argument_inapplicable"],
   [["get"], "argument_value_required"],
   [["get", "--reference", layout.stable_ref, "--limit", "1"], "argument_inapplicable"],
   [["context", "--query", "x", "--limit", "1"], "argument_inapplicable"],
+  [["context", "--query", "x", "--paths-only"], "argument_inapplicable"],
   [["discover", "--help"], "argument_inapplicable"],
 ];
 for (const [args, code] of parserFailures) {
@@ -94,8 +97,8 @@ for (const option of ["--offset", "--limit-bytes", "--limit", "--budget-tokens"]
 
 const help = success(["--help"], "help");
 assert.deepEqual(help.report.result.commands.map(({ name }) => name), ["discover", "search", "get", "context"]);
-assert.deepEqual(help.report.result.options, ["--query", "--reference", "--offset", "--limit-bytes", "--limit", "--budget-tokens", "--help"]);
-for (const forbidden of ["resolve", "claims", "ops", "--format", "proposal", "path", "manifest", "head"]) {
+assert.deepEqual(help.report.result.options, ["--query", "--reference", "--offset", "--limit-bytes", "--limit", "--paths-only", "--budget-tokens", "--help"]);
+for (const forbidden of ["resolve", "claims", "ops", "--format", "proposal", "repository_path", "manifest", "head"]) {
   assert.equal(help.child.stdout.includes(forbidden), false, forbidden);
 }
 
@@ -104,6 +107,14 @@ const searchA = success(["search", "--query", "Layout", "--limit", "5"], "materi
 const searchB = success(["--limit", "5", "--query", "Layout", "search"], "material-search");
 assert.equal(searchA.child.stdout, searchB.child.stdout);
 assert.ok(searchA.report.result.results.some(({ source }) => source.stable_ref === layout.stable_ref));
+const pathsA = success(["search", "--query", "Layout", "--paths-only", "--limit", "5"], "material-search");
+const pathsB = success(["--limit", "5", "--paths-only", "--query", "Layout", "search"], "material-search");
+assert.equal(pathsA.child.stdout, pathsB.child.stdout);
+assert.equal(pathsA.report.result.paths_only, true);
+assert.equal(pathsA.report.result.paths.length, 5);
+assert.deepEqual(pathsA.report.result.paths, searchA.report.result.results.map(({ identity }) => manifest.materials.find((record) => record.stable_ref === identity.source_ref || record.stable_ref === identity.stable_ref)?.repository_path));
+assert.ok(pathsA.report.result.paths.every((candidate) => typeof candidate === "string" && !path.isAbsolute(candidate) && !candidate.includes("..")));
+for (const omitted of ["results", "identity", "source", "score", "match_counts"]) assert.equal(Object.hasOwn(pathsA.report.result, omitted), false);
 const getA = success(["get", "--reference", layout.stable_ref, "--offset", "0", "--limit-bytes", "256"], "material-get");
 const getB = success(["--limit-bytes", "256", "get", "--offset", "0", "--reference", layout.stable_ref], "material-get");
 assert.equal(getA.child.stdout, getB.child.stdout);
@@ -138,5 +149,5 @@ try {
   assert.equal(outsideRun.child.stdout, success(["search", "--query", "Layout", "--limit", "1"], "material-search").child.stdout);
 } finally { fs.rmSync(outside, { recursive: true, force: true }); }
 
-const report = { ok: true, parser_cases: parserCases.length + parserFailures.length + 32, cli_successes: 10, cli_failures: 8 };
+const report = { ok: true, parser_cases: parserCases.length + parserFailures.length + 32, cli_successes: 12, cli_failures: 8 };
 process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
