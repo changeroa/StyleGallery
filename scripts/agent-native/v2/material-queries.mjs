@@ -310,10 +310,35 @@ function titleOf(text) {
   return /^#{1,6}\s+(.+?)\s*$/m.exec(text)?.[1] ?? "";
 }
 function fieldMembership(fieldTokens, queryTokens) {
-  const members = new Set(fieldTokens);
   let count = 0;
-  for (const token of queryTokens) if (members.has(token)) count += 1;
+  for (const token of queryTokens) if (fieldTokens.has(token)) count += 1;
   return count;
+}
+function queryTokenMembership(value, queryTokenSet) {
+  const matches = new Set();
+  for (const token of tokenizeMaterialText(value)) {
+    if (queryTokenSet.has(token)) matches.add(token);
+  }
+  return matches;
+}
+function rarityWeightsFor(documents, queryTokens) {
+  return queryTokens.map((token) => {
+    const documentFrequency = documents.reduce((count, document) => count + Number(
+      document.titleTokens.has(token) || document.pathTokens.has(token) || document.bodyTokens.has(token),
+    ), 0);
+    return {
+      document_frequency: documentFrequency,
+      multiplier: Math.ceil(documents.length / Math.max(1, documentFrequency)),
+      token,
+    };
+  });
+}
+function weightedFieldMembership(fieldTokens, rarityByToken, fieldWeight) {
+  let score = 0;
+  for (const [token, multiplier] of rarityByToken) {
+    if (fieldTokens.has(token)) score += multiplier * fieldWeight;
+  }
+  return score;
 }
 function sourceIdentity(record) {
   return { stable_ref: record.stable_ref, version_id: record.version_id, source_sha256: record.source_sha256, byte_length: record.byte_length };
@@ -334,26 +359,47 @@ export function materialSearch({ repositoryRoot, input, fileSystem = fs, sourceR
   const state = snapshot ? requireSnapshot(snapshot) : loadMetadata(repositoryRoot, fileSystem);
   const { root, manifest } = state;
   const beforeInventory = snapshot ? state.inventory : trackedInventory(repositoryRoot, gitRunner);
-  const ranked = [];
+  const queryTokenSet = new Set(normalized.scoringTokens);
+  const documents = [];
   for (const record of manifest.materials) {
     const bytes = readRecord({ repositoryRoot, root, record, fileSystem, sourceReader, gitRunner, inventory: beforeInventory });
     let body;
     try { body = utf8Fatal.decode(bytes); } catch { fail("material_source_utf8_invalid", "material source is not valid UTF-8"); }
     const title = titleOf(body);
-    const titleCount = fieldMembership(tokenizeMaterialText(title), normalized.scoringTokens);
-    const pathCount = fieldMembership(tokenizeMaterialText(record.repository_path), normalized.scoringTokens);
-    const bodyCount = fieldMembership(tokenizeMaterialText(body), normalized.scoringTokens);
-    const score = titleCount * MATERIAL_SEARCH_WEIGHTS.title + pathCount * MATERIAL_SEARCH_WEIGHTS.path + bodyCount * MATERIAL_SEARCH_WEIGHTS.body;
-    if (score === 0) continue;
-    ranked.push({
-      repositoryPath: record.repository_path,
-      result: { identity: materialIdentityForRecord(record), source: sourceIdentity(record), title, score, match_counts: { title: titleCount, path: pathCount, body: bodyCount } },
+    documents.push({
+      bodyTokens: queryTokenMembership(body, queryTokenSet),
+      pathTokens: queryTokenMembership(record.repository_path, queryTokenSet),
+      record,
+      title,
+      titleTokens: queryTokenMembership(title, queryTokenSet),
     });
   }
   const afterInventory = trackedInventory(repositoryRoot, gitRunner);
   for (const record of manifest.materials) {
     assertTracked(record, afterInventory);
     if (canonicalize(beforeInventory.get(record.repository_path)) !== canonicalize(afterInventory.get(record.repository_path))) fail("material_source_race", "material source tracking changed during read");
+  }
+  const rarityWeights = rarityWeightsFor(documents, normalized.scoringTokens);
+  const rarityByToken = new Map(rarityWeights.map(({ token, multiplier }) => [token, multiplier]));
+  const ranked = [];
+  for (const document of documents) {
+    const titleCount = fieldMembership(document.titleTokens, normalized.scoringTokens);
+    const pathCount = fieldMembership(document.pathTokens, normalized.scoringTokens);
+    const bodyCount = fieldMembership(document.bodyTokens, normalized.scoringTokens);
+    const score = weightedFieldMembership(document.titleTokens, rarityByToken, MATERIAL_SEARCH_WEIGHTS.title)
+      + weightedFieldMembership(document.pathTokens, rarityByToken, MATERIAL_SEARCH_WEIGHTS.path)
+      + weightedFieldMembership(document.bodyTokens, rarityByToken, MATERIAL_SEARCH_WEIGHTS.body);
+    if (score === 0) continue;
+    ranked.push({
+      repositoryPath: document.record.repository_path,
+      result: {
+        identity: materialIdentityForRecord(document.record),
+        source: sourceIdentity(document.record),
+        title: document.title,
+        score,
+        match_counts: { title: titleCount, path: pathCount, body: bodyCount },
+      },
+    });
   }
   ranked.sort((left, right) => right.result.score - left.result.score || compare(left.result.identity.stable_ref, right.result.identity.stable_ref));
   const selected = ranked.slice(0, normalized.limit);
@@ -362,6 +408,8 @@ export function materialSearch({ repositoryRoot, input, fileSystem = fs, sourceR
     normalization: "Unicode NFKC; ECMAScript locale-independent lowercase; Letter/Number-led Unicode words retaining attached Marks; unique query-token field membership",
     query: normalized.query.normalize("NFKC").toLowerCase(), tokens: normalized.tokens,
     scoring_tokens: normalized.scoringTokens, weights: MATERIAL_SEARCH_WEIGHTS,
+    rarity_weighting: "ceil(material_count / max(1, token_document_frequency))",
+    rarity_weights: rarityWeights,
   };
   if (normalized.pathsOnly) return deepFreeze({ ...envelope, paths_only: true, paths: selected.map(({ repositoryPath }) => repositoryPath), total_matches: ranked.length });
   return deepFreeze({ ...envelope, results: selected.map(({ result }) => result), total_matches: ranked.length });

@@ -29,6 +29,11 @@ const sentinels = [
   "scripts/sg-mcp-shadow.mjs",
 ];
 const mandatory = ["README.md", "package.json"];
+const stickyPaths = [
+  "patterns/split-sidebar/sticky-aside.md",
+  "patterns/viewport-shell/sticky-header.md",
+  "patterns/viewport-shell/sticky-footer.md",
+];
 
 function relativeImports(source) {
   const imports = [];
@@ -68,6 +73,10 @@ async function bounded(promise, label) {
     promise,
     new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(`${label} timed out`)), 30000); timer.unref(); }),
   ]).finally(() => clearTimeout(timer));
+}
+
+function toolEnvelope(response) {
+  return response.structuredContent ?? JSON.parse(response.content.find(({ type }) => type === "text").text);
 }
 
 function copyPackage(source, destination) {
@@ -156,6 +165,15 @@ try {
   });
   assert.equal(install.status, 0, install.stderr || install.stdout);
   const installedRoot = path.join(installedProject, "node_modules", packageJson.name);
+  const materialCliPath = path.join(installedRoot, "scripts", "sg-material.mjs");
+  const installedCliSearch = spawnSync(process.execPath, [materialCliPath, "search", "--query", "sticky layout", "--paths-only", "--limit", "5"], {
+    cwd: externalCwd, encoding: "utf8", maxBuffer: 16 * 1024 * 1024,
+  });
+  assert.equal(installedCliSearch.status, 0, installedCliSearch.stderr || installedCliSearch.stdout);
+  assert.equal(installedCliSearch.stderr, "");
+  const installedCliReport = JSON.parse(installedCliSearch.stdout);
+  assert.equal(installedCliReport.ok, true);
+  assert.deepEqual(installedCliReport.result.paths.slice(0, 3), stickyPaths);
   const serverPath = path.join(installedRoot, "scripts", "sg-mcp.mjs");
   assert.ok(fs.statSync(serverPath).isFile(), "installed v1 MCP entrypoint must exist");
   const transport = new StdioClientTransport({ command: process.execPath, args: [serverPath], cwd: externalCwd, stderr: "pipe" });
@@ -183,6 +201,12 @@ try {
     assert.deepEqual((await bounded(materialClient.listTools(), "installed material MCP tools")).tools.map(({ name }) => name), ["material-context", "material-discover", "material-get", "material-search"]);
     assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 133);
     assert.deepEqual((await bounded(materialClient.listResourceTemplates(), "installed material MCP templates")).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
+    const installedMcpSearch = toolEnvelope(await bounded(materialClient.callTool({
+      name: "material-search",
+      arguments: { query: "design terminology source kinds", paths_only: true, limit: 5 },
+    }), "installed material MCP search"));
+    assert.equal(installedMcpSearch.ok, true);
+    assert.equal(installedMcpSearch.result.paths[0], "design-terminology/source-kinds.md");
   } finally {
     await bounded(materialClient.close(), "installed material MCP shutdown");
   }
@@ -201,7 +225,9 @@ try {
     bins_executable: true,
     declared_runtime_roots_derived: true,
     installed_v1_mcp_official_sdk: true,
+    installed_material_cli_search: true,
     installed_material_mcp_official_sdk: true,
+    installed_material_mcp_search: true,
     installed_external_spaced_cwd: true,
   }, null, 2)}\n`);
 } finally {
