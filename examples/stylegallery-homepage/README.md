@@ -1,3 +1,9 @@
+---
+type: Example Guide
+title: StyleGallery Homepage Example
+description: Static product-layer homepage built as an end-to-end npm package usage test.
+---
+
 # StyleGallery Homepage Example
 
 Static product-layer homepage built as an end-to-end npm package usage test.

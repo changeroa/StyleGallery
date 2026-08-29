@@ -47,13 +47,13 @@ The initial five domain leaves are independent method rewrites inspired by [emil
 
 `design-engineering/consumer-migration-readiness.md` is the separately declared StyleGallery-local leaf. It uses `provenance_kind: local`, carries no external source fields, and remains experimental. Its presence does not change the external-adaptation inventory or make its consumer-local method universal policy.
 
-## Promotion And Staleness
+## Lifecycle And Staleness
 
-External adaptations begin `experimental`. Promotion to `stable` requires a demonstrated reader or review task, evidence that the document improves that task, a named review owner, and no unresolved provenance or platform-version debt. Remove or revise a page when its source revision changes materially, a platform claim becomes stale, a local quality gate contradicts it, or a reader test shows the route is misleading.
+External adaptations begin `experimental`. Domain lifecycle changes are repository-owner decisions based on whether the bounded scope remains coherent, provenance and platform-version obligations are current, and machine-checkable contracts have relevant validator coverage. User studies, reader tasks, adoption counts, and attestations are neither required nor sufficient for a domain lifecycle change. Remove or revise a page when its source revision changes materially, a platform claim becomes stale, a local quality gate contradicts it, or its route or boundary no longer matches the domain contract.
 
 ### Consumer Reference Promotion
 
-Consumer-reference promotion does not add a domain. The [canonical promotion contract](consumer-reference/contract.md#promotion-boundary) owns the full human-readable boundary, and the [canonical JSON promotion policy](consumer-reference/policies/shared-experimental.json) owns machine policy. As a boundary summary: the `>=2` gateway applies only to consumer-local → shared-experimental invariant eligibility; Editorial and terminal are related examples in one fixture set; Shared stable has no numeric adoption threshold; and Normative correctness may waive adoption count only. A failed stable contract is never silently relabeled experimental. Promotion records are JSON-only, and the committed examples remain synthetic with zero adopter attestations.
+This separate contract governs consumer-reference invariant sharing only; it does not govern domain or page lifecycle. Consumer-reference promotion does not add a domain. The [canonical promotion contract](consumer-reference/contract.md#promotion-boundary) owns the full human-readable boundary, and the [canonical JSON promotion policy](consumer-reference/policies/shared-experimental.json) owns machine policy. As a boundary summary: the `>=2` gateway applies only to consumer-local → shared-experimental invariant eligibility; Editorial and terminal are related examples in one fixture set; Shared stable has no numeric adoption threshold; and Normative correctness may waive adoption count only. A failed stable contract is never silently relabeled experimental. Promotion records are JSON-only, and the committed examples remain synthetic with zero adopter attestations.
 
 ## IA Navigation
 
