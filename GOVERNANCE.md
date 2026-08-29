@@ -92,7 +92,7 @@ Use these states in reviews and governance notes. Do not invent new lifecycle la
 | `draft` | Useful but still being shaped. | May change in structure or wording; review owner checks source-of-truth fit. |
 | `stable` | Canonical guidance or contract. | Requires validator coverage or a named evidence boundary before behavior changes. |
 | `deprecated` | Kept for history or migration. | Must name the replacement and removal trigger. |
-| `experimental` | Accepted exploration that should not be treated as canonical. | The named owner may revise or reclassify it after scope, provenance or version, and relevant validator checks. User studies, reader tasks, adoption counts, and attestations are not lifecycle gates. |
+| `experimental` | Accepted exploration that should not be treated as canonical. | Must name the review trigger that promotes, revises, or removes it. |
 | `generated` | Produced from generator/data source. | Change the source file, regenerate, and run generated drift checks. |
 
 Default lifecycle:
@@ -142,7 +142,7 @@ No repository-wide maximum age or inferred time-to-live applies. Evidence withou
 Audit trigger:
 
 - Run `node scripts/validate-links.mjs --json` and `node scripts/validate-governance.mjs --json` when external source lineage, generated policy, root navigation, or validation ownership changes.
-- Run `node scripts/validate-domains.mjs --json` and `node scripts/test-validate-domains.mjs` when domain membership, scope boundaries, source paths, source revisions, platform context, or lifecycle state changes.
+- Run `node scripts/validate-domains.mjs --json` and `node scripts/test-validate-domains.mjs` when domain membership, scope boundaries, source paths, source revisions, platform context, or promotion state changes.
 - Run `node scripts/test-audit-evidence-freshness.mjs --json` when `expires_at`, `review_by`, record inventory, advisory classification, or the scheduled workflow changes.
 
 ## Required Verification

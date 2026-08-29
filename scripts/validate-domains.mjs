@@ -38,7 +38,7 @@ const requiredCrossDomainStrings = [
   },
   {
     relative: "quality/evidence/executable-evidence.md",
-    required: "Five governed domains and their declared leaves are reachable and attributed; lifecycle changes remain repository-owner decisions without user, reader, adoption-count, or attestation gates.",
+    required: "Five governed domains and their declared leaves are reachable and attributed.",
     failure: "quality/evidence/executable-evidence.md: missing canonical five-domain validator coverage",
   },
   {

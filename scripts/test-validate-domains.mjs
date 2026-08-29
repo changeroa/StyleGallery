@@ -16,7 +16,7 @@ const vocabularyDomainList = "Use for: Layout, Motion, Design Engineering, Game 
 const qualityDomainList = "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, and Platform Guides claims are admissible.";
 const readmeConsumerReferenceBoundary = "without owning profiles, visual values, components, or a sixth domain";
 const qualityConsumerReferenceBoundary = "without classifying it as a sixth domain";
-const executableEvidenceDomainCoverage = "Five governed domains and their declared leaves are reachable and attributed; lifecycle changes remain repository-owner decisions without user, reader, adoption-count, or attestation gates.";
+const executableEvidenceDomainCoverage = "Five governed domains and their declared leaves are reachable and attributed.";
 const gameUiFindabilityScenario = "| Find the authority route for uGUI, UI Toolkit, or NGUI. | [README](../README.md) | [Unity UI Systems](../game-ui/unity/ui-systems.md) | The first selected route is Game UI, and the system-specific source and version boundary is reached within three hops. |";
 
 function indexPage(title, links) {
