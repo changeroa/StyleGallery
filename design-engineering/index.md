@@ -20,7 +20,7 @@ This domain proposes product-layer questions. [Quality Gates](../quality/index.m
 
 ## Domain Contract
 
-See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page membership, and promotion rules.
+See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page membership, and staleness rules.
 
 ## IA Navigation
 

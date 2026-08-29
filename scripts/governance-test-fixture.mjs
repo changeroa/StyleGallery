@@ -59,7 +59,7 @@ export const files = {
   "quality/evidence/executable-evidence.md": [
     "| Claim | Validator or test | CI command | Positive evidence | Negative evidence | Evidence boundary |",
     "| Governance, lifecycle, generated-file, ownership, and stale-content policy remain discoverable and CI-enforced. | `scripts/validate-governance.mjs` and `scripts/test-validate-governance.mjs` | `node scripts/validate-governance.mjs --json`; `node scripts/test-validate-governance.mjs --json` | `GOVERNANCE.md`, `.github/CODEOWNERS`, generated warnings, generated metadata, root links, lifecycle states, stale-audit decision, and CI wiring are present. | Missing governance file, generated warning, generated metadata, CODEOWNERS coverage, or stale policy fixtures must fail. | Proves governance policy is present and linked, not that CODEOWNERS users have verified repository write access. |",
-    "| Domain topology, metadata, provenance, scope boundaries, and root routes remain enforced. | `scripts/validate-domains.mjs` and `scripts/test-validate-domains.mjs` | `node scripts/validate-domains.mjs --json`; `node scripts/test-validate-domains.mjs` | Five governed domains and their declared leaves are reachable and attributed. | Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail. | A full SHA proves content identity syntax, not publisher authenticity or local quality. |",
+    "| Domain topology, metadata, provenance, scope boundaries, lifecycle policy, and root routes remain enforced. | `scripts/validate-domains.mjs` and `scripts/test-validate-domains.mjs` | `node scripts/validate-domains.mjs --json`; `node scripts/test-validate-domains.mjs` | Five governed domains and their declared leaves are reachable and attributed; lifecycle changes remain repository-owner decisions without user, reader, adoption-count, or attestation gates. | Domain metadata, immutable provenance, scope boundaries, lifecycle policy, and root-route fixtures must fail. | A full SHA proves content identity syntax, not publisher authenticity or local quality. |",
     "Consumer-reference handoffs, schema/runtime parity, and containment remain enforced; repository handoff omissions must fail.",
     "Promotion governance remains a closed JSON-only, invariant-scoped, deferred example contract.",
     "Synthetic validation does not authenticate adoption, organizations, owners, support capacity, provenance, or a promotion decision.",
@@ -332,6 +332,7 @@ export const files = {
     "",
     "## Lifecycle States",
     "`draft` `stable` `deprecated` `experimental` `generated`",
+    "User studies, reader tasks, adoption counts, and attestations are not lifecycle gates.",
     "",
     "## Review Ownership",
     "CODEOWNERS",

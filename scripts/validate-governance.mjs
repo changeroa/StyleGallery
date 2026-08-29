@@ -95,6 +95,7 @@ function requireLifecycleStates() {
   for (const state of ["`draft`", "`stable`", "`deprecated`", "`experimental`", "`generated`"]) {
     requireIncludes("GOVERNANCE.md", state);
   }
+  requireIncludes("GOVERNANCE.md", "User studies, reader tasks, adoption counts, and attestations are not lifecycle gates.");
 }
 
 function requireOwnership() {
@@ -189,7 +190,7 @@ function requireEvidenceMap() {
   requireIncludes("quality/evidence/executable-evidence.md", "scripts/test-validate-governance.mjs");
   recommendIncludes("quality/evidence/executable-evidence.md", "generated warnings, generated metadata, root link targets");
   requireIncludes("quality/evidence/executable-evidence.md", "Missing governance file, generated warning, generated metadata, CODEOWNERS coverage, or stale policy fixtures must fail.");
-  requireIncludes("quality/evidence/executable-evidence.md", "Domain metadata, immutable provenance, scope boundaries, and root-route fixtures must fail.");
+  requireIncludes("quality/evidence/executable-evidence.md", "Domain metadata, immutable provenance, scope boundaries, lifecycle policy, and root-route fixtures must fail.");
   requireIncludes("quality/evidence/executable-evidence.md", "Consumer-reference handoffs, schema/runtime parity");
   requireIncludes("quality/evidence/executable-evidence.md", "repository handoff omissions must fail");
   requireIncludes("quality/evidence/executable-evidence.md", "The proposed Chromium sentinel preserves canonical card-grid geometry and truth-derived calibration evidence.");

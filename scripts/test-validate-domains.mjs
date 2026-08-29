@@ -16,7 +16,7 @@ const vocabularyDomainList = "Use for: Layout, Motion, Design Engineering, Game 
 const qualityDomainList = "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, and Platform Guides claims are admissible.";
 const readmeConsumerReferenceBoundary = "without owning profiles, visual values, components, or a sixth domain";
 const qualityConsumerReferenceBoundary = "without classifying it as a sixth domain";
-const executableEvidenceDomainCoverage = "Five governed domains and their declared leaves are reachable and attributed.";
+const executableEvidenceDomainCoverage = "Five governed domains and their declared leaves are reachable and attributed; lifecycle changes remain repository-owner decisions without user, reader, adoption-count, or attestation gates.";
 const gameUiFindabilityScenario = "| Find the authority route for uGUI, UI Toolkit, or NGUI. | [README](../README.md) | [Unity UI Systems](../game-ui/unity/ui-systems.md) | The first selected route is Game UI, and the system-specific source and version boundary is reached within three hops. |";
 
 function indexPage(title, links) {
@@ -152,8 +152,14 @@ const baseFiles = {
     "",
     "[Consumer Reference](consumer-reference/index.md) is shared infrastructure outside the five-domain contract and cannot add a sixth domain row.",
     "",
+    "## Lifecycle And Staleness",
+    "",
+    "Domain lifecycle changes are repository-owner decisions when machine-checkable contracts have relevant validator coverage.",
+    "User studies, reader tasks, adoption counts, and attestations are neither required nor sufficient for a domain lifecycle change.",
+    "",
     "### Consumer Reference Promotion",
     "",
+    "This separate contract governs consumer-reference invariant sharing only; it does not govern domain or page lifecycle.",
     "The gateway applies only to consumer-local → shared-experimental invariant eligibility.",
     "Editorial and terminal are related examples in one fixture set.",
     "Shared stable has no numeric adoption threshold.",
@@ -200,6 +206,8 @@ const cases = [
   { name: "manifest_extra_domain", mutate: ["DOMAINS.md", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |\n| Other | [Other](other/index.md) | `experimental` |"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "consumer_reference_sixth_domain", mutate: ["DOMAINS.md", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |\n| Consumer Reference | [Consumer Reference](consumer-reference/index.md) | `stable` |"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "consumer_reference_four_domain_contract", mutate: ["DOMAINS.md", "five-domain contract", "four-domain contract"], expect: "DOMAINS.md: missing canonical domain contract" },
+  { name: "domain_lifecycle_reader_gate", mutate: ["DOMAINS.md", "User studies, reader tasks, adoption counts, and attestations are neither required nor sufficient for a domain lifecycle change.", "User studies and reader tasks are required for a domain lifecycle change."], expect: "DOMAINS.md: missing lifecycle boundary User studies, reader tasks, adoption counts, and attestations are neither required nor sufficient for a domain lifecycle change." },
+  { name: "consumer_promotion_claims_domain_lifecycle", mutate: ["DOMAINS.md", "does not govern domain or page lifecycle", "also governs domain and page lifecycle"], expect: "DOMAINS.md: missing promotion boundary does not govern domain or page lifecycle" },
   { name: "promotion_stable_by_count", mutate: ["DOMAINS.md", "Shared stable has no numeric adoption threshold.", "Shared stable uses a numeric adoption threshold."], expect: "DOMAINS.md: missing promotion boundary Shared stable has no numeric adoption threshold" },
   { name: "promotion_related_as_independent", mutate: ["DOMAINS.md", "Editorial and terminal are related examples in one fixture set.", "Editorial and terminal are independent consumers."], expect: "DOMAINS.md: missing promotion boundary Editorial and terminal are related examples in one fixture set" },
   { name: "promotion_yaml_route", mutate: ["DOMAINS.md", "Promotion records are JSON-only", "Promotion records may use YAML"], expect: "DOMAINS.md: missing promotion boundary Promotion records are JSON-only" },

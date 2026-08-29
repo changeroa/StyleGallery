@@ -16,7 +16,7 @@ Out of scope: universal timing or easing rules, unmeasured performance claims, a
 
 ## Domain Contract
 
-See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page membership, and promotion rules.
+See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page membership, and staleness rules.
 
 ## IA Navigation
 

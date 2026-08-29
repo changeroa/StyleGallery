@@ -38,7 +38,7 @@ const requiredCrossDomainStrings = [
   },
   {
     relative: "quality/evidence/executable-evidence.md",
-    required: "Five governed domains and their declared leaves are reachable and attributed.",
+    required: "Five governed domains and their declared leaves are reachable and attributed; lifecycle changes remain repository-owner decisions without user, reader, adoption-count, or attestation gates.",
     failure: "quality/evidence/executable-evidence.md: missing canonical five-domain validator coverage",
   },
   {
@@ -192,7 +192,7 @@ export function validateDomains({ root: nextRoot = process.cwd(), domains: nextD
   root = nextRoot;
   domains = nextDomains;
   failures = [];
-  const { checkIndex, checkLeaf, checkReferenceDocuments, checkPromotionBoundary } = createDomainValidationChecks({
+  const { checkDomainLifecycleBoundary, checkIndex, checkLeaf, checkReferenceDocuments, checkPromotionBoundary } = createDomainValidationChecks({
     domains,
     failures,
     read,
@@ -218,6 +218,7 @@ export function validateDomains({ root: nextRoot = process.cwd(), domains: nextD
   }
   failures.push(...collectDomainBoundaryFailures(root, boundaryRegistry(domains)));
   checkReferenceDocuments();
+  checkDomainLifecycleBoundary();
   checkPromotionBoundary();
 
   const result = { ok: failures.length === 0, checkedDomains: domains.length, checkedLeaves, failures: [...new Set(failures)] };
