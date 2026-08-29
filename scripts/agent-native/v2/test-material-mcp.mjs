@@ -106,7 +106,7 @@ try {
   assert.equal(nullPrototypeResponse.structuredContent?.ok, true);
 
   const resources = (await client.listResources()).resources;
-  assert.equal(resources.length, 126);
+  assert.equal(resources.length, 144);
   assert.deepEqual((await client.listResourceTemplates()).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
   assert.ok(resources.every(({ uri }) => uri === materialResourceUri(resources.find((entry) => entry.uri === uri).name)));
 
@@ -123,9 +123,9 @@ try {
     assert.deepEqual(envelope(response), executeMaterialCli(cliArgs));
   }
 
-  const domainRecords = manifest.materials.filter(({ repository_path }) => ["layout/index.md", "motion/index.md", "design-engineering/index.md", "game-ui/index.md", "platform-guides/index.md"].includes(repository_path));
+  const domainRecords = manifest.materials.filter(({ repository_path }) => ["layout/index.md", "motion/index.md", "design-engineering/index.md", "game-ui/index.md", "platform-guides/index.md", "state-management/index.md"].includes(repository_path));
   const generated = manifest.materials.find(({ domain, lifecycle }) => domain === "layout" && lifecycle === "generated");
-  assert.equal(domainRecords.length, 5);
+  assert.equal(domainRecords.length, 6);
   for (const record of [...domainRecords, generated]) {
     const response = await client.readResource({ uri: materialResourceUri(record.stable_ref) });
     const payload = JSON.parse(response.contents[0].text);

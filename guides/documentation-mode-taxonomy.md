@@ -40,6 +40,11 @@ Do not use `mixed` as a mode. If a page has more than one reading posture, keep 
 | `design-engineering/consumer-migration-readiness.md` | How-to | Policy/procedure | Build a consumer-owned migration evidence chain without claiming universal authority. |
 | `platform-guides/index.md` | Reference | Explanation | Enter bounded comparative platform references. |
 | `platform-guides/*.md` | Explanation | Reference | Compare a named platform with explicit source, version, adaptation, and evidence limits. |
+| `state-management/index.md` | Reference | How-to | Enter framework-neutral state planning, pattern, recipe, catalog, and verification routes. |
+| `state-management/catalog.md` | Reference | None | Look up a known State Management pattern or recipe. |
+| `state-management/guides/*.md` | How-to or Reference | Explanation | Plan authority and lifetime, select patterns, complete a brief, or run the verification matrix. |
+| `state-management/patterns/**/*.md` | Reference | Explanation | Apply one experimental application-state responsibility without making a library canonical. |
+| `state-management/recipes/*.md` | How-to | Reference | Compose State Management patterns for a common user flow and preserve substitution risk. |
 | `guides/decision-tree.md` | How-to | Reference | Route from constraints to pattern families and recipes. |
 | `guides/layout-brief.md` | How-to | Reference | Fill before selecting a pattern stack. |
 | `guides/vocabulary.md` | Reference | Policy/procedure | Look up canonical terms, aliases, deprecated terms, and scannability rules. |
@@ -110,6 +115,8 @@ The wildcard rows are intentional. Generated pattern pages share one stable refe
 | `recipes/index.md` | Keep and label | The page is a recipe lookup index, with enough how-to routing to choose the next recipe. |
 | `recipes/primitive-to-recipe-matrix.md` | Keep and label | The page is a reference matrix that supports how-to substitution decisions. |
 | `recipes/*.md` | Intentional hybrid | Recipes teach composition steps while preserving reusable reference contracts for pattern stacks, constraints, and scroll ownership. |
+| `state-management/guides/*.md` | Intentional hybrid | Guides route an implementation decision while preserving authority, lifetime, transition, and verification contracts. |
+| `state-management/recipes/*.md` | Intentional hybrid | Recipes teach state composition while preserving pattern roles, rejected alternatives, and recovery boundaries. |
 | `quality/index.md` | Keep and label | The page explains why the quality layer exists and routes readers into policy/procedure gates. |
 | `quality/principles.md` | Keep and label | The page explains shared principles that later become gate policy. |
 | `quality/claims.md` | Keep and label | The page is a claim-record reference with procedure for when a record is required. |
@@ -128,6 +135,9 @@ The wildcard rows are intentional. Generated pattern pages share one stable refe
 | Review a product-level craft decision. | `design-engineering/index.md` | `design-engineering/interface-craft.md`, then the relevant quality gate |
 | Prove an existing consumer migration. | `design-engineering/consumer-migration-readiness.md` | `quality/gates/consumer-migration-evidence.md`, then the consumer-owned conformance record |
 | Compare an Apple interaction convention. | `platform-guides/index.md` | `platform-guides/apple-interaction.md` and current official sources |
+| Plan or review application state. | `state-management/index.md` | `state-management/guides/decision-tree.md`, then `state-management/guides/state-brief.md` |
+| Look up a known state pattern. | `state-management/catalog.md` | The matching `state-management/patterns/**/*.md` contract |
+| Compose state for a common user flow. | `state-management/recipes/index.md` | The matching recipe and `state-management/recipes/pattern-to-recipe-matrix.md` |
 | Choose a layout when the pattern name is unknown. | `GUIDE.md` | `guides/decision-tree.md` |
 | Turn raw content into a homepage or webpage. | `guides/webpage-generation-workflow.md` | `recipes/homepage.md`, `quality/gates/harmony-evaluation.md` |
 | Look up a known layout primitive. | `CATALOG.md` | The relevant `patterns/*/*.md` page |

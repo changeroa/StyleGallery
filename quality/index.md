@@ -1,6 +1,6 @@
 # Quality Gates
 
-`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, and Platform Guides claims are admissible.
+`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, Platform Guides, and State Management claims are admissible.
 
 This shared layer does not make the repository a visual design system. Layout pattern files still own spatial structure only; domain guidance cannot bypass these gates. Quality gates explain how claims are framed, what evidence can support them, and when review or debt is required.
 
@@ -48,7 +48,8 @@ Use this script for lightweight tree tests:
 | Name an observed motion effect. | [README](../README.md) | [Motion Vocabulary](../motion/vocabulary.md) | The first selected route is Motion and the term reference is reached within two hops. |
 | Review product-level interface craft. | [README](../README.md) | [Interface Craft Decisions](../design-engineering/interface-craft.md) | The first selected route is Design Engineering and shared quality gates remain visible. |
 | Compare an Apple interaction convention. | [README](../README.md) | [Apple Interaction](../platform-guides/apple-interaction.md) | The first selected route is Platform Guides and source/version limits are reached within two hops. |
-| Declare whether a consumer reference applies. | [README](../README.md) | [Consumer Reference](../consumer-reference/index.md) | The handoff reaches the shared contract without classifying it as a sixth domain. |
+| Plan application-state ownership and recovery. | [README](../README.md) | [State Management](../state-management/index.md) | The first selected route is State Management and the decision tree or state brief is reached within two hops. |
+| Declare whether a consumer reference applies. | [README](../README.md) | [Consumer Reference](../consumer-reference/index.md) | The handoff reaches the shared contract without classifying it as another governed domain. |
 | Prove a consumer migration preserves declared behavior. | [README](../README.md) | [Consumer Migration Readiness](../design-engineering/consumer-migration-readiness.md) | The reader reaches the Design Engineering method and its evidence gate within two hops. |
 | Find the authority route for uGUI, UI Toolkit, or NGUI. | [README](../README.md) | [Unity UI Systems](../game-ui/unity/ui-systems.md) | The first selected route is Game UI, and the system-specific source and version boundary is reached within three hops. |
 

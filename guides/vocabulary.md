@@ -15,19 +15,35 @@ Primary role: vocabulary and scannability contract.
 - Canonical: `domain`
   - Concept: top-level knowledge ownership
   - Definition: A governed StyleGallery decision surface with a named scope, exclusions, lifecycle, source-of-truth, validator, and review owner.
-  - Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, root routing, and `domain` frontmatter on governed leaves.
+  - Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, State Management, root routing, and `domain` frontmatter on governed leaves.
 - Canonical: `category`
   - Concept: domain-local browse placement
   - Definition: A canonical grouping inside one domain; it cannot change the owning domain or its evidence boundary.
   - Use for: Layout pattern families and future domain-local indexes after a governed need is established.
 - Canonical: `pattern`
-  - Concept: reusable spatial primitive
-  - Definition: A minimal HTML/CSS layout contract that solves one primary spatial problem.
-  - Use for: Individual files under `patterns/`, generated catalog entries, pattern stacks, and primitive references.
+  - Concept: reusable domain primitive
+  - Definition: A bounded contract that solves one primary problem inside its owning domain.
+  - Use for: Layout files under `patterns/`, State Management files under `state-management/patterns/`, domain-local catalogs, pattern stacks, and primitive references.
 - Canonical: `recipe`
-  - Concept: screen composition
-  - Definition: A screen-level composition that maps a common use case to a pattern stack.
-  - Use for: Files under `recipes/`, planning flow, and primitive-to-recipe dependency records.
+  - Concept: domain-local composition
+  - Definition: A common use-case composition that assigns named responsibilities to a pattern stack.
+  - Use for: Layout screen compositions under `recipes/`, State Management flow compositions under `state-management/recipes/`, planning flow, and pattern-to-recipe dependency records.
+- Canonical: `state owner`
+  - Concept: mutable-fact authority
+  - Definition: The one declared authority that accepts writes and determines the current value for a mutable fact within a named boundary.
+  - Use for: State briefs, State Management patterns, recipes, and implementation handoffs.
+- Canonical: `state lifetime`
+  - Concept: validity interval
+  - Definition: The interval and boundary across which a state value remains valid before reset, eviction, replacement, or migration.
+  - Use for: Component, feature, navigation, session, persistence, and remote-cache decisions.
+- Canonical: `derived state`
+  - Concept: computed projection
+  - Definition: A value computed from authoritative inputs without an independent writer.
+  - Use for: Selectors, projections, totals, filtering, eligibility, and dirty-state computation.
+- Canonical: `logical transition`
+  - Concept: accepted state change
+  - Definition: A named event and rule that maps an accepted current state to a next state while preserving declared invariants.
+  - Use for: State Management transition contracts; use Motion terminology for the animation that communicates the result.
 - Canonical: `gate`
   - Concept: quality decision contract
   - Definition: A named quality contract that decides whether a claim is admissible and which evidence can support it.
@@ -80,7 +96,7 @@ Primary role: vocabulary and scannability contract.
 - Alias: `section` -> `category`
   - Use only for document structure or explanatory prose, not canonical placement metadata.
 - Alias: `primitive` -> `pattern`
-  - Use `primitive` only when contrasting individual patterns with recipes.
+  - Use `primitive` only when contrasting individual domain patterns with recipes.
 - Alias: `layout primitive` -> `pattern`
   - Use in explanatory prose only; canonical records should use `pattern`.
 - Alias: `screen recipe` -> `recipe`
@@ -93,7 +109,7 @@ Primary role: vocabulary and scannability contract.
 ## Deprecated Terms
 
 - Deprecated: `component` -> `pattern`
-  - Reason: In Layout, component implies visual or framework ownership; Layout owns spatial pattern contracts.
+  - Reason: In Layout and State Management, component implies visual or framework ownership; the domains own portable problem contracts.
 - Deprecated: `template` -> `recipe`
   - Reason: Template implies copy-paste completeness; recipes are starting compositions.
 - Deprecated: `proof` -> `evidence`

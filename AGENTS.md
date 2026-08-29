@@ -6,7 +6,7 @@ description: Rules coding agents must follow when editing this governed multi-do
 
 # Agent Instructions
 
-This repository is StyleGallery: a governed gallery with Layout, Motion, Design Engineering, Game UI, and Platform Guides domains. Read [StyleGallery Domains](DOMAINS.md) before adding a domain, changing a domain boundary, or adapting an external source.
+This repository is StyleGallery: a governed gallery with Layout, Motion, Design Engineering, Game UI, Platform Guides, and State Management domains. Read [StyleGallery Domains](DOMAINS.md) before adding a domain, changing a domain boundary, or adapting an external source.
 
 Before editing generated artifacts, validators, lifecycle state, or ownership policy, read [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md).
 
@@ -23,6 +23,8 @@ Before editing generated artifacts, validators, lifecycle state, or ownership po
 - Treat `consumer-reference/policies/lifecycle-dispositions.json` as the lifecycle index. Preserve named owners, caller status `unknown`, deadlines, extension dispositions, and immutable archive bindings until their machine gate authorizes a transition.
 - Treat `patterns/**`, `recipes/**`, `GUIDE.md`, and `CATALOG.md` as the Layout corpus at their existing paths.
 - Treat the Layout domain as a layout pattern library, not a visual design system.
+- Treat `state-management/**` as the State Management corpus. Keep its canonical guidance framework-neutral, domain-local, and separate from Layout pattern generation and consumer implementation state.
+- Keep logical application-state transitions in State Management, transition animation in Motion, spatial consequences in Layout, and product-level visual or interaction-state decisions in Design Engineering.
 - Start with semantic HTML before adding layout classes.
 - Keep DOM order, reading order, and focus order logical.
 - Keep each pattern focused on one primary spatial problem.
@@ -40,6 +42,16 @@ Before editing generated artifacts, validators, lifecycle state, or ownership po
 - Use `sg-material context` as a fallback when repository files cannot be read directly or when a bounded, provenance-linked context package must be transferred to another process. Do not make context packaging the default local retrieval path.
 
 The remaining pattern, CSS, naming, token, checklist, and verification rules apply to the Layout domain. Non-Layout domain documents may discuss product-layer behavior, but they do not authorize decorative or motion properties in reusable Layout pattern CSS.
+
+## State Management Boundary Gate
+
+Before adding a State Management pattern or recipe, check [State Management Decision Tree](state-management/guides/decision-tree.md) and [State Brief](state-management/guides/state-brief.md).
+
+- Name one authoritative owner, lifetime, reset boundary, readers, writers, accepted events, and failure behavior.
+- Derive values when existing authority determines them; do not create a mirrored writable copy without a synchronization contract.
+- For asynchronous work, declare cancellation, ordering, stale-result, conflict, and recovery behavior where applicable.
+- Add a pattern only when an existing State Management pattern or recipe does not already cover the responsibility.
+- Keep library-specific APIs as bounded examples rather than canonical contracts.
 
 ## Pattern Boundary Gate
 

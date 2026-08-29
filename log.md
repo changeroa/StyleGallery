@@ -1,5 +1,11 @@
 # StyleGallery Log
 
+## 2026-08-30
+
+- Added State Management as an experimental domain for framework-neutral application-state ownership, lifetime, derivation, logical transitions, synchronization, recovery, and verification.
+- Added a domain-local planning workflow, decision tree, state brief, verification matrix, six reusable patterns, three recipes, and a pattern-to-recipe matrix without extending the Layout generator.
+- Extended root IA, governance, domain validation, Material v2 discovery, MCP resources, package exposure, and the README infographic from five to six governed domains.
+
 ## 2026-08-18
 
 - Added the StyleGallery homepage example planned from a clean npm installation and verified across desktop, tablet, and mobile Chrome CDP viewports.

@@ -100,20 +100,22 @@ test("v2 identity grammar is closed and v1 rejects every v2 kind", () => {
   assert.throws(() => parseMaterialStableRef({ schema_version: "1.0", stable_ref: "sg:domain/layout" }), { code: "material_identity_version_invalid" });
 });
 
-test("material-discover returns exactly the five governed domains and deterministic projected identities", () => {
+test("material-discover returns exactly the six governed domains and deterministic projected identities", () => {
   const first = invoke("material-discover");
   const second = invoke("material-discover");
   assert.equal(first.ok, true);
   assert.equal(canonicalize(first), canonicalize(second));
   assert.deepEqual(first.result.domains.map(({ identity }) => identity.stable_ref), [
-    "sg:domain/design-engineering", "sg:domain/game-ui", "sg:domain/layout", "sg:domain/motion", "sg:domain/platform-guides",
+    "sg:domain/design-engineering", "sg:domain/game-ui", "sg:domain/layout", "sg:domain/motion", "sg:domain/platform-guides", "sg:domain/state-management",
   ]);
   const layout = recordForPath("layout/index.md");
   const page = recordForPath("patterns/index.md");
   const pattern = recordForPath("patterns/centering/center.md");
+  const statePattern = recordForPath("state-management/patterns/derivation/derived-state.md");
   assert.equal(materialIdentityForRecord(layout).stable_ref, "sg:domain/layout");
   assert.equal(materialIdentityForRecord(page).kind, "page");
   assert.equal(materialIdentityForRecord(pattern).kind, "pattern");
+  assert.equal(materialIdentityForRecord(statePattern).kind, "pattern");
   assert.equal(materialIdentityForRecord(pattern).stable_ref, materialIdentityForRecord(pattern).stable_ref);
   assert.equal(materialIdentityForRecord(pattern).source_ref, pattern.stable_ref);
 });

@@ -6,7 +6,7 @@ export const MATERIAL_STABLE_REF_KINDS = Object.freeze(["domain", "page", "patte
 const KIND_SET = new Set(MATERIAL_STABLE_REF_KINDS);
 const KEBAB = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const PATH_ID = /^path-sha256-[a-f0-9]{64}$/;
-const DOMAIN_IDS = new Set(["layout", "motion", "design-engineering", "game-ui", "platform-guides"]);
+const DOMAIN_IDS = new Set(["layout", "motion", "design-engineering", "game-ui", "platform-guides", "state-management"]);
 const MATERIAL_ID = PATH_ID;
 
 export class MaterialIdentityError extends TypeError {
@@ -56,9 +56,9 @@ export function materialIdentityForRecord(record) {
   if (typeof repositoryPath !== "string") fail("material_record_identity_invalid", "record has no bound source path");
   let kind = "page";
   let id = `path-sha256-${sha256(Buffer.from(repositoryPath, "utf8"))}`;
-  const domainMatch = /^(layout|motion|design-engineering|game-ui|platform-guides)\/index\.md$/.exec(repositoryPath);
+  const domainMatch = /^(layout|motion|design-engineering|game-ui|platform-guides|state-management)\/index\.md$/.exec(repositoryPath);
   if (domainMatch) { kind = "domain"; id = domainMatch[1]; }
-  else if (/^patterns\/[^/]+\/[^/]+\.md$/.test(repositoryPath)) kind = "pattern";
+  else if (/^patterns\/[^/]+\/[^/]+\.md$/.test(repositoryPath) || /^state-management\/patterns\/[^/]+\/[^/]+\.md$/.test(repositoryPath)) kind = "pattern";
   return deepFreeze({
     schema_version: "2.0",
     stable_ref: createMaterialStableRef({ kind, id }),

@@ -18,33 +18,38 @@ const referenceDocuments = [
 const requiredCrossDomainStrings = [
   {
     relative: "guides/vocabulary.md",
-    required: "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, root routing, and `domain` frontmatter on governed leaves.",
-    failure: "guides/vocabulary.md: missing canonical five-domain vocabulary list",
+    required: "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, State Management, root routing, and `domain` frontmatter on governed leaves.",
+    failure: "guides/vocabulary.md: missing canonical six-domain vocabulary list",
   },
   {
     relative: "quality/index.md",
-    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, and Platform Guides claims are admissible.",
-    failure: "quality/index.md: missing canonical five-domain quality scope",
+    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, Platform Guides, and State Management claims are admissible.",
+    failure: "quality/index.md: missing canonical six-domain quality scope",
   },
   {
     relative: "README.md",
-    required: "without owning profiles, visual values, components, or a sixth domain",
+    required: "without owning profiles, visual values, components, or another governed domain",
     failure: "README.md: missing canonical Consumer Reference boundary",
   },
   {
     relative: "quality/index.md",
-    required: "without classifying it as a sixth domain",
+    required: "without classifying it as another governed domain",
     failure: "quality/index.md: missing canonical Consumer Reference boundary",
   },
   {
     relative: "quality/evidence/executable-evidence.md",
-    required: "Five governed domains and their declared leaves are reachable and attributed.",
-    failure: "quality/evidence/executable-evidence.md: missing canonical five-domain validator coverage",
+    required: "Six governed domains and their declared leaves are reachable and attributed.",
+    failure: "quality/evidence/executable-evidence.md: missing canonical six-domain validator coverage",
   },
   {
     relative: "quality/index.md",
     required: "| Find the authority route for uGUI, UI Toolkit, or NGUI. | [README](../README.md) | [Unity UI Systems](../game-ui/unity/ui-systems.md) | The first selected route is Game UI, and the system-specific source and version boundary is reached within three hops. |",
     failure: "quality/index.md: missing Game UI findability QA scenario",
+  },
+  {
+    relative: "quality/index.md",
+    required: "| Plan application-state ownership and recovery. | [README](../README.md) | [State Management](../state-management/index.md) | The first selected route is State Management and the decision tree or state brief is reached within two hops. |",
+    failure: "quality/index.md: missing State Management findability QA scenario",
   },
 ];
 
@@ -83,6 +88,28 @@ export const canonicalDomains = [
     ],
   },
   { slug: "platform-guides", label: "Platform Guides", leaves: [{ path: "platform-guides/apple-interaction.md", provenance: "external", sourcePath: "skills/apple-design/SKILL.md" }] },
+  {
+    slug: "state-management",
+    label: "State Management",
+    leaves: [
+      { path: "state-management/catalog.md", provenance: "local" },
+      { path: "state-management/guides/planning-workflow.md", provenance: "local" },
+      { path: "state-management/guides/decision-tree.md", provenance: "local" },
+      { path: "state-management/guides/state-brief.md", provenance: "local" },
+      { path: "state-management/guides/verification-matrix.md", provenance: "local" },
+      { path: "state-management/patterns/ownership/local-draft-state.md", provenance: "local" },
+      { path: "state-management/patterns/ownership/url-owned-state.md", provenance: "local" },
+      { path: "state-management/patterns/ownership/server-state-cache.md", provenance: "local" },
+      { path: "state-management/patterns/derivation/derived-state.md", provenance: "local" },
+      { path: "state-management/patterns/transitions/explicit-transition-model.md", provenance: "local" },
+      { path: "state-management/patterns/synchronization/optimistic-mutation.md", provenance: "local" },
+      { path: "state-management/recipes/pattern-to-recipe-matrix.md", provenance: "local" },
+      { path: "state-management/recipes/search-and-filter.md", provenance: "local" },
+      { path: "state-management/recipes/editable-form.md", provenance: "local" },
+      { path: "state-management/recipes/optimistic-list.md", provenance: "local" },
+    ],
+    referenceDocuments: ["state-management/patterns/index.md", "state-management/recipes/index.md"],
+  },
 ];
 export const domainRegistry = canonicalDomains;
 
@@ -155,8 +182,8 @@ function checkManifest() {
     && content.includes(`snapshot \`${revision}\``)
     && content.includes("## Shared Non-Domain Infrastructure")
     && content.includes("[Consumer Reference](consumer-reference/index.md)")
-    && content.includes("infrastructure outside the five-domain contract")
-    && content.includes("cannot add a sixth domain row");
+    && content.includes("infrastructure outside the six-domain contract")
+    && content.includes("cannot add another domain row");
 
   for (const domain of domains) {
     const domainRow = domainRows.find((row) => row[0] === domain.label);

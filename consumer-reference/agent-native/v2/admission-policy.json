@@ -633,6 +633,96 @@
       "repository_path": "recipes/saas-settings.md",
       "domain": "layout",
       "lifecycle": "stable"
+    },
+    {
+      "repository_path": "state-management/catalog.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/guides/decision-tree.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/guides/planning-workflow.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/guides/state-brief.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/guides/verification-matrix.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/index.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/patterns/derivation/derived-state.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/patterns/index.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/patterns/ownership/local-draft-state.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/patterns/ownership/server-state-cache.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/patterns/ownership/url-owned-state.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/patterns/synchronization/optimistic-mutation.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/patterns/transitions/explicit-transition-model.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/recipes/editable-form.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/recipes/index.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/recipes/optimistic-list.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/recipes/pattern-to-recipe-matrix.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "state-management/recipes/search-and-filter.md",
+      "domain": "state-management",
+      "lifecycle": "experimental"
     }
   ],
   "exclusions": [
@@ -712,5 +802,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:017b5de61c5e98779ec9b32880b3cd897c5f7012e726bdb73392572800b1f837"
+  "version_id": "sg:policy/material-admission-v2@sha256:1421527cf60a23b16689dd40d4b013b89680d6acf68efe990de4404b205031ee"
 }
