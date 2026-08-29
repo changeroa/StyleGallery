@@ -1,3 +1,9 @@
+---
+type: Example Implementation
+title: StyleGallery Homepage Example
+description: Static product-layer homepage built as an end-to-end npm package usage test of the published StyleGallery material corpus.
+---
+
 # StyleGallery Homepage Example
 
 Static product-layer homepage built as an end-to-end npm package usage test.
