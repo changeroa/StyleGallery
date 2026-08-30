@@ -34,6 +34,7 @@ const baseFiles = {
     "| [Motion](motion/index.md) | Motion domain |",
     "| [Design Engineering](design-engineering/index.md) | Design Engineering domain |",
     "| [Platform Guides](platform-guides/index.md) | Platform Guides domain |",
+    "| [State Management](state-management/index.md) | State Management domain |",
     "| [Consumer Reference](consumer-reference/index.md) | Shared infrastructure contract |",
     "| [Consumer Migration Readiness](design-engineering/consumer-migration-readiness.md) | Migration method |",
     "",
@@ -68,6 +69,7 @@ const baseFiles = {
     "- [Motion](motion/index.md)",
     "- [Design Engineering](design-engineering/index.md)",
     "- [Platform Guides](platform-guides/index.md)",
+    "- [State Management](state-management/index.md)",
     "- [Consumer reference](consumer-reference/index.md)",
     "- [Consumer migration readiness](design-engineering/consumer-migration-readiness.md)",
     "",
@@ -104,6 +106,7 @@ const baseFiles = {
   "design-engineering/reference-profiles/external-adaptation/index.md": "# External Adaptation\n\nParent: [Reference Profiles](../index.md).\nNext: [Platform Guides](../../../platform-guides/index.md).\n",
   "platform-guides/index.md": "# Platform Guides\n\n- [Apple](apple.md)\n",
   "platform-guides/apple.md": leaf("Apple", "index.md", "../layout/index.md"),
+  "state-management/index.md": "# State Management\n",
   "consumer-reference/index.md": "# Consumer Reference\n\n- [Contract](contract.md)\n- [Consumer Migration Readiness](../design-engineering/consumer-migration-readiness.md)\n",
   "consumer-reference/contract.md": leaf("Consumer Reference Contract", "index.md", "../quality/index.md"),
 };

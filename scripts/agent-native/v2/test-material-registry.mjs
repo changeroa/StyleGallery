@@ -85,7 +85,7 @@ test.after(() => { for (const root of temporaryRoots) fs.rmSync(root, { recursiv
 test("generated registry is canonical, exact, source-bound, complete, and v1-isolated", () => {
   const beforeV1 = fs.readFileSync(v1RegistryPath);
   const generated = generateMaterialRegistry({ repositoryRoot });
-  assert.equal(generated.materials.length, 126);
+  assert.equal(generated.materials.length, 144);
   assert.deepEqual(validateMaterialRegistry({ repositoryRoot, manifest: generated }), { ok: true, failures: [], materials: generated.materials });
   assert.equal(generated.version_id, recomputeManifestVersion(generated));
   assert.equal(generated.admission_policy_ref, materialAdmissionPolicy.stable_ref);
@@ -97,7 +97,10 @@ test("generated registry is canonical, exact, source-bound, complete, and v1-iso
     "design-engineering/index.md", "design-engineering/consumer-migration-readiness.md", "design-engineering/interface-craft.md",
     "game-ui/index.md", "game-ui/classification.md", "game-ui/reference-record.md", "game-ui/screen-hierarchy.md",
     "game-ui/unity/architecture.md", "game-ui/unity/cli-loop.md", "game-ui/unity/org-wiki.md", "game-ui/unity/repository-map.md", "game-ui/unity/ui-systems.md",
-    "platform-guides/index.md", "platform-guides/apple-interaction.md", "patterns/index.md", "patterns/centering/center.md",
+    "platform-guides/index.md", "platform-guides/apple-interaction.md", "state-management/index.md", "state-management/catalog.md",
+    "state-management/guides/decision-tree.md", "state-management/guides/state-brief.md",
+    "state-management/patterns/derivation/derived-state.md", "state-management/patterns/ownership/server-state-cache.md",
+    "state-management/recipes/search-and-filter.md", "patterns/index.md", "patterns/centering/center.md",
   ];
   assert.equal(required.every((entry) => generated.materials.some(({ repository_path }) => repository_path === entry)), true);
   const serialized = canonicalize(generated);

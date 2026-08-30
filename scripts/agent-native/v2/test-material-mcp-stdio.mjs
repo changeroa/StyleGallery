@@ -115,7 +115,7 @@ async function rawProtocolProbe(script, cwd) {
     const afterMalformed = next((message) => message.id === 61, "post-malformed response");
     send("{malformed-json");
     send({ jsonrpc: "2.0", id: 61, method: "resources/list", params: {} });
-    assert.equal((await afterMalformed).result.resources.length, 126);
+    assert.equal((await afterMalformed).result.resources.length, 144);
     assert.equal(allMessages.filter((message) => message.id === undefined).length, 0);
   } finally {
     child.stdin.end();
@@ -242,7 +242,7 @@ try {
   assert.deepEqual(Object.keys(material.client.getServerCapabilities()).sort(), ["resources", "tools"]);
   const tools = (await deadline(material.client.listTools(), "list tools")).tools;
   assert.deepEqual(tools.map(({ name }) => name), ["material-context", "material-discover", "material-get", "material-search"]);
-  assert.equal((await deadline(material.client.listResources(), "list resources")).resources.length, 126);
+  assert.equal((await deadline(material.client.listResources(), "list resources")).resources.length, 144);
   assert.deepEqual((await deadline(material.client.listResourceTemplates(), "list templates")).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
 
   const calls = [
@@ -257,7 +257,7 @@ try {
     assert.deepEqual(envelope(response), executeMaterialCli(cli));
   }
 
-  const selected = manifest.materials.filter(({ repository_path }) => ["layout/index.md", "motion/index.md", "design-engineering/index.md", "game-ui/index.md", "platform-guides/index.md"].includes(repository_path));
+  const selected = manifest.materials.filter(({ repository_path }) => ["layout/index.md", "motion/index.md", "design-engineering/index.md", "game-ui/index.md", "platform-guides/index.md", "state-management/index.md"].includes(repository_path));
   selected.push(manifest.materials.find(({ domain, lifecycle }) => domain === "layout" && lifecycle === "generated"));
   for (const record of selected) {
     const response = await deadline(material.client.readResource({ uri: materialResourceUri(record.stable_ref) }), "read material");
@@ -291,7 +291,7 @@ try {
   await rejected(() => v1.client.readResource({ uri: materialResourceUri(selected[0].stable_ref) }), /not found|resource/i);
   await rejected(() => material.client.readResource({ uri: "sg://self" }), /not found|resource/i);
 
-  process.stdout.write(`${JSON.stringify({ ok: true, transport: "stdio", cwd_with_spaces: true, direct_run: { real_path: true, symlink_with_spaces: true }, import_guard: importGuard, tools: 4, resources: 126, domains: 5, generated: selected[5].stable_ref, source_hashes_verified: 6, concurrent_requests: 8, raw_protocol: rawProtocol, frame_boundaries: frameBoundaries, oversized_frame: oversizedFrame, epipe, v1_tools: v1Tools, stderr_empty: true }, null, 2)}\n`);
+  process.stdout.write(`${JSON.stringify({ ok: true, transport: "stdio", cwd_with_spaces: true, direct_run: { real_path: true, symlink_with_spaces: true }, import_guard: importGuard, tools: 4, resources: 144, domains: 6, generated: selected[6].stable_ref, source_hashes_verified: 7, concurrent_requests: 8, raw_protocol: rawProtocol, frame_boundaries: frameBoundaries, oversized_frame: oversizedFrame, epipe, v1_tools: v1Tools, stderr_empty: true }, null, 2)}\n`);
 } finally {
   if (v1) {
     await deadline(v1.client.close(), "v1 shutdown");

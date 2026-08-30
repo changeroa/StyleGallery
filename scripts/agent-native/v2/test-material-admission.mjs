@@ -27,8 +27,8 @@ const v1SchemaDirectory = path.join(repositoryRoot, "consumer-reference", "agent
 const v2Directory = path.join(repositoryRoot, "consumer-reference", "agent-native", "v2");
 const temporaryRoots = new Set();
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const EXPECTED_PATH_COUNT = 126;
-const EXPECTED_PATHS_NEWLINE_SHA256 = "897c48cb3dec29fdb210e99c91d1fdfe24ea70562ba182143495b476909d2744";
+const EXPECTED_PATH_COUNT = 144;
+const EXPECTED_PATHS_NEWLINE_SHA256 = "979bb2ee0e5b77402895c5b2ffd7f4f9f9ab8b818aae6b027f7cc73118f0a4aa";
 
 function run(command, args, options = {}) {
   return spawnSync(command, args, { encoding: "utf8", maxBuffer: 8 * 1024 * 1024, timeout: 30_000, ...options });
@@ -86,7 +86,7 @@ function createRepository() {
     "AGENTS.md": "# Agents\n", "CATALOG.md": "# Catalog\n", "DOMAINS.md": "# Domains\n", "GOVERNANCE.md": "# Governance\n",
     "GUIDE.md": "# Guide\n", "README.md": "# Readme\n", "index.md": "# Index\n", "log.md": "# Log\n",
     "layout/index.md": "# Layout\n", "motion/index.md": "# Motion\n", "design-engineering/index.md": "# Design Engineering\n",
-    "game-ui/index.md": "# Game UI\n", "platform-guides/index.md": "# Platform Guides\n",
+    "game-ui/index.md": "# Game UI\n", "platform-guides/index.md": "# Platform Guides\n", "state-management/index.md": "# State Management\n",
     "patterns/index.md": "<!-- generated -->\n# Patterns\n", "patterns/centering/center.md": "# Pattern\n",
     "recipes/article-page.md": "# Article\n", "recipes/dashboard.md": "# Dashboard\n", "recipes/list-detail.md": "# List detail\n",
     "guides/layout-brief.md": "# Brief\n", "quality/index.md": "# Quality\n",
@@ -111,7 +111,7 @@ function policyVersion(policy) {
 
 test.after(() => { for (const root of temporaryRoots) fs.rmSync(root, { force: true, recursive: true }); });
 
-test("policy is closed, versioned, exact, and seals all 126 current paths", () => {
+test("policy is closed, versioned, exact, and seals all 144 current paths", () => {
   const policySchema = JSON.parse(fs.readFileSync(path.join(v2Directory, "schema", "admission-policy.schema.json"), "utf8"));
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   assert.equal(ajv.validate(policySchema, materialAdmissionPolicy), true, JSON.stringify(ajv.errors));
@@ -127,7 +127,7 @@ test("policy is closed, versioned, exact, and seals all 126 current paths", () =
   assert.equal(Object.hasOwn(materialAdmissionPolicy, "public_roots"), false);
 });
 
-test("actual repository manifest admits exactly 126 paths with deterministic identities and source versions", () => {
+test("actual repository manifest admits exactly 144 paths with deterministic identities and source versions", () => {
   const materials = materialAdmissionPolicy.allowed_materials.map(({ repository_path }) => sourceRecord(repositoryRoot, repository_path));
   const manifest = createMaterialManifest(materials);
   const result = validateMaterialManifest({ repositoryRoot, manifest });

@@ -325,7 +325,7 @@ export function materialDiscover({ repositoryRoot, fileSystem = fs }) {
     .filter(({ identity }) => identity.kind === "domain")
     .map(({ record, identity }) => ({ identity, source: sourceIdentity(record), lifecycle: record.lifecycle }))
     .sort((left, right) => compare(left.identity.stable_ref, right.identity.stable_ref));
-  if (domains.length !== 5) fail("material_domain_set_invalid", "material manifest does not contain the five governed domains");
+  if (domains.length !== 6) fail("material_domain_set_invalid", "material manifest does not contain the six governed domains");
   return deepFreeze({ schema_version: "2.0", manifest_version_id: manifest.version_id, domains });
 }
 

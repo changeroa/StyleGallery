@@ -2,7 +2,7 @@
 
 Primary role: shared non-domain infrastructure index.
 
-`consumer-reference/` is shared infrastructure for schema, provenance, routing, and evidence metadata outside the five-domain contract. It owns no profile values, visual defaults, component implementation, state behavior, product CSS, or brand authority.
+`consumer-reference/` is shared infrastructure for schema, provenance, routing, and evidence metadata outside the six-domain contract. It owns no profile values, visual defaults, component implementation, application-state behavior, product CSS, or brand authority.
 
 ## Scope Boundary
 

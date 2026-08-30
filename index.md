@@ -4,7 +4,7 @@ okf_version: "0.1"
 
 # StyleGallery
 
-StyleGallery is an OKF-style knowledge bundle organized into governed interface-knowledge domains. Existing Layout paths remain canonical while Motion, Design Engineering, Game UI, and Platform Guides own separate product and reference boundaries.
+StyleGallery is an OKF-style knowledge bundle organized into governed interface-knowledge domains. Existing Layout paths remain canonical while Motion, Design Engineering, Game UI, Platform Guides, and State Management own separate product, reference, and runtime-state boundaries.
 
 Primary role: OKF bundle map.
 
@@ -16,6 +16,7 @@ Primary role: OKF bundle map.
 - [Design Engineering](design-engineering/index.md) - Product-layer interface-craft decisions and verification questions.
 - [Game UI](game-ui/index.md) - Game-interface classification, hierarchy, reference records, and named engine implementation guides.
 - [Platform Guides](platform-guides/index.md) - Bounded comparative references for named platforms.
+- [State Management](state-management/index.md) - Framework-neutral application-state ownership, transitions, synchronization, recovery, and verification.
 - [Consumer reference](consumer-reference/index.md) - Shared non-domain receiver contract for declared repository-local JSON records or reasoned non-applicability.
 - [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) - Machine-facing identity, retrieval, operation, CLI, read-only MCP, task projection, and governed-learning contracts.
 - [Consumer migration readiness](design-engineering/consumer-migration-readiness.md) - Experimental Design Engineering method for consumer-owned conformance, runtime proof, and source-bound page evidence.

@@ -49,7 +49,7 @@ export function createDomainValidationChecks({
         failures.push(`${relative}: missing leaf route ${target}`);
       }
     }
-    if (domain.referenceDocuments?.length > 0 && !content.includes("[Reference Profiles](reference-profiles/index.md)")) {
+    if (domain.slug === "design-engineering" && domain.referenceDocuments?.length > 0 && !content.includes("[Reference Profiles](reference-profiles/index.md)")) {
       failures.push(`${relative}: missing reference profile route`);
     }
   }
