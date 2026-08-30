@@ -100,7 +100,7 @@ const PAGE_PROTECTED = Object.freeze([
   ["tests/consumer-conformance.spec.mjs", "e19df0d1131b7a65fd6e5b7b79c993d05f4a4559b64a18da673e1beede5421a3", "browser_capture_surface"],
   ["tests/fixtures/consumer-conformance-scenarios.mjs", "927d185f523e70e7f2e1fccee0013360d126e02aa532c2367670e64cdef43f12", "state_w1024_focus_contract"],
   ["tests/helpers/render-consumer-conformance.mjs", "6d5db609aaadb2f68fec1a0f1f51af1c17157cf1364631a42b35da2d6c1a0865", "capture_renderer"],
-  ["quality/evidence/executable-evidence.md", "a0ae7f2c355ab26293cdb9e96b31d91d50a024ed404aa0c8297a65b91af73a33", "archive_and_retrieval_documentation"],
+  ["quality/evidence/executable-evidence.md", "fb441412dabc0b57aeac8355f92321a9873aa67612e489e3137953d7680312b1", "archive_and_retrieval_documentation"],
   ["playwright.config.mjs", "7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae", "pinned_browser_configuration"],
 ]);
 const PAGE_ADOPTER_TRUST_ROOTS = Object.freeze([]);
