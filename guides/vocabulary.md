@@ -109,7 +109,7 @@ Primary role: vocabulary and scannability contract.
 ## Deprecated Terms
 
 - Deprecated: `component` -> `pattern`
-  - Reason: In Layout and State Management, component implies visual or framework ownership; the domains own portable problem contracts.
+  - Reason: In Layout, component implies visual or framework ownership; Layout owns spatial pattern contracts. In State Management, component can also imply framework or visual ownership; use `pattern` for the portable state responsibility.
 - Deprecated: `template` -> `recipe`
   - Reason: Template implies copy-paste completeness; recipes are starting compositions.
 - Deprecated: `proof` -> `evidence`
