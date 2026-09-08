@@ -147,8 +147,8 @@
           "start": 1,
           "end": 274
         },
-        "file_sha256": "73fa498c2ae3fe0f4e5665cc46e75fee3f89d8a82fc97613236f359e57a23d7d",
-        "content_id": "sha256:73fa498c2ae3fe0f4e5665cc46e75fee3f89d8a82fc97613236f359e57a23d7d",
+        "file_sha256": "6bb6c9fc24d0ccdc4bc2cad2f816257dba19fd8011494fd622c9f9d3c1955e28",
+        "content_id": "sha256:6bb6c9fc24d0ccdc4bc2cad2f816257dba19fd8011494fd622c9f9d3c1955e28",
         "reference_lines": [
           191,
           207
@@ -434,8 +434,8 @@
         "start": 1,
         "end": 274
       },
-      "file_sha256": "73fa498c2ae3fe0f4e5665cc46e75fee3f89d8a82fc97613236f359e57a23d7d",
-      "content_id": "sha256:73fa498c2ae3fe0f4e5665cc46e75fee3f89d8a82fc97613236f359e57a23d7d"
+      "file_sha256": "6bb6c9fc24d0ccdc4bc2cad2f816257dba19fd8011494fd622c9f9d3c1955e28",
+      "content_id": "sha256:6bb6c9fc24d0ccdc4bc2cad2f816257dba19fd8011494fd622c9f9d3c1955e28"
     },
     "forwarding": {
       "path": "scripts/agent-native/a2a-projection.mjs",
