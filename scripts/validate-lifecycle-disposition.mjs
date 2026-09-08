@@ -594,6 +594,8 @@ const PAGE_ARCHIVE_PACKET = Object.freeze([
   "records/consumer-conformance.json", "provenance/source-commit.txt",
 ]);
 const PAGE_ARCHIVE_PROTECTED = Object.freeze(PAGE_PROTECTED.map(([repositoryPath, expectedSha, role]) => {
+  // Historical archive bytes remain pinned when current authoring documentation changes.
+  if (repositoryPath === "quality/evidence/executable-evidence.md") return [repositoryPath, "a0ae7f2c355ab26293cdb9e96b31d91d50a024ed404aa0c8297a65b91af73a33", role];
   if (repositoryPath === "tests/consumer-conformance.spec.mjs") return [repositoryPath, "a7b7e117fff636830029e9923fc828ed92d1d22ac91f3efde338eb154b0101e7", role];
   if (repositoryPath === "tests/fixtures/consumer-conformance-scenarios.mjs") return [repositoryPath, "67aa1931764237ee9485d0e81606c2721297e2c3517a321be4c4e945149fbe58", role];
   return [repositoryPath, expectedSha, role];

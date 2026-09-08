@@ -13,6 +13,9 @@
 
 Implementation handoff: `consumer_reference: consumer-reference/agent-native/registry.json`.
 
+Consumer reference: declared
+Consumer reference record: consumer-reference/agent-native/registry.json
+
 Terminology reliance: `figma.variable`, `figma.mode`, `figma.collection`, `figma.component`, `dtcg.token`, `dtcg.group`, `dtcg.token.draft2`, `css.custom-property`, `carbon.component`, `carbon.pattern`, and `stylegallery.pattern`. Relation types used in the records: `partial_overlap`, `implementation_representation`, `not_comparable`, `same_label_different_meaning`, and `near_equivalent`. Their named Figma, DTCG, CSSWG, Carbon, and local Layout sources were rechecked on 2026-09-08; this is an author review, not independent semantic approval. Direct locators and comparison boundaries are in [Term Cases](design-terminology/conflict-cases.md).
 
 ## 2026-08-18

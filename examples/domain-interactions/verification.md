@@ -71,6 +71,9 @@ All 21 original core/source digests, six CLI byte-output goldens, registry recor
 
 Implementation handoff: `consumer_reference: consumer-reference/agent-native/registry.json`. No design-terminology term/relation records are used by this runtime implementation.
 
+Consumer reference: declared
+Consumer reference record: consumer-reference/agent-native/registry.json
+
 ## Navigation
 
 Parent: [Interaction Lab](README.md).
