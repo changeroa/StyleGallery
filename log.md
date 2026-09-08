@@ -2,6 +2,7 @@
 
 ## 2026-09-08
 
+- Prepared npm release `stylegallery@0.1.5` with the complete six-domain, 147-document Material v2 corpus and the README compatibility repair.
 - Added fourteen local guides across the five non-Layout domains: task selection, motion briefs and recipes, component contracts and worked examples, game screen recipes and verification, Apple/Android/Windows adaptation, and terminology comparison.
 - Connected the guides through domain hubs and root routes, declared their membership/provenance, and included them in the closed 147-document material index and npm package. Layout retains its existing 46 patterns and spatial boundaries.
 - Replaced unsupported aggregate term records with directly sourced records; corrected representation direction and the confusion between composition and set containment. The Markdown validator now checks dates, source locators, labels, scoped direction, temporal relations, inverse consistency, and containment cycles with negative fixtures.
