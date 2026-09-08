@@ -4,7 +4,7 @@ okf_version: "0.1"
 
 # StyleGallery
 
-StyleGallery is an OKF-style knowledge bundle organized into governed interface-knowledge domains. Existing Layout paths remain canonical while Motion, Design Engineering, Game UI, and Platform Guides own separate product and reference boundaries.
+StyleGallery is an OKF-style knowledge bundle organized into governed interface-knowledge domains. Existing Layout paths remain canonical while Motion, Design Engineering, Game UI, Platform Guides, and Design Terminology own separate product and reference boundaries.
 
 Primary role: OKF bundle map.
 
@@ -16,6 +16,7 @@ Primary role: OKF bundle map.
 - [Design Engineering](design-engineering/index.md) - Product-layer interface-craft decisions and verification questions.
 - [Game UI](game-ui/index.md) - Game-interface classification, hierarchy, reference records, and named engine implementation guides.
 - [Platform Guides](platform-guides/index.md) - Bounded comparative references for named platforms.
+- [Design Terminology](design-terminology/index.md) - Source-kind and concept-family classification, typed term relations, and cross-system conflict cases for named vocabulary sources.
 - [Consumer reference](consumer-reference/index.md) - Shared non-domain receiver contract for declared repository-local JSON records or reasoned non-applicability.
 - [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) - Machine-facing identity, retrieval, operation, CLI, read-only MCP, task projection, and governed-learning contracts.
 - [Consumer migration readiness](design-engineering/consumer-migration-readiness.md) - Experimental Design Engineering method for consumer-owned conformance, runtime proof, and source-bound page evidence.
@@ -34,3 +35,11 @@ Primary role: OKF bundle map.
 - [Quality gates](quality/index.md) - Principle-backed gates for admissible layout and design evidence claims.
 - [Consumer migration evidence gate](quality/gates/consumer-migration-evidence.md) - Blocking contract for declared migration evidence.
 - [Update log](log.md) - Bundle update history.
+
+## Applied Workflows
+
+- [Motion Decision Tree](motion/decision-tree.md) - Choose a behavior from the user task.
+- [Design Engineering Decision Tree](design-engineering/decision-tree.md) - Route the uncertain product decision.
+- [Game UI Decision Tree](game-ui/decision-tree.md) - Choose by player task and ownership.
+- [Platform Adaptation Workflow](platform-guides/adaptation-workflow.md) - Record native facts, target decisions, and fallbacks.
+- [Design Term Comparison Workflow](design-terminology/comparison-workflow.md) - Resolve a source-specific question and produce a scoped handoff.

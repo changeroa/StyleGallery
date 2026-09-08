@@ -19,20 +19,22 @@ This manifest is the source of truth for top-level StyleGallery domains. A domai
 | Design Engineering | [Design Engineering](design-engineering/index.md) | `experimental` | Product-layer craft questions and evidence-bearing decisions. | A second shared principle system or taste as proof. | Design Engineering domain owner |
 | Game UI | [Game UI](game-ui/index.md) | `experimental` | Game-interface classification, hierarchy, reference records, and implementation guides nested by engine. | Reusable Layout CSS or claims that one engine structure is universal. | Game UI domain owner |
 | Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` | Comparative references for a named platform and version context. | Affiliation, brand imitation, or authority over web standards. | Platform Guides domain owner |
+| Design Terminology | [Design Terminology](design-terminology/index.md) | `experimental` | Source-kind classification, concept-family classification, typed term relations, and cross-system conflict cases for named vocabulary sources. | StyleGallery's own controlled vocabulary, motion terminology, visual token values, universal naming prescriptions, or authority over external vocabularies. | Design Terminology domain owner |
 
 ## Page Manifest
 
 | Domain | Manual hub | Governed leaves |
 | --- | --- | --- |
 | Layout | `layout/index.md` | Existing `GUIDE.md`, Layout-specific `guides/*.md`, and `recipes/*.md`; generated `patterns/**/*.md` and `CATALOG.md` remain at current paths. Shared `quality/**/*.md` infrastructure governs every domain without becoming a Layout leaf. |
-| Motion | `motion/index.md` | `motion/vocabulary.md`, `motion/review-workflow.md`, `motion/practice-reference.md` |
-| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/consumer-migration-readiness.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md` |
-| Game UI | `game-ui/index.md` | `game-ui/classification.md`, `game-ui/screen-hierarchy.md`, `game-ui/reference-record.md`, `game-ui/unity/architecture.md`, `game-ui/unity/ui-systems.md`, `game-ui/unity/cli-loop.md`, `game-ui/unity/repository-map.md`, `game-ui/unity/org-wiki.md` |
-| Platform Guides | `platform-guides/index.md` | `platform-guides/apple-interaction.md` |
+| Motion | `motion/index.md` | `motion/vocabulary.md`, `motion/review-workflow.md`, `motion/practice-reference.md`, `motion/decision-tree.md`, `motion/motion-brief.md`, `motion/interaction-recipes.md` |
+| Design Engineering | `design-engineering/index.md` | `design-engineering/interface-craft.md`, `design-engineering/consumer-migration-readiness.md`, `design-engineering/reference-profiles/index.md`, `design-engineering/reference-profiles/governed-local/index.md`, `design-engineering/reference-profiles/external-adaptation/index.md`, `design-engineering/decision-tree.md`, `design-engineering/component-contract.md`, `design-engineering/worked-examples.md` |
+| Game UI | `game-ui/index.md` | `game-ui/classification.md`, `game-ui/screen-hierarchy.md`, `game-ui/reference-record.md`, `game-ui/unity/architecture.md`, `game-ui/unity/ui-systems.md`, `game-ui/unity/cli-loop.md`, `game-ui/unity/repository-map.md`, `game-ui/unity/org-wiki.md`, `game-ui/decision-tree.md`, `game-ui/screen-recipes.md`, `game-ui/verification-workflow.md` |
+| Platform Guides | `platform-guides/index.md` | `platform-guides/apple-interaction.md`, `platform-guides/adaptation-workflow.md`, `platform-guides/android-interaction.md`, `platform-guides/windows-interaction.md`, `platform-guides/compatibility-matrix.md` |
+| Design Terminology | `design-terminology/index.md` | `design-terminology/source-kinds.md`, `design-terminology/source-vocabularies.md`, `design-terminology/concept-families.md`, `design-terminology/relation-types.md`, `design-terminology/conflict-cases.md`, `design-terminology/comparison-workflow.md` |
 
 ## Shared Non-Domain Infrastructure
 
-[Consumer Reference](consumer-reference/index.md) is shared schema, provenance, routing, evidence, lifecycle, and machine-retrieval infrastructure outside the five-domain contract. Its source-bound material v2 index classifies admitted pages by these five domains but does not own their prose. It owns no profile implementation, visual values, or product CSS and cannot add a sixth domain row. Consumer or profile records may depend on Layout; Layout and its generated corpus cannot import consumer-reference, profile, material-registry, or transport records.
+[Consumer Reference](consumer-reference/index.md) is shared schema, provenance, routing, evidence, lifecycle, and machine-retrieval infrastructure outside the six-domain contract. Its source-bound material v2 index classifies admitted pages by these six domains but does not own their prose. It owns no profile implementation, visual values, or product CSS and cannot add a seventh domain row. Consumer or profile records may depend on Layout; Layout and its generated corpus cannot import consumer-reference, profile, material-registry, or transport records.
 
 ## External Adaptation Contract
 
@@ -45,7 +47,9 @@ The initial five domain leaves are independent method rewrites inspired by [emil
 - If recognizable upstream expression is added later, preserve the full upstream MIT notice and record the copied material separately before merge.
 - Tracked repository documents must not depend on `.omo/`; stable upstream blob links and tracked repository contracts carry contributor-facing provenance.
 
-`design-engineering/consumer-migration-readiness.md` is the separately declared StyleGallery-local leaf. It uses `provenance_kind: local`, carries no external source fields, and remains experimental. Its presence does not change the external-adaptation inventory or make its consumer-local method universal policy.
+The workflow, brief, contract, recipe, and comparison leaves added under the five non-Layout domains are StyleGallery-local synthesis with `provenance_kind: local`; their worked scenarios are proposals, not captured product evidence. The domain indexes route selection, authoring, application, and verification.
+
+`design-engineering/consumer-migration-readiness.md` is a separately declared StyleGallery-local leaf. It uses `provenance_kind: local`, carries no external source fields, and remains experimental. Its presence does not change the external-adaptation inventory or make its consumer-local method universal policy.
 
 ## Lifecycle And Staleness
 

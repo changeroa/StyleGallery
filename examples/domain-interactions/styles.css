@@ -1,0 +1,46 @@
+/* Product-layer demonstration styles; not reusable Layout pattern CSS. */
+:root {
+  color: #182331;
+  background: #f3f5f7;
+  font: 100%/1.5 system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1rem; }
+header, main, footer { margin-inline: auto; max-inline-size: 65rem; }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; }
+h2 { font-size: 1.35rem; }
+section, dialog {
+  background: white;
+  border: 1px solid #9eaebe;
+  border-radius: .5rem;
+  margin-block: 1rem;
+  padding: 1rem;
+}
+section, article, p, strong, button { overflow-wrap: anywhere; }
+form, fieldset { display: grid; gap: .65rem; }
+input, button, summary { font: inherit; }
+input:not([type="radio"]), button { min-block-size: 2.75rem; }
+input:not([type="radio"]) { inline-size: 100%; min-inline-size: 0; }
+button {
+  background: #173f69;
+  border: 1px solid #173f69;
+  border-radius: .25rem;
+  color: white;
+  cursor: pointer;
+  padding: .5rem .9rem;
+}
+button:disabled { background: #e0e6ed; border-color: #788b9e; color: #3a4857; cursor: default; }
+:focus-visible { outline: 3px solid #a23c00; outline-offset: 3px; }
+summary { cursor: pointer; padding-block: .65rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.search-panes { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.search-panes > * { min-inline-size: 0; }
+ul { display: grid; gap: .5rem; padding-inline-start: 1.5rem; }
+dialog { margin: auto; max-block-size: 90dvh; max-inline-size: min(34rem, calc(100% - 2rem)); overflow: auto; }
+dialog::backdrop { background: rgb(15 25 40 / 55%); }
+[hidden] { display: none !important; }
+[role="alert"] { color: #9d270a; }
+@media (max-width: 40rem) {
+  .search-panes { grid-template-columns: minmax(0, 1fr); }
+  .search-panes[data-view="detail"] #search-list { display: none; }
+}

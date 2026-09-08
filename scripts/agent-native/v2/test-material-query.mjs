@@ -100,13 +100,13 @@ test("v2 identity grammar is closed and v1 rejects every v2 kind", () => {
   assert.throws(() => parseMaterialStableRef({ schema_version: "1.0", stable_ref: "sg:domain/layout" }), { code: "material_identity_version_invalid" });
 });
 
-test("material-discover returns exactly the five governed domains and deterministic projected identities", () => {
+test("material-discover returns exactly the six governed domains and deterministic projected identities", () => {
   const first = invoke("material-discover");
   const second = invoke("material-discover");
   assert.equal(first.ok, true);
   assert.equal(canonicalize(first), canonicalize(second));
   assert.deepEqual(first.result.domains.map(({ identity }) => identity.stable_ref), [
-    "sg:domain/design-engineering", "sg:domain/game-ui", "sg:domain/layout", "sg:domain/motion", "sg:domain/platform-guides",
+    "sg:domain/design-engineering", "sg:domain/design-terminology", "sg:domain/game-ui", "sg:domain/layout", "sg:domain/motion", "sg:domain/platform-guides",
   ]);
   const layout = recordForPath("layout/index.md");
   const page = recordForPath("patterns/index.md");
@@ -138,10 +138,13 @@ test("search normalization preserves attached Unicode marks and delimits standal
   assert.equal(canonicalize(plain.result.results), canonicalize(normalized.result.results));
 });
 
-test("known Layout ranking uses title=16 path=8 body=1 unique-token field membership", () => {
+test("known Layout ranking uses rarity-weighted title=16 path=8 body=1 unique-token field membership", () => {
   const response = invoke("material-search", { query: "Layout", limit: 100 });
   assert.equal(response.ok, true);
   assert.deepEqual(response.result.weights, MATERIAL_SEARCH_WEIGHTS);
+  assert.equal(response.result.rarity_weighting, "ceil(material_count / max(1, token_document_frequency))");
+  assert.equal(response.result.rarity_weights.length, 1);
+  assert.equal(response.result.rarity_weights[0].token, "layout");
   assert.equal(response.result.results[0].identity.stable_ref, "sg:domain/layout");
   const layout = response.result.results.find(({ identity }) => identity.stable_ref === "sg:domain/layout");
   const source = fs.readFileSync(path.join(repositoryRoot, "layout/index.md"), "utf8");
@@ -149,9 +152,22 @@ test("known Layout ranking uses title=16 path=8 body=1 unique-token field member
   const expected = Number(new Set(tokenizeMaterialText(title)).has("layout")) * 16
     + Number(new Set(tokenizeMaterialText("layout/index.md")).has("layout")) * 8
     + Number(new Set(tokenizeMaterialText(source)).has("layout"));
-  assert.equal(layout.score, expected);
-  assert.equal(layout.score, 25);
+  assert.equal(layout.score, expected * response.result.rarity_weights[0].multiplier);
   assert.deepEqual(layout.match_counts, { title: 1, path: 1, body: 1 });
+});
+
+test("rarity weighting ranks the specific sticky intent above generic Layout hubs", () => {
+  const response = invoke("material-search", { query: "sticky layout", limit: 5, paths_only: true });
+  assert.equal(response.ok, true);
+  assert.deepEqual(response.result.paths.slice(0, 3), [
+    "patterns/split-sidebar/sticky-aside.md",
+    "patterns/viewport-shell/sticky-header.md",
+    "patterns/viewport-shell/sticky-footer.md",
+  ]);
+  const sticky = response.result.rarity_weights.find(({ token }) => token === "sticky");
+  const layout = response.result.rarity_weights.find(({ token }) => token === "layout");
+  assert.ok(sticky.document_frequency < layout.document_frequency);
+  assert.ok(sticky.multiplier > layout.multiplier);
 });
 
 test("paths-only search preserves ranking while projecting repository-relative paths", () => {
@@ -179,6 +195,12 @@ test("public domain leaf queries resolve to npm-portable repository paths", () =
     ["unity cli loop", "game-ui/unity/cli-loop.md"],
     ["motion review workflow", "motion/review-workflow.md"],
     ["Apple interaction", "platform-guides/apple-interaction.md"],
+    ["motion interaction recipes", "motion/interaction-recipes.md"],
+    ["component contract", "design-engineering/component-contract.md"],
+    ["game ui screen recipes", "game-ui/screen-recipes.md"],
+    ["android interaction", "platform-guides/android-interaction.md"],
+    ["windows interaction", "platform-guides/windows-interaction.md"],
+    ["design term comparison workflow", "design-terminology/comparison-workflow.md"],
   ];
   for (const [query, expected] of cases) {
     const response = invoke("material-search", { query, limit: 5, paths_only: true });
@@ -201,10 +223,11 @@ test("synthetic equal scores tie strictly by projected StableRef", () => {
     const paths = ["motion/index.md", "game-ui/index.md"];
     for (const repositoryPath of paths) fs.appendFileSync(path.join(root, repositoryPath), "\nzzztietoken\nzzztietoken\n");
     rebindSources(root, paths);
-    const results = createMaterialOperationRegistry({ repositoryRoot: root }).invoke("material-search", { query: "zzztietoken", limit: 10 }).result.results;
+    const result = createMaterialOperationRegistry({ repositoryRoot: root }).invoke("material-search", { query: "zzztietoken", limit: 10 }).result;
+    const results = result.results;
     assert.equal(results.length, 2);
-    assert.equal(results[0].score, 1);
-    assert.equal(results[1].score, 1);
+    assert.equal(results[0].score, result.rarity_weights[0].multiplier);
+    assert.equal(results[1].score, result.rarity_weights[0].multiplier);
     assert.ok(results[0].identity.stable_ref < results[1].identity.stable_ref);
   } finally { fs.rmSync(root, { recursive: true, force: true }); }
 });

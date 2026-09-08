@@ -8,6 +8,16 @@ In scope: naming observable motion, reviewing declared behavior, distinguishing 
 
 Out of scope: universal timing or easing rules, unmeasured performance claims, and permission to add animation or decorative properties to reusable Layout pattern CSS.
 
+## Start Here
+
+| Task | Route |
+| --- | --- |
+| Choose a behavior from the user task. | [Motion Decision Tree](decision-tree.md) |
+| Record states, owners, interruption, and evidence. | [Motion Brief](motion-brief.md) |
+| Apply feedback, disclosure, modal, reorder, progress, and drag contracts. | [Motion Interaction Recipes](interaction-recipes.md) |
+
+These workflows and worked cases are usable experimental guidance. Expected-result tables are test designs; actual product, engine, and reader evidence must be recorded separately. Review on a failed task, a source change, or a changed ownership contract.
+
 ## Documents
 
 - [Motion Vocabulary](vocabulary.md) maps observed behavior to implementation-neutral terms while preserving ambiguity.
@@ -21,4 +31,4 @@ See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page member
 ## IA Navigation
 
 Parent: [StyleGallery](../index.md).
-Next: [Motion Vocabulary](vocabulary.md).
+Next: [Motion Decision Tree](decision-tree.md).

@@ -14,6 +14,16 @@ The player-task classes and classification axes are a local taxonomy proposed fo
 
 Interface In Game was reviewed on 2026-07-14 through its [home page](https://interfaceingame.com/), [games index](https://interfaceingame.com/games/), and representative records for [Team Fortress 2](https://interfaceingame.com/games/team-fortress-2/), [Genshin Impact (Mobile)](https://interfaceingame.com/games/genshin-impact-mobile/), and [Gris](https://interfaceingame.com/games/gris/). In this bounded sample, the site exposed site-local facets such as Genres, Themes, and Platforms, while screenshots used Elements. The sample informs the local separation of player task from other axes; it does not cover the archive or establish the site's full information model.
 
+## Start Here
+
+| Task | Route |
+| --- | --- |
+| Choose by player task and ownership. | [Game UI Decision Tree](decision-tree.md) |
+| Compose all ten player-task classes with failure cases. | [Game UI Screen Recipes](screen-recipes.md) |
+| Record input, state, hierarchy, and teardown evidence. | [Game UI Verification Workflow](verification-workflow.md) |
+
+These workflows and worked cases are usable experimental guidance. Expected-result tables are test designs; actual product, engine, and reader evidence must be recorded separately. Review on a failed task, a source change, or a changed ownership contract.
+
 ## Available Guides
 
 - [Game UI Classification](classification.md) separates player purpose from visual language, input, state, and motion.
@@ -32,4 +42,4 @@ Game UI describes interface purpose, screen composition, and how named engines c
 ## IA Navigation
 
 Parent: [StyleGallery](../index.md).
-Next: [Game UI Classification](classification.md).
+Next: [Game UI Decision Tree](decision-tree.md).

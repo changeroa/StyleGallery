@@ -42,10 +42,17 @@ Use this file before editing repository documentation. It names which file is au
 | Design Engineering domain guidance | `design-engineering/*.md` | Manual | None | `experimental` | Upstream revision, evidence boundary, or guidance changes. | `scripts/validate-domains.mjs` | Design Engineering domain owner |
 | Game UI domain guidance | `game-ui/**/*.md` | Manual | None | `experimental` | Classification, hierarchy, engine implementation, evidence boundary, or route changes. | `scripts/validate-domains.mjs` | Game UI domain owner |
 | Platform Guides domain guidance | `platform-guides/*.md` | Manual | None | `experimental` | Platform version, upstream revision, evidence boundary, or guidance changes. | `scripts/validate-domains.mjs` | Platform Guides domain owner |
+| Design Terminology domain guidance | `design-terminology/*.md` | Manual; term and relation tables remain authoring sources | None | `experimental` | Source-kind, source-vocabulary, concept-family, relation-model, or conflict-case changes. | `scripts/validate-domains.mjs`, `scripts/validate-design-terminology.mjs` | Design Terminology domain owner |
 | Pattern data and examples | `scripts/pattern-data.mjs` | Manual data source | `patterns/**/*.md`, `patterns/**/index.md`, `patterns/index.md`, `CATALOG.md` | `generated` output from `stable` source | Source-lineage URL changes, generated drift, category changes, or pattern count changes. | `scripts/validate-patterns.mjs`, `scripts/validate-catalog.mjs`, `scripts/validate-governance.mjs` | Pattern-data owner |
 | Pattern generator | `scripts/generate-patterns.mjs` | Manual code source | `patterns/**/*.md`, `patterns/**/index.md`, `patterns/index.md`, `CATALOG.md` | `stable` generator, `generated` output | Generated structure changes, generated-warning changes, or generated metadata changes. | `node -c scripts/generate-patterns.mjs`, generated drift check, `scripts/validate-governance.mjs` | Pattern-data owner |
 | Validation scripts | `scripts/validate-*.mjs`, `scripts/test-validate-*.mjs` | Manual code source | CI validation output | `stable` | Validator scope changes, fixture changes, or CI parity changes. | `node -c`, matching fixture tests, `.github/workflows/validate.yml` | Validation owner |
 | CI workflows | `.github/workflows/validate.yml`, `.github/workflows/evidence-freshness.yml` | Manual | GitHub Actions runs and audit artifacts | `stable` | Validation step, explicit-deadline schedule, generated drift policy, or owner changes. | GitHub Actions, `scripts/validate-governance.mjs` | Repository governance owner |
+
+## Domain Workflow Verification Boundary
+
+The non-Layout hubs route selection, briefs/contracts, applied recipes or cases, and verification. Their local leaves declare `provenance_kind: local` and remain `experimental`. Worked examples contain expected outcomes, not captured product or engine evidence. `scripts/validate-domains.mjs` checks declared membership, provenance, sections, and routes; it does not execute those examples.
+
+The Design Terminology Markdown tables additionally require directly located sources, labels, valid dates, explicit comparison scope and direction, and consistent relation graphs. `scripts/validate-design-terminology.mjs` and its negative fixtures check those record invariants; semantic accuracy and independent promotion review remain human judgments. Material v2 indexes only the admitted Markdown bytes. Changing the allowed document set requires updating its closed inventory, digest, package exposure, and generated registry together, without admitting code, schemas, profiles, or fixtures as material.
 
 ## Generated Artifact Policy
 
@@ -98,7 +105,7 @@ Use these states in reviews and governance notes. Do not invent new lifecycle la
 Default lifecycle:
 
 - Root docs, guides, recipes, quality docs, validators, and CI are `stable` unless a page explicitly says otherwise.
-- `DOMAINS.md`, the scope decision, and `layout/index.md` are `stable`; domain leaves under `motion/`, `design-engineering/`, `game-ui/`, and `platform-guides/` begin `experimental`.
+- `DOMAINS.md`, the scope decision, and `layout/index.md` are `stable`; domain leaves under `motion/`, `design-engineering/`, `game-ui/`, `platform-guides/`, and `design-terminology/` begin `experimental`.
 - Generated pattern docs, generated pattern indexes, and `CATALOG.md` are `generated`.
 - Draft research artifacts under `.omo/` are `draft` or `experimental` and are not contributor-facing source of truth.
 
@@ -125,6 +132,7 @@ Consumer-reference ownership records the current truth as `owner.enforcement: "p
 | `tests/**`, `playwright.config.mjs`, `consumer-reference/baselines/**`, `scripts/*baseline*.mjs`, `scripts/*sentinel*.mjs`, `scripts/*renderer-purity.mjs` | Repository governance owner with Validation owner | Pure rendering, computed semantics before screenshots, immutable browser pins, required consumer-conformance semantics, optional raster capture, calibration cardinality, and pending owner approval. |
 | `game-ui/**` | Game UI domain owner | Player-task classification, hierarchy responsibility, reference records, engine-specific subtrees, and cross-engine boundaries. |
 | `platform-guides/**` | Platform Guides domain owner | Platform/source/version limits, comparison boundaries, and stale review. |
+| `design-terminology/**` | Design Terminology domain owner | Term-family classification, comparative system definitions, conflict-case boundaries, and external vocabulary citations. |
 | `scripts/validate-*.mjs`, `scripts/test-validate-*.mjs`, `.github/workflows/validate.yml`, `.github/workflows/evidence-freshness.yml` | Validation owner | Validator scope, negative fixtures, blocking/advisory boundaries, CI parity. |
 
 ## Shared Promotion Governance

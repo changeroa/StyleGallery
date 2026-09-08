@@ -1,0 +1,73 @@
+# Design Terminology
+
+Design Terminology owns the decision surface that binds design terms to their named sources, classifies them by source kind and concept family, and judges typed semantic relations and conflicts between them.
+
+## Scope Boundary
+
+In scope: source-kind classification for named vocabulary sources, concept-family classification for design terms, a typed relation model between terms from different sources, source-bounded vocabulary inventories with freshness fields, and cross-system conflict cases.
+
+Out of scope: StyleGallery's own canonical naming, actual UI behavior or implementation methods, accessibility rules, platform-specific interaction adaptation, universal prescriptions about which term is generally better, and authority over any external vocabulary.
+
+This domain decides: which source a term belongs to, what kind of source that is, which concept family the term serves, and what typed relation holds between two terms with its boundary. It does not decide what StyleGallery calls things internally, whether an implementation is correct, or which external definition wins.
+
+## Evidence And Research Boundary
+
+V0.1 is a Markdown-only browsing and verification stage. Term records and typed relations are authored and reviewed as Markdown tables in [Cross-System Term Cases](conflict-cases.md); a machine-readable term, concept, source, and relation registry is a prerequisite for promotion beyond `experimental`. Material v2 currently exposes these pages through document search only; it does not answer structured crosswalk queries.
+
+Representative questions this domain answers: are Figma's variable, the DTCG design token, and the CSS custom property the same thing; is a component a pattern; is a style guide the same as a design system; which of two clashing labels came from which source.
+
+## Promotion To Stable
+
+Domain lifecycle decisions follow the [repository-owner policy](../DOMAINS.md#lifecycle-and-staleness). The following source, ownership, and machine-contract checks inform a proposed transition beyond `experimental`:
+
+- A named review owner, secondary reviewer, freshness owner, and dispute resolver are recorded.
+- A machine-readable registry with schema exists for terms, concepts, sources, and relations; until then `scripts/validate-design-terminology.mjs` enforces record consistency on the Markdown tables.
+- A relation invariant validator derived from the forbidden error states in [Design Term Relations](relation-types.md) passes.
+- Every term carries a direct source locator.
+- Every relation names both sources and a non-trivial boundary.
+- Representative findability queries return a target document or record.
+- Unresolved semantic disputes: zero.
+- Stale sources beyond their re-review trigger: zero.
+
+Reader tasks, user studies, adoption counts, and attestations are neither required nor sufficient for a domain lifecycle change. Reader-task observations may support a separately scoped findability claim.
+
+## Content Review Contract
+
+Record consistency is enforced mechanically from v0.1 by `scripts/validate-design-terminology.mjs`, which parses the term and relation tables and rejects unknown types, duplicate or unrecorded terms, missing source locators, empty boundaries/scopes, conflicting directions, containment cycles, impossible calendar dates, invalid temporal relations, label mismatches, and orphan terms. Source meaning and authority remain review judgments. Human semantic review is a **stable-promotion gate only**, not a merge gate for `experimental` content; it covers every term and relation (not a sample) against this checklist:
+
+- Is the source kind correct for each cited source?
+- Does each term description match what its source actually supports?
+- Is each relation type appropriate for its pair?
+- Is each relation boundary sufficient?
+- Are both terms compared at the same abstraction level?
+- Is official-source authority overstated anywhere?
+- Is each historical/current status correct?
+
+The review result is recorded as: terms reviewed, relations reviewed, counts of accepted, revised, and unresolved items, reviewer name, and review date. Author self-audit alone does not satisfy promotion.
+
+This domain is a working method template: consumers may fork it and re-record their own sources, terms, and relations. Forked records are consumer-owned and never feed values back into StyleGallery.
+
+## Start Here
+
+| Task | Route |
+| --- | --- |
+| Resolve a source-specific question and produce a scoped handoff. | [Design Term Comparison Workflow](comparison-workflow.md) |
+
+These workflows and worked cases are usable experimental guidance. Expected-result tables are test designs; actual product, engine, and reader evidence must be recorded separately. Review on a failed task, a source change, or a changed ownership contract.
+
+## Available Guides
+
+- [Design Source Kinds](source-kinds.md) classifies what kind of thing a vocabulary source is before its terms are read.
+- [Design Source Vocabularies](source-vocabularies.md) inventories named sources with kind, version boundary, status, and review date.
+- [Design Concept Families](concept-families.md) classifies design terms by the decision each term serves.
+- [Design Term Relations](relation-types.md) defines the typed relation model and the term record shape.
+- [Cross-System Term Cases](conflict-cases.md) applies typed relations to recorded term records and conflict scenarios.
+
+## Domain Contract
+
+[Vocabulary](../guides/vocabulary.md) owns StyleGallery's canonical internal word set; Design Terminology compares the meanings and relations of terms used by external named sources. Platform Guides compares platform interaction conventions, not terminology; Motion owns motion terminology. Naming rationale: topology suggests a relation graph this domain does not yet provide; terminology is the accurate name for comparing definitions, usage scope, and conflicts. Scope decision: [Design Terminology Domain Scope Decision](../quality/claim-records/design-terminology-domain-scope.md).
+
+## IA Navigation
+
+Parent: [StyleGallery](../index.md).
+Next: [Design Term Comparison Workflow](comparison-workflow.md).

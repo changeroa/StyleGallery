@@ -16,7 +16,7 @@ const manifestPath = path.join(repositoryRoot, "consumer-reference", "agent-nati
 const exposedNames = new Set(["material-context", "material-discover", "material-get", "material-search"]);
 const descriptions = Object.freeze({
   "material-context": "Build a deterministic, provenance-bound material context within a token budget.",
-  "material-discover": "Discover the five governed StyleGallery domain entries.",
+  "material-discover": "Discover the six governed StyleGallery domain entries.",
   "material-get": "Read bounded UTF-8 bytes for one canonical v2 material StableRef.",
   "material-search": "Search admitted material deterministically, optionally returning only repository-relative paths.",
 });

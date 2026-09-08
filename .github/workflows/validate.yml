@@ -42,6 +42,8 @@ jobs:
           node -c scripts/test-validate-governance.mjs
           node -c scripts/validate-domains.mjs
           node -c scripts/test-validate-domains.mjs
+          node -c scripts/validate-design-terminology.mjs
+          node -c scripts/test-validate-design-terminology.mjs
           node -c scripts/validate-consumer-reference.mjs
           node -c scripts/test-validate-consumer-reference.mjs
           node -c scripts/consumer-reference-case-runner.mjs
@@ -118,6 +120,8 @@ jobs:
         run: |
           node scripts/validate-domains.mjs --json
           node scripts/test-validate-domains.mjs
+          node scripts/validate-design-terminology.mjs --json
+          node scripts/test-validate-design-terminology.mjs
 
       - name: Unity organization compressed wiki check
         run: |
