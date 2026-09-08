@@ -57,8 +57,8 @@ const OWNER_TRUST_ROOT = Object.freeze({
 });
 const AUTHORIZED_APPROVAL_COMMITS = Object.freeze([]);
 const SENTINEL_WORKFLOW_PATH = ".github/workflows/validate.yml";
-const SENTINEL_ACTIVE_WORKFLOW_SHA256 = "846417a45a462a51ba28028621ff9fe82cf018be15b8a433a661d7d0d7af3017";
-const SENTINEL_RETIRED_WORKFLOW_SHA256 = "421c63222db3dfb5af03630c437a4b8b0f755a6146abec4e5d213eb2b0369620";
+const SENTINEL_ACTIVE_WORKFLOW_SHA256 = "b7aac452ac49ec1bc287ef3d75efe3806895eb147172b106634394f413a520fc";
+const SENTINEL_RETIRED_WORKFLOW_SHA256 = "e1d2cc248efdad81267326fdf2706335a7d4e6f4e271f05a37904102313b347b";
 const SENTINEL_JOB_SHA256 = "86228e7fb44c2ba5d0abe160d6bd3c4f5228e7c1ec40189b3b4f528acfd45e62";
 const SENTINEL_PROTECTED = Object.freeze([
   ["consumer-reference/baselines/calibration.json", "b537b0c3acb3ac55e4b926b1d12b41d2cb8050a85de2410ad4b42e1b7b53f88e", "raw_20_run_aggregate_and_provenance"],
@@ -80,8 +80,8 @@ const SENTINEL_PROTECTED = Object.freeze([
   ["tests/helpers/render-consumer-reference.mjs", "88802a948909d5e40470be6b5481766ce2de498e59c053ac68af370b46e72ca9", "sentinel_renderer_source"],
   ["tests/snapshots/consumer-reference-card-grid.png", "5528358e957a6115793155e501f62716f7db31dc1c86856d9e1234868d672837", "historical_baseline_bytes"],
 ]);const PAGE_WORKFLOW_PATH = ".github/workflows/validate.yml";
-const PAGE_ACTIVE_WORKFLOW_SHA256 = "846417a45a462a51ba28028621ff9fe82cf018be15b8a433a661d7d0d7af3017";
-const PAGE_RETIRED_WORKFLOW_SHA256 = "e68fe15654d5830d918e8adfda4b8dcedcb0340b286d6e42058831c1d1c44f58";
+const PAGE_ACTIVE_WORKFLOW_SHA256 = "b7aac452ac49ec1bc287ef3d75efe3806895eb147172b106634394f413a520fc";
+const PAGE_RETIRED_WORKFLOW_SHA256 = "5f709d829e5008b9a0b101ac519454a64cb938b40b0c03cf645ee1d779e8038b";
 const PAGE_JOB_SHA256 = "11d0fe7ea2880c5d32d32bb419493600afdfd221aef728f3c0e36e22cf52b116";
 const PAGE_SYNTHETIC_REPOSITORIES = Object.freeze(["ark-jo/stylegallery", "changeroa/stylegallery", "example/stylegallery-page-evidence-ci"]);
 const PAGE_PROTECTED = Object.freeze([
@@ -100,7 +100,7 @@ const PAGE_PROTECTED = Object.freeze([
   ["tests/consumer-conformance.spec.mjs", "e19df0d1131b7a65fd6e5b7b79c993d05f4a4559b64a18da673e1beede5421a3", "browser_capture_surface"],
   ["tests/fixtures/consumer-conformance-scenarios.mjs", "927d185f523e70e7f2e1fccee0013360d126e02aa532c2367670e64cdef43f12", "state_w1024_focus_contract"],
   ["tests/helpers/render-consumer-conformance.mjs", "6d5db609aaadb2f68fec1a0f1f51af1c17157cf1364631a42b35da2d6c1a0865", "capture_renderer"],
-  ["quality/evidence/executable-evidence.md", "a0ae7f2c355ab26293cdb9e96b31d91d50a024ed404aa0c8297a65b91af73a33", "archive_and_retrieval_documentation"],
+  ["quality/evidence/executable-evidence.md", "fb441412dabc0b57aeac8355f92321a9873aa67612e489e3137953d7680312b1", "archive_and_retrieval_documentation"],
   ["playwright.config.mjs", "7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae", "pinned_browser_configuration"],
 ]);
 const PAGE_ADOPTER_TRUST_ROOTS = Object.freeze([]);

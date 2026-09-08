@@ -9,6 +9,7 @@
 
 - Follow-up runtime work added the [Interaction Lab](examples/domain-interactions/README.md), a standalone web adaptation with explicit mock responses. Its [verification notes](examples/domain-interactions/verification.md) bind actual browser observations to local source hashes and separate desktop execution from simulated viewport sizes, untested mobile devices, and untested native engines. Fixed the lab's modal Tab boundary after observing focus escape in the real browser.
 - Fixed the v1 compatibility suite's stale README digest. Commit `d8bdf0bd5b5aec2fbc38e322a9ac7a1d31fd1332` had added material-v2 guidance and corrected the domain count without updating the test. The exact reviewed documentation digest is now checked separately; all 21 original core/source pins and six CLI output goldens remain unchanged. `npm run test:agent-native` passes.
+- Integrated the current domain lifecycle policy from `main`: reader tasks and adoption counts do not authorize or block domain promotion. Refreshed active workflow/document seals and source-generated protocol inventories for the added validation and documentation; preserved job bytes, lifecycle decisions, external caller status, deadlines, and immutable archive bindings.
 
 Implementation handoff: `consumer_reference: consumer-reference/agent-native/registry.json`.
 
