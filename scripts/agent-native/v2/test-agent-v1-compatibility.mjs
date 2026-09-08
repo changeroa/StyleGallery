@@ -12,7 +12,6 @@ import { agentNativeRegistry } from "../registry.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const expectedFiles = Object.freeze({
-  "consumer-reference/agent-native/README.md": "959509d4539f4b7bb7d193bfdfb949b4cf25ab53317e072aaad7657f04b8779e",
   "consumer-reference/agent-native/registry.json": "70107a28225ee893b0d32df8e2a3c69bed747992bf7e92a0ca5431df4605d8b0",
   "consumer-reference/agent-native/schema/agent-native.schema.json": "0675d61d57a8d12c724f6a97160f6bc4cf2f8abf91663adae0593e7a5a221871",
   "consumer-reference/agent-native/schema/epistemic.schema.json": "ddfdd88692897b4cc17057fc7b0cb6222f69d078956ffb0344d288025cbab9d2",
@@ -34,6 +33,16 @@ const expectedFiles = Object.freeze({
   "scripts/sg.mjs": "fa213e57b9cafcc98f4ded3e884fbe40f77f628b2df8e0149f50cd9b338b4980",
   "scripts/test-agent-mcp.mjs": "8ee6726f2ad811e32b9c7304ef3e2ab5755e261a68fffbc3c03f872355fe5740",
   "scripts/test-sg-cli.mjs": "a120d23ae0a244b0694f1ef24068e7a629bfd400eb83031447b76a82067fb67f",
+});
+// The shared guide gained material-v2 instructions and the six-domain correction
+// in this reviewed documentation revision. That update did not change v1 bytes.
+// Keep its exact digest explicit, separately from the original Todo2 core pins;
+// never derive either baseline from the working tree at test time.
+const expectedDocumentation = Object.freeze({
+  "consumer-reference/agent-native/README.md": {
+    revision: "d8bdf0bd5b5aec2fbc38e322a9ac7a1d31fd1332",
+    sha256: "6e59c913b175039819143b53078817630e3664db1c0342f89545038d0e53a52e",
+  },
 });
 const expectedCli = Object.freeze([
   ["discover", ["discover", "--format", "json"], 12748, "a8980754604d800a979bfdd7ae9bb78f755405989df4152e8f7293854e409719"],
@@ -80,6 +89,9 @@ const snapshot = {
 assert.deepEqual(checkSnapshot(snapshot), []);
 
 for (const [file, digest] of Object.entries(expectedFiles)) assert.equal(sha(fs.readFileSync(path.join(root, file))), digest, `${file} changed from Todo2`);
+for (const [file, { revision, sha256 }] of Object.entries(expectedDocumentation)) {
+  assert.equal(sha(fs.readFileSync(path.join(root, file))), sha256, `${file} changed from reviewed documentation revision ${revision}`);
+}
 for (const file of ["fixture.mjs", "identity.mjs", "queries.mjs", "registry.mjs", "cli-adapter.mjs", "mcp-adapter.mjs", "self-description.mjs"]) {
   const source = fs.readFileSync(path.join(root, "scripts/agent-native", file), "utf8");
   assert.doesNotMatch(source, /(?:from|import\s*\()[^\n]*(?:extensions\/|a2a-projection|agui-projection|material-)/, `v1 core imports an extension/material plane: ${file}`);
@@ -120,6 +132,7 @@ for (const [changed, code] of perturbations) assert.ok(checkSnapshot(changed).in
 process.stdout.write(`${JSON.stringify({
   ok: true,
   todo2_source_digests: Object.keys(expectedFiles).length,
+  reviewed_documentation: expectedDocumentation,
   frozen_cli_goldens: parsed,
   fixture_records: snapshot.recordCount,
   stable_ref_kinds: snapshot.kinds.length,

@@ -1,5 +1,19 @@
 # StyleGallery Log
 
+## 2026-09-08
+
+- Added fourteen local guides across the five non-Layout domains: task selection, motion briefs and recipes, component contracts and worked examples, game screen recipes and verification, Apple/Android/Windows adaptation, and terminology comparison.
+- Connected the guides through domain hubs and root routes, declared their membership/provenance, and included them in the closed 147-document material index and npm package. Layout retains its existing 46 patterns and spatial boundaries.
+- Replaced unsupported aggregate term records with directly sourced records; corrected representation direction and the confusion between composition and set containment. The Markdown validator now checks dates, source locators, labels, scoped direction, temporal relations, inverse consistency, and containment cycles with negative fixtures.
+- Examples remain expected behavior rather than claimed runtime evidence. Domain leaves remain `experimental`; no lifecycle promotion or consumer adoption is claimed.
+
+- Follow-up runtime work added the [Interaction Lab](examples/domain-interactions/README.md), a standalone web adaptation with explicit mock responses. Its [verification notes](examples/domain-interactions/verification.md) bind actual browser observations to local source hashes and separate desktop execution from simulated viewport sizes, untested mobile devices, and untested native engines. Fixed the lab's modal Tab boundary after observing focus escape in the real browser.
+- Fixed the v1 compatibility suite's stale README digest. Commit `d8bdf0bd5b5aec2fbc38e322a9ac7a1d31fd1332` had added material-v2 guidance and corrected the domain count without updating the test. The exact reviewed documentation digest is now checked separately; all 21 original core/source pins and six CLI output goldens remain unchanged. `npm run test:agent-native` passes.
+
+Implementation handoff: `consumer_reference: consumer-reference/agent-native/registry.json`.
+
+Terminology reliance: `figma.variable`, `figma.mode`, `figma.collection`, `figma.component`, `dtcg.token`, `dtcg.group`, `dtcg.token.draft2`, `css.custom-property`, `carbon.component`, `carbon.pattern`, and `stylegallery.pattern`. Relation types used in the records: `partial_overlap`, `implementation_representation`, `not_comparable`, `same_label_different_meaning`, and `near_equivalent`. Their named Figma, DTCG, CSSWG, Carbon, and local Layout sources were rechecked on 2026-09-08; this is an author review, not independent semantic approval. Direct locators and comparison boundaries are in [Term Cases](design-terminology/conflict-cases.md).
+
 ## 2026-08-18
 
 - Added Design Terminology as the sixth governed domain: source-kind and concept-family classification separated as distinct axes, a typed term relation model, freshness-bounded source vocabularies, and cross-system conflict cases with three representative scenarios.

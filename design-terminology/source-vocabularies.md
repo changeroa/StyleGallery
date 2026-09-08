@@ -31,10 +31,24 @@ This page inventories the named sources whose terms this domain records, with th
 | [Fluent 2](https://fluent2.microsoft.design/) | Microsoft | `design-system` | `foundations`, `components`, `patterns`, tokens | Living site; reviewed page set | current | 2026-08-18 |
 | [Carbon](https://carbondesignsystem.com/) | IBM | `design-system` | `foundations` including tokens, `components`, `patterns` | Living site; reviewed page set | current | 2026-08-18 |
 | [Polaris](https://polaris.shopify.com/) | Shopify | `design-system` | `foundations` including design tokens, `components`, `patterns`, `icons` | Living site; package versions for code | current | 2026-08-18 |
-| [Design Tokens Format](https://tr.designtokens.org/) | W3C Design Tokens Community Group | `specification` | `token`, `group`, `alias` data model | Specification draft version | current | 2026-08-18 |
+| [Design Tokens Format](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/) | Design Tokens Community Group | `specification` | `token`, `group`, `alias` data model | Format Module 2025.10; Community Group report, not a W3C Recommendation | current | 2026-09-08 |
 | [Figma](https://help.figma.com/hc/en-us) | Figma | `design-tool` | `variables`, `modes`, `components` as tool constructs | Product and help-center version | current | 2026-08-18 |
 
-All entries cite official first-party URLs (`authority: official`); `retrieved_on` equals `reviewed_on` for this revision.
+All entries cite official first-party URLs (`authority: official`); `retrieved_on` equals the corresponding `reviewed_on`. Entries retaining 2026-08-18 are prior bounded readings, not rechecked claims for the current session.
+
+## Direct Sources For Current Term Records
+
+The [Term Cases](conflict-cases.md) use this narrower source set, rechecked 2026-09-08. Locators in the term table point to the exact document or section, not a general vendor home page.
+
+| Named source | Source kind | Reviewed surface and version | Re-review trigger |
+| --- | --- | --- | --- |
+| Figma | `design-tool` | [Variables, collections, modes](https://help.figma.com/hc/en-us/articles/14506821864087-Overview-of-variables-collections-and-modes) and [components](https://help.figma.com/hc/en-us/articles/360038662654-Guide-to-components-in-Figma); dated help pages | Tool data model or cited help meaning changes |
+| DTCG | `specification` | [2025.10 Format](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/) and [Second Editors' Draft, 2022-06-14](https://www.designtokens.org/tr/second-editors-draft/format/) | A comparison changes version; retain the historical scope |
+| CSSWG | `web-platform` | [CSS Custom Properties Level 1](https://www.w3.org/TR/css-variables-1/#defining-variables) | The cited runtime-value definition changes |
+| Carbon | `design-system` | [What is Carbon](https://carbondesignsystem.com/all-about-carbon/what-is-carbon/) and [patterns overview](https://carbondesignsystem.com/patterns/overview/) | Component or pattern scope changes |
+| StyleGallery | `pattern-library` | Local [Layout hub](../layout/index.md) and its repository contract | Layout ownership or pattern contract changes |
+
+The DTCG 2022 reading is historical evidence of a draft, not an implementation recommendation. A direct locator and a recorded reading establish provenance for the local summary; independent semantic approval remains separate.
 
 ## Freshness Policy
 
@@ -42,7 +56,7 @@ Every recorded source carries: `source_url`, `source_kind`, a version boundary (
 
 ## Reading The Inventory
 
-- Four of the seven sources are design systems; HIG is a platform guideline, DTCG is a specification, Figma is a tool. Horizontal comparison is valid only within a kind, or through typed relations with boundaries.
+- Four of the seven broad browse sources are design systems; HIG is a platform guideline, DTCG is a specification, Figma is a tool. Horizontal comparison is valid only within a kind, or through typed relations with boundaries.
 - `foundations` labels are near-equivalent as layer names, but each system decides what the layer contains.
 - The DTCG row records an interchange format, not a published token set.
 - Dates above are the reading bound; any later restructure is new evidence, not a back-fill.

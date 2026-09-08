@@ -199,7 +199,7 @@ try {
   try {
     await bounded(materialClient.connect(materialTransport), "installed material MCP initialize");
     assert.deepEqual((await bounded(materialClient.listTools(), "installed material MCP tools")).tools.map(({ name }) => name), ["material-context", "material-discover", "material-get", "material-search"]);
-    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 133);
+    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 147);
     assert.deepEqual((await bounded(materialClient.listResourceTemplates(), "installed material MCP templates")).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
     const installedMcpSearch = toolEnvelope(await bounded(materialClient.callTool({
       name: "material-search",
@@ -207,6 +207,26 @@ try {
     }), "installed material MCP search"));
     assert.equal(installedMcpSearch.ok, true);
     assert.equal(installedMcpSearch.result.paths[0], "design-terminology/source-kinds.md");
+    const domainWorkflows = [
+      ["motion interaction recipes", "motion/interaction-recipes.md"],
+      ["component contract", "design-engineering/component-contract.md"],
+      ["game ui screen recipes", "game-ui/screen-recipes.md"],
+      ["android interaction", "platform-guides/android-interaction.md"],
+      ["windows interaction", "platform-guides/windows-interaction.md"],
+      ["design term comparison workflow", "design-terminology/comparison-workflow.md"],
+    ];
+    for (const [query, expectedPath] of domainWorkflows) {
+      const cli = spawnSync(process.execPath, [materialCliPath, "search", "--query", query, "--paths-only", "--limit", "5"], {
+        cwd: externalCwd, encoding: "utf8", timeout: 30_000,
+      });
+      assert.equal(cli.status, 0, cli.stderr || cli.stdout);
+      assert.equal(JSON.parse(cli.stdout).result.paths[0], expectedPath, query);
+      const mcp = toolEnvelope(await bounded(materialClient.callTool({
+        name: "material-search", arguments: { query, paths_only: true, limit: 5 },
+      }), `installed domain search: ${query}`));
+      assert.equal(mcp.ok, true);
+      assert.equal(mcp.result.paths[0], expectedPath, query);
+    }
   } finally {
     await bounded(materialClient.close(), "installed material MCP shutdown");
   }
@@ -228,6 +248,7 @@ try {
     installed_material_cli_search: true,
     installed_material_mcp_official_sdk: true,
     installed_material_mcp_search: true,
+    installed_non_layout_workflow_searches: 6,
     installed_external_spaced_cwd: true,
   }, null, 2)}\n`);
 } finally {

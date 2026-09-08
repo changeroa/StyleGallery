@@ -57,6 +57,9 @@ export const canonicalDomains = [
       { path: "motion/vocabulary.md", provenance: "external", sourcePath: "skills/animation-vocabulary/SKILL.md" },
       { path: "motion/review-workflow.md", provenance: "external", sourcePath: "skills/review-animations/SKILL.md" },
       { path: "motion/practice-reference.md", provenance: "external", sourcePath: "skills/review-animations/STANDARDS.md" },
+      { path: "motion/decision-tree.md", provenance: "local" },
+      { path: "motion/motion-brief.md", provenance: "local" },
+      { path: "motion/interaction-recipes.md", provenance: "local" },
     ],
   },
   {
@@ -65,6 +68,9 @@ export const canonicalDomains = [
     leaves: [
       { path: "design-engineering/interface-craft.md", provenance: "external", sourcePath: "skills/emil-design-eng/SKILL.md" },
       { path: "design-engineering/consumer-migration-readiness.md", provenance: "local" },
+      { path: "design-engineering/decision-tree.md", provenance: "local" },
+      { path: "design-engineering/component-contract.md", provenance: "local" },
+      { path: "design-engineering/worked-examples.md", provenance: "local" },
     ],
     referenceDocuments,
   },
@@ -80,12 +86,21 @@ export const canonicalDomains = [
       { path: "game-ui/unity/cli-loop.md", provenance: "external", sourcePath: "README.md" },
       { path: "game-ui/unity/repository-map.md", provenance: "repository" },
       { path: "game-ui/unity/org-wiki.md", provenance: "repository" },
+      { path: "game-ui/decision-tree.md", provenance: "local" },
+      { path: "game-ui/screen-recipes.md", provenance: "local" },
+      { path: "game-ui/verification-workflow.md", provenance: "local" },
     ],
   },
   {
     slug: "platform-guides",
     label: "Platform Guides",
-    leaves: [{ path: "platform-guides/apple-interaction.md", provenance: "external", sourcePath: "skills/apple-design/SKILL.md" }],
+    leaves: [
+      { path: "platform-guides/apple-interaction.md", provenance: "external", sourcePath: "skills/apple-design/SKILL.md" },
+      { path: "platform-guides/adaptation-workflow.md", provenance: "local" },
+      { path: "platform-guides/android-interaction.md", provenance: "local" },
+      { path: "platform-guides/windows-interaction.md", provenance: "local" },
+      { path: "platform-guides/compatibility-matrix.md", provenance: "local" },
+    ],
   },
   {
     slug: "design-terminology",
@@ -96,6 +111,7 @@ export const canonicalDomains = [
       { path: "design-terminology/concept-families.md", provenance: "repository" },
       { path: "design-terminology/relation-types.md", provenance: "repository" },
       { path: "design-terminology/conflict-cases.md", provenance: "repository" },
+      { path: "design-terminology/comparison-workflow.md", provenance: "local" },
     ],
   },
 ];

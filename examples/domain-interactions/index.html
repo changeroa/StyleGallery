@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StyleGallery interaction lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <header>
+    <p>StyleGallery · executable examples</p>
+    <h1>Interaction lab</h1>
+    <p>Explore state, interruption, and recovery. All data stays in memory; response controls simulate a service.</p>
+    <p id="motion-preference" role="status"></p>
+  </header>
+  <main>
+    <section aria-labelledby="save-heading">
+      <h2 id="save-heading">1. Save without losing later edits</h2>
+      <form id="save-form" novalidate>
+        <label for="draft">Display name</label>
+        <input id="draft" value="Original" required aria-describedby="save-error">
+        <p id="save-error" role="alert"></p>
+        <button id="save" type="submit">Save name</button>
+      </form>
+      <p id="save-status" role="status"></p>
+      <p>Confirmed name: <strong id="persisted"></strong></p>
+      <details open>
+        <summary>Save response controls</summary>
+        <div class="actions">
+          <button id="save-success" disabled>Confirm save</button>
+          <button id="save-failure" disabled>Fail save</button>
+        </div>
+      </details>
+    </section>
+    <section aria-labelledby="search-heading">
+      <h2 id="search-heading">2. Search and return to the same item</h2>
+      <form id="search-form">
+        <label for="query">Search query</label>
+        <input id="query" required>
+        <button type="submit">Search items</button>
+      </form>
+      <p id="search-status" role="status">Enter a query.</p>
+      <div id="search-panes" class="search-panes" data-view="list">
+        <div id="search-list"><h3>Results</h3><ul id="results"></ul></div>
+        <article id="detail" aria-labelledby="detail-heading" hidden>
+          <h3 id="detail-heading" tabindex="-1"></h3>
+          <p id="detail-description"></p>
+          <button id="back-results">Back to results</button>
+        </article>
+      </div>
+      <details open>
+        <summary>Search response controls</summary>
+        <div id="search-responses" class="actions"></div>
+      </details>
+    </section>
+    <section aria-labelledby="inventory-heading">
+      <h2 id="inventory-heading">3. Inventory and nested decisions</h2>
+      <button id="open-inventory">Open inventory</button>
+      <p id="equipment-status" role="status">Equipped: none.</p>
+      <details open>
+        <summary>Equipment response controls</summary>
+        <div class="actions">
+          <button id="equip-success" disabled>Confirm equipment request</button>
+          <button id="equip-failure" disabled>Fail equipment request</button>
+        </div>
+      </details>
+    </section>
+    <section aria-labelledby="reward-heading">
+      <h2 id="reward-heading">4. A reward independent of its reveal</h2>
+      <div class="actions">
+        <button id="claim-reward">Claim reward</button>
+        <button id="skip-reveal" disabled>Skip reveal</button>
+      </div>
+      <p id="reward-status" role="status">Reward ready.</p>
+      <p id="reward-count">Rewards granted: 0</p>
+    </section>
+    <section aria-labelledby="disclosure-heading">
+      <h2 id="disclosure-heading">5. Disclosure and direct manipulation</h2>
+      <details id="delivery">
+        <summary>Delivery restrictions</summary>
+        <p>Some destinations need an additional delivery day.</p>
+      </details>
+      <label for="position">Preview position</label>
+      <input id="position" type="range" min="0" max="100" value="50" aria-describedby="position-help">
+      <p id="position-help">Drag or use arrow keys. Release commits; Escape cancels an active preview.</p>
+      <p id="position-status" role="status">Committed position: 50</p>
+    </section>
+  </main>
+  <dialog id="inventory-dialog" aria-labelledby="inventory-title">
+    <h2 id="inventory-title">Inventory</h2>
+    <fieldset>
+      <legend>Selected item</legend>
+      <label><input type="radio" name="item" value="A" checked> Item A</label>
+      <label><input type="radio" name="item" value="B"> Item B</label>
+    </fieldset>
+    <p id="inventory-status"></p>
+    <div class="actions">
+      <button id="equip-item">Equip selected item</button>
+      <button id="close-inventory">Close inventory</button>
+    </div>
+  </dialog>
+  <dialog id="equip-dialog" aria-labelledby="equip-title" aria-describedby="equip-status">
+    <h2 id="equip-title"></h2>
+    <p id="equip-status"></p>
+    <div class="actions">
+      <button id="confirm-equip">Start equipment request</button>
+      <button id="cancel-equip">Close decision</button>
+    </div>
+  </dialog>
+  <footer><p>Example only. Reload resets data. Browser behavior is distinct from native engine and service behavior.</p></footer>
+</body>
+</html>

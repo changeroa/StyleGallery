@@ -195,6 +195,12 @@ test("public domain leaf queries resolve to npm-portable repository paths", () =
     ["unity cli loop", "game-ui/unity/cli-loop.md"],
     ["motion review workflow", "motion/review-workflow.md"],
     ["Apple interaction", "platform-guides/apple-interaction.md"],
+    ["motion interaction recipes", "motion/interaction-recipes.md"],
+    ["component contract", "design-engineering/component-contract.md"],
+    ["game ui screen recipes", "game-ui/screen-recipes.md"],
+    ["android interaction", "platform-guides/android-interaction.md"],
+    ["windows interaction", "platform-guides/windows-interaction.md"],
+    ["design term comparison workflow", "design-terminology/comparison-workflow.md"],
   ];
   for (const [query, expected] of cases) {
     const response = invoke("material-search", { query, limit: 5, paths_only: true });

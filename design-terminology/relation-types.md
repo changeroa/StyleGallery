@@ -47,7 +47,9 @@ A relation record is invalid when any of the following holds:
 - Either term lacks an official, named source.
 - The boundary field is empty or restates the type without adding scope.
 
-These rules are the human contract for v0.1; when the structured registry lands, they become validator rules unchanged.
+The Markdown validator enforces unique source-qualified term IDs, direct source locators, actual calendar dates, explicit scope and direction, identical labels for `same_label_different_meaning`, temporal status/event requirements, inverse consistency, and acyclic containment within each scope. It ignores fenced examples and HTML comments. Locators must be HTTPS or existing repository documents; the validator does not authenticate source ownership or evaluate semantic truth.
+
+The term table has seven columns: identifier, label, source/kind with direct locator, concept, status, scope, and reviewed date. The relation table has seven: from, to, type, scope, direction, boundary, and reviewed date. Scope is a non-empty kebab-case comparison identifier. One directed pair has one relation per scope; a separately recorded inverse must agree. Symmetric types use `symmetric`; representation, containment, and temporal relations use `directional`; `near_equivalent` declares either explicitly. Self-relations are invalid. Boundaries must contain a substantive sentence; a length check can reject blanks but cannot establish semantic adequacy.
 
 ## Term Record Shape
 
@@ -55,18 +57,22 @@ These rules are the human contract for v0.1; when the structured registry lands,
 term_id: figma.variable
 label: Variable
 source: figma            # named source from source-vocabularies
+source_url: https://help.figma.com/hc/en-us/articles/14506821864087-Overview-of-variables-collections-and-modes
 source_kind: design-tool # from source-kinds
 concept: named-design-value
 status: current          # current | deprecated | historical | unknown
 scope: file-or-collection-bound
-reviewed_on: 2026-08-18
+reviewed_on: 2026-09-08
 relations:
   - target: dtcg.token
     type: partial_overlap
+    scope: value-interchange
+    direction: symmetric
+    reviewed_on: 2026-09-08
     boundary: >
-      Some tool variables export as interchange tokens, but tool features
-      such as modes exceed the format, and not every variable is a
-      portable design token.
+      Exportable design values overlap; prototype values need not be
+      tokens, and one scalar variable does not provide every composite
+      structure in the 2025.10 format.
 ```
 
 In v0.1 this shape is authored as the Markdown tables in [Cross-System Term Cases](conflict-cases.md). A machine-readable registry holding terms, concepts, sources, and relations is a prerequisite for promoting this domain beyond `experimental`; until then Material v2 answers document search only, not structured crosswalk queries.
@@ -95,7 +101,7 @@ Every recorded relation names two term records, one type from the closed set, a 
 
 ## Source, License, And Attribution
 
-This page is a locally authored model. Cited sources remain authoritative for their own definitions; no upstream prose is reproduced.
+This page is a locally authored model. The illustrative `figma.variable` and `dtcg.token` relation uses `partial_overlap`; its named sources were rechecked on 2026-09-08 as recorded in [Term Cases](conflict-cases.md). No upstream prose is reproduced.
 
 ## IA Navigation
 

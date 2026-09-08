@@ -119,6 +119,20 @@ CLI와 MCP의 상세 사용법은 [Agent-Native StyleGallery 가이드](consumer
 
 The canonical domain manifest and provenance policy are in [StyleGallery Domains](DOMAINS.md).
 
+## Practical Domain Workflows
+
+| Task | Start | Apply and verify |
+| --- | --- | --- |
+| Design a transition | [Motion Decision Tree](motion/decision-tree.md) | [Brief](motion/motion-brief.md), [interaction recipes](motion/interaction-recipes.md), and [review](motion/review-workflow.md) |
+| Build a product interaction | [Design Engineering Decision Tree](design-engineering/decision-tree.md) | [Component contract](design-engineering/component-contract.md) and [worked examples](design-engineering/worked-examples.md) |
+| Compose a game screen | [Game UI Decision Tree](game-ui/decision-tree.md) | [Screen recipes](game-ui/screen-recipes.md) and [verification workflow](game-ui/verification-workflow.md) |
+| Adapt a platform convention | [Platform Adaptation Workflow](platform-guides/adaptation-workflow.md) | [Apple](platform-guides/apple-interaction.md), [Android](platform-guides/android-interaction.md), [Windows](platform-guides/windows-interaction.md), and [compatibility matrix](platform-guides/compatibility-matrix.md) |
+| Resolve a terminology conflict | [Design Term Comparison Workflow](design-terminology/comparison-workflow.md) | [Directly sourced term cases](design-terminology/conflict-cases.md) and [relation rules](design-terminology/relation-types.md) |
+
+Layout 외 도메인도 선택 절차, 작성 양식, 적용 사례, 검증 경로를 제공합니다. 예제의 기대 결과는 실제 실행 증거와 구분하며, 공식 출처를 확인한 날짜와 적용 범위는 각 문서에 기록합니다. 문서 확충만으로 `experimental` 상태가 자동 승격되지는 않습니다.
+
+[Interaction Lab](examples/domain-interactions/README.md)은 저장·검색·중첩 팝업·보상·입력 사례를 실행할 수 있는 브라우저 예제입니다. [검증 기록](examples/domain-interactions/verification.md)은 실제 Mac 브라우저에서 관찰한 결과와 모바일·네이티브 엔진 미검증 범위를 구분합니다.
+
 ## Repository Entry Roles
 
 Use each root hub for one primary job.

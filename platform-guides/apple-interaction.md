@@ -9,7 +9,7 @@ source_path: skills/apple-design/SKILL.md
 source_revision: 220e8607c90b17337d210125777b7b695f26c221
 platform: Apple platforms
 platform_version: verify-current
-reviewed_on: 2026-07-11
+reviewed_on: 2026-09-08
 ---
 
 # Apple Interaction As A Comparative Reference
@@ -32,6 +32,14 @@ For each proposed comparison:
 4. Separate the reusable interaction question from native implementation details.
 5. Define the web adaptation, including unavailable or materially different capabilities.
 6. Verify the adapted behavior on its real surface and record what remains unproven.
+
+## Official Source Review And Worked Adaptation
+
+Official [HIG Motion](https://developer.apple.com/design/human-interface-guidelines/motion) and [HIG Accessibility](https://developer.apple.com/design/human-interface-guidelines/accessibility) were rechecked on 2026-09-08 through Apple's documentation data for [Motion](https://developer.apple.com/tutorials/data/design/human-interface-guidelines/motion.json) and [Accessibility](https://developer.apple.com/tutorials/data/design/human-interface-guidelines/accessibility.json). This is a dated living-document review, not a pin of shipped OS behavior. The motion guidance supports purposeful, optional motion and cancellation; it does not supply universal web animation parameters.
+
+Worked proposal: a web settings disclosure opens immediately and keeps its trigger operable. Optional movement communicates the revealed region. Under reduced motion, the same content and controls remain available without unnecessary movement. Use [Motion Disclosure](../motion/interaction-recipes.md#disclosure) for the behavior contract and the [Adaptation Workflow](adaptation-workflow.md) for the source/target record.
+
+Expected cases: open and close by keyboard, reverse while opening, enlarge the text, hide content while focus is inside, and change the motion preference. Actual result: `not_run`; this proposal is not a tested Apple or browser implementation. `consumer_reference: not_applicable` because the worked proposal selects no consumer-owned record.
 
 ## Comparative Questions
 

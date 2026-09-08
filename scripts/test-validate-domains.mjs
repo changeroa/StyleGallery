@@ -203,6 +203,84 @@ const baseFiles = {
   "CATALOG.md": "# Catalog\n",
 };
 
+const additionalLocalLeaves = {
+  "motion": [
+    [
+      "decision-tree.md",
+      "Motion Decision Tree"
+    ],
+    [
+      "motion-brief.md",
+      "Motion Brief"
+    ],
+    [
+      "interaction-recipes.md",
+      "Motion Interaction Recipes"
+    ]
+  ],
+  "design-engineering": [
+    [
+      "decision-tree.md",
+      "Design Engineering Decision Tree"
+    ],
+    [
+      "component-contract.md",
+      "Component Contract"
+    ],
+    [
+      "worked-examples.md",
+      "Design Engineering Worked Examples"
+    ]
+  ],
+  "game-ui": [
+    [
+      "decision-tree.md",
+      "Game UI Decision Tree"
+    ],
+    [
+      "screen-recipes.md",
+      "Game UI Screen Recipes"
+    ],
+    [
+      "verification-workflow.md",
+      "Game UI Verification Workflow"
+    ]
+  ],
+  "platform-guides": [
+    [
+      "adaptation-workflow.md",
+      "Platform Adaptation Workflow"
+    ],
+    [
+      "android-interaction.md",
+      "Android Interaction As A Comparative Reference"
+    ],
+    [
+      "windows-interaction.md",
+      "Windows Interaction As A Comparative Reference"
+    ],
+    [
+      "compatibility-matrix.md",
+      "Platform Compatibility Matrix"
+    ]
+  ],
+  "design-terminology": [
+    [
+      "comparison-workflow.md",
+      "Design Term Comparison Workflow"
+    ]
+  ]
+};
+
+for (const [domain, leaves] of Object.entries(additionalLocalLeaves)) {
+  for (const [name, title] of leaves) {
+    baseFiles[`${domain}/${name}`] = leafPage({ title, domain, parent: "index.md", next: "../DOMAINS.md", provenanceKind: "local" });
+    baseFiles[`${domain}/index.md`] += `\n- [${title}](${name})\n`;
+  }
+  baseFiles["DOMAINS.md"] = baseFiles["DOMAINS.md"].split("\n").map((line) => line.includes(`| \`${domain}/index.md\` |`)
+    ? `${line.slice(0, -2)}, ${leaves.map(([name]) => `\`${domain}/${name}\``).join(", ")} |` : line).join("\n");
+}
+
 const cases = [
   { name: "empty_manifest", mutate: ["DOMAINS.md", baseFiles["DOMAINS.md"], "# Empty manifest\n"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "manifest_extra_domain", mutate: ["DOMAINS.md", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |\n| Other | [Other](other/index.md) | `experimental` |"], expect: "DOMAINS.md: missing canonical domain contract" },

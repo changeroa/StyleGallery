@@ -50,7 +50,17 @@
       "lifecycle": "stable"
     },
     {
+      "repository_path": "design-engineering/component-contract.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "design-engineering/consumer-migration-readiness.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/decision-tree.md",
       "domain": "design-engineering",
       "lifecycle": "experimental"
     },
@@ -62,6 +72,16 @@
     {
       "repository_path": "design-engineering/interface-craft.md",
       "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/worked-examples.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-terminology/comparison-workflow.md",
+      "domain": "design-terminology",
       "lifecycle": "experimental"
     },
     {
@@ -100,6 +120,11 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "game-ui/decision-tree.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "game-ui/index.md",
       "domain": "game-ui",
       "lifecycle": "experimental"
@@ -111,6 +136,11 @@
     },
     {
       "repository_path": "game-ui/screen-hierarchy.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/screen-recipes.md",
       "domain": "game-ui",
       "lifecycle": "experimental"
     },
@@ -136,6 +166,11 @@
     },
     {
       "repository_path": "game-ui/unity/ui-systems.md",
+      "domain": "game-ui",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "game-ui/verification-workflow.md",
       "domain": "game-ui",
       "lifecycle": "experimental"
     },
@@ -180,7 +215,22 @@
       "lifecycle": "stable"
     },
     {
+      "repository_path": "motion/decision-tree.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "motion/index.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/interaction-recipes.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/motion-brief.md",
       "domain": "motion",
       "lifecycle": "experimental"
     },
@@ -480,12 +530,32 @@
       "lifecycle": "generated"
     },
     {
+      "repository_path": "platform-guides/adaptation-workflow.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "platform-guides/android-interaction.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "platform-guides/apple-interaction.md",
       "domain": "platform-guides",
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "platform-guides/compatibility-matrix.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "platform-guides/index.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "platform-guides/windows-interaction.md",
       "domain": "platform-guides",
       "lifecycle": "experimental"
     },
@@ -747,5 +817,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:f306613097c233ca309a1360fa736233dfe5858c8828c5238b956fff8e253870"
+  "version_id": "sg:policy/material-admission-v2@sha256:3bc645aa9b84393a404612ebc4d757aada288ef88f57bb2d2fca03022b4d201d"
 }

@@ -1,0 +1,48 @@
+{
+  "kind": "local-browser-artifact-manifest",
+  "host": {
+    "hardware_id": "Mac16,8",
+    "architecture": "arm64",
+    "os": "macOS 26.5.1",
+    "build": "25F80"
+  },
+  "started": "2026-09-08T02:06:57.911Z",
+  "finished": "2026-09-08T02:07:11.475Z",
+  "files": [
+    {
+      "path": "sources.json",
+      "sha256": "08948cf9802120ba1e7f77e3d71abd1c93b6d77c640d8be845640d61469a3a18",
+      "bytes": 852
+    },
+    {
+      "path": "report.json",
+      "sha256": "e7293474a2defafaaf3caeff7cd9732649d0be403a667ffe795a0b37a090f66c",
+      "bytes": 247335
+    },
+    {
+      "path": "native-desktop.png",
+      "sha256": "65d6c673f35c57d9bd908a30d118c7e7c67655b8ecba8cbc50f8a1b41e3624ea",
+      "bytes": 146262
+    },
+    {
+      "path": "detail-375.png",
+      "sha256": "2625c9ee709c447e11e4a23d3929ecf07e25de6b8df297b88ac90195a27966c8",
+      "bytes": 106435
+    },
+    {
+      "path": "nested-dialogs.png",
+      "sha256": "8f4ca0089b1255a6f57a6957a4568939767590883f9e0c8286c57e0bc8e6791d",
+      "bytes": 156467
+    },
+    {
+      "path": "long-rtl-320.png",
+      "sha256": "b1ae71d42ef75c1a039ba85d432279ab828eb704680a036e808c2634ced827cb",
+      "bytes": 103423
+    },
+    {
+      "path": "reduced-motion-320.png",
+      "sha256": "adbe3f645b79abec61681508cf8c204328f03fdd7b312710c8435d4bc28a8595",
+      "bytes": 109100
+    }
+  ]
+}

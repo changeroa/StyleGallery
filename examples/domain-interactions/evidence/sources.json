@@ -1,0 +1,27 @@
+{
+  "kind": "working-tree-source-snapshot",
+  "base_revision": "d8bdf0bd5b5aec2fbc38e322a9ac7a1d31fd1332",
+  "uncommitted_sources": true,
+  "files": [
+    {
+      "path": "examples/domain-interactions/index.html",
+      "sha256": "4c6280a9f720b546c2c6bc6c252dd8603764c71868b1cc3df091de39651228ab",
+      "bytes": 4922
+    },
+    {
+      "path": "examples/domain-interactions/styles.css",
+      "sha256": "016f98025a98cb612f3730e3df013f8f6b4aebe467db9fb4464b9b37d7b923cd",
+      "bytes": 1832
+    },
+    {
+      "path": "examples/domain-interactions/app.mjs",
+      "sha256": "d802165599b917fc8d9bebf38e4f62d733552c44de47dc988ca6e64041f26eb9",
+      "bytes": 11538
+    },
+    {
+      "path": "examples/domain-interactions/qa.aside.js",
+      "sha256": "dfda27544710f975eccab6aeb7bb51f38aff3e0bab9b7381b3fa41472c49e070",
+      "bytes": 15750
+    }
+  ]
+}

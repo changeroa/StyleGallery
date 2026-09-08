@@ -106,7 +106,7 @@ try {
   assert.equal(nullPrototypeResponse.structuredContent?.ok, true);
 
   const resources = (await client.listResources()).resources;
-  assert.equal(resources.length, 133);
+  assert.equal(resources.length, 147);
   assert.deepEqual((await client.listResourceTemplates()).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
   assert.ok(resources.every(({ uri }) => uri === materialResourceUri(resources.find((entry) => entry.uri === uri).name)));
 

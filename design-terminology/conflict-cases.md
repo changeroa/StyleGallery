@@ -1,7 +1,7 @@
 ---
 type: Domain Guide
 title: Cross-System Term Cases
-description: Typed-relation term records and three representative cross-system scenarios with non-equivalence boundaries.
+description: Directly sourced terms and scoped relations for tool values, runtime representations, components, patterns, and historical formats.
 domain: design-terminology
 lifecycle: experimental
 ---
@@ -18,75 +18,64 @@ This page applies the typed relation model to recorded term records and conflict
 
 1. Name the sources in tension and the shared term.
 2. Record each side as a term record with source, kind, concept, status, and scope.
-3. Assign one relation type per pair per scope.
+3. Assign one relation type per pair per explicit scope and declare its direction.
 4. Write the non-equivalence boundary: where substitution breaks.
 5. Stamp `reviewed_on`; re-verify when any involved source revises its term.
 
 ## Term Records
 
-| Term | Source (kind) | Concept | Status | Scope | Reviewed on |
-| --- | --- | --- | --- | --- | --- |
-| `figma.variable` | Figma (`design-tool`) | named-design-value | current | file- or collection-bound | 2026-08-18 |
-| `figma.mode` | Figma (`design-tool`) | theme-context | current | variable collection | 2026-08-18 |
-| `figma.component` | Figma (`design-tool`) | tool-instance-model | current | file-bound | 2026-08-18 |
-| `component.code` | Codebases (`design-system`) | ui-building-block | current | codebase | 2026-08-18 |
-| `component.system` | Published system units (`design-system`) | published-ui-building-block | current | system-wide | 2026-08-18 |
-| `dtcg.token` | DTCG Format (`specification`) | interchange-record | current | format-bound | 2026-08-18 |
-| `css.custom-property` | CSS (`web-platform`) | runtime-value-slot | current | document/runtime | 2026-08-18 |
-| `polaris.token` | Polaris (`design-system`) | published-design-value | current | system-wide | 2026-08-18 |
-| `carbon.pattern` | Carbon (`design-system`) | workflow-guidance | current | system-wide | 2026-08-18 |
-| `polaris.pattern` | Polaris (`design-system`) | workflow-guidance | current | system-wide | 2026-08-18 |
-| `stylegallery.pattern` | StyleGallery (`pattern-library`) | spatial-primitive | current | repository | 2026-08-18 |
-| `primitive` (shared usage) | multiple systems | base-layer-input | current | per-system | 2026-08-18 |
-| `hig.material` | Apple HIG (`platform-guideline`) | visual-surface-treatment | current | OS platforms | 2026-08-18 |
-| `material.system` | Google (`design-system`) | system-collection-name | current | brand-wide | 2026-08-18 |
-| `styleguide` (historical) | industry history | visual-style-governance | historical | org-wide | 2026-08-18 |
-| `designsystem` (general) | industry usage | layered-system-collection | current | org-wide | 2026-08-18 |
-| `foundation` (layer label) | Material, Fluent, Carbon, Polaris (`design-system`) | base-layer-label | current | per-system | 2026-08-18 |
-| `variant` (`mode`/`state`/`theme`) | tool, code, tokens | theme-variant-context | current | per-surface | 2026-08-18 |
+| Term | Label | Source (kind) | Concept | Status | Scope | Reviewed on |
+| --- | --- | --- | --- | --- | --- | --- |
+| `figma.variable` | Variable | [Figma](https://help.figma.com/hc/en-us/articles/14506821864087-Overview-of-variables-collections-and-modes) (`design-tool`) | named-design-value | current | variable collection; dated help page | 2026-09-08 |
+| `figma.mode` | Mode | [Figma](https://help.figma.com/hc/en-us/articles/14506821864087-Overview-of-variables-collections-and-modes) (`design-tool`) | value-context | current | values selected within a collection | 2026-09-08 |
+| `figma.collection` | Collection | [Figma](https://help.figma.com/hc/en-us/articles/14506821864087-Overview-of-variables-collections-and-modes) (`design-tool`) | variable-organization | current | collection containing variables and modes | 2026-09-08 |
+| `figma.component` | Component | [Figma](https://help.figma.com/hc/en-us/articles/360038662654-Guide-to-components-in-Figma) (`design-tool`) | tool-instance-model | current | reusable design object and its instances | 2026-09-08 |
+| `dtcg.token` | Token | [DTCG](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#design-token) (`specification`) | interchange-record | current | Format Module 2025.10 | 2026-09-08 |
+| `dtcg.group` | Group | [DTCG](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#groups) (`specification`) | token-organization | current | Format Module 2025.10 | 2026-09-08 |
+| `dtcg.token.draft2` | Token | [DTCG](https://www.designtokens.org/tr/second-editors-draft/format/#design-token) (`specification`) | interchange-record | historical | Second Editors' Draft, 2022-06-14 | 2026-09-08 |
+| `css.custom-property` | Custom property | [CSSWG](https://www.w3.org/TR/css-variables-1/#defining-variables) (`web-platform`) | runtime-value-slot | current | CSS Custom Properties Level 1 | 2026-09-08 |
+| `carbon.component` | Component | [Carbon](https://carbondesignsystem.com/all-about-carbon/what-is-carbon/) (`design-system`) | published-ui-building-block | current | Carbon design and implementation resources | 2026-09-08 |
+| `carbon.pattern` | Pattern | [Carbon](https://carbondesignsystem.com/patterns/overview/) (`design-system`) | workflow-guidance | current | Carbon patterns catalog | 2026-09-08 |
+| `stylegallery.pattern` | Pattern | [StyleGallery](../layout/index.md) (`pattern-library`) | spatial-primitive | current | repository Layout corpus | 2026-09-08 |
+
+The external locators and local Layout contract were rechecked on the dates shown. Current status is bounded by the named source/version, not a promise about every later release. Concept labels are local classification summaries.
 
 ## Recorded Relations
 
-| From | To | Type | Boundary |
-| --- | --- | --- | --- |
-| `figma.variable` | `dtcg.token` | `partial_overlap` | Exportable variables intersect the format; tool features such as modes exceed it, and not every variable is a portable token |
-| `figma.variable` | `css.custom-property` | `implementation_representation` | Variables can bind to custom properties in codegen; the binding is a representation path, not semantic identity |
-| `dtcg.token` | `css.custom-property` | `implementation_representation` | Custom properties are one serialization target for token values and also hold non-design values |
-| `polaris.token` | `dtcg.token` | `implementation_representation` | The format is one representation of Polaris's published values; the system, not the format, owns the values |
-| `figma.mode` | `variant` | `near_equivalent` | Modes, tool variants, component states, and token themes overlap as context switching but diverge in binding level |
-| `figma.component` | `component.code` | `same_label_different_meaning` | Tool instance model versus shipped code unit; swapping definitions breaks handoff |
-| `figma.component` | `component.system` | `same_label_different_meaning` | A tool construct versus a published system unit with API and support |
-| `carbon.pattern` | `stylegallery.pattern` | `partial_overlap` | Both are reusable solutions above atomic controls; Carbon patterns are workflow guidance, StyleGallery patterns are spatial primitives |
-| `carbon.pattern` | `polaris.pattern` | `near_equivalent` | Both name system-level workflow guidance with content and maturity differences |
-| `carbon.pattern` | `component.system` | `broader_than` | Within Carbon, patterns compose components into flows; the containment is system-scoped |
-| `primitive` | `foundation` | `near_equivalent` | Shared base-layer usage across systems with unstable extension: sometimes tokens, sometimes atoms |
-| `hig.material` | `material.system` | `same_label_different_meaning` | HIG names visual surface treatments; Material names a design system; the shared label is coincidence |
-| `styleguide` | `designsystem` | `partial_overlap` | Era- and org-scoped: a historical style guide governs visual style; a design system layers foundations, code, and governance; both labels coexist |
-| `foundation` (Material) | `foundation` | `near_equivalent` | Near-equivalent layer labels whose contents each system decides independently |
+| From | To | Type | Scope | Direction | Boundary | Reviewed on |
+| --- | --- | --- | --- | --- | --- | --- |
+| `figma.variable` | `dtcg.token` | `partial_overlap` | value-interchange | symmetric | Exportable design values overlap; Figma prototype values need not be tokens, while the format has composite structures not supplied by one scalar variable | 2026-09-08 |
+| `css.custom-property` | `dtcg.token` | `implementation_representation` | token-to-css-output | directional | A custom property can consume a translated token value; it also holds non-design values and does not preserve the entire token record | 2026-09-08 |
+| `figma.collection` | `dtcg.group` | `partial_overlap` | value-organization | symmetric | Both organize named values; a Figma collection includes modes, while a format group can nest groups and carry format-specific metadata | 2026-09-08 |
+| `figma.mode` | `dtcg.group` | `not_comparable` | context-versus-containment | symmetric | A mode selects value context; a group organizes token records. Containment alone does not choose the active context | 2026-09-08 |
+| `figma.component` | `carbon.component` | `same_label_different_meaning` | handoff-artifact-identity | symmetric | A reusable tool object and a system-published UI unit share a label; a design instance is not by itself the system's implementation contract | 2026-09-08 |
+| `carbon.pattern` | `stylegallery.pattern` | `partial_overlap` | reusable-interface-guidance | symmetric | Both describe reusable interface arrangements; Carbon includes task sequences and flows, while StyleGallery Layout covers spatial constraints without those interaction contracts | 2026-09-08 |
+| `carbon.component` | `carbon.pattern` | `not_comparable` | catalog-unit-subtyping | symmetric | Composition is not set containment: a workflow can use components without being a broader class whose instances include component instances | 2026-09-08 |
+| `dtcg.token.draft2` | `dtcg.token` | `near_equivalent` | versioned-token-concept | symmetric | The named-value interchange concept overlaps; the 2022 draft and 2025.10 format have different conformance details, so historical files need version-specific validation | 2026-09-08 |
 
-## Scenario A: Component vs Pattern
+## Scenario A: Component Versus Pattern
 
-Question: is a component a pattern; at what level do `primitive`, `component`, and `pattern` sit?
+Query phrasing: `component versus pattern terminology`, `difference between component and pattern across design systems`.
 
-Query phrasing covered: `component versus pattern terminology`, `difference between component and pattern across design systems`.
+Distinguish Figma's design object from Carbon's published component before comparing either with a pattern. `figma.component` and `carbon.component` use `same_label_different_meaning`. Within Carbon, components participate in patterns; composition does not establish the set-theoretic `broader_than` relation. Carbon and StyleGallery patterns have `partial_overlap` within reusable interface guidance, with different behavioral boundaries.
 
-Answer shape: per system, not universal. In Carbon, `pattern` is `broader_than` its components within Carbon's scope; `carbon.pattern` and `stylegallery.pattern` share the reusable-solution region only as `partial_overlap`; `primitive` is `near_equivalent` to foundation terms with an unstable extension. A merged one-line definition would erase these boundaries.
+## Scenario B: Variable, Design Token, And CSS Custom Property
 
-## Scenario B: Variable vs Design Token vs CSS Custom Property
+Query phrasing: `figma variable design token custom property`.
 
-Question: are Figma's `variable`, DTCG's `token`, and CSS's `custom property` the same thing?
+These are different labels from three source kinds. Their relation is not the same-label case. `figma.variable` and `dtcg.token` have `partial_overlap`; `css.custom-property` → `dtcg.token` is `implementation_representation`, with the representation first. A tool-to-code binding requires a consumer-owned translation; it does not establish equivalence or guarantee a lossless round trip.
 
-Query phrasing covered: `figma variable design token custom property`. This is the same-label different-meaning case.
+## Scenario C: Historical And Current Token Formats
 
-Answer shape: no single equivalence holds. The three terms come from different source kinds (`design-tool`, `specification`, web platform mechanism) with different concepts: named-design-value, interchange-record, runtime-value-slot. `figma.variable` → `dtcg.token` is `partial_overlap`; `dtcg.token` → `css.custom-property` is `implementation_representation`. Substitution breaks in both directions: tool modes do not survive export, and custom properties carry non-design values.
+Query phrasing: `historical design token format`, `DTCG second editors draft versus 2025.10`.
 
-## Scenario C: Style Guide vs Design System
+The retained 2022 source describes a historical draft. The versioned 2025.10 source describes an intended-for-implementation format. Both remain records; a common label does not make their file contracts identical. The relation is `near_equivalent` for the concept, not `renamed_to`: the label did not change. Neither Community Group report is a W3C Recommendation.
 
-Question: is a `style guide` the same as a `design system`?
+## Scenario D: Style Guide Versus Design System
 
-Query phrasing covered: `style guide versus design system`.
+Query phrasing: `style guide versus design system`.
 
-Answer shape: no; `partial_overlap` scoped by era and organization. The historical `styleguide` record carries `historical_scope`: org-wide visual governance, dominant before layered systems with code and tokens; `introduced_in`/`deprecated_in` are not globally datable because adoption is per-organization, which is exactly why the relation is not `renamed_to`. Named-source evidence: the four recorded design systems each publish foundations-plus-components-plus-guidance, which no cited historical style guide scope covers.
+Result: insufficient context until an organization and dated source are named on both sides. “Industry history” cannot stand in for a specific historical style guide. Do not create a universal rename or deprecation event; request the two sources and then use the [Comparison Workflow](comparison-workflow.md).
 
 ## Opinionated Guidance
 
@@ -108,13 +97,13 @@ When a case involves a platform guideline source, cite that platform's surface a
 
 ## Verification Contract
 
-For each relation, verify both cited sources still use the recorded terms and meanings, the typed relation and boundary still hold, `reviewed_on` is current for the claim, and every case names at least two sources in tension.
+Run `node scripts/validate-design-terminology.mjs --json` and its fixtures after editing. Verify both direct source locators, the comparison scope, direction, and boundary. The validator checks record shape and graph invariants; semantic accuracy still requires source review. Re-review when a named source changes the cited meaning.
 
 ## Source, License, And Attribution
 
-This page is a locally authored relation record with locally written summaries. Cited sources remain authoritative for their own definitions; no upstream definitional prose is reproduced.
+Locally authored summaries and judgments, with direct source links per term. Rechecked 2026-09-08: Figma variables/components, DTCG 2025.10 and second draft, CSS Custom Properties Level 1, Carbon system/pattern pages, and the local Layout hub. No source prose or code samples are copied. This is an author source review, not independent semantic approval.
 
 ## IA Navigation
 
 Parent: [Design Terminology](index.md).
-Next: [StyleGallery Domains](../DOMAINS.md).
+Next: [Design Term Comparison Workflow](comparison-workflow.md).

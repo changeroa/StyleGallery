@@ -8,6 +8,16 @@ In scope: purpose, frequency, interaction detail, implementation review, prototy
 
 Out of scope: a second universal principle set, unsupported claims of beauty or adoption, and overrides of semantic, accessibility, Layout, or shared quality contracts.
 
+## Start Here
+
+| Task | Route |
+| --- | --- |
+| Route the uncertain product decision. | [Design Engineering Decision Tree](decision-tree.md) |
+| Specify semantics, state, requests, and focus. | [Component Contract](component-contract.md) |
+| Apply settings, search, and destructive-action contracts. | [Design Engineering Worked Examples](worked-examples.md) |
+
+These workflows and worked cases are usable experimental guidance. Expected-result tables are test designs; actual product, engine, and reader evidence must be recorded separately. Review on a failed task, a source change, or a changed ownership contract.
+
 ## Documents
 
 - [Interface Craft Decisions](interface-craft.md) connects product purpose, implementation detail, and verification without treating taste as proof.
@@ -25,4 +35,4 @@ See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page member
 ## IA Navigation
 
 Parent: [StyleGallery](../index.md).
-Next: [Consumer Migration Readiness](consumer-migration-readiness.md).
+Next: [Design Engineering Decision Tree](decision-tree.md).

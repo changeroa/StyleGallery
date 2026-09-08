@@ -35,3 +35,11 @@ Primary role: OKF bundle map.
 - [Quality gates](quality/index.md) - Principle-backed gates for admissible layout and design evidence claims.
 - [Consumer migration evidence gate](quality/gates/consumer-migration-evidence.md) - Blocking contract for declared migration evidence.
 - [Update log](log.md) - Bundle update history.
+
+## Applied Workflows
+
+- [Motion Decision Tree](motion/decision-tree.md) - Choose a behavior from the user task.
+- [Design Engineering Decision Tree](design-engineering/decision-tree.md) - Route the uncertain product decision.
+- [Game UI Decision Tree](game-ui/decision-tree.md) - Choose by player task and ownership.
+- [Platform Adaptation Workflow](platform-guides/adaptation-workflow.md) - Record native facts, target decisions, and fallbacks.
+- [Design Term Comparison Workflow](design-terminology/comparison-workflow.md) - Resolve a source-specific question and produce a scoped handoff.
