@@ -121,11 +121,24 @@ export function createDomainValidationChecks({
     }
   }
 
+  function checkDomainLifecycleBoundary() {
+    const relative = "DOMAINS.md";
+    const content = stripFencedCodeBlocks(read(relative));
+    const required = [
+      "## Lifecycle And Staleness",
+      "Domain lifecycle changes are repository-owner decisions",
+      "machine-checkable contracts have relevant validator coverage",
+      "User studies, reader tasks, adoption counts, and attestations are neither required nor sufficient for a domain lifecycle change.",
+    ];
+    for (const clause of required) if (!content.includes(clause)) failures.push(`${relative}: missing lifecycle boundary ${clause}`);
+  }
+
   function checkPromotionBoundary() {
     const relative = "DOMAINS.md";
     const content = stripFencedCodeBlocks(read(relative));
     const required = [
       "### Consumer Reference Promotion",
+      "does not govern domain or page lifecycle",
       "applies only to consumer-local → shared-experimental invariant eligibility",
       "Editorial and terminal are related examples in one fixture set",
       "Shared stable has no numeric adoption threshold",
@@ -137,5 +150,5 @@ export function createDomainValidationChecks({
     for (const clause of required) if (!content.includes(clause)) failures.push(`${relative}: missing promotion boundary ${clause}`);
   }
 
-  return { checkIndex, checkLeaf, checkReferenceDocuments, checkPromotionBoundary };
+  return { checkDomainLifecycleBoundary, checkIndex, checkLeaf, checkReferenceDocuments, checkPromotionBoundary };
 }

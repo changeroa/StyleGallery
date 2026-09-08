@@ -51,7 +51,7 @@ The terms are implementation-neutral. A framework, operating-system behavior, or
 
 ## Opinionated Guidance
 
-The family ordering favors what a reader can observe before implementation details. It is useful for retrieval, but it is not a complete ontology. Add a term only after a reader task demonstrates that existing terms and aliases cannot express the distinction.
+The family ordering favors what a reader can observe before implementation details. It is useful for retrieval, but it is not a complete ontology. Add a term only when contrastive repository cases show that existing terms and aliases cannot express the distinction.
 
 ## Platform-Specific Guidance
 
@@ -66,7 +66,7 @@ Names tied to iOS, macOS, a browser API, Motion, Framer Motion, React, or a comp
 
 ## Verification Contract
 
-A vocabulary lookup should exercise exact, ambiguous, and unknown cases. Pass requires one justified term, an ordered candidate set with a stated distinction, or `unknown`; invented winners fail. A new term also requires a findability task showing the current route cannot reach an adequate term within two hops.
+A vocabulary lookup should exercise exact, ambiguous, and unknown cases. Pass requires one justified term, an ordered candidate set with a stated distinction, or `unknown`; invented winners fail. A new term also requires contrastive exact, ambiguous, and unknown cases showing that the current vocabulary cannot express the distinction.
 
 ## Source, License, And Attribution
 

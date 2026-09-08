@@ -18,18 +18,18 @@ Representative questions this domain answers: are Figma's variable, the DTCG des
 
 ## Promotion To Stable
 
-Promotion beyond `experimental` requires all of the following, each pass/fail checkable:
+Domain lifecycle decisions follow the [repository-owner policy](../DOMAINS.md#lifecycle-and-staleness). The following source, ownership, and machine-contract checks inform a proposed transition beyond `experimental`:
 
 - A named review owner, secondary reviewer, freshness owner, and dispute resolver are recorded.
 - A machine-readable registry with schema exists for terms, concepts, sources, and relations; until then `scripts/validate-design-terminology.mjs` enforces record consistency on the Markdown tables.
 - A relation invariant validator derived from the forbidden error states in [Design Term Relations](relation-types.md) passes.
 - Every term carries a direct source locator.
 - Every relation names both sources and a non-trivial boundary.
-- At least three representative user tasks are verified: judging same-label different-meaning, judging a cross-system relation, and separating a historical term from a current one.
 - Representative findability queries return a target document or record.
 - Unresolved semantic disputes: zero.
 - Stale sources beyond their re-review trigger: zero.
-- Usage evidence from at least one real human or agent consumer exists.
+
+Reader tasks, user studies, adoption counts, and attestations are neither required nor sufficient for a domain lifecycle change. Reader-task observations may support a separately scoped findability claim.
 
 ## Content Review Contract
 

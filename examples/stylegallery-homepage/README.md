@@ -1,7 +1,7 @@
 ---
-type: Worked Example
+type: Example Guide
 title: StyleGallery Homepage Example
-description: Static product-layer homepage example planned from a clean install of the published npm package.
+description: Static product-layer homepage built as an end-to-end npm package usage test.
 ---
 
 # StyleGallery Homepage Example

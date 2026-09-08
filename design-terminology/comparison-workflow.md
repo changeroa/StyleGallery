@@ -70,7 +70,7 @@ This judgment does not prove any actual converter preserves aliases, types, or m
 | Compare the second DTCG draft with 2025.10 | Historical/current version scopes and no invented rename | Treating the draft as the current implementation contract |
 | Compare “style guide” and “design system” without organizations | Insufficient context; request the two sources | Universal history or deprecation claim |
 
-These are expected lookup outcomes. A maintainer records actual reader task results and participant identity separately before claiming findability or promotion evidence.
+These are expected lookup outcomes. A maintainer records actual reader task results and participant identity separately before claiming findability evidence. Reader tasks are not a domain lifecycle prerequisite.
 
 ## Opinionated Guidance
 
@@ -86,7 +86,7 @@ Do not infer equivalence from an absent relation, source popularity, or shared s
 
 ## Verification Contract
 
-Verify table consistency mechanically and meaning against both sources. Run the reader tasks for an actual findability claim. Re-review when either source revises its term or a reader encounters an unresolved ambiguity. Stable promotion still requires the complete [domain promotion contract](index.md#promotion-to-stable).
+Verify table consistency mechanically and meaning against both sources. Run the reader tasks for an actual findability claim. Re-review when either source revises its term or a reader encounters an unresolved ambiguity. The [domain lifecycle review](index.md#promotion-to-stable) follows the repository-owner policy separately from reader evidence.
 
 ## Source, License, And Attribution
 
