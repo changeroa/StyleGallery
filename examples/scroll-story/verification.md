@@ -10,6 +10,8 @@ Observed on 2026-09-09 through the repository's Aside browser workflow in Chrome
 
 ## Observed Results
 
+This record and its source hashes describe commit `8230b64a0fe737a16727d894b3b28d2700473eba` (merged by `30141c0`). Later selector links and Flow's persistent-device treatment are outside this historical run. See [follow-up verification](../scene-navigation/verification.md) for those changes; these existing artifacts have not been rebound to new source bytes.
+
 | Case | Observation |
 | --- | --- |
 | Headphones, 1440×900 | All 41 browser assertions passed: progress landmarks and boundaries, forward/reverse, pinned stage, one accessible chapter, idle updates, long copy fallback, RTL, and width containment. |

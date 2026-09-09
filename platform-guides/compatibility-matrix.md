@@ -48,6 +48,12 @@ Use [Motion's scroll-story contract](../motion/interaction-recipes.md#scroll-dri
 
 Require readable static chapters when the stage cannot fit. Test reduced-motion changes during an active scene, not just the startup preference. The [Scroll Story Lab](../examples/scroll-story/README.md) supplies a target implementation and separates its observed results from untested runtime/device cases.
 
+## Fixed-Viewport Scene Target Cases
+
+The [scene-navigation contract](../motion/interaction-recipes.md#full-viewport-scene-navigation) adds input arbitration to scene rendering. Test wheel bursts and momentum tails, reverse gestures, horizontal input, modifier zoom, native copy scrolling at both edges, keyboard editing, visible navigation, direct hashes, and browser Back/Forward. Touch testing includes swipe start outside the owned art surface, cancellation, a second pointer, pinch zoom, and orientation changes.
+
+The [worked example](../examples/scene-navigation/README.md) has desktop-emulated input evidence and an explicit reading escape. Physical trackpad behavior, browser chrome resizing on a phone, iOS Safari, Android, and assistive technology need separate actual-device runs. Never relabel CDP touch injection or a 375-pixel viewport as physical-device verification.
+
 ## Example Record
 
 ```yaml

@@ -1,0 +1,33 @@
+{
+  "kind": "example-local-source-binding",
+  "observed_on": "2026-09-09",
+  "base_git_revision": "30141c0",
+  "scope": "Source bytes exercised by the scene-navigation and persistent-device follow-up; not canonical consumer-reference evidence.",
+  "sources": {
+    "examples/scene-navigation/app.mjs": "5aeccde70ecea809cd29ece06c84292da285f449cb7da93664254f83854b3a47",
+    "examples/scene-navigation/index.html": "c4cee8b9527df0102b49e6c49c750e326379efb8b727d699b95af52620747615",
+    "examples/scene-navigation/input.mjs": "abde7348b6edcd07855576510e467399bd976c4ef2c8be6afbb6c1b3f366b911",
+    "examples/scene-navigation/qa.mjs": "2bf90d02d60b867754bda5442f00e0f44fe90a0f8b41f8fe52d984c23374a228",
+    "examples/scene-navigation/styles.css": "cfff3dfdd7d63e4b6d788a4f0b1ed79b0b316f8c344a4778c2768ad7d01857f7",
+    "examples/scene-navigation/test-input.mjs": "29600e43d90a43d46fba914ef41ef2465e81882169e23434cd173fab797c6b35",
+    "examples/toss-homepage-clone/index.html": "43d07494851eaedae89e81dc37f4ece25dd23a60787212154d58098e9de7b344",
+    "examples/toss-homepage-clone/script.js": "fda023e91367d053fa3e14ba30d0bc28ae84ef9068b0b6d7ac26e614e06c716d",
+    "examples/toss-homepage-clone/story/controller.mjs": "065c5afdbe17e572474f7baae86f669e6826cdd25e05d5b99a6f4249c79f2968",
+    "examples/toss-homepage-clone/story/init.mjs": "80e98a1c2fcd660c88edc3f2bb737b9283f861811bda6f51cb26ad75d3583292",
+    "examples/toss-homepage-clone/story/persistent-device.mjs": "344e05e0900193ee56900a1c934ac88ee4a796f6fc3544c937879507edb77c05",
+    "examples/toss-homepage-clone/story/story.css": "851c3224e4a481fa21da728c6d41c4bc1a4d52af518f86aa5b8d83229dc6f28d",
+    "examples/toss-homepage-clone/story/timeline.mjs": "d13fa7d2aed9968c08ca36c5468087fd6154089bac451bfcda9eeb2ef26cd4f5",
+    "examples/toss-homepage-clone/styles.css": "30dfccdb7d8f65d1ea46d42cab5f22dd8098594a514ed493b4beaa8424e8552c"
+  },
+  "artifacts": {
+    "scene-checks-matrix.json": "ca14ea2562a8e8cebf9bc7d25399fac9411ac5368719ea46c0270a31b316df14",
+    "scene-input-navigation.json": "61f75ca1b3971d3daf2792e0856e3a4d13ba46936c7dc3720cdb0a0a46ecfcc8",
+    "scene-fallbacks.json": "097e9d01cede4cdceef7f343829ee6013809fa7dc536672818654320a611148e",
+    "scene-no-script-ax.json": "819eb1b231491fa4f85e2b1530ca9cd2eac2107bf284f81387689e304a398461",
+    "flow-persistent-device.json": "772d7984866ae8979d5f8e961f5f06b50b33ccc91f1dfffd435576b112cdc9a3",
+    "scene-desktop.png": "bb921b6cd3923ff5cff9c06f4fad8e656086c7bb77a9cb58c777fdab3eb18405",
+    "scene-mobile.png": "c2f0478e2d47bffeccacc66427a010b3ae55a629c611f44f38dda5caeeeba695",
+    "flow-persistent-start.png": "f24fb34b6b3acad9d9b399b97db706edf88264cbff81fab30afc84f6e4ededf2",
+    "flow-persistent-end.png": "d2da26c4554a56d82bbe8b4adf9e8190c94c470d527160ae7504077e1af6a25d"
+  }
+}

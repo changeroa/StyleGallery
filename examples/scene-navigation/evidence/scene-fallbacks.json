@@ -1,0 +1,32 @@
+[
+  {
+    "case": "low 1440x500",
+    "state": {
+      "index": 2,
+      "deck": false,
+      "reading": false
+    },
+    "allAccessible": true,
+    "scrollHeight": 1841
+  },
+  {
+    "case": "reading direct entry",
+    "state": {
+      "index": 1,
+      "deck": false,
+      "reading": true
+    },
+    "url": "http://127.0.0.1:4175/scene-navigation/?reading=1#instantly",
+    "allAccessible": true
+  },
+  {
+    "case": "live reduced motion final",
+    "state": {
+      "index": 0,
+      "deck": true,
+      "reading": false
+    },
+    "transition": "0s",
+    "y": 0
+  }
+]

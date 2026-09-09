@@ -35,6 +35,7 @@ Use this route to decide whether a product interaction needs motion and which be
 | Explain an operation that takes time | [Progress and completion](interaction-recipes.md#progress-and-completion) | An invented percentage or success before confirmation | Delayed result, cancellation, failure |
 | Follow direct manipulation | [Drag and settle](interaction-recipes.md#drag-and-settle) | A cancelled gesture committing data | Release, reversal, cancellation, alternative input |
 | Explore a product through scroll-controlled chapters | [Scroll-driven story](interaction-recipes.md#scroll-driven-story) | Entry callbacks mistaken for continuous progress; inaccessible pinned content | Reverse, jump, middle reload, static reading |
+| Navigate a whole page as fixed-viewport scenes | [Full-viewport scene navigation](interaction-recipes.md#full-viewport-scene-navigation) | Gesture bursts skipping chapters; trapped input or lost history | Burst, boundary, direct link, Back, Escape, native copy scroll |
 | Decorate an idle surface | [Practice Reference](practice-reference.md) | Repetition competing with the user's task | Compare against removal and reduced motion |
 
 ## Worked Selection

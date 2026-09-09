@@ -14,6 +14,8 @@ The results and two screenshots below describe commit `af9dbde62f68d349ea26825df
 
 ## Results
 
+The subsequent persistent-device treatment has its own [follow-up verification](../scene-navigation/verification.md); the original screenshots below remain historical.
+
 | Check | Result |
 | --- | --- |
 | 1440×900 desktop | Hero, fixed header, section rail, split product scenes, three-column finance cards, service rail, business scene, travel scene, global section, and footer rendered without document overflow. |

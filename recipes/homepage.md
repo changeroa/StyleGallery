@@ -45,6 +45,8 @@ Motion owns continuous progress and scene changes through the [Scroll-driven Sto
 
 ## Scroll Ownership
 
+A short full-page showcase can compose a viewport shell and [overlay-stack](../patterns/overlay-exception/overlay-stack.md) responsibilities with the [Full-viewport Scene Navigation contract](../motion/interaction-recipes.md#full-viewport-scene-navigation). Declare the document as fixed in scene mode, the chapter copy as the native overflow owner, and the document as the scroll owner in reading mode. The failure to prevent is a clipped or unreachable chapter when the viewport or text size changes. The [worked example](../examples/scene-navigation/README.md) uses a shrinkable stage between header and footer; it introduces no new reusable Layout pattern.
+
 Prefer normal document scrolling. Avoid nested scroll regions unless a section has an explicit independent task, such as a horizontally scrolling media reel with named keyboard and overflow behavior.
 
 ## Accessibility Expectations

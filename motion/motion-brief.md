@@ -81,6 +81,24 @@ performance_protocol: # exact runtime, input trace, measurements and local targe
 
 See [Scroll-driven story](interaction-recipes.md#scroll-driven-story) and the [worked lab](../examples/scroll-story/README.md). A brief must distinguish view-entry triggers from continuous scroll progress.
 
+## Fixed-Viewport Navigation Extension
+
+Use this instead of assuming a document scroll track when the selected chapter drives the page:
+
+```yaml
+state_source: selected chapter ID
+input_owner: # stage, exempt editable/native scroll regions, visible alternatives
+gesture_policy: # wheel units/threshold/burst/reversal; swipe start/cancel/multi-touch
+navigation: # chapter hashes, direct entry, Back/Forward, invalid destination
+boundaries: # first/last behavior; no implicit wrap or browser-navigation trap
+focus_policy: # outgoing panel focus, retained control focus, status announcement
+reading_escape: # visible control, Escape, short viewport, no-script path
+reduced_motion: # immediate chapter changes or a declared static alternative
+teardown: # input listeners, pending state, document overflow restoration
+```
+
+See [Full-viewport scene navigation](interaction-recipes.md#full-viewport-scene-navigation). Record ordinary document scrolling, pinned scrubbing, native snapping, and input-driven navigation as distinct choices.
+
 ## Opinionated Guidance
 
 Write cancellation before tuning curves. An animation completion callback should report presentation completion; it should not be the sole authority for network success, focus cleanup, or saving data.
