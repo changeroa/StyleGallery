@@ -42,3 +42,6 @@ Layout composition: viewport shell with a `minmax(0, 1fr)` stage, overlaid chapt
 Read [Motion's recipe](../../motion/interaction-recipes.md#full-viewport-scene-navigation), [Motion Brief](../../motion/motion-brief.md#fixed-viewport-navigation-extension), and [verification](verification.md). Compare [pinned scroll chapters](../scroll-story/README.md): those advance document position and release their sticky stage; this example selects discrete scenes without a scroll track. Neither example infers the original Toss site's rendering technology.
 
 Implementation handoff: `consumer_reference: not_applicable` because this standalone product example selects no consumer profile or reference record. No design-terminology records are used. This is repository-only example code; npm distributes the governed guidance and retrieval tools, not these assets or runtime modules.
+
+Consumer reference: not_applicable
+Consumer reference reason: This standalone product example selects no consumer profile or reference record.

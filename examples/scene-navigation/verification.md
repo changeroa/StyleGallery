@@ -37,3 +37,6 @@ Serve `examples/` as described in [README](README.md). In scene mode run `await 
 No connected iPhone/Android was found in the Mac's USB inventory; ADB and Xcode device tooling were unavailable. Physical devices, physical trackpad momentum, iOS Safari, Android, VoiceOver/screen-reader speech, browser chrome resizing, and measured rendering frame rate remain `not_run`. The screenshots show endpoints, not film-quality continuity. The injected pointer and reduced-motion checks establish local event/state behavior, not user comfort or universal browser support.
 
 Implementation handoff: `consumer_reference: not_applicable` because these standalone product examples select no consumer profile or canonical evidence record. No design-terminology records are used. Earlier [Scroll Story evidence](../scroll-story/verification.md) remains bound to its original commit and has not been overwritten.
+
+Consumer reference: not_applicable
+Consumer reference reason: These example-local observations select no consumer profile or canonical evidence record.
