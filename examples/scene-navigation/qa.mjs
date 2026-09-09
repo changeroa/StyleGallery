@@ -57,9 +57,9 @@ export async function runSceneChecks(root, controller) {
   const pointer = (target, type, id, x, y, primary = true) => target.dispatchEvent(new PointerEvent(type, { pointerType: 'touch', pointerId: id, isPrimary: primary, clientX: x, clientY: y, bubbles: true }));
   pointer(art, 'pointerdown', 1, 100, 200); pointer(window, 'pointercancel', 1, 100, 100); pointer(window, 'pointerup', 1, 100, 100);
   check('cancelled swipe does not navigate', controller.state.index === 1);
-  pointer(art, 'pointerdown', 1, 100, 200); pointer(art, 'pointerdown', 2, 150, 200, false);
+  pointer(art, 'pointerdown', 1, 100, 200); pointer(root.querySelector('header'), 'pointerdown', 2, 150, 200, false);
   pointer(window, 'pointerup', 1, 100, 100); pointer(window, 'pointerup', 2, 150, 100, false);
-  check('second pointer cancels chapter gesture', controller.state.index === 1);
+  check('second pointer outside stage cancels chapter gesture', controller.state.index === 1);
   pointer(copy, 'pointerdown', 1, 100, 200); pointer(window, 'pointerup', 1, 100, 100);
   check('swipe outside art remains native', controller.state.index === 1);
   pointer(art, 'pointerdown', 1, 100, 200); pointer(window, 'pointerup', 1, 100, 100);
@@ -71,7 +71,7 @@ export async function runSceneChecks(root, controller) {
   root.querySelector('[data-reading]').click(); await settle();
   check('scene view can be restored', controller.state.deck && scrollY === 0);
   controller.destroy();
-  check('teardown restores accessible document', !document.documentElement.classList.contains('scene-document') && panels.every(panel => !panel.inert));
+  check('teardown restores accessible document', !controller.state.deck && !document.documentElement.classList.contains('scene-document') && panels.every(panel => !panel.inert));
   const before = controller.state.index; key(stage, 'Home'); wheel(art);
   check('teardown removes input handlers', controller.state.index === before);
   return { ok: rows.every(row => row.pass), viewport: [innerWidth, innerHeight], userAgent: navigator.userAgent, rows };

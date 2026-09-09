@@ -83,7 +83,7 @@ export function mountScenes(root) {
     if (target === undefined) return;
     event.preventDefault(); select(target);
   }, { signal: listeners.signal });
-  stage.addEventListener('pointerdown', event => {
+  window.addEventListener('pointerdown', event => {
     if (event.pointerType !== 'touch') return;
     pointers.add(event.pointerId);
     if (!deck || pointers.size !== 1 || !event.isPrimary || !event.target.closest('[data-swipe]')) { touch = null; return; }
@@ -114,7 +114,8 @@ export function mountScenes(root) {
   return {
     get state() { return { index, deck, reading }; },
     destroy() {
-      disposed = true; listeners.abort(); gate.reset();
+      disposed = true; deck = false; reading = true; touch = null;
+      listeners.abort(); gate.reset(); pointers.clear();
       document.documentElement.classList.remove('scene-document');
       root.dataset.mode = 'reading';
       panels.forEach(panel => { panel.inert = false; panel.removeAttribute('aria-hidden'); });
