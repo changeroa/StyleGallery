@@ -1,0 +1,56 @@
+[
+  {
+    "requested": 0,
+    "actual": 0,
+    "pinned": true,
+    "pass": true
+  },
+  {
+    "requested": 0.249,
+    "actual": 0.2489,
+    "pinned": true,
+    "pass": true
+  },
+  {
+    "requested": 0.251,
+    "actual": 0.251,
+    "pinned": true,
+    "pass": true
+  },
+  {
+    "requested": 0.5,
+    "actual": 0.5001,
+    "pinned": true,
+    "pass": true
+  },
+  {
+    "requested": 0.749,
+    "actual": 0.749,
+    "pinned": true,
+    "pass": true
+  },
+  {
+    "requested": 0.751,
+    "actual": 0.7511,
+    "pinned": true,
+    "pass": true
+  },
+  {
+    "requested": 1,
+    "actual": 1,
+    "pinned": true,
+    "pass": true
+  },
+  {
+    "requested": 0.5,
+    "actual": 0.5001,
+    "pinned": true,
+    "pass": true
+  },
+  {
+    "requested": 0,
+    "actual": 0,
+    "pinned": true,
+    "pass": true
+  }
+]

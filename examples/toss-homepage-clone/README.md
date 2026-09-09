@@ -31,6 +31,10 @@ Open `http://127.0.0.1:4174/`.
 - Rejected pattern: a fixed-body shell, because the page is a sequential story and the document should own scrolling.
 - Product styling excluded from reusable Layout CSS: photography, gradients, colors, rounded corners, shadows, type scale, and transition timing.
 
+## Scroll Story Follow-up
+
+The Transfers section now contains three scroll-controlled chapters using [the local controller](story/controller.mjs). It supports reversal, direct progress calculation, static reading mode, and fallback for constrained viewports, long copy, or reduced motion. [Scroll Story Lab](../scroll-story/README.md) reuses it with another product and links source and verification.
+
 ## Interaction Contract
 
 The mobile navigation exposes `aria-expanded`, closes after navigation and on Escape, and keeps the semantic link order. The asset feature selector uses tabs with Arrow Up/Down, Home, and End behavior. Section reveals stop changing once visible. `prefers-reduced-motion` removes smooth scrolling and reveals all content without waiting for animation.

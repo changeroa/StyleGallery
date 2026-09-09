@@ -79,6 +79,22 @@ observed_results: not_run
 remaining_evidence: # actual runtime, input, device, and user evidence
 ```
 
+## Product Story And Media Handoff
+
+Start with an observation sheet for a product homepage: section job, reading order, scene boundaries, changing objects, media crop, and source-confidence level. Record an unknown rendering mechanism as unknown; cinematic appearance alone does not establish video, Canvas, WebGL, or a library.
+
+| Decision | Product-owned record | Verification |
+| --- | --- | --- |
+| Typography and rhythm | Heading measure, copy length, spacing, contrast and image ratio | Real copy, text growth, narrow windows |
+| Scene composition | Subject identity, crop and focal point, transparent layers, background transitions | First/middle/last and transition frames |
+| Media export | Dimensions, frame order, codec/format, alpha, poster, source/license | Decode readiness and failed asset |
+| Runtime budget | Download bytes, decoded-memory estimate, cache and concurrency limits | Slow requests, repeated reversal, idle work |
+| Static equivalent | Every essential message in semantic HTML, explicit reading mode | No script, reduced motion, keyboard access |
+
+Use the [Motion scene contract](../motion/interaction-recipes.md#scene-composition-contract) and compare the [Flow and headphones examples](../examples/scroll-story/README.md). Their shared controller demonstrates content substitution; both are related local examples and establish no independent adopter evidence. Their different typography, colors, and assets remain product choices.
+
+Complete one representative scene before producing an entire video or image sequence. Review its composition and transition framing, then export at the target dimensions. A polished poster does not validate the intervening frames. This section is locally authored practice guidance, not adapted external visual expression.
+
 ## Opinionated Guidance
 
 Preserve the user's work across recoverable failures. Status text should explain the real operation; motion and color alone are insufficient descriptions of what happened.

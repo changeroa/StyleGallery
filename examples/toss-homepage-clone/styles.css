@@ -189,7 +189,8 @@ h2 { margin-block-end: 1.5rem; font-size: clamp(2.7rem, 5.5vw, 5.25rem); line-he
 .footer-meta { display:flex; justify-content:space-between; margin-block-start:5rem; font-size:.8rem; }
 .footer-display { position:absolute; inset:auto 1rem -5vw; margin:0; color:rgba(255,255,255,.15); font-size:clamp(8rem,20vw,20rem); font-weight:700; letter-spacing:-.09em; white-space:nowrap; }
 
-.reveal { opacity: 0; transform: translateY(2rem); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.reveal-ready { opacity: 0; transform: translateY(2rem); }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 :focus-visible { outline: 3px solid #7ab8ff; outline-offset: 4px; }
 
@@ -235,5 +236,5 @@ h2 { margin-block-end: 1.5rem; font-size: clamp(2.7rem, 5.5vw, 5.25rem); line-he
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior:auto; }
   *, *::before, *::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; }
-  .reveal { opacity:1; transform:none; }
+  .reveal.reveal-ready { opacity:1; transform:none; }
 }

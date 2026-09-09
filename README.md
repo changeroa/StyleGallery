@@ -64,6 +64,8 @@ The [StyleGallery homepage example](examples/stylegallery-homepage/README.md) wa
 
 The [Toss-inspired homepage clone](examples/toss-homepage-clone/README.md) applies the same workflow to an observed external homepage: it maps the source into section jobs, composes existing Layout patterns, keeps brand styling in the example layer, and records desktop, mobile, keyboard, overflow, and reduced-motion checks.
 
+The [Scroll Story Lab](examples/scroll-story/README.md) adds runnable scroll-controlled product chapters, an image sequence with bounded decoding, native CSS scrubbing, and a static reading path. Start from [Motion’s scroll-driven story](motion/interaction-recipes.md#scroll-driven-story) for ownership and failure cases.
+
 ### Read-only MCP server
 
 Launch the packaged stdio server with:

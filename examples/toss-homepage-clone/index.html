@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="story/story.css">
+  <script type="module" src="story/init.mjs"></script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -59,26 +61,22 @@
       <a class="scroll-cue" href="#send"><span>Discover</span><i aria-hidden="true"></i></a>
     </section>
 
-    <section class="send-section observed-section" id="send" data-section>
-      <div class="content-limiter split-story">
-        <div class="story-copy reveal">
-          <p class="eyebrow">Transfers</p>
-          <h2>Send money<br>in seconds</h2>
-          <p class="lede">No account numbers. No extra steps.<br>Pick a friend, enter the amount, and send.</p>
-          <a class="round-link" href="#money">Explore transfers <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="phone-stage reveal" aria-label="Transfer confirmation preview">
-          <div class="glow-orb glow-blue"></div>
-          <div class="phone phone-dark">
-            <div class="phone-top"><span>9:41</span><span>● ● ●</span></div>
-            <div class="contact-avatar">J</div>
-            <p class="phone-label">Send to Jamie</p>
-            <strong class="transfer-amount">$240</strong>
-            <div class="keypad" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>·</span><span>0</span><span>⌫</span></div>
-            <button type="button" class="phone-action">Send now</button>
-          </div>
-          <div class="floating-receipt"><i>✓</i><div><span>Transfer complete</span><strong>$240 sent instantly</strong></div></div>
-        </div>
+    <section class="scroll-story observed-section" id="send" data-section data-story data-story-offset="64" aria-label="One connected money journey">
+      <div class="story-controls"><a href="#money">Skip money story ↓</a><button type="button" data-story-toggle aria-pressed="false" hidden>Read without animation</button></div>
+      <div class="story-stage" data-story-stage>
+        <article class="story-panel" data-story-panel>
+          <div class="story-text"><span class="story-number">01 / Connect</span><h2>Your money.<br>One clear view.</h2><p>Bring your everyday account and savings into one calm place. See where you stand before your next move.</p></div>
+          <div class="story-art" aria-hidden="true"><div class="story-device"><small>flow</small><strong>$18,420</strong><small>Total balance</small><div class="device-row">Everyday · $8,480</div><div class="device-row">Savings · $9,940</div><div class="device-action">Everything, together</div></div></div>
+        </article>
+        <article class="story-panel" data-story-panel>
+          <div class="story-text"><span class="story-number">02 / Send</span><h2>A little help.<br>A single move.</h2><p>Choose Jamie, check the amount, and send. The preview shows the journey; no money moves in this study.</p></div>
+          <div class="story-art" aria-hidden="true"><div class="story-device"><small>flow</small><strong>$240</strong><small>Send to Jamie</small><div class="device-row">From everyday account</div><div class="device-row">Transfer preview</div><div class="device-action">Ready to send</div></div></div>
+        </article>
+        <article class="story-panel" data-story-panel>
+          <div class="story-text"><span class="story-number">03 / Go</span><h2>Go further.<br>Feel at home.</h2><p>Take one clear view of your money wherever life takes you. Your travel budget stays close at hand.</p></div>
+          <div class="story-art" aria-hidden="true"><div class="story-device"><small>flow</small><strong>$3,220</strong><small>Travel wallet</small><div class="device-row">Your next destination</div><div class="device-row">One wallet. More possibilities.</div><div class="device-action">Ready for the world</div></div></div>
+        </article>
+        <div class="story-meter" data-story-meter aria-hidden="true"></div>
       </div>
     </section>
 

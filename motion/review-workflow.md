@@ -72,6 +72,14 @@ Do not automatically block `ease-in`, a particular scale value, motion longer th
 
 Exercise the actual interaction in its default, repeated, interrupted, reversed, and reduced-motion states. Record the exact environment and observable. Source review may establish declared code paths; rendered and human outcomes require corresponding evidence families.
 
+## Scroll Story Evidence
+
+For [scroll-driven stories](interaction-recipes.md#scroll-driven-story), add boundary samples immediately before and after each scene transition, forward/reverse comparison, large jumps, direct middle entry, reload/history restoration, narrow and short viewports, long copy, and delayed font/image changes. Deliberately fail or delay a media request and verify stale completion cannot replace current presentation.
+
+Record JavaScript update cost separately from animation-frame intervals: neither alone measures compositor frame delivery. Count idle updates to catch observer/decode feedback loops. Record media dimensions, bounded cache entries, and estimated decoded bytes separately from measured process/GPU memory. Set product-local budgets and keep real-device, touch, assistive-technology, and comfort outcomes `not_run` when unobserved.
+
+The [Scroll Story verification](../examples/scroll-story/verification.md) records the two worked implementations and the limits of the local run.
+
 ## Source, License, And Attribution
 
 - Upstream inspiration: [review-animations/SKILL.md](https://github.com/emilkowalski/skills/blob/220e8607c90b17337d210125777b7b695f26c221/skills/review-animations/SKILL.md)

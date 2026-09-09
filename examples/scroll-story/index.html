@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Scroll stories · StyleGallery</title>
+  <link rel="stylesheet" href="../toss-homepage-clone/story/story.css">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <header class="lab-header"><a href="../toss-homepage-clone/">Flow homepage ↗</a><a href="#examples">Explore recipes</a></header>
+  <main>
+    <section class="lab-intro" id="examples">
+      <p class="story-number">StyleGallery / Motion in practice</p>
+      <h1>Scroll to understand.<br>Reverse to explore.</h1>
+      <p>Three scenes, two products, one movement contract. Explore the examples, read the failure cases, and inspect the implementation.</p>
+      <div class="example-cards">
+        <a href="../toss-homepage-clone/#send"><strong>01 · Connected money</strong><span>DOM scenes · continuous scroll · static reading mode</span></a>
+        <a href="#listening"><strong>02 · A quieter world</strong><span>Image sequence · bounded decoding · poster fallback</span></a>
+        <a href="#native"><strong>03 · Native CSS scrub</strong><span>Scroll-driven rotation · support detection · static fallback</span></a>
+      </div>
+    </section>
+    <section id="listening" class="scroll-story listening-story" data-story data-story-offset="0" aria-label="A quieter world">
+      <div class="story-controls"><a href="#native">Skip listening story ↓</a><button type="button" data-story-toggle aria-pressed="false" hidden>Read without animation</button></div>
+      <div class="story-stage" data-story-stage>
+        <article class="story-panel" data-story-panel><div class="story-text"><span class="story-number">01 / Discover</span><h2>A quieter world.<br>A closer listen.</h2><p>Meet a fictional pair of headphones designed around the moments you want to keep. Scroll to explore the shape.</p></div><div class="story-art" aria-hidden="true"><img data-sequence-image src="assets/headphones-00.svg" width="480" height="480" alt=""></div></article>
+        <article class="story-panel" data-story-panel><div class="story-text"><span class="story-number">02 / Focus</span><h2>Find your<br>own space.</h2><p>A soft seal and a simple silhouette make room for the music. This illustration explains the concept, with no measured product claims.</p></div><div class="story-art" aria-hidden="true"><img data-sequence-image src="assets/headphones-06.svg" width="480" height="480" alt=""></div></article>
+        <article class="story-panel" data-story-panel><div class="story-text"><span class="story-number">03 / Carry</span><h2>Keep the good<br>parts close.</h2><p>A companion for the journey ahead. Every chapter remains readable when animation is turned off.</p></div><div class="story-art" aria-hidden="true"><img data-sequence-image src="assets/headphones-11.svg" width="480" height="480" alt=""></div></article>
+        <div class="story-meter" data-story-meter aria-hidden="true"></div>
+      </div>
+    </section>
+    <section class="native-demo" id="native">
+      <div class="native-stage"><div><span class="story-number">Native CSS / continuous progress</span><h2>A different way<br>to turn the page.</h2><p>The same start, midpoint, and end are available in both directions. Unsupported browsers and reduced-motion preferences retain the poster.</p></div><img class="native-object" src="assets/headphones-06.svg" width="480" height="480" alt="Illustration of over-ear headphones"></div>
+    </section>
+    <section class="lab-notes" id="notes"><h2>Make the contract visible.</h2><p>Try a narrow window, enable reduced motion, reload halfway through, or reverse quickly. Content remains available when the cinematic treatment cannot fit.</p><div class="example-cards"><a href="README.md"><strong>Implementation guide</strong><span>Ownership, source, media budget, and failure cases</span></a><a href="verification.md"><strong>Verification record</strong><span>Observed runs and untested environments</span></a></div></section>
+  </main>
+</body>
+</html>

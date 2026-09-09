@@ -8,6 +8,10 @@ description: Local browser observations for responsive layout, keyboard behavior
 
 The implementation was observed on 2026-09-09 in an Aside-controlled Chrome 151 browser on a local Mac. The original `https://toss.im/en-us` and this local implementation were inspected in separate tabs. Original-page observations were used only to identify high-level composition and interaction relationships.
 
+## Original Capture Scope
+
+The results and two screenshots below describe commit `af9dbde62f68d349ea26825df9c2a98887ad04ac`, before the scroll-story follow-up. They are retained as historical observations. The current three-chapter story and its checks are recorded in [Scroll Story verification](../scroll-story/verification.md).
+
 ## Results
 
 | Check | Result |

@@ -42,6 +42,12 @@ Choose the relevant concern, read its platform source guide, record native facts
 | Capability | Available, unavailable, denied, interrupted where relevant | Fallback behavior must be exercised independently |
 | State | Normal, pending, failed, empty, stale or removed data | A screenshot of default state is insufficient |
 
+## Scroll Story Target Cases
+
+Use [Motion's scroll-story contract](../motion/interaction-recipes.md#scroll-driven-story) when the target is a browser scene controlled by scrolling. Record CSS timeline support at the tested version, feature-unavailable fallback, wheel/trackpad/keyboard/touch input actually used, browser history restoration, and resize/orientation changes. Viewport emulation is evidence of layout at that size, not of mobile hardware or touch physics.
+
+Require readable static chapters when the stage cannot fit. Test reduced-motion changes during an active scene, not just the startup preference. The [Scroll Story Lab](../examples/scroll-story/README.md) supplies a target implementation and separates its observed results from untested runtime/device cases.
+
 ## Example Record
 
 ```yaml

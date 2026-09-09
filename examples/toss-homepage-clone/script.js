@@ -56,7 +56,10 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach((element) => {
   if (reducedMotion.matches) element.classList.add("is-visible");
-  else revealObserver.observe(element);
+  else {
+    element.classList.add("reveal-ready");
+    revealObserver.observe(element);
+  }
 });
 
 const sectionObserver = new IntersectionObserver((entries) => {

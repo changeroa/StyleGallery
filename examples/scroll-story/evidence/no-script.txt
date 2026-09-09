@@ -1,0 +1,36 @@
+- title: "Scroll stories · StyleGallery" [url=http://127.0.0.1:4175/scroll-story/]
+- banner:
+  - link "Flow homepage ↗" [ref=e1]
+  - link "Explore recipes" [ref=e2]
+- main:
+  - region:
+    - text: "StyleGallery / Motion in practice"
+    - heading "Scroll to understand.Reverse to explore." [level=1]
+    - text: "Three scenes, two products, one movement contract. Explore the examples, read the failure cases, and inspect the implementation."
+    - link "01 · Connected money DOM scenes · continuous scroll · static reading mode" [ref=e3]
+    - link "02 · A quieter world Image sequence · bounded decoding · poster fallback" [ref=e4]
+    - link "03 · Native CSS scrub Scroll-driven rotation · support detection · static fallback" [ref=e5]
+  - region "A quieter world" [ref=e6]:
+    - link "Skip listening story ↓" [ref=e7]
+    - article:
+      - text: "01 / Discover"
+      - heading "A quieter world.A closer listen." [level=2]
+      - text: "Meet a fictional pair of headphones designed around the moments you want to keep. Scroll to explore the shape."
+    - article:
+      - text: "02 / Focus"
+      - heading "Find yourown space." [level=2]: "Find your own space."
+      - text: "A soft seal and a simple silhouette make room for the music. This illustration explains the concept, with no measured product claims."
+    - article:
+      - text: "03 / Carry"
+      - heading "Keep the goodparts close." [level=2]: "Keep the good parts close."
+      - text: "A companion for the journey ahead. Every chapter remains readable when animation is turned off."
+  - region:
+    - text: "Native CSS / continuous progress"
+    - heading "A different wayto turn the page." [level=2]: "A different way to turn the page."
+    - text: "The same start, midpoint, and end are available in both directions. Unsupported browsers and reduced-motion preferences retain the poster."
+    - image "Illustration of over-ear headphones"
+  - region:
+    - heading "Make the contract visible." [level=2]
+    - text: "Try a narrow window, enable reduced motion, reload halfway through, or reverse quickly. Content remains available when the cinematic treatment cannot fit."
+    - link "Implementation guide Ownership, source, media budget, and failure cases" [ref=e8]
+    - link "Verification record Observed runs and untested environments" [ref=e9]

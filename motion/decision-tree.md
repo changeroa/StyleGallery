@@ -34,6 +34,7 @@ Use this route to decide whether a product interaction needs motion and which be
 | Preserve identity when items move | [Reorder and filter](interaction-recipes.md#reorder-and-filter) | Visual movement changing logical reading order | Stable identity and focused-item removal |
 | Explain an operation that takes time | [Progress and completion](interaction-recipes.md#progress-and-completion) | An invented percentage or success before confirmation | Delayed result, cancellation, failure |
 | Follow direct manipulation | [Drag and settle](interaction-recipes.md#drag-and-settle) | A cancelled gesture committing data | Release, reversal, cancellation, alternative input |
+| Explore a product through scroll-controlled chapters | [Scroll-driven story](interaction-recipes.md#scroll-driven-story) | Entry callbacks mistaken for continuous progress; inaccessible pinned content | Reverse, jump, middle reload, static reading |
 | Decorate an idle surface | [Practice Reference](practice-reference.md) | Repetition competing with the user's task | Compare against removal and reduced motion |
 
 ## Worked Selection

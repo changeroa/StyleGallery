@@ -1,0 +1,35 @@
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body { background: #f8f6f0; color: #272924; font-family: system-ui, sans-serif; margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #2868d0; outline-offset: 5px; }
+.lab-header { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; padding: 1.5rem 5vw; }
+.lab-intro, .lab-notes { margin-inline: auto; max-inline-size: 80rem; padding: 6rem 5vw; }
+h1 { font-size: clamp(3rem, 6vw, 6rem); letter-spacing: -.065em; line-height: 1; margin: 1rem 0 2rem; }
+p { font-size: 1.1rem; line-height: 1.7; max-inline-size: 45rem; }
+.example-cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); margin-block-start: 3rem; }
+.example-cards a { background: #eae6db; border-radius: 1rem; display: grid; gap: 1rem; padding: 1.7rem; text-decoration: none; }
+.example-cards a:hover { background: #e0dbcd; }
+.example-cards span { font-size: .9rem; line-height: 1.6; }
+.listening-story { background: #e8dfce; color: #2f3029; }
+.listening-story .story-number { color: #795125; }
+.listening-story .story-art::before { background: #e0d2bc; }
+.story-art img { max-inline-size: 100%; position: relative; }
+.native-demo { background: #242f2a; color: #f4eedc; padding-inline: 5vw; }
+.native-stage { align-items: center; display: grid; gap: 2rem; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-inline: auto; max-inline-size: 70rem; padding-block: 4rem; }
+.native-stage h2, .lab-notes h2 { font-size: clamp(2.5rem, 4vw, 4rem); letter-spacing: -.05em; line-height: 1.1; }
+.native-object { block-size: auto; inline-size: 100%; }
+@supports (animation-timeline: view()) and (animation-range: contain) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 900px) and (min-height: 640px) {
+    .native-demo { block-size: 260vh; view-timeline-name: --native-turn; }
+    .native-stage { block-size: 100vh; inset-block-start: 0; position: sticky; }
+    .native-object { animation: turn 1s linear both; animation-range: contain 0% contain 100%; animation-timeline: --native-turn; }
+  }
+}
+@keyframes turn {
+  from { transform: rotate(-25deg) scale(.8); }
+  50% { transform: rotate(0) scale(1); }
+  to { transform: rotate(25deg) scale(.8); }
+}
+@media (max-width: 899px) { .native-stage { grid-template-columns: minmax(0, 1fr); } }
+.story-art img { block-size: auto; }
