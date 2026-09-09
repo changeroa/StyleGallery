@@ -1,0 +1,107 @@
+{
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+  "viewport": [
+    1440,
+    900
+  ],
+  "rows": [
+    {
+      "requested": 0,
+      "actual": 0,
+      "sameDevice": true,
+      "background": "rgb(237, 244, 255)",
+      "color": "rgb(0, 0, 0)",
+      "transform": "perspective(1000px) rotateY(-19.2deg) rotateZ(-12deg) scale(1)",
+      "stageTop": 64,
+      "screens": [
+        "1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "requested": 0.25,
+      "actual": 0.2498,
+      "sameDevice": true,
+      "background": "rgb(237, 244, 255)",
+      "color": "rgb(0, 0, 0)",
+      "transform": "perspective(1000px) rotateY(-12.0053deg) rotateZ(-7.50331deg) scale(1.106)",
+      "stageTop": 64,
+      "screens": [
+        "0.500613",
+        "0.499387",
+        "0"
+      ]
+    },
+    {
+      "requested": 0.5,
+      "actual": 0.5001,
+      "sameDevice": true,
+      "background": "rgb(237, 244, 255)",
+      "color": "rgb(0, 0, 0)",
+      "transform": "perspective(1000px) rotateY(-4.79735deg) rotateZ(-2.99834deg) scale(1.15)",
+      "stageTop": 64,
+      "screens": [
+        "0",
+        "1",
+        "0"
+      ]
+    },
+    {
+      "requested": 0.75,
+      "actual": 0.7499,
+      "sameDevice": true,
+      "background": "rgb(129, 143, 163)",
+      "color": "rgb(0, 0, 0)",
+      "transform": "perspective(1000px) rotateY(2.39735deg) rotateZ(1.49834deg) scale(1.1061)",
+      "stageTop": 64,
+      "screens": [
+        "0",
+        "0.500307",
+        "0.499693"
+      ]
+    },
+    {
+      "requested": 1,
+      "actual": 1,
+      "sameDevice": true,
+      "background": "rgb(20, 41, 71)",
+      "color": "rgb(255, 255, 255)",
+      "transform": "perspective(1000px) rotateY(9.6deg) rotateZ(6deg) scale(1)",
+      "stageTop": 64,
+      "screens": [
+        "0",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "requested": 0.5,
+      "actual": 0.5001,
+      "sameDevice": true,
+      "background": "rgb(237, 244, 255)",
+      "color": "rgb(0, 0, 0)",
+      "transform": "perspective(1000px) rotateY(-4.79735deg) rotateZ(-2.99834deg) scale(1.15)",
+      "stageTop": 64,
+      "screens": [
+        "0",
+        "1",
+        "0"
+      ]
+    },
+    {
+      "requested": 0,
+      "actual": 0,
+      "sameDevice": true,
+      "background": "rgb(237, 244, 255)",
+      "color": "rgb(0, 0, 0)",
+      "transform": "perspective(1000px) rotateY(-19.2deg) rotateZ(-12deg) scale(1)",
+      "stageTop": 64,
+      "screens": [
+        "1",
+        "0",
+        "0"
+      ]
+    }
+  ]
+}

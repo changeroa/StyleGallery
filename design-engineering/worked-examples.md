@@ -95,6 +95,12 @@ Use the [Motion scene contract](../motion/interaction-recipes.md#scene-compositi
 
 Complete one representative scene before producing an entire video or image sequence. Review its composition and transition framing, then export at the target dimensions. A polished poster does not validate the intervening frames. This section is locally authored practice guidance, not adapted external visual expression.
 
+### Persistent Subject And Page Navigation
+
+The Flow story keeps one device shell mounted while its screen content and pose change with progress. The [Scene Navigation example](../examples/scene-navigation/README.md) carries that same identity principle into a page whose chapter selection changes while document position stays fixed. Background, text, device pose, and screen layers share one state owner. These are local product treatments, not profile values or reusable Layout CSS.
+
+For this page type, add an input map and URL/history contract to the visual handoff. Specify which surface owns wheel/swipe, which copy regions retain native scrolling, how a focused outgoing action is recovered, and how the user reaches ordinary reading. Review intermediate frames as well as the endpoints; semantic availability must not depend on a visual completion callback.
+
 ## Opinionated Guidance
 
 Preserve the user's work across recoverable failures. Status text should explain the real operation; motion and color alone are insufficient descriptions of what happened.

@@ -34,3 +34,9 @@
   [data-story-mode="animated"] .story-stage { block-size: auto; display: block; position: static; }
   [data-story-mode="animated"] .story-panel { opacity: 1 !important; transform: none !important; }
 }
+.persistent-art { display: none; }
+[data-story-mode="animated"][data-persistent-device] .story-panel .story-art { visibility: hidden; }
+[data-story-mode="animated"] .persistent-art { align-items: center; display: flex; inline-size: 44%; inset: 0 5% 0 auto; justify-content: center; pointer-events: none; position: absolute; }
+.persistent-device { block-size: 420px; color: #142033; }
+.persistent-screen { inset: 1.6rem 1.1rem; position: absolute; }
+[data-story-mode="animated"][data-persistent-device] .story-number { color: inherit; }

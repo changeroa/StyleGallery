@@ -1,0 +1,33 @@
+{
+  "kind": "example-local-source-binding",
+  "observed_on": "2026-09-09",
+  "base_git_revision": "30141c0",
+  "scope": "Source bytes exercised by the scene-navigation and persistent-device follow-up; not canonical consumer-reference evidence.",
+  "sources": {
+    "examples/scene-navigation/app.mjs": "faf82af6be58dcd5c3e4bbcbe563a7c156249795fed6f5b2506f689048d6c49c",
+    "examples/scene-navigation/index.html": "2a8f3a16101e1c921b1f100f0cf8260e54977317e70f4602e1e9515ae5f011eb",
+    "examples/scene-navigation/input.mjs": "abde7348b6edcd07855576510e467399bd976c4ef2c8be6afbb6c1b3f366b911",
+    "examples/scene-navigation/qa.mjs": "227bcb198185cfd782e8819eca3c59a3d8d2c3f70f99a2768040794f50b45f5e",
+    "examples/scene-navigation/styles.css": "cfff3dfdd7d63e4b6d788a4f0b1ed79b0b316f8c344a4778c2768ad7d01857f7",
+    "examples/scene-navigation/test-input.mjs": "29600e43d90a43d46fba914ef41ef2465e81882169e23434cd173fab797c6b35",
+    "examples/toss-homepage-clone/index.html": "43d07494851eaedae89e81dc37f4ece25dd23a60787212154d58098e9de7b344",
+    "examples/toss-homepage-clone/script.js": "fda023e91367d053fa3e14ba30d0bc28ae84ef9068b0b6d7ac26e614e06c716d",
+    "examples/toss-homepage-clone/story/controller.mjs": "065c5afdbe17e572474f7baae86f669e6826cdd25e05d5b99a6f4249c79f2968",
+    "examples/toss-homepage-clone/story/init.mjs": "80e98a1c2fcd660c88edc3f2bb737b9283f861811bda6f51cb26ad75d3583292",
+    "examples/toss-homepage-clone/story/persistent-device.mjs": "344e05e0900193ee56900a1c934ac88ee4a796f6fc3544c937879507edb77c05",
+    "examples/toss-homepage-clone/story/story.css": "851c3224e4a481fa21da728c6d41c4bc1a4d52af518f86aa5b8d83229dc6f28d",
+    "examples/toss-homepage-clone/story/timeline.mjs": "d13fa7d2aed9968c08ca36c5468087fd6154089bac451bfcda9eeb2ef26cd4f5",
+    "examples/toss-homepage-clone/styles.css": "30dfccdb7d8f65d1ea46d42cab5f22dd8098594a514ed493b4beaa8424e8552c"
+  },
+  "artifacts": {
+    "scene-checks-matrix.json": "cff54eed183cca57eb3a3d30c231ca24baa711a2cf3143ad8533aa2f670b88eb",
+    "scene-input-navigation.json": "ff1715f6f7294b609b236b1d51f7268ce29178a8b5bdf3ff87f4bdaf9e1fbbb2",
+    "scene-fallbacks.json": "097e9d01cede4cdceef7f343829ee6013809fa7dc536672818654320a611148e",
+    "scene-no-script-ax.json": "c1c12257ba426b26c1516b6f48edd09dc932f185e510e699c66fc529a8be38f1",
+    "flow-persistent-device.json": "772d7984866ae8979d5f8e961f5f06b50b33ccc91f1dfffd435576b112cdc9a3",
+    "scene-desktop.png": "bb921b6cd3923ff5cff9c06f4fad8e656086c7bb77a9cb58c777fdab3eb18405",
+    "scene-mobile.png": "badb7b2958f677bbaaf881868055f80297877eb7c277d2456b58d1ecb39d8369",
+    "flow-persistent-start.png": "f24fb34b6b3acad9d9b399b97db706edf88264cbff81fab30afc84f6e4ededf2",
+    "flow-persistent-end.png": "d2da26c4554a56d82bbe8b4adf9e8190c94c470d527160ae7504077e1af6a25d"
+  }
+}

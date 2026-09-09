@@ -10,6 +10,8 @@ Build a product story where scrolling enlarges a phone and changes its screen, o
 
 ## Run And Explore
 
+For a page that stays fixed while wheel/keys/swipe select chapters, open [Scene Navigation](../scene-navigation/README.md). It uses discrete chapter state, history, and input arbitration instead of this lab's document scroll track. The Flow scene also has a persistent device treatment; [follow-up verification](../scene-navigation/verification.md) records that later change separately.
+
 From the repository root:
 
 ```sh

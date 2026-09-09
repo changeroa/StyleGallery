@@ -2,6 +2,11 @@
 
 ## 2026-09-09
 
+- Added a full-page fixed-viewport scene-navigation example with chapter hashes/history, wheel-burst gating, keyboard and art-surface swipe navigation, native copy overflow, immediate reduced-motion transitions, and a complete reading escape.
+- Extended Motion, Design Engineering, Platform Guides, and the Homepage composition route for this distinct navigation model. Kept visual values and controllers in the example layer.
+- Preserved one device shell across Flow's scroll-controlled scenes and linked the new page through the Scroll Story Lab. Historical verification remains bound to its original source; follow-up checks have separate records.
+- Prepared npm 0.1.6 with the cumulative governed-document updates. Runnable examples remain repository-only and are not added to the material admission or npm file inventory.
+
 - Added scroll-story contracts to Motion, a product media handoff to Design Engineering, and browser target cases to Platform Guides. Linked the existing Homepage recipe without adding a new Layout pattern or changing domain lifecycle.
 - Replaced the Flow transfer scene with three reversible scroll-controlled chapters and added a second product example, native CSS scrubbing, bounded image decoding, static reading, and deterministic/runtime checks in the Scroll Story Lab.
 

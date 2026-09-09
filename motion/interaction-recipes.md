@@ -104,6 +104,38 @@ Exercise `0 → 0.5 → 1 → 0.5 → 0`, direct entry at 0.5, and jumps across 
 
 Technical sources rechecked on 2026-09-09: [W3C Scroll-driven Animations draft](https://www.w3.org/TR/scroll-animations-1/), [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame), and [image decode](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode). These support the API distinctions and decode lifecycle; they do not establish local frame rate, comfort, or adoption.
 
+### Full-Viewport Scene Navigation
+
+Task: explore a short sequence as screen transitions while the document stays at one position. This is discrete navigation driven by input, not a scroll-position timeline. Use the [Scene Navigation example](../examples/scene-navigation/README.md) for a runnable contract.
+
+| Model | State source | Scroll responsibility |
+| --- | --- | --- |
+| Pinned scrub | Continuous document position | Document traverses a track; the local stage sticks and releases |
+| Native snapping | Browser scroll position and snap targets | Document or named pane scrolls between real positions |
+| Fixed-viewport scenes | Selected chapter identity | Document stays fixed in scene mode; overflowing copy owns native scrolling |
+
+Choose explicitly; similar appearance does not make their input, history, or recovery behavior equivalent. A short showcase may justify scene navigation. Articles, search results, forms, and long task flows should retain ordinary reading and scrolling unless a tested task requires otherwise.
+
+#### Input And Navigation Contract
+
+One controller owns the selected chapter. Commit that state immediately and let product CSS retarget presentation; never wait for an animation timer before accepting navigation. Keep the same decorative subject node across scenes when object continuity is intended.
+
+- Declare the input surface. The example owns vertical wheel gestures only within its stage and touch swipes only over its decorative art; visible chapter and previous/next controls remain available.
+- Aggregate small wheel deltas and accept at most one navigation per burst. Declare threshold, unit conversion, silence interval, reversal, and edge behavior as local choices. Test long momentum tails on actual target hardware before claiming trackpad support.
+- Exempt editable controls, native overflowing copy, modifier gestures, and horizontal scrolling. Do not capture Tab, browser history shortcuts, or pinch zoom. Do not auto-advance from a copy pane when its scroll reaches the edge.
+- Support direct chapter links, keyboard commands, Back/Forward restoration, and invalid-fragment fallback. Do not loop at the first or last chapter. Preserve unrelated URL state.
+- Make only the selected panel interactive in scene mode. If focus was inside the outgoing panel, move it to the incoming heading; otherwise retain control focus. Announce the chapter separately from animation.
+- Provide a persistent reading-mode control and an escape command. All chapters remain ordinary semantic HTML with no script. A short viewport selects reading mode; long copy remains a named native scroll region.
+- Reduced motion may preserve discrete navigation while making transitions immediate. State this separately from the pinned example's static fallback, and react to preference changes during use.
+
+The example's 60-pixel aggregate threshold, 180-millisecond silence interval, 55-pixel swipe threshold, and 540-pixel minimum height are product experiments. They are not gallery-wide defaults or measured usability recommendations.
+
+#### Verification Trace
+
+Record `0 → 1 → 2 → 1 → 0` with document position unchanged, a long wheel burst, fresh reverse gesture, rapid opposite commands, boundary commands, direct entry, Back/Forward, and Escape. Exercise long copy and text editing without changing chapters, cancelled/multi-touch gestures, no script, reduced motion, resize, and teardown. Desktop touch emulation does not establish iOS Safari, Android, physical trackpad, or assistive-technology behavior.
+
+Locally authored interaction contract. The worked example's verification is bounded to its recorded source and runtime; no external homepage implementation is inferred from its appearance.
+
 ## Opinionated Guidance
 
 For frequent operations, compare with removing motion before increasing its complexity. When two recipes compose, one controller must arbitrate the shared state rather than letting competing completion callbacks decide it.

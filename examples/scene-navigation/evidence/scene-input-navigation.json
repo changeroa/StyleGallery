@@ -1,0 +1,58 @@
+[
+  {
+    "case": "direct #instantly",
+    "state": {
+      "index": 1,
+      "deck": true,
+      "reading": false
+    },
+    "y": 0
+  },
+  {
+    "case": "CDP swipe",
+    "state": {
+      "index": 2,
+      "deck": true,
+      "reading": false
+    },
+    "y": 0
+  },
+  {
+    "case": "Back restores chapter and announcement",
+    "state": {
+      "index": 1,
+      "deck": true,
+      "reading": false
+    },
+    "y": 0,
+    "status": "Chapter 2 of 3: Instantly"
+  },
+  {
+    "case": "Forward",
+    "state": {
+      "index": 2,
+      "deck": true,
+      "reading": false
+    },
+    "y": 0,
+    "status": "Chapter 3 of 3: Everywhere"
+  },
+  {
+    "case": "browser Home key",
+    "state": {
+      "index": 0,
+      "deck": true,
+      "reading": false
+    },
+    "y": 0
+  },
+  {
+    "case": "CDP wheel",
+    "state": {
+      "index": 1,
+      "deck": true,
+      "reading": false
+    },
+    "y": 0
+  }
+]

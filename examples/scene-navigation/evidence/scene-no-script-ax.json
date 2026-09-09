@@ -1,0 +1,89 @@
+{
+  "tree": "- title: \"Flow · a world in motion\" [url=http://127.0.0.1:4175/scene-navigation/]\n- banner:\n  - link \"● flow\" [ref=e1]\n  - navigation \"Chapters\" [ref=e2]:\n    - link \"Together\" [ref=e3]\n    - link \"Instantly\" [ref=e4]\n    - link \"Everywhere\" [ref=e5]\n- main \"Flow product story\" [ref=e6]:\n  - heading \"Your world with Flow\" [level=1]\n  - region:\n    - generic [ref=e7]:\n      - text: \"01 · Together\"\n      - heading \"Your world.In one place.\" [level=2]\n      - text: \"Money, plans, possibilities.A little more connected.A lot more you.\"\n      - link \"Explore Flow ↗\" [ref=e8]\n  - region:\n    - generic [ref=e9]:\n      - text: \"02 · Instantly\"\n      - heading \"A small gesture.A big difference.\" [level=2]\n      - text: \"Split a moment. Share a little help.Keep moving together.\"\n      - link \"See the money journey ↗\" [ref=e10]\n  - region:\n    - generic [ref=e11]:\n      - text: \"03 · Everywhere\"\n      - heading \"Life goes on.Go with it.\" [level=2]\n      - text: \"A familiar feeling,wherever you find yourself next.\"\n      - link \"Explore the world ↗\" [ref=e12]\n- contentinfo:\n  - link \"Back to gallery ↗\" [ref=e13]\n- status",
+  "refs": {
+    "e1": {
+      "role": "link",
+      "name": "● flow",
+      "tagName": "A",
+      "nthAmongSameSignature": 0
+    },
+    "e2": {
+      "role": "navigation",
+      "name": "Chapters",
+      "tagName": "NAV",
+      "ariaLabel": "Chapters",
+      "nthAmongSameSignature": 0
+    },
+    "e3": {
+      "role": "link",
+      "name": "Together",
+      "tagName": "A",
+      "nthAmongSameSignature": 0
+    },
+    "e4": {
+      "role": "link",
+      "name": "Instantly",
+      "tagName": "A",
+      "nthAmongSameSignature": 0
+    },
+    "e5": {
+      "role": "link",
+      "name": "Everywhere",
+      "tagName": "A",
+      "nthAmongSameSignature": 0
+    },
+    "e6": {
+      "role": "main",
+      "name": "Flow product story",
+      "tagName": "MAIN",
+      "ariaLabel": "Flow product story",
+      "nthAmongSameSignature": 0
+    },
+    "e7": {
+      "role": "generic",
+      "name": "",
+      "tagName": "DIV",
+      "ariaLabel": "Together chapter",
+      "nthAmongSameSignature": 0
+    },
+    "e8": {
+      "role": "link",
+      "name": "Explore Flow ↗",
+      "tagName": "A",
+      "nthAmongSameSignature": 0
+    },
+    "e9": {
+      "role": "generic",
+      "name": "",
+      "tagName": "DIV",
+      "ariaLabel": "Instantly chapter",
+      "nthAmongSameSignature": 1
+    },
+    "e10": {
+      "role": "link",
+      "name": "See the money journey ↗",
+      "tagName": "A",
+      "nthAmongSameSignature": 0
+    },
+    "e11": {
+      "role": "generic",
+      "name": "",
+      "tagName": "DIV",
+      "ariaLabel": "Everywhere chapter",
+      "nthAmongSameSignature": 2
+    },
+    "e12": {
+      "role": "link",
+      "name": "Explore the world ↗",
+      "tagName": "A",
+      "nthAmongSameSignature": 0
+    },
+    "e13": {
+      "role": "link",
+      "name": "Back to gallery ↗",
+      "tagName": "A",
+      "nthAmongSameSignature": 0
+    }
+  },
+  "diff": "@@ -1 +1,29 @@\n-\n+- banner:\n+  - link \"● flow\" [ref=e1]\n+  - navigation \"Chapters\" [ref=e2]:\n+    - link \"Together\" [ref=e3]\n+    - link \"Instantly\" [ref=e4]\n+    - link \"Everywhere\" [ref=e5]\n+- main \"Flow product story\" [ref=e6]:\n+  - heading \"Your world with Flow\" [level=1]\n+  - region:\n+    - generic [ref=e7]:\n+      - text: \"01 · Together\"\n+      - heading \"Your world.In one place.\" [level=2]\n+      - text: \"Money, plans, possibilities.A little more connected.A lot more you.\"\n+      - link \"Explore Flow ↗\" [ref=e8]\n+  - region:\n+    - generic [ref=e9]:\n+      - text: \"02 · Instantly\"\n+      - heading \"A small gesture.A big difference.\" [level=2]\n+      - text: \"Split a moment. Share a little help.Keep moving together.\"\n+      - link \"See the money journey ↗\" [ref=e10]\n+  - region:\n+    - generic [ref=e11]:\n+      - text: \"03 · Everywhere\"\n+      - heading \"Life goes on.Go with it.\" [level=2]\n+      - text: \"A familiar feeling,wherever you find yourself next.\"\n+      - link \"Explore the world ↗\" [ref=e12]\n+- contentinfo:\n+  - link \"Back to gallery ↗\" [ref=e13]\n+- status\n"
+}

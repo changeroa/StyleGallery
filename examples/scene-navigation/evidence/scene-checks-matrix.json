@@ -1,0 +1,972 @@
+[
+  {
+    "ok": true,
+    "viewport": [
+      320,
+      568
+    ],
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "rows": [
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "first boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "last boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "Tab remains native",
+        "pass": true
+      },
+      {
+        "name": "modifier shortcut remains native",
+        "pass": true
+      },
+      {
+        "name": "button Space remains native",
+        "pass": true
+      },
+      {
+        "name": "outgoing focus moves to incoming heading",
+        "pass": true
+      },
+      {
+        "name": "chapter control retains focus",
+        "pass": true
+      },
+      {
+        "name": "wheel burst selects one chapter",
+        "pass": true
+      },
+      {
+        "name": "horizontal input remains native",
+        "pass": true
+      },
+      {
+        "name": "pinch and horizontal modifiers remain native",
+        "pass": true
+      },
+      {
+        "name": "long copy owns real overflow",
+        "pass": true
+      },
+      {
+        "name": "copy wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "copy edge does not navigate",
+        "pass": true
+      },
+      {
+        "name": "copy keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "cancelled swipe does not navigate",
+        "pass": true
+      },
+      {
+        "name": "second pointer cancels chapter gesture",
+        "pass": true
+      },
+      {
+        "name": "swipe outside art remains native",
+        "pass": true
+      },
+      {
+        "name": "swipe release outside stage is handled",
+        "pass": true
+      },
+      {
+        "name": "Escape restores ordinary reading",
+        "pass": true
+      },
+      {
+        "name": "reading exposes all chapters",
+        "pass": true
+      },
+      {
+        "name": "Escape focuses mode control",
+        "pass": true
+      },
+      {
+        "name": "scene view can be restored",
+        "pass": true
+      },
+      {
+        "name": "teardown restores accessible document",
+        "pass": true
+      },
+      {
+        "name": "teardown removes input handlers",
+        "pass": true
+      }
+    ]
+  },
+  {
+    "ok": true,
+    "viewport": [
+      375,
+      812
+    ],
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "rows": [
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "first boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "last boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "Tab remains native",
+        "pass": true
+      },
+      {
+        "name": "modifier shortcut remains native",
+        "pass": true
+      },
+      {
+        "name": "button Space remains native",
+        "pass": true
+      },
+      {
+        "name": "outgoing focus moves to incoming heading",
+        "pass": true
+      },
+      {
+        "name": "chapter control retains focus",
+        "pass": true
+      },
+      {
+        "name": "wheel burst selects one chapter",
+        "pass": true
+      },
+      {
+        "name": "horizontal input remains native",
+        "pass": true
+      },
+      {
+        "name": "pinch and horizontal modifiers remain native",
+        "pass": true
+      },
+      {
+        "name": "long copy owns real overflow",
+        "pass": true
+      },
+      {
+        "name": "copy wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "copy edge does not navigate",
+        "pass": true
+      },
+      {
+        "name": "copy keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "cancelled swipe does not navigate",
+        "pass": true
+      },
+      {
+        "name": "second pointer cancels chapter gesture",
+        "pass": true
+      },
+      {
+        "name": "swipe outside art remains native",
+        "pass": true
+      },
+      {
+        "name": "swipe release outside stage is handled",
+        "pass": true
+      },
+      {
+        "name": "Escape restores ordinary reading",
+        "pass": true
+      },
+      {
+        "name": "reading exposes all chapters",
+        "pass": true
+      },
+      {
+        "name": "Escape focuses mode control",
+        "pass": true
+      },
+      {
+        "name": "scene view can be restored",
+        "pass": true
+      },
+      {
+        "name": "teardown restores accessible document",
+        "pass": true
+      },
+      {
+        "name": "teardown removes input handlers",
+        "pass": true
+      }
+    ]
+  },
+  {
+    "ok": true,
+    "viewport": [
+      768,
+      900
+    ],
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "rows": [
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "first boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "last boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "Tab remains native",
+        "pass": true
+      },
+      {
+        "name": "modifier shortcut remains native",
+        "pass": true
+      },
+      {
+        "name": "button Space remains native",
+        "pass": true
+      },
+      {
+        "name": "outgoing focus moves to incoming heading",
+        "pass": true
+      },
+      {
+        "name": "chapter control retains focus",
+        "pass": true
+      },
+      {
+        "name": "wheel burst selects one chapter",
+        "pass": true
+      },
+      {
+        "name": "horizontal input remains native",
+        "pass": true
+      },
+      {
+        "name": "pinch and horizontal modifiers remain native",
+        "pass": true
+      },
+      {
+        "name": "long copy owns real overflow",
+        "pass": true
+      },
+      {
+        "name": "copy wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "copy edge does not navigate",
+        "pass": true
+      },
+      {
+        "name": "copy keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "cancelled swipe does not navigate",
+        "pass": true
+      },
+      {
+        "name": "second pointer cancels chapter gesture",
+        "pass": true
+      },
+      {
+        "name": "swipe outside art remains native",
+        "pass": true
+      },
+      {
+        "name": "swipe release outside stage is handled",
+        "pass": true
+      },
+      {
+        "name": "Escape restores ordinary reading",
+        "pass": true
+      },
+      {
+        "name": "reading exposes all chapters",
+        "pass": true
+      },
+      {
+        "name": "Escape focuses mode control",
+        "pass": true
+      },
+      {
+        "name": "scene view can be restored",
+        "pass": true
+      },
+      {
+        "name": "teardown restores accessible document",
+        "pass": true
+      },
+      {
+        "name": "teardown removes input handlers",
+        "pass": true
+      }
+    ]
+  },
+  {
+    "ok": true,
+    "viewport": [
+      1024,
+      768
+    ],
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "rows": [
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "first boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "last boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "Tab remains native",
+        "pass": true
+      },
+      {
+        "name": "modifier shortcut remains native",
+        "pass": true
+      },
+      {
+        "name": "button Space remains native",
+        "pass": true
+      },
+      {
+        "name": "outgoing focus moves to incoming heading",
+        "pass": true
+      },
+      {
+        "name": "chapter control retains focus",
+        "pass": true
+      },
+      {
+        "name": "wheel burst selects one chapter",
+        "pass": true
+      },
+      {
+        "name": "horizontal input remains native",
+        "pass": true
+      },
+      {
+        "name": "pinch and horizontal modifiers remain native",
+        "pass": true
+      },
+      {
+        "name": "long copy owns real overflow",
+        "pass": true
+      },
+      {
+        "name": "copy wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "copy edge does not navigate",
+        "pass": true
+      },
+      {
+        "name": "copy keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "cancelled swipe does not navigate",
+        "pass": true
+      },
+      {
+        "name": "second pointer cancels chapter gesture",
+        "pass": true
+      },
+      {
+        "name": "swipe outside art remains native",
+        "pass": true
+      },
+      {
+        "name": "swipe release outside stage is handled",
+        "pass": true
+      },
+      {
+        "name": "Escape restores ordinary reading",
+        "pass": true
+      },
+      {
+        "name": "reading exposes all chapters",
+        "pass": true
+      },
+      {
+        "name": "Escape focuses mode control",
+        "pass": true
+      },
+      {
+        "name": "scene view can be restored",
+        "pass": true
+      },
+      {
+        "name": "teardown restores accessible document",
+        "pass": true
+      },
+      {
+        "name": "teardown removes input handlers",
+        "pass": true
+      }
+    ]
+  },
+  {
+    "ok": true,
+    "viewport": [
+      1440,
+      900
+    ],
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "rows": [
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 2 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 1 device identity",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 selected",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 fixed document",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 semantics",
+        "pass": true
+      },
+      {
+        "name": "chapter 0 device identity",
+        "pass": true
+      },
+      {
+        "name": "first boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "last boundary does not wrap",
+        "pass": true
+      },
+      {
+        "name": "Tab remains native",
+        "pass": true
+      },
+      {
+        "name": "modifier shortcut remains native",
+        "pass": true
+      },
+      {
+        "name": "button Space remains native",
+        "pass": true
+      },
+      {
+        "name": "outgoing focus moves to incoming heading",
+        "pass": true
+      },
+      {
+        "name": "chapter control retains focus",
+        "pass": true
+      },
+      {
+        "name": "wheel burst selects one chapter",
+        "pass": true
+      },
+      {
+        "name": "horizontal input remains native",
+        "pass": true
+      },
+      {
+        "name": "pinch and horizontal modifiers remain native",
+        "pass": true
+      },
+      {
+        "name": "long copy owns real overflow",
+        "pass": true
+      },
+      {
+        "name": "copy wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "copy edge does not navigate",
+        "pass": true
+      },
+      {
+        "name": "copy keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing keys remain native",
+        "pass": true
+      },
+      {
+        "name": "editing wheel remains native",
+        "pass": true
+      },
+      {
+        "name": "cancelled swipe does not navigate",
+        "pass": true
+      },
+      {
+        "name": "second pointer cancels chapter gesture",
+        "pass": true
+      },
+      {
+        "name": "swipe outside art remains native",
+        "pass": true
+      },
+      {
+        "name": "swipe release outside stage is handled",
+        "pass": true
+      },
+      {
+        "name": "Escape restores ordinary reading",
+        "pass": true
+      },
+      {
+        "name": "reading exposes all chapters",
+        "pass": true
+      },
+      {
+        "name": "Escape focuses mode control",
+        "pass": true
+      },
+      {
+        "name": "scene view can be restored",
+        "pass": true
+      },
+      {
+        "name": "teardown restores accessible document",
+        "pass": true
+      },
+      {
+        "name": "teardown removes input handlers",
+        "pass": true
+      }
+    ]
+  }
+]
