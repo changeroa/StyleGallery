@@ -1,0 +1,33 @@
+{
+  "scope": "example-local source bytes exercised by the scroll-story follow-up; not a canonical capture",
+  "date": "2026-09-09",
+  "sources": {
+    "examples/scroll-story/app.mjs": "64eb50540c11e7463ca16dcaaa919edb7b815311b6efed872c95740b0792d24a",
+    "examples/scroll-story/assets/headphones-00.svg": "be8dd50e88fa608a95a5891298f822e553bb666d1b306f1e714d5894735c0ffd",
+    "examples/scroll-story/assets/headphones-01.svg": "c616f5a53b673080b9b6790847b146e56ce8578c87ddc582634cef701f952335",
+    "examples/scroll-story/assets/headphones-02.svg": "33cc3bc7b79ca4b04b97bb804ee5938192b81bcda2153047a9f0e71622064470",
+    "examples/scroll-story/assets/headphones-03.svg": "cba8d3da7a5895db905db32740467f364f7289a475813a1325abb5d10f252de0",
+    "examples/scroll-story/assets/headphones-04.svg": "8e471f9e6c9cb6fb46f33e387d21e8f488862b05e8343291fe8cf9172a73e97c",
+    "examples/scroll-story/assets/headphones-05.svg": "f9452e99bbc1902f40616026d934877f19b0f34e31320157082990bb36423ff4",
+    "examples/scroll-story/assets/headphones-06.svg": "626b61a3c42480be1ba07346cac014cea94bcd3f8deeec37b1db0c29ac10c084",
+    "examples/scroll-story/assets/headphones-07.svg": "190720158e078677db6e849dec700709d79db7ef81b438cc6855c330f1b7ae7b",
+    "examples/scroll-story/assets/headphones-08.svg": "2778ebb6b5924036df0e0e5f5e393adfff5de846d0399877c57cd58839a71607",
+    "examples/scroll-story/assets/headphones-09.svg": "c5e30f68060a612ff1461920064f4a7016f2fe67557bbab84bcab6f33cda5ce2",
+    "examples/scroll-story/assets/headphones-10.svg": "62b6294ce890b949bb290bc634f68df4a9492f68a4be110dc44a41655e475bbc",
+    "examples/scroll-story/assets/headphones-11.svg": "f35c58797477e7f1c31b9e987218155161175237477a57d6b10c7db6f13eaab4",
+    "examples/scroll-story/index.html": "db4b050df77892c09419afedcad509ef5c7a38f4e60b5cf428aac6923a06757f",
+    "examples/scroll-story/qa.mjs": "153a5b6afc3841f0ffa01f0ff98cf8275c239aa81a426cfa5da583cfb4272884",
+    "examples/scroll-story/sequence.mjs": "679f2a3619488ae3991af6467eea3961a458774e55b81b01b0807e3b965eda38",
+    "examples/scroll-story/styles.css": "c6fc60a2fe3b8e6d4abf530a187bd9fa88220368f06d76511b7b101ba7568dc7",
+    "examples/scroll-story/test-contract.mjs": "53157b6a924bd2586633848192c783b315b9ce7739268eece80f11d8a4cdadbc",
+    "examples/toss-homepage-clone/assets/commuter-hero.jpg": "c83fb3658baa215a96a48e2a7eed2db2c3b9e914733c273787c85cb2cce41a7b",
+    "examples/toss-homepage-clone/assets/travel-sunset.jpg": "bf3b0ed25c1b6d1e363f36737d3c72a850d6a98780b01c5ea62a5f965b7efc06",
+    "examples/toss-homepage-clone/index.html": "43d07494851eaedae89e81dc37f4ece25dd23a60787212154d58098e9de7b344",
+    "examples/toss-homepage-clone/script.js": "fda023e91367d053fa3e14ba30d0bc28ae84ef9068b0b6d7ac26e614e06c716d",
+    "examples/toss-homepage-clone/story/controller.mjs": "065c5afdbe17e572474f7baae86f669e6826cdd25e05d5b99a6f4249c79f2968",
+    "examples/toss-homepage-clone/story/init.mjs": "10fe2780bea7a99c8ba9bbcb5ce1c8f4099f64163a2af8b7bac5776e903d8208",
+    "examples/toss-homepage-clone/story/story.css": "e61b95b551a601821e675b505a0f44514e3482d6499d7a0e90a33781f03389af",
+    "examples/toss-homepage-clone/story/timeline.mjs": "d13fa7d2aed9968c08ca36c5468087fd6154089bac451bfcda9eeb2ef26cd4f5",
+    "examples/toss-homepage-clone/styles.css": "30dfccdb7d8f65d1ea46d42cab5f22dd8098594a514ed493b4beaa8424e8552c"
+  }
+}

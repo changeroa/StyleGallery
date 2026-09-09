@@ -14,6 +14,7 @@ Out of scope: universal timing or easing rules, unmeasured performance claims, a
 | --- | --- |
 | Choose a behavior from the user task. | [Motion Decision Tree](decision-tree.md) |
 | Record states, owners, interruption, and evidence. | [Motion Brief](motion-brief.md) |
+| Build a scroll-driven product story and inspect runnable examples. | [Scroll-driven Story](interaction-recipes.md#scroll-driven-story) and [Scroll Story Lab](../examples/scroll-story/README.md) |
 | Apply feedback, disclosure, modal, reorder, progress, and drag contracts. | [Motion Interaction Recipes](interaction-recipes.md) |
 
 These workflows and worked cases are usable experimental guidance. Expected-result tables are test designs; actual product, engine, and reader evidence must be recorded separately. Review on a failed task, a source change, or a changed ownership contract.

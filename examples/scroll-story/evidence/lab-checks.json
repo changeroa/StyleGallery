@@ -1,0 +1,201 @@
+{
+  "ok": true,
+  "viewport": [
+    1440,
+    900
+  ],
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+  "rows": [
+    {
+      "name": "progress 0",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "pinned 0",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "visible 0",
+      "pass": true
+    },
+    {
+      "name": "semantic 0",
+      "pass": true
+    },
+    {
+      "name": "progress 0.249",
+      "pass": true,
+      "detail": 0.2491
+    },
+    {
+      "name": "pinned 0.249",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "visible 0.249",
+      "pass": true
+    },
+    {
+      "name": "semantic 0.249",
+      "pass": true
+    },
+    {
+      "name": "progress 0.251",
+      "pass": true,
+      "detail": 0.251
+    },
+    {
+      "name": "pinned 0.251",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "visible 0.251",
+      "pass": true
+    },
+    {
+      "name": "semantic 0.251",
+      "pass": true
+    },
+    {
+      "name": "progress 0.5",
+      "pass": true,
+      "detail": 0.4999
+    },
+    {
+      "name": "pinned 0.5",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "visible 0.5",
+      "pass": true
+    },
+    {
+      "name": "semantic 0.5",
+      "pass": true
+    },
+    {
+      "name": "progress 0.749",
+      "pass": true,
+      "detail": 0.7491
+    },
+    {
+      "name": "pinned 0.749",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "visible 0.749",
+      "pass": true
+    },
+    {
+      "name": "semantic 0.749",
+      "pass": true
+    },
+    {
+      "name": "progress 0.751",
+      "pass": true,
+      "detail": 0.751
+    },
+    {
+      "name": "pinned 0.751",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "visible 0.751",
+      "pass": true
+    },
+    {
+      "name": "semantic 0.751",
+      "pass": true
+    },
+    {
+      "name": "progress 1",
+      "pass": true,
+      "detail": 0.9999
+    },
+    {
+      "name": "pinned 1",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "visible 1",
+      "pass": true
+    },
+    {
+      "name": "semantic 1",
+      "pass": true
+    },
+    {
+      "name": "progress 0.5",
+      "pass": true,
+      "detail": 0.4999
+    },
+    {
+      "name": "pinned 0.5",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "visible 0.5",
+      "pass": true
+    },
+    {
+      "name": "semantic 0.5",
+      "pass": true
+    },
+    {
+      "name": "progress 0",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "pinned 0",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "visible 0",
+      "pass": true
+    },
+    {
+      "name": "semantic 0",
+      "pass": true
+    },
+    {
+      "name": "idle does not continuously render",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "long copy chooses static reading",
+      "pass": true,
+      "detail": "content"
+    },
+    {
+      "name": "static chapters accessible",
+      "pass": true
+    },
+    {
+      "name": "rtl contains document width",
+      "pass": true
+    },
+    {
+      "name": "document width contained",
+      "pass": true
+    }
+  ],
+  "metrics": {
+    "updates": 20,
+    "maxUpdateMs": 7.099999904632568,
+    "enhanced": true,
+    "start": 836.640625,
+    "distance": 2340
+  }
+}

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A StyleGallery-built study of the Toss English homepage's spatial rhythm and interaction patterns.">
+  <title>Flow — all of life, one smooth move</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="story/story.css">
+  <script type="module" src="story/init.mjs"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#home" aria-label="Flow home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
+      <span>flow</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+      <span class="sr-only">Toggle navigation</span>
+      <span></span><span></span>
+    </button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
+      <a href="#money">Personal</a>
+      <a href="#business">Business</a>
+      <a href="#global">Company</a>
+      <a href="#stories">Newsroom</a>
+      <a href="#footer">Careers</a>
+    </nav>
+    <div class="header-actions">
+      <button class="language" type="button" aria-label="Current language: English">ENG <span aria-hidden="true">⌄</span></button>
+      <a class="download-button" href="#download">Download App</a>
+    </div>
+  </header>
+
+  <nav class="section-rail" aria-label="Page sections" data-section-rail>
+    <a href="#home" aria-label="Hero"><span></span></a>
+    <a href="#send" aria-label="Transfers"><span></span></a>
+    <a href="#money" aria-label="Assets"><span></span></a>
+    <a href="#finance" aria-label="Finance"><span></span></a>
+    <a href="#stories" aria-label="Services"><span></span></a>
+    <a href="#business" aria-label="Business"><span></span></a>
+    <a href="#travel" aria-label="Global"><span></span></a>
+  </nav>
+
+  <main id="main">
+    <section class="hero observed-section" id="home" data-section>
+      <div class="hero-media">
+        <img src="assets/commuter-hero.jpg" alt="A commuter using a phone beside a bright train window">
+        <div class="hero-shade"></div>
+        <div class="hero-copy reveal">
+          <p class="eyebrow light">Designed with StyleGallery</p>
+          <h1>From money to everyday life.<br>All in one place.</h1>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#send"><span>Discover</span><i aria-hidden="true"></i></a>
+    </section>
+
+    <section class="scroll-story observed-section" id="send" data-section data-story data-story-offset="64" aria-label="One connected money journey">
+      <div class="story-controls"><a href="#money">Skip money story ↓</a><button type="button" data-story-toggle aria-pressed="false" hidden>Read without animation</button></div>
+      <div class="story-stage" data-story-stage>
+        <article class="story-panel" data-story-panel>
+          <div class="story-text"><span class="story-number">01 / Connect</span><h2>Your money.<br>One clear view.</h2><p>Bring your everyday account and savings into one calm place. See where you stand before your next move.</p></div>
+          <div class="story-art" aria-hidden="true"><div class="story-device"><small>flow</small><strong>$18,420</strong><small>Total balance</small><div class="device-row">Everyday · $8,480</div><div class="device-row">Savings · $9,940</div><div class="device-action">Everything, together</div></div></div>
+        </article>
+        <article class="story-panel" data-story-panel>
+          <div class="story-text"><span class="story-number">02 / Send</span><h2>A little help.<br>A single move.</h2><p>Choose Jamie, check the amount, and send. The preview shows the journey; no money moves in this study.</p></div>
+          <div class="story-art" aria-hidden="true"><div class="story-device"><small>flow</small><strong>$240</strong><small>Send to Jamie</small><div class="device-row">From everyday account</div><div class="device-row">Transfer preview</div><div class="device-action">Ready to send</div></div></div>
+        </article>
+        <article class="story-panel" data-story-panel>
+          <div class="story-text"><span class="story-number">03 / Go</span><h2>Go further.<br>Feel at home.</h2><p>Take one clear view of your money wherever life takes you. Your travel budget stays close at hand.</p></div>
+          <div class="story-art" aria-hidden="true"><div class="story-device"><small>flow</small><strong>$3,220</strong><small>Travel wallet</small><div class="device-row">Your next destination</div><div class="device-row">One wallet. More possibilities.</div><div class="device-action">Ready for the world</div></div></div>
+        </article>
+        <div class="story-meter" data-story-meter aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="money-section observed-section" id="money" data-section>
+      <div class="content-limiter money-layout">
+        <div class="money-copy reveal">
+          <p class="eyebrow">Assets</p>
+          <h2>Your money,<br>simplified</h2>
+          <div class="feature-tabs" role="tablist" aria-label="Money features">
+            <button type="button" role="tab" aria-selected="true" aria-controls="feature-panel" data-feature="overview">See everything in one place</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="feature-panel" data-feature="manage">Manage your money</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="feature-panel" data-feature="interest">Get interest whenever you want</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="feature-panel" data-feature="exchange">Exchange with zero fees</button>
+          </div>
+        </div>
+        <div class="asset-stage reveal" id="feature-panel" role="tabpanel" tabindex="0">
+          <div class="asset-halo"></div>
+          <div class="phone phone-light">
+            <div class="phone-top"><strong>flow bank</strong><span>⌁ ◉</span></div>
+            <p class="phone-label">Total balance</p>
+            <strong class="balance" data-balance>$18,420.50</strong>
+            <div class="account-card primary"><span>Everyday account</span><strong>$8,480.00</strong><button type="button">Send</button></div>
+            <div class="account-card"><span>Savings vault</span><strong>$6,720.50</strong><small>Get interest now</small></div>
+            <div class="account-card"><span>Travel wallet</span><strong>$3,220.00</strong><small>0% exchange fee</small></div>
+          </div>
+          <div class="floating-card balance-alert"><span>September card bill</span><strong>$1,190.00</strong><small>Plenty of balance</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="finance-section observed-section" id="finance" data-section>
+      <div class="content-limiter finance-heading reveal">
+        <p class="eyebrow light">Finance</p>
+        <h2>Better decisions<br>start with clarity.</h2>
+        <p>Borrow, invest, and compare without losing sight of the whole picture.</p>
+      </div>
+      <div class="finance-grid content-limiter">
+        <article class="finance-card cobalt reveal">
+          <span class="card-kicker">Credit</span>
+          <h3>Know what you can afford.</h3>
+          <div class="score-ring"><strong>812</strong><span>Excellent</span></div>
+        </article>
+        <article class="finance-card lime reveal">
+          <span class="card-kicker">Investing</span>
+          <h3>Start small.<br>Stay curious.</h3>
+          <div class="mini-chart" aria-label="Illustrative rising chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </article>
+        <article class="finance-card porcelain reveal">
+          <span class="card-kicker">Insurance</span>
+          <h3>Only the cover<br>you actually need.</h3>
+          <div class="shield" aria-hidden="true">✓</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="stories-section observed-section" id="stories" data-section>
+      <div class="content-limiter stories-heading reveal">
+        <p class="eyebrow">Everyday life</p>
+        <h2>One app. More ways<br>to move through your day.</h2>
+      </div>
+      <div class="card-reel" tabindex="0" aria-label="Everyday service cards">
+        <article class="service-card card-shop reveal"><div class="service-art"><span class="parcel">FLOW</span></div><small>Shopping</small><h3>Find a better deal</h3></article>
+        <article class="service-card card-reward reveal"><div class="service-art"><span class="coin">F</span><span class="coin second">F</span></div><small>Rewards</small><h3>Turn moments into points</h3></article>
+        <article class="service-card card-ride reveal"><div class="service-art"><span class="route"></span><span class="car">●</span></div><small>Mobility</small><h3>Move without the wait</h3></article>
+        <article class="service-card card-place reveal"><div class="service-art"><span class="store">OPEN</span></div><small>Places</small><h3>Discover around you</h3></article>
+      </div>
+    </section>
+
+    <section class="business-section observed-section" id="business" data-section>
+      <div class="content-limiter business-intro reveal">
+        <p class="eyebrow">For business</p>
+        <h2>Everything your<br>business needs to flow.</h2>
+      </div>
+      <div class="business-stage">
+        <div class="business-copy reveal">
+          <span class="pill">Flow place</span>
+          <h3>See your business<br>in real time</h3>
+          <p>Peak hours. Bestsellers. Trends.<br>Clearly summarized at a glance.</p>
+          <a href="#download" class="round-link inverse">Learn more <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="terminal-wrap reveal" aria-label="Merchant dashboard preview">
+          <div class="terminal-screen">
+            <div class="terminal-bar"><strong>flow place</strong><span>Overview&nbsp;&nbsp; Orders&nbsp;&nbsp; Customers</span></div>
+            <div class="terminal-content"><small>Today</small><strong>$4,280</strong><div class="sales-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="terminal-stats"><span><small>Orders</small><b>128</b></span><span><small>Returning</small><b>64%</b></span></div></div>
+          </div>
+          <div class="terminal-stand"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="travel-section observed-section" id="travel" data-section>
+      <img src="assets/travel-sunset.jpg" alt="A traveler looking through an airplane window at sunset">
+      <div class="travel-shade"></div>
+      <div class="travel-copy reveal">
+        <p class="eyebrow light">Global</p>
+        <h2>Money should feel<br>at home everywhere.</h2>
+        <p>Spend, exchange, and keep moving<br>with one calm view of your world.</p>
+        <a href="#global" class="round-link inverse">Explore global <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="global-section" id="global">
+      <div class="planet planet-one" aria-hidden="true"></div>
+      <div class="planet planet-two" aria-hidden="true"></div>
+      <div class="content-limiter global-copy reveal">
+        <p class="eyebrow light">Connected life</p>
+        <h2>When everything connects,<br>life gets simpler.</h2>
+        <p>One clear home for payments, plans, places, and everyday tasks.</p>
+      </div>
+    </section>
+
+    <section class="download-section" id="download">
+      <div class="content-limiter download-layout reveal">
+        <div><p class="eyebrow">Ready when you are</p><h2>Carry less.<br>Do more.</h2></div>
+        <div class="download-actions">
+          <a href="#" class="store-button"><span aria-hidden="true">●</span><div><small>Download on the</small><strong>App Store</strong></div></a>
+          <a href="#" class="store-button"><span aria-hidden="true">▶</span><div><small>GET IT ON</small><strong>Google Play</strong></div></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="content-limiter footer-grid">
+      <a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true"><i></i><i></i></span><span>flow</span></a>
+      <div><strong>Services</strong><a href="#money">Personal</a><a href="#business">Business</a><a href="#travel">Global</a></div>
+      <div><strong>Company</strong><a href="#global">About</a><a href="#stories">Newsroom</a><a href="#footer">Careers</a></div>
+      <div><strong>Support</strong><a href="#footer">Help center</a><a href="#footer">Privacy</a><a href="#footer">Terms</a></div>
+    </div>
+    <div class="content-limiter footer-meta"><span>StyleGallery implementation study</span><span>© 2026 Flow Study</span></div>
+    <p class="footer-display" aria-hidden="true">All in one.</p>
+  </footer>
+</body>
+</html>

@@ -63,6 +63,24 @@ consumer_reference_reason: This blank template selects no consumer reference rec
 
 Example handoff: `consumer_reference: not_applicable` because no profile or consumer evidence record is selected. A real consumer replaces this with its applicable repository-relative record or its own reason.
 
+## Scroll Story Extension
+
+For scroll-linked scenes, fill these fields in addition to the general brief:
+
+```yaml
+scroll_owner: document
+stage_owner: # sticky containing block and offset
+start_and_distance: # measured start, positive distance, zero-distance alternative
+scene_ranges: # each chapter's entry, hold, exit, and semantic availability
+resize_policy: # recompute geometry and fall back when content cannot fit
+direct_entry: # derive state from restored scroll position without replay
+static_path: # source-order reading, no script, reduced motion, explicit user choice
+media_budget: # poster, dimensions, cache, decode concurrency, timeout, fallback
+performance_protocol: # exact runtime, input trace, measurements and local targets
+```
+
+See [Scroll-driven story](interaction-recipes.md#scroll-driven-story) and the [worked lab](../examples/scroll-story/README.md). A brief must distinguish view-entry triggers from continuous scroll progress.
+
 ## Opinionated Guidance
 
 Write cancellation before tuning curves. An animation completion callback should report presentation completion; it should not be the sole authority for network success, focus cleanup, or saving data.
