@@ -54,5 +54,15 @@
       "reading": false
     },
     "y": 0
+  },
+  {
+    "case": "fresh page body accepts browser Home",
+    "state": {
+      "index": 0,
+      "deck": true,
+      "reading": false
+    },
+    "focus": "BODY",
+    "y": 0
   }
 ]

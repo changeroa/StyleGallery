@@ -75,7 +75,8 @@ export function mountScenes(root) {
     const direction = gate.feed({ deltaY: event.deltaY, deltaX: event.deltaX, deltaMode: event.deltaMode, time: performance.now(), pageSize: innerHeight });
     if (direction) select(index + direction);
   }, { passive: false, signal: listeners.signal });
-  root.addEventListener('keydown', event => {
+  window.addEventListener('keydown', event => {
+    if (event.target instanceof Node && event.target !== document.body && event.target !== document.documentElement && !root.contains(event.target)) return;
     if (event.key === 'Escape' && deck) { reading = true; configure(); mode.focus({ preventScroll: true }); return; }
     if (!deck || event.defaultPrevented || event.repeat || event.ctrlKey || event.metaKey || event.altKey || interactive(event.target) || nativeScroll(event.target)) return;
     if (event.key === ' ' && event.target instanceof Element && event.target.closest('button,a')) return;

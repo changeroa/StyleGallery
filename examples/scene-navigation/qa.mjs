@@ -25,8 +25,8 @@ export async function runSceneChecks(root, controller) {
     check(`chapter ${i} semantics`, panels.every((panel, j) => panel.inert === (j !== i)));
     check(`chapter ${i} device identity`, root.querySelector('.scene-device') === device);
   }
-  key(stage, 'Home'); key(stage, 'ArrowUp');
-  check('first boundary does not wrap', controller.state.index === 0);
+  key(stage, 'End'); key(document.body, 'Home'); key(document.body, 'ArrowUp');
+  check('unfocused page accepts keys and first boundary does not wrap', controller.state.index === 0);
   key(stage, 'End'); key(stage, 'ArrowDown');
   check('last boundary does not wrap', controller.state.index === 2);
   check('Tab remains native', !key(stage, 'Tab'));
