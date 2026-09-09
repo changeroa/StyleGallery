@@ -1,5 +1,16 @@
 # StyleGallery Log
 
+## 2026-09-09
+
+- Added an independent Toss-inspired homepage study that composes the existing Homepage recipe and Layout patterns inside a standalone product layer.
+- Added original generated hero and travel imagery, responsive navigation, keyboard-operated asset tabs, section progress, reduced-motion behavior, and explicit horizontal service-rail ownership.
+- Recorded real Chrome verification at desktop, tablet, and mobile viewport sizes with retained desktop and mobile screenshots. No reusable Layout CSS or consumer-reference profile values were changed.
+
+Implementation handoff: `consumer_reference: not_applicable`.
+
+Consumer reference: not_applicable
+Consumer reference reason: This standalone visual study selects no consumer-reference profile or record.
+
 ## 2026-09-08
 
 - Prepared npm release `stylegallery@0.1.5` with the complete six-domain, 147-document Material v2 corpus and the README compatibility repair.

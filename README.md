@@ -62,6 +62,8 @@ For a coding agent with repository filesystem access, local guided traversal is 
 
 The [StyleGallery homepage example](examples/stylegallery-homepage/README.md) was planned from a clean install of the published npm package. It demonstrates the Homepage recipe, selected layout patterns, agent-native CLI access, responsive behavior, and Chrome CDP verification in a standalone product-layer implementation.
 
+The [Toss-inspired homepage clone](examples/toss-homepage-clone/README.md) applies the same workflow to an observed external homepage: it maps the source into section jobs, composes existing Layout patterns, keeps brand styling in the example layer, and records desktop, mobile, keyboard, overflow, and reduced-motion checks.
+
 ### Read-only MCP server
 
 Launch the packaged stdio server with:
