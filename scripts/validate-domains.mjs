@@ -60,6 +60,7 @@ export const canonicalDomains = [
       { path: "motion/decision-tree.md", provenance: "local" },
       { path: "motion/motion-brief.md", provenance: "local" },
       { path: "motion/interaction-recipes.md", provenance: "local" },
+      { path: "motion/observed-choreography.md", provenance: "local" },
     ],
   },
   {

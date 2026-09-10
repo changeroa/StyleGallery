@@ -222,6 +222,10 @@ const additionalLocalLeaves = {
     [
       "interaction-recipes.md",
       "Motion Interaction Recipes"
+    ],
+    [
+      "observed-choreography.md",
+      "Observed Choreography Transcription"
     ]
   ],
   "design-engineering": [

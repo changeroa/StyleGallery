@@ -25,6 +25,7 @@ These workflows and worked cases are usable experimental guidance. Expected-resu
 - [Motion Vocabulary](vocabulary.md) maps observed behavior to implementation-neutral terms while preserving ambiguity.
 - [Motion Review Workflow](review-workflow.md) structures evidence-first review and remediation.
 - [Motion Practice Reference](practice-reference.md) classifies mechanics, heuristics, platform notes, and unsupported claims.
+- [Observed Choreography Transcription](observed-choreography.md) transcribes an observed scroll choreography into Scene Composition Contract vocabulary.
 
 ## Domain Contract
 
