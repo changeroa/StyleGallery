@@ -36,6 +36,7 @@ For each observed scene, write:
 - **Pin observation**: whether a stage visually holds position while the document advances (`start` and `distance` in document pixels), or the scene scrolls through normally (`distance` not applicable).
 - **Scene ranges**: sub-segments as fractions of scene progress, each with the observed state it presents.
 - **Keyframe observations**: for each boundary between sub-segments, the property-level change observed across adjacent frames — content swap, translation, scale, opacity, counter/number roll, media frame advance — stated as direction and rough magnitude, not invented exact values.
+- **Transition profile**: for each sub-segment boundary, how the states mix — `cut` (adjacent frames show only completed states), `blend` (a mid-transition frame shows both states partially visible; record the observed blend width in scroll pixels, bounded below by the capture step), or `slide` (a mid-transition frame shows a state displaced along an axis; record the direction). A consumer without a profile defaults to whatever its own contract prefers, so an omitted profile is a gap worth naming.
 - **Static path**: what a non-animated reading order of the same content would present, so the consumer can build the reduced-motion and no-script alternative required by the [Scroll-Driven Story](interaction-recipes.md#scroll-driven-story) contract.
 - **Asset inventory**: the kind of media carrying the effect (photograph, video, rendered UI, image sequence) and its role. Kinds only; the record never embeds or links a copy of the asset for reuse.
 - **Frame evidence**: the frame files supporting each claim.
@@ -56,7 +57,7 @@ Record the capture browser, OS, headless mode, and device scale separately from 
 
 ## Unsupported Absolutes
 
-A transcription proves what frames show at sampled positions, never how the original is implemented — no easing curve, frame rate, library, or performance claim survives from frame differences alone. There is no universal scrub step, difference threshold, or scene count; each capture declares its own. Frame similarity in one direction does not prove reversibility.
+A transcription proves what frames show at sampled positions, never how the original is implemented — no easing curve, frame rate, library, or performance claim survives from frame differences alone. There is no universal scrub step, difference threshold, or scene count; each capture declares its own. Frame similarity in one direction does not prove reversibility. A transition profile is bounded by sampling: a capture step wider than a transition can prove `blend` only when a mid-transition frame happens to land inside it, and can never prove `cut`.
 
 ## Verification Contract
 
