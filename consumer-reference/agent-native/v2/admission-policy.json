@@ -235,6 +235,11 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "motion/observed-choreography.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "motion/practice-reference.md",
       "domain": "motion",
       "lifecycle": "experimental"
@@ -817,5 +822,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:3bc645aa9b84393a404612ebc4d757aada288ef88f57bb2d2fca03022b4d201d"
+  "version_id": "sg:policy/material-admission-v2@sha256:2d05124736bd9a971488c05ee325ff0baf0669180e4695cea200b0b064bc3d38"
 }
