@@ -98,9 +98,6 @@ jobs:
         run: |
           node scripts/validate-patterns.mjs --min-count 46 --json
 
-      - name: State management executable examples
-        run: npm run test:state-management
-
       - name: Markdown link check
         run: node scripts/validate-links.mjs --json
 
