@@ -282,6 +282,85 @@ const additionalLocalLeaves = {
   ]
 };
 
+additionalLocalLeaves["design-engineering"].push(...[
+  [
+    "state-management/decision-tree.md",
+    "State Management Decision Tree"
+  ],
+  [
+    "state-management/patterns/derived-state.md",
+    "Derived State From Authoritative Inputs"
+  ],
+  [
+    "state-management/patterns/draft-and-baseline.md",
+    "Draft And Persisted Baseline"
+  ],
+  [
+    "state-management/patterns/id-selection.md",
+    "Selection By Stable Identity"
+  ],
+  [
+    "state-management/patterns/identity-reset.md",
+    "Identity Boundary And Reset"
+  ],
+  [
+    "state-management/patterns/latest-request-wins.md",
+    "Latest Request Wins"
+  ],
+  [
+    "state-management/patterns/optimistic-overlay.md",
+    "Optimistic Overlay And Recovery"
+  ],
+  [
+    "state-management/patterns/single-flight.md",
+    "Single Flight And Duplicate Submission"
+  ],
+  [
+    "state-management/patterns/single-owner.md",
+    "Single Owner And Controlled Inputs"
+  ],
+  [
+    "state-management/patterns/submitted-snapshot.md",
+    "Submitted Snapshot And Save Acknowledgement"
+  ],
+  [
+    "state-management/patterns/unsaved-navigation.md",
+    "Unsaved Changes And Navigation"
+  ],
+  [
+    "state-management/patterns/url-state.md",
+    "URL State And History"
+  ],
+  [
+    "state-management/patterns/versioned-restore.md",
+    "Versioned And Scoped State Restore"
+  ],
+  [
+    "state-management/recipes/delete-undo.md",
+    "Deletion And Supported Undo"
+  ],
+  [
+    "state-management/recipes/multi-step-form.md",
+    "Multi-Step Form With Retained Draft"
+  ],
+  [
+    "state-management/recipes/search-detail.md",
+    "Search Filters And Detail Selection"
+  ],
+  [
+    "state-management/recipes/settings-save.md",
+    "Settings With Explicit Save"
+  ],
+  [
+    "state-management/state-brief.md",
+    "State Management Brief"
+  ],
+  [
+    "state-management/verification.md",
+    "State Management Verification Matrix"
+  ]
+]);
+
 for (const [domain, leaves] of Object.entries(additionalLocalLeaves)) {
   for (const [name, title] of leaves) {
     baseFiles[`${domain}/${name}`] = leafPage({ title, domain, parent: "index.md", next: "../DOMAINS.md", provenanceKind: "local" });
@@ -289,6 +368,13 @@ for (const [domain, leaves] of Object.entries(additionalLocalLeaves)) {
   }
   baseFiles["DOMAINS.md"] = baseFiles["DOMAINS.md"].split("\n").map((line) => line.includes(`| \`${domain}/index.md\` |`)
     ? `${line.slice(0, -2)}, ${leaves.map(([name]) => `\`${domain}/${name}\``).join(", ")} |` : line).join("\n");
+}
+
+for (const route of ["state-management/index.md", "state-management/recipes/index.md"]) {
+  baseFiles[`design-engineering/${route}`] = indexPage("State navigation", [["Design Engineering", "../index.md"]]);
+  baseFiles["design-engineering/index.md"] += `\n- [State navigation](${route})\n`;
+  baseFiles["DOMAINS.md"] = baseFiles["DOMAINS.md"].split("\n").map((line) => line.includes("| `design-engineering/index.md` |")
+    ? `${line.slice(0, -2)}, \`design-engineering/${route}\` |` : line).join("\n");
 }
 
 const cases = [

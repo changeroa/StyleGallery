@@ -18,6 +18,48 @@ Out of scope: a second universal principle set, unsupported claims of beauty or 
 
 These workflows and worked cases are usable experimental guidance. Expected-result tables are test designs; actual product, engine, and reader evidence must be recorded separately. Review on a failed task, a source change, or a changed ownership contract.
 
+## State Management
+
+Choose [State Management](state-management/index.md) for UI state ownership, transitions, asynchronous consistency, and lifetime. The collection contains 12 patterns and four behavior recipes within this domain.
+
+### Planning And Verification
+
+- [State decision tree](state-management/decision-tree.md)
+- [State brief](state-management/state-brief.md)
+- [State verification matrix](state-management/verification.md)
+- [State recipes and composition matrix](state-management/recipes/index.md)
+
+### Ownership And Derivation
+
+- [Single owner and controlled inputs](state-management/patterns/single-owner.md)
+- [Derived state](state-management/patterns/derived-state.md)
+- [Selection by stable identity](state-management/patterns/id-selection.md)
+
+### Editing And Persistence
+
+- [Draft and persisted baseline](state-management/patterns/draft-and-baseline.md)
+- [Submitted snapshot](state-management/patterns/submitted-snapshot.md)
+- [Unsaved navigation](state-management/patterns/unsaved-navigation.md)
+
+### Asynchronous Consistency
+
+- [Latest request wins](state-management/patterns/latest-request-wins.md)
+- [Single flight](state-management/patterns/single-flight.md)
+- [Optimistic overlay](state-management/patterns/optimistic-overlay.md)
+
+### Navigation And Lifetime
+
+- [URL state](state-management/patterns/url-state.md)
+- [Identity reset](state-management/patterns/identity-reset.md)
+- [Versioned restore](state-management/patterns/versioned-restore.md)
+
+### Screen Compositions
+
+- [Settings save](state-management/recipes/settings-save.md)
+- [Search and detail](state-management/recipes/search-detail.md)
+- [Multi-step form](state-management/recipes/multi-step-form.md)
+- [Delete and supported undo](state-management/recipes/delete-undo.md)
+
 ## Documents
 
 - [Interface Craft Decisions](interface-craft.md) connects product purpose, implementation detail, and verification without treating taste as proof.

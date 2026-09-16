@@ -19,6 +19,8 @@ This contract describes consumer-owned behavior. It does not create a shared com
 
 Start with semantic HTML or the platform's native control. Name the public inputs, emitted events, internal state, and owner of persisted data. Then describe each transition and its observable outcome. Use the [Worked Examples](worked-examples.md) to check common failure paths.
 
+For reusable ownership and transition mechanisms, use the [State Management catalog](state-management/index.md). The [submitted snapshot pattern](state-management/patterns/submitted-snapshot.md) provides an executable model of the save contract below.
+
 ## Contract Template
 
 | Field | Required answer |
