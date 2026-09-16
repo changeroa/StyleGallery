@@ -75,6 +75,111 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "design-engineering/state-management/decision-tree.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/index.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/derived-state.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/draft-and-baseline.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/id-selection.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/identity-reset.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/latest-request-wins.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/optimistic-overlay.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/single-flight.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/single-owner.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/submitted-snapshot.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/unsaved-navigation.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/url-state.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/patterns/versioned-restore.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/recipes/delete-undo.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/recipes/index.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/recipes/multi-step-form.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/recipes/search-detail.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/recipes/settings-save.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/state-brief.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/state-management/verification.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "design-engineering/worked-examples.md",
       "domain": "design-engineering",
       "lifecycle": "experimental"
@@ -822,5 +927,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:2d05124736bd9a971488c05ee325ff0baf0669180e4695cea200b0b064bc3d38"
+  "version_id": "sg:policy/material-admission-v2@sha256:09bda93e619fdc08d9a5a5063578ee31749a527cc9d3198ba3590b554d7f6d69"
 }

@@ -110,6 +110,8 @@ sg discover --format json
 
 CLI와 MCP의 상세 사용법은 [Agent-Native StyleGallery 가이드](consumer-reference/agent-native/README.md)를 참고하세요. 사람이 문서를 탐색하려면 아래의 도메인 표에서 목적에 맞는 진입점을 선택하면 됩니다.
 
+For UI state ownership, asynchronous races, drafts, URL/history, and persistence, start with [State Management](design-engineering/state-management/index.md) in Design Engineering.
+
 ## Domains
 
 | Domain | Owns | Does not own |

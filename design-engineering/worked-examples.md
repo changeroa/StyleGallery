@@ -21,6 +21,8 @@ The separate [Interaction Lab](../examples/domain-interactions/README.md) implem
 
 Choose a matching user task, adapt its state ownership through the [Component Contract](component-contract.md), and execute the listed failure cases in the consuming application. The decision is incomplete until expected and actual results are recorded separately.
 
+The [State Management recipes](state-management/recipes/index.md) expand these tasks into explicit pattern stacks and substitution rules, including a multi-step form. These existing scenarios remain at their original anchors.
+
 ## Settings With Explicit Save
 
 Task: edit preferences, inspect changes, and save intentionally. Compose the [SaaS Settings recipe](../recipes/saas-settings.md); let its selected patterns own page structure and scrolling. The form owns the editable draft, the operation owns the submitted snapshot, and persistence determines success.

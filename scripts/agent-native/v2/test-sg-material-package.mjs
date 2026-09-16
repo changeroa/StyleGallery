@@ -199,7 +199,7 @@ try {
   try {
     await bounded(materialClient.connect(materialTransport), "installed material MCP initialize");
     assert.deepEqual((await bounded(materialClient.listTools(), "installed material MCP tools")).tools.map(({ name }) => name), ["material-context", "material-discover", "material-get", "material-search"]);
-    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 148);
+    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 169);
     assert.deepEqual((await bounded(materialClient.listResourceTemplates(), "installed material MCP templates")).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
     const installedMcpSearch = toolEnvelope(await bounded(materialClient.callTool({
       name: "material-search",
@@ -210,6 +210,9 @@ try {
     const domainWorkflows = [
       ["motion interaction recipes", "motion/interaction-recipes.md"],
       ["component contract", "design-engineering/component-contract.md"],
+      ["상태 관리", "design-engineering/state-management/index.md"],
+      ["latest request wins", "design-engineering/state-management/patterns/latest-request-wins.md"],
+      ["submitted snapshot", "design-engineering/state-management/patterns/submitted-snapshot.md"],
       ["game ui screen recipes", "game-ui/screen-recipes.md"],
       ["android interaction", "platform-guides/android-interaction.md"],
       ["windows interaction", "platform-guides/windows-interaction.md"],
@@ -248,7 +251,7 @@ try {
     installed_material_cli_search: true,
     installed_material_mcp_official_sdk: true,
     installed_material_mcp_search: true,
-    installed_non_layout_workflow_searches: 6,
+    installed_non_layout_workflow_searches: 9,
     installed_external_spaced_cwd: true,
   }, null, 2)}\n`);
 } finally {

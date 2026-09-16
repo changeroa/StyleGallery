@@ -29,6 +29,7 @@ This route turns a product request into a bounded implementation decision. It ow
 | --- | --- | --- |
 | What should this screen contain? | [Webpage Generation Workflow](../guides/webpage-generation-workflow.md) | Content inventory and task model |
 | What owns size, flow, and scroll? | [Layout Planning Guide](../GUIDE.md) | Layout brief and pattern composition |
+| Where should state live, and how do its transitions compose? | [State Management](state-management/index.md) | Owner map, selected patterns, and acceptance traces |
 | What happens after activation or failure? | [Component Contract](component-contract.md) | State, event, focus, and asynchronous ownership tables |
 | How should a form, search, or destructive action recover? | [Worked Examples](worked-examples.md) | Scenario-specific acceptance cases |
 | Does a product detail serve the task? | [Interface Craft Decisions](interface-craft.md) | Claim with an observable and evidence boundary |
