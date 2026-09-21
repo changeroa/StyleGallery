@@ -238,3 +238,7 @@ Every pattern documents its primary problem, structure, constraints, scroll owne
 ## Verification Matrix
 
 Pattern verification covers the relevant viewport, container, content, direction, writing-mode, interaction, overflow, focus, and sticky/scroll cases. See the [detailed verification matrix](layout/index.md#verification-matrix).
+
+## License
+
+Source code is licensed under the MIT License ([LICENSE](LICENSE)). Documentation is licensed under Creative Commons Attribution 4.0 International ([LICENSE-DOCS](LICENSE-DOCS)). Material adapted from external sources keeps its original rights; see [NOTICE](NOTICE) and the [External Adaptation Contract](DOMAINS.md#external-adaptation-contract).

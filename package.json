@@ -3,6 +3,7 @@
   "version": "0.1.6",
   "description": "A governed gallery of portable interface knowledge with deterministic CLIs and read-only MCP servers.",
   "type": "module",
+  "license": "MIT",
   "homepage": "https://github.com/changeroa/StyleGallery#readme",
   "bugs": {
     "url": "https://github.com/changeroa/StyleGallery/issues"
@@ -28,6 +29,9 @@
     "DOMAINS.md",
     "GOVERNANCE.md",
     "GUIDE.md",
+    "LICENSE",
+    "LICENSE-DOCS",
+    "NOTICE",
     "README.md",
     "consumer-reference/agent-native/README.md",
     "consumer-reference/agent-native/registry.json",

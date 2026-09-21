@@ -1,0 +1,38 @@
+StyleGallery
+Copyright (c) 2026 IYEN
+
+Licensing of this repository is split by kind of content:
+
+- Source code: MIT License, see LICENSE.
+- Documentation: Creative Commons Attribution 4.0 International, see
+  LICENSE-DOCS.
+
+Third-party material
+
+Some documentation leaves are independent method rewrites adapted from
+external sources. Those sources keep their own rights; the licenses above
+cover only the StyleGallery-authored expression. The repository does not
+retain upstream prose, tables, code samples, distinctive examples, or
+distinctive sequence from those sources, and it does not claim any license
+over them.
+
+Where a leaf was adapted from an external source, that leaf's own page
+metadata records `source_repository`, the exact `source_path`, and the full
+`source_revision`. Leaves authored locally carry `provenance_kind: local` and
+no upstream fields. The governing rules are in DOMAINS.md under "External
+Adaptation Contract".
+
+The initial five domain leaves were inspired by emilkowalski/skills
+(https://github.com/emilkowalski/skills) at snapshot
+220e8607c90b17337d210125777b7b695f26c221, which is published under the MIT
+License. If recognizable upstream expression is ever added, the full upstream
+MIT notice is preserved alongside it and the copied material is recorded
+separately before merge.
+
+Observation records
+
+Documents that describe observed behavior of third-party websites or
+products are unofficial observation records. They are not affiliated with,
+endorsed by, or derived from the code, assets, or copy of the sites they
+describe, and product or company names in them are used only to identify the
+subject of observation.
