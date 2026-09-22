@@ -6,7 +6,7 @@ description: Machine-facing identity, query, execution, protocol-projection, and
 
 # Agent-Native StyleGallery
 
-Primary role: machine interface guide.
+Primary role: frozen v1 knowledge interface guide. For the current `sg` CLI and main MCP server, including compiler execution, use [SG Website Compilation](../../scripts/compiler/README.md).
 
 Agent-Native StyleGallery lets a person, script, or agent inspect the governed StyleGallery knowledge graph without learning repository paths first. The Markdown corpus remains the human-readable source material; the agent-native layer gives its governed fixture records stable identities, closed schemas, deterministic operations, and protocol-specific projections.
 
@@ -31,11 +31,11 @@ The canonical fixture and operation inventory is [registry.json](registry.json).
 Run the CLI from the repository root:
 
 ```sh
-npm run sg -- discover --format json
-npm run sg -- resolve sg:profile/editorial-reference-profile --format json
-npm run sg -- claims sg:profile/editorial-reference-profile --format json
-npm run sg -- context sg:profile/editorial-reference-profile --format json
-npm run sg -- ops --format json
+npm run sg:v1 -- discover --format json
+npm run sg:v1 -- resolve sg:profile/editorial-reference-profile --format json
+npm run sg:v1 -- claims sg:profile/editorial-reference-profile --format json
+npm run sg:v1 -- context sg:profile/editorial-reference-profile --format json
+npm run sg:v1 -- ops --format json
 ```
 
 The executable can also be invoked directly:
@@ -72,7 +72,7 @@ stylegallery-material search --query "design terminology source kinds" --paths-o
 Start the stdio MCP server with:
 
 ```sh
-npm run sg:mcp
+npm run sg:mcp:v1
 ```
 
 An MCP client can launch it directly:

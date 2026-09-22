@@ -1,5 +1,13 @@
 # StyleGallery Log
 
+## 2026-09-22
+
+- Prepared `stylegallery@0.1.7` with direct website capture, transcription, and workflow commands in the SG CLI and MCP. The compiler remains a separately installed checkout; frozen v1 knowledge entrypoints remain available.
+- Routed faithful reconstruction, adaptation, and sale-package work through the compiler's task-aware workflow. Reconstruction prioritizes usable original media, additional observation, explicit replacement decisions, and visual QA. The automatic sale-edition builder is labeled as a package preview.
+- Added compiler transport, cancellation, packaged-install, and local real-capture checks. These verify the integration; they do not establish an improvement in clone quality.
+
+Implementation handoff: `consumer_reference: consumer-reference/agent-native/registry.json`.
+
 ## 2026-09-09
 
 - Added a full-page fixed-viewport scene-navigation example with chapter hashes/history, wheel-burst gating, keyboard and art-surface swipe navigation, native copy overflow, immediate reduced-motion transitions, and a complete reading escape.

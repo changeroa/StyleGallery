@@ -29,6 +29,7 @@ const sentinels = [
   "scripts/sg-mcp-shadow.mjs",
 ];
 const mandatory = ["README.md", "package.json"];
+const legalDocuments = ["LICENSE", "LICENSE-DOCS", "NOTICE"];
 const stickyPaths = [
   "patterns/split-sidebar/sticky-aside.md",
   "patterns/viewport-shell/sticky-header.md",
@@ -111,6 +112,7 @@ const v2Schemas = fs.readdirSync(path.join(repositoryRoot, "consumer-reference/a
   .filter((name) => name.endsWith(".json")).map((name) => `consumer-reference/agent-native/v2/schema/${name}`);
 const v1Registry = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference/agent-native/registry.json"), "utf8"));
 const required = new Set([
+  ...legalDocuments,
   ...runtimeClosure(repositoryRoot, packageJson),
   ...schemas,
   ...v2Schemas,
@@ -122,6 +124,9 @@ const required = new Set([
   "consumer-reference/agent-native/registry.json",
   "consumer-reference/agent-native/v2/admission-policy.json",
   "consumer-reference/agent-native/v2/material-registry.json",
+  // Transport setup documentation is packaged without admitting tool code or
+  // private upstream documents to the governed material corpus.
+  "scripts/compiler/README.md",
 ]);
 assert.deepEqual(files, [...required].sort(), "package files must equal the closed runtime/schema/material inventory");
 
@@ -144,7 +149,7 @@ try {
   assert.equal(packed.status, 0, packed.stderr || packed.stdout);
   assert.equal(packed.stderr, "");
   const description = JSON.parse(packed.stdout)[0];
-  const inventory = description.files.map(({ path: entry }) => entry);
+  const inventory = description.files.map(({ path: entry }) => entry).sort();
   const expected = [...new Set([...files, ...mandatory])].sort();
   assert.deepEqual(inventory, expected, "packed inventory must equal allow-list plus npm mandatory metadata");
   assert.deepEqual(inventory.filter((entry) => sentinels.includes(entry)), [], "sentinels must not be packed");
@@ -154,6 +159,8 @@ try {
   assert.equal(modes.get("scripts/sg-material.mjs"), 0o755);
   assert.equal(modes.get("scripts/sg-material-mcp.mjs"), 0o755);
   assert.equal(modes.get("scripts/sg-mcp.mjs"), 0o755);
+  assert.equal(modes.get("scripts/sg-entry.mjs"), 0o755);
+  assert.equal(modes.get("scripts/sg-server.mjs"), 0o755);
 
   const installedProject = path.join(temporaryRoot, "installed project with spaces");
   const externalCwd = path.join(temporaryRoot, "external cwd with spaces");
@@ -189,6 +196,33 @@ try {
     await bounded(client.close(), "installed v1 MCP shutdown");
   }
   assert.equal(Buffer.concat(stderr).toString("utf8"), "");
+
+  const compilerRoot = path.join(temporaryRoot, "external compiler checkout");
+  fs.mkdirSync(compilerRoot);
+  fs.writeFileSync(path.join(compilerRoot, "package.json"), '{"name":"site-compiler","version":"0.1.0","type":"module"}');
+  fs.writeFileSync(path.join(compilerRoot, "compile.mjs"), 'console.log(JSON.stringify({args:process.argv.slice(2),cwd:process.cwd()}));\n');
+  const compilerEnv = { ...process.env, SG_COMPILER_ROOT: compilerRoot };
+  const installedSg = spawnSync(process.execPath, [path.join(installedRoot, packageJson.bin.sg), "compile", "--url", "https://example.com/", "--out", "capture output"], {
+    cwd: externalCwd, env: compilerEnv, encoding: "utf8", timeout: 30_000,
+  });
+  assert.equal(installedSg.status, 0, installedSg.stderr || installedSg.stdout);
+  assert.equal(installedSg.stderr, "");
+  const installedCompile = JSON.parse(installedSg.stdout);
+  assert.equal(installedCompile.ok, true);
+  assert.deepEqual(JSON.parse(installedCompile.result.stdout).args, ["--url", "https://example.com/", "--out", path.join(fs.realpathSync(externalCwd), "capture output")]);
+  const currentTransport = new StdioClientTransport({ command: process.execPath, args: [path.join(installedRoot, packageJson.bin["stylegallery-mcp"])], cwd: externalCwd, env: compilerEnv, stderr: "pipe" });
+  const currentStderr = [];
+  currentTransport.stderr.on("data", (chunk) => currentStderr.push(Buffer.from(chunk)));
+  const currentClient = new Client({ name: "installed-sg-compiler-regression", version: "1.0.0" });
+  try {
+    await bounded(currentClient.connect(currentTransport), "installed SG MCP initialize");
+    const tools = (await bounded(currentClient.listTools(), "installed SG MCP tools")).tools;
+    assert.equal(tools.length, 20);
+    assert.equal(tools.find(({ name }) => name === "compile").annotations.readOnlyHint, false);
+    const compiled = toolEnvelope(await bounded(currentClient.callTool({ name: "compile", arguments: { url: "https://example.com/", out: "capture output" } }), "installed SG MCP compile"));
+    assert.deepEqual(compiled, installedCompile, "installed direct CLI and MCP compile must agree");
+  } finally { await bounded(currentClient.close(), "installed SG MCP shutdown"); }
+  assert.equal(Buffer.concat(currentStderr).toString("utf8"), "");
 
   const materialServerPath = path.join(installedRoot, "scripts", "sg-material-mcp.mjs");
   assert.ok(fs.statSync(materialServerPath).isFile(), "installed material MCP entrypoint must exist");
@@ -248,6 +282,7 @@ try {
     bins_executable: true,
     declared_runtime_roots_derived: true,
     installed_v1_mcp_official_sdk: true,
+    installed_sg_compiler_cli_mcp_equivalent: true,
     installed_material_cli_search: true,
     installed_material_mcp_official_sdk: true,
     installed_material_mcp_search: true,

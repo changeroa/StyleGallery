@@ -1,7 +1,7 @@
 {
   "name": "stylegallery",
-  "version": "0.1.6",
-  "description": "A governed gallery of portable interface knowledge with deterministic CLIs and read-only MCP servers.",
+  "version": "0.1.7",
+  "description": "A governed gallery of portable interface knowledge with knowledge CLIs, website compilation, and MCP servers.",
   "type": "module",
   "license": "MIT",
   "homepage": "https://github.com/changeroa/StyleGallery#readme",
@@ -240,19 +240,26 @@
     "scripts/agent-native/v2/material-operation-registry.mjs",
     "scripts/agent-native/v2/material-queries.mjs",
     "scripts/agent-native/v2/material-registry.mjs",
+    "scripts/compiler/README.md",
+    "scripts/compiler/cli.mjs",
+    "scripts/compiler/mcp.mjs",
+    "scripts/compiler/operations.mjs",
+    "scripts/compiler/runtime.mjs",
+    "scripts/sg-entry.mjs",
     "scripts/sg-material-mcp.mjs",
     "scripts/sg-material.mjs",
     "scripts/sg-mcp.mjs",
+    "scripts/sg-server.mjs",
     "scripts/sg.mjs",
     "scripts/strict-json.mjs"
   ],
   "bin": {
-    "sg": "scripts/sg.mjs",
+    "sg": "scripts/sg-entry.mjs",
     "sg-material": "scripts/sg-material.mjs",
-    "stylegallery": "scripts/sg.mjs",
+    "stylegallery": "scripts/sg-entry.mjs",
     "stylegallery-material": "scripts/sg-material.mjs",
     "stylegallery-material-mcp": "scripts/sg-material-mcp.mjs",
-    "stylegallery-mcp": "scripts/sg-mcp.mjs"
+    "stylegallery-mcp": "scripts/sg-server.mjs"
   },
   "publishConfig": {
     "access": "public"
@@ -277,14 +284,17 @@
     "test:material": "node scripts/agent-native/v2/test-material-admission.mjs && node scripts/agent-native/v2/test-material-registry.mjs && node scripts/agent-native/v2/test-material-query.mjs && node scripts/agent-native/v2/test-material-context.mjs && node scripts/agent-native/v2/test-sg-material-cli.mjs && node scripts/agent-native/v2/test-material-mcp.mjs && node scripts/agent-native/v2/test-material-mcp-stdio.mjs && node scripts/agent-native/v2/test-sg-material-package.mjs",
     "test:lifecycle-dispositions": "node scripts/test-lifecycle-disposition.mjs",
     "validate:lifecycle-dispositions": "node scripts/validate-lifecycle-disposition.mjs --json",
-    "sg": "node scripts/sg.mjs",
+    "sg": "node scripts/sg-entry.mjs",
     "sg:material": "node scripts/sg-material.mjs",
     "sg:material:mcp": "node scripts/sg-material-mcp.mjs",
-    "sg:mcp": "node scripts/sg-mcp.mjs",
+    "sg:mcp": "node scripts/sg-server.mjs",
     "test:agent-native": "node scripts/test-agent-knowledge-kernel.mjs --json && node scripts/test-agent-execution-kernel.mjs --json && node scripts/test-agent-execution-safety.mjs --json && node scripts/test-agent-events.mjs --json && node scripts/test-agent-learning.mjs --json && node scripts/test-agent-native-schemas.mjs --json && node scripts/test-sg-cli.mjs --json && node scripts/test-agent-conformance-receipt.mjs --json && node scripts/test-agent-mcp.mjs --json && node scripts/test-agent-registry-mcp-integrity.mjs --json && node scripts/test-agent-registry-mutations.mjs --json && node scripts/test-agent-adapter-conformance.mjs --json && node scripts/agent-native/v2/test-agent-extension-boundary.mjs && node scripts/test-agent-projections.mjs --json && node scripts/agent-native/v2/test-agent-v1-compatibility.mjs",
     "validate": "node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json",
     "validate:component-state": "node scripts/validate-component-state.mjs --json && node scripts/generate-consumer-reference-evidence.mjs --check --json",
-    "test:state-management": "node --test scripts/test-state-management-examples.mjs"
+    "test:state-management": "node --test scripts/test-state-management-examples.mjs",
+    "test:compiler": "node --test scripts/test-sg-compiler.mjs",
+    "sg:v1": "node scripts/sg.mjs",
+    "sg:mcp:v1": "node scripts/sg-mcp.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",
