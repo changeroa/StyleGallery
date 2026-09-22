@@ -8,6 +8,9 @@
 
 Implementation handoff: `consumer_reference: consumer-reference/agent-native/registry.json`.
 
+Consumer reference: declared
+Consumer reference record: consumer-reference/agent-native/registry.json
+
 ## 2026-09-09
 
 - Added a full-page fixed-viewport scene-navigation example with chapter hashes/history, wheel-burst gating, keyboard and art-surface swipe navigation, native copy overflow, immediate reduced-motion transitions, and a complete reading escape.
