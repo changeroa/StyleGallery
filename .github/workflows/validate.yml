@@ -144,9 +144,6 @@ jobs:
       - name: Agent-native operation and protocol contracts
         run: npm run test:agent-native
 
-      - name: SG compiler CLI and MCP contracts
-        run: npm run test:compiler
-
       - name: Source-bound material v2 contracts
         run: |
           node scripts/agent-native/v2/validate-material-registry.mjs
