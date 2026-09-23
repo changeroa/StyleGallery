@@ -18,7 +18,7 @@ The existing Layout corpus remains a gallery of minimal, portable CSS layout pat
 
 [Consumer Reference](consumer-reference/index.md) is shared non-domain infrastructure for optional consumer-owned reference handoffs. It carries schema, routing, provenance, and evidence metadata without owning profiles, visual values, components, or a seventh domain.
 
-[Agent-Native StyleGallery](consumer-reference/agent-native/README.md) is the machine-facing entry point over that governed knowledge. Frozen v1 provides claim/evidence/governance records through `sg` and its MCP; isolated material v2 indexes admitted Markdown and exposes `sg-material` plus a separate read-only MCP. Lifecycle records own extension and archive dispositions. These material, trust/conformance, transport, and extension planes do not create a seventh domain, replace the Markdown corpus, permit mutation, or feed visual defaults back into Layout.
+[Agent-Native StyleGallery](consumer-reference/agent-native/README.md) documents the frozen v1 claim/evidence/governance interface. The `sg` CLI and main MCP server also expose [website compilation](scripts/compiler/README.md) through a separately installed compiler; isolated material v2 indexes admitted Markdown through `sg-material` and its read-only MCP. Lifecycle records own extension and archive dispositions. These interfaces do not create a seventh domain, replace the Markdown corpus, permit mutation of governed knowledge, or feed visual defaults back into Layout.
 
 ## Quick Start
 
@@ -46,7 +46,20 @@ sg context sg:profile/editorial-reference-profile --format json
 sg ops --format json
 ```
 
-Every command writes deterministic JSON to stdout. Invalid input returns an error object and a nonzero exit status. See [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) for the command contract, StableRef and VersionID model, MCP resources, and trust boundaries.
+Every command writes JSON to stdout. Knowledge results retain their deterministic v1 payloads; `discover` and `ops` also report the local compiler installation. Invalid input returns an error object and a nonzero exit status. See [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) for the frozen knowledge contract, StableRef and VersionID model, MCP resources, and trust boundaries.
+
+Compile a website directly through SG after [installing the compiler](scripts/compiler/README.md#setup):
+
+```sh
+export SG_COMPILER_ROOT=/absolute/path/to/site-compiler
+sg compile --url https://example.com --out ./captures/example
+sg timeline --url https://example.com --out ./captures/example --step 500
+sg workflow
+```
+
+`compile`, `timeline`, `transcribe`, `sale`, `gate`, and `build` are direct SG commands and MCP tool names. See [SG Website Compilation](scripts/compiler/README.md) for all commands, configuration, output ownership, and verification.
+
+Start with `sg workflow` to select the stages for reconstruction, adaptation, or sale-package production. For a faithful clone, use available original media and fill document gaps by inspecting the source. The automatic `build` command is a sale-edition preview with restricted source access; it is not the general clone builder.
 
 Material v2 searches the admitted Markdown corpus and returns JSON without an additional format flag:
 
@@ -66,7 +79,7 @@ The [Toss-inspired homepage clone](examples/toss-homepage-clone/README.md) appli
 
 The [Scroll Story Lab](examples/scroll-story/README.md) adds runnable scroll-controlled product chapters, an image sequence with bounded decoding, native CSS scrubbing, and a static reading path. Start from [Motion’s scroll-driven story](motion/interaction-recipes.md#scroll-driven-story) for ownership and failure cases. The [Scene Navigation example](examples/scene-navigation/README.md) keeps the entire page fixed while wheel, keys, chapter links, and art-surface swipes select scenes; its [separate contract](motion/interaction-recipes.md#full-viewport-scene-navigation) covers input ownership, history, focus, and reading escape.
 
-### Read-only MCP server
+### MCP server
 
 Launch the packaged stdio server with:
 
@@ -87,7 +100,7 @@ Example MCP client configuration:
 }
 ```
 
-The MCP surface exposes governed read operations only. It cannot modify repository knowledge.
+The main MCP server exposes governed read operations and compiler execution tools. Configure `SG_COMPILER_ROOT` in its environment to use the compiler. Execution tools declare file and network effects; the knowledge registry remains a read-only API. The frozen read-only server remains available as `npm run sg:mcp:v1`.
 
 The separate Material v2 MCP server is available as `stylegallery-material-mcp`.
 
@@ -186,7 +199,7 @@ Each common task has one primary route. Use secondary links only after the prima
 | `check whether a layout or design claim is admissible` | [Quality Gates](quality/index.md) | It routes claims to gates and evidence boundaries. |
 | `prove repository checks and evidence coverage` | [Executable Evidence Coverage](quality/evidence/executable-evidence.md) | It maps validators, fixtures, CI commands, and their boundaries. |
 | `declare consumer reference applicability` | [Consumer Reference](consumer-reference/index.md) | It provides the required handoff field without moving consumer values into Layout. |
-| `use StyleGallery from an agent or automation` | [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) | It routes frozen v1 trust queries, material v2 discovery/search/get/context, both read-only MCPs, extensions, lifecycle dispositions, and archive boundaries. |
+| `use StyleGallery from an agent or automation` | [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) | It routes frozen v1 trust queries, material v2 discovery/search/get/context, extensions, lifecycle dispositions, and archive boundaries. Use [SG Website Compilation](scripts/compiler/README.md) for compiler commands in the main CLI and MCP. |
 | `prove an existing consumer migration` | [Consumer Migration Readiness](design-engineering/consumer-migration-readiness.md) | It requires thirteen explicit behavior classifications, runtime proof, adoption mappings, and source-bound page evidence when applicable. |
 | `change generated patterns, catalog, or governance policy` | [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md) | It identifies source files, generated artifacts, validators, lifecycle state, and review ownership. |
 | `run findability QA` | [Tree-Test Findability QA](quality/index.md#tree-test-findability-qa) | It tests whether task routes are discoverable, not just linked. |

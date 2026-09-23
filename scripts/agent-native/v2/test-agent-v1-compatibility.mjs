@@ -34,14 +34,14 @@ const expectedFiles = Object.freeze({
   "scripts/test-agent-mcp.mjs": "8ee6726f2ad811e32b9c7304ef3e2ab5755e261a68fffbc3c03f872355fe5740",
   "scripts/test-sg-cli.mjs": "a120d23ae0a244b0694f1ef24068e7a629bfd400eb83031447b76a82067fb67f",
 });
-// The shared guide gained material-v2 instructions and the six-domain correction
-// in this reviewed documentation revision. That update did not change v1 bytes.
-// Keep its exact digest explicit, separately from the original Todo2 core pins;
-// never derive either baseline from the working tree at test time.
+// The shared guide routes compiler users to the outer SG transport and names
+// the explicit frozen-v1 npm aliases. This documentation-only baseline does
+// not change any v1 runtime pin or CLI golden. Never derive a baseline from
+// the working tree at test time.
 const expectedDocumentation = Object.freeze({
   "consumer-reference/agent-native/README.md": {
-    revision: "d8bdf0bd5b5aec2fbc38e322a9ac7a1d31fd1332",
-    sha256: "6e59c913b175039819143b53078817630e3664db1c0342f89545038d0e53a52e",
+    baseline: "compiler-routing-docs-2026-09-21",
+    sha256: "7b4a91037ccbe9fe1a8dfc424dce99ec3959321dc1ca3215e9e1b40e01cc48c7",
   },
 });
 const expectedCli = Object.freeze([
@@ -89,8 +89,8 @@ const snapshot = {
 assert.deepEqual(checkSnapshot(snapshot), []);
 
 for (const [file, digest] of Object.entries(expectedFiles)) assert.equal(sha(fs.readFileSync(path.join(root, file))), digest, `${file} changed from Todo2`);
-for (const [file, { revision, sha256 }] of Object.entries(expectedDocumentation)) {
-  assert.equal(sha(fs.readFileSync(path.join(root, file))), sha256, `${file} changed from reviewed documentation revision ${revision}`);
+for (const [file, { baseline, sha256 }] of Object.entries(expectedDocumentation)) {
+  assert.equal(sha(fs.readFileSync(path.join(root, file))), sha256, `${file} changed from documentation baseline ${baseline}`);
 }
 for (const file of ["fixture.mjs", "identity.mjs", "queries.mjs", "registry.mjs", "cli-adapter.mjs", "mcp-adapter.mjs", "self-description.mjs"]) {
   const source = fs.readFileSync(path.join(root, "scripts/agent-native", file), "utf8");
