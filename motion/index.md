@@ -27,6 +27,12 @@ These workflows and worked cases are usable experimental guidance. Expected-resu
 - [Motion Practice Reference](practice-reference.md) classifies mechanics, heuristics, platform notes, and unsupported claims.
 - [Observed Choreography Transcription](observed-choreography.md) transcribes an observed scroll choreography into Scene Composition Contract vocabulary.
 
+## Source-Backed Deep Dives
+
+- [Accessible Motion And Equivalent Feedback](accessible-motion.md). Separate motion preferences, automatic updates, and equivalent feedback.
+- [Interruption And Retargeting](interruption-and-retargeting.md). Resolve repeated input, cancellation, and stale completion callbacks.
+- [Motion Rendering And Performance](rendering-and-performance.md). Choose native mechanisms and diagnose measured delivery failures.
+
 ## Domain Contract
 
 See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page membership, and staleness rules.

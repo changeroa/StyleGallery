@@ -38,7 +38,7 @@ All entries cite official first-party URLs (`authority: official`); `retrieved_o
 
 ## Direct Sources For Current Term Records
 
-The [Term Cases](conflict-cases.md) use this narrower source set, rechecked 2026-09-08. Locators in the term table point to the exact document or section, not a general vendor home page.
+The [Term Cases](conflict-cases.md) use the narrower source sets below. Locators in the term table point to the exact document or section, not a general vendor home page. The first set retains its 2026-09-08 review; later readings do not backdate or refresh unrelated terms.
 
 | Named source | Source kind | Reviewed surface and version | Re-review trigger |
 | --- | --- | --- | --- |
@@ -49,6 +49,22 @@ The [Term Cases](conflict-cases.md) use this narrower source set, rechecked 2026
 | StyleGallery | `pattern-library` | Local [Layout hub](../layout/index.md) and its repository contract | Layout ownership or pattern contract changes |
 
 The DTCG 2022 reading is historical evidence of a draft, not an implementation recommendation. A direct locator and a recorded reading establish provenance for the local summary; independent semantic approval remains separate.
+
+### Sources Rechecked On 2026-09-21
+
+| Named source | Source kind | Reviewed surface and version | Re-review trigger |
+| --- | --- | --- | --- |
+| DTCG | `specification` | [Format 2025.10](https://www.designtokens.org/tr/2025.10/format/); token, group, alias, and typography meanings | Format version or the selected comparison changes |
+| DTCG Resolver | `specification` | [Resolver 2025.10](https://www.designtokens.org/tr/2025.10/resolver/); modifiers and context selection | Resolver version or context-resolution contract changes |
+| Fluent 2 | `design-system` | [Design tokens](https://fluent2.microsoft.design/design-tokens) and [typography](https://fluent2.microsoft.design/typography); dated guidance | Token-layer or target-platform role meaning changes |
+| Carbon | `design-system` | [Color overview](https://carbondesignsystem.com/elements/color/overview/) and [usage](https://carbondesignsystem.com/elements/color/usage/); dated role/theme/layer guidance | Color role, theme, or contextual layer semantics change |
+| WHATWG HTML | `web-platform` | [Popover](https://html.spec.whatwg.org/multipage/popover.html) and [dialog](https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element); Living Standard | Presentation or element semantics change |
+| WAI-ARIA | `specification` | [Dialog role in WAI-ARIA 1.2](https://www.w3.org/TR/wai-aria-1.2/#dialog) | Role version, meaning, or native representation changes |
+| Apple HIG | `platform-guideline` | [Popovers](https://developer.apple.com/design/human-interface-guidelines/popovers) and [typography](https://developer.apple.com/design/human-interface-guidelines/typography); dated platform guidance | Platform convention or text-style behavior changes |
+| Material 3 Compose | `design-system` | [Material 3 typography in Compose](https://developer.android.com/develop/ui/compose/designsystems/material3#typography); implementation surface of the system | Named style slots or system-to-implementation mapping changes |
+| CSSWG | `web-platform` | [Custom Properties Level 1](https://www.w3.org/TR/css-variables-1/) and [Fonts Level 4](https://www.w3.org/TR/css-fonts-4/#font-prop); runtime representations | Property or shorthand semantics change |
+
+For this set, `retrieved_on` and `reviewed_on` are 2026-09-21. Apple bodies were inspected through their official documentation JSON when the HTML reader returned a JavaScript shell. The previous Carbon `/guidelines/color/` locators were unavailable in the reader; the reviewed official pages use `/elements/color/`. No historical source record was silently relabeled current. DTCG modules remain Community Group reports, not W3C Recommendations. Source review here is by the author and does not satisfy independent semantic promotion.
 
 ## Freshness Policy
 

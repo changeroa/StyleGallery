@@ -60,7 +60,13 @@ Trace: pending → cancellation requested → confirmed cancelled or completed; 
 
 Use when direct manipulation previews a change before commitment. Separate the preview value from the committed value. Release on a valid target commits; cancellation restores or reconciles with the current model. A new gesture retargets from the presented position where continuity is intended. Provide a task-equivalent non-drag operation.
 
-Test release inside/outside, cancellation, pointer loss, a changing destination, and repeated reversal. Focus and the selected item must remain traceable while visual position changes. The engine or browser adapter owns gesture events; the product owns acceptance of the new value.
+The non-drag operation has two separate audiences. [WCAG 2.2 Success Criterion 2.5.7 Dragging Movements](https://www.w3.org/TR/WCAG22/#dragging-movements) (Level AA) asks that functionality operated by dragging also be achievable with a single pointer without dragging: a click or tap, not a held path. Its [Understanding document](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html) states that keyboard equivalence does not meet this criterion by itself unless those controls can also be clicked or tapped, and that the keyboard and single-pointer requirements are evaluated independently. A sortable list with arrow-key reordering therefore still needs pointer-operable move controls, and move buttons that only respond to a pointer still need keyboard operation.
+
+Two exceptions bound the criterion. Dragging may remain the only pointer method when it is essential to the task, and the criterion does not cover dragging that the user agent determines and the author has not modified, such as native scrolling. The alternative cannot itself be a path-based gesture such as a swipe or flick; the Understanding document's own examples are tapping a slider track, move controls beside a sortable item, and a text input for a precise value. It does cover content that suppresses native scrolling and interprets the drag itself, which includes a custom carousel, a canvas pan, or the art-surface swipe in [full-viewport scene navigation](#full-viewport-scene-navigation). Record an essential claim with its reason rather than assuming it.
+
+Failure cases: the alternative exists only in a keyboard handler; the alternative appears only on hover, so touch cannot reach it; the alternative commits a different value or skips the validation that release performs; the alternative moves the item but leaves focus or the announced position on the old location.
+
+Test release inside/outside, cancellation, pointer loss, a changing destination, and repeated reversal. Run the same task three ways (drag, single-pointer activation without movement, keyboard only) and compare the committed value and the final focus. Focus and the selected item must remain traceable while visual position changes. The engine or browser adapter owns gesture events; the product owns acceptance of the new value.
 
 ### Scroll-Driven Story
 
@@ -156,7 +162,7 @@ The [Interaction Lab](../examples/domain-interactions/README.md) provides a boun
 
 ## Source, License, And Attribution
 
-Locally authored recipes and HTML. The linked W3C APG pages and Media Queries Level 5 were rechecked on 2026-09-08 for the specific semantics and preference signal above. No upstream examples or timing prescriptions are copied.
+Locally authored recipes and HTML. The linked W3C APG pages and Media Queries Level 5 were rechecked on 2026-09-08 for the specific semantics and preference signal above. WCAG 2.2 (W3C Recommendation, 12 December 2024) and its Understanding page for Success Criterion 2.5.7 (updated 10 August 2026) were rechecked on 2026-09-19 for the criterion text, its two exceptions, and its relationship to keyboard operation; the Understanding page is informative, and the failure cases above are local and unexecuted. No upstream examples or timing prescriptions are copied.
 
 ## IA Navigation
 

@@ -54,6 +54,9 @@ export const canonicalDomains = [
     slug: "motion",
     label: "Motion",
     leaves: [
+      { path: "motion/accessible-motion.md", provenance: "local" },
+      { path: "motion/interruption-and-retargeting.md", provenance: "local" },
+      { path: "motion/rendering-and-performance.md", provenance: "local" },
       { path: "motion/vocabulary.md", provenance: "external", sourcePath: "skills/animation-vocabulary/SKILL.md" },
       { path: "motion/review-workflow.md", provenance: "external", sourcePath: "skills/review-animations/SKILL.md" },
       { path: "motion/practice-reference.md", provenance: "external", sourcePath: "skills/review-animations/STANDARDS.md" },
@@ -67,6 +70,9 @@ export const canonicalDomains = [
     slug: "design-engineering",
     label: "Design Engineering",
     leaves: [
+      { path: "design-engineering/native-interaction-contracts.md", provenance: "local" },
+      { path: "design-engineering/text-input-and-internationalization.md", provenance: "local" },
+      { path: "design-engineering/loading-and-feedback.md", provenance: "local" },
       { path: "design-engineering/interface-craft.md", provenance: "external", sourcePath: "skills/emil-design-eng/SKILL.md" },
       { path: "design-engineering/consumer-migration-readiness.md", provenance: "local" },
       { path: "design-engineering/decision-tree.md", provenance: "local" },
@@ -115,6 +121,9 @@ export const canonicalDomains = [
     slug: "platform-guides",
     label: "Platform Guides",
     leaves: [
+      { path: "platform-guides/adaptive-navigation.md", provenance: "local" },
+      { path: "platform-guides/preferences-and-accessibility.md", provenance: "local" },
+      { path: "platform-guides/input-and-focus.md", provenance: "local" },
       { path: "platform-guides/apple-interaction.md", provenance: "external", sourcePath: "skills/apple-design/SKILL.md" },
       { path: "platform-guides/adaptation-workflow.md", provenance: "local" },
       { path: "platform-guides/android-interaction.md", provenance: "local" },
@@ -126,6 +135,9 @@ export const canonicalDomains = [
     slug: "design-terminology",
     label: "Design Terminology",
     leaves: [
+      { path: "design-terminology/token-semantics.md", provenance: "local" },
+      { path: "design-terminology/interaction-semantics.md", provenance: "local" },
+      { path: "design-terminology/typography-semantics.md", provenance: "local" },
       { path: "design-terminology/source-kinds.md", provenance: "repository" },
       { path: "design-terminology/source-vocabularies.md", provenance: "repository" },
       { path: "design-terminology/concept-families.md", provenance: "repository" },
