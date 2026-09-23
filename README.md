@@ -64,10 +64,12 @@ Start with `sg workflow` to select the stages for reconstruction, adaptation, or
 Material v2 searches the admitted Markdown corpus and returns JSON without an additional format flag:
 
 ```sh
-sg-material discover
-sg-material search --query "sticky layout" --paths-only --limit 5
-sg-material context --query "responsive sidebar" --budget-tokens 4096
+npx --package stylegallery sg-material discover
+npx --package stylegallery sg-material search --query "sticky layout" --paths-only --limit 5
+npx --package stylegallery sg-material context --query "responsive sidebar" --budget-tokens 4096
 ```
+
+With a global install, the same commands are available as `sg-material discover`, `sg-material search`, and `sg-material context`.
 
 For a coding agent with repository filesystem access, local guided traversal is the default: read `AGENTS.md` and this README, follow the narrowest relevant task route or domain index, and inspect the selected Markdown files directly. Use `search --paths-only` only when the path is unclear; it returns a deterministic `paths` array of repository-relative candidates without full result metadata. Reserve `context` for environments that cannot read repository files or for transferring a bounded, provenance-linked package.
 
