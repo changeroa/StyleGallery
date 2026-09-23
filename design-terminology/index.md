@@ -63,6 +63,12 @@ These workflows and worked cases are usable experimental guidance. Expected-resu
 - [Design Term Relations](relation-types.md) defines the typed relation model and the term record shape.
 - [Cross-System Term Cases](conflict-cases.md) applies typed relations to recorded term records and conflict scenarios.
 
+## Source-Backed Deep Dives
+
+- [Token Semantics And Resolution](token-semantics.md). Compare semantic roles, references, groups, context resolution, and runtime values.
+- [Dialog And Popover Semantics](interaction-semantics.md). Separate platform names, HTML mechanisms, ARIA roles, and task behavior.
+- [Typography Roles, Styles, And Representations](typography-semantics.md). Compare native styles, role collections, composite records, and CSS output.
+
 ## Domain Contract
 
 [Vocabulary](../guides/vocabulary.md) owns StyleGallery's canonical internal word set; Design Terminology compares the meanings and relations of terms used by external named sources. Platform Guides compares platform interaction conventions, not terminology; Motion owns motion terminology. Naming rationale: topology suggests a relation graph this domain does not yet provide; terminology is the accurate name for comparing definitions, usage scope, and conflicts. Scope decision: [Design Terminology Domain Scope Decision](../quality/claim-records/design-terminology-domain-scope.md).

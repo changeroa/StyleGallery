@@ -1,5 +1,23 @@
 # StyleGallery Log
 
+## 2026-09-21
+
+Understood as: substantially enrich Motion, Design Engineering, Platform Guides, and Design Terminology with primary-source research integrated into governed local documents. The user excluded Layout and Game UI from this work.
+
+- Added twelve local research guides: motion accessibility/interruption/rendering; native interaction contracts, multilingual input, and asynchronous feedback; platform adaptation/preferences/input; and token, interaction, and typography semantics. Each separates source-backed findings, local proposals, failure cases, and unexecuted verification scenarios.
+- Inspected 66 cited official source pages on 2026-09-21. Recorded source status and target-version limits; read Apple page bodies through official documentation JSON when the HTML reader exposed a JavaScript shell. Preserved prior source-review dates for unrelated term records.
+- Added fourteen source-qualified terms and nine scoped relations, bringing the terminology tables to twenty-five terms and seventeen relations. These are author-reviewed experimental judgments, not independent semantic approval.
+- Registered the twelve leaves in domain membership, local navigation, the closed Material v2 admission set, and npm packaging. The admitted corpus has 181 documents. New guidance remains experimental and does not add profile values, native implementations, or a domain.
+- Verified Markdown structure, links, IA, governance, domain membership, terminology, consumer handoffs, and material admission in an isolated checkout of the research changes. Domain/terminology/governance, consumer/evidence, and frozen-v1 regression suites passed; package installation and CLI/MCP retrieval passed. Fixed the package inventory test's omission of the three existing license/notice files while preserving its exact allow-list assertion.
+- Checked every cited URL and fragment. Applied two fresh-reader corrections to the term-comparison method and contributor verification route. Eight author-selected search probes retrieved the intended guide within the first two results; these are retrieval smoke checks, not an independent usability evaluation. No browser, native IME, assistive-technology, or product performance execution is claimed.
+
+Implementation handoff: `consumer_reference: consumer-reference/agent-native/registry.json`.
+
+Consumer reference: declared
+Consumer reference record: consumer-reference/agent-native/registry.json
+
+Terminology reliance: `dtcg.alias`, `fluent.alias-token`, `fluent.global-token`, `carbon.color-token`, `dtcg.resolver-modifier`, `html.popover`, `apple.popover`, `html.dialog`, `aria.dialog`, `apple.text-style`, `fluent.type-ramp`, `material3.typography`, `dtcg.typography`, `css.font`, `dtcg.token`, `dtcg.group`, and `css.custom-property`. Relation types used: `partial_overlap`, `implementation_representation`, and `not_comparable`. Named sources for these terms were rechecked on 2026-09-21; the older Figma, historical-format, component/pattern, and Layout relations retain their original review scope. Direct locators and boundaries are in [Term Cases](design-terminology/conflict-cases.md).
+
 ## 2026-09-09
 
 - Added a full-page fixed-viewport scene-navigation example with chapter hashes/history, wheel-burst gating, keyboard and art-surface swipe navigation, native copy overflow, immediate reduced-motion transitions, and a complete reading escape.

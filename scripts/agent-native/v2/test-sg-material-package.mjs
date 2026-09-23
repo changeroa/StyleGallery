@@ -29,6 +29,7 @@ const sentinels = [
   "scripts/sg-mcp-shadow.mjs",
 ];
 const mandatory = ["README.md", "package.json"];
+const legalDocuments = ["LICENSE", "LICENSE-DOCS", "NOTICE"];
 const stickyPaths = [
   "patterns/split-sidebar/sticky-aside.md",
   "patterns/viewport-shell/sticky-header.md",
@@ -111,6 +112,7 @@ const v2Schemas = fs.readdirSync(path.join(repositoryRoot, "consumer-reference/a
   .filter((name) => name.endsWith(".json")).map((name) => `consumer-reference/agent-native/v2/schema/${name}`);
 const v1Registry = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "consumer-reference/agent-native/registry.json"), "utf8"));
 const required = new Set([
+  ...legalDocuments,
   ...runtimeClosure(repositoryRoot, packageJson),
   ...schemas,
   ...v2Schemas,
@@ -144,7 +146,7 @@ try {
   assert.equal(packed.status, 0, packed.stderr || packed.stdout);
   assert.equal(packed.stderr, "");
   const description = JSON.parse(packed.stdout)[0];
-  const inventory = description.files.map(({ path: entry }) => entry);
+  const inventory = description.files.map(({ path: entry }) => entry).sort();
   const expected = [...new Set([...files, ...mandatory])].sort();
   assert.deepEqual(inventory, expected, "packed inventory must equal allow-list plus npm mandatory metadata");
   assert.deepEqual(inventory.filter((entry) => sentinels.includes(entry)), [], "sentinels must not be packed");
@@ -199,7 +201,7 @@ try {
   try {
     await bounded(materialClient.connect(materialTransport), "installed material MCP initialize");
     assert.deepEqual((await bounded(materialClient.listTools(), "installed material MCP tools")).tools.map(({ name }) => name), ["material-context", "material-discover", "material-get", "material-search"]);
-    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 169);
+    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 181);
     assert.deepEqual((await bounded(materialClient.listResourceTemplates(), "installed material MCP templates")).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
     const installedMcpSearch = toolEnvelope(await bounded(materialClient.callTool({
       name: "material-search",

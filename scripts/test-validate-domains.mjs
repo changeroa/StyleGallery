@@ -211,6 +211,9 @@ const baseFiles = {
 
 const additionalLocalLeaves = {
   "motion": [
+    ["accessible-motion.md", "Accessible Motion And Equivalent Feedback"],
+    ["interruption-and-retargeting.md", "Interruption And Retargeting"],
+    ["rendering-and-performance.md", "Motion Rendering And Performance"],
     [
       "decision-tree.md",
       "Motion Decision Tree"
@@ -229,6 +232,9 @@ const additionalLocalLeaves = {
     ]
   ],
   "design-engineering": [
+    ["native-interaction-contracts.md", "Native Interaction Contracts"],
+    ["text-input-and-internationalization.md", "Text Input And Internationalization"],
+    ["loading-and-feedback.md", "Loading, Progress, And Feedback"],
     [
       "decision-tree.md",
       "Design Engineering Decision Tree"
@@ -257,6 +263,9 @@ const additionalLocalLeaves = {
     ]
   ],
   "platform-guides": [
+    ["adaptive-navigation.md", "Adaptive Navigation Across Platforms"],
+    ["preferences-and-accessibility.md", "Preferences And Accessibility Across Platforms"],
+    ["input-and-focus.md", "Input And Focus Across Platforms"],
     [
       "adaptation-workflow.md",
       "Platform Adaptation Workflow"
@@ -275,6 +284,9 @@ const additionalLocalLeaves = {
     ]
   ],
   "design-terminology": [
+    ["token-semantics.md", "Token Semantics And Resolution"],
+    ["interaction-semantics.md", "Dialog And Popover Semantics"],
+    ["typography-semantics.md", "Typography Roles, Styles, And Representations"],
     [
       "comparison-workflow.md",
       "Design Term Comparison Workflow"

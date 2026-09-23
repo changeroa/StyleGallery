@@ -75,6 +75,16 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "design-engineering/loading-and-feedback.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/native-interaction-contracts.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "design-engineering/state-management/decision-tree.md",
       "domain": "design-engineering",
       "lifecycle": "experimental"
@@ -180,6 +190,11 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "design-engineering/text-input-and-internationalization.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "design-engineering/worked-examples.md",
       "domain": "design-engineering",
       "lifecycle": "experimental"
@@ -205,6 +220,11 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "design-terminology/interaction-semantics.md",
+      "domain": "design-terminology",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "design-terminology/relation-types.md",
       "domain": "design-terminology",
       "lifecycle": "experimental"
@@ -216,6 +236,16 @@
     },
     {
       "repository_path": "design-terminology/source-vocabularies.md",
+      "domain": "design-terminology",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-terminology/token-semantics.md",
+      "domain": "design-terminology",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-terminology/typography-semantics.md",
       "domain": "design-terminology",
       "lifecycle": "experimental"
     },
@@ -320,6 +350,11 @@
       "lifecycle": "stable"
     },
     {
+      "repository_path": "motion/accessible-motion.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "motion/decision-tree.md",
       "domain": "motion",
       "lifecycle": "experimental"
@@ -335,6 +370,11 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "motion/interruption-and-retargeting.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "motion/motion-brief.md",
       "domain": "motion",
       "lifecycle": "experimental"
@@ -346,6 +386,11 @@
     },
     {
       "repository_path": "motion/practice-reference.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/rendering-and-performance.md",
       "domain": "motion",
       "lifecycle": "experimental"
     },
@@ -645,6 +690,11 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "platform-guides/adaptive-navigation.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "platform-guides/android-interaction.md",
       "domain": "platform-guides",
       "lifecycle": "experimental"
@@ -661,6 +711,16 @@
     },
     {
       "repository_path": "platform-guides/index.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "platform-guides/input-and-focus.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "platform-guides/preferences-and-accessibility.md",
       "domain": "platform-guides",
       "lifecycle": "experimental"
     },
@@ -927,5 +987,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:09bda93e619fdc08d9a5a5063578ee31749a527cc9d3198ba3590b554d7f6d69"
+  "version_id": "sg:policy/material-admission-v2@sha256:9f2fc214681572314282a56dccc425d7faa1ac9aa939416892a97ab89c6c9b30"
 }

@@ -70,6 +70,12 @@ Choose [State Management](state-management/index.md) for UI state ownership, tra
 
 This domain proposes product-layer questions. [Quality Gates](../quality/index.md) remain the shared authority for claims, evidence families, accessibility precedence, rationale, and debt.
 
+## Source-Backed Deep Dives
+
+- [Native Interaction Contracts](native-interaction-contracts.md). Choose dialog, disclosure, menu, popover, and combobox behavior.
+- [Text Input And Internationalization](text-input-and-internationalization.md). Preserve IME composition, text units, mixed direction, and editing intent.
+- [Loading, Progress, And Feedback](loading-and-feedback.md). Separate pending work, accepted results, announcements, and responsiveness.
+
 ## Domain Contract
 
 See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page membership, and staleness rules.

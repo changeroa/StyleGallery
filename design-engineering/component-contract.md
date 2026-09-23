@@ -31,7 +31,7 @@ For reusable ownership and transition mechanisms, use the [State Management cata
 | Outputs | Events, payload meaning, when they are emitted, who commits the result |
 | State | Initial, active, selected, disabled, pending, empty, error, completed as applicable |
 | State ownership | Controlled inputs versus internal temporary state; reconciliation rule |
-| Input and focus | Keyboard, pointer, touch, focus entry/return and unavailable actions |
+| Input and focus | Keyboard, pointer, touch, focus entry/return and unavailable actions; for any drag operation, the separate single-pointer and keyboard alternatives |
 | Async ownership | Request identity, duplicate action policy, stale result handling, cancellation |
 | Content | Empty, long, localized, unbroken and unavailable data |
 | Spatial composition | Layout source, parent constraints, scroll owner and overflow behavior |
@@ -74,6 +74,20 @@ on result(identity, result):
 
 A real application also defines revision conflicts, server normalization, and retry semantics. The sketch is not a distributed consistency protocol. Its handoff is `consumer_reference: not_applicable` because this fictional example selects no consumer profile or conformance record.
 
+## Drag Operations Need Two Alternatives
+
+When a component commits a value through dragging (reorder, slider thumb, resize handle, board column move), answer the Input and focus field once per input path:
+
+| Path | Required answer |
+| --- | --- |
+| Drag | What previews, what release commits, what cancellation restores |
+| Single pointer without dragging | Which click or tap controls reach the same committed value, and where they are visible without hover |
+| Keyboard | Which keys reach the same committed value, and where focus rests afterwards |
+
+[WCAG 2.2 Success Criterion 2.5.7](https://www.w3.org/TR/WCAG22/#dragging-movements) (Level AA) is the named source for the second row. Its Understanding document evaluates it independently from keyboard operation, so a keyboard handler does not answer it and pointer-only buttons do not answer the keyboard row. The criterion excepts dragging that is essential and functionality the user agent determines without author modification; a custom slider, sortable list, or pan surface owns all three rows. A swipe or flick is not an acceptable second row because it is still a path-based gesture. All paths emit the same output event with the same payload meaning, so validation, duplicate policy, and stale-result handling are not bypassed by the alternative. The motion and cancellation side is in [Drag And Settle](../motion/interaction-recipes.md#drag-and-settle).
+
+This contract names what to declare. It does not establish conformance; that requires the consuming product's rendered behavior under the [accessibility evidence gate](../quality/gates/accessibility-evidence.md). [Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) is a different criterion for the size of those pointer controls and is measured in CSS pixels, not platform dp or pt.
+
 ## Opinionated Guidance
 
 Use state names that expose meaningful differences. Two booleans can accidentally permit “saved and failed”; a state transition table helps reveal impossible combinations. Do not merge input validity, request state, and persisted revision into one visual status.
@@ -88,11 +102,11 @@ A state table does not prove accessibility, successful persistence, race freedom
 
 ## Verification Contract
 
-Resolve responses out of order, edit during saving, fail then retry, activate repeatedly, and remove the component before completion. Inspect both persisted and displayed values. Include keyboard-only operation, long content, and constrained parents. Record actual outcomes; the table above is an unexecuted reference contract. Review when a public input, event, or state meaning changes.
+Resolve responses out of order, edit during saving, fail then retry, activate repeatedly, and remove the component before completion. Inspect both persisted and displayed values. Include keyboard-only operation, long content, and constrained parents. For a drag operation, complete the task by drag, by click or tap without movement, and by keyboard, then compare the committed value, emitted event, and focus position. Record actual outcomes; the table above is an unexecuted reference contract. Review when a public input, event, or state meaning changes.
 
 ## Source, License, And Attribution
 
-Locally authored contract and pseudocode; no framework or upstream implementation is copied. Shared quality gates own evidence admissibility.
+Locally authored contract and pseudocode; no framework or upstream implementation is copied. WCAG 2.2 (W3C Recommendation, 12 December 2024) and the informative Understanding pages for Success Criteria 2.5.7 (updated 10 August 2026) and 2.5.8 were rechecked on 2026-09-19 for the statements attributed to them; the three-path table is local synthesis and has not been executed against a product. Shared quality gates own evidence admissibility.
 
 ## IA Navigation
 
