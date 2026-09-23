@@ -94,8 +94,8 @@
         "scripts/test-lifecycle-disposition.mjs",
         "scripts/validate-lifecycle-disposition.mjs"
       ],
-      "scanned_file_count": 490,
-      "scanned_paths_content_id": "sha256:0c0a5c98965116dbac5d8b4298808a2a9cd9c8696c448e02e8d04a00b35a8df4"
+      "scanned_file_count": 502,
+      "scanned_paths_content_id": "sha256:725dc3e19ba66bc515e64b18edad20cc20317dce4540dcec85fbef80eb30089b"
     },
     "implementation": {
       "path": "scripts/agent-native/v2/extensions/a2a-projection.mjs",
@@ -145,13 +145,13 @@
         "role": "repository_reference",
         "lines": {
           "start": 1,
-          "end": 300
+          "end": 316
         },
-        "file_sha256": "8c7b5043c80560db60bce667eff7fdcad8b477553a554a5d3c55e4a3e1ee7cc9",
-        "content_id": "sha256:8c7b5043c80560db60bce667eff7fdcad8b477553a554a5d3c55e4a3e1ee7cc9",
+        "file_sha256": "84e04b22140c38403b15781cd0aa9d82f2785cb127a68a001177bd4ff682b962",
+        "content_id": "sha256:84e04b22140c38403b15781cd0aa9d82f2785cb127a68a001177bd4ff682b962",
         "reference_lines": [
-          213,
-          229
+          229,
+          245
         ],
         "reference_kinds": [
           "forwarder_path",
@@ -279,12 +279,12 @@
         "role": "repository_reference",
         "lines": {
           "start": 1,
-          "end": 259
+          "end": 261
         },
-        "file_sha256": "101a99d9cca3d1de2284b50a8c01d1b27c3b1e8df875d66d78ed796347612b26",
-        "content_id": "sha256:101a99d9cca3d1de2284b50a8c01d1b27c3b1e8df875d66d78ed796347612b26",
+        "file_sha256": "69485bc30624b9b54bc82d28d11139e106679a56052600c64a9aa75fed5a03cc",
+        "content_id": "sha256:69485bc30624b9b54bc82d28d11139e106679a56052600c64a9aa75fed5a03cc",
         "reference_lines": [
-          53
+          54
         ],
         "reference_kinds": [
           "forwarder_path",
@@ -389,10 +389,10 @@
         "role": "projection_adapter_conformance_test",
         "lines": {
           "start": 1,
-          "end": 259
+          "end": 261
         },
-        "file_sha256": "101a99d9cca3d1de2284b50a8c01d1b27c3b1e8df875d66d78ed796347612b26",
-        "content_id": "sha256:101a99d9cca3d1de2284b50a8c01d1b27c3b1e8df875d66d78ed796347612b26"
+        "file_sha256": "69485bc30624b9b54bc82d28d11139e106679a56052600c64a9aa75fed5a03cc",
+        "content_id": "sha256:69485bc30624b9b54bc82d28d11139e106679a56052600c64a9aa75fed5a03cc"
       }
     ],
     "docs_and_registry": [
@@ -432,10 +432,10 @@
       "role": "installed_package_exposure",
       "lines": {
         "start": 1,
-        "end": 300
+        "end": 316
       },
-      "file_sha256": "8c7b5043c80560db60bce667eff7fdcad8b477553a554a5d3c55e4a3e1ee7cc9",
-      "content_id": "sha256:8c7b5043c80560db60bce667eff7fdcad8b477553a554a5d3c55e4a3e1ee7cc9"
+      "file_sha256": "84e04b22140c38403b15781cd0aa9d82f2785cb127a68a001177bd4ff682b962",
+      "content_id": "sha256:84e04b22140c38403b15781cd0aa9d82f2785cb127a68a001177bd4ff682b962"
     },
     "forwarding": {
       "path": "scripts/agent-native/a2a-projection.mjs",
