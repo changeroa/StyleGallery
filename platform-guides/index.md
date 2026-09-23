@@ -27,6 +27,12 @@ These workflows and worked cases are usable experimental guidance. Expected-resu
 
 A platform guide names the platform, source authority, version or review date, web-adaptation boundary, and local verification protocol. Similar appearance or behavior does not establish affiliation or correctness.
 
+## Source-Backed Deep Dives
+
+- [Adaptive Navigation Across Platforms](adaptive-navigation.md). Preserve task state across window and navigation transformations.
+- [Preferences And Accessibility Across Platforms](preferences-and-accessibility.md). Compare text scaling, contrast, motion, and transparency independently.
+- [Input And Focus Across Platforms](input-and-focus.md). Compare keyboard, pointer, drag alternatives, and focus contracts.
+
 ## Domain Contract
 
 See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page membership, and staleness rules.
