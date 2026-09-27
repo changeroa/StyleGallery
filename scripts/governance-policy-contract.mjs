@@ -20,6 +20,8 @@ export const requiredCodeowners = [
   "/design-engineering/ @changeroa",
   "/game-ui/ @changeroa",
   "/platform-guides/ @changeroa",
+  "/expression/ @changeroa",
+  "/showcase/ @changeroa",
   "/consumer-reference/ @changeroa",
   "/consumer-reference/baselines/ @changeroa",
   "/consumer-reference/policies/ @changeroa",

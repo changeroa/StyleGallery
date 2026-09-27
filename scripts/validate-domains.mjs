@@ -18,27 +18,27 @@ const referenceDocuments = [
 const requiredCrossDomainStrings = [
   {
     relative: "guides/vocabulary.md",
-    required: "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, root routing, and `domain` frontmatter on governed leaves.",
+    required: "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, Expression, root routing, and `domain` frontmatter on governed leaves.",
     failure: "guides/vocabulary.md: missing canonical domain vocabulary list",
   },
   {
     relative: "quality/index.md",
-    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, Platform Guides, and Design Terminology claims are admissible.",
+    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, and Expression claims are admissible.",
     failure: "quality/index.md: missing canonical domain quality scope",
   },
   {
     relative: "README.md",
-    required: "without owning profiles, visual values, components, or a seventh domain",
+    required: "without owning profiles, visual values, components, or an eighth domain",
     failure: "README.md: missing canonical Consumer Reference boundary",
   },
   {
     relative: "quality/index.md",
-    required: "without classifying it as a seventh domain",
+    required: "without classifying it as an eighth domain",
     failure: "quality/index.md: missing canonical Consumer Reference boundary",
   },
   {
     relative: "quality/evidence/executable-evidence.md",
-    required: "Six governed domains and their declared leaves are reachable and attributed.",
+    required: "Seven governed domains and their declared leaves are reachable and attributed.",
     failure: "quality/evidence/executable-evidence.md: missing canonical domain validator coverage",
   },
   {
@@ -64,6 +64,8 @@ export const canonicalDomains = [
       { path: "motion/motion-brief.md", provenance: "local" },
       { path: "motion/interaction-recipes.md", provenance: "local" },
       { path: "motion/observed-choreography.md", provenance: "local" },
+      { path: "motion/techniques/scroll-choreography.md", provenance: "local" },
+      { path: "motion/techniques/kinetic-type.md", provenance: "local" },
     ],
   },
   {
@@ -146,6 +148,19 @@ export const canonicalDomains = [
       { path: "design-terminology/comparison-workflow.md", provenance: "local" },
     ],
   },
+  {
+    slug: "expression",
+    label: "Expression",
+    leaves: [
+      { path: "expression/direction-brief.md", provenance: "local" },
+      { path: "expression/brand-studies.md", provenance: "local" },
+      { path: "expression/directions/nocturne-editorial.md", provenance: "local" },
+      { path: "expression/directions/warm-print.md", provenance: "local" },
+      { path: "expression/techniques/gradient-atmosphere.md", provenance: "local" },
+      { path: "expression/techniques/grain-and-texture.md", provenance: "local" },
+      { path: "expression/techniques/webgl-hero.md", provenance: "local" },
+    ],
+  },
 ];
 export const domainRegistry = canonicalDomains;
 
@@ -218,8 +233,8 @@ function checkManifest() {
     && content.includes(`snapshot \`${revision}\``)
     && content.includes("## Shared Non-Domain Infrastructure")
     && content.includes("[Consumer Reference](consumer-reference/index.md)")
-    && content.includes("infrastructure outside the six-domain contract")
-    && content.includes("cannot add a seventh domain row");
+    && content.includes("infrastructure outside the seven-domain contract")
+    && content.includes("cannot add an eighth domain row");
 
   for (const domain of domains) {
     const domainRow = domainRows.find((row) => row[0] === domain.label);

@@ -1,5 +1,18 @@
 # StyleGallery Log
 
+## 2026-09-27
+
+Understood as: let StyleGallery produce finished, expressive pages without loosening the Layout contract, and keep only the parts that belong in the official repository.
+
+- Added Expression as the seventh governed domain: a direction brief, an unofficial brand-study policy, two named directions with concrete values (Nocturne Editorial, Warm Print), and three visual technique recipes (gradient atmosphere, grain and texture, WebGL hero field). Expression owns art direction; it owns no Layout mechanics, motion timing, or governed tokens.
+- Added two executable Motion techniques: scroll choreography (GSAP ScrollTrigger with Lenis on one ticker, pinned horizontal travel, a CSS scroll-timeline alternative) and kinetic type (split-word rises, scroll-lit paragraphs, count-ups, marquees).
+- Added the `showcase/` work area, which is not a domain: a work contract, a QA contract with fifteen ideal-state properties and twenty-one scenarios, the outcome checker `scripts/check-showcase.mjs`, its fixture self-test, and `scripts/serve-showcase.mjs`. Layout authoring rules do not apply to showcase CSS; outcome checks for overflow, focus, contrast, reduced motion, honest actions, hash navigation, short viewports, offscreen loops, and offline and no-script reading do. No works are committed.
+- Added the Creative Build Route to AGENTS.md and registered the domain in the manifest, root routes, governance, ownership, IA, and domain validators and fixtures. Material v2 admits 192 documents.
+- The domain count sentence in `quality/evidence/executable-evidence.md` changed from six to seven governed domains. With owner approval, only that file's sealed SHA-256 was refreshed in the page-evidence retirement record and its validator constant; the record's owner, deadline, decision, workflow, adoption, and archive bindings are unchanged. The A2A and AG-UI extension source inventories were regenerated for the edited caller documents, as in the 2026-09-21 research expansion.
+
+Consumer reference: not_applicable
+Consumer reference reason: This change adds domain guidance and showcase tooling and selects no consumer-reference profile or record.
+
 ## 2026-09-22
 
 - Prepared `stylegallery@0.1.7` with direct website capture, transcription, and workflow commands in the SG CLI and MCP. The compiler remains a separately installed checkout; frozen v1 knowledge entrypoints remain available.

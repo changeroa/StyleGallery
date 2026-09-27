@@ -115,7 +115,7 @@ async function rawProtocolProbe(script, cwd) {
     const afterMalformed = next((message) => message.id === 61, "post-malformed response");
     send("{malformed-json");
     send({ jsonrpc: "2.0", id: 61, method: "resources/list", params: {} });
-    assert.equal((await afterMalformed).result.resources.length, 181);
+    assert.equal((await afterMalformed).result.resources.length, 192);
     assert.equal(allMessages.filter((message) => message.id === undefined).length, 0);
   } finally {
     child.stdin.end();
@@ -242,7 +242,7 @@ try {
   assert.deepEqual(Object.keys(material.client.getServerCapabilities()).sort(), ["resources", "tools"]);
   const tools = (await deadline(material.client.listTools(), "list tools")).tools;
   assert.deepEqual(tools.map(({ name }) => name), ["material-context", "material-discover", "material-get", "material-search"]);
-  assert.equal((await deadline(material.client.listResources(), "list resources")).resources.length, 181);
+  assert.equal((await deadline(material.client.listResources(), "list resources")).resources.length, 192);
   assert.deepEqual((await deadline(material.client.listResourceTemplates(), "list templates")).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
 
   const calls = [

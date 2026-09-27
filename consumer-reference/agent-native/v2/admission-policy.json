@@ -250,6 +250,46 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "expression/brand-studies.md",
+      "domain": "expression",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "expression/direction-brief.md",
+      "domain": "expression",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "expression/directions/nocturne-editorial.md",
+      "domain": "expression",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "expression/directions/warm-print.md",
+      "domain": "expression",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "expression/index.md",
+      "domain": "expression",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "expression/techniques/gradient-atmosphere.md",
+      "domain": "expression",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "expression/techniques/grain-and-texture.md",
+      "domain": "expression",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "expression/techniques/webgl-hero.md",
+      "domain": "expression",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "game-ui/classification.md",
       "domain": "game-ui",
       "lifecycle": "experimental"
@@ -396,6 +436,16 @@
     },
     {
       "repository_path": "motion/review-workflow.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/techniques/kinetic-type.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/techniques/scroll-choreography.md",
       "domain": "motion",
       "lifecycle": "experimental"
     },
@@ -908,6 +958,11 @@
       "repository_path": "recipes/saas-settings.md",
       "domain": "layout",
       "lifecycle": "stable"
+    },
+    {
+      "repository_path": "showcase/README.md",
+      "domain": "shared",
+      "lifecycle": "experimental"
     }
   ],
   "exclusions": [
@@ -987,5 +1042,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:9f2fc214681572314282a56dccc425d7faa1ac9aa939416892a97ab89c6c9b30"
+  "version_id": "sg:policy/material-admission-v2@sha256:b06c3ba6d492f24529c57879628922ebf93fa05c56c67e2f6338b80a7723193e"
 }

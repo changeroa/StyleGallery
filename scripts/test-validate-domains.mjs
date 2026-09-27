@@ -12,11 +12,11 @@ const revision = "220e8607c90b17337d210125777b7b695f26c221";
 const repository = "https://github.com/emilkowalski/skills";
 const unityCliLoopRepository = "https://github.com/hatayama/unity-cli-loop";
 const unityCliLoopRevision = "61a0fe6d7da0aa9d0bcbc6d95944dd069c483ff0";
-const vocabularyDomainList = "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, root routing, and `domain` frontmatter on governed leaves.";
-const qualityDomainList = "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, Platform Guides, and Design Terminology claims are admissible.";
-const readmeConsumerReferenceBoundary = "without owning profiles, visual values, components, or a seventh domain";
-const qualityConsumerReferenceBoundary = "without classifying it as a seventh domain";
-const executableEvidenceDomainCoverage = "Six governed domains and their declared leaves are reachable and attributed.";
+const vocabularyDomainList = "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, Expression, root routing, and `domain` frontmatter on governed leaves.";
+const qualityDomainList = "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, and Expression claims are admissible.";
+const readmeConsumerReferenceBoundary = "without owning profiles, visual values, components, or an eighth domain";
+const qualityConsumerReferenceBoundary = "without classifying it as an eighth domain";
+const executableEvidenceDomainCoverage = "Seven governed domains and their declared leaves are reachable and attributed.";
 const gameUiFindabilityScenario = "| Find the authority route for uGUI, UI Toolkit, or NGUI. | [README](../README.md) | [Unity UI Systems](../game-ui/unity/ui-systems.md) | The first selected route is Game UI, and the system-specific source and version boundary is reached within three hops. |";
 
 function indexPage(title, links) {
@@ -121,8 +121,8 @@ const localLeaf = leafPage({
 });
 
 const baseFiles = {
-  "README.md": `# StyleGallery\n\nConsumer Reference is shared non-domain infrastructure ${readmeConsumerReferenceBoundary}.\n\n- [Layout](layout/index.md)\n- [Motion](motion/index.md)\n- [Design Engineering](design-engineering/index.md)\n- [Game UI](game-ui/index.md)\n- [Platform Guides](platform-guides/index.md)\n- [Design Terminology](design-terminology/index.md)\n`,
-  "index.md": "# StyleGallery\n\n- [Layout](layout/index.md)\n- [Motion](motion/index.md)\n- [Design Engineering](design-engineering/index.md)\n- [Game UI](game-ui/index.md)\n- [Platform Guides](platform-guides/index.md)\n- [Design Terminology](design-terminology/index.md)\n",
+  "README.md": `# StyleGallery\n\nConsumer Reference is shared non-domain infrastructure ${readmeConsumerReferenceBoundary}.\n\n- [Layout](layout/index.md)\n- [Motion](motion/index.md)\n- [Design Engineering](design-engineering/index.md)\n- [Game UI](game-ui/index.md)\n- [Platform Guides](platform-guides/index.md)\n- [Design Terminology](design-terminology/index.md)\n- [Expression](expression/index.md)\n`,
+  "index.md": "# StyleGallery\n\n- [Layout](layout/index.md)\n- [Motion](motion/index.md)\n- [Design Engineering](design-engineering/index.md)\n- [Game UI](game-ui/index.md)\n- [Platform Guides](platform-guides/index.md)\n- [Design Terminology](design-terminology/index.md)\n- [Expression](expression/index.md)\n",
   "DOMAINS.md": [
     "# StyleGallery Domains",
     "",
@@ -136,6 +136,7 @@ const baseFiles = {
     "| Game UI | [Game UI](game-ui/index.md) | `experimental` |",
     "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |",
     "| Design Terminology | [Design Terminology](design-terminology/index.md) | `experimental` |",
+    "| Expression | [Expression](expression/index.md) | `experimental` |",
     "",
     "## Page Manifest",
     "",
@@ -147,12 +148,13 @@ const baseFiles = {
     "| Game UI | `game-ui/index.md` | `game-ui/classification.md`, `game-ui/screen-hierarchy.md`, `game-ui/reference-record.md`, `game-ui/unity/architecture.md`, `game-ui/unity/ui-systems.md`, `game-ui/unity/cli-loop.md`, `game-ui/unity/repository-map.md`, `game-ui/unity/org-wiki.md` |",
     "| Platform Guides | `platform-guides/index.md` | `platform-guides/apple-interaction.md` |",
     "| Design Terminology | `design-terminology/index.md` | `design-terminology/source-kinds.md`, `design-terminology/source-vocabularies.md`, `design-terminology/concept-families.md`, `design-terminology/relation-types.md`, `design-terminology/conflict-cases.md` |",
+    "| Expression | `expression/index.md` | `expression/direction-brief.md` |",
     "",
     `Source snapshot \`${revision}\`.`,
     "",
     "## Shared Non-Domain Infrastructure",
     "",
-    "[Consumer Reference](consumer-reference/index.md) is shared infrastructure outside the six-domain contract and cannot add a seventh domain row.",
+    "[Consumer Reference](consumer-reference/index.md) is shared infrastructure outside the seven-domain contract and cannot add an eighth domain row.",
     "",
     "## Lifecycle And Staleness",
     "",
@@ -202,6 +204,8 @@ const baseFiles = {
   "design-terminology/concept-families.md": leafPage({ title: "Design Concept Families", domain: "design-terminology", parent: "index.md", next: "relation-types.md" }),
   "design-terminology/relation-types.md": leafPage({ title: "Design Term Relations", domain: "design-terminology", parent: "index.md", next: "conflict-cases.md" }),
   "design-terminology/conflict-cases.md": leafPage({ title: "Cross-System Term Cases", domain: "design-terminology", parent: "index.md", next: "../layout/index.md" }),
+  "expression/index.md": indexPage("Expression", [["Expression Direction Brief", "direction-brief.md"]]),
+  "expression/direction-brief.md": leafPage({ title: "Expression Direction Brief", domain: "expression", parent: "index.md", next: "brand-studies.md", provenanceKind: "local" }),
   "quality/claim-records/stylegallery-multidomain-scope.md": "# Scope Decision\n\nStyleGallery supersedes the layout-only repository identity.\n",
   "guides/vocabulary.md": `# Controlled Vocabulary\n\n- Canonical: \`domain\`\n  - ${vocabularyDomainList}\n`,
   "quality/index.md": `# Quality Gates\n\n${qualityDomainList}\n\nThe handoff reaches the shared contract ${qualityConsumerReferenceBoundary}.\n\n${gameUiFindabilityScenario}\n`,
@@ -229,7 +233,9 @@ const additionalLocalLeaves = {
     [
       "observed-choreography.md",
       "Observed Choreography Transcription"
-    ]
+    ],
+    ["techniques/scroll-choreography.md", "Scroll Choreography Technique"],
+    ["techniques/kinetic-type.md", "Kinetic Type Technique"]
   ],
   "design-engineering": [
     ["native-interaction-contracts.md", "Native Interaction Contracts"],
@@ -291,6 +297,14 @@ const additionalLocalLeaves = {
       "comparison-workflow.md",
       "Design Term Comparison Workflow"
     ]
+  ],
+  "expression": [
+    ["brand-studies.md", "Brand Studies"],
+    ["directions/nocturne-editorial.md", "Nocturne Editorial Direction"],
+    ["directions/warm-print.md", "Warm Print Direction"],
+    ["techniques/gradient-atmosphere.md", "Gradient Atmosphere"],
+    ["techniques/grain-and-texture.md", "Grain And Texture"],
+    ["techniques/webgl-hero.md", "WebGL Hero Field"]
   ]
 };
 
@@ -393,7 +407,7 @@ const cases = [
   { name: "empty_manifest", mutate: ["DOMAINS.md", baseFiles["DOMAINS.md"], "# Empty manifest\n"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "manifest_extra_domain", mutate: ["DOMAINS.md", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |\n| Other | [Other](other/index.md) | `experimental` |"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "consumer_reference_sixth_domain", mutate: ["DOMAINS.md", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |", "| Platform Guides | [Platform Guides](platform-guides/index.md) | `experimental` |\n| Consumer Reference | [Consumer Reference](consumer-reference/index.md) | `stable` |"], expect: "DOMAINS.md: missing canonical domain contract" },
-  { name: "consumer_reference_wrong_domain_count", mutate: ["DOMAINS.md", "six-domain contract", "five-domain contract"], expect: "DOMAINS.md: missing canonical domain contract" },
+  { name: "consumer_reference_wrong_domain_count", mutate: ["DOMAINS.md", "seven-domain contract", "six-domain contract"], expect: "DOMAINS.md: missing canonical domain contract" },
   { name: "domain_lifecycle_reader_gate", mutate: ["DOMAINS.md", "User studies, reader tasks, adoption counts, and attestations are neither required nor sufficient for a domain lifecycle change.", "User studies and reader tasks are required for a domain lifecycle change."], expect: "DOMAINS.md: missing lifecycle boundary User studies, reader tasks, adoption counts, and attestations are neither required nor sufficient for a domain lifecycle change." },
   { name: "consumer_promotion_claims_domain_lifecycle", mutate: ["DOMAINS.md", "does not govern domain or page lifecycle", "also governs domain and page lifecycle"], expect: "DOMAINS.md: missing promotion boundary does not govern domain or page lifecycle" },
   { name: "promotion_stable_by_count", mutate: ["DOMAINS.md", "Shared stable has no numeric adoption threshold.", "Shared stable uses a numeric adoption threshold."], expect: "DOMAINS.md: missing promotion boundary Shared stable has no numeric adoption threshold" },
@@ -405,6 +419,14 @@ const cases = [
   { name: "missing_domain_index", omit: ["design-engineering/index.md"], expect: "design-engineering/index.md: missing file" },
   { name: "missing_domain_leaf", omit: ["motion/vocabulary.md"], expect: "motion/vocabulary.md: missing file" },
   { name: "missing_local_domain_leaf", omit: ["game-ui/classification.md"], expect: "game-ui/classification.md: missing file" },
+  { name: "manifest_missing_expression_row", mutate: ["DOMAINS.md", "| Expression | [Expression](expression/index.md) | `experimental` |\n", ""], expect: "DOMAINS.md: missing canonical domain contract" },
+  { name: "missing_expression_hub", omit: ["expression/index.md"], expect: "expression/index.md: missing file" },
+  { name: "missing_expression_leaf", omit: ["expression/techniques/webgl-hero.md"], expect: "expression/techniques/webgl-hero.md: missing file" },
+  { name: "undeclared_expression_leaf", add: ["expression/directions/rogue.md", "# Rogue\n"], expect: "expression/directions/rogue.md: undeclared governed domain document" },
+  { name: "expression_leaf_wrong_domain", mutate: ["expression/brand-studies.md", "domain: expression", "domain: platform-guides"], expect: "expression/brand-studies.md: domain platform-guides does not match expression" },
+  { name: "unreachable_expression_domain", mutate: ["README.md", "- [Expression](expression/index.md)\n", ""], expect: "README.md: missing [Expression](expression/index.md)" },
+  { name: "undeclared_motion_technique", add: ["motion/techniques/rogue.md", "# Rogue\n"], expect: "motion/techniques/rogue.md: undeclared governed domain document" },
+  { name: "vocabulary_missing_expression", mutate: ["guides/vocabulary.md", vocabularyDomainList, vocabularyDomainList.replace("Expression, ", "")], expect: "guides/vocabulary.md: missing canonical domain vocabulary list" },
   { name: "missing_design_terminology_hub", omit: ["design-terminology/index.md"], expect: "design-terminology/index.md: missing file" },
   { name: "missing_design_terminology_leaf", omit: ["design-terminology/source-kinds.md"], expect: "design-terminology/source-kinds.md: missing file" },
   { name: "missing_unity_ui_systems_leaf", omit: ["game-ui/unity/ui-systems.md"], expect: "game-ui/unity/ui-systems.md: missing file" },
@@ -470,9 +492,9 @@ const cases = [
   { name: "vocabulary_missing_game_ui", mutate: ["guides/vocabulary.md", vocabularyDomainList, vocabularyDomainList.replace("Game UI, ", "")], expect: "guides/vocabulary.md: missing canonical domain vocabulary list" },
   { name: "quality_missing_game_ui", mutate: ["quality/index.md", qualityDomainList, qualityDomainList.replace("Game UI, ", "")], expect: "quality/index.md: missing canonical domain quality scope" },
   { name: "quality_missing_game_ui_findability_scenario", mutate: ["quality/index.md", `${gameUiFindabilityScenario}\n`, ""], expect: "quality/index.md: missing Game UI findability QA scenario" },
-  { name: "readme_stale_consumer_reference_ordinal", mutate: ["README.md", "seventh domain", "sixth domain"], expect: "README.md: missing canonical Consumer Reference boundary" },
-  { name: "quality_stale_consumer_reference_ordinal", mutate: ["quality/index.md", "seventh domain", "sixth domain"], expect: "quality/index.md: missing canonical Consumer Reference boundary" },
-  { name: "executable_evidence_stale_domain_count", mutate: ["quality/evidence/executable-evidence.md", "Six governed domains", "Five governed domains"], expect: "quality/evidence/executable-evidence.md: missing canonical domain validator coverage" },
+  { name: "readme_stale_consumer_reference_ordinal", mutate: ["README.md", "eighth domain", "seventh domain"], expect: "README.md: missing canonical Consumer Reference boundary" },
+  { name: "quality_stale_consumer_reference_ordinal", mutate: ["quality/index.md", "eighth domain", "seventh domain"], expect: "quality/index.md: missing canonical Consumer Reference boundary" },
+  { name: "executable_evidence_stale_domain_count", mutate: ["quality/evidence/executable-evidence.md", "Seven governed domains", "Six governed domains"], expect: "quality/evidence/executable-evidence.md: missing canonical domain validator coverage" },
   { name: "success_path", expect: null },
 ];
 

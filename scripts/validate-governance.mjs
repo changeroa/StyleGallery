@@ -67,6 +67,8 @@ function requireGovernanceMatrix() {
     "Game UI domain guidance",
     "Platform Guides domain guidance",
     "Design Terminology domain guidance",
+    "Expression domain guidance",
+    "Showcase works",
     "Pattern data and examples",
     "Pattern generator",
     "Validation scripts",

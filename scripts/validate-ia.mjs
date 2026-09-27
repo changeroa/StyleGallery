@@ -20,8 +20,9 @@ const domainRoutes = [
   ["Motion", "motion/index.md"],
   ["Design Engineering", "design-engineering/index.md"],
   ["Platform Guides", "platform-guides/index.md"],
+  ["Expression", "expression/index.md"],
 ];
-const leafDirectories = ["patterns", "recipes", "quality", "motion", "design-engineering", "platform-guides", "consumer-reference"];
+const leafDirectories = ["patterns", "recipes", "quality", "motion", "design-engineering", "platform-guides", "expression", "consumer-reference"];
 const nestedIndexes = [
   "design-engineering/reference-profiles/index.md",
   "design-engineering/reference-profiles/governed-local/index.md",
