@@ -1,7 +1,7 @@
 ---
 type: Domain Recipe
 title: Drawn Products
-description: Copy-ready recipes for drawing phones, hardware, vehicles, and cards in SVG and CSS so they can be recoloured, configured, and scrubbed without photography.
+description: SVG and CSS recipes for intentional schematic product graphics, not replacements for existing photography or renders.
 domain: expression
 lifecycle: experimental
 provenance_kind: local
@@ -17,7 +17,7 @@ Product-layer CSS and SVG for `showcase/` works and consumer pages. Never add th
 
 ## Reusable Method
 
-Brand studies may not reuse product photography, so every hardware, vehicle, and fintech study in the showcase draws its objects. A drawn object can do things a photo cannot: take any paint colour, change wheels, light up, and move with scroll. Four recipes cover almost every case.
+Use existing product photography and renders first. The early showcase studies drew objects because an older policy excluded photography; that constraint no longer applies. These four recipes are retained for intentional vector graphics, diagrams, and schematic controls only. Do not use them to fill a photographic hero or replace a detailed product image. See [Image Weight](image-weight.md).
 
 ### One Symbol, Many Paints
 
@@ -78,7 +78,7 @@ Nothing's glyph pad toggles `data-on` on absolutely positioned strips; a glow is
 
 ## Opinionated Guidance
 
-Draw at the level of a pictogram, not a render. The studies that tried detail (panel gaps, reflections) looked worse than those that stopped at silhouette, glass, wheels, and one highlight line. Let the paint colour and the interaction carry the realism.
+Draw at the level of a pictogram only when a pictogram is the intended asset. If the slot needs material detail, reflections, photographic scenery, or a realistic product view, use an existing asset instead. Recolouring a silhouette does not give it the visual quality of product photography.
 
 Put the name behind the drawing. A huge model name with the object overlapping its lower third (negative top margin on the drawing) gives depth without 3D.
 

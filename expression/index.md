@@ -22,11 +22,11 @@ Out of scope: layout mechanics and scroll ownership (Layout), timing, interrupti
 | Present physical products or vehicles one stage at a time. | [Hardware Catalogue Direction](directions/hardware-catalogue.md) |
 | Style a software tool in dark or light, with mono labels and a working mock. | [Developer Tool Direction](directions/developer-tool.md) |
 | Style a Korean service or commerce page with Pretendard and dense grids. | [Korean Service Direction](directions/korean-service.md) |
-| Draw phones, hardware, vehicles, or cards so they can be recoloured and configured. | [Drawn Products](techniques/drawn-products.md) |
+| Make an intentionally vector product diagram, not a substitute for photography. | [Drawn Products](techniques/drawn-products.md) |
 | Add a small working product demo that answers honestly. | [Live Product Demos](techniques/live-product-demos.md) |
 | Put a pointer-reactive 3D object field on a page without WebGL. | [Canvas 3D Without WebGL](techniques/canvas-3d.md) |
 | Check a page against measured values from 49 live homepages, and see why the studies read as less expressive. | [Measured Expression Benchmarks](measured-benchmarks.md) |
-| Give imagery its measured share of the page and frame it, without brand photography. | [Image Weight](techniques/image-weight.md) |
+| Reuse existing assets, frame imagery, and restrict new assets to graphics/vectors. | [Image Weight](techniques/image-weight.md) |
 | Calibrate display size, weight, tracking, and leading so type reads confident, not loud. | [Display Type Calibration](techniques/display-type-calibration.md) |
 | Add the finishing detail of edge-fade masks, rounded clips, wipes, blur-in, and hairlines. | [Masks, Clips, And Hairlines](techniques/surface-detail.md) |
 | Find a finished brand study to learn from, and the lessons 54 studies taught. | [Study Atlas](study-atlas.md) |

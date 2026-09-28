@@ -32,6 +32,12 @@ A brand study (`brand_study: true`) reinterprets a named real brand. It addition
 
 See [Brand Studies](../expression/brand-studies.md) for the reasoning and limits.
 
+## Asset Selection
+
+Reuse existing assets first: reference-site media, supplied files, and project assets. Record the source and selected file for each image/video slot in the brief. Cropping, sizing, compression, masks, and grading adapt an existing asset to the page.
+
+Create new assets only for intentionally graphical/vector work: icons, diagrams, patterns, abstract graphics, and vector illustrations. Do not generate photography, video, or realistic product renders, or replace them with CSS/SVG/canvas stand-ins. If the right asset is missing, find an existing one or record the gap rather than drawing a substitute to pass the richness check. Working product UI can still be implemented as behavior; it is not a replacement for photographic media. See [Image Weight](../expression/techniques/image-weight.md).
+
 ## Brief Template
 
 ```md
@@ -52,6 +58,9 @@ Type pairing, palette, texture, and motion density, with actual values or a link
 
 ## Techniques
 Expression and Motion technique pages the work uses.
+
+## Assets
+Existing source URL/path and selected local file per slot; list any intentionally graphical/vector assets to create and any missing media.
 
 ## Layout Floor
 Scroll owner, pinned or sticky regions, and how the page collapses at 320px.

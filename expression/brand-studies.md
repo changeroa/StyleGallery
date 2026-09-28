@@ -21,7 +21,7 @@ A brand study reinterprets a real, named brand as an unofficial design exercise.
 2. Add `<meta name="robots" content="noindex, nofollow">` to `index.html`.
 3. Show the word "Unofficial" in visible page text, typically in the title and footer, e.g. "Unofficial brand study".
 4. Study the brand's register, then write original copy in that register. Do not paste taglines, product copy, or press text.
-5. Do not use the brand's logo files, icon sets, trademarked artwork, or product photography. Draw an original wordmark in a web font, or use the plain brand name as text.
+5. Reuse existing photographs, videos, product renders, and other media from the reference or supplied/project assets; record their source in the brief. Do not replace them with generated pictures or CSS/SVG product stand-ins. Create assets only for intentionally graphical or vector work, following [Image Weight](techniques/image-weight.md). Keep the brand name as plain text rather than copying its logo as the study's identity.
 6. Run `node scripts/check-showcase.mjs --work <slug>`. The brief and page checks fail if steps 1-3 are missing.
 
 ## Opinionated Guidance
@@ -38,7 +38,7 @@ Following these steps reduces confusion and copying risk. It is not legal advice
 
 ## Verification Contract
 
-The showcase checker enforces the machine-checkable steps (subject, `noindex`, visible Unofficial text). A reviewer checks the rest from the source and screenshots: no copied logos, artwork, or verbatim copy.
+The showcase checker enforces the machine-checkable steps (subject, `noindex`, visible Unofficial text). A reviewer checks original copy, plain-text brand identity, recorded media sources, and whether newly created assets are intentionally graphical/vector rather than substitutes for photography or realistic renders.
 
 ## Source, License, And Attribution
 

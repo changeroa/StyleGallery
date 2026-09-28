@@ -19,7 +19,7 @@ These values are a starting point for product pages in `showcase/` or a consumer
 
 Mood: a quiet showroom where each object gets its own stage. One product per viewport, a big name, a short line, three numbers, and two buttons. Everything else stays out of the light.
 
-The direction is distilled from the showcase studies of Apple iPhone, Apple MacBook Pro, Nothing, teenage engineering, Tesla Model 3, and Rivian. All six were built without product photography: the objects are drawn in CSS or SVG, which turned out to be a strength, because a drawing can be recoloured, rotated, and scrubbed live.
+The direction is distilled from the showcase studies of Apple iPhone, Apple MacBook Pro, Nothing, teenage engineering, Tesla Model 3, and Rivian. Those early studies used CSS/SVG stand-ins under an older asset policy. Do not repeat that compromise: reuse existing product photography or renders, and create vectors only for deliberately schematic graphics.
 
 ```css
 :root {
@@ -42,7 +42,7 @@ The direction is distilled from the showcase studies of Apple iPhone, Apple MacB
 | Actions | Two equal-width buttons (Tesla uses 264px min width, 4px radius) or pill pairs (Rivian, Apple) |
 | Catalogue grid | Hairline 1px dividers on each cell, square corners, mono code and price, blue underlined "buy" links (teenage engineering) |
 | Indicator colour | One small, saturated colour used like an LED: Nothing red, teenage engineering orange knob, Rivian gold pill |
-| Object | On a real product page, a render or photograph that fills the stage (measured hardware originals put about 100% of page area into imagery). In a study, an original render or an SVG `<symbol>` filled with `currentColor` and composed with ground, light, and shadow; paint swatches set `color` or a custom property |
+| Object | An existing product render or photograph that fills the stage, in both a study and a real product page. Paint swatches can select existing variant assets. Use a recolourable SVG symbol only for an intentionally vector illustration, never as a substitute for photographic detail |
 | Motion density | The object settles or rolls in with scroll progress; configurators respond instantly; about 66 elements with responsive states at 200ms; no idle loops |
 | Length | Several stages per product, not one: measured originals run 17.5 viewports, the studies 3.9. See [Measured Expression Benchmarks](../measured-benchmarks.md) |
 
@@ -62,7 +62,7 @@ Web Audio for a playable instrument must start only after a click, stop by itsel
 
 ## Unsupported Absolutes
 
-These values produced six study pages that pass the showcase checks. Drawn objects are a study constraint; a real product page still needs photography, and these values are not tested against it.
+These values produced six study pages that pass the showcase checks, but that does not establish photographic quality. Drawn objects are no longer a study requirement; select existing media for photographic slots.
 
 ## Verification Contract
 

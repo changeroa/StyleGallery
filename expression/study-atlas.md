@@ -17,10 +17,10 @@ This page indexes `showcase/` works and routes to Expression directions and tech
 
 ## Reusable Method
 
-Each study was built the same way:
+The initial studies used the workflow below. The older requirement to draw objects instead of using photography has been superseded by the existing-asset-first policy in [Image Weight](techniques/image-weight.md); the gallery descriptions record historical implementations, not a requirement to repeat that substitution.
 
 1. Read the capture pack for the site (`site-compiler/out/packs/<slug>/SCENEBOOK.md`): scene order, grounds, type hierarchy, button shapes, sticky elements, and observed motion.
-2. Build `showcase/<slug>/index.html` with original copy, drawn objects instead of photography, a plain-text wordmark instead of the logo, `noindex`, and an "Unofficial" label.
+2. Build `showcase/<slug>/index.html` with original copy, existing media with recorded sources, a plain-text wordmark instead of the logo, `noindex`, and an "Unofficial" label. Create only intentional graphics/vectors; do not draw replacements for photographs or realistic renders.
 3. Add at least one working demo of the product (see [Live Product Demos](techniques/live-product-demos.md)).
 4. Pass `node scripts/check-showcase.mjs --work <slug>`.
 5. Render the study and the capture frames side by side at 1440x900 and record matches, deliberate differences, and remaining gaps in the study's `brief.md`.

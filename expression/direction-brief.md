@@ -31,7 +31,8 @@ type:
 palette: # 3-6 hex values with roles: ground, text, accent, secondary accent
 texture: # grain, noise, paper, halftone, or none, with strength
 atmosphere: # gradient field, grain, or WebGL behind content; never in place of content
-imagery: # one slot per screen: photo, drawn scene, render, or live product surface, named per section
+imagery: # existing asset per slot: source URL/path, crop, focal point, and role; name any missing asset
+asset_creation: # none by default; only intentionally graphical/vector assets, never generated photos/video/realistic renders
 response: # what answers the pointer (links, cards, tabs, media frames) and how fast; 100-320ms states, 400-500ms reveals
 surface_detail: # edge-fade masks, rounded media clips, hairlines between panels
 motion_density: # entrance sequence count, scroll scenes, ambient loops
@@ -46,7 +47,8 @@ consumer_reference_reason: A direction brief selects no consumer reference recor
 
 These defaults come from [Measured Expression Benchmarks](measured-benchmarks.md), which compared 49 live homepages with StyleGallery studies built from the older advice. The studies read as empty and loud; the originals read as full and calm.
 
-- Put a picture, drawn scene, render, or live product surface on every screen. Measured originals give about half their page area to imagery; a screen holding only a headline on a gradient reads as empty. See [Image Weight](techniques/image-weight.md).
+- Select existing assets before writing the page: reference-site media, supplied files, then project assets. Reuse photographs, video, and product renders instead of making replacements. New asset creation is limited to intentional graphics/vectors: icons, diagrams, patterns, abstract graphics, and vector illustrations. SVG, canvas, WebGL, or an image generator is not a workaround for recreating a photographic scene.
+- Put existing imagery, an intentional vector graphic, or a live product surface on every screen. Implementing a working UI is page behavior, not permission to fabricate photographic product imagery. If an asset is missing, find an existing one or name the missing slot rather than filling it with a crude drawing. See [Image Weight](techniques/image-weight.md).
 - Size display type from the page's job, not bigger than feels safe: the largest text is 3.5-5.5 times the body (measured median 56px over 14px), tracking 0em on Korean and system faces and about -0.02em on Latin grotesks, line height 1.1-1.2. Only a campaign or editorial hero goes to 6-7 times. See [Display Type Calibration](techniques/display-type-calibration.md).
 - Pair one display face with one body face, plus a mono or small-caps label face only if the page needs it. Two families is the measured median; three is the ceiling.
 - Make many things answer the pointer: every link, button, card, tab, and media frame gets a 100-320ms state change on `opacity`, `color`, `transform`, or `background-color` (measured median: 76 responsive elements per page). Reserve 400-500ms for reveals.

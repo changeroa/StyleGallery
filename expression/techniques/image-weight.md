@@ -1,7 +1,7 @@
 ---
 type: Domain Recipe
 title: Image Weight
-description: How much of a page the measured originals give to imagery, how they frame it, and how a brand study fills those slots with original imagery instead of gradients.
+description: How to select and frame existing imagery, reserving new asset creation for intentional graphics and vectors.
 domain: expression
 lifecycle: experimental
 provenance_kind: local
@@ -13,7 +13,7 @@ Primary role: visual technique recipe.
 
 ## Repository Boundary
 
-Product-layer HTML and CSS for `showcase/` works and consumer pages. Never add these declarations to reusable Layout pattern CSS. Brand studies still follow [Brand Studies](../brand-studies.md): no brand photography, logos, or product renders.
+Product-layer HTML and CSS for `showcase/` works and consumer pages. Never add these declarations to reusable Layout pattern CSS. Brand studies follow [Brand Studies](../brand-studies.md), including source records for reused media and an explicit unofficial identity.
 
 ## Reusable Method
 
@@ -39,13 +39,15 @@ Apple clips its media with `clip-path: inset(0 round 28px)` rather than `border-
 .media img, .media video { block-size: 100%; display: block; inline-size: 100%; object-fit: cover; }
 ```
 
-### Fill Study Slots With Original Imagery
+### Reuse Existing Assets Before Creating Graphics
 
-A study may not use the brand's photography, but it may use original imagery made for the study:
+Choose the asset before designing its frame. Inspect reference-site media, user-supplied files, and project assets first. Reuse an existing photograph, video, or product render for a photographic slot; preserve its subject, focal point, and useful resolution.
 
-1. **Generated or commissioned images** of generic subjects in the brand's palette and lighting: a bakery counter, a mountain road, a desk at dusk. Name the file after the slot (`assets/hero-dusk-road.webp`), export WebP at 1600px wide and quality 80, and set `width`, `height`, and `alt`.
-2. **Rendered product stand-ins**: invented devices drawn in SVG or canvas (see [Drawn Products](drawn-products.md)), composed as a scene with ground, light, and shadow, not floated on a flat gradient.
-3. **Live product surfaces**: a working mock of the product UI (see [Live Product Demos](live-product-demos.md)) counts as imagery when it fills the slot.
+1. **Existing media is the default.** Record the source URL or supplied path and the local asset path in `brief.md`. Crop, resize, compress, mask, or color-grade the asset to fit the composition; these are adaptations, not reasons to recreate it.
+2. **Create only intentionally graphical/vector assets.** Icons, diagrams, patterns, abstract graphics, and vector illustrations may be authored when the design calls for them. The [Drawn Products](drawn-products.md) recipes are for schematic illustrations, not replacement product photography.
+3. **Do not manufacture photographic substitutes.** Do not generate photos, video, or realistic product renders. Do not replace a car photograph, food shot, interior, portrait, or landscape with a simplified CSS/SVG/canvas scene merely because it is easier to code. The intended visual role, not the file extension or tool, determines whether creation is allowed.
+4. **Missing assets remain explicit.** Find another existing asset or record the missing slot. Do not fabricate a substitute to satisfy an area threshold.
+5. **Working UI remains implementation.** A real interactive product surface may be built with HTML/CSS (see [Live Product Demos](live-product-demos.md)); it does not justify redrawing photographic hardware or scenery around it.
 
 A gradient alone is acceptable only as atmosphere behind one of these, never as the content of a slot.
 
@@ -59,7 +61,7 @@ A gradient alone is acceptable only as atmosphere behind one of these, never as 
 
 Count the slots. If a section has no picture, product screen, or drawn scene, it needs a reason. Across the 49 originals only developer-tool homepages drop below a third of their area in imagery, and they replace it with dense product UI, not with gradients.
 
-Keep one lighting mood per page. Generated images from different prompts drift in white balance; state the same light ("soft overcast daylight", "warm dusk") in every prompt for one page.
+Keep one lighting mood per page by selecting compatible existing assets and adjusting their crops and grading. Do not generate new images to force a match.
 
 ## Platform-Specific Guidance
 
