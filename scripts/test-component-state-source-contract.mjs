@@ -24,7 +24,7 @@ assert.deepEqual(first.files, second.files, "source manifest files must be stabl
 assert(first.files.some((entry) => entry.path === "tests/component-state-evidence.spec.mjs"), "capture browser code must be bound");
 assert(first.files.some((entry) => entry.path === "playwright.config.mjs"), "Playwright capture configuration must be bound");
 assert(first.files.some((entry) => entry.path === "package.json"), "capture dependency declarations must be bound");
-assert(first.files.some((entry) => entry.path === "package-lock.json"), "exact capture dependencies must be bound");
+assert(first.files.some((entry) => entry.path === "bun.lock"), "exact capture dependencies must be bound");
 assert(first.files.some((entry) => entry.path === "scripts/artifact-metadata.mjs"), "capture artifact metadata code must be bound");
 assert(first.files.some((entry) => entry.path === "scripts/visual-expectation-contract.mjs"), "visual expectation selection must be bound");
 for (const fixturePath of [

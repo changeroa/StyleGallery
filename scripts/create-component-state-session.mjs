@@ -68,7 +68,7 @@ const receipt = {
     browser_revision: revisionSegment ?? path.basename(executable),
     container_image: process.env.SENTINEL_CONTAINER_IMAGE ?? `local-host:${os.release()}`,
     kind: "browser",
-    lockfile_sha256: sha256(fs.readFileSync(path.join(repositoryRoot, "package-lock.json"))),
+    lockfile_sha256: sha256(fs.readFileSync(path.join(repositoryRoot, "bun.lock"))),
     node: process.version,
     platform: process.platform === "linux" && process.arch === "x64" ? "linux/amd64" : `${process.platform}/${process.arch}`,
     playwright: packageJson.devDependencies["@playwright/test"],

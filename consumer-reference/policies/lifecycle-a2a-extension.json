@@ -94,8 +94,8 @@
         "scripts/test-lifecycle-disposition.mjs",
         "scripts/validate-lifecycle-disposition.mjs"
       ],
-      "scanned_file_count": 509,
-      "scanned_paths_content_id": "sha256:08db0a944c67fa62eacbabcc1ff85354e0d354c6cd50f2fad206d14a70cbf6b7"
+      "scanned_file_count": 508,
+      "scanned_paths_content_id": "sha256:6001abaaf98d0c71c82f8433818c411b74df09a34a759ae00305bf7c3ad8665b"
     },
     "implementation": {
       "path": "scripts/agent-native/v2/extensions/a2a-projection.mjs",
@@ -145,13 +145,13 @@
         "role": "repository_reference",
         "lines": {
           "start": 1,
-          "end": 328
+          "end": 329
         },
-        "file_sha256": "33990057beb56f57e8d95de16f57be158400b0a379015121d249b9dc22e59d23",
-        "content_id": "sha256:33990057beb56f57e8d95de16f57be158400b0a379015121d249b9dc22e59d23",
+        "file_sha256": "9c996a12ee2e4f809b3fd74d057d7c41b16bc75b0d6b2eac6e656ef200069791",
+        "content_id": "sha256:9c996a12ee2e4f809b3fd74d057d7c41b16bc75b0d6b2eac6e656ef200069791",
         "reference_lines": [
-          227,
-          243
+          228,
+          244
         ],
         "reference_kinds": [
           "forwarder_path",
@@ -432,10 +432,10 @@
       "role": "installed_package_exposure",
       "lines": {
         "start": 1,
-        "end": 328
+        "end": 329
       },
-      "file_sha256": "33990057beb56f57e8d95de16f57be158400b0a379015121d249b9dc22e59d23",
-      "content_id": "sha256:33990057beb56f57e8d95de16f57be158400b0a379015121d249b9dc22e59d23"
+      "file_sha256": "9c996a12ee2e4f809b3fd74d057d7c41b16bc75b0d6b2eac6e656ef200069791",
+      "content_id": "sha256:9c996a12ee2e4f809b3fd74d057d7c41b16bc75b0d6b2eac6e656ef200069791"
     },
     "forwarding": {
       "path": "scripts/agent-native/a2a-projection.mjs",

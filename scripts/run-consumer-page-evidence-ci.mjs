@@ -106,7 +106,7 @@ function prepare(values) {
     record_kind: "consumer_migration_conformance",
     scenarios: [{
       assertions: ["The selected responsive layout case passes its browser assertions."],
-      argv: ["npx", "playwright", "test", "tests/consumer-conformance.spec.mjs", "--project=chromium", "--grep", "state-w1024-focus"],
+      argv: ["bunx", "playwright", "test", "tests/consumer-conformance.spec.mjs", "--project=chromium", "--grep", "state-w1024-focus"],
       evidence_method: "browser",
       exit_code: 0,
       id: scenarioId,

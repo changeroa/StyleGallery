@@ -23,10 +23,10 @@ Use this file before editing repository documentation. It names which file is au
 | Layout recipes | `recipes/*.md` | Manual | None | `stable` | Pattern-stack changes, route changes, or broken recipe links. | `scripts/validate-okf.mjs`, `scripts/validate-links.mjs`, `scripts/validate-ia.mjs` | Recipe owner |
 | Quality gates and evidence | `quality/**/*.md` | Manual | None | `stable` | Claim-boundary changes, evidence-family changes, or broken quality links. | `scripts/validate-okf.mjs`, `scripts/validate-links.mjs`, `scripts/validate-ia.mjs` | Quality owner |
 | Consumer reference contract | `consumer-reference/contract.md`, `consumer-reference/schema/item.schema.json` | Manual | None | `stable` contract with related fixtures | Handoff shape, path boundary, lifecycle, ownership, or dependency-direction changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Repository governance owner with Validation owner |
-| Agent-native knowledge interface v1 | `consumer-reference/agent-native/registry.json`, `consumer-reference/agent-native/schema/*.json`, `scripts/agent-native/{registry,identity,queries}.mjs`, `scripts/sg.mjs`, `scripts/sg-mcp.mjs` | Manual, with protocol projections derived from one operation registry | Frozen v1 CLI JSON, read-only MCP tools/resources, and compatibility projections | `experimental`, byte-compatible v1 interface | Identity grammar, canonical hashing, registry records, operation metadata, capability/effect semantics, receipt/conformance rules, or retrieval changes. | `npm run test:agent-native` | Repository governance owner with Validation owner |
-| Governed material interface v2 | `consumer-reference/agent-native/v2/admission-policy.json`, its closed schemas, and admitted tracked Markdown | `scripts/agent-native/v2/generate-material-registry.mjs` | `consumer-reference/agent-native/v2/material-registry.json`; separate `sg-material` CLI and material MCP | `experimental`, read-only and isolated from v1 | Admission roots/exclusions, source hash, identity, operation inventory, query/context bounds, package exposure, or source drift changes. | `npm run validate:material`, `npm run test:material`, generated drift | Repository governance owner with Validation owner |
+| Agent-native knowledge interface v1 | `consumer-reference/agent-native/registry.json`, `consumer-reference/agent-native/schema/*.json`, `scripts/agent-native/{registry,identity,queries}.mjs`, `scripts/sg.mjs`, `scripts/sg-mcp.mjs` | Manual, with protocol projections derived from one operation registry | Frozen v1 CLI JSON, read-only MCP tools/resources, and compatibility projections | `experimental`, byte-compatible v1 interface | Identity grammar, canonical hashing, registry records, operation metadata, capability/effect semantics, receipt/conformance rules, or retrieval changes. | `bun run test:agent-native` | Repository governance owner with Validation owner |
+| Governed material interface v2 | `consumer-reference/agent-native/v2/admission-policy.json`, its closed schemas, and admitted tracked Markdown | `scripts/agent-native/v2/generate-material-registry.mjs` | `consumer-reference/agent-native/v2/material-registry.json`; separate `sg-material` CLI and material MCP | `experimental`, read-only and isolated from v1 | Admission roots/exclusions, source hash, identity, operation inventory, query/context bounds, package exposure, or source drift changes. | `bun run validate:material`, `bun run test:material`, generated drift | Repository governance owner with Validation owner |
 | Experimental protocol extensions | `scripts/agent-native/v2/experimental-extension-registry.mjs`, `scripts/agent-native/v2/extensions/*.mjs`, lifecycle extension records | Manual | A2A `1.0` and AG-UI `0.0.57` projections | `experimental`, retained pending owner review | Protocol version, caller inventory, forwarding, migration evidence, or disposition changes. | `scripts/agent-native/v2/test-agent-extension-boundary.mjs`, lifecycle suites | Repository governance owner with protocol and Validation owners |
-| Lifecycle dispositions and archives | `consumer-reference/policies/lifecycle-dispositions.json`, its five records, and `consumer-reference/schema/lifecycle-disposition.schema.json` | Manual, with immutable archive receipts | Retrieval metadata for historical sentinel/calibration and page evidence | `pending_owner` for three families; both extensions `retain` | Owner, deadline, caller status, archive object/ref, approval, transition, or post-deadline action changes. | `npm run validate:lifecycle-dispositions`, `npm run test:lifecycle-dispositions` | Repository governance owner with named family owner and Validation owner |
+| Lifecycle dispositions and archives | `consumer-reference/policies/lifecycle-dispositions.json`, its five records, and `consumer-reference/schema/lifecycle-disposition.schema.json` | Manual, with immutable archive receipts | Retrieval metadata for historical sentinel/calibration and page evidence | `pending_owner` for three families; both extensions `retain` | Owner, deadline, caller status, archive object/ref, approval, transition, or post-deadline action changes. | `bun run validate:lifecycle-dispositions`, `bun run test:lifecycle-dispositions` | Repository governance owner with named family owner and Validation owner |
 | Portable token source | `consumer-reference/fixtures/token-portability/valid-reference.json`, `consumer-reference/schema/portable-tokens.schema.json` | `scripts/build-reference-artifacts.mjs` with Style Dictionary `5.5.0` | `consumer-reference/generated/tokens.css`, `consumer-reference/generated/manifest.json` | `stable` restricted adapter contract, `generated` output | Allowed token shape, adapter/version pin, source token count, warning, declaration, or content hash changes. | `scripts/validate-reference-artifacts.mjs`, `scripts/test-reference-adapters.mjs` | Repository governance owner with Validation owner |
 | Governed local reference profiles | `design-engineering/reference-profiles/governed-local/editorial/profile.json`, `design-engineering/reference-profiles/governed-local/editorial/tokens.dtcg.json`, `design-engineering/reference-profiles/governed-local/editorial/local-foundations.json`, `design-engineering/reference-profiles/governed-local/terminal/profile.json`, `design-engineering/reference-profiles/governed-local/terminal/tokens.dtcg.json`, `design-engineering/reference-profiles/governed-local/terminal/local-foundations.json` | Manual | None | `experimental`, `example_only`, non-default related fixtures | Layout revision, identity values, UA/reset assumptions, explicit selection, or fixture relationship changes. | `scripts/validate-consumer-reference.mjs`, `scripts/test-validate-consumer-reference.mjs` | Design Engineering owner with Validation owner |
 | Component-state evidence matrices | Each profile's declared `components/*.component.json`, `states/*.states.json`, `fixtures/*.fixture.json`, and `evidence/*.evidence.json` records | `scripts/generate-consumer-reference-evidence.mjs` | `design-engineering/reference-profiles/governed-local/editorial/generated/state-matrix.md`, `design-engineering/reference-profiles/governed-local/editorial/generated/keyboard-matrix.md`, `design-engineering/reference-profiles/governed-local/editorial/generated/evidence-coverage.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/state-matrix.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/keyboard-matrix.md`, `design-engineering/reference-profiles/governed-local/terminal/generated/evidence-coverage.md` | `generated` output from `experimental` canonical records | Declared record paths, capture-session identity, scenario/mode/channel counts, claim boundary, generated escaping, or generator output changes. | `scripts/validate-component-state.mjs`, `scripts/test-validate-component-state.mjs`, `scripts/test-validate-component-state-artifacts.mjs`, `scripts/test-generate-consumer-reference-evidence.mjs` | Design Engineering owner with Validation owner |
@@ -81,7 +81,7 @@ Current generated artifacts:
 - `design-engineering/reference-profiles/governed-local/terminal/generated/evidence-coverage.md`
 - `tests/snapshots/consumer-reference-card-grid.png` (proposed; update only by an explicit local baseline proposal, never in CI)
 
-Portable token artifacts are regenerated only from the restricted fixture through the pinned adapter. Run `npm run build`; never broaden the allowed token subset to accommodate an adapter false-success, and revert the adapter with both generated files if the pin regresses.
+Portable token artifacts are regenerated only from the restricted fixture through the pinned adapter. Run `bun run build`; never broaden the allowed token subset to accommodate an adapter false-success, and revert the adapter with both generated files if the pin regresses.
 
 Component-state evidence matrices are regenerated only from the records declared by each `profile.json`. Run `node scripts/generate-consumer-reference-evidence.mjs --json`; never hand-edit any of the six matrices or substitute undeclared record paths.
 
@@ -185,7 +185,7 @@ node scripts/validate-catalog.mjs --json
 For portable token source, adapter, or generated artifact changes, run:
 
 ```sh
-npm ci --ignore-scripts --no-audit --no-fund
+bun install --frozen-lockfile --ignore-scripts
 node scripts/build-reference-artifacts.mjs --adapter style-dictionary --fail-on-warning --json
 node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json
 node scripts/test-reference-adapters.mjs --json
@@ -195,7 +195,7 @@ git diff --exit-code -- consumer-reference/generated
 For the proposed Chromium sentinel, also run:
 
 ```sh
-npm run test:sentinel
+bun run test:sentinel
 node scripts/test-consumer-reference-sentinel.mjs
 node scripts/validate-baseline-manifest.mjs --json
 node scripts/test-validate-baseline-manifest.mjs --json
@@ -212,13 +212,13 @@ mkdir -p "$STATE_EVIDENCE_ROOT"
 node scripts/create-component-state-session.mjs --output "$STATE_EVIDENCE_ROOT/capture-session.json" --json
 STATE_SESSION_RECEIPT="$STATE_EVIDENCE_ROOT/capture-session.json" \
   STATE_ARTIFACT_DIR="$STATE_EVIDENCE_ROOT/runtime" \
-  npm run test:component-state:runtime -- --reporter=line
+  bun run test:component-state:runtime -- --reporter=line
 node scripts/finalize-component-state-evidence.mjs --artifact-root "$STATE_EVIDENCE_ROOT" --json
 node scripts/validate-component-state.mjs \
   --artifact-root "$STATE_EVIDENCE_ROOT" \
   --runtime-manifest "$STATE_EVIDENCE_ROOT/runtime-manifest.json" \
   --json
-npm run test:component-state:runtime-negative
+bun run test:component-state:runtime-negative
 ```
 
 For shared promotion governance, also run:

@@ -1,6 +1,6 @@
 {
   "name": "stylegallery",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A governed gallery of portable interface knowledge with knowledge CLIs, website compilation, and MCP servers.",
   "type": "module",
   "license": "MIT",
@@ -23,6 +23,7 @@
   "engines": {
     "node": ">=22"
   },
+  "packageManager": "bun@1.3.14",
   "files": [
     "AGENTS.md",
     "CATALOG.md",

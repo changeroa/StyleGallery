@@ -37,7 +37,7 @@ Then open `http://127.0.0.1:4173`.
 For the Chrome CDP QA matrix, launch Google Chrome with a remote-debugging port and run:
 
 ```sh
-npm run test:homepage:cdp
+bun run test:homepage:cdp
 ```
 
 ## Implementation handoff

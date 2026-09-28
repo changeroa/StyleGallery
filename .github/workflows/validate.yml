@@ -30,8 +30,13 @@ jobs:
         with:
           node-version: 22
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.3.14
+
       - name: Install pinned validation dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Syntax and whitespace
         run: |
@@ -76,9 +81,9 @@ jobs:
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/promotion-rfc.schema.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/policies/shared-experimental.json"))'
           node -e 'JSON.parse(require("fs").readFileSync("consumer-reference/schema/visual-evidence.schema.json"))'
-          npm run test:source-inventory
-          npm run test:json-schema-formats
-          npm run test:consumer-conformance:matrix
+          bun run test:source-inventory
+          bun run test:json-schema-formats
+          bun run test:consumer-conformance:matrix
           git diff --check
 
       - name: Generated artifacts are current
@@ -132,7 +137,7 @@ jobs:
         run: node scripts/test-json-cli-output.mjs
 
       - name: Agent-native operation and protocol contracts
-        run: npm run test:agent-native
+        run: bun run test:agent-native
 
       - name: Source-bound material v2 contracts
         run: |
@@ -213,16 +218,24 @@ jobs:
         with:
           node-version: 22.18.0
 
+      - name: Install unzip for Bun setup
+        run: apt-get update && apt-get install -y --no-install-recommends unzip
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.3.14
+
       - name: Install exact conformance dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Verify default inventory and cleanup boundary
         run: |
-          npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line --list
+          bunx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line --list
           node scripts/test-consumer-conformance-sentinel.mjs --json --case ci-cleanup-symlink
 
       - name: Execute authenticated full and candidate matrix comparison
-        run: npm run test:consumer-conformance:matrix:execute
+        run: bun run test:consumer-conformance:matrix:execute
 
   consumer-page-evidence:
     name: Consumer page-evidence raster capture (nonblocking)
@@ -252,8 +265,16 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install unzip for Bun setup
+        run: apt-get update && apt-get install -y --no-install-recommends unzip
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.3.14
+
       - name: Install exact capture dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Prepare synthetic consumer sources
         run: >-
@@ -281,7 +302,7 @@ jobs:
       - name: Capture the selected consumer conformance raster
         run: |
           cd "$PAGE_EVIDENCE_CONSUMER_ROOT"
-          CONSUMER_CONFORMANCE_CAPTURE_DIR= npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line --grep "state-w1024-focus"
+          CONSUMER_CONFORMANCE_CAPTURE_DIR= bunx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line --grep "state-w1024-focus"
 
       - name: Finalize the page-evidence session
         run: |
@@ -342,11 +363,19 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install unzip for Bun setup
+        run: apt-get update && apt-get install -y --no-install-recommends unzip
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.3.14
+
       - name: Install exact sentinel dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Run ordinary immutable Chromium sentinel
-        run: npm run test:sentinel -- --reporter=line
+        run: bun run test:sentinel -- --reporter=line
 
       - name: Run Chromium sentinel semantic negative controls
         run: node scripts/test-consumer-reference-sentinel.mjs
@@ -373,8 +402,16 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install unzip for Bun setup
+        run: apt-get update && apt-get install -y --no-install-recommends unzip
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.3.14
+
       - name: Install exact component-state dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Run component-state artifact and session adversarial harness
         run: node scripts/test-validate-component-state-artifacts.mjs
@@ -388,7 +425,7 @@ jobs:
             --json
           STATE_ARTIFACT_DIR="$STATE_EVIDENCE_ROOT/runtime" \
             STATE_SESSION_RECEIPT="$STATE_EVIDENCE_ROOT/capture-session.json" \
-            npm run test:component-state:runtime -- --reporter=line
+            bun run test:component-state:runtime -- --reporter=line
           node scripts/finalize-component-state-evidence.mjs \
             --artifact-root "$STATE_EVIDENCE_ROOT" \
             --output "$STATE_EVIDENCE_ROOT/runtime-manifest.json" \
@@ -399,7 +436,7 @@ jobs:
             --json
 
       - name: Run component-state runtime negative controls
-        run: npm run test:component-state:runtime-negative
+        run: bun run test:component-state:runtime-negative
 
       - name: Upload claim-scoped component-state evidence
         if: always()
@@ -429,8 +466,16 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install unzip for Bun setup
+        run: apt-get update && apt-get install -y --no-install-recommends unzip
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.3.14
+
       - name: Install exact calibration dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Capture 20 unique raw calibration runs
         shell: bash
@@ -446,7 +491,7 @@ jobs:
             run_dir="calibration-artifacts/run-$(printf '%02d' "$run")"
             mkdir -p "$run_dir"
             SENTINEL_ARTIFACT_DIR="$run_dir" SENTINEL_CALIBRATION_RUN="$run" \
-              npx playwright test tests/consumer-reference-sentinels.spec.mjs \
+              bunx playwright test tests/consumer-reference-sentinels.spec.mjs \
                 --project=chromium --grep "canonical consumer reference" --reporter=json \
                 > "$run_dir/playwright.json" 2> "$run_dir/playwright.stderr"
             test_exit=$?

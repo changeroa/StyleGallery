@@ -102,7 +102,7 @@ Example MCP client configuration:
 }
 ```
 
-The main MCP server exposes governed read operations and compiler execution tools. Configure `SG_COMPILER_ROOT` in its environment to use the compiler. Execution tools declare file and network effects; the knowledge registry remains a read-only API. The frozen read-only server remains available as `npm run sg:mcp:v1`.
+The main MCP server exposes governed read operations and compiler execution tools. Configure `SG_COMPILER_ROOT` in its environment to use the compiler. Execution tools declare file and network effects; the knowledge registry remains a read-only API. The frozen read-only server remains available as `bun run sg:mcp:v1`.
 
 The separate Material v2 MCP server is available as `stylegallery-material-mcp`. Attach it for Markdown retrieval and authoring work; the main server covers governed knowledge reads and compiler execution.
 

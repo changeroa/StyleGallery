@@ -123,7 +123,7 @@
             "additionalProperties": false,
             "required": ["path", "sha256", "byte_length"],
             "properties": {
-              "path": { "type": "string", "pattern": "^(?:(?:consumer-reference|profiles|scripts|tests)/[^\\\\?#]+|package(?:-lock)?\\.json|playwright\\.config\\.mjs)$" },
+              "path": { "type": "string", "pattern": "^(?:(?:consumer-reference|profiles|scripts|tests)/[^\\\\?#]+|package(?:-lock)?\\.json|bun\\.lock|playwright\\.config\\.mjs)$" },
               "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
               "byte_length": { "type": "integer", "minimum": 1 }
             }

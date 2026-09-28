@@ -12,13 +12,13 @@ Use `sg compile`, `sg timeline`, and the other commands below directly. The `sty
 
 ## Setup
 
-Install StyleGallery with Node.js 22 or newer using `npm install --global stylegallery`. For an unreleased StyleGallery checkout, run commands from that checkout as `npm run sg -- <command>` instead. If another program already owns the `sg` command, use the equivalent `stylegallery` executable or the npm script. The compiler is a [separate private repository](https://github.com/changeroa/site-compiler); an account with access must install it once:
+Install StyleGallery with Node.js 22 or newer using `npm install --global stylegallery`. For an unreleased StyleGallery checkout, run commands from that checkout as `bun run sg -- <command>` instead. If another program already owns the `sg` command, use the equivalent `stylegallery` executable or the npm script. The compiler is a [separate private repository](https://github.com/changeroa/site-compiler); an account with access must install it once:
 
 ```sh
 gh repo clone changeroa/site-compiler /absolute/path/to/site-compiler
 cd /absolute/path/to/site-compiler
-npm ci --ignore-scripts --no-audit --no-fund
-npx playwright install chromium
+bun install --frozen-lockfile --ignore-scripts
+bunx playwright install chromium
 export SG_COMPILER_ROOT=/absolute/path/to/site-compiler
 sg discover --format json
 ```
@@ -90,13 +90,13 @@ Use `sg discover` or `sg ops` for the full input schemas. CLI options use hyphen
 
 Call `compile` with `{"url":"https://example.com","out":"/absolute/path/to/captures/example"}` or `gate` with `{"in":"/absolute/path/to/captures/example"}`. Prefer absolute paths because the MCP client's launch directory may differ from your terminal. Long captures require a client request timeout longer than the capture; the runner's timeout does not change client settings. `workflow` and the knowledge tools are read-only; execution tools are marked as potentially destructive and non-idempotent because existing artifacts may be replaced.
 
-From the StyleGallery checkout, use `npm run sg -- compile ...` and `npm run sg:mcp` for local development. To connect an MCP client to that unreleased checkout, use `"command": "node"` and `"args": ["/absolute/path/to/StyleGallery/scripts/sg-server.mjs"]` with the same environment settings. The frozen six-tool v1 server is `npm run sg:mcp:v1`, and its CLI is `npm run sg:v1 -- ...`.
+From the StyleGallery checkout, use `bun run sg -- compile ...` and `bun run sg:mcp` for local development. To connect an MCP client to that unreleased checkout, use `"command": "node"` and `"args": ["/absolute/path/to/StyleGallery/scripts/sg-server.mjs"]` with the same environment settings. The frozen six-tool v1 server is `bun run sg:mcp:v1`, and its CLI is `bun run sg:v1 -- ...`.
 
 ## Contracts And Verification
 
 The adapter follows the handoff fields in [Component Contract](../../design-engineering/component-contract.md): explicit inputs, outputs, process ownership, cancellation, and observable failure. Motion transcription remains governed by [Observed Choreography](../../motion/observed-choreography.md). These are routes into the existing domains; the transport creates no new domain or reusable Layout styling.
 
-From the StyleGallery checkout, run `npm run test:compiler` for subprocess, argument, cancellation, JSON, and MCP transport checks. With a compiler installation and Chromium available, run `SG_COMPILER_INTEGRATION_ROOT=/absolute/path/to/site-compiler npm run test:compiler` to also capture a local fixture with the real upstream scripts. Model transcription, model builds, and product release packaging are separate upstream operations and are not exercised by that smoke test.
+From the StyleGallery checkout, run `bun run test:compiler` for subprocess, argument, cancellation, JSON, and MCP transport checks. With a compiler installation and Chromium available, run `SG_COMPILER_INTEGRATION_ROOT=/absolute/path/to/site-compiler bun run test:compiler` to also capture a local fixture with the real upstream scripts. Model transcription, model builds, and product release packaging are separate upstream operations and are not exercised by that smoke test.
 
 Implementation handoff:
 

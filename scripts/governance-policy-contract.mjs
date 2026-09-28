@@ -46,5 +46,6 @@ export const requiredCodeowners = [
 export const immutableActionPins = [
   "uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4",
   "uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4",
+  "uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0",
   "uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4",
 ];

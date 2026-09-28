@@ -48,7 +48,7 @@ Use this route when the task is to make a finished, expressive page (a landing p
 
 - Read only [Showcase](showcase/README.md), one [Expression](expression/index.md) direction, and the Expression or [Motion techniques](motion/techniques/scroll-choreography.md) the page needs. Skip governance, lifecycle, provenance, and consumer-reference documents: a showcase work creates no governed record.
 - Build in `showcase/<slug>/` with an `index.html` and a `brief.md`. The Layout CSS Authoring, CSS Scope, Class Naming, and Token rules do not apply there. Any property, selector, library, font, or WebGL is allowed.
-- Preview with `npm run showcase:serve`; over SSH, it prints the `ssh -L` command to run on the local machine. Add the work to the hub, `showcase/index.html`, creating the hub with the first work.
+- Preview with `bun run showcase:serve`; over SSH, it prints the `ssh -L` command to run on the local machine. Add the work to the hub, `showcase/index.html`, creating the hub with the first work.
 - Layout remains the floor, checked by outcome: run `node scripts/check-showcase.mjs --work <slug>` and fix every failure (errors, overflow, focus, reduced motion, contrast, honest actions, hash navigation, short viewports, offscreen loops, offline and no-script reading; see [Showcase QA](showcase/QA.md)). Then review the settled screenshots in `.tmp/showcase/<slug>/` for taste, which the check does not judge.
 - A brand study of a real brand must follow [Brand Studies](expression/brand-studies.md): name the subject, mark the page Unofficial, set `noindex`, and use no copied logos or verbatim copy.
 - Handoff: `consumer_reference: not_applicable` because a showcase work selects no consumer reference record.

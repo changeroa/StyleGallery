@@ -31,7 +31,7 @@ Start with the selected pattern's invariant. Use controlled promises or an injec
 
 ### Executable Local Coverage
 
-From a repository checkout, `npm run test:state-management` extracts and executes the standalone `js` block from each of the 12 pattern pages in an isolated Node process. The examples assert model outcomes for ownership, projections, selection, drafts, save snapshots, navigation decisions, stale completions, duplicate effects, optimistic recovery, URL parsing, identity generations, and restore validation.
+From a repository checkout, `bun run test:state-management` extracts and executes the standalone `js` block from each of the 12 pattern pages in an isolated Node process. The examples assert model outcomes for ownership, projections, selection, drafts, save snapshots, navigation decisions, stale completions, duplicate effects, optimistic recovery, URL parsing, identity generations, and restore validation.
 
 The four recipes declare integration acceptance sequences; they are not runnable browser fixtures. Existing [Interaction Lab](../../examples/domain-interactions/README.md) is a separate prototype with its own evidence scope. New recipe acceptance remains unexecuted until adapted to a consumer.
 
