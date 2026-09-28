@@ -35,6 +35,16 @@ These workflows and worked cases are usable experimental guidance. Expected-resu
 - [Interruption And Retargeting](interruption-and-retargeting.md). Resolve repeated input, cancellation, and stale completion callbacks.
 - [Motion Rendering And Performance](rendering-and-performance.md). Choose native mechanisms and diagnose measured delivery failures.
 
+## Visual Reference: Motion Prompt
+
+[Motion Prompt by @ssaengcho](https://motion-prompt-ssaengcho.soldaeng-guri.chatgpt.site/#top) is an external Korean motion dictionary for comparing effects visually and describing the intended movement. Its interface lists 36 effects and five combinations across entrance/exit, emphasis, sequencing, space, scene transitions, shape/focus, timing, and text.
+
+Use it to select an observable effect, then record the actual product behavior in the [Motion Brief](motion-brief.md): trigger, moving property, start/end state, interruption, reduced-motion alternative, and completion feedback. For example, distinguish moving an element from moving imagery inside a stationary frame, and distinguish changing opacity from revealing through a moving mask.
+
+The dictionary's example durations and prompts are reference choices, not StyleGallery defaults or measured performance guarantees. Its naming is not a replacement for the [Motion Vocabulary](vocabulary.md). This link is a discovery reference, not a bundled implementation.
+
+Source review: 2026-09-28. The public page and effect definitions were inspected; no source code, prompt collection, or artwork is reproduced here. Cross-browser behavior, accessibility, and every rendered combination have not been verified.
+
 ## Domain Contract
 
 See [StyleGallery Domains](../DOMAINS.md) for lifecycle, provenance, page membership, and staleness rules.
