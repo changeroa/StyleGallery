@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pitch - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Pitch's violet presentation page: a giant hero over drifting slides, a prompt that drafts a deck, a quote wall, a toolkit bento, and a lime-accented dark finale.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232a1466'/%3E%3Crect x='9' y='9' width='14' height='14' rx='3' fill='%23c9f26a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --night: #1d0f4f; --violet: #6b3cf0; --lav: #c6b3ff; --lav-soft: #f3eeff; --lime: #c9f26a; --ink: #150b35; --grey: #56506e; --sans: "Plus Jakarta Sans", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace; --sg-header: 110px; --sg-focus: #6b3cf0; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 16px/1.6 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1224px; padding-inline: 24px; }
+  .top { position: sticky; top: 0; z-index: 30; }
+  .note { background: var(--lav); color: var(--ink); font-size: 12px; padding: 7px 16px; text-align: center; }
+  .nav { background: var(--night); color: #fff; }
+  .nav .w { align-items: center; display: flex; gap: 24px; block-size: 60px; }
+  .logo { color: #fff; font-size: 20px; font-weight: 800; letter-spacing: -0.03em; text-decoration: none; }
+  .nav nav { display: flex; gap: 20px; margin-inline: auto; }
+  .nav nav a { color: #e4dcff; font-size: 14px; text-decoration: none; }
+  .nav nav a:hover { color: #fff; }
+  .pill { border: 0; border-radius: 999px; font: 700 13px var(--sans); padding: 8px 14px; }
+  .pill.w1 { background: #fff; color: var(--ink); }
+  .pill.l { background: var(--lime); color: var(--ink); }
+  .pill.n { background: var(--night); color: #fff; }
+  .pill.w1::after, .pill.n::after { content: " →"; }
+  .hr { display: flex; gap: 8px; }
+  @media (max-width: 860px) { .nav nav { display: none; } .hr { margin-inline-start: auto; } }
+
+  /* Hero: violet night with template slides drifting behind a giant two-line headline. */
+  .hero { background: linear-gradient(180deg, #2a1470, #5a2fd0 70%, #7a4df0); color: #fff; overflow: clip; position: relative; text-align: center; }
+  .drift { inset: 0; position: absolute; }
+  .drift span { background: linear-gradient(135deg, var(--a), var(--b)); border-radius: 10px; block-size: 130px; color: rgb(255 255 255 / .6); display: grid; filter: blur(1.5px); font: 800 16px var(--sans); inline-size: 210px; opacity: .45; padding: 14px; position: absolute; text-transform: uppercase; animation: float 16s ease-in-out infinite alternate; }
+  @keyframes float { to { transform: translateY(-26px) rotate(-2deg); } }
+  .hero .w { padding-block: 90px 110px; position: relative; }
+  .hero h1 { font-size: clamp(3rem, 9vw, 8rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.95; text-shadow: 0 10px 60px rgb(30 10 80 / .5); }
+  .prompt { background: #fff; border: 3px solid var(--lav); border-radius: 18px; box-shadow: 0 30px 60px -20px rgb(20 0 80 / .6); color: var(--ink); margin: 44px auto 0; max-inline-size: 620px; padding: 16px 18px; text-align: start; }
+  .prompt textarea { border: 0; font: inherit; inline-size: 100%; min-block-size: 56px; outline: none; resize: none; }
+  .prompt .row { align-items: center; display: flex; gap: 10px; justify-content: space-between; }
+  .prompt .row span { color: var(--grey); font-size: 13px; font-weight: 700; }
+  .gen { background: var(--violet); border: 0; border-radius: 10px; color: #fff; font: 700 13px var(--sans); padding: 8px 14px; }
+  .deck { display: grid; gap: 8px; grid-template-columns: repeat(4, 1fr); margin-block-start: 14px; }
+  .deck div { aspect-ratio: 16/9; background: linear-gradient(135deg, #3a1a9a, #8a5cff); border-radius: 6px; color: #fff; font-size: 10px; font-weight: 700; padding: 6px; }
+  .hero small { color: #eee8ff; display: block; font-size: 14px; margin-block-start: 18px; }
+  .logos { background: rgb(0 0 0 / .18); color: #eee8ff; display: flex; flex-wrap: wrap; font-weight: 800; gap: 12px 44px; justify-content: center; padding: 20px; position: relative; }
+
+  .ws { display: grid; gap: 50px; grid-template-columns: 0.9fr 1.1fr; padding-block: 110px 40px; }
+  .ws h2 { font-size: clamp(1.8rem, 3.2vw, 2.7rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.12; }
+  .ws > div > p { color: var(--grey); margin-block: 12px 30px; }
+  .feat { background: none; border: 0; border-inline-start: 3px solid #e6e0f5; color: var(--ink); display: block; font: inherit; padding: 14px 18px; text-align: start; inline-size: 100%; }
+  .feat b { display: block; font-size: 18px; font-weight: 800; }
+  .feat span { color: var(--grey); font-size: 14px; }
+  .feat[aria-pressed="true"] { border-color: var(--violet); }
+  .feat[aria-pressed="true"] b { color: var(--violet); }
+  .stage { align-self: start; background: linear-gradient(160deg, #e3d7ff, #b79bff); border-radius: 28px; padding: 34px; position: sticky; top: 130px; }
+  .editor { background: #fff; border-radius: 12px; box-shadow: 0 30px 60px -30px rgb(40 10 120 / .5); display: grid; grid-template-columns: 70px 1fr; min-block-size: 300px; overflow: hidden; }
+  .editor aside { background: #f4f0ff; display: grid; gap: 6px; align-content: start; padding: 8px; }
+  .editor aside i { aspect-ratio: 16/9; background: #d9ccff; border-radius: 4px; }
+  .slide { background: var(--sbg); color: #fff; display: grid; margin: 14px; border-radius: 8px; padding: 24px; place-content: center; text-align: center; transition: background .6s var(--ease); }
+  .slide b { font-size: clamp(1.2rem, 2.4vw, 2rem); font-weight: 800; letter-spacing: -0.03em; }
+  .slide small { opacity: .85; }
+  @media (max-width: 900px) { .ws { grid-template-columns: 1fr; } .stage { position: static; } }
+
+  .how { background: linear-gradient(180deg, #fff, var(--lav-soft)); padding-block: 110px 80px; overflow: clip; }
+  .lab { color: var(--violet); font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+  .how h2, .tool h2 { font-size: clamp(1.8rem, 3.2vw, 2.7rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.12; margin-block: 8px 12px; }
+  .rail { display: flex; gap: 20px; margin-block-start: 40px; overflow-x: auto; padding-block-end: 12px; scroll-snap-type: x mandatory; }
+  .step { background: #fff; border-radius: 28px; box-shadow: 0 20px 50px -30px rgb(60 20 160 / .4); flex: 0 0 min(760px, 86%); padding: 30px; scroll-snap-align: start; }
+  .step h3 { align-items: baseline; color: var(--violet); display: flex; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; gap: 12px; }
+  .step h3 small { color: var(--grey); font: 500 14px var(--mono); }
+  .step p { color: var(--grey); margin-block-start: 8px; }
+  .step .vis { background: linear-gradient(135deg, var(--a), var(--b)); border-radius: 16px; color: #fff; font-size: clamp(1.4rem, 3vw, 2.6rem); font-weight: 800; margin-block-start: 20px; min-block-size: 220px; padding: 24px; text-transform: uppercase; }
+
+  .wall { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); padding-block: 90px; }
+  .q { border-radius: 20px; color: #fff; font-size: 15px; font-weight: 700; line-height: 1.4; min-block-size: 240px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+  .q small { font-size: 12px; font-weight: 500; }
+  .q.v { background: var(--violet); } .q.l { background: var(--lime); color: var(--ink); } .q.d { background: #3a2a6a; }
+  .q.c { align-items: center; background: none; color: var(--violet); font-size: 26px; font-weight: 800; justify-content: center; text-align: center; }
+  @media (max-width: 900px) { .wall { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .wall { grid-template-columns: 1fr; } }
+
+  .tool { padding-block: 40px 110px; text-align: center; }
+  .tool > p { color: var(--grey); margin-inline: auto; max-inline-size: 60ch; }
+  .bento { display: grid; gap: 20px; grid-template-columns: 1.4fr 1fr; margin-block-start: 40px; text-align: start; }
+  .bc { background: var(--lav-soft); border-radius: 26px; min-block-size: 240px; padding: 24px; }
+  .bc.dk { background: var(--night); color: #fff; }
+  .bc h3 { font-size: 18px; font-weight: 800; }
+  .bc p { color: var(--grey); font-size: 14px; }
+  .bc.dk p { color: #d8d0f5; }
+  .views { display: flex; align-items: flex-end; gap: 6px; block-size: 90px; margin-block-start: 16px; }
+  .views i { background: var(--lime); border-radius: 4px 4px 0 0; flex: 1; block-size: var(--h); }
+  @media (max-width: 760px) { .bento { grid-template-columns: 1fr; } }
+
+  .dark { background: var(--night); color: #fff; }
+  .sol { padding-block: 110px 80px; text-align: center; }
+  .sol h2 { color: var(--lav); font-size: clamp(1.8rem, 3.4vw, 2.8rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.15; }
+  .dark .lab { color: #cfc2ff; }
+  .stabs { border-block-end: 1px solid rgb(255 255 255 / .15); display: flex; flex-wrap: wrap; gap: 4px 20px; justify-content: center; margin-block: 34px 30px; }
+  .stabs button { background: none; border: 0; border-block-end: 2px solid transparent; color: #b8acdf; font: 600 14px var(--sans); padding: 8px 2px; }
+  .stabs button[aria-pressed="true"] { border-color: #fff; color: #fff; }
+  .spanel { align-items: center; display: grid; gap: 40px; grid-template-columns: 1fr 1fr; text-align: start; }
+  .spanel .img { aspect-ratio: 1.4; background: linear-gradient(135deg, var(--a), var(--b)); border-radius: 20px; }
+  .spanel h3 { font-size: 22px; font-weight: 800; }
+  .spanel p { color: #d8d0f5; }
+  @media (max-width: 760px) { .spanel { grid-template-columns: 1fr; } }
+  .tpl { display: grid; gap: 40px; grid-template-columns: 1fr 1fr; padding-block: 60px; }
+  .tpl h2 { color: var(--lav); font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; letter-spacing: -0.04em; }
+  .tpl h2 sup { font-size: .35em; }
+  .tpl p { color: #d8d0f5; margin-block: 10px 20px; max-inline-size: 40ch; }
+  .cats { list-style: none; margin: 0; padding: 0; }
+  .cats button { background: none; border: 0; color: #6f63a0; font: 500 clamp(1.4rem, 3vw, 2.4rem)/1.2 var(--sans); padding: 0; text-transform: uppercase; transition: color .3s; }
+  .cats button[aria-pressed="true"], .cats button:hover { color: #fff; }
+  @media (max-width: 760px) { .tpl { grid-template-columns: 1fr; } }
+  .faq { margin-inline: auto; max-inline-size: 620px; padding-block: 60px 110px; text-align: center; }
+  .faq h2 { color: var(--lav); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-block: 6px 26px; }
+  .faq details { background: #3a2a78; border: 1px solid #5a48a8; border-radius: 16px; margin-block-end: 12px; text-align: start; }
+  .faq summary { cursor: pointer; font-weight: 700; list-style: none; padding: 16px 20px; display: flex; justify-content: space-between; gap: 12px; }
+  .faq summary::after { content: "+"; font-size: 20px; }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details p { color: #e0d8ff; padding: 0 20px 16px; }
+  .end { overflow: clip; padding-block-start: 40px; }
+  .big { color: #3a2a88; font-size: clamp(4rem, 14vw, 13rem); font-weight: 800; letter-spacing: -0.06em; line-height: .8; text-align: center; }
+  .foot { background: #fff; border-radius: 26px 26px 0 0; color: var(--ink); display: grid; gap: 24px; grid-template-columns: 2fr 1fr; margin-block-start: -30px; padding: 34px; position: relative; }
+  .foot a { color: var(--violet); }
+  .foot .cta { background: var(--night); border-radius: 20px; color: #fff; padding: 22px; }
+  .foot .cta b { display: block; font-size: 22px; font-weight: 800; line-height: 1.2; margin-block-end: 14px; }
+  @media (max-width: 760px) { .foot { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="top">
+  <p class="note">Study note: an unofficial design study, not a product announcement.</p>
+  <div class="nav"><div class="w">
+    <a class="logo" href="#top">Pitch</a>
+    <nav aria-label="Sections"><a href="#workspace">Workspace</a><a href="#how">How to</a><a href="#toolkit">Toolkit</a><a href="#templates">Templates</a><a href="#faq">FAQ</a></nav>
+    <div class="hr"><button class="pill w1" type="button" data-demo="Log in is not available in this unofficial study.">Log in</button><button class="pill l" type="button" data-demo="Sign up is a demo in this unofficial study.">Sign up</button></div>
+  </div></div>
+</header>
+<main id="main">
+  <section class="hero" id="top">
+    <div class="drift" aria-hidden="true" data-ambient>
+      <span style="--a:#3a1a9a;--b:#6a3ce0;inset:8% auto auto 3%">Quarterly brief</span>
+      <span style="--a:#5a2fd0;--b:#c65cff;inset:14% 4% auto auto;animation-delay:-4s">Studio review</span>
+      <span style="--a:#2a1470;--b:#8a5cff;inset:auto auto 18% 6%;animation-delay:-8s">Launch plan</span>
+      <span style="--a:#6a3ce0;--b:#ff7ac6;inset:auto 5% 22% auto;animation-delay:-2s">Partner deck</span>
+    </div>
+    <div class="w">
+      <h1 data-split>Decks people<br>remember.</h1>
+      <form class="prompt" data-prompt onsubmit="return false">
+        <label class="sg-visually-hidden" for="ask">Describe the presentation you need</label>
+        <textarea id="ask" placeholder="Draft a five-slide update for a small design studio"></textarea>
+        <div class="row"><span>✦ Prompts</span><button class="gen" type="submit">Draft slides ↑</button></div>
+        <div class="deck" aria-live="polite" data-deck></div>
+      </form>
+      <small data-reveal data-delay="300">From a sentence to a finished deck, made with your team (study copy).</small>
+    </div>
+    <div class="logos" aria-label="Fictional customer names"><span>NORTHWIND</span><span>Harlow</span><span>quanta</span><span>MERIDIAN</span><span>kite&amp;co</span><span>ARCLINE</span></div>
+  </section>
+
+  <section class="w ws" id="workspace">
+    <div>
+      <h2 data-reveal>Where the team<br>builds the deck together</h2>
+      <p>First slide to final send, in one shared place.</p>
+      <div data-feats>
+        <button class="feat" type="button" aria-pressed="true"><b>Slides that look finished</b><span>Video, motion, and custom fonts without a designer on call.</span></button>
+        <button class="feat" type="button" aria-pressed="false"><b>Always on brand</b><span>Locked colors and layouts keep every deck consistent.</span></button>
+        <button class="feat" type="button" aria-pressed="false"><b>Know who watched</b><span>See which slides held attention after you send a link.</span></button>
+      </div>
+    </div>
+    <div class="stage" aria-hidden="true"><div class="editor"><aside><i></i><i></i><i></i><i></i></aside><div class="slide" data-slide style="--sbg:linear-gradient(135deg,#3a1a9a,#c65cff)"><b>Studio update</b><small>Q4 · five slides</small></div></div></div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="w">
+      <p class="lab">How to</p>
+      <h2 data-reveal>From rough draft<br>to signed deal</h2>
+      <p style="color:var(--grey);max-inline-size:52ch">Good decks are rarely made alone. Drag the rail to follow one through its life.</p>
+      <div class="rail" tabindex="0" aria-label="Steps, scroll sideways">
+        <article class="step"><h3><small>(01)</small>Draft</h3><p>Start from a prompt or a template.</p><div class="vis" style="--a:#6a3ce0;--b:#ff7ac6" aria-hidden="true">Creative brief</div></article>
+        <article class="step"><h3><small>(02)</small>Collaborate</h3><p>Comment, assign slides, and edit together.</p><div class="vis" style="--a:#1d0f4f;--b:#6b3cf0" aria-hidden="true">Team review</div></article>
+        <article class="step"><h3><small>(03)</small>Share</h3><p>Send a link and watch engagement come in.</p><div class="vis" style="--a:#5a2fd0;--b:#c9f26a" aria-hidden="true">Sent to buyer</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="w wall" aria-label="What teams say (fictional)">
+    <figure class="q v">"We stopped fighting slide layouts and started talking about the story."<small>Fictional · marketing lead</small></figure>
+    <figure class="q l">"Our pitch looked like we had a design team. We don't."<small>Fictional · founder</small></figure>
+    <figure class="q d">"Knowing who opened the deck changed how we follow up."<small>Fictional · sales director</small></figure>
+    <figure class="q c">Loved by teams everywhere<small style="color:var(--grey)">(fictional)</small></figure>
+    <figure class="q d">"Brand templates saved every review cycle a day."<small>Fictional · head of brand</small></figure>
+    <figure class="q v">"Five people edited one deck the night before. Nothing broke."<small>Fictional · product manager</small></figure>
+    <figure class="q l">"The AI draft was a real first draft, not a placeholder."<small>Fictional · consultant</small></figure>
+    <figure class="q v">"We moved every board update over in a week."<small>Fictional · COO</small></figure>
+  </section>
+
+  <section class="w tool" id="toolkit">
+    <p class="lab">Toolkit</p>
+    <h2 data-reveal>Everything a deck needs</h2>
+    <p>Design basics and AI help in the same editor.</p>
+    <div class="bento">
+      <article class="bc"><h3>Deck agent</h3><p>Generate on-brand slides and rewrite for each audience.</p></article>
+      <article class="bc"><h3>Slide editor</h3><p>Fine control over layout, type, and motion.</p></article>
+      <article class="bc dk"><h3>Viewer analytics</h3><p>Which slides people lingered on, per link.</p><div class="views" aria-hidden="true" data-views></div></article>
+      <article class="bc"><h3>Deal rooms</h3><p>Share decks and files together in one branded page.</p></article>
+    </div>
+  </section>
+
+  <div class="dark">
+    <section class="w sol" id="solutions">
+      <p class="lab">Solutions</p>
+      <h2 data-reveal>Made for people<br>who present for a living</h2>
+      <div class="stabs" role="group" aria-label="Team type" data-stabs><button type="button" aria-pressed="true">Software teams</button><button type="button" aria-pressed="false">Agencies</button><button type="button" aria-pressed="false">Brands</button><button type="button" aria-pressed="false">Freelancers</button></div>
+      <div class="spanel"><div class="img" data-simg style="--a:#6a3ce0;--b:#ff7ac6" aria-hidden="true"></div><div><h3 data-sh>Speed up the sales cycle</h3><p data-sp>Build branded decks fast, share rooms with buyers, and see engagement before the next call.</p></div></div>
+    </section>
+    <section class="w tpl" id="templates">
+      <div><h2 data-reveal>Templates<sup>(150+)</sup></h2><p>Start from a designer-made layout or bring your old deck in.</p><button class="pill w1" type="button" data-demo="The template gallery is illustrative in this unofficial study.">Browse templates</button></div>
+      <ul class="cats" role="list" data-cats><li><button type="button" aria-pressed="false">Pitch deck</button></li><li><button type="button" aria-pressed="false">Marketing</button></li><li><button type="button" aria-pressed="true">Design</button></li><li><button type="button" aria-pressed="false">Startups</button></li><li><button type="button" aria-pressed="false">Sales</button></li></ul>
+    </section>
+    <section class="faq w" id="faq">
+      <p class="lab">FAQ</p>
+      <h2 data-reveal>Questions before you switch</h2>
+      <details><summary>Is there a free plan?</summary><p>This study imagines a free tier for small teams.</p></details>
+      <details><summary>Can I import an existing deck?</summary><p>The study assumes common slide formats import directly.</p></details>
+      <details><summary>Can someone build my deck for me?</summary><p>The study imagines a directory of designers for hire.</p></details>
+    </section>
+    <div class="end">
+      <p class="big" aria-hidden="true">Let's present</p>
+      <div class="w"><div class="foot"><div><strong>Unofficial</strong> brand study of Pitch by StyleGallery. Not affiliated with Pitch. Copy, customers, and quotes are fictional; no logos or photos are used. <a href="../">All studies</a></div><div class="cta"><b>One workspace for every deck</b><button class="pill l" type="button" data-demo="Sign up is a demo in this unofficial study.">Sign up</button></div></div></div>
+    </div>
+  </div>
+</main>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Pitch by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Prompt drafts four slide thumbnails from the text.
+  const deck = document.querySelector("[data-deck]"), ask = document.querySelector("#ask");
+  document.querySelector("[data-prompt]").addEventListener("submit", () => {
+    const topic = (ask.value.trim() || "Studio update").slice(0, 28);
+    const titles = [topic, "Where we are", "What changes", "Next steps"];
+    deck.innerHTML = titles.map((t) => `<div>${t}</div>`).join("");
+    if (!reduced) deck.querySelectorAll("div").forEach((d, i) => d.animate([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }], { duration: 400, delay: i * 120, fill: "backwards" }));
+  });
+  // Feature list swaps the slide on the stage.
+  const slides = [["Studio update", "Q4 · five slides", "linear-gradient(135deg,#3a1a9a,#c65cff)"], ["Brand kit locked", "Colors · type · layouts", "linear-gradient(135deg,#1d0f4f,#6b3cf0)"], ["Slide 3 held 42s", "Viewer analytics", "linear-gradient(135deg,#2a5a3a,#9bd46a)"]];
+  const feats = [...document.querySelectorAll("[data-feats] .feat")], slide = document.querySelector("[data-slide]");
+  feats.forEach((f, i) => f.addEventListener("click", () => { feats.forEach((o) => o.setAttribute("aria-pressed", String(o === f))); slide.innerHTML = `<b>${slides[i][0]}</b><small>${slides[i][1]}</small>`; slide.style.setProperty("--sbg", slides[i][2]); }));
+  document.querySelector("[data-views]").innerHTML = [30, 55, 90, 70, 40, 62, 85].map((h) => `<i style="--h:${h}%"></i>`).join("");
+  const sol = [["Speed up the sales cycle", "Build branded decks fast, share rooms with buyers, and see engagement before the next call.", "#6a3ce0", "#ff7ac6"], ["Win the pitch meeting", "Reuse your best case studies and keep every client deck on your agency's style.", "#1d6a7a", "#6ae0c9"], ["Keep the brand consistent", "Locked templates for every region and team.", "#8a3a1a", "#ffb86b"], ["Look bigger than you are", "Studio-quality decks without a studio.", "#3a2a88", "#c9f26a"]];
+  const st = [...document.querySelectorAll("[data-stabs] button")];
+  st.forEach((b, i) => b.addEventListener("click", () => { st.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); document.querySelector("[data-sh]").textContent = sol[i][0]; document.querySelector("[data-sp]").textContent = sol[i][1]; const im = document.querySelector("[data-simg]"); im.style.setProperty("--a", sol[i][2]); im.style.setProperty("--b", sol[i][3]); }));
+  const cats = [...document.querySelectorAll("[data-cats] button")];
+  cats.forEach((b) => b.addEventListener("click", () => cats.forEach((o) => o.setAttribute("aria-pressed", String(o === b)))));
+})();
+</script>
+</body>
+</html>

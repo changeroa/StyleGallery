@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Revolut - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Revolut's homepage language: full-bleed stages, phone-outline overlays, pill tabs, a near-black card box, an assistant that answers, spinning coins, and a 3+2 plan grid.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23191c1f'/%3E%3Crect x='9' y='7' width='14' height='18' rx='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #191c1f; --grey: #6b7077; --paper: #f7f7f5; --black: #000; --coal: #1c1d20; --blue: #4f55f1; --sans: "Inter Tight", system-ui, sans-serif; --sg-header: 12px; --sg-focus: #4f55f1; --ease: cubic-bezier(.2,.8,.2,1); }
+  body { background: var(--paper); color: var(--ink); font: 400 16px/1.5 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1040px; padding-inline: clamp(16px, 4vw, 20px); }
+  .pill { border: 0; border-radius: 999px; cursor: pointer; font: 600 15px var(--sans); padding: 13px 24px; }
+  .pill.light { background: #fff; color: var(--ink); }
+  .pill.dark { background: var(--ink); color: #fff; }
+  .pill:hover { opacity: .88; }
+  .tabs { display: inline-flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .tabs button { background: transparent; border: 1.5px solid currentColor; border-radius: 999px; color: inherit; cursor: pointer; font: 600 14px var(--sans); padding: 9px 18px; }
+  .tabs button[aria-pressed="true"], .tabs button[aria-selected="true"] { background: #fff; border-color: #fff; color: var(--ink); }
+  .light-sec .tabs button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .center { text-align: center; }
+  .h2 { font: 700 clamp(2.2rem, 5vw, 4rem)/1 var(--sans); letter-spacing: -.035em; }
+  .sub { margin: 16px auto 24px; max-inline-size: 56ch; }
+  .fine { color: inherit; font-size: 12px; margin: -10px auto 22px; max-inline-size: 70ch; opacity: .7; }
+
+  /* Header sits on the hero only. */
+  .site-header { background: #1b5fb8; inset: 0 0 auto; position: absolute; z-index: 20; }
+  .site-header .w { align-items: center; display: flex; gap: 28px; padding-block: 20px; max-inline-size: 1240px; }
+  .mark { color: #fff; font: 800 22px var(--sans); letter-spacing: -.03em; text-decoration: none; }
+  .site-header nav { display: flex; gap: 24px; }
+  .site-header nav a { color: #fff; font: 500 15px var(--sans); text-decoration: none; }
+  .site-header nav a:hover { text-decoration: underline; text-underline-offset: 5px; }
+  .site-header .end { align-items: center; display: flex; gap: 18px; margin-inline-start: auto; }
+  .site-header .login { background: none; border: 0; color: #fff; cursor: pointer; font: 600 15px var(--sans); }
+  @media (max-width: 860px) { .site-header nav, .site-header .login { display: none; } }
+
+  /* Hero: full-bleed sky, left headline, phone outline with a balance you can switch. */
+  .hero { background: radial-gradient(40% 50% at 62% 60%, #f4c7a4 0 30%, transparent 31%), radial-gradient(22% 30% at 62% 40%, #c65a2e 0 60%, transparent 61%), linear-gradient(180deg, #1b5fb8 0%, #6fb1ec 55%, #b9dcf6 100%); color: #fff; min-block-size: 100svh; overflow: clip; position: relative; }
+  .hero .w { align-items: center; display: grid; gap: 40px; grid-template-columns: 1.1fr 1fr; max-inline-size: 1240px; min-block-size: 100svh; padding-block: 110px 60px; }
+  .hero h1 { font: 800 clamp(3.2rem, 8vw, 7rem)/.92 var(--sans); letter-spacing: -.05em; }
+  .hero p { font-size: 19px; margin-block: 22px 28px; max-inline-size: 30ch; }
+  .phone { border: 2px solid rgb(255 255 255 / .85); border-radius: 44px; justify-self: center; inline-size: min(300px, 80vw); padding: 26px 20px; text-align: center; backdrop-filter: blur(2px); }
+  .phone small { display: block; font: 500 13px var(--sans); opacity: .9; }
+  .phone .bal { display: block; font: 700 46px/1.1 var(--sans); letter-spacing: -.03em; margin-block: 6px 12px; }
+  .phone .ccy { display: flex; gap: 6px; justify-content: center; margin-block-end: 16px; }
+  .phone .ccy button { background: rgb(255 255 255 / .2); border: 0; border-radius: 999px; color: #fff; cursor: pointer; font: 600 12px var(--sans); padding: 6px 10px; }
+  .phone .ccy button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+  .phone .row { align-items: center; background: rgb(255 255 255 / .92); border-radius: 18px; color: var(--ink); display: flex; font-size: 13px; gap: 10px; margin-block-start: 8px; padding: 10px 12px; text-align: start; }
+  .phone .row i { background: var(--c); border-radius: 50%; block-size: 30px; flex: none; inline-size: 30px; }
+  .phone .row b { margin-inline-start: auto; }
+  @media (max-width: 860px) { .hero .w { grid-template-columns: 1fr; } }
+
+  /* Salary: three account cards, the middle one taller. */
+  .light-sec { background: var(--paper); padding-block: 110px; }
+  .stack { align-items: end; display: grid; gap: 18px; grid-template-columns: 1fr 1.2fr 1fr; margin-block-start: 50px; }
+  .acct { border-radius: 30px; color: #fff; display: flex; flex-direction: column; gap: 4px; min-block-size: 360px; padding: 22px; position: relative; text-align: start; transition: transform .6s var(--ease); }
+  .acct:nth-child(2) { min-block-size: 440px; }
+  .acct:hover { transform: translateY(-8px); }
+  .acct small { opacity: .9; }
+  .acct b { font: 700 34px var(--sans); letter-spacing: -.03em; }
+  .acct .tx { background: #fff; border-radius: 16px; color: var(--ink); font-size: 13px; margin-block-start: auto; padding: 12px; display: flex; justify-content: space-between; gap: 8px; }
+  @media (max-width: 760px) { .stack { grid-template-columns: 1fr; } .acct, .acct:nth-child(2) { min-block-size: 240px; } }
+
+  /* Savings stage at dusk with goal tabs. */
+  .dusk { background: linear-gradient(180deg, #1c2233 0%, #6a4a5c 40%, #d9875b 62%, #2b2230 62.3%, #120f16 100%); color: #f1f1f1; padding-block: 110px 80px; }
+  .goal { border: 2px solid rgb(255 255 255 / .7); border-radius: 40px; margin: 40px auto 30px; max-inline-size: 300px; padding: 26px 20px; }
+  .goal b { display: block; font: 700 44px/1.1 var(--sans); letter-spacing: -.03em; margin-block: 6px 14px; }
+  .goal .bar { background: rgb(255 255 255 / .2); border-radius: 999px; block-size: 10px; overflow: hidden; }
+  .goal .bar i { background: #fff; block-size: 100%; display: block; inline-size: var(--p); transition: inline-size .6s var(--ease); }
+  .goal .icons { display: flex; gap: 10px; justify-content: center; margin-block-start: 18px; }
+  .goal .icons span { align-items: center; background: rgb(255 255 255 / .18); border-radius: 50%; block-size: 40px; display: inline-grid; inline-size: 40px; justify-content: center; }
+  .rate { margin: 0 auto 30px; max-inline-size: 420px; }
+  .rate label { display: block; font: 600 14px var(--sans); margin-block-end: 8px; }
+  .rate input { accent-color: #fff; inline-size: 100%; }
+
+  /* Near-black: a tilted box of cards with physical/virtual toggle. */
+  .black { background: var(--black); color: #eee; padding-block: 110px; }
+  .box { align-items: end; background: linear-gradient(180deg, #121316, #26282c); border-radius: 26px; display: flex; gap: clamp(8px, 2vw, 20px); justify-content: center; margin: 50px auto 30px; max-inline-size: 900px; padding: 60px 20px 0; perspective: 900px; }
+  .card { aspect-ratio: .63; background: var(--bg); border-radius: 14px; box-shadow: 0 20px 40px rgb(0 0 0 / .5); inline-size: clamp(64px, 16vw, 150px); position: relative; transform: rotateX(12deg) translateY(var(--y, 0)); transition: transform .6s var(--ease), background .6s; }
+  .card:hover { --y: -24px; }
+  .card::after { background: rgb(255 255 255 / .55); border-radius: 3px; block-size: 18%; content: ""; inline-size: 14%; inset: 12% auto auto 12%; position: absolute; }
+  .card[data-virtual]::after { background: none; border: 1.5px dashed rgb(255 255 255 / .7); }
+
+  /* Assistant phone with prompts that answer. */
+  .ai .phone2 { background: radial-gradient(80% 50% at 50% 0%, rgb(56 170 180 / .35), transparent 70%), #07090a; border: 1.5px solid #2c2f33; border-radius: 44px; margin: 50px auto 0; max-inline-size: 340px; min-block-size: 440px; padding: 26px 20px; text-align: start; }
+  .ai .orb { background: radial-gradient(circle at 35% 30%, #bff5ff, #3aa6b9 45%, #123b4a); border-radius: 50%; block-size: 44px; inline-size: 44px; margin: 0 auto 18px; }
+  .ai .greet { font: 600 24px/1.2 var(--sans); margin-block-end: 18px; text-align: center; }
+  .msgs { display: grid; gap: 8px; min-block-size: 150px; }
+  .msg { border-radius: 18px; font-size: 14px; max-inline-size: 85%; padding: 10px 14px; }
+  .msg.me { background: #2b2e33; justify-self: end; }
+  .msg.bot { background: #fff; color: var(--ink); }
+  .prompts { display: flex; flex-wrap: wrap; gap: 6px; margin-block-start: 16px; }
+  .prompts button { background: transparent; border: 1px solid #3a3e44; border-radius: 999px; color: #eee; cursor: pointer; font: 500 12px var(--sans); padding: 7px 11px; }
+  .prompts button:hover { border-color: #fff; }
+
+  /* Security: two columns with a drawn shield. */
+  .secure .w { align-items: center; display: grid; gap: 40px; grid-template-columns: 1fr 1fr; }
+  .secure p { margin-block: 18px 26px; max-inline-size: 44ch; }
+  .shield { aspect-ratio: .85; background: linear-gradient(140deg, #f2f2f2, #9ea3a9 55%, #d9dcdf); clip-path: path("M150 0 L300 50 L300 170 C300 260 230 320 150 350 C70 320 0 260 0 170 L0 50 Z"); inline-size: 300px; justify-self: center; position: relative; }
+  .shield::after { border: 14px solid rgb(25 28 31 / .8); border-radius: 50%; content: ""; inset: 30% 28% 34%; position: absolute; }
+  @media (max-width: 760px) { .secure .w { grid-template-columns: 1fr; } .shield { inline-size: 220px; clip-path: none; border-radius: 40% 40% 50% 50%; } }
+
+  /* Coins that turn in place. */
+  .coins { display: flex; justify-content: center; margin-block-start: 50px; perspective: 800px; }
+  .coin { align-items: center; animation: spin 6s linear infinite; animation-delay: calc(var(--i) * -.8s); background: radial-gradient(circle at 35% 30%, #5a5e66, #1a1b1e 70%); border: 3px solid #3c3f45; border-radius: 50%; block-size: clamp(70px, 12vw, 140px); color: #d7d9dc; display: grid; font: 800 clamp(14px, 2vw, 22px) var(--sans); inline-size: clamp(70px, 12vw, 140px); justify-content: center; margin-inline: -10px; }
+  @keyframes spin { to { transform: rotateY(360deg); } }
+
+  /* Plans: three then two. */
+  .plans-sec { background: var(--coal); color: #eee; padding-block: 110px; }
+  .plans { display: grid; gap: 14px; grid-template-columns: repeat(6, 1fr); margin-block-start: 44px; }
+  .plan { background: #0f1012; border-radius: 26px; display: flex; flex-direction: column; gap: 8px; grid-column: span 2; min-block-size: 240px; padding: 26px; }
+  .plan:nth-child(n+4) { grid-column: span 3; }
+  .plan h3 { font: 700 24px var(--sans); }
+  .plan .price { font: 600 18px var(--sans); }
+  .plan p { color: #9da2a8; font-size: 14px; }
+  .plan button { align-self: end; background: #2b2d31; border: 0; border-radius: 50%; block-size: 42px; color: #fff; cursor: pointer; font-size: 18px; inline-size: 42px; margin-block-start: auto; }
+  .plan button:hover { background: #fff; color: var(--ink); }
+  .billing { margin-block-start: 22px; }
+  @media (max-width: 860px) { .plans { grid-template-columns: 1fr; } .plan, .plan:nth-child(n+4) { grid-column: auto; } }
+
+  footer.site { background: var(--coal); border-block-start: 1px solid #2d2f33; color: #9da2a8; font-size: 12px; padding-block: 50px 80px; }
+  footer.site .cols { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-block-end: 30px; }
+  footer.site strong, footer.site a { color: #fff; }
+  footer.site ul { list-style: none; margin: 8px 0 0; padding: 0; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="w">
+    <a class="mark" href="#top">Revolut</a>
+    <nav aria-label="Sections"><a href="#salary">Personal</a><a href="#cards">Cards</a><a href="#assistant">Assistant</a><a href="#plans">Plans</a></nav>
+    <div class="end"><button class="login" type="button" data-demo="There is no login in this unofficial study.">Log in</button><button class="pill light" type="button" data-demo="There is no sign-up in this unofficial study.">Sign up</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="w">
+      <div>
+        <h1 id="h1" data-split>Money, minus the borders</h1>
+        <p data-reveal data-delay="300">One account for spending, sending, and saving in the currencies you actually use. Opening one takes a few taps.</p>
+        <button class="pill light" type="button" data-reveal data-delay="400" data-demo="There is no app download in this unofficial study." data-magnet>Get the app</button>
+      </div>
+      <div class="phone" aria-labelledby="bal-l">
+        <small id="bal-l">Personal · <span data-ccy-name>GBP</span></small>
+        <span class="bal" data-bal aria-live="polite">£6,040</span>
+        <div class="ccy" role="group" aria-label="Show balance in"><button type="button" aria-pressed="true" data-c="GBP">GBP</button><button type="button" aria-pressed="false" data-c="EUR">EUR</button><button type="button" aria-pressed="false" data-c="USD">USD</button><button type="button" aria-pressed="false" data-c="JPY">JPY</button></div>
+        <div class="row"><i style="--c:#f2b33d" aria-hidden="true"></i><span>Croissant, Lyon</span><b data-tx>-£2.80</b></div>
+        <div class="row"><i style="--c:#4f55f1" aria-hidden="true"></i><span>Salary</span><b data-tx2>+£3,100</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="light-sec center" id="salary" aria-labelledby="sal-h">
+    <div class="w">
+      <h2 class="h2" id="sal-h" data-reveal>Payday, sorted for you</h2>
+      <p class="sub">Split your salary into pockets the moment it lands: bills, savings, and the fun part. All figures here are invented.</p>
+      <button class="pill dark" type="button" data-demo="There is no salary switching in this unofficial study.">Move your salary</button>
+      <div class="stack">
+        <article class="acct" style="background:linear-gradient(160deg,#7a5cff,#2b2d8f)" data-reveal><small>Personal · EUR</small><b>€3,140</b><div class="tx"><span>Espresso, Rome<br><small style="color:#6b7077">Yesterday</small></span><span>-€1.60</span></div></article>
+        <article class="acct" style="background:radial-gradient(60% 40% at 50% 30%,#ffd0a8,transparent 70%),linear-gradient(180deg,#f07b4b,#9a2f58)" data-reveal data-delay="100"><small>Personal · GBP</small><b>£6,040</b><div class="tx"><span>Protected deposits (study)</span><span>✓</span></div></article>
+        <article class="acct" style="background:linear-gradient(160deg,#1fa37a,#0c4a4f)" data-reveal data-delay="200"><small>Bills pocket</small><b>£2,300</b><div class="tx"><span>Rent<br><small style="color:#6b7077">Due Friday</small></span><span>-£1,450</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dusk center" aria-labelledby="sav-h">
+    <div class="w">
+      <h2 class="h2" id="sav-h" data-reveal>Save for the plan, not the pile</h2>
+      <p class="sub">Name a goal, set a target, and let daily interest do some of the lifting.</p>
+      <p class="fine">Rates and balances in this study are invented and do not describe any real product.</p>
+      <div class="goal" aria-live="polite"><small data-goal-name>Trip to the coast</small><b data-goal-bal>£1,320</b><div class="bar" aria-hidden="true"><i data-goal-bar style="--p:44%"></i></div><small data-goal-pct>44% of £3,000</small><div class="icons" aria-hidden="true"><span>+</span><span>⇄</span><span>⌂</span><span>…</span></div></div>
+      <div class="rate"><label for="rate">Interest after one year at <span data-rate-l>4.0</span>% (invented): <span data-rate-out>£1,373</span></label><input id="rate" type="range" min="1" max="6" step=".5" value="4"></div>
+      <div class="tabs" role="group" aria-label="Goal" data-goals><button type="button" aria-pressed="true" data-g="0">Trip</button><button type="button" aria-pressed="false" data-g="1">Wedding</button><button type="button" aria-pressed="false" data-g="2">Moving</button></div>
+    </div>
+  </section>
+
+  <section class="black center" id="cards" aria-labelledby="card-h">
+    <div class="w">
+      <h2 class="h2" id="card-h" data-reveal>Spend, then get something back</h2>
+      <p class="sub">Every purchase earns points you can trade for flights and more. Card finishes here are drawn in CSS.</p>
+      <button class="pill light" type="button" data-demo="There are no rewards in this unofficial study.">Start earning</button>
+      <div class="box" aria-hidden="true" data-box>
+        <span class="card" style="--bg:linear-gradient(160deg,#8a6bff,#2c7bf5)"></span>
+        <span class="card" style="--bg:linear-gradient(160deg,#c9ccd1,#7c8189)"></span>
+        <span class="card" style="--bg:linear-gradient(160deg,#2b2d31,#0c0d0f)"></span>
+        <span class="card" style="--bg:repeating-linear-gradient(45deg,#26282c 0 6px,#1a1b1e 6px 12px)"></span>
+      </div>
+      <div class="tabs" role="group" aria-label="Card type" data-kind><button type="button" aria-pressed="true" data-k="physical">Physical cards</button><button type="button" aria-pressed="false" data-k="virtual">Virtual cards</button></div>
+      <p class="sg-visually-hidden" role="status" data-kind-status></p>
+    </div>
+  </section>
+
+  <section class="black center ai" id="assistant" aria-labelledby="ai-h">
+    <div class="w">
+      <h2 class="h2" id="ai-h" data-reveal>Ask, and it gets done</h2>
+      <p class="sub">An assistant inside the app that answers questions about your own money. Try a prompt; the answers are scripted.</p>
+      <div class="phone2">
+        <div class="orb" aria-hidden="true"></div>
+        <p class="greet">What can I help with, Sam?</p>
+        <div class="msgs" data-msgs role="log" aria-live="polite"></div>
+        <div class="prompts" role="group" aria-label="Try a prompt"><button type="button" data-q="0">What did I spend on food?</button><button type="button" data-q="1">Freeze my card</button><button type="button" data-q="2">Send £20 to Mia</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="light-sec secure" aria-labelledby="sec-h">
+    <div class="w">
+      <div>
+        <h2 class="h2" id="sec-h" data-reveal>A safer place for your money</h2>
+        <p>Round-the-clock monitoring, instant card freezes, and people whose job is spotting fraud before you do.</p>
+        <button class="pill dark" type="button" data-demo="There is no security page in this unofficial study.">Learn more</button>
+      </div>
+      <div class="shield" role="img" aria-label="Drawing of a metal shield"></div>
+    </div>
+  </section>
+
+  <section class="black center" aria-labelledby="st-h">
+    <div class="w">
+      <h2 class="h2" id="st-h" data-reveal>Thousands of stocks, one tap each</h2>
+      <p class="sub">Buy slices of companies you know, with a monthly allowance of commission-free trades (invented).</p>
+      <p class="fine">Capital at risk. This study offers no investments.</p>
+      <button class="pill light" type="button" data-demo="There is no trading in this unofficial study.">Try it out</button>
+      <div class="coins" aria-hidden="true" data-ambient><span class="coin" style="--i:0">ETF</span><span class="coin" style="--i:1">+4%</span><span class="coin" style="--i:2">$</span><span class="coin" style="--i:3">€</span><span class="coin" style="--i:4">£</span><span class="coin" style="--i:5">¥</span></div>
+    </div>
+  </section>
+
+  <section class="plans-sec center" id="plans" aria-labelledby="pl-h">
+    <div class="w">
+      <h2 class="h2" id="pl-h" data-reveal>Pick a plan</h2>
+      <div class="tabs billing" role="group" aria-label="Billing"><button type="button" aria-pressed="true" data-bill="1">Monthly</button><button type="button" aria-pressed="false" data-bill="10">Yearly</button></div>
+      <div class="plans" style="text-align:start">
+        <article class="plan"><h3>Basic</h3><p class="price" data-p="0">Free</p><p>Everyday spending and sending with the essentials in one place.</p><button type="button" aria-label="Basic plan details" data-demo="There are no plans in this unofficial study.">&rarr;</button></article>
+        <article class="plan"><h3>Plus</h3><p class="price" data-p="3.5">£3.50/month</p><p>Better limits abroad and cover for things you buy.</p><button type="button" aria-label="Plus plan details" data-demo="There are no plans in this unofficial study.">&rarr;</button></article>
+        <article class="plan"><h3>Premium</h3><p class="price" data-p="8">£8/month</p><p>Higher savings rates and unlimited exchange on weekdays.</p><button type="button" aria-label="Premium plan details" data-demo="There are no plans in this unofficial study.">&rarr;</button></article>
+        <article class="plan"><h3>Metal</h3><p class="price" data-p="15">£15/month</p><p>For frequent travellers: insurance, lounges, and a heavier card.</p><button type="button" aria-label="Metal plan details" data-demo="There are no plans in this unofficial study.">&rarr;</button></article>
+        <article class="plan"><h3>Ultra</h3><p class="price" data-p="50">£50/month</p><p>Everything above plus the subscriptions you'd buy anyway.</p><button type="button" aria-label="Ultra plan details" data-demo="There are no plans in this unofficial study.">&rarr;</button></article>
+      </div>
+      <p class="sg-visually-hidden" role="status" data-bill-status></p>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="w">
+    <div class="cols"><div><strong>Personal</strong><ul><li>Accounts</li><li>Savings</li><li>Cards</li></ul></div><div><strong>Help</strong><ul><li>Support</li><li>Security</li><li>Status</li></ul></div><div><strong>Company</strong><ul><li>About</li><li>Careers</li><li>Press</li></ul></div></div>
+    <p><strong>Unofficial</strong> brand study of Revolut by StyleGallery. Not affiliated with Revolut. All balances, rates, prices, and copy are invented; cards, shield, and coins are drawn in CSS; no logos or photos are used. <a href="../">All studies</a></p>
+  </div>
+</footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Revolut by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  // Hero balance in four currencies (invented rates).
+  const R = { GBP: [1, "£"], EUR: [1.17, "€"], USD: [1.27, "$"], JPY: [188, "¥"] };
+  const fmt = (v, c) => `${R[c][1]}${Math.round(v * R[c][0]).toLocaleString("en-US")}`;
+  const bal = document.querySelector("[data-bal]"), nm = document.querySelector("[data-ccy-name]"), tx = document.querySelector("[data-tx]"), tx2 = document.querySelector("[data-tx2]");
+  const cb = [...document.querySelectorAll(".ccy button")];
+  cb.forEach((b) => b.addEventListener("click", () => {
+    cb.forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+    const c = b.dataset.c; nm.textContent = c; bal.textContent = fmt(6040, c);
+    tx.textContent = `-${R[c][1]}${(2.8 * R[c][0]).toFixed(c === "JPY" ? 0 : 2)}`; tx2.textContent = `+${fmt(3100, c)}`;
+  }));
+  // Savings goals and an interest slider.
+  const goals = [["Trip to the coast", 1320, 3000], ["Wedding fund", 5400, 12000], ["Moving day", 860, 2500]];
+  let g = 0;
+  const gn = document.querySelector("[data-goal-name]"), gb = document.querySelector("[data-goal-bal]"), gbar = document.querySelector("[data-goal-bar]"), gp = document.querySelector("[data-goal-pct]"), rate = document.querySelector("#rate"), rl = document.querySelector("[data-rate-l]"), ro = document.querySelector("[data-rate-out]");
+  const paint = () => { const [n, b, t] = goals[g]; const pct = Math.round(b / t * 100); gn.textContent = n; gb.textContent = `£${b.toLocaleString("en-US")}`; gbar.style.setProperty("--p", `${pct}%`); gp.textContent = `${pct}% of £${t.toLocaleString("en-US")}`; const r = +rate.value; rl.textContent = r.toFixed(1); ro.textContent = `£${Math.round(b * (1 + r / 100)).toLocaleString("en-US")}`; };
+  const gbs = [...document.querySelectorAll("[data-goals] button")];
+  gbs.forEach((b) => b.addEventListener("click", () => { gbs.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); g = +b.dataset.g; paint(); }));
+  rate.addEventListener("input", paint); paint();
+  // Physical or virtual cards.
+  const cards = [...document.querySelectorAll("[data-box] .card")], kb = [...document.querySelectorAll("[data-kind] button")], ks = document.querySelector("[data-kind-status]");
+  kb.forEach((b) => b.addEventListener("click", () => { kb.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); const v = b.dataset.k === "virtual"; cards.forEach((c) => c.toggleAttribute("data-virtual", v)); ks.textContent = v ? "Showing virtual cards" : "Showing physical cards"; }));
+  // Scripted assistant.
+  const A = [["What did I spend on food?", "£214 this month (invented), 12% less than last month. Groceries were most of it."], ["Freeze my card", "Done. Your card is frozen in this study. Tap again in the real app to unfreeze."], ["Send £20 to Mia", "Nothing was sent: this is an unofficial study. In the app, you'd confirm with a tap."]];
+  const log = document.querySelector("[data-msgs]");
+  document.querySelectorAll("[data-q]").forEach((b) => b.addEventListener("click", () => {
+    const [q, a] = A[+b.dataset.q];
+    log.insertAdjacentHTML("beforeend", `<p class="msg me"></p>`); log.lastElementChild.textContent = q;
+    const bot = document.createElement("p"); bot.className = "msg bot"; bot.textContent = a; log.append(bot);
+    while (log.children.length > 4) log.firstElementChild.remove();
+  }));
+  // Monthly or yearly prices.
+  const bb = [...document.querySelectorAll(".billing button")], bs = document.querySelector("[data-bill-status]");
+  bb.forEach((b) => b.addEventListener("click", () => { bb.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); const y = b.dataset.bill === "10"; document.querySelectorAll("[data-p]").forEach((p) => { const v = +p.dataset.p; p.textContent = v === 0 ? "Free" : y ? `£${v * 10}/year` : `£${v % 1 ? v.toFixed(2) : v}/month`; }); bs.textContent = y ? "Showing yearly prices" : "Showing monthly prices"; }));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Perplexity - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="Perplexity 검색 허브의 조용한 앱 셸과 중앙 질문창을 원본 카피 없이 재해석한 비공식 스터디. 질문하면 출처와 함께 답이 써진다.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23134e4a'/%3E%3Cpath d='M16 6v20M7 11l9 5 9-5M7 21l9-5 9 5' stroke='%23e8f3f1' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --bg: #fbfbf8; --side: #f3f3ee; --card: #f1f1ec; --ink: #13201f; --grey: #5a625f; --line: #e2e2dc; --teal: #1f6f68; --teal-ink: #165a54; --sans: "Pretendard Variable", Pretendard, -apple-system, sans-serif; --sg-header: 24px; --sg-focus: #1f6f68; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--bg); color: var(--ink); font: 400 15px/1.6 var(--sans); letter-spacing: -0.01em; word-break: keep-all; }
+  .shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-block-size: 100vh; }
+  .side { align-self: start; background: var(--side); border-inline-end: 1px solid var(--line); block-size: 100vh; display: flex; flex-direction: column; gap: 4px; padding: 14px 12px; position: sticky; top: 0; }
+  .brand { align-items: center; color: var(--ink); display: flex; font-weight: 700; gap: 8px; margin-block-end: 14px; text-decoration: none; }
+  .brand svg { block-size: 22px; inline-size: 22px; }
+  .side button { background: none; border: 0; border-radius: 8px; color: var(--ink); font: 500 14px var(--sans); padding: 7px 10px; text-align: start; }
+  .side button:hover, .side button[aria-current] { background: #e7e7e0; }
+  .side small { color: var(--grey); font-size: 12px; margin: 14px 10px 4px; }
+  .side .hist { color: var(--grey); font-size: 13px; overflow: hidden; padding: 4px 10px; text-overflow: ellipsis; white-space: nowrap; }
+  .side .login { margin-block-start: auto; }
+  .main { display: flex; flex-direction: column; min-block-size: 100vh; position: relative; }
+  .tools { display: flex; gap: 6px; inset: 14px 16px auto auto; position: absolute; }
+  .tools button { background: #fff; border: 1px solid var(--line); border-radius: 8px; block-size: 32px; inline-size: 32px; }
+  .hub { margin: auto; inline-size: min(660px, 100% - 32px); padding-block: 90px 60px; }
+  .lab { color: var(--grey); display: block; font-size: 13px; text-align: center; }
+  .hub h1 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; margin-block: 4px 22px; min-block-size: 1.3em; text-align: center; }
+  .ask { background: #fff; border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 10px 30px -22px rgb(0 40 40 / .35); padding: 14px 14px 10px 18px; transition: border-color .3s, box-shadow .3s; }
+  .ask:focus-within { border-color: #9cc6c1; box-shadow: 0 10px 40px -16px rgb(31 111 104 / .35); }
+  .ask textarea { background: none; border: 0; color: var(--ink); font: 400 16px/1.5 var(--sans); inline-size: 100%; min-block-size: 54px; outline: none; resize: none; }
+  .ask .row { align-items: center; display: flex; gap: 8px; }
+  .mode { background: var(--card); border-radius: 999px; display: flex; padding: 3px; }
+  .mode button { background: none; border: 0; border-radius: 999px; color: var(--grey); font: 600 12px var(--sans); padding: 4px 10px; }
+  .mode button[aria-pressed="true"] { background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .12); color: var(--ink); }
+  .ask .sp { flex: 1; }
+  .ico { background: none; border: 0; color: var(--grey); font-size: 15px; }
+  .send { background: var(--ink); border: 0; border-radius: 50%; block-size: 34px; color: #fff; font-size: 14px; inline-size: 34px; }
+  .sugs { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; margin-block-start: 14px; }
+  .sug { background: var(--card); border: 1px solid var(--line); border-radius: 14px; color: var(--ink); font: inherit; padding: 12px 14px; text-align: start; transition: transform .3s var(--ease), border-color .3s; }
+  .sug:hover { border-color: #b9c9c6; transform: translateY(-2px); }
+  .sug b { display: block; font-size: 14px; }
+  .sug span { color: var(--grey); font-size: 13px; }
+  .answer { margin-block-start: 26px; }
+  .answer[hidden] { display: none; }
+  .answer h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; margin-block-end: 12px; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 8px; margin-block-end: 14px; }
+  .src { background: #fff; border: 1px solid var(--line); border-radius: 10px; font-size: 12px; inline-size: 150px; padding: 8px 10px; }
+  .src b { color: var(--teal-ink); display: block; font-size: 11px; }
+  .text { font-size: 16px; line-height: 1.75; }
+  .text sup { background: #dcebe9; border-radius: 4px; color: var(--teal-ink); font-size: 10px; margin-inline: 2px; padding: 0 4px; }
+  .text .caret::after { animation: blink 1s steps(1) infinite; color: var(--teal); content: "▍"; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .follow { display: flex; flex-wrap: wrap; gap: 6px; margin-block-start: 16px; }
+  .follow button { background: none; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font: 500 13px var(--sans); padding: 5px 12px; }
+  .foot { color: var(--grey); font-size: 12px; padding: 14px 20px; text-align: center; }
+  .foot a { color: var(--teal-ink); }
+  .cookie { background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 16px 40px -20px rgb(0 0 0 / .3); font-size: 13px; inline-size: 300px; inset: auto 16px 60px auto; padding: 14px; position: absolute; z-index: 5; }
+  .cookie[hidden] { display: none; }
+  .cookie div { display: flex; gap: 6px; margin-block-start: 10px; }
+  .cookie button { background: var(--card); border: 0; border-radius: 8px; flex: 1; font: 600 12px var(--sans); padding: 7px; }
+  @media (max-width: 820px) { .shell { grid-template-columns: minmax(0, 1fr); } .side { block-size: auto; flex-direction: row; flex-wrap: wrap; position: static; } .side small, .side .hist { display: none; } .side .login { margin: 0; } .brand { margin: 0 8px 0 0; } .sugs { grid-template-columns: 1fr; } .cookie { inline-size: auto; margin: 0 16px 12px; position: static; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<div class="shell">
+  <aside class="side" aria-label="앱 메뉴 (예시)">
+    <a class="brand" href="#main"><svg viewBox="0 0 22 22" aria-hidden="true"><rect width="22" height="22" rx="6" fill="#134e4a"/><path d="M11 4v14M5 8l6 3 6-3M5 15l6-3 6 3" stroke="#e8f3f1" stroke-width="1.6" fill="none"/></svg>Perplexity</a>
+    <button type="button" aria-current="page" data-demo="이미 새 검색 화면이에요.">＋ 새 검색</button>
+    <button type="button" data-demo="비공식 스터디: 탐색 피드는 없어요.">탐색</button>
+    <button type="button" data-demo="비공식 스터디: 스페이스는 없어요.">스페이스</button>
+    <small>최근 질문 (예시)</small>
+    <span class="hist">가을 제주 3박 일정</span><span class="hist">전세 계약 체크리스트</span><span class="hist">커피 원두 산미 차이</span>
+    <button class="login" type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인</button>
+  </aside>
+  <div class="main">
+    <div class="tools"><button type="button" aria-label="공유 (예시)" data-demo="비공식 스터디: 공유는 없어요.">↗</button><button type="button" aria-label="설정 (예시)" data-demo="비공식 스터디: 설정은 없어요.">⚙</button></div>
+    <main class="hub" id="main">
+      <span class="lab">검색</span>
+      <h1 data-reveal="blur">궁금한 걸 그대로 물어보세요</h1>
+      <form class="ask" data-ask>
+        <label class="sg-visually-hidden" for="q">질문 입력</label>
+        <textarea id="q" placeholder="예: 비 오는 주말 서울에서 아이와 갈 만한 곳"></textarea>
+        <div class="row">
+          <div class="mode" role="group" aria-label="모드"><button type="button" aria-pressed="true" data-mode>검색</button><button type="button" aria-pressed="false" data-mode>깊이 조사</button></div>
+          <span class="sp"></span>
+          <button class="ico" type="button" aria-label="파일 첨부 (예시)" data-demo="비공식 스터디: 파일 첨부는 없어요.">＋</button>
+          <button class="ico" type="button" aria-label="음성 입력 (예시)" data-demo="비공식 스터디: 음성 입력은 없어요.">🎙</button>
+          <button class="send" type="submit" aria-label="질문 보내기">↑</button>
+        </div>
+      </form>
+      <div class="sugs">
+        <button class="sug" type="button" data-q="비 오는 주말 서울에서 아이와 갈 만한 곳"><b>주말 계획</b><span>비 오는 날 아이와 갈 곳을 찾아보세요.</span></button>
+        <button class="sug" type="button" data-q="처음 사는 러닝화 고르는 기준"><b>쇼핑 도움</b><span>처음 사는 러닝화, 무엇부터 볼까요?</span></button>
+      </div>
+      <section class="answer" aria-live="polite" data-answer hidden>
+        <h2 data-atitle></h2>
+        <div class="srcs" data-srcs></div>
+        <div class="text" data-text></div>
+        <div class="follow" data-follow></div>
+      </section>
+    </main>
+    <div class="cookie" data-cookie role="region" aria-label="쿠키 안내 (예시)">이 스터디는 쿠키를 쓰지 않아요. 원본의 쿠키 안내 위치만 재현했어요.<div><button type="button" data-close>모두 허용</button><button type="button" data-close>필수 항목만</button></div></div>
+    <p class="foot"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 · Perplexity와 무관해요. 답변과 출처는 모두 미리 써 둔 가상 예시예요. <a href="../">모든 스터디</a></p>
+  </div>
+</div>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Perplexity by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  const bank = {
+    rain: ["비 오는 주말, 아이와 실내에서", [["어린이 박물관 안내", "museum.example"], ["실내 놀이 시설 모음", "family.example"], ["주말 날씨 예보", "weather.example"]], "비가 오면 실내 전시와 체험 공간이 좋아요. 예약제 어린이 박물관은 붐비지 않아 느긋하게 둘러볼 수 있고[1], 대형 서점 안 키즈존은 무료라 부담이 적어요[2]. 오후에 비가 그친다는 예보라면[3] 근처 공원 산책으로 마무리하는 일정도 괜찮아요.", ["예약 없이 갈 수 있는 곳은?", "점심 먹기 좋은 근처 식당", "만 3세 기준으로 다시"]],
+    shoe: ["첫 러닝화 고르는 기준", [["러닝화 쿠션 비교", "run.example"], ["발볼 측정하는 법", "fit.example"], ["초보 러너 가이드", "coach.example"]], "처음이라면 가벼운 속도보다 쿠션과 안정성을 먼저 보세요[1]. 오후에 발이 부은 상태로 신어 보고, 발볼이 넓다면 와이드 모델을 고르면 물집이 줄어요[2]. 주 2-3회, 5km 이내라면 가격대가 중간인 데일리 트레이너로 충분해요[3].", ["평발이면 달라지나요?", "트레일 러닝화와 차이", "교체 주기는?"]],
+  };
+  const pick = (q) => q.includes("신발") || q.includes("러닝") ? bank.shoe : bank.rain;
+  const box = document.querySelector("[data-answer]"), q = document.querySelector("#q");
+  let timer = 0;
+  const answer = (text) => {
+    const [title, srcs, body, follow] = pick(text);
+    box.hidden = false;
+    box.querySelector("[data-atitle]").textContent = title;
+    box.querySelector("[data-srcs]").innerHTML = srcs.map(([t, d], i) => `<div class="src"><b>${i + 1} · ${d}</b>${t}</div>`).join("");
+    box.querySelector("[data-follow]").innerHTML = follow.map((f) => `<button type="button" data-q="${f}">${f}</button>`).join("");
+    const out = box.querySelector("[data-text]"), html = (s) => s.replace(/\[(\d)\]/g, "<sup>$1</sup>");
+    clearInterval(timer);
+    if (reduced) { out.innerHTML = html(body); return; }
+    let i = 0;
+    timer = setInterval(() => { i += 2; out.innerHTML = html(body.slice(0, i)) + (i < body.length ? '<span class="caret"></span>' : ""); if (i >= body.length) clearInterval(timer); }, 22);
+  };
+  document.querySelector("[data-ask]").addEventListener("submit", (e) => { e.preventDefault(); answer(q.value.trim() || "주말"); });
+  q.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); answer(q.value.trim() || "주말"); } });
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-q]"); if (!b) return; q.value = b.dataset.q; answer(b.dataset.q); });
+  const modes = [...document.querySelectorAll("[data-mode]")];
+  modes.forEach((m) => m.addEventListener("click", () => modes.forEach((o) => o.setAttribute("aria-pressed", String(o === m)))));
+  document.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => { document.querySelector("[data-cookie]").hidden = true; }));
+})();
+</script>
+</body>
+</html>

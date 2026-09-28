@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tesla Model 3 - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Tesla's vehicle-page language: full-bleed stages, a centered transparent header, three-stat rows, one blue button, and a live paint and wheel configurator drawn in SVG.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23171a20'/%3E%3Crect x='8' y='14' width='16' height='4' rx='2' fill='%233e6ae1'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #171a20; --grey: #5c5e62; --soft: #f4f4f4; --blue: #3e6ae1; --sans: "Inter", system-ui, sans-serif; --sg-header: 56px; --sg-focus: #3e6ae1; --ease: cubic-bezier(.5,0,0,1); }
+  body { background: #fff; color: var(--ink); font: 400 15px/1.5 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1200px; padding-inline: clamp(16px, 4vw, 40px); }
+  .btn { border: 0; border-radius: 4px; cursor: pointer; font: 500 14px var(--sans); min-inline-size: min(264px, 100%); padding: 11px 24px; transition: background .33s var(--ease); }
+  .btn.blue { background: var(--blue); color: #fff; }
+  .btn.blue:hover { background: #3457b1; }
+  .btn.pale { background: rgb(244 244 244 / .75); color: var(--ink); }
+  .btn.pale:hover { background: #fff; }
+  .btn.dark { background: var(--ink); color: #fff; }
+
+  /* Transparent header centered over the stage. */
+  .site-header { align-items: center; display: grid; grid-template-columns: 1fr auto 1fr; block-size: 56px; inset: 0 0 auto; padding-inline: clamp(16px, 3vw, 40px); position: fixed; transition: background .3s; z-index: 30; }
+  .site-header[data-solid] { background: rgb(255 255 255 / .92); backdrop-filter: blur(10px); }
+  .mark { color: var(--ink); font: 600 16px var(--sans); letter-spacing: .4em; text-decoration: none; }
+  .site-header nav { display: flex; gap: 4px; }
+  .site-header nav a { border-radius: 4px; color: var(--ink); font: 500 14px var(--sans); padding: 6px 12px; text-decoration: none; transition: background .33s; }
+  .site-header nav a:hover { background: rgb(0 0 0 / .06); }
+  .site-header .end { justify-self: end; }
+  @media (max-width: 820px) { .site-header nav { display: none; } .site-header { grid-template-columns: 1fr auto; } }
+
+  /* Full-bleed stage: headline top, car centre, stats and buttons bottom. */
+  .stage { display: grid; grid-template-rows: auto 1fr auto; min-block-size: 100svh; overflow: clip; padding-block: 110px 48px; position: relative; text-align: center; }
+  .stage h1, .stage h2 { font: 500 clamp(2.2rem, 4.6vw, 3.4rem)/1.1 var(--sans); }
+  .stage .sub { font-size: 15px; margin-block-start: 6px; }
+  .stage .sub button { background: none; border: 0; color: inherit; cursor: pointer; font: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .bg-studio { background: linear-gradient(180deg, #e9ecef 0%, #f6f7f8 55%, #d9dcdf 55.2%, #eef0f1 100%); }
+  .bg-road { background: linear-gradient(180deg, #9fb7c9 0%, #dfe7ec 48%, #4d5256 48.2%, #2c2f32 100%); color: #fff; }
+  .bg-night { background: radial-gradient(60% 50% at 50% 60%, #26344f, #0b0d12 70%); color: #fff; }
+  .car { align-self: center; color: var(--paint, #e6e6e6); inline-size: min(1000px, 94%); justify-self: center; transform: translateY(calc((1 - var(--in, 1)) * 40px)); }
+  .car svg { display: block; filter: drop-shadow(0 34px 22px rgb(0 0 0 / .35)); inline-size: 100%; }
+  .stats { display: flex; flex-wrap: wrap; gap: clamp(20px, 5vw, 70px); justify-content: center; }
+  .stats div { min-inline-size: 110px; }
+  .stats b { display: block; font: 500 clamp(1.6rem, 2.6vw, 2.2rem)/1.1 var(--sans); }
+  .stats span { font-size: 13px; }
+  .acts { display: flex; flex-wrap: wrap; gap: 16px 24px; justify-content: center; margin-block-start: 26px; }
+
+  /* Split feature sections. */
+  .split { align-items: center; display: grid; gap: clamp(24px, 5vw, 70px); grid-template-columns: 1.3fr 1fr; padding-block: 110px; }
+  .split h2 { font: 500 clamp(1.8rem, 3.4vw, 2.6rem)/1.15 var(--sans); margin-block-end: 14px; }
+  .split p { color: var(--grey); max-inline-size: 44ch; }
+  .split .stats { justify-content: start; margin-block: 28px; }
+  .cabin { aspect-ratio: 16 / 10; background: linear-gradient(180deg, #d9d4cb 0 30%, #f2efe9 30% 36%, #2a2b2d 36% 40%, #efece6 40%); border-radius: 8px; overflow: hidden; position: relative; }
+  .cabin .screen { aspect-ratio: 16 / 10; background: #111; border-radius: 10px; inline-size: 34%; inset: 22% auto auto 50%; position: absolute; transform: translateX(-50%); display: grid; grid-template-columns: 1fr 1.4fr; gap: 4%; padding: 3%; }
+  .cabin .screen i { background: repeating-linear-gradient(35deg, #28303a 0 2px, transparent 2px 12px), #1b2129; border-radius: 4px; }
+  .cabin .screen i:first-child { background: #f4f4f4; }
+  .cabin .wheel { border: 10px solid #2a2b2d; border-radius: 50%; block-size: 38%; inline-size: 24%; inset: 42% auto auto 18%; position: absolute; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+
+  /* Range estimator. */
+  .range { background: var(--soft); padding-block: 100px; }
+  .range h2 { font: 500 clamp(1.8rem, 3.4vw, 2.6rem)/1.15 var(--sans); text-align: center; }
+  .range .panel { display: grid; gap: 30px; grid-template-columns: 1fr 1fr; margin-block-start: 40px; }
+  .ctrl { display: grid; gap: 22px; }
+  .ctrl fieldset { border: 0; margin: 0; padding: 0; }
+  .ctrl legend { font: 500 14px var(--sans); margin-block-end: 10px; }
+  .seg { display: flex; flex-wrap: wrap; gap: 8px; }
+  .seg button { background: #fff; border: 1px solid #d0d1d2; border-radius: 4px; cursor: pointer; font: 500 14px var(--sans); padding: 10px 16px; }
+  .seg button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .ctrl label { font: 500 14px var(--sans); }
+  .ctrl input { accent-color: var(--ink); display: block; inline-size: 100%; margin-block-start: 8px; }
+  .readout { align-content: center; background: #fff; border-radius: 8px; display: grid; justify-items: center; padding: 30px; text-align: center; }
+  .readout output { font: 500 clamp(3.4rem, 8vw, 5.6rem)/1 var(--sans); letter-spacing: -.02em; }
+  .readout small { color: var(--grey); }
+  @media (max-width: 860px) { .range .panel { grid-template-columns: 1fr; } }
+
+  /* Configurator: paint and wheels recolour the drawn car. */
+  .config { display: grid; gap: 30px; grid-template-columns: 1.6fr 1fr; padding-block: 100px; }
+  .config .view { align-items: center; background: linear-gradient(180deg, #fff, #eceef0); border-radius: 8px; color: var(--paint, #e6e6e6); display: grid; min-block-size: 360px; padding: 30px; }
+  .config .view svg { inline-size: 100%; }
+  .config h2 { font: 500 30px/1.2 var(--sans); }
+  .config .price { color: var(--grey); margin-block: 6px 24px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+  .chips button { border: 0; border-radius: 50%; block-size: 38px; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .2); cursor: pointer; inline-size: 38px; padding: 0; }
+  .chips button[aria-pressed="true"] { outline: 2px solid var(--blue); outline-offset: 3px; }
+  .config p.pick { font: 500 14px var(--sans); margin-block: 22px 10px; }
+  .config .btn { margin-block-start: 28px; inline-size: 100%; }
+  @media (max-width: 860px) { .config { grid-template-columns: 1fr; } }
+
+  footer.site { color: var(--grey); font-size: 12px; padding-block: 40px 80px; text-align: center; }
+  footer.site a { color: var(--ink); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sedan" viewBox="0 0 1000 300"><path fill="currentColor" d="M40 214 C40 190 56 176 96 170 L230 150 C300 104 380 80 480 78 C580 76 660 92 740 136 L900 160 C940 166 962 182 962 206 L962 226 C962 234 956 240 946 240 L56 240 C46 240 40 232 40 214Z"/><path fill="#1c1f24" opacity=".85" d="M300 146 C360 108 420 94 490 92 C560 90 620 102 690 138 Z"/><path fill="rgb(255 255 255 / .35)" d="M120 188 L880 188 L880 192 L120 192Z"/><g fill="#121417"><circle cx="230" cy="240" r="56"/><circle cx="780" cy="240" r="56"/></g><g data-rim fill="var(--rim, #8b9096)"><circle cx="230" cy="240" r="34"/><circle cx="780" cy="240" r="34"/></g><g fill="#121417"><circle cx="230" cy="240" r="8"/><circle cx="780" cy="240" r="8"/></g></symbol>
+</svg>
+<header class="site-header" data-header>
+  <a class="mark" href="#top">TESLA</a>
+  <nav aria-label="Sections"><a href="#top">Model 3</a><a href="#interior">Interior</a><a href="#range">Range</a><a href="#design">Design yours</a></nav>
+  <button class="btn pale end" type="button" style="min-inline-size:0" data-demo="There is no account in this unofficial study.">Account</button>
+</header>
+<main id="main">
+  <section class="stage bg-studio" id="top" aria-labelledby="h1">
+    <div><h1 id="h1" data-split>Model 3</h1><p class="sub">Study pricing from $39,000 (invented) · <button type="button" data-demo="There is no financing in this unofficial study.">See details</button></p></div>
+    <div class="car" data-car style="--paint:#e6e6e6"><svg viewBox="0 0 1000 300" aria-hidden="true"><use href="#sedan"/></svg></div>
+    <div>
+      <div class="stats"><div><b data-count="340">340</b><span>mi range (invented)</span></div><div><b>4.1s</b><span>0-60 mph (invented)</span></div><div><b data-count="125">125</b><span>mph top speed (invented)</span></div></div>
+      <div class="acts"><button class="btn blue" type="button" data-demo="There is no ordering in this unofficial study." data-magnet>Order now</button><button class="btn pale" type="button" data-demo="There are no demo drives in this unofficial study.">Demo drive</button></div>
+    </div>
+  </section>
+
+  <section class="stage bg-road" aria-labelledby="h-perf">
+    <div><h2 id="h-perf" data-reveal>Quick, quiet, and planted.</h2><p class="sub">Dual motors and a low floor keep it flat through every corner.</p></div>
+    <div class="car" data-car style="--paint:#1f2a44"><svg viewBox="0 0 1000 300" aria-hidden="true"><use href="#sedan"/></svg></div>
+    <div class="stats"><div><b>2.9s</b><span>0-60 mph (invented)</span></div><div><b data-count="510">510</b><span>hp peak (invented)</span></div><div><b>AWD</b><span>dual motor</span></div></div>
+  </section>
+
+  <div class="w">
+    <section class="split" id="interior" aria-labelledby="h-int">
+      <div class="cabin" role="img" aria-label="Drawing of a minimal cabin with one wide centre screen"><div class="screen"><i></i><i></i></div><div class="wheel"></div></div>
+      <div>
+        <h2 id="h-int" data-reveal>One screen. Everything else gets out of the way.</h2>
+        <p>A wide centre display runs navigation, media, and climate. The rest of the cabin is fabric, glass, and quiet.</p>
+        <div class="stats"><div><b>15"</b><span>touchscreen (invented)</span></div><div><b data-count="5">5</b><span>seats</span></div></div>
+        <button class="btn dark" type="button" data-demo="There is no interior page in this unofficial study.">See the interior</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="range" id="range" aria-labelledby="h-range">
+    <div class="w">
+      <h2 id="h-range">Estimate your range</h2>
+      <div class="panel">
+        <div class="ctrl">
+          <fieldset><legend>Wheels</legend><div class="seg" data-seg="wheel"><button type="button" aria-pressed="true" data-v="1">18" aero</button><button type="button" aria-pressed="false" data-v=".93">19" sport</button></div></fieldset>
+          <fieldset><legend>Climate</legend><div class="seg" data-seg="climate"><button type="button" aria-pressed="true" data-v="1">Mild</button><button type="button" aria-pressed="false" data-v=".82">Heater on</button><button type="button" aria-pressed="false" data-v=".92">A/C on</button></div></fieldset>
+          <label for="speed">Highway speed: <span data-speed-label>65 mph</span><input id="speed" type="range" min="45" max="85" step="5" value="65"></label>
+        </div>
+        <div class="readout"><output for="speed" data-range-out>340</output><small>mi estimated range (invented model, not a real rating)</small></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="w">
+    <section class="config" id="design" aria-labelledby="h-cfg">
+      <div class="view" data-view style="--paint:#e6e6e6"><svg viewBox="0 0 1000 300" role="img" aria-label="Drawing of the configured car"><use href="#sedan"/></svg></div>
+      <div>
+        <h2 id="h-cfg">Design yours</h2>
+        <p class="price"><span data-price>$39,000</span> (invented)</p>
+        <p class="pick">Paint: <span data-paint-name>Pearl White</span></p>
+        <div class="chips" role="group" aria-label="Paint" data-paint>
+          <button type="button" aria-label="Pearl White" aria-pressed="true" style="background:#e6e6e6" data-c="#e6e6e6" data-p="0"></button>
+          <button type="button" aria-label="Midnight" aria-pressed="false" style="background:#1d1f24" data-c="#1d1f24" data-p="1000"></button>
+          <button type="button" aria-label="Deep Blue" aria-pressed="false" style="background:#1f2a44" data-c="#1f2a44" data-p="1000"></button>
+          <button type="button" aria-label="Quicksilver" aria-pressed="false" style="background:#9aa0a6" data-c="#9aa0a6" data-p="1500"></button>
+          <button type="button" aria-label="Ultra Red" aria-pressed="false" style="background:#a3141b" data-c="#a3141b" data-p="2000"></button>
+        </div>
+        <p class="pick">Wheels: <span data-rim-name>18" aero</span></p>
+        <div class="chips" role="group" aria-label="Wheels" data-rims>
+          <button type="button" aria-label="18 inch aero" aria-pressed="true" style="background:#8b9096" data-c="#8b9096" data-p="0" data-n='18" aero'></button>
+          <button type="button" aria-label="19 inch sport" aria-pressed="false" style="background:#2b2d31" data-c="#2b2d31" data-p="1500" data-n='19" sport'></button>
+        </div>
+        <button class="btn blue" type="button" data-demo="There is no ordering in this unofficial study.">Order with card</button>
+        <p class="sg-visually-hidden" role="status" data-cfg-status></p>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site"><strong>Unofficial</strong> brand study of Tesla Model 3 by StyleGallery. Not affiliated with Tesla. Every price, range, and performance figure is invented; the car is drawn in SVG; no logos or photos are used. <a href="../">All studies</a></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Tesla Model 3 by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Header turns solid once the first stage scrolls away.
+  const header = document.querySelector("[data-header]");
+  const solid = () => header.toggleAttribute("data-solid", scrollY > innerHeight * .6);
+  addEventListener("scroll", solid, { passive: true }); solid();
+  // Cars settle upward as their stage enters.
+  if (!reduced) {
+    const cars = [...document.querySelectorAll("[data-car]")];
+    const settle = () => cars.forEach((c) => { const r = c.getBoundingClientRect(); const t = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight * .5))); c.style.setProperty("--in", t.toFixed(3)); });
+    addEventListener("scroll", settle, { passive: true }); settle();
+  }
+  // Range estimator with an invented model.
+  const factors = { wheel: 1, climate: 1 }, speed = document.querySelector("#speed"), out = document.querySelector("[data-range-out]"), sl = document.querySelector("[data-speed-label]");
+  const calc = () => { const s = +speed.value; const r = 340 * factors.wheel * factors.climate * (1 - (s - 65) * .012); out.textContent = String(Math.round(r)); sl.textContent = `${s} mph`; };
+  document.querySelectorAll("[data-seg]").forEach((g) => { const bs = [...g.children]; bs.forEach((b) => b.addEventListener("click", () => { bs.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); factors[g.dataset.seg] = +b.dataset.v; calc(); })); });
+  speed.addEventListener("input", calc); calc();
+  // Configurator: paint and wheels recolour the drawing and update the price.
+  const view = document.querySelector("[data-view]"), price = document.querySelector("[data-price]"), st = document.querySelector("[data-cfg-status]");
+  const sel = { paint: 0, rim: 0 };
+  const total = () => { price.textContent = `$${(39000 + sel.paint + sel.rim).toLocaleString("en-US")}`; st.textContent = `Price now ${price.textContent}`; };
+  const group = (q, apply) => { const bs = [...document.querySelectorAll(`${q} button`)]; bs.forEach((b) => b.addEventListener("click", () => { bs.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); apply(b); total(); })); };
+  group("[data-paint]", (b) => { view.style.setProperty("--paint", b.dataset.c); document.querySelector("[data-paint-name]").textContent = b.getAttribute("aria-label"); sel.paint = +b.dataset.p; });
+  group("[data-rims]", (b) => { view.style.setProperty("--rim", b.dataset.c); document.querySelector("[data-rim-name]").textContent = b.dataset.n; sel.rim = +b.dataset.p; });
+})();
+</script>
+</body>
+</html>

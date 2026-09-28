@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>카카오뱅크 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="카카오뱅크 홈페이지의 조용한 카드 구성과 AI 대화 히어로를 원본 카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23fee500'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #1a1a1a; --grey: #555b63; --soft: #f4f5f7; --line: #e6e8eb; --yellow: #fee500; --teal: #2a9fb5; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 24px; --sg-focus: #1a1a1a; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 16px/1.6 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1440px; padding-inline: clamp(20px, 3vw, 40px); }
+  h1, h2, h3 { font-weight: 700; letter-spacing: -0.035em; line-height: 1.3; }
+
+  .site-header { color: #fff; inset: 0 0 auto; position: absolute; z-index: 5; }
+  .site-header .inner { align-items: center; display: flex; block-size: 64px; gap: 24px; }
+  .logo { color: #fff; font-size: 19px; font-weight: 800; letter-spacing: -0.04em; text-decoration: none; }
+  .logo b { font-weight: 500; }
+  .site-nav { display: flex; gap: 4px; margin-inline: auto; }
+  .site-nav a { border-radius: 8px; color: #fff; font-size: 14px; font-weight: 600; padding: 6px 12px; text-decoration: none; }
+  .site-nav a:hover { background: rgb(255 255 255 / 0.14); }
+  .lang { color: #fff; font-size: 13px; }
+  @media (max-width: 820px) { .site-nav { display: none; } .lang { margin-inline-start: auto; } }
+
+  /* Hero: warm dark field with an oversized phone whose AI chat actually types. */
+  .hero { background: radial-gradient(70% 70% at 50% 40%, #7a4a3a, #3a2320 55%, #1c1312); block-size: 100vh; min-block-size: 640px; overflow: hidden; position: relative; }
+  .hero::after { background: radial-gradient(45% 28% at 50% 52%, rgb(20 12 10 / 0.55), transparent 75%), linear-gradient(180deg, rgb(0 0 0 / 0.35), rgb(0 0 0 / 0.15) 40%, rgb(0 0 0 / 0.45)); content: ""; inset: 0; position: absolute; }
+  .hands { background: radial-gradient(40% 30% at 20% 90%, #c98b6c, transparent 70%), radial-gradient(40% 30% at 80% 88%, #c08066, transparent 70%); inset: 0; position: absolute; }
+  .big-phone { background: #f7f7f8; border: 16px solid #111; border-radius: 70px; block-size: 150vh; inline-size: min(560px, 80vw); inset: 6vh auto auto 50%; position: absolute; transform: translateX(-50%) rotate(-3deg) translateY(calc(var(--hp, 0) * -18vh)); box-shadow: 0 60px 120px rgb(0 0 0 / 0.6); filter: blur(1.6px); padding: 70px 34px; }
+  .chat-title { color: #222; font-size: 20px; font-weight: 700; text-align: center; margin-block-end: 40px; }
+  .bubble { background: #eceef1; border-radius: 22px; color: #222; font-size: 22px; line-height: 1.45; margin-block: 14px; max-inline-size: 80%; padding: 16px 20px; }
+  .bubble.me { background: var(--yellow); margin-inline-start: auto; }
+  .hero-copy { color: #fff; font-size: clamp(2.4rem, 5.6vw, 5rem); inset: 50% 0 auto; line-height: 1.2; position: absolute; text-align: center; transform: translateY(-40%); z-index: 2; text-shadow: 0 4px 40px rgb(0 0 0 / 0.35); }
+  .hero-copy small { color: rgb(255 255 255 / 0.85); display: block; font-size: 0.34em; font-weight: 600; letter-spacing: 0; margin-block-end: 18px; }
+  .chev { border-radius: 50%; color: #fff; display: grid; font-size: 22px; block-size: 44px; inline-size: 44px; inset: auto auto 26px 50%; place-items: center; position: absolute; text-decoration: none; transform: translateX(-50%); z-index: 2; }
+  .chev span { animation: bob 1.6s ease-in-out infinite; display: block; }
+  @keyframes bob { 50% { transform: translateY(6px); } }
+
+  /* Service collage: three staggered cards, painted "photos" tilted, panels overlapping. */
+  .services { padding-block: 160px 170px; }
+  .services h2, .stories h2 { font-size: clamp(1.7rem, 2.6vw, 2.3rem); }
+  .services h2 { text-align: center; }
+  .collage { display: grid; gap: clamp(16px, 3vw, 40px); grid-template-columns: repeat(3, 1fr); margin-block-start: 70px; align-items: start; }
+  .svc { position: relative; min-block-size: 440px; }
+  .svc:nth-child(2) { margin-block-start: 0; } .svc:nth-child(1) { margin-block-start: 30px; } .svc:nth-child(3) { margin-block-start: 60px; }
+  .photo { border-radius: 22px; position: absolute; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.35); overflow: hidden; }
+  .photo.a { background: linear-gradient(160deg, #d8cdbd, #a88b6f); block-size: 300px; inline-size: 52%; inset: 0 auto auto 0; transform: rotate(-4deg) translateY(calc(var(--py, 0) * 40px)); }
+  .photo.a::after { background: linear-gradient(135deg, #ffe34d, #f2c400); border-radius: 10px; block-size: 90px; content: ""; inline-size: 140px; inset: 40% auto auto 18%; position: absolute; transform: rotate(-16deg); box-shadow: 0 10px 20px rgb(0 0 0 / 0.2); }
+  .photo.b { background: linear-gradient(180deg, #7fb2e6 0%, #b8d6f2 55%, #5a7690 56%, #3e5468); block-size: 400px; inline-size: 74%; inset: 0 auto auto 13%; transform: translateY(calc(var(--py, 0) * -30px)); }
+  .photo.b::after { background: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.6) 0 3px, transparent 3px 26px); block-size: 20%; content: ""; inset: 50% 0 auto; position: absolute; }
+  .photo.c { background: linear-gradient(160deg, #efe6da, #c9b39a); block-size: 320px; inline-size: 50%; inset: 30px 0 auto auto; transform: rotate(4deg) translateY(calc(var(--py, 0) * 50px)); }
+  .panel { background: var(--soft); border-radius: 20px; padding: 22px; position: absolute; box-shadow: 0 20px 40px -24px rgb(0 0 0 / 0.25); }
+  .panel small { color: var(--grey); display: block; font-size: 13px; margin-block-end: 8px; }
+  .panel h3 { font-size: 19px; }
+  .panel .chips { display: grid; gap: 6px; margin-block-start: 60px; }
+  .chip { background: #fff; border-radius: 999px; font-size: 13px; padding: 5px 12px; justify-self: start; }
+  .svc:nth-child(1) .panel { inline-size: 58%; inset: 90px 0 auto auto; min-block-size: 330px; }
+  .svc:nth-child(2) .panel { background: #fff; inline-size: 64%; inset: 290px auto auto 18%; text-align: center; }
+  .svc:nth-child(3) .panel { inline-size: 56%; inset: 0 auto auto 0; min-block-size: 300px; }
+  .avatars { display: flex; justify-content: center; margin-block-start: 8px; }
+  .avatars i { border: 2px solid #fff; border-radius: 50%; block-size: 28px; inline-size: 28px; margin-inline: -4px; }
+  .input { background: #fff; border-radius: 999px; color: var(--grey); font-size: 12px; margin-block-start: 110px; padding: 8px 12px; }
+  .amount { background: #fff; border-radius: 16px; box-shadow: 0 20px 30px -20px rgb(0 0 0 / 0.3); font-size: 12px; inset: auto 6% 40px auto; padding: 10px 14px; position: absolute; z-index: 2; }
+  .amount b { display: block; font-size: 17px; }
+  @media (max-width: 900px) { .collage { grid-template-columns: 1fr; } .svc { margin: 0 !important; } }
+
+  .facts { padding-block: 0 170px; }
+  .facts h2 { font-size: 22px; margin-block-end: 26px; }
+  .fact-row { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+  .fact { aspect-ratio: 1.3; border-radius: 20px; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 24px; position: relative; text-decoration: none; transition: transform .5s var(--ease); }
+  .fact:hover { transform: translateY(-6px); }
+  .fact .go { background: rgb(255 255 255 / 0.25); border-radius: 50%; block-size: 30px; display: grid; inline-size: 30px; inset: auto 20px 20px auto; place-items: center; position: absolute; }
+  .fact.chart { background: linear-gradient(#f4f5f7, #f4f5f7); color: var(--ink); }
+  .fact.chart .go { background: #e3e6ea; }
+  .fact.chart svg { inset: 18% 8% 30%; position: absolute; }
+  .fact.chart path.line { fill: none; stroke: var(--teal); stroke-width: 3; stroke-dasharray: 600; stroke-dashoffset: var(--dash, 0); transition: stroke-dashoffset 1.6s var(--ease); }
+  .fact.room { background: linear-gradient(180deg, #3b3d41, #8a7a6a 55%, #6b5140); }
+  .fact.room::before { background: radial-gradient(50% 18% at 50% 62%, #d8d2c8 60%, transparent 62%), repeating-linear-gradient(90deg, rgb(255 255 255 / 0.08) 0 40px, transparent 40px 80px); content: ""; inset: 0; position: absolute; }
+  .fact.esg { background: linear-gradient(135deg, #2f5d2a, #7ea34a 55%, #3b6b2e); }
+  .fact.esg::before { background: linear-gradient(120deg, transparent 45%, rgb(235 230 170 / 0.5) 46%, rgb(235 230 170 / 0.5) 49%, transparent 50%); content: ""; inset: 0; position: absolute; }
+  .fact.esg strong { font-size: clamp(3rem, 6vw, 5rem); inset: 22% 0 auto 0; letter-spacing: -0.04em; position: absolute; text-align: center; }
+  .fact span { font-weight: 600; position: relative; }
+  @media (max-width: 900px) { .fact-row { grid-template-columns: 1fr; } }
+
+  /* Story carousel: grey text panel and a dark stage with a flip calendar. */
+  .stories { padding-block: 0 150px; }
+  .stories h2 { margin-block-end: 30px; }
+  .carousel { background: var(--soft); border-radius: 22px; display: grid; grid-template-columns: 1fr 1fr; min-block-size: 480px; overflow: hidden; }
+  .car-copy { display: flex; flex-direction: column; padding: 30px 34px; }
+  .car-top { align-items: center; display: flex; justify-content: space-between; }
+  .yt { align-items: center; display: flex; font-size: 13px; font-weight: 600; gap: 8px; }
+  .yt i { background: #e5302a; border-radius: 5px; block-size: 14px; inline-size: 20px; }
+  .arrows { display: flex; gap: 6px; }
+  .arrows button { background: none; border: 0; border-radius: 50%; block-size: 36px; font-size: 20px; inline-size: 36px; color: var(--ink); }
+  .arrows button:hover { background: #e3e6ea; }
+  .car-text { margin-block-start: auto; }
+  .car-text h3 { font-size: 21px; }
+  .car-text p { color: var(--grey); font-size: 14px; margin-block: 10px 20px; max-inline-size: 46ch; }
+  .dark-btn { background: #111; border: 0; border-radius: 6px; color: #fff; font-size: 13px; padding: 9px 14px; }
+  .car-stage { background: radial-gradient(40% 30% at 50% 0%, rgb(255 255 255 / 0.6), transparent 70%), #0b0b0c; display: grid; place-items: center; position: relative; }
+  .cal { background: #fff; border-radius: 10px; box-shadow: 0 30px 60px rgb(0 0 0 / 0.6); inline-size: 200px; overflow: hidden; text-align: center; }
+  .cal-top { background: var(--yellow); font-size: 12px; font-weight: 700; padding: 10px; }
+  .cal-day { font-size: 110px; font-weight: 800; letter-spacing: -0.06em; line-height: 1.1; padding-block: 8px 18px; }
+  .progress { display: flex; gap: 6px; inset: auto 30px 24px; position: absolute; }
+  .progress i { background: rgb(255 255 255 / 0.3); block-size: 3px; flex: 1; }
+  .progress i[data-on] { background: #fff; }
+  .slide-copy[hidden] { display: none; }
+  @media (max-width: 900px) { .carousel { grid-template-columns: 1fr; } .car-stage { min-block-size: 320px; } }
+
+  .links { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; padding-block-end: 90px; }
+  .links a, .links button { align-items: center; border: 0; color: var(--ink); font-family: inherit; background: var(--soft); border-radius: 12px; display: flex; font-size: 14px; font-weight: 600; justify-content: space-between; padding: 16px 20px; text-decoration: none; transition: background .3s; }
+  .links a:hover, .links button:hover { background: #eaecef; }
+  .links a span, .links button span { background: #fff; border-radius: 50%; block-size: 26px; display: grid; inline-size: 26px; place-items: center; }
+  @media (max-width: 700px) { .links { grid-template-columns: 1fr; } }
+
+  footer { background: var(--soft); padding-block: 60px 40px; }
+  .foot { display: grid; gap: 30px; grid-template-columns: 2fr repeat(3, 1fr); font-size: 13px; color: var(--grey); }
+  .foot strong { color: var(--ink); font-size: 22px; letter-spacing: -0.04em; }
+  .foot h3 { color: var(--ink); font-size: 13px; margin-block-end: 8px; }
+  .foot a { color: var(--ink); }
+  .legal { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 12px; margin-block-start: 40px; padding-block-start: 20px; }
+  @media (max-width: 800px) { .foot { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+
+<main id="main">
+  <section class="hero" id="top" data-hero data-ambient>
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="#top">kakao<b>bank</b></a>
+    <nav class="site-nav" aria-label="섹션">
+      <a href="#services">서비스</a>
+      <a href="#facts">경영정보</a>
+      <a href="#stories">이야기</a>
+      <a href="#links">바로가기</a>
+    </nav>
+    <span class="lang">KR | EN</span>
+  </div>
+</header>
+    <div class="hands" aria-hidden="true"></div>
+    <div class="big-phone" aria-hidden="true">
+      <div class="chat-title">은행 AI</div>
+      <div class="bubble me">전세 계약 전에 등기부에서 뭘 봐야 해?</div>
+      <div class="bubble" data-typing="먼저 '을구'에 적힌 금액을 확인해 보세요. 집값에 비해 먼저 잡힌 빚이 크면 보증금을 돌려받기 어려울 수 있어요. 제가 순서대로 같이 볼게요."></div>
+    </div>
+    <h1 class="hero-copy"><small>묻고, 계산하고, 맡기는</small>물어보면<br>대답하는 은행</h1>
+    <a class="chev" href="#services" aria-label="서비스로 내려가기"><span aria-hidden="true">&#8964;</span></a>
+  </section>
+
+  <section class="services inner" id="services" aria-labelledby="svc-h">
+    <h2 id="svc-h" data-reveal>쓰다 보면 익숙해지는<br>작은 금융 도구들</h2>
+    <div class="collage" data-collage>
+      <article class="svc" data-reveal>
+        <div class="photo a" aria-hidden="true"></div>
+        <div class="panel"><small>AI 이자 계산</small><h3>복잡한 계산은<br>맡겨 두세요</h3><div class="chips"><span class="chip">1,500만원을 1년 두면</span><span class="chip">예상 이자 51만원</span><span class="chip">만기 금액 1,551만원</span></div></div>
+      </article>
+      <article class="svc" data-reveal data-delay="120">
+        <div class="photo b" aria-hidden="true"></div>
+        <div class="panel"><small>산책모임 통장</small><h3>매주 금요일 1만원씩</h3><div class="avatars" aria-hidden="true"><i style="background:#f3b37a"></i><i style="background:#8fb8e8"></i><i style="background:#c6a4e0"></i></div></div>
+      </article>
+      <article class="svc" data-reveal data-delay="240">
+        <div class="photo c" aria-hidden="true"></div>
+        <div class="panel"><small>은행 AI</small><h3>궁금한 게 생기면<br>언제든 물어보세요</h3><div class="input">메시지를 적어 주세요</div></div>
+        <div class="amount" aria-hidden="true">모은 금액<b>2,400,000원</b></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="facts inner" id="facts" aria-labelledby="facts-h">
+    <h2 id="facts-h">숫자로 보는 은행</h2>
+    <div class="fact-row">
+      <button class="fact chart" type="button" data-demo="비공식 스터디: 실적 자료는 제공하지 않아요." data-chart><svg viewBox="0 0 300 140" aria-hidden="true"><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2a9fb5" stop-opacity=".45"/><stop offset="1" stop-color="#2a9fb5" stop-opacity="0"/></linearGradient></defs><path d="M0 70 L60 100 L120 104 L190 48 L260 18 L260 140 L0 140Z" fill="url(#fill)"/><path class="line" d="M0 70 L60 100 L120 104 L190 48 L260 18"/><circle cx="260" cy="18" r="6" fill="#2a9fb5"/></svg><span>실적 발표</span><i class="go" aria-hidden="true">&rarr;</i></button>
+      <button class="fact room" type="button" data-demo="비공식 스터디: 공시 자료는 제공하지 않아요."><span>경영 공시</span><i class="go" aria-hidden="true">&rarr;</i></button>
+      <button class="fact esg" type="button" data-demo="비공식 스터디: ESG 보고서는 제공하지 않아요."><strong aria-hidden="true">AAA</strong><span>ESG</span><i class="go" aria-hidden="true">&rarr;</i></button>
+    </div>
+  </section>
+
+  <section class="stories inner" id="stories" aria-labelledby="stories-h">
+    <h2 id="stories-h">3분이면 보는<br>돈 공부 영상</h2>
+    <div class="carousel" data-carousel>
+      <div class="car-copy">
+        <div class="car-top"><span class="yt"><i aria-hidden="true"></i>영상 시리즈</span><div class="arrows"><button type="button" aria-label="이전 이야기" data-prev>&larr;</button><button type="button" aria-label="다음 이야기" data-next>&rarr;</button></div></div>
+        <div class="car-text" aria-live="polite">
+          <div class="slide-copy"><h3>월급날 편 &lt;들어오자마자 나누기&gt;</h3><p>월급이 들어오는 날, 쓸 돈과 모을 돈을 자동으로 나누는 법을 3분 안에 알려드려요.</p></div>
+                    <button class="dark-btn" type="button" data-demo="비공식 스터디: 영상은 연결되어 있지 않아요.">자세히 보기</button>
+        </div>
+      </div>
+      <div class="car-stage" aria-hidden="true">
+        <div class="cal"><div class="cal-top" data-cal-month>2026 SEPTEMBER</div><div class="cal-day" data-cal-day>25</div></div>
+        <div class="progress"><i data-on></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="inner" id="links" aria-labelledby="links-h">
+    <h2 class="sg-visually-hidden" id="links-h">바로가기</h2>
+    <div class="links">
+      <button type="button" data-demo="비공식 스터디: '금융 기술 연구' 페이지는 없어요.">금융 기술 연구 <span aria-hidden="true">&#8599;</span></button>
+      <button type="button" data-demo="비공식 스터디: '기술 블로그' 페이지는 없어요.">기술 블로그 <span aria-hidden="true">&#8599;</span></button>
+      <button type="button" data-demo="비공식 스터디: '광고 문의' 페이지는 없어요.">광고 문의 <span aria-hidden="true">&#8599;</span></button>
+      <button type="button" data-demo="비공식 스터디: '인증서' 페이지는 없어요.">인증서 <span aria-hidden="true">&#8599;</span></button>
+      <button type="button" data-demo="비공식 스터디: '제휴 문의' 페이지는 없어요.">제휴 문의 <span aria-hidden="true">&#8599;</span></button>
+      <a href="../">모든 스터디 <span aria-hidden="true">&#8599;</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="inner">
+    <div class="foot">
+      <div><strong>kakaobank</strong><p style="margin-block-start:10px">Unofficial 브랜드 스터디. 카카오뱅크와 무관하며 로고·사진·카피를 사용하지 않았습니다.</p></div>
+      <div><h3>서비스</h3><p>예금 &middot; 대출 &middot; 모임</p></div>
+      <div><h3>스터디</h3><p><a href="../">StyleGallery 쇼케이스</a></p></div>
+      <div><h3>서체</h3><p>Pretendard</p></div>
+    </div>
+    <p class="legal">StyleGallery showcase &middot; 모든 문구는 새로 작성되었습니다.</p>
+  </div>
+</footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of KakaoBank by StyleGallery. Not affiliated with KakaoBank.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene, range } = window.SG;
+  // Hero phone types its answer; the phone drifts upward as the hero scrolls away.
+  const bubble = document.querySelector("[data-typing]");
+  const text = bubble.dataset.typing;
+  if (reduced) bubble.textContent = text;
+  else { let i = 0; const t = () => { bubble.textContent = text.slice(0, i); if (i++ < text.length) setTimeout(t, 34); }; setTimeout(t, 700); }
+  const hero = document.querySelector("[data-hero]");
+  if (!reduced) scene(hero, (p) => hero.style.setProperty("--hp", String(p)), { start: "top" });
+  // Collage parallax: each painted photo moves at its own rate.
+  const collage = document.querySelector("[data-collage]");
+  if (!reduced) scene(collage, (p) => collage.style.setProperty("--py", String(p * 2 - 1)), { start: "enter" });
+  // Chart line draws when the facts row arrives.
+  const chart = document.querySelector("[data-chart]");
+  if (!reduced) { chart.style.setProperty("--dash", "600"); new IntersectionObserver(([e], o) => { if (e.isIntersecting) { chart.style.setProperty("--dash", "0"); o.disconnect(); } }, { threshold: 0.4 }).observe(chart); }
+  // Carousel: arrows change the story; the calendar flips to its date.
+  const car = document.querySelector("[data-carousel]");
+  const copy = car.querySelector(".slide-copy");
+  const stories = [[copy.querySelector("h3").textContent, copy.querySelector("p").textContent], ["여행 편 <떠나기 전 한 번에>", "환전, 여행자 보험, 모임 정산까지 떠나기 전날 한 번에 끝내는 순서를 정리했어요."], ["첫 집 편 <계약서 읽는 밤>", "처음 전세를 구할 때 꼭 봐야 할 서류 세 가지를 은행 AI와 함께 짚어봐요."]];
+  const bars = [...car.querySelectorAll(".progress i")];
+  const days = [["2026 SEPTEMBER", "25"], ["2026 OCTOBER", "03"], ["2026 NOVEMBER", "14"]];
+  let at = 0;
+  const show = (n) => {
+    at = (n + stories.length) % stories.length;
+    copy.querySelector("h3").textContent = stories[at][0]; copy.querySelector("p").textContent = stories[at][1];
+    bars.forEach((b, i) => b.toggleAttribute("data-on", i === at));
+    car.querySelector("[data-cal-month]").textContent = days[at][0];
+    const day = car.querySelector("[data-cal-day]");
+    day.textContent = days[at][1];
+    if (!reduced) day.animate([{ transform: "rotateX(90deg)" }, { transform: "none" }], { duration: 500, easing: "cubic-bezier(.16,1,.3,1)" });
+  };
+  car.querySelector("[data-prev]").addEventListener("click", () => show(at - 1));
+  car.querySelector("[data-next]").addEventListener("click", () => show(at + 1));
+})();
+</script>
+</body>
+</html>

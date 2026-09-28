@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Linear - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Linear's dark, precise product-page language.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23e6e6e6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root {
+    --bg: #08090a; --bg-2: #0f1011; --bg-3: #161718; --line: rgb(255 255 255 / 0.08); --line-2: rgb(255 255 255 / 0.14);
+    --text: #f7f8f8; --text-2: #b4b8bf; --text-3: #8a8f98; --indigo: #5e6ad2; --teal: #4cc3c0; --lime: #e4f222;
+    --sans: "Inter", "Helvetica Neue", Arial, sans-serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --sg-header: 76px; --sg-focus: #8b95ff; --gutter: clamp(20px, 5.5vw, 80px); --max: 1280px;
+  }
+  body { background: var(--bg); color: var(--text); font: 400 16px/1.6 var(--sans); letter-spacing: -0.01em; }
+  .wrap { margin-inline: auto; max-inline-size: calc(var(--max) + var(--gutter) * 2); padding-inline: var(--gutter); }
+  .mono { color: var(--text-3); font: 500 11px/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* Header: glass bar with hairline, fixed across every scene. */
+  .site-header { backdrop-filter: blur(16px) saturate(140%); background: rgb(8 9 10 / 0.72); border-bottom: 1px solid transparent; inset: 0 0 auto; position: fixed; transition: border-color 0.3s; z-index: 50; }
+  .site-header[data-scrolled] { border-bottom-color: var(--line); }
+  .site-header .wrap { align-items: center; display: flex; gap: 24px; block-size: 64px; }
+  .brand { align-items: center; color: var(--text); display: flex; font-weight: 600; gap: 10px; text-decoration: none; letter-spacing: -0.02em; }
+  .brand-mark { background: conic-gradient(from 200deg, #f7f8f8, #8a8f98, #f7f8f8); border-radius: 50%; block-size: 18px; inline-size: 18px; }
+  .site-nav { display: flex; gap: 4px; margin-inline-start: auto; }
+  .site-nav a { border-radius: 8px; color: var(--text-2); font-size: 13px; padding: 6px 10px; text-decoration: none; transition: color 0.2s, background 0.2s; }
+  .site-nav a:hover { background: var(--bg-3); color: var(--text); }
+  .header-actions { align-items: center; display: flex; gap: 8px; border-inline-start: 1px solid var(--line); padding-inline-start: 16px; }
+  .btn { align-items: center; border: 1px solid transparent; border-radius: 999px; display: inline-flex; font: 500 13px/1 var(--sans); gap: 6px; padding: 9px 14px; text-decoration: none; transition: transform 0.2s, background 0.2s; }
+  .btn-light { background: var(--text); color: #08090a; }
+  .btn-light:hover { background: #fff; }
+  .btn-ghost { background: var(--bg-2); border-color: var(--line-2); color: var(--text); }
+  .btn-text { background: none; color: var(--text-2); border: 0; padding-inline: 6px; }
+  @media (max-width: 860px) { .site-nav { display: none; } .header-actions { margin-inline-start: auto; border: 0; } }
+
+  /* Hero */
+  .hero { padding-block: clamp(140px, 20vh, 200px) 0; position: relative; }
+  .hero::before { background: radial-gradient(60% 50% at 50% 100%, rgb(94 106 210 / 0.16), transparent 70%); content: ""; inset: 30% 0 0; pointer-events: none; position: absolute; }
+  .hero h1 { font-size: clamp(2.6rem, 6.4vw, 4.6rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1.02; max-inline-size: 13ch; text-wrap: balance; }
+  .hero-sub { align-items: end; display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: space-between; margin-block-start: 28px; }
+  .hero-sub p { color: var(--text-2); font-size: 17px; max-inline-size: 42ch; }
+  .hero-news { align-items: center; color: var(--text-2); display: inline-flex; font-size: 13px; gap: 10px; text-decoration: none; }
+  .hero-news b { color: var(--text); font-weight: 500; }
+  .stage { margin-block-start: 72px; perspective: 1800px; position: relative; }
+  .app { background: var(--bg-2); border: 1px solid var(--line-2); border-radius: 14px; box-shadow: 0 40px 120px -20px rgb(0 0 0 / 0.8), 0 0 0 1px rgb(255 255 255 / 0.02) inset; display: grid; grid-template-columns: 220px 1fr; min-block-size: 560px; overflow: hidden; transform-origin: 50% 0; }
+  .app-side { background: #0c0d0e; border-inline-end: 1px solid var(--line); font-size: 13px; padding: 14px 10px; color: var(--text-2); }
+  .app-side li { align-items: center; border-radius: 6px; display: flex; gap: 8px; padding: 5px 8px; }
+  .app-side li.on { background: var(--bg-3); color: var(--text); }
+  .app-side .grp { color: var(--text-3); font-size: 11px; margin-block: 14px 4px; padding-inline: 8px; }
+  .dot { border-radius: 50%; block-size: 8px; flex: none; inline-size: 8px; background: var(--text-3); }
+  .app-main { display: grid; grid-template-columns: 1fr 340px; }
+  .issue { padding: 22px 30px; border-inline-end: 1px solid var(--line); }
+  .crumb { color: var(--text-3); font-size: 12px; margin-block-end: 26px; }
+  .issue h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; margin-block-end: 10px; }
+  .issue p { color: var(--text-2); font-size: 14px; max-inline-size: 52ch; }
+  code.inline { background: var(--bg-3); border: 1px solid var(--line); border-radius: 4px; font: 12px var(--mono); padding: 1px 5px; }
+  .activity { border-block-start: 1px solid var(--line); margin-block-start: 26px; padding-block-start: 18px; font-size: 13px; color: var(--text-2); }
+  .activity li { display: flex; gap: 10px; padding-block: 7px; }
+  .avatar { border-radius: 50%; block-size: 18px; flex: none; inline-size: 18px; }
+  .agent { background: #0c0d0e; display: flex; flex-direction: column; font-size: 13px; padding: 18px; gap: 12px; }
+  .agent-card { background: var(--bg-3); border: 1px solid var(--line); border-radius: 10px; padding: 12px; color: var(--text-2); }
+  .agent-card strong { color: var(--text); font-weight: 500; }
+  .typing { color: var(--text-2); min-block-size: 3.2em; }
+  .caret { animation: blink 1s steps(1) infinite; background: var(--text); display: inline-block; block-size: 1em; inline-size: 2px; vertical-align: -2px; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .result { opacity: 0; transform: translateY(6px); transition: opacity 0.5s, transform 0.5s; }
+  .result[data-on] { opacity: 1; transform: none; }
+  .no-js-result .result { opacity: 1; transform: none; }
+  @media (max-width: 1000px) { .app { grid-template-columns: 1fr; } .app-side { display: none; } .app-main { grid-template-columns: 1fr; } .agent { display: none; } }
+
+  /* Logos + statement */
+  .proof { padding-block: 140px 60px; }
+  .logos { align-items: center; display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .logo { color: var(--text-2); font-size: 19px; font-weight: 600; letter-spacing: -0.03em; text-align: center; transition: color 0.3s; }
+  .logo:nth-child(2n) { font-family: var(--mono); font-size: 15px; font-weight: 500; letter-spacing: 0; }
+  .logo:nth-child(3n) { font-style: italic; font-weight: 500; }
+  .logos:hover .logo { color: var(--text-3); } .logos .logo:hover { color: var(--text); }
+  .statement { font-size: clamp(1.6rem, 3.3vw, 2.6rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.2; margin-block-start: 110px; max-inline-size: 30ch; }
+  .statement .w { color: var(--text-3); transition: color 0.25s; }
+  .statement .w[data-lit] { color: var(--text); }
+  .figs { border-block: 1px solid var(--line); display: grid; grid-template-columns: repeat(3, 1fr); margin-block-start: 90px; }
+  .fig { border-inline-start: 1px solid var(--line); padding: 28px 28px 36px; }
+  .fig:first-child { border: 0; padding-inline-start: 0; }
+  .fig svg { block-size: 220px; inline-size: 100%; margin-block: 18px 22px; }
+  .fig svg * { fill: none; stroke: #6f747c; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .fig:hover svg * { stroke: #9aa0a8; }
+  .fig h3 { font-size: 17px; font-weight: 500; }
+  .fig p { color: var(--text-2); font-size: 14px; margin-block-start: 6px; max-inline-size: 36ch; }
+  @media (max-width: 860px) { .figs { grid-template-columns: 1fr; } .fig { border: 0; border-block-start: 1px solid var(--line); padding-inline: 0; } }
+
+  /* Feature scenes share one template: two-column header, then a masked product surface. */
+  .feature { padding-block: 150px 40px; border-block-start: 1px solid var(--line); }
+  .feature-head { display: grid; gap: 20px 40px; grid-template-columns: 1fr 1fr; }
+  .feature-head h2 { font-size: clamp(2rem, 3.6vw, 3rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; }
+  .feature-head h2 span { color: var(--text-3); display: block; }
+  .feature-head p { color: var(--text-2); font-size: 17px; max-inline-size: 46ch; }
+  .more { color: var(--text-2); display: inline-block; font-size: 14px; margin-block-start: 18px; text-decoration: none; }
+  .more:hover { color: var(--text); }
+  .surface { margin-block-start: 80px; min-block-size: 460px; position: relative; -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent), linear-gradient(to right, #000 70%, transparent); mask-image: linear-gradient(to bottom, #000 62%, transparent); }
+  .index { border-block-start: 1px solid var(--line); display: grid; gap: 10px; grid-template-columns: 1fr 1fr 1fr; margin-block-start: 20px; padding-block: 18px; font-size: 14px; color: var(--text-2); }
+  .index ul { display: grid; gap: 6px; grid-template-columns: 1fr 1fr; grid-column: 2 / 4; }
+  .index li::after { color: var(--text-3); content: " +"; }
+  @media (max-width: 860px) { .feature-head { grid-template-columns: 1fr; } .index { grid-template-columns: 1fr; } .index ul { grid-column: auto; } }
+
+  .panel { background: var(--bg-2); border: 1px solid var(--line-2); border-radius: 12px; font-size: 13px; }
+  .thread { inline-size: min(460px, 100%); padding: 16px; position: relative; z-index: 2; }
+  .msg { display: flex; gap: 10px; margin-block: 12px; color: var(--text-2); }
+  .msg b { color: var(--text); font-weight: 500; }
+  .composer { border: 1px solid var(--line-2); border-radius: 10px; margin-block-start: 16px; padding: 12px; color: var(--text); }
+  .mention { background: rgb(94 106 210 / 0.25); border-radius: 4px; color: #c7cbff; padding: 0 4px; }
+  .board { display: grid; gap: 12px; grid-template-columns: repeat(4, 240px); inset: 30px 0 auto 360px; position: absolute; }
+  .col-h { color: var(--text-2); display: flex; gap: 8px; margin-block-end: 10px; font-size: 12px; }
+  .card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; margin-block-end: 10px; padding: 12px; color: var(--text-2); font-size: 12px; }
+  .card b { color: var(--text); display: block; font-weight: 500; margin-block: 2px 8px; }
+  .chip { border: 1px solid var(--line-2); border-radius: 999px; display: inline-block; font-size: 11px; margin-inline-end: 4px; padding: 1px 8px; }
+  @media (max-width: 860px) { .board { display: none; } }
+
+  .roadmap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; }
+  .gantt { padding: 20px 0; position: relative; }
+  .gantt-scale { color: var(--text-3); display: grid; font: 11px var(--mono); grid-template-columns: repeat(12, 1fr); margin-block-end: 18px; }
+  .bar { background: linear-gradient(90deg, rgb(94 106 210 / 0.6), rgb(94 106 210 / 0.15)); border: 1px solid rgb(139 149 255 / 0.4); border-radius: 6px; block-size: 26px; color: var(--text); font-size: 12px; margin-block: 16px; padding: 4px 10px; white-space: nowrap; transform-origin: left; }
+  .bar.late { background: linear-gradient(90deg, rgb(235 87 87 / 0.5), rgb(235 87 87 / 0.08)); border-color: rgb(235 87 87 / 0.45); }
+  .chart { padding: 18px; position: relative; }
+  .chart canvas { block-size: 380px; inline-size: 100%; }
+  @media (max-width: 860px) { .roadmap { grid-template-columns: 1fr; } .gantt { display: none; } }
+
+  .agents { display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(240px, 1fr)); }
+  .agents .panel { padding: 14px; min-block-size: 300px; }
+  .agents .panel:nth-child(1), .agents .panel:nth-child(4) { opacity: 0.45; }
+  .agent-name { align-items: center; display: flex; gap: 8px; color: var(--text); margin-block-end: 14px; }
+  .step { color: var(--text-2); margin-block: 8px; }
+  .step::before { color: var(--teal); content: "\2713  "; }
+  .step.run::before { animation: spin 1s linear infinite; content: "\25CC  "; display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 1000px) { .agents { grid-template-columns: 1fr 1fr; } .agents .panel:nth-child(n+3) { display: none; } }
+  @media (max-width: 560px) { .agents { grid-template-columns: 1fr; } .agents .panel:nth-child(n+2) { display: none; } .agents .panel:nth-child(2) { display: block; opacity: 1; } }
+
+  .review { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 14px; }
+  .review .panel { padding: 14px; }
+  .ilist li { align-items: center; border-block-end: 1px solid var(--line); color: var(--text-2); display: flex; gap: 10px; padding-block: 8px; }
+  .diff { font: 12px/1.75 var(--mono); overflow: hidden; }
+  .diff .ln { color: #5a5f67; display: inline-block; inline-size: 2.5em; }
+  .diff .del { background: rgb(235 87 87 / 0.12); color: #f2a8a8; display: block; }
+  .diff .add { background: rgb(76 195 110 / 0.12); color: #9ee6b3; display: block; }
+  .diff .k { color: #c7cbff; } .diff .s { color: #9ee6b3; }
+  @media (max-width: 860px) { .review { grid-template-columns: 1fr; } .review .panel:first-child { display: none; } }
+
+  /* Testimonials: the only bright surfaces on the page. */
+  .quotes { display: grid; gap: 14px; grid-template-columns: 1.6fr 1fr; padding-block: 140px 60px; }
+  .quote { border-radius: 16px; color: #111; display: flex; flex-direction: column; justify-content: space-between; min-block-size: 380px; padding: 28px; position: relative; overflow: hidden; }
+  .quote blockquote { font-size: clamp(1.3rem, 2.2vw, 1.75rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.2; margin: 0; max-inline-size: 22ch; position: relative; }
+  .quote figcaption { font-size: 13px; position: relative; }
+  .quote figcaption span { display: block; color: #333; }
+  .q1 { background: linear-gradient(135deg, #f3f5ff, #dfe6ff 45%, #e9f6ff); }
+  .q1::after { border: 36px solid rgb(94 106 210 / 0.08); border-radius: 50%; block-size: 520px; content: ""; inline-size: 520px; inset: auto -120px -200px auto; position: absolute; }
+  .q2 { background: var(--lime); }
+  .scale-line { color: var(--text-2); font-size: 15px; margin-block-start: 20px; }
+  @media (max-width: 860px) { .quotes { grid-template-columns: 1fr; } .quote { min-block-size: 300px; } }
+
+  .final { padding-block: 160px 120px; text-align: center; }
+  .final h2 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1; }
+  .final h2 span { color: var(--text-3); display: block; }
+  .final .row { display: flex; gap: 10px; justify-content: center; margin-block-start: 32px; }
+  .foot { border-block-start: 1px solid var(--line); display: grid; gap: 30px; grid-template-columns: 2fr repeat(4, 1fr); padding-block: 60px; font-size: 13px; color: var(--text-2); }
+  .foot h3 { color: var(--text); font-size: 13px; font-weight: 500; margin-block-end: 12px; }
+  .foot li { padding-block: 3px; }
+  @media (max-width: 860px) { .foot { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header" data-header>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Linear study home"><span class="brand-mark" aria-hidden="true"></span>Linear</a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#intake">Intake</a>
+      <a href="#plan">Plan</a>
+      <a href="#agents">Agents</a>
+      <a href="#ship">Ship</a>
+      <a href="#customers">Customers</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn btn-text" type="button" data-demo="Log in is not available in this unofficial study.">Log in</button>
+      <button class="btn btn-light" type="button" data-demo="Sign up is a demo: this unofficial study creates no accounts.">Sign up</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <div class="wrap">
+      <h1 data-split>The quiet engine behind teams that ship with agents</h1>
+      <div class="hero-sub">
+        <p data-reveal data-delay="300">Issues, plans, and code review in one fast surface, built for people and the agents working next to them.</p>
+        <a class="hero-news" href="#agents" data-reveal data-delay="450"><b>New</b> Agents that pick up issues on their own &rarr;</a>
+      </div>
+      <div class="stage">
+        <figure class="app" data-ambient role="img" aria-label="Product mockup: an issue view with an agent drafting a fix in a side panel" data-hero-app>
+          <div aria-hidden="true" style="display:contents">
+            <div class="app-side">
+              <ul role="list">
+                <li class="on"><span class="dot" style="background:#8b95ff"></span>Inbox</li>
+                <li><span class="dot"></span>My issues</li>
+                <li><span class="dot"></span>Reviews</li>
+                <li><span class="dot"></span>Pulse</li>
+              </ul>
+              <div class="grp">Workspace</div>
+              <ul role="list">
+                <li><span class="dot" style="background:#4cc3c0"></span>Initiatives</li>
+                <li><span class="dot" style="background:#f2c94c"></span>Projects</li>
+                <li><span class="dot" style="background:#eb5757"></span>Cycles</li>
+              </ul>
+              <div class="grp">Team Orbit</div>
+              <ul role="list">
+                <li><span class="dot"></span>Triage</li>
+                <li><span class="dot"></span>Active</li>
+                <li><span class="dot"></span>Backlog</li>
+              </ul>
+            </div>
+            <div class="app-main">
+              <div class="issue">
+                <div class="crumb">Orbit &rsaquo; ORB-4127</div>
+                <h3>Cold start feels sluggish on older phones</h3>
+                <p>First paint waits for the full <code class="inline">session_state</code> sync. Render cached rows first, hydrate the rest in the background, and log startup timing.</p>
+                <ul class="activity" role="list">
+                  <li><span class="avatar" style="background:#e0a36b"></span>Mara filed this from a support thread &middot; 4m</li>
+                  <li><span class="avatar" style="background:#8b95ff"></span>Triage routed it to Orbit &middot; 3m</li>
+                  <li><span class="avatar" style="background:#4cc3c0"></span>Agent picked it up and opened a draft &middot; now</li>
+                </ul>
+              </div>
+              <div class="agent">
+                <div class="agent-card"><strong>Agent</strong> &middot; working<br>Render cached rows before sync and add a startup timer.</div>
+                <div class="typing" data-typing="Read 6 files. Moved the sync behind first paint and added a cold-start metric. Opening a draft now."></div>
+                <div class="agent-card result" data-result><strong>Changed 3 files</strong> &middot; +48 &minus;12<br>Draft: render cached rows first</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" aria-labelledby="proof-label">
+    <div class="wrap">
+      <div class="logos" aria-label="Example customer names (fictional)">
+        <span class="logo">Northwind</span><span class="logo">helio.dev</span><span class="logo">Parallax</span><span class="logo">Quanta</span><span class="logo">driftwood</span><span class="logo">Meridian</span><span class="logo">kite&amp;co</span>
+      </div>
+      <p class="mono" id="proof-label" style="margin-block-start:28px">Trusted by teams building what comes next (fictional names)</p>
+      <p class="statement" data-statement>Planning, building, and shipping, finally in one quiet place. Made for teams where agents now carry part of the work, and everyone can still see the whole line.</p>
+      <div class="figs">
+        <article class="fig" data-reveal>
+          <span class="mono">Fig 0.1</span>
+          <svg viewBox="0 0 300 220" aria-hidden="true"><path d="M150 40 250 90 150 140 50 90Z"/><path d="M50 90v24l100 50 100-50V90"/><path d="M50 114v24l100 50 100-50v-24"/><path d="M50 138v24l100 50 100-50v-24"/><ellipse cx="150" cy="70" rx="40" ry="16"/><path d="M110 70a40 40 0 0 1 80 0"/></svg>
+          <h3>Opinionated by default</h3>
+          <p>Shaped by the habits of teams that ship weekly, so the defaults already work.</p>
+        </article>
+        <article class="fig" data-reveal data-delay="120">
+          <span class="mono">Fig 0.2</span>
+          <svg viewBox="0 0 300 220" aria-hidden="true"><path d="M100 60 140 40 180 60 140 80Z"/><path d="M100 60v44l40 20V80M180 60v44l-40 20"/><path d="M150 110 190 90 230 110 190 130Z"/><path d="M150 110v44l40 20v-44M230 110v44l-40 20"/><path d="M60 120 100 100 140 120 100 140Z"/><path d="M60 120v44l40 20v-44M140 120v44l-40 20"/></svg>
+          <h3>Agents as teammates</h3>
+          <p>Hand an issue to an agent, watch its steps, and review the result like any other change.</p>
+        </article>
+        <article class="fig" data-reveal data-delay="240">
+          <span class="mono">Fig 0.3</span>
+          <svg viewBox="0 0 300 220" aria-hidden="true"><path d="M40 190V150l20-10v40ZM80 190V130l20-10v60ZM120 190V110l20-10v80ZM160 190V90l20-10v100ZM200 190V70l20-10v120ZM240 190V50l20-10v140Z"/><path d="M30 196h240"/></svg>
+          <h3>Fast on purpose</h3>
+          <p>Every view opens instantly and every action has a key, so momentum never stalls.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature" id="intake">
+    <div class="wrap">
+      <div class="feature-head">
+        <h2 data-reveal>Intake <span>without the inbox</span></h2>
+        <div data-reveal data-delay="120">
+          <p>Conversations and customer notes become issues that arrive already labeled, prioritized, and routed to the team that owns them.</p>
+          <a class="more" href="#plan">Next: planning &rarr;</a>
+        </div>
+      </div>
+      <figure class="surface" data-ambient role="img" aria-label="Mockup: a chat thread asks the tool to file an issue, next to a kanban board">
+        <div aria-hidden="true">
+          <div class="panel thread" data-reveal="left">
+            <div class="col-h"><b style="color:var(--text)">Thread</b> #mobile</div>
+            <div class="msg"><span class="avatar" style="background:#e0a36b"></span><div><b>mara</b> 10:42<br>Cold start on older phones takes forever after a day away.</div></div>
+            <div class="msg"><span class="avatar" style="background:#8b95ff"></span><div><b>teo</b> 10:43<br>We block first paint on a full sync. Cached rows would fix most of it.</div></div>
+            <div class="msg"><span class="avatar" style="background:#4cc3c0"></span><div><b>ines</b> 10:44<br>Let's also time startup so we know how often it bites.</div></div>
+            <div class="composer"><span class="mention">@Linear</span> file this and assign it to me<span class="caret"></span></div>
+          </div>
+          <div class="board">
+            <div><div class="col-h">&#9675; Todo &middot; 64</div>
+              <div class="card" data-reveal data-delay="100">ORB-4127<b>Cold start waits on sync</b><span class="chip">Perf</span><span class="chip">Mobile</span></div>
+              <div class="card" data-reveal data-delay="180">ORB-4120<b>Empty state flickers</b><span class="chip">Bug</span></div>
+              <div class="card" data-reveal data-delay="260">ORB-4102<b>Offline banner copy</b><span class="chip">Design</span></div></div>
+            <div><div class="col-h">&#9681; In progress &middot; 4</div>
+              <div class="card" data-reveal data-delay="140">ORB-4099<b>Batch avatar requests</b><span class="chip">Perf</span></div>
+              <div class="card" data-reveal data-delay="220">ORB-4081<b>Retry failed uploads</b><span class="chip">Bug</span></div></div>
+            <div><div class="col-h">&#9679; Done</div>
+              <div class="card" data-reveal data-delay="200">ORB-4066<b>Faster search index</b><span class="chip">Infra</span></div></div>
+            <div><div class="col-h">&#9680; Review</div>
+              <div class="card">ORB-4051<b>Theme tokens</b></div></div>
+          </div>
+        </div>
+      </figure>
+      <div class="index"><span>Features</span><ul role="list"><li>Triage</li><li>Integrations</li><li>Customer requests</li><li>Forms</li></ul></div>
+    </div>
+  </section>
+
+  <section class="feature" id="plan">
+    <div class="wrap">
+      <div class="feature-head">
+        <h2 data-reveal>Planning <span>you can actually read</span></h2>
+        <div data-reveal data-delay="120">
+          <p>Roadmaps, initiatives, and cycle health on one timeline, with the numbers that tell you what is slipping before it does.</p>
+          <a class="more" href="#agents">Next: agents &rarr;</a>
+        </div>
+      </div>
+      <figure class="surface" data-ambient role="img" aria-label="Mockup: a gantt roadmap next to a scatter chart of cycle time by agent">
+        <div class="roadmap" aria-hidden="true">
+          <div class="gantt" data-gantt>
+            <div class="gantt-scale"><span>MAR</span><span>9</span><span>16</span><span>23</span><span>APR</span><span>6</span><span>13</span><span>20</span><span>MAY</span><span>4</span><span>11</span><span>18</span></div>
+            <div class="bar" style="inline-size:62%;margin-inline-start:4%">Visual refresh</div>
+            <div class="bar" style="inline-size:44%;margin-inline-start:22%">Split payments</div>
+            <div class="bar late" style="inline-size:58%;margin-inline-start:34%">Telemetry reliability</div>
+            <div class="bar" style="inline-size:36%;margin-inline-start:12%">Offline mode</div>
+            <div class="bar" style="inline-size:40%;margin-inline-start:50%">Public API v2</div>
+          </div>
+          <div class="panel chart"><div class="col-h"><b style="color:var(--text)">Cycle time by agent</b></div><canvas data-scatter width="600" height="380"></canvas></div>
+        </div>
+      </figure>
+      <div class="index"><span>Features</span><ul role="list"><li>Projects</li><li>Initiatives</li><li>Documents</li><li>Pulse</li></ul></div>
+    </div>
+  </section>
+
+  <section class="feature" id="agents">
+    <div class="wrap">
+      <div class="feature-head">
+        <h2 data-reveal>Agents <span>on the same board</span></h2>
+        <div data-reveal data-delay="120">
+          <p>Assign work to agents the way you assign it to people. Each one shows its plan, its steps, and a draft you can review.</p>
+          <a class="more" href="#ship">Next: shipping &rarr;</a>
+        </div>
+      </div>
+      <figure class="surface" data-ambient role="img" aria-label="Mockup: four agent panels working on different issues side by side">
+        <div class="agents" aria-hidden="true">
+          <div class="panel"><div class="agent-name"><span class="dot" style="background:#f2c94c"></span>Scout</div><div class="step">Summarized 14 requests</div><div class="step">Drafted a spec</div></div>
+          <div class="panel" data-reveal><div class="agent-name"><span class="dot" style="background:#8b95ff"></span>Builder</div><div class="step">Read issue ORB-4127</div><div class="step">Found the sync call</div><div class="step">Moved sync after paint</div><div class="step run">Running tests</div></div>
+          <div class="panel" data-reveal data-delay="140"><div class="agent-name"><span class="dot" style="background:#4cc3c0"></span>Reviewer</div><div class="step">Checked the draft</div><div class="step">Asked for a timer</div><div class="step run">Waiting on Builder</div></div>
+          <div class="panel"><div class="agent-name"><span class="dot" style="background:#eb5757"></span>Writer</div><div class="step">Updated the changelog</div></div>
+        </div>
+      </figure>
+      <div class="index"><span>Features</span><ul role="list"><li>Agents</li><li>Automations</li><li>Insights</li><li>Coding sessions</li></ul></div>
+    </div>
+  </section>
+
+  <section class="feature" id="ship">
+    <div class="wrap">
+      <div class="feature-head">
+        <h2 data-reveal>Review <span>and ship in one pass</span></h2>
+        <div data-reveal data-delay="120">
+          <p>Diffs sit next to the issue that asked for them, so review has context and fewer comments go back and forth.</p>
+          <a class="more" href="#customers">Next: customers &rarr;</a>
+        </div>
+      </div>
+      <figure class="surface" data-ambient role="img" aria-label="Mockup: an issue list next to a code diff">
+        <div class="review" aria-hidden="true">
+          <div class="panel ilist"><div class="col-h"><b style="color:var(--text)">In review &middot; 3</b></div><ul role="list"><li><span class="dot" style="background:#f2c94c"></span>ORB-4127 Render cached rows first</li><li><span class="dot" style="background:#f2c94c"></span>ORB-4120 Stable empty state</li><li><span class="dot" style="background:#f2c94c"></span>ORB-4099 Batch avatars</li><li><span class="dot" style="background:#8b95ff"></span>ORB-4081 Upload retries</li><li><span class="dot" style="background:#8b95ff"></span>ORB-4066 Search index</li></ul></div>
+          <div class="panel diff" data-reveal="fade"><pre style="margin:0"><span class="ln">12</span><span class="k">import</span> { useSession } <span class="k">from</span> <span class="s">"./session"</span>
+<span class="ln">13</span><span class="k">import</span> { cachedRows } <span class="k">from</span> <span class="s">"./cache"</span>
+<span class="del"><span class="ln">18</span>  await session.syncAll()</span><span class="add"><span class="ln">18</span>  render(cachedRows())</span><span class="add"><span class="ln">19</span>  queueMicrotask(() =&gt; session.syncAll())</span><span class="add"><span class="ln">20</span>  metrics.mark(<span class="s">"cold_start"</span>)</span><span class="ln">21</span>  <span class="k">return</span> view
+</pre></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap" id="customers" aria-labelledby="customers-h">
+    <h2 class="sg-visually-hidden" id="customers-h">What customers say</h2>
+    <div class="quotes">
+      <figure class="quote q1" data-reveal>
+        <blockquote>&ldquo;Our planning meetings got shorter because the board already told the story.&rdquo;</blockquote>
+        <figcaption><b>Sana Okafor</b><span>Engineering lead, Northwind (fictional)</span></figcaption>
+      </figure>
+      <figure class="quote q2" data-reveal data-delay="120">
+        <blockquote>&ldquo;It is the first tool our agents and our people both use without complaint.&rdquo;</blockquote>
+        <figcaption><b>Jonas Pike</b><span>CTO, Parallax (fictional)</span></figcaption>
+      </figure>
+    </div>
+    <p class="scale-line">Illustrative quotes written for this study. <a class="more" style="margin:0" href="#final">Try it &rarr;</a></p>
+  </section>
+
+  <section class="final wrap" id="final">
+    <h2 data-reveal>Built for what comes next. <span>Open today.</span></h2>
+    <div class="row">
+      <button class="btn btn-light" type="button" data-demo="Get started is a demo in this unofficial study; nothing is created." data-magnet>Get started</button>
+      <button class="btn btn-ghost" type="button" data-demo="Contact sales is a demo in this unofficial study; no message is sent.">Contact sales</button>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <div class="foot">
+      <div><span class="brand"><span class="brand-mark" aria-hidden="true"></span>Linear</span><p style="margin-block-start:12px;max-inline-size:32ch">Unofficial brand study. Not affiliated with Linear. Original copy; no logos or product imagery.</p></div>
+      <div><h3>Product</h3><ul role="list"><li>Intake</li><li>Plan</li><li>Agents</li><li>Ship</li></ul></div>
+      <div><h3>Study</h3><ul role="list"><li><a href="../">All studies</a></li><li><a href="#intake">Features</a></li></ul></div>
+      <div><h3>Type</h3><ul role="list"><li>Inter</li><li>JetBrains Mono</li></ul></div>
+      <div><h3>Gallery</h3><ul role="list"><li>StyleGallery</li><li>Showcase</li></ul></div>
+    </div>
+  </footer>
+</main>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Linear by StyleGallery. Not affiliated with or endorsed by Linear.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene, loop, range } = window.SG;
+  // Hero: the app starts tilted back and settles flat as the reader scrolls into it.
+  const app = document.querySelector("[data-hero-app]");
+  if (!reduced) scene(app, (p) => { const t = range(p, 0, 0.6); app.style.transform = `rotateX(${(1 - t) * 14}deg) scale(${0.95 + t * 0.05})`; app.style.opacity = String(0.85 + t * 0.15); }, { start: "enter" });
+
+  // Agent panel types its reply once, then reveals the result card.
+  const typing = document.querySelector("[data-typing]");
+  const result = document.querySelector("[data-result]");
+  const full = typing.dataset.typing;
+  if (reduced) { typing.textContent = full; result.dataset.on = "1"; }
+  else {
+    let i = 0;
+    const caret = document.createElement("span"); caret.className = "caret";
+    const tick = () => { typing.textContent = full.slice(0, i); typing.append(caret); if (i++ < full.length) setTimeout(tick, 22); else { caret.remove(); result.dataset.on = "1"; } };
+    setTimeout(tick, 900);
+  }
+
+  // Statement: words light up in reading order as the paragraph crosses the viewport.
+  const statement = document.querySelector("[data-statement]");
+  const words = statement.textContent.split(" ");
+  statement.innerHTML = words.map((w) => `<span class="w">${w}</span>`).join(" ");
+  const spans = [...statement.querySelectorAll(".w")];
+  if (reduced) spans.forEach((s) => s.dataset.lit = "1");
+  else scene(statement, (p) => { const n = Math.round(range(p, 0.25, 0.7) * spans.length); spans.forEach((s, i) => s.toggleAttribute("data-lit", i < n)); }, { start: "enter" });
+
+  // Scatter chart: points drift into their monthly clusters.
+  const canvas = document.querySelector("[data-scatter]");
+  const ctx = canvas.getContext("2d");
+  const pts = Array.from({ length: 220 }, (_, i) => ({ c: i % 4, y: Math.random(), j: Math.random() - 0.5, s: Math.random() * 6.28 }));
+  loop(canvas, (t) => {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    ctx.strokeStyle = "rgba(255,255,255,0.07)"; ctx.setLineDash([3, 5]);
+    for (let g = 1; g < 5; g++) { ctx.beginPath(); ctx.moveTo(0, (h / 5) * g); ctx.lineTo(w, (h / 5) * g); ctx.stroke(); }
+    ctx.setLineDash([]); ctx.strokeStyle = "rgba(235,87,87,0.6)"; ctx.beginPath(); ctx.moveTo(0, h * 0.28); ctx.lineTo(w, h * 0.22); ctx.stroke();
+    for (const p of pts) {
+      const cx = (w / 4) * (p.c + 0.5) + p.j * 50 + Math.sin(t / 900 + p.s) * 2;
+      const cy = h * (0.15 + p.y * 0.75) + Math.cos(t / 1100 + p.s) * 2;
+      ctx.fillStyle = p.c === 3 ? "rgba(76,195,192,0.35)" : "rgba(76,195,192,0.9)";
+      ctx.beginPath(); ctx.arc(cx, cy, 2.4, 0, 6.28); ctx.fill();
+    }
+  });
+
+  // Gantt bars grow from their start dates when the roadmap arrives.
+  const gantt = document.querySelector("[data-gantt]");
+  if (!reduced) new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); gantt.querySelectorAll(".bar").forEach((b, i) => b.animate([{ transform: "scaleX(0)" }, { transform: "none" }], { duration: 1100, delay: i * 90, easing: "cubic-bezier(.16,1,.3,1)", fill: "backwards" })); }).observe(gantt);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Arc - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Arc's playful indigo page: grainy blue ground, scalloped bands, and a browser window whose sidebar changes color as you scroll.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233139fb'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ffd2e0'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --indigo: #2f37e8; --indigo-2: #1f25b0; --cream: #fff8e6; --ink: #121433; --sans: "Space Grotesk", "Helvetica Neue", Arial, sans-serif; --serif: "Fraunces", Georgia, serif; --mono: "IBM Plex Mono", ui-monospace, monospace; --sg-header: 140px; --sg-focus: #ffd84d; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--indigo); color: #fff; font: 500 16px/1.55 var(--sans); }
+  /* Grain over the blue ground. */
+  .ground { background: var(--indigo); position: relative; isolation: isolate; }
+  .ground::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E"); content: ""; inset: 0; mix-blend-mode: overlay; opacity: .5; pointer-events: none; position: absolute; z-index: -1; }
+  .top { position: sticky; top: 0; z-index: 30; }
+  .nav { align-items: center; background: var(--indigo); display: flex; gap: 22px; padding: 12px clamp(16px, 3vw, 36px); }
+  .star { block-size: 26px; inline-size: 26px; }
+  .nav a { color: #fff; font-size: 13px; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .banner { align-items: center; background: linear-gradient(90deg, #ffd6ea, #e8e1ff 40%, #d8f2ff 70%, #fff1d6); color: var(--ink); display: flex; gap: 18px; justify-content: center; padding: 14px 16px 22px; position: relative; -webkit-mask: radial-gradient(9px at 50% 100%, #0000 98%, #000) 0 0 / 18px 100%; mask: radial-gradient(9px at 50% 100%, #0000 98%, #000) 0 0 / 18px 100%; }
+  .banner b { font: 800 clamp(16px, 2vw, 22px) var(--serif); }
+  .try { align-items: center; background: #121212; border: 0; border-radius: 999px; color: #fff; display: inline-flex; font: 500 13px var(--sans); gap: 8px; padding: 7px 14px; }
+  .try i { background: linear-gradient(135deg, #ff9ec7, #7aa7ff); block-size: 16px; border-radius: 4px; inline-size: 16px; }
+  @media (max-width: 700px) { .nav a:not(.home) { display: none; } .banner { flex-wrap: wrap; } }
+
+  .hero { padding: 90px 20px 0; text-align: center; }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-inline: auto; max-inline-size: 15ch; }
+  .press { font: 800 13px var(--serif); letter-spacing: .06em; margin-block: 20px 6px; text-transform: uppercase; }
+  .fyi { font-size: 13px; margin-inline: auto; max-inline-size: 48ch; }
+  .dl { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-block: 24px 60px; }
+  .dl button { border: 0; border-radius: 8px; font: 700 14px var(--sans); padding: 12px 18px; }
+  .dl .dl-mac { background: #fff; color: var(--indigo-2); }
+  .dl .dl-win { background: #131866; color: #fff; }
+
+  /* Scroll-driven browser: one sticky window, five states. */
+  .browse { position: relative; }
+  .sg-js .browse { block-size: 480vh; }
+  .browse .pin { display: grid; place-items: center; padding: 20px; }
+  .sg-js .browse .pin { block-size: 100vh; position: sticky; top: 0; }
+  .win { background: #fff; border-radius: 18px; box-shadow: 0 50px 90px -40px rgb(0 0 20 / .6); color: var(--ink); display: grid; grid-template-columns: 220px 1fr; inline-size: min(1160px, 100%); min-block-size: min(620px, 72vh); overflow: hidden; padding: 10px; }
+  .sidebar { background: var(--sb, #ff8a8a); border-radius: 12px; display: flex; flex-direction: column; font-size: 13px; gap: 4px; padding: 12px; transition: background .7s var(--ease); }
+  .sidebar .lights { display: flex; gap: 6px; margin-block-end: 10px; }
+  .sidebar .lights i { background: rgb(0 0 0 / .25); block-size: 10px; border-radius: 50%; inline-size: 10px; }
+  .url { background: rgb(255 255 255 / .55); border-radius: 8px; margin-block-end: 10px; padding: 6px 8px; font-size: 12px; }
+  .tab { border-radius: 8px; padding: 6px 8px; }
+  .tab.on { background: rgb(255 255 255 / .75); font-weight: 700; }
+  .page { border-radius: 10px; margin-inline-start: 10px; overflow: hidden; position: relative; }
+  .pane { inset: 0; opacity: 0; position: absolute; transition: opacity .6s var(--ease), transform .8s var(--ease); transform: scale(.98); padding: 24px; }
+  .pane[data-on] { opacity: 1; transform: none; }
+  .sg-js .pane:not([data-on]) { visibility: hidden; }
+  .gallery { display: grid; gap: 10px; grid-template-columns: 1.2fr 1fr 1fr; grid-template-rows: 1fr 1fr; block-size: 100%; }
+  .gallery i { border-radius: 4px; }
+  .gallery i:first-child { grid-row: span 2; }
+  .poster { background: #2f37e8; color: #fff; block-size: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .poster .h3 { display: block;  font: 700 clamp(22px, 3vw, 40px)/1 var(--sans); text-transform: uppercase; }
+  .poster .pp { display: block;  font: 12px/1.6 var(--mono); margin-block-start: 14px; }
+  .shop { background: #fdfbf6; block-size: 100%; }
+  .shop .h3 { display: block;  font: 800 28px var(--serif); margin-block-end: 14px; }
+  .shop .items { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); }
+  .shop .it i { aspect-ratio: 1; border-radius: 4px; display: block; }
+  .shop .it b { font: 600 14px var(--serif); display: block; margin-block-start: 6px; }
+  .zine { background: #fffdf2; block-size: 100%; }
+  .zine .h3 { display: block;  font: 800 44px var(--serif); }
+  .note { background: #f4f4f8; border-radius: 14px; box-shadow: 0 20px 40px -20px rgb(0 0 0 / .3); inset: auto 24px 24px auto; inline-size: 220px; padding: 14px; position: absolute; }
+  .swatches { display: flex; gap: 6px; margin-block-start: 10px; }
+  .swatches b { block-size: 16px; border-radius: 50%; inline-size: 16px; }
+  .stateline { color: #fff; font: 500 12px var(--mono); margin-block-start: 14px; text-align: center; letter-spacing: .1em; text-transform: uppercase; }
+  .static-note { display: none; }
+  html:not(.sg-js) .pane, html:not(.sg-js) .win { position: static; }
+  html:not(.sg-js) .page { display: grid; gap: 12px; }
+  html:not(.sg-js) .pane { opacity: 1; transform: none; min-block-size: 280px; }
+  @media (prefers-reduced-motion: reduce) { .sg-js .browse { block-size: auto; } .sg-js .browse .pin { block-size: auto; position: static; } .sg-js .pane:not([data-on]) { visibility: visible; } .pane { opacity: 1; position: static; transform: none; min-block-size: 280px; } .page { display: grid; gap: 12px; } }
+  @media (max-width: 760px) { .win { grid-template-columns: 1fr; } .sidebar { flex-direction: row; flex-wrap: wrap; } .sidebar .lights, .url { display: none; } .page { margin: 10px 0 0; min-block-size: 360px; } .poster { grid-template-columns: 1fr; } .shop .items { grid-template-columns: 1fr 1fr; } .note { display: none; } }
+
+  .scallop { block-size: 18px; background: radial-gradient(9px at 50% 0, var(--indigo) 98%, #0000) 0 0 / 18px 100%; }
+  .love { background: var(--cream); color: #1f25b0; padding: 50px clamp(16px, 4vw, 60px) 70px; text-align: center; }
+  .love .icons { font-size: 26px; letter-spacing: .4em; margin-block-end: 26px; }
+  .quotes { display: grid; gap: 30px; grid-template-columns: repeat(4, 1fr); }
+  .quotes blockquote { font: 700 18px/1.3 var(--sans); margin: 0; }
+  .quotes cite { border: 1.5px solid #1f25b0; border-radius: 999px; display: inline-block; font: 500 11px var(--mono); font-style: normal; margin-block-start: 14px; padding: 2px 10px; }
+  @media (max-width: 860px) { .quotes { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .quotes { grid-template-columns: 1fr; } }
+  .scallop.down { background: radial-gradient(9px at 50% 100%, var(--indigo) 98%, var(--cream)) 0 0 / 18px 100%; }
+  .final { padding: 70px 20px 90px; text-align: center; }
+  .final h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+  .final h2 em { font-family: var(--serif); }
+  .final button { background: #fff; border: 0; border-radius: 8px; color: var(--indigo-2); font: 700 14px var(--sans); margin-block-start: 18px; padding: 12px 20px; }
+  footer { font-size: 13px; padding: 20px clamp(16px, 3vw, 36px) 40px; }
+  footer a { color: #fff; }
+  .pane .pp { display: block; }
+</style>
+</head>
+<body class="ground">
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="nav">
+    <a class="home" href="#top" aria-label="Arc study home"><svg class="star" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 2 16 10 24 10 18 15 20 24 13 19 6 24 8 15 2 10 10 10Z" fill="#ff7aa8" stroke="#fff" stroke-width="1.5"/></svg></a>
+    <nav aria-label="Sections" style="display:flex;gap:22px"><a href="#browse">Tour</a><a href="#love">Loved by</a><a href="#get">Get it</a></nav>
+  </div>
+  <div class="banner"><b>A calmer browser for the next few years</b><button class="try" type="button" data-demo="The follow-up product is a demo in this unofficial study."><i></i>Take a look →</button></div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <h1 data-split>The browser you keep forgetting is a browser.</h1>
+    <p class="press" data-reveal data-delay="300">— said a fictional tech weekly</p>
+    <p class="fyi" data-reveal data-delay="400">Heads up: this study page is not a product. It borrows only the mood, never the words or the logo.</p>
+    <div class="dl" data-reveal data-delay="500"><button class="dl-mac" type="button" data-demo="There is no download in this unofficial study.">Download for Mac</button><button class="dl-win" type="button" data-demo="There is no download in this unofficial study.">Download for Windows</button></div>
+  </section>
+
+  <section class="browse" id="browse" data-browse aria-label="A tour of one browser window changing with your day">
+    <div class="pin">
+      <div style="inline-size:min(1160px,100%)">
+        <div class="win">
+          <div class="sidebar" data-sidebar aria-hidden="true">
+            <div class="lights"><i></i><i></i><i></i></div>
+            <div class="url" data-url>moodboard.example</div>
+            <div class="tab on" data-tab>Home</div><div class="tab">Trip plans</div><div class="tab">Reading</div><div class="tab">+ New tab</div>
+          </div>
+          <div class="page">
+            <div class="pane" data-on aria-label="Photos"><div class="gallery" aria-hidden="true"><i style="background:linear-gradient(160deg,#d8e2ea,#7d8f9a)"></i><i style="background:linear-gradient(160deg,#c4b59a,#6e5a40)"></i><i style="background:linear-gradient(160deg,#9bb6c9,#e8d9c0)"></i><i style="background:linear-gradient(160deg,#394a3a,#8aa07a)"></i><i style="background:linear-gradient(160deg,#e9d7c7,#b8886a)"></i></div></div>
+            <div class="pane poster" aria-label="Event page"><div><strong class="h3">Night Talks<br>Harbor Hall<br>10.28.26</strong><span class="pp">A fictional evening about the future of small buildings. Doors at seven.</span></div><div aria-hidden="true" style="background:repeating-radial-gradient(circle at 60% 40%,#fff 0 2px,transparent 2px 14px);border-radius:8px"></div></div>
+            <div class="pane shop" aria-label="Shopping"><strong class="h3">Garden things</strong><div class="items"><div class="it"><i style="background:linear-gradient(160deg,#c8a07a,#6b4a33)"></i><b>Clay planter</b></div><div class="it"><i style="background:linear-gradient(160deg,#9ab88a,#3a5a2a)"></i><b>Fig tree</b></div><div class="it"><i style="background:linear-gradient(160deg,#e8e2d4,#a8a08a)"></i><b>Linen apron</b></div></div></div>
+            <div class="pane zine" aria-label="A drawing board"><strong class="h3">zine v.14</strong><span class="pp" style="font:14px var(--serif);max-inline-size:36ch">Pages you save become a scrapbook you can draw on.</span><div class="note" aria-hidden="true">Pen<div class="swatches"><b style="background:#ff7aa8"></b><b style="background:#2f37e8"></b><b style="background:#3ccf7a"></b><b style="background:#ffd84d"></b></div></div></div>
+          </div>
+        </div>
+        <p class="stateline" data-state aria-live="polite">Morning · photos</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="scallop" aria-hidden="true"></div>
+  <section class="love" id="love">
+    <h2 class="sg-visually-hidden">What people say (fictional)</h2>
+    <p class="icons" aria-hidden="true">✌ ♡ ✧</p>
+    <div class="quotes">
+      <figure data-reveal><blockquote>"Tabs finally stopped yelling at me."</blockquote><cite>@FICTIONAL_ONE</cite></figure>
+      <figure data-reveal data-delay="80"><blockquote>"It feels like my desk after I clean it."</blockquote><cite>@MADEUP_TWO</cite></figure>
+      <figure data-reveal data-delay="160"><blockquote>"Playful, but it never gets in the way."</blockquote><cite>@INVENTED_3</cite></figure>
+      <figure data-reveal data-delay="240"><blockquote>"I went back to my old browser for a day. Never again."</blockquote><cite>@STUDY_FOUR</cite></figure>
+    </div>
+  </section>
+  <div class="scallop down" aria-hidden="true"></div>
+
+  <section class="final" id="get">
+    <h2 data-reveal>Move into <em>your</em> corner of the web.</h2>
+    <button type="button" data-demo="There is no download in this unofficial study.">Download for Mac</button>
+  </section>
+</main>
+<footer><strong>Unofficial</strong> brand study of Arc by StyleGallery. Not affiliated with The Browser Company. No logos, screenshots, or marketing copy are reused; quotes are fictional. <a href="../">All studies</a></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Arc by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene } = window.SG;
+  const panes = [...document.querySelectorAll("[data-browse] .pane")];
+  const sb = document.querySelector("[data-sidebar]"), url = document.querySelector("[data-url]"), tab = document.querySelector("[data-tab]"), st = document.querySelector("[data-state]");
+  const states = [["#ff8a8a", "moodboard.example", "Photos", "Morning · photos"], ["#b9b4ff", "harborhall.example", "Night Talks", "Noon · planning an evening"], ["linear-gradient(180deg,#ffb35c,#ff7a7a)", "gardenshop.example", "Garden things", "Afternoon · shopping"], ["linear-gradient(180deg,#8ee0a8,#3ccf7a)", "zine.example", "zine v.14", "Evening · making something"]];
+  let cur = -1;
+  const set = (i) => { if (i === cur) return; cur = i; panes.forEach((p, k) => p.toggleAttribute("data-on", k === i)); const [c, u, t, s] = states[i]; sb.style.setProperty("--sb", c); url.textContent = u; tab.textContent = t; st.textContent = s; };
+  set(0);
+  if (!reduced) scene(document.querySelector("[data-browse]"), (p) => set(Math.min(states.length - 1, Math.floor(p * states.length))));
+})();
+</script>
+</body>
+</html>

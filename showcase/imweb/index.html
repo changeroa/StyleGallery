@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>아임웹 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="아임웹 홈의 AI 프롬프트 히어로, 템플릿 레일, 고정 제목 기능 스토리, 성장 막대 그래프를 원본 카피·사진 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #111214; --grey: #5b5e66; --line: #eceef1; --cyan: #00b4ff; --cyan-ink: #0072b8; --amber: #a8550a; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 24px; --sg-focus: #0072b8; --ease: cubic-bezier(.16,1,.3,1); }
+  html { scroll-padding-bottom: 80px; }
+  body { background: #fff; color: var(--ink); font: 400 15px/1.55 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1360px; padding-inline: 24px; }
+  .promo { background: #15161a; border-radius: 12px; color: #fff; font-size: 13px; margin: 10px; padding: 12px 20px; text-align: center; }
+  .promo b { color: #ffd84a; }
+  .site-header .inner { align-items: center; display: flex; gap: 26px; block-size: 64px; }
+  .logo { color: var(--ink); font-size: 21px; font-weight: 900; letter-spacing: -0.05em; text-decoration: none; }
+  .site-header nav { display: flex; gap: 20px; }
+  .site-header nav a { color: var(--ink); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .hbtn { display: flex; gap: 8px; margin-inline-start: auto; }
+  .outline { background: #fff; border: 1px solid #d6d9de; border-radius: 6px; font-size: 13px; padding: 7px 12px; }
+  .black { background: var(--ink); border: 0; border-radius: 6px; color: #fff; font-size: 13px; font-weight: 700; padding: 8px 14px; }
+  .black.big { font-size: 15px; padding: 14px 24px; }
+  @media (max-width: 860px) { .site-header nav { display: none; } }
+
+  .hero { padding-block: 70px 30px; text-align: center; }
+  .hero h1 { font-size: clamp(2.4rem, 5.4vw, 4.8rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1.1; }
+  .hero > p { color: var(--grey); margin-block: 14px 44px; }
+  .ai-row { align-items: center; display: grid; gap: 20px; grid-template-columns: 1fr 1.6fr 1fr; }
+  .thumb { aspect-ratio: 1.6; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 40px -24px rgb(0 0 0 / 0.4); }
+  .box { background: #fff; border: 1.5px solid #cfd3da; border-radius: 16px; box-shadow: 0 30px 60px -30px rgb(0 60 120 / 0.35); padding: 16px 18px; text-align: start; }
+  .box .h { align-items: center; display: flex; font-size: 13px; font-weight: 700; gap: 8px; }
+  .box .h em { background: #eef8ff; border-radius: 999px; color: var(--cyan-ink); font-size: 11px; font-style: normal; padding: 1px 8px; }
+  .box .h button { background: #e6f5ff; border: 0; border-radius: 8px; color: var(--cyan-ink); font-size: 12px; font-weight: 700; margin-inline-start: auto; padding: 6px 10px; }
+  .box textarea { border: 0; font: inherit; font-size: 14px; inline-size: 100%; min-block-size: 90px; margin-block-start: 10px; outline: none; resize: none; }
+  .box .foot { align-items: center; color: var(--grey); display: flex; font-size: 12px; justify-content: space-between; }
+  .box .go { background: var(--ink); border: 0; border-radius: 50%; block-size: 30px; color: #fff; inline-size: 30px; }
+  .result { color: var(--cyan-ink); font-size: 13px; margin-block-start: 10px; min-block-size: 1.5em; text-align: start; }
+  .perks { color: var(--grey); display: flex; flex-wrap: wrap; font-size: 12px; gap: 8px 24px; justify-content: center; margin-block-start: 22px; }
+  @media (max-width: 860px) { .ai-row { grid-template-columns: 1fr; } .ai-row .thumb { display: none; } }
+
+  .split-h { align-items: flex-end; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; margin-block-end: 30px; }
+  .split-h h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.25; }
+  .split-h p { color: var(--grey); font-size: 13px; max-inline-size: 30ch; text-align: end; }
+  .gallery { padding-block: 90px 60px; }
+  .rail { --sg-marquee-speed: 50s; --sg-marquee-gap: 16px; }
+  .tpl { flex: none; inline-size: 300px; }
+  .tpl .shot { aspect-ratio: 1.45; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .tpl span { display: block; font-size: 12px; margin-block-start: 6px; }
+  .center { margin-block-start: 30px; text-align: center; }
+  .cases { background: var(--amber); color: #fff; overflow: hidden; padding-block: 80px; }
+  .cases h2 { color: #fff; }
+  .case-row { align-items: center; display: flex; gap: 24px; transition: transform .7s var(--ease); }
+  .case { flex: 0 0 min(480px, 80vw); }
+  .case .pic { aspect-ratio: 1.55; border-radius: 10px; overflow: hidden; }
+  .case b { display: block; font-size: 17px; margin-block-start: 14px; }
+  .case small { color: #fff; font-size: 13px; }
+  .arrows { display: flex; gap: 12px; }
+  .arrows button { background: none; border: 0; color: #fff; font-size: 22px; }
+
+  /* Sticky title, three stepping cards: the active card follows the reader. */
+  .story { display: grid; gap: 40px; grid-template-columns: 0.8fr 1.2fr; padding-block: 120px 60px; }
+  .story .stick { align-self: start; position: sticky; top: 100px; }
+  .story .stick h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.25; }
+  .story .stick ol { color: var(--grey); font-size: 14px; list-style: none; margin: 24px 0 0; padding: 0; }
+  .story .stick li { padding-block: 4px; transition: color .3s; }
+  .story .stick li[data-on] { color: var(--ink); font-weight: 700; }
+  .feat { align-items: center; display: grid; gap: 30px; grid-template-columns: 1fr 1fr; min-block-size: 80vh; opacity: 0.5; transition: opacity .5s; }
+  .feat[data-on] { opacity: 1; }
+  .feat .panel { aspect-ratio: 0.9; border-radius: 16px; display: grid; padding: 24px; place-items: center; }
+  .feat .ui { background: #fff; border-radius: 10px; box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.35); inline-size: 90%; padding: 14px; font-size: 12px; }
+  .feat h3 { font-size: 24px; font-weight: 800; }
+  .feat p { color: var(--grey); margin-block-start: 8px; }
+  @media (prefers-reduced-motion: reduce) { .feat { opacity: 1; } }
+  @media (max-width: 860px) { .story { grid-template-columns: 1fr; } .story .stick { position: static; } .feat { grid-template-columns: 1fr; min-block-size: auto; opacity: 1; } }
+
+  .growth { display: grid; gap: 20px; grid-template-columns: 1.2fr 1fr; padding-block: 60px; }
+  .bars { align-items: flex-end; display: flex; gap: 10px; block-size: 320px; }
+  .bar { background: var(--cyan-ink); border-radius: 4px 4px 0 0; color: #fff; flex: 1; font-size: 12px; padding: 8px; position: relative; transform-origin: bottom; }
+  .bar b { display: block; font-size: 26px; font-weight: 800; }
+  .big-num { align-content: center; background: linear-gradient(160deg, #1a1c22, #3a2a2a); border-radius: 14px; color: #fff; display: grid; padding: 30px; }
+  .big-num b { color: #5cd0ff; font-size: clamp(4rem, 9vw, 8rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
+  .big-num span { color: #e6e8ec; }
+  .metrics { border-block-start: 1px solid var(--line); display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); padding-block: 24px; }
+  .metrics b { display: block; font-size: 32px; font-weight: 800; }
+  .metrics span { color: var(--grey); font-size: 13px; }
+  @media (max-width: 860px) { .growth, .metrics { grid-template-columns: 1fr; } }
+  .closing { padding-block: 120px; text-align: center; }
+  .closing h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.3; margin-block-end: 24px; }
+  footer { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 12px; padding-block: 40px 60px; }
+  footer a { color: var(--cyan-ink); }
+  .fab { background: #fff; border: 1px solid var(--line); border-radius: 50%; block-size: 48px; box-shadow: 0 6px 20px rgb(0 0 0 / 0.12); color: #c02aa8; font-size: 20px; inline-size: 48px; inset: auto 20px 20px auto; position: fixed; z-index: 15; }
+  .sg-studybar { padding-inline-end: 80px; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<p class="promo">가입은 1분, 첫 상품 등록까지 <b>하루면 충분</b>해요 (스터디용 예시 배너)</p>
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="#top">imweb</a>
+    <nav aria-label="섹션"><a href="#templates">템플릿</a><a href="#cases">고객 사례</a><a href="#story">기능</a><a href="#growth">성장</a></nav>
+    <div class="hbtn"><button class="outline" type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인</button><button class="black" type="button" data-demo="비공식 스터디: 가입은 없어요.">무료로 시작하기</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero inner" id="top" aria-labelledby="hero-h">
+    <h1 id="hero-h" data-split>오늘 만들고<br>내일 파는 쇼핑몰</h1>
+    <p>만들고 싶은 가게를 한 문장으로 적어보세요.</p>
+    <div class="ai-row">
+      <div class="thumb" aria-hidden="true" data-art="bag|#efe9e1|#1d1d1d|#c8a36a"></div>
+      <form class="box" data-ai onsubmit="return false">
+        <div class="h"><span>AI 빌더</span><em>beta</em><button type="button" data-demo="비공식 스터디: 단계별 만들기는 없어요.">단계별로 만들기</button></div>
+        <label class="sg-visually-hidden" for="idea">만들고 싶은 쇼핑몰 설명</label>
+        <textarea id="idea" maxlength="200" placeholder="예: 손으로 만든 도자기 컵을 파는 차분한 느낌의 가게"></textarea>
+        <div class="foot"><span data-len>0 / 200</span><button class="go" type="submit" aria-label="만들기 시작">&uarr;</button></div>
+        <p class="result" role="status" data-result></p>
+      </form>
+      <div class="thumb" aria-hidden="true" data-art="jacket|#15161a|#f3efe6|#666"></div>
+    </div>
+    <p class="perks"><span>&#10003; 디자인 몰라도 되는 템플릿</span><span>&#10003; 결제와 배송 기본 연결</span><span>&#10003; 한 화면에서 주문 관리</span></p>
+  </section>
+
+  <section class="gallery" id="templates" aria-labelledby="tpl-h">
+    <div class="inner split-h"><h2 id="tpl-h">마음에 드는 걸<br>고르기만 하세요</h2><p>템플릿은 모두 가상의 예시예요.</p></div>
+    <div class="sg-marquee rail" data-ambient data-tpl aria-label="템플릿 예시가 흘러가는 목록"></div>
+    <p class="center"><button class="black big" type="button" data-demo="비공식 스터디: 가입은 없어요.">지금 무료로 시작하기</button></p>
+  </section>
+
+  <section class="cases" id="cases" aria-labelledby="cases-h">
+    <div class="inner split-h"><h2 id="cases-h">작게 시작한 가게가<br>커지는 속도</h2><div class="arrows"><button type="button" aria-label="이전 사례" data-prev>&larr;</button><button type="button" aria-label="다음 사례" data-next>&rarr;</button></div></div>
+    <div class="inner"><div class="case-row" data-cases></div></div>
+  </section>
+
+  <section class="inner story" id="story" aria-labelledby="story-h">
+    <div class="stick"><h2 id="story-h">만들고, 굴리고,<br>알리는 일까지</h2><ol data-steps><li data-on>디자인</li><li>운영</li><li>마케팅</li></ol></div>
+    <div>
+      <article class="feat" data-on><div class="panel" style="background:#2bb8f0"><div class="ui" aria-hidden="true"><b>새 페이지</b><p style="margin-block-start:8px">블록을 끌어다 놓아 보세요</p></div></div><div><h3>디자인이 쉬워요</h3><p>블록을 고르고 글만 바꾸면 페이지가 완성돼요.</p></div></article>
+      <article class="feat"><div class="panel" style="background:#b04ae8"><div class="ui" aria-hidden="true"><b>오늘 주문 24건</b><p style="margin-block-start:8px">배송 준비 9 &middot; 발송 완료 15</p></div></div><div><h3>운영이 쉬워요</h3><p>주문, 재고, 문의를 한 화면에서 처리해요.</p></div></article>
+      <article class="feat"><div class="panel" style="background:#2fb56a"><div class="ui" aria-hidden="true"><b>쿠폰 캠페인</b><p style="margin-block-start:8px">재방문 고객에게 10% 발송됨</p></div></div><div><h3>알리는 게 쉬워요</h3><p>쿠폰, 알림, 광고 연결을 몇 번의 클릭으로.</p></div></article>
+    </div>
+  </section>
+
+  <section class="inner" id="growth" aria-labelledby="growth-h">
+    <div class="split-h"><h2 id="growth-h">빠르게 늘어나는<br>가게들의 숫자</h2><p>막대와 수치는 모두 가상이에요.</p></div>
+    <div class="growth">
+      <div class="bars" data-bars aria-label="연도별 가상 가게 수"><div class="bar" style="block-size:12%">2023</div><div class="bar" style="block-size:22%">2024</div><div class="bar" style="block-size:48%">2025<b>55만</b></div><div class="bar" style="block-size:78%">2026<b>80만</b></div></div>
+      <div class="big-num"><b data-count="100" data-suffix="만">100만</b><span>곧 도달할 가상 목표 가게 수</span></div>
+    </div>
+    <div class="metrics"><div><b data-count="340" data-suffix="%">340%</b><span>연평균 거래액 성장 (가상)</span></div><div><b data-count="7">7</b><span>분, 첫 상품 등록까지 (가상)</span></div><div><b data-count="24" data-suffix="시간">24시간</b><span>상담 운영 (가상)</span></div></div>
+  </section>
+
+  <section class="closing inner" aria-labelledby="close-h"><h2 id="close-h">가볍게 시작하고<br>크게 자라는 가게</h2><button class="black big" type="button" data-demo="비공식 스터디: 가입은 없어요." data-magnet>지금 무료로 시작하기</button></section>
+</main>
+<footer><div class="inner"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 &middot; 아임웹과 무관합니다. 템플릿, 사례, 수치는 모두 가상이며 사진 대신 그림을 썼어요. <a href="../">모든 스터디</a></div></footer>
+<button class="fab" type="button" aria-label="상담 (예시)" data-demo="비공식 스터디: 상담은 없어요.">&#127911;</button>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of imweb by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art, reduced, scene } = window.SG;
+  document.querySelectorAll("[data-art]").forEach((el) => { const [k, g, m, a] = el.dataset.art.split("|"); el.innerHTML = art(k, { ground: g, main: m, accent: a }); });
+  // Template shots: tiny fake storefronts, each with its own mood.
+  const tpls = [["Slow Paper", "#f4f1ec", "#1d1d1d", "tote"], ["Bold Type", "#ffffff", "#2a4bff", "lamp"], ["Night Market", "#111", "#ff2fa0", "ticket"], ["Run Club", "#14171c", "#ff5a1f", "sneaker"], ["Clay & Co", "#efe6da", "#8a5a3a", "bowl"], ["Green Room", "#e8f0e4", "#3a7a4a", "plant"]];
+  const shot = ([n, g, m, k]) => `<div class="tpl"><div class="shot" aria-hidden="true"><svg viewBox="0 0 300 207" style="width:100%;height:100%;display:block;background:${g}"><rect x="0" y="0" width="300" height="18" fill="${m}" opacity=".12"/><text x="14" y="60" fill="${m}" font-size="30" font-weight="800" font-family="sans-serif">${n}</text><rect x="14" y="74" width="120" height="6" fill="${m}" opacity=".3"/><g transform="translate(170 70) scale(1.2)">${art(k, { ground: "transparent", main: m, accent: "#888" }).replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg></div><span>${n} &middot; 가상 템플릿</span></div>`;
+  const list = tpls.map(shot).join("");
+  document.querySelector("[data-tpl]").innerHTML = `<div class="sg-marquee-track">${list}</div><div class="sg-marquee-track" aria-hidden="true">${list}</div>`;
+  // AI box: counts characters and answers with a plan.
+  const idea = document.querySelector("#idea"), len = document.querySelector("[data-len]"), result = document.querySelector("[data-result]");
+  idea.addEventListener("input", () => { len.textContent = `${idea.value.length} / 200`; });
+  document.querySelector("[data-ai]").addEventListener("submit", () => { const v = idea.value.trim() || "차분한 느낌의 수공예 가게"; result.textContent = `"${v.slice(0, 30)}${v.length > 30 ? "…" : ""}" 로 메인, 상품 목록, 소개 페이지 3장을 만들 준비가 됐어요. (시연용 답변)`; });
+  // Case carousel.
+  const cases = [["구독자 10만 크리에이터, 굿즈로 '태도'를 파는 가게", "#f2d7b8", "gift"], ["동네 빵집이 전국 택배를 시작하기까지", "#f5e6d0", "fruit"], ["운동화 수선 공방의 예약 페이지", "#e6ecf2", "sneaker"], ["작은 꽃집의 정기 배송", "#eaf2e2", "plant"]];
+  const row = document.querySelector("[data-cases]");
+  row.innerHTML = cases.map(([t, g, k]) => `<article class="case"><div class="pic" aria-hidden="true">${art(k, { ground: g, main: "#a8550a", accent: "#333" })}</div><b>${t}</b><small>가상의 성장 사례</small></article>`).join("");
+  let at = 0; const move = (d) => { at = Math.max(0, Math.min(cases.length - 1, at + d)); row.style.transform = `translateX(calc(${-at} * (min(480px, 80vw) + 24px)))`; };
+  document.querySelector("[data-prev]").addEventListener("click", () => move(-1)); document.querySelector("[data-next]").addEventListener("click", () => move(1));
+  // Feature story: the card nearest the viewport center becomes active; the sticky list follows.
+  const feats = [...document.querySelectorAll(".feat")], steps = [...document.querySelectorAll("[data-steps] li")];
+  if (!reduced) { const watch = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { const i = feats.indexOf(e.target); feats.forEach((f, k) => f.toggleAttribute("data-on", k === i)); steps.forEach((s, k) => s.toggleAttribute("data-on", k === i)); } }, { rootMargin: "-45% 0px -45% 0px" }); feats.forEach((f) => watch.observe(f)); }
+  // Bars grow from the baseline when the chart arrives.
+  const bars = document.querySelector("[data-bars]");
+  if (!reduced) new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); bars.querySelectorAll(".bar").forEach((b, k) => b.animate([{ transform: "scaleY(0)" }, { transform: "none" }], { duration: 1100, delay: k * 140, easing: "cubic-bezier(.16,1,.3,1)", fill: "backwards" })); }, { threshold: 0.4 }).observe(bars);
+})();
+</script>
+</body>
+</html>

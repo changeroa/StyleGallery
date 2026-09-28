@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>토스 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="토스 홈페이지의 스크롤 연출 언어를 원본 카피 없이 재해석한 StyleGallery 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='24' height='24' rx='8' fill='%233182f6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root {
+    --blue: #3182f6; --ink: #191f28; --ink-2: #333d4b; --grey: #4e5968; --grey-2: #6b7684; --line: #e5e8eb; --bg-2: #f2f4f6; --bg-3: #f9fafb;
+    --orange: #ff5b2e; --sans: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    --sg-header: 24px; --sg-focus: #3182f6; --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  body { background: #fff; color: var(--ink); font: 400 17px/1.6 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1180px; padding-inline: clamp(20px, 5vw, 48px); }
+  h1, h2, h3 { font-weight: 700; letter-spacing: -0.035em; line-height: 1.3; }
+
+  /* Header sits on the hero and scrolls away, as in the capture. */
+  .site-header { inset: 0 0 auto; position: absolute; z-index: 20; }
+  .site-header .inner { align-items: center; display: flex; gap: 20px; block-size: 60px; max-inline-size: 1400px; }
+  .logo { align-items: center; color: var(--ink); display: inline-flex; font-size: 20px; font-weight: 800; gap: 6px; letter-spacing: -0.05em; text-decoration: none; }
+  .logo i { background: var(--blue); border-radius: 7px 7px 7px 2px; block-size: 18px; display: inline-block; inline-size: 18px; transform: rotate(-12deg); }
+  .site-nav { display: flex; gap: 6px; margin-inline: auto; }
+  .site-nav a { border-radius: 8px; color: var(--ink-2); font-size: 15px; padding: 6px 12px; text-decoration: none; }
+  .site-nav a:hover { background: var(--bg-2); }
+  .dl { background: var(--bg-2); border: 0; border-radius: 8px; color: var(--ink-2); font-size: 14px; font-weight: 600; padding: 8px 14px; }
+  @media (max-width: 760px) { .site-nav { display: none; } .dl { margin-inline-start: auto; } }
+
+  /* Left progress ticks invert over dark scenes through difference blending. */
+  .ticks { display: grid; gap: 7px; inset: 50% auto auto 22px; mix-blend-mode: difference; position: fixed; transform: translateY(-50%); z-index: 30; }
+  .ticks span { background: rgb(255 255 255 / 0.35); block-size: 2px; display: block; inline-size: 10px; transition: inline-size 0.3s var(--ease), background 0.3s; }
+  .ticks span[data-on] { background: #fff; inline-size: 18px; }
+  @media (max-width: 760px) { .ticks { display: none; } }
+
+  /* Scroll stages. Without JavaScript or with reduced motion every stage is a normal static block. */
+  .stage-track { position: relative; }
+  .stage { min-block-size: 100vh; overflow: clip; position: relative; }
+  .sg-js .stage-track { block-size: var(--track, 300vh); }
+  .sg-js .stage { block-size: 100vh; inset-block-start: 0; position: sticky; }
+  @media (prefers-reduced-motion: reduce) { .sg-js .stage-track { block-size: auto; } .sg-js .stage { block-size: auto; min-block-size: 100vh; position: relative; } }
+
+  /* Painted scenes stand in for photography: layered gradients, no image files. */
+  .scene { background: linear-gradient(180deg, #b9c7d3 0%, #d9dfe3 38%, #9aa7ad 62%, #56626a 100%); inset: 0; overflow: hidden; position: absolute; }
+  .scene::before { background: radial-gradient(60% 40% at 30% 30%, rgb(255 255 255 / 0.8), transparent 70%), radial-gradient(30% 25% at 78% 22%, rgb(255 236 214 / 0.7), transparent 70%); content: ""; inset: 0; position: absolute; }
+  .scene .city { background: repeating-linear-gradient(90deg, rgb(120 134 145 / 0.55) 0 26px, transparent 26px 34px, rgb(140 152 160 / 0.45) 34px 70px, transparent 70px 82px); block-size: 16%; filter: blur(3px); inset: 34% 0 auto; position: absolute; }
+  .scene .river { background: linear-gradient(180deg, #c7d2d8, #8e9ca4); block-size: 30%; inset: 48% 0 auto; position: absolute; }
+  .scene .glint { animation: glint 9s ease-in-out infinite alternate; background: radial-gradient(closest-side, rgb(255 255 255 / 0.55), transparent); block-size: 18%; filter: blur(8px); inline-size: 40%; inset: 52% auto auto 20%; position: absolute; }
+  @keyframes glint { to { transform: translateX(60%) scaleX(1.4); } }
+  .scene .frame { border: clamp(24px, 5vw, 70px) solid rgb(40 44 50 / 0.92); border-radius: 60px; inset: -6% -4% 8% 38%; position: absolute; box-shadow: inset 0 0 60px rgb(0 0 0 / 0.35); }
+  .scene .figure { background: radial-gradient(40% 30% at 50% 22%, #3a2b25 60%, transparent 62%), radial-gradient(50% 55% at 50% 85%, #efe6da 60%, transparent 62%); block-size: 80%; inset: auto auto 0 12%; inline-size: 34%; position: absolute; }
+  .scene .phone-glow { background: radial-gradient(closest-side, rgb(255 244 228 / 0.9), transparent); block-size: 50%; inline-size: 36%; inset: auto auto 10% 10%; position: absolute; filter: blur(10px); }
+
+  /* Hero: inset card expands to full bleed, the three-phrase line clears, a second line arrives. */
+  .hero .stage { background: #fff; }
+  .hero-card { background: linear-gradient(180deg, #b9c7d3, #56626a); clip-path: inset(var(--it, 64px) var(--is, 14px) var(--ib, 14px) round var(--ir, 28px)); inset: 0; position: absolute; }
+  .hero-card::after { background: linear-gradient(to top, rgb(0 0 0 / 0.45), transparent 45%); content: ""; inset: 0; position: absolute; z-index: 1; }
+  .hero h1 { color: rgb(255 255 255 / var(--a1, 1)); display: flex; flex-wrap: wrap; font-size: clamp(2rem, 4.6vw, 4.2rem); gap: 0.2em 1.2em; inset: auto 0 clamp(40px, 7vh, 80px); justify-content: center; padding-inline: 24px; position: absolute; text-align: center; z-index: 2; transform: translateY(calc(var(--d1, 0) * 40px)); }
+  .hero .second { color: rgb(255 255 255 / var(--a2, 0)); font-size: clamp(1.8rem, 4vw, 3.4rem); inset: 50% 0 auto; padding-inline: 24px; position: absolute; text-align: center; transform: translateY(calc(-50% + var(--d2, 1) * 30px)); z-index: 2; }
+  html:not(.sg-js) .hero .second, .reduced .hero .second { --a2: 1; }
+
+  /* Transfer card */
+  .transfer { padding-block: 16px; }
+  .transfer-card { border-radius: 28px; display: grid; grid-template-columns: 1fr 1fr; min-block-size: 82vh; overflow: hidden; position: relative; margin-inline: 14px; }
+  .transfer-card { background: linear-gradient(110deg, #1f2833 0%, #3c4a57 45%, #a7b6c2 100%); }
+  .transfer-copy { align-self: start; color: #fff; padding: 16vh clamp(24px, 6vw, 90px) 40px; position: relative; z-index: 1; }
+  .transfer-copy h2 { font-size: clamp(2rem, 3.8vw, 3.2rem); }
+  .transfer-copy p { color: rgb(255 255 255 / 0.82); margin-block-start: 18px; max-inline-size: 30ch; }
+  .phone { background: #fff; border: 10px solid #101418; border-radius: 46px; box-shadow: 0 40px 80px -20px rgb(0 0 0 / 0.45); block-size: 560px; inline-size: 280px; overflow: hidden; position: relative; }
+  .phone-slot { align-self: center; display: grid; justify-items: center; padding-block: 40px; position: relative; }
+  .sent { display: grid; gap: 10px; justify-items: center; padding: 120px 22px 0; text-align: center; }
+  .check { background: var(--blue); border-radius: 50%; block-size: 64px; color: #fff; display: grid; font-size: 30px; inline-size: 64px; place-items: center; }
+  .sent b { font-size: 21px; line-height: 1.35; }
+  .sent .btns { display: flex; gap: 8px; inset: auto 16px 20px; position: absolute; }
+  .sent .btns span { background: var(--bg-2); border-radius: 14px; flex: 1; padding: 14px; font-weight: 600; font-size: 15px; }
+  .sent .btns span:last-child { background: var(--blue); color: #fff; }
+  @media (max-width: 860px) { .transfer-card { grid-template-columns: 1fr; } .transfer-copy { padding-block-start: 60px; } }
+
+  /* Accordion with pinned phone: progress picks the open item. */
+  .assets .stage { align-items: center; background: radial-gradient(50% 60% at 75% 50%, #eaf0f7, #fff 70%); display: grid; }
+  .assets-grid { align-items: center; display: grid; gap: 40px; grid-template-columns: 1fr 1fr; }
+  .assets h2 { font-size: clamp(1.9rem, 3.4vw, 2.8rem); margin-block-end: 36px; }
+  .acc li { border-block-start: 1px solid var(--line); padding-block: 18px; }
+  .acc h3 { color: #8b95a1; font-size: 26px; transition: color 0.4s; }
+  .acc li[data-open] h3, html:not(.sg-js) .acc h3 { color: var(--ink); }
+  .acc .body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.5s var(--ease); }
+  .sg-js .acc li:not([data-open]) .body { grid-template-rows: 0fr; }
+  .acc .body > div { overflow: hidden; }
+  @media (prefers-reduced-motion: reduce) { .sg-js .acc li:not([data-open]) .body { grid-template-rows: 1fr; } .acc h3 { color: var(--ink); } }
+  .acc p { color: var(--grey); padding-block: 10px 14px; max-inline-size: 42ch; }
+  .pill-btn { align-items: center; background: var(--bg-2); border: 0; border-radius: 999px; color: var(--ink); display: inline-flex; font-size: 15px; font-weight: 600; gap: 10px; padding: 8px 8px 8px 18px; }
+  .pill-btn b { background: var(--ink); border-radius: 50%; block-size: 28px; color: #fff; display: grid; font-size: 14px; inline-size: 28px; place-items: center; }
+  .tilt { justify-self: center; perspective: 1400px; position: relative; }
+  .tilt .phone { transform: rotateY(-16deg) rotateX(6deg) rotateZ(2deg); }
+  .screen { background: var(--bg-3); inset: 0; padding: 50px 16px 16px; position: absolute; transition: clip-path 0.6s var(--ease); clip-path: inset(0 0 100% 0); }
+  .screen[data-on] { clip-path: inset(0); }
+  .row { background: #fff; border-radius: 16px; display: flex; justify-content: space-between; margin-block-end: 8px; padding: 14px; font-size: 13px; }
+  .row b { font-size: 15px; }
+  .float { background: rgb(255 255 255 / 0.92); border-radius: 18px; box-shadow: 0 20px 50px -10px rgb(0 20 60 / 0.25); inset: auto -60px 22% auto; padding: 16px 18px; position: absolute; font-size: 13px; inline-size: 220px; z-index: 2; transition: transform 0.6s var(--ease); }
+  .float b { display: block; font-size: 17px; }
+  @media (max-width: 860px) { .assets-grid { grid-template-columns: 1fr; } .tilt { display: none; } }
+
+  /* Card rows */
+  .experts { padding-block: 160px 120px; text-align: center; }
+  .experts h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+  .experts .lead { color: var(--grey); font-size: 20px; font-weight: 600; margin-block: 20px 60px; }
+  .cards { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); text-align: start; }
+  .card-vis { aspect-ratio: 1 / 1.05; border-radius: 26px; display: grid; overflow: hidden; padding: 28px; place-items: center; position: relative; }
+  .card-vis.p1 { background: linear-gradient(160deg, #ffe3d3, #cfe0ff 70%); }
+  .card-vis.p2 { background: linear-gradient(160deg, #cfe3ff, #e9f1ff 60%, #d7e6ff); }
+  .card-vis.p3 { background: linear-gradient(160deg, #dcd9ff, #e8f0ff 70%); }
+  .card-vis.d { background: radial-gradient(70% 60% at 50% 30%, #2a2f37, #0d0f12 75%); color: #fff; }
+  .glass { background: rgb(255 255 255 / 0.72); backdrop-filter: blur(10px); border-radius: 20px; box-shadow: 0 20px 40px -20px rgb(0 40 120 / 0.3); inline-size: 78%; padding: 18px; }
+  .glass small { color: var(--grey); display: block; }
+  .glass strong { display: block; font-size: 34px; letter-spacing: -0.04em; }
+  .bar2 { background: rgb(49 130 246 / 0.15); border-radius: 8px; block-size: 12px; margin-block-start: 10px; overflow: hidden; }
+  .bar2 i { animation: load 2.4s var(--ease) infinite; background: var(--blue); block-size: 100%; display: block; inline-size: 60%; }
+  @keyframes load { from { transform: translateX(-100%); } to { transform: translateX(180%); } }
+  .cap { padding: 22px 6px 0; }
+  .cap h3 { font-size: 21px; line-height: 1.4; }
+  .cap p { color: var(--grey); font-size: 15px; margin-block-start: 6px; }
+  .cards + .cards { margin-block-start: 60px; }
+  .dark-ui { background: rgb(255 255 255 / 0.06); border: 1px solid rgb(255 255 255 / 0.1); border-radius: 18px; inline-size: 82%; padding: 18px; }
+  .dark-ui strong { display: block; font-size: 30px; letter-spacing: -0.03em; }
+  .dark-ui span { color: #c5ccd6; font-size: 13px; }
+  .dots-globe { aspect-ratio: 1; background: radial-gradient(circle, rgb(255 255 255 / 0.55) 1.2px, transparent 1.6px) 0 0 / 12px 12px; border-radius: 50%; inline-size: 70%; -webkit-mask-image: radial-gradient(circle, #000 55%, transparent 72%); mask-image: radial-gradient(circle, #000 55%, transparent 72%); animation: spin-bg 30s linear infinite; }
+  @keyframes spin-bg { to { background-position: 120px 0; } }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
+
+  /* Blur-to-focus copy, then a warm painted full-bleed. */
+  .focus .stage { background: var(--bg-2); display: grid; place-items: center; }
+  .focus h2 { font-size: clamp(2rem, 5vw, 4rem); line-height: 1.25; padding-inline: 24px; text-align: center; }
+  .focus .w { color: rgb(25 31 40 / calc(0.18 + var(--f, 1) * 0.82)); display: inline-block; filter: blur(calc((1 - var(--f, 1)) * 10px)); }
+  .box-scene { background: radial-gradient(40% 30% at 50% 70%, #c99a6b, transparent 70%), linear-gradient(180deg, #e9ded0, #cdb8a0 60%, #8f7458); clip-path: inset(var(--bi, 50%) round 30px); inset: 0; position: absolute; }
+  .box-scene::before { background: linear-gradient(160deg, #d9a770, #a8784a); block-size: 30%; border-radius: 6px; content: ""; inline-size: 26%; inset: auto auto 22% 37%; position: absolute; box-shadow: 0 30px 60px -20px rgb(60 30 0 / 0.5); }
+  .box-scene::after { background: linear-gradient(180deg, #f5ecdf, #e4d2bb); block-size: 10%; content: ""; inline-size: 30%; inset: auto auto 50% 35%; position: absolute; transform: skewX(-18deg); }
+  .box-scene p { color: rgb(255 255 255 / var(--ba, 0)); font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 700; inset: 14% 0 auto; position: absolute; text-align: center; text-shadow: 0 2px 30px rgb(80 40 0 / 0.4); }
+  @media (prefers-reduced-motion: reduce) { .box-scene { display: none; } .focus .w { color: var(--ink); filter: none; } }
+  html:not(.sg-js) .box-scene { display: none; }
+
+  /* Data terrain */
+  .data { background: var(--bg-2); background-image: linear-gradient(90deg, rgb(0 0 0 / 0.04) 1px, transparent 1px); background-size: 25% 100%; padding-block: 100px 120px; }
+  .meta { color: var(--grey); display: flex; flex-wrap: wrap; font: 500 13px/1.4 ui-monospace, Menlo, monospace; gap: 12px 30px; justify-content: space-between; }
+  .meta b { color: var(--orange); }
+  .terrain { block-size: clamp(260px, 42vw, 520px); inline-size: 100%; margin-block: 30px; }
+  .data-grid { display: grid; gap: 30px; grid-template-columns: 1.3fr 1fr; }
+  .data h2 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); }
+  .data-grid > div > p { color: var(--grey); margin-block-start: 16px; max-inline-size: 48ch; }
+  .data-cols { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .data-cols div { border-inline-start: 1px solid #d1d6db; padding-inline: 16px; font-size: 14px; color: var(--grey); }
+  .data-cols h3 { color: var(--ink); font-size: 15px; margin-block-end: 6px; }
+  @media (max-width: 860px) { .data-grid, .data-cols { grid-template-columns: 1fr; } .data-cols div { border: 0; border-block-start: 1px solid #d1d6db; padding: 12px 0; } }
+
+  /* Device pill: a black pill between two words grows into a dark full-bleed stage. */
+  .pay .stage { background: #fff; display: grid; place-items: center; }
+  .pill-line { align-items: center; display: flex; inline-size: 100%; font-size: clamp(1.6rem, 3.4vw, 2.8rem); font-weight: 700; gap: calc(var(--pw, 70px) + 40px); position: relative; z-index: 1; color: rgb(25 31 40 / var(--pa, 1)); }
+  .pill-line span { flex: 1 1 0; } .pill-line span:first-child { text-align: end; }
+  .pill { background: #0e1013; border-radius: var(--pr, 34px); block-size: var(--ph, 240px); inline-size: var(--pw, 70px); inset: 50% auto auto 50%; position: absolute; transform: translate(-50%, -50%); }
+  .slides { inset: 0; position: absolute; z-index: 2; }
+  .slide { align-items: center; display: grid; gap: 30px; grid-template-columns: 1fr 1fr; inset: 0; padding: 12vh clamp(24px, 7vw, 110px); position: absolute; clip-path: inset(0 0 0 100%); transition: clip-path 0.7s var(--ease); }
+  .slide[data-on] { clip-path: inset(0); }
+  .slide .chip { border: 1px solid rgb(255 255 255 / 0.5); border-radius: 999px; color: #fff; display: inline-block; font-size: 13px; padding: 4px 12px; }
+  .slide h2 { color: #fff; font-size: clamp(1.8rem, 3.6vw, 3rem); margin-block: 16px 14px; }
+  .slide p { color: #c5ccd6; max-inline-size: 32ch; }
+  .slide .more { background: rgb(255 255 255 / 0.12); border: 0; border-radius: 999px; color: #fff; font-weight: 600; margin-block-start: 24px; padding: 10px 18px; }
+  .device { justify-self: center; position: relative; }
+  .terminal { background: linear-gradient(180deg, #f7f8fa, #d9dde3); border-radius: 26px; block-size: 360px; inline-size: 190px; box-shadow: 0 50px 80px -30px rgb(0 0 0 / 0.8); padding: 16px; }
+  .terminal i { background: linear-gradient(160deg, #3182f6, #7ab1ff); border-radius: 14px; display: block; block-size: 62%; }
+  .pos { background: linear-gradient(180deg, #2b3038, #15181c); border: 8px solid #d9dde3; border-radius: 22px; block-size: 280px; inline-size: 420px; max-inline-size: 80vw; padding: 16px; display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); }
+  .pos i { background: rgb(255 255 255 / 0.1); border-radius: 10px; }
+  .kiosk { background: linear-gradient(180deg, #f7f8fa, #c9ced6); border-radius: 18px 18px 6px 6px; block-size: 420px; inline-size: 170px; padding: 14px; box-shadow: 0 50px 80px -30px rgb(0 0 0 / 0.8); }
+  .kiosk i { background: radial-gradient(circle at 50% 40%, #7ab1ff, #3182f6); border-radius: 12px; display: block; block-size: 55%; }
+  @media (prefers-reduced-motion: reduce) { .pay .pill, .pay .pill-line { display: none; } .pay .slides { position: relative; } .pay .slide { position: relative; clip-path: none; background: #0e1013; min-block-size: 80vh; } }
+  html:not(.sg-js) .pay .pill, html:not(.sg-js) .pay .pill-line { display: none; }
+  html:not(.sg-js) .pay .slides { position: relative; }
+  html:not(.sg-js) .pay .slide { position: relative; clip-path: none; background: #0e1013; min-block-size: 80vh; }
+  @media (max-width: 860px) { .slide { grid-template-columns: 1fr; padding-block: 90px 40px; } .device { display: none; } }
+
+  /* Daily: stair tiles, one tile flies to full bleed, footer on the blurred sunset. */
+  .daily .stage { background: #fff; }
+  .daily-copy { inset: 12vh auto auto 0; position: absolute; inline-size: 100%; }
+  .daily h2 { font-size: clamp(2rem, 3.6vw, 3rem); }
+  .daily h2 em { color: var(--blue); font-style: normal; }
+  .daily-copy p { color: var(--grey); margin-block-start: 14px; max-inline-size: 56ch; transform: translateY(calc(var(--dc, 0) * -60px)); }
+  .tiles { display: flex; gap: 14px; inset: auto 0 12vh; position: absolute; padding-inline: clamp(20px, 7vw, 100px); align-items: flex-end; }
+  .tile { aspect-ratio: 3 / 4; border-radius: 22px; flex: 1; max-inline-size: 220px; position: relative; overflow: hidden; }
+  .tile:nth-child(1) { background: linear-gradient(180deg, #e7d9c6, #b99b7b); transform: translateY(calc(40px + var(--tf, 0) * 120vh)); }
+  .tile:nth-child(2) { background: linear-gradient(180deg, #2a2230, #e88a4a 70%, #3a2a2a); transform: translateY(0); z-index: 2; }
+  .tile:nth-child(3) { background: linear-gradient(180deg, #e9e4dc, #a88f73); transform: translateY(calc(-40px + var(--tf, 0) * 120vh)); }
+  .tile:nth-child(4) { background: linear-gradient(180deg, #dfe4ea, #8b97a3); transform: translateY(calc(-80px + var(--tf, 0) * 120vh)); }
+  .tile::after { background: radial-gradient(60% 40% at 30% 20%, rgb(255 255 255 / 0.55), transparent 70%), linear-gradient(0deg, rgb(0 0 0 / 0.18), transparent 50%); content: ""; inset: 0; position: absolute; }
+  .tile:nth-child(2)::after { background: radial-gradient(40% 50% at 50% 45%, #f6b36b, transparent 70%); }
+  .sunset { background: linear-gradient(180deg, #40559a 0%, #8a6fa8 40%, #f09a5c 75%, #f6c27f 100%); clip-path: inset(var(--st, 30%) var(--sr, 40%) var(--sb, 20%) var(--sl, 30%) round var(--sR, 22px)); inset: 0; position: absolute; z-index: 3; }
+  .sunset::after { background: linear-gradient(90deg, transparent 80%, rgb(220 110 50 / 0.8)); content: ""; inset: 0; position: absolute; }
+  html:not(.sg-js) .sunset { display: none; }
+  @media (prefers-reduced-motion: reduce) { .sunset { display: none; } .daily .stage { min-block-size: 110vh; } }
+
+  footer.site { background: linear-gradient(180deg, #4b5a93, #6b5b8e 50%, #2c3150); color: #fff; overflow: hidden; padding-block: 90px 40px; position: relative; }
+  .foot-top { display: grid; gap: 40px; grid-template-columns: 1.2fr 2fr; }
+  .foot-top > p { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; letter-spacing: -0.03em; }
+  .foot-cols { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); font-size: 14px; }
+  .foot-cols h3 { font-size: 14px; margin-block-end: 10px; }
+  .foot-cols li { color: rgb(255 255 255 / 0.85); padding-block: 3px; }
+  .foot-cols a { color: #fff; }
+  .legal { border-block-start: 1px solid rgb(255 255 255 / 0.2); color: rgb(255 255 255 / 0.85); font-size: 13px; margin-block-start: 60px; padding-block-start: 24px; }
+  .watermark { color: rgb(255 255 255 / 0.1); font-size: 28vw; font-weight: 800; letter-spacing: -0.08em; line-height: 0.8; margin-block-start: 30px; text-align: center; }
+  @media (max-width: 760px) { .foot-top, .foot-cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="#top" aria-label="토스 스터디 처음으로"><i aria-hidden="true"></i>toss</a>
+    <nav class="site-nav" aria-label="섹션">
+      <a href="#money">서비스</a>
+      <a href="#business">비즈니스</a>
+      <a href="#data">광고</a>
+      <a href="#pay">결제</a>
+      <a href="#daily">일상</a>
+    </nav>
+    <button class="dl" type="button" data-demo="비공식 스터디라서 앱 다운로드는 동작하지 않아요.">앱 다운로드</button>
+  </div>
+</header>
+<div class="ticks" aria-hidden="true" data-ticks></div>
+
+<main id="main">
+  <section class="hero stage-track" id="top" style="--track:250vh" data-hero>
+    <div class="stage">
+      <div class="hero-card"><div class="scene" data-ambient><div class="city"></div><div class="river"></div><div class="glint"></div><div class="phone-glow"></div><div class="frame"></div></div>
+      <h1><span>돈에 관한 모든 일을</span><span>이제는</span><span>가볍게 한 번에</span></h1>
+      <p class="second">복잡했던 금융이<br>손끝에서 조용히 끝나요</p></div>
+    </div>
+  </section>
+
+  <section class="transfer" id="money" aria-labelledby="money-h">
+    <div class="transfer-card">
+      <div class="transfer-copy">
+        <h2 id="money-h" data-reveal>계좌번호 없이<br>보내는 돈</h2>
+        <p data-reveal data-delay="120">계좌번호를 묻고 옮겨 적던 시간은 이제 없어요. 연락처에서 친구를 고르고 금액만 적으면 끝이에요.</p>
+      </div>
+      <div class="phone-slot" aria-hidden="true">
+        <div class="phone" data-reveal="rise"><div class="sent"><span class="check">&#10003;</span><b>한지우님에게<br>35,000원을 보냈어요</b><span style="color:var(--grey);font-size:14px">수수료 0원</span><div class="btns"><span>공유</span><span>확인</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="assets stage-track" style="--track:360vh" aria-labelledby="assets-h" data-assets>
+    <div class="stage">
+      <div class="inner assets-grid">
+        <div>
+          <h2 id="assets-h">통장이 여러 개여도<br>한 화면이면 충분해요</h2>
+          <ul class="acc" role="list">
+            <li data-open><h3>흩어진 계좌를 한눈에</h3><div class="body"><div><p>은행, 카드, 증권에 나뉘어 있던 잔액을 한 화면에 모아 보여드려요.</p><button class="pill-btn" type="button" data-demo="비공식 스터디: 실제 자산 조회는 하지 않아요.">자산 보기 <b>&rarr;</b></button></div></div></li>
+            <li><h3>빠져나갈 돈 미리 알림</h3><div class="body"><div><p>카드값이 나가기 사흘 전, 잔액이 모자라면 먼저 알려드려요. 연체 걱정은 접어두세요.</p><button class="pill-btn" type="button" data-demo="비공식 스터디: 알림은 설정되지 않아요.">알림 켜기 <b>&rarr;</b></button></div></div></li>
+            <li><h3>하루마다 붙는 이자</h3><div class="body"><div><p>한 달을 기다리지 않아도 돼요. 매일 쌓인 이자를 원할 때 바로 받아가세요.</p><button class="pill-btn" type="button" data-demo="비공식 스터디: 이자 지급은 시연이에요.">이자 받기 <b>&rarr;</b></button></div></div></li>
+            <li><h3>떠나기 전 환전까지</h3><div class="body"><div><p>여행 전날 밤에도 앱에서 바로 환전하고, 공항에서는 찾기만 하면 돼요.</p><button class="pill-btn" type="button" data-demo="비공식 스터디: 환전은 시연이에요.">환전하기 <b>&rarr;</b></button></div></div></li>
+          </ul>
+        </div>
+        <div class="tilt" aria-hidden="true">
+          <div class="phone">
+            <div class="screen" data-on><div class="row"><span>생활비 통장</span><b>1,284,500원</b></div><div class="row"><span>적금</span><b>3,000,000원</b></div><div class="row"><span>증권</span><b>842,120원</b></div><div class="row"><span>카드 이번 달</span><b>412,300원</b></div></div>
+            <div class="screen"><div class="row"><span>11월 카드값</span><b>1,820,000원</b></div><div class="row" style="background:#fff4f0"><span>잔액 부족 예상</span><b style="color:var(--orange)">-240,000원</b></div></div>
+            <div class="screen"><div class="row"><span>오늘 받은 이자</span><b>1,208원</b></div><div class="row"><span>이번 달 누적</span><b>28,441원</b></div></div>
+            <div class="screen"><div class="row"><span>120.00 EUR</span><b>환전 완료</b></div><div class="row"><span>수수료</span><b>0원</b></div></div>
+          </div>
+          <div class="float" data-float><b>1,820,000원</b>사흘 뒤 카드값이 나가요</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="experts inner" aria-labelledby="experts-h">
+    <h2 id="experts-h" data-reveal>어려운 비교는<br>앱이 먼저 해둘게요</h2>
+    <p class="lead" data-reveal data-delay="100">고민하던 순간들이 짧아져요</p>
+    <div class="cards">
+      <article><div class="card-vis p1" aria-hidden="true" data-ambient><div class="glass"><small>한도 계산 중</small><strong>5.92%</strong><div class="bar2"><i></i></div></div></div><div class="cap"><h3>지금 받을 수 있는 대출만<br>골라서 보여드려요</h3><p>나에게 맞는 대출 찾기</p></div></article>
+      <article><div class="card-vis p2" aria-hidden="true"><div class="glass"><small>자주 쓰는 곳 기준</small><strong>+3.1%</strong><small>적립이 더 많은 카드가 있어요</small></div></div><div class="cap"><h3>지금 카드보다 혜택 큰 카드를<br>대신 찾아드려요</h3><p>카드 혜택 비교</p></div></article>
+      <article><div class="card-vis p3" aria-hidden="true"><div class="glass"><small>보장 점검</small><strong>2건</strong><small>겹치는 보장이 있어요</small></div></div><div class="cap"><h3>가입한 보험을 살펴보고<br>겹치는 보장을 알려드려요</h3><p>보험 점검 받기</p></div></article>
+    </div>
+    <div class="cards">
+      <article><div class="card-vis d" aria-hidden="true"><div class="dark-ui"><span>실적 발표 요약</span><strong>매출 +41%</strong><span>실시간 번역 중 &middot; 한국어</span></div></div><div class="cap"><h3>해외 실적 발표도<br>우리말로 바로 요약</h3><p>숫자에 담긴 의미를 쉬운 말로 풀어드려요.</p></div></article>
+      <article><div class="card-vis d"><div class="dark-ui" aria-label="자동으로 모인 주식 수 예시"><span>매주 월요일 자동 구매</span><strong><span data-count="128" data-suffix="주" style="color:#fff;font-size:30px">128주</span></strong><span>설정만 하면 알아서 모여요</span></div></div><div class="cap"><h3>잊고 있어도<br>차곡차곡 모이는 주식</h3><p>금액과 주기만 정하면 나머지는 자동이에요.</p></div></article>
+      <article><div class="card-vis d" aria-hidden="true" data-ambient><div class="dots-globe"></div></div><div class="cap"><h3>같은 종목을 보는 사람들과<br>나누는 이야기</h3><p>혼자 하던 투자가 함께 보는 투자로 바뀌어요.</p></div></article>
+    </div>
+  </section>
+
+  <section class="focus stage-track" id="business" style="--track:260vh" aria-labelledby="focus-h" data-focus>
+    <div class="stage">
+      <h2 id="focus-h" data-words>매일 쓰는 돈이<br>누군가의 가게를 키워요</h2>
+      <div class="box-scene" aria-hidden="true"><p>장보기도, 판매도 한 곳에서</p></div>
+    </div>
+  </section>
+
+  <section class="data" id="data" aria-labelledby="data-h">
+    <div class="inner">
+      <div class="meta"><span data-clock>2026.09.28 10:00:00</span><span>앱 사용자 &mdash; <b data-count="3240000" data-suffix="+">3,240,000+</b></span><span>Data : Life | Spend | Finance</span></div>
+      <canvas class="terrain" data-terrain aria-hidden="true"></canvas>
+      <div class="data-grid">
+        <div>
+          <h2 id="data-h">관심 있는 사람에게 닿는 광고,<br>버려지는 노출은 줄여요</h2>
+          <p>고객이 동의한 데이터로 우리 상품을 반길 사람을 먼저 찾아요. 필요한 순간에 닿는 광고는 방해가 아니라 정보가 되니까요.</p>
+        </div>
+        <div class="data-cols">
+          <div><h3>생활 데이터</h3>반려동물, 여행 관심, 시간대별 소비</div>
+          <div><h3>금융 데이터</h3>보유 계좌, 투자 성향, 보험 가입</div>
+          <div><h3>소비 데이터</h3>선호 브랜드, 구독, 카드 사용 패턴</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pay stage-track" id="pay" style="--track:420vh" aria-labelledby="pay-h" data-pay>
+    <div class="stage">
+      <p class="pill-line" aria-hidden="true"><span>온라인과</span><span>오프라인 사이</span></p>
+      <div class="pill" aria-hidden="true"></div>
+      <div class="slides">
+        <div class="slide" data-on><div><span class="chip">결제 단말기</span><h2 id="pay-h">작은 가게 계산대에도<br>쏙 들어가는 크기</h2><p>작고 조용한 모양이라 매장 분위기를 가리지 않아요.</p><button class="more" type="button" data-demo="비공식 스터디: 제품 상세 페이지는 없어요.">자세히 보기</button></div><div class="device" aria-hidden="true"><div class="terminal"><i></i></div></div></div>
+        <div class="slide"><div><span class="chip">포스</span><h3 style="color:#fff;font-size:clamp(1.8rem,3.6vw,3rem);margin-block:16px 14px">단골을 기억하는<br>계산대</h3><p>누가 언제 다시 왔는지 알려줘서 한 마디 인사가 쉬워져요.</p></div><div class="device" aria-hidden="true"><div class="pos"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+        <div class="slide"><div><span class="chip">키오스크</span><h3 style="color:#fff;font-size:clamp(1.8rem,3.6vw,3rem);margin-block:16px 14px">줄이 길어도<br>주문은 빠르게</h3><p>메뉴를 고르고 결제까지 한 화면에서 끝나요.</p></div><div class="device" aria-hidden="true"><div class="kiosk"><i></i></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="daily stage-track" id="daily" style="--track:320vh" aria-labelledby="daily-h" data-daily>
+    <div class="stage">
+      <div class="daily-copy inner">
+        <h2 id="daily-h">조금씩 <em>가벼워진</em> 하루</h2>
+        <p>금융에서 시작한 편리함이 장보기, 여행, 가게 운영까지 번져가요. 하루가 복잡할수록 한 곳에서 끝나는 일이 늘어나요.</p>
+      </div>
+      <div class="tiles" aria-hidden="true"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+      <div class="sunset" aria-hidden="true"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="inner">
+    <div class="foot-top">
+      <p>돈에 관한 일은,<br>이제 가볍게.</p>
+      <div class="foot-cols">
+        <div><h3>서비스</h3><ul role="list"><li>송금</li><li>자산</li><li>증권</li><li>결제</li></ul></div>
+        <div><h3>스터디</h3><ul role="list"><li><a href="../">모든 스터디 보기</a></li><li><a href="#money">서비스로 이동</a></li></ul></div>
+        <div><h3>알림</h3><ul role="list"><li>모든 카피는 새로 작성</li><li>로고·사진 미사용</li></ul></div>
+      </div>
+    </div>
+    <p class="legal"><strong>Unofficial</strong> 브랜드 스터디입니다. 토스(Viva Republica)와 무관하며 승인받지 않았습니다. StyleGallery showcase.</p>
+    <p class="watermark" aria-hidden="true">toss</p>
+  </div>
+</footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Toss by StyleGallery. Not affiliated with Toss.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene, loop, range, lerp } = window.SG;
+  const staged = !reduced;
+  if (!staged) document.documentElement.classList.add("reduced");
+
+  // Progress ticks: eleven marks, the active one follows the page.
+  const ticks = document.querySelector("[data-ticks]");
+  ticks.innerHTML = "<span></span>".repeat(11);
+  const marks = [...ticks.children];
+  const tickUpdate = () => { const p = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight); const i = Math.round(p * 10); marks.forEach((m, k) => m.toggleAttribute("data-on", k === i)); };
+  addEventListener("scroll", tickUpdate, { passive: true }); tickUpdate();
+
+  if (!staged) return;
+
+  // Hero: card grows to full bleed (0 to 0.45), first line clears, second line arrives (0.5 to 0.8).
+  const hero = document.querySelector("[data-hero]");
+  scene(hero, (p) => {
+    const e = range(p, 0, 0.45);
+    const s = hero.style;
+    s.setProperty("--it", `${lerp(64, 0, e)}px`); s.setProperty("--is", `${lerp(14, 0, e)}px`); s.setProperty("--ib", `${lerp(14, 0, e)}px`); s.setProperty("--ir", `${lerp(28, 0, e)}px`);
+    const out = range(p, 0.05, 0.3); s.setProperty("--a1", String(1 - out)); s.setProperty("--d1", String(out));
+    const inn = range(p, 0.5, 0.8); s.setProperty("--a2", String(inn)); s.setProperty("--d2", String(1 - inn));
+  });
+
+  // Accordion: progress chooses the open item and the phone screen.
+  const assets = document.querySelector("[data-assets]");
+  const items = [...assets.querySelectorAll(".acc li")];
+  const screens = [...assets.querySelectorAll(".screen")];
+  const float = assets.querySelector("[data-float]");
+  const floats = [["1,284,500원", "모든 계좌 잔액을 모았어요"], ["1,820,000원", "사흘 뒤 카드값이 나가요"], ["+1,208원", "오늘 이자가 도착했어요"], ["120 EUR", "수수료 없이 환전했어요"]];
+  let current = -1;
+  scene(assets, (p) => {
+    const i = Math.min(3, Math.floor(p * 4));
+    if (i === current) return;
+    current = i;
+    items.forEach((li, k) => { li.toggleAttribute("data-open", k === i); li.querySelector(".body").inert = k !== i; });
+    screens.forEach((sc, k) => sc.toggleAttribute("data-on", k === i));
+    float.innerHTML = `<b>${floats[i][0]}</b>${floats[i][1]}`;
+    float.animate([{ transform: "translateY(16px)", opacity: 0 }, { transform: "none", opacity: 1 }], { duration: 500, easing: "cubic-bezier(.16,1,.3,1)" });
+  });
+
+  // Blur-to-focus words, then the warm box scene opens from the center.
+  const focus = document.querySelector("[data-focus]");
+  const heading = focus.querySelector("[data-words]");
+  heading.innerHTML = heading.innerHTML.split("<br>").map((line) => line.split(" ").map((w) => `<span class="w">${w}</span>`).join(" ")).join("<br>");
+  const ws = [...heading.querySelectorAll(".w")];
+  const box = focus.querySelector(".box-scene");
+  scene(focus, (p) => {
+    ws.forEach((w, k) => w.style.setProperty("--f", String(range(p, 0.02 + k * 0.05, 0.12 + k * 0.05))));
+    const o = range(p, 0.55, 0.85);
+    box.style.setProperty("--bi", `${lerp(50, 0, o)}%`);
+    box.style.setProperty("--ba", String(range(p, 0.8, 0.95)));
+  });
+
+  // Device pill grows into the stage, then three products slide through.
+  const pay = document.querySelector("[data-pay]");
+  const slides = [...pay.querySelectorAll(".slide")];
+  scene(pay, (p) => {
+    const g = range(p, 0.05, 0.3);
+    const s = pay.style;
+    s.setProperty("--pw", `calc(70px + ${g} * (100vw - 70px))`); s.setProperty("--ph", `calc(240px + ${g} * (100vh - 240px))`); s.setProperty("--pr", `${lerp(34, 0, g)}px`);
+    s.setProperty("--pa", String(1 - range(p, 0.05, 0.18)));
+    const k = p < 0.3 ? -1 : Math.min(2, Math.floor(range(p, 0.3, 1) * 3));
+    slides.forEach((sl, i) => { sl.toggleAttribute("data-on", i === k); sl.inert = i !== k; });
+  });
+
+  // Daily tiles fall away, the sunset tile opens to full bleed.
+  const daily = document.querySelector("[data-daily]");
+  scene(daily, (p) => {
+    const s = daily.style;
+    const f = range(p, 0.1, 0.4); s.setProperty("--tf", String(f)); s.setProperty("--dc", String(f));
+    const o = range(p, 0.35, 0.8);
+    s.setProperty("--st", `${lerp(34, 0, o)}%`); s.setProperty("--sb", `${lerp(14, 0, o)}%`);
+    s.setProperty("--sl", `${lerp(28, 0, o)}%`); s.setProperty("--sr", `${lerp(58, 0, o)}%`); s.setProperty("--sR", `${lerp(22, 0, o)}px`);
+    daily.querySelector(".sunset").style.opacity = String(range(p, 0.3, 0.38));
+  });
+})();
+
+// Live clock and dot terrain run in every mode; the terrain draws one still frame under reduced motion.
+(() => {
+  const clock = document.querySelector("[data-clock]");
+  const pad = (n) => String(n).padStart(2, "0");
+  const tick = () => { const d = new Date(); clock.textContent = `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`; };
+  tick(); setInterval(tick, 1000);
+  const canvas = document.querySelector("[data-terrain]");
+  const ctx = canvas.getContext("2d");
+  const size = () => { const r = canvas.getBoundingClientRect(); canvas.width = r.width * devicePixelRatio; canvas.height = r.height * devicePixelRatio; };
+  size(); addEventListener("resize", size);
+  window.SG.loop(canvas, (t) => {
+    const w = canvas.width, h = canvas.height, dpr = devicePixelRatio;
+    ctx.clearRect(0, 0, w, h);
+    const cols = 90, rows = 26;
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const u = c / cols, v = r / rows;
+      const peak = Math.exp(-((u - 0.62) ** 2) / 0.004 - ((v - 0.35) ** 2) / 0.02);
+      const hgt = Math.sin(u * 9 + t / 1400) * 0.05 + Math.sin(u * 23 - v * 5 + t / 1900) * 0.025 + peak * 0.28;
+      const x = (u * 1.2 - 0.1 + (v - 0.5) * 0.25) * w;
+      const y = h * (0.32 + v * 0.62 - hgt);
+      ctx.fillStyle = peak > 0.25 ? `rgba(255,91,46,${0.5 + peak * 0.5})` : `rgba(90,110,130,${0.25 + v * 0.45})`;
+      ctx.fillRect(x, y, 1.6 * dpr, 1.6 * dpr);
+    }
+    const px = (0.62 * 1.2 - 0.1 + (0.35 - 0.5) * 0.25) * w, py = h * (0.32 + 0.35 * 0.62 - 0.33);
+    ctx.strokeStyle = "rgba(255,91,46,0.9)"; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, py - 40 * dpr); ctx.stroke();
+    ctx.fillStyle = "#ff5b2e"; ctx.font = `${12 * dpr}px Pretendard Variable, sans-serif`; ctx.fillText("해외여행 예정", px - 34 * dpr, py - 48 * dpr);
+  });
+})();
+</script>
+</body>
+</html>

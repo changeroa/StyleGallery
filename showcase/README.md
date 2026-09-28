@@ -94,6 +94,11 @@ Once any work exists, `showcase/index.html` is the hub that lists every work: th
 | Offline | With every non-local request blocked: page errors, hidden text, or overflow at 390 wide. |
 | No script | With every script blocked: hidden text or overflow at 390 wide. |
 | Hub | Works exist but `showcase/index.html` is missing, or a work directory it does not link. With no works, the check passes and reports that there is nothing to check. |
+| Richness: empty screen | At 1440x900, a screen where images, video, canvas, SVG of at least 120x80, background images, and elements marked `data-surface` cover under 8% and text covers under 10%. |
+| Richness: response | Fewer than 4 elements with transitions per screen of page length (at least 12), or link and button transitions with a median above 350ms. |
+| Richness: surface detail | Fewer than 2 elements with a mask or clip-path, or fewer than 3 with 1px hairline borders. |
+
+Richness findings are warnings by default so older works keep passing; run with `--richness error` to make them failures, which new works must pass. Mark a drawn scene or a live product mock built from HTML with `data-surface` so the check counts it; never mark a gradient or an empty panel.
 
 Fictional actions (subscribe, book, get a key) must be `<button type="button" data-demo="...">` elements that show an honest message in a `role="status"` region, never links that jump to the top.
 
@@ -105,7 +110,7 @@ The repository ships the contract, the checker, and the guidance, but no committ
 
 ## Starting A Work Fast
 
-Read this page, one [Expression direction](../expression/index.md), and the [Motion techniques](../motion/techniques/scroll-choreography.md) you need. Skip governance, provenance, and consumer-reference documents: a showcase work creates no governed record. Build, add a hub card, run `bun run showcase:serve` and `node scripts/check-showcase.mjs --work <slug>`, look at the screenshots, and iterate.
+Read this page, the [Expression Direction Brief](../expression/direction-brief.md), one [Expression direction](../expression/index.md), and the [Motion techniques](../motion/techniques/scroll-choreography.md) you need. Skip governance, provenance, and consumer-reference documents: a showcase work creates no governed record. Plan one image, drawn scene, or product surface per screen before writing CSS ([Image Weight](../expression/techniques/image-weight.md)). Build, add a hub card, run `bun run showcase:serve` and `node scripts/check-showcase.mjs --work <slug> --richness error`, look at the screenshots, and iterate.
 
 ## IA Navigation
 

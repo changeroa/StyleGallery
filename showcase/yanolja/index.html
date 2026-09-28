@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>야놀자(NOL) - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="야놀자 NOL 홈의 여가 슈퍼앱 구성과 장르 랭킹, 기획전 카드를 원본 사진·포스터 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Ctext x='4' y='21' fill='%23fff' font-size='11' font-weight='900' font-family='sans-serif'%3ENOL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --blue: #1f5bff; --ink: #1a1a1a; --grey: #666; --line: #ececec; --soft: #f5f6f8; --sale: #c9281a; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 76px; --sg-focus: #1f5bff; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 14px/1.5 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  svg.scene { block-size: 100%; display: block; inline-size: 100%; }
+  .inner { margin-inline: auto; max-inline-size: 1240px; padding-inline: 20px; }
+  .site-header { background: #fff; border-block-end: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
+  .hrow { align-items: center; display: flex; gap: 18px; block-size: 64px; }
+  .logo { color: #111; font-size: 24px; font-weight: 900; letter-spacing: -0.04em; text-decoration: none; }
+  .search { align-items: center; background: var(--soft); border-radius: 999px; display: flex; flex: 1; max-inline-size: 440px; padding: 9px 16px; }
+  .search input { background: none; border: 0; flex: 1; font: inherit; outline: none; min-inline-size: 0; }
+  .hnav { display: flex; gap: 16px; margin-inline-start: auto; }
+  .hnav a { color: var(--ink); font-size: 13px; font-weight: 600; text-decoration: none; }
+  @media (max-width: 760px) { .hnav { display: none; } }
+
+  /* Hero: a wide card carousel that peeks its neighbours. */
+  .hero { overflow: hidden; padding-block: 20px 10px; }
+  .track { display: flex; gap: 14px; transition: transform .7s var(--ease); }
+  .slide { aspect-ratio: 2.9; border-radius: 22px; color: #fff; display: flex; flex: 0 0 min(900px, 86vw); flex-direction: column; justify-content: center; overflow: hidden; padding: 0 50px; position: relative; }
+  .slide .scene { inset: 0; position: absolute; }
+  .slide .t { background: linear-gradient(90deg, rgb(0 0 0 / 0.5), transparent); inset: 0; padding: 0 50px; position: absolute; display: flex; flex-direction: column; justify-content: center; }
+  .slide b { font-size: clamp(1.3rem, 2.6vw, 2.2rem); line-height: 1.3; }
+  .slide span { font-size: 13px; margin-block-start: 8px; }
+  .slide .chip { align-self: flex-start; background: var(--blue); border-radius: 999px; font-size: 11px; margin-block-end: 10px; padding: 3px 10px; }
+  .hero-ctrl { align-items: center; display: flex; gap: 8px; justify-content: center; margin-block-start: 12px; }
+  .hero-ctrl button { background: #fff; border: 1px solid var(--line); border-radius: 50%; block-size: 34px; inline-size: 34px; }
+  .hero-ctrl span { font-size: 12px; color: var(--grey); font-variant-numeric: tabular-nums; }
+  .notice { align-items: center; background: var(--soft); border-radius: 12px; display: flex; gap: 10px; font-size: 13px; margin-block: 18px; padding: 12px 16px; }
+  .notice em { background: var(--blue); border-radius: 999px; color: #fff; font-size: 11px; font-style: normal; padding: 1px 8px; }
+  .login-band { align-items: center; border: 1px solid var(--line); border-radius: 12px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 14px; }
+  .login-band button { background: var(--blue); border: 0; border-radius: 6px; color: #fff; font-size: 12px; font-weight: 700; padding: 6px 12px; }
+  .cats { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); padding-block: 26px 10px; }
+  .cat { background: none; border: 0; color: var(--ink); display: grid; font: 500 12px var(--sans); gap: 6px; justify-items: center; position: relative; }
+  .cat span { block-size: 48px; display: block; inline-size: 48px; }
+  .cat em { background: var(--sale); border-radius: 999px; color: #fff; font-size: 9px; font-style: normal; inset: -6px 10px auto auto; padding: 0 5px; position: absolute; }
+
+  .sec { padding-block: 44px 10px; }
+  .sec-h { align-items: baseline; display: flex; gap: 10px; margin-block-end: 14px; }
+  .sec-h h2 { font-size: 20px; font-weight: 800; }
+  .sec-h small { color: var(--grey); font-size: 13px; }
+  .sec-h button { background: none; border: 0; color: var(--grey); font-size: 13px; margin-inline-start: auto; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-block-end: 14px; }
+  .pills button { background: var(--soft); border: 0; border-radius: 999px; color: var(--ink); font: 600 13px var(--sans); padding: 7px 14px; }
+  .pills button[aria-pressed="true"] { background: #111; color: #fff; }
+  .rank { display: grid; gap: 16px; grid-template-columns: repeat(5, 1fr); }
+  .poster { position: relative; }
+  .poster .p { aspect-ratio: 0.72; border-radius: 12px; overflow: hidden; position: relative; transition: transform .4s var(--ease); }
+  .poster:hover .p { transform: translateY(-6px); }
+  .poster .n { color: #fff; font-size: 44px; font-weight: 900; inset: auto auto 6px 10px; position: absolute; text-shadow: 0 2px 10px rgb(0 0 0 / 0.5); }
+  .poster h3 { font-size: 14px; font-weight: 600; margin-block-start: 8px; }
+  .poster p { color: var(--grey); font-size: 12px; }
+  .grid4 { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); }
+  .stay .pic { aspect-ratio: 1.1; border-radius: 12px; overflow: hidden; }
+  .stay h3 { font-size: 14px; font-weight: 600; margin-block-start: 8px; }
+  .stay .pr { font-weight: 800; }
+  .stay .pr em { color: var(--sale); font-style: normal; margin-inline-end: 4px; }
+  .deal-band { background: linear-gradient(180deg, #e9eef8, #f7f9fc); margin-block-start: 50px; padding-block: 40px; }
+  .deals { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
+  .deal { aspect-ratio: 0.8; border-radius: 18px; color: #fff; display: flex; flex-direction: column; overflow: hidden; padding: 22px; position: relative; }
+  .deal .scene { inset: 0; position: absolute; }
+  .deal .t { background: linear-gradient(180deg, rgb(0 0 0 / 0.45), transparent); margin: -22px; padding: 22px 22px 60px; position: relative; }
+  .deal b { display: block; font-size: 20px; line-height: 1.3; }
+  .deal small { font-size: 12px; }
+  .expo { display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); }
+  .expo .deal { aspect-ratio: 1.2; }
+  @media (max-width: 900px) { .rank { grid-template-columns: repeat(3, 1fr); } .grid4 { grid-template-columns: 1fr 1fr; } .deals, .expo { grid-template-columns: 1fr; } .deal { aspect-ratio: 1.6; } }
+  footer { background: var(--soft); color: var(--grey); font-size: 12px; margin-block-start: 60px; padding-block: 40px; }
+  footer a { color: var(--ink); }
+  .totop { background: #fff; border: 1px solid var(--line); border-radius: 50%; block-size: 42px; inset: auto 20px 20px auto; inline-size: 42px; position: fixed; z-index: 15; visibility: hidden; font-size: 16px; }
+  .totop[data-on] { visibility: visible; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="inner hrow">
+    <a class="logo" href="#top">NOL</a>
+    <label class="search"><span class="sg-visually-hidden">검색</span><input type="search" placeholder="어디로, 무엇을 하러 갈까요?"><span aria-hidden="true">&#9906;</span></label>
+    <nav class="hnav" aria-label="섹션"><a href="#rank">공연</a><a href="#stays">숙소</a><a href="#deals">특가</a><a href="#expo">기획전</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-roledescription="carousel" aria-label="이번 주 기획 (예시)">
+    <div class="track" data-track></div>
+    <div class="hero-ctrl"><button type="button" aria-label="이전 기획" data-prev>&lsaquo;</button><span data-count>1 / 4</span><button type="button" aria-label="다음 기획" data-next>&rsaquo;</button></div>
+  </section>
+  <div class="inner">
+    <p class="notice"><em>공지</em>이 페이지는 NOL(야놀자)의 Unofficial 스터디이며, 모든 상품은 가상이에요.</p>
+    <div class="login-band"><span>로그인하고 첫 예약 쿠폰 받기 (예시)</span><button type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인/가입하기 &rsaquo;</button></div>
+    <div class="cats" data-cats></div>
+
+    <section class="sec" id="rank" aria-labelledby="rank-h">
+      <div class="sec-h"><h2 id="rank-h">장르별 랭킹</h2><small>최근 한 달 예매 많은 순</small><button type="button" data-demo="비공식 스터디: 전체 랭킹은 없어요.">전체보기 &rsaquo;</button></div>
+      <div class="pills" role="group" aria-label="장르" data-genres><button type="button" aria-pressed="true">뮤지컬</button><button type="button" aria-pressed="false">콘서트</button><button type="button" aria-pressed="false">연극</button><button type="button" aria-pressed="false">전시</button><button type="button" aria-pressed="false">클래식</button></div>
+      <div class="rank" data-rank></div>
+    </section>
+
+    <section class="sec" id="stays" aria-labelledby="stays-h">
+      <div class="sec-h"><h2 id="stays-h">퇴근하고 바로 가는 시내 호텔</h2><small>이번 주말 남은 객실</small></div>
+      <div class="grid4" data-stays></div>
+    </section>
+  </div>
+
+  <section class="deal-band" id="deals" aria-labelledby="deals-h">
+    <div class="inner">
+      <div class="sec-h"><h2 id="deals-h">놓치기 아까운 특가</h2><small>매일 자정 교체 (예시)</small></div>
+      <div class="deals" data-deals></div>
+    </div>
+  </section>
+
+  <section class="sec inner" id="expo" aria-labelledby="expo-h">
+    <div class="sec-h"><h2 id="expo-h">기획전 모음</h2></div>
+    <div class="expo" data-expo></div>
+  </section>
+</main>
+<footer><div class="inner"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 &middot; 야놀자/NOL과 무관합니다. 공연 포스터는 모두 새로 만든 가상 작품이고, 사진 대신 그린 장면을 썼어요. <a href="../">모든 스터디</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Yanolja (NOL) by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art, reduced } = window.SG;
+  // Painted travel scenes: sky, horizon, and a subject from the art kit.
+  const scene = (sky1, sky2, land, k, main) => `<svg class="scene" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g${sky1.slice(1)}${land.slice(1)}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky1}"/><stop offset="1" stop-color="${sky2}"/></linearGradient></defs><rect width="400" height="200" fill="url(#g${sky1.slice(1)}${land.slice(1)})"/><path d="M0 140 C80 110 140 150 220 120 S340 110 400 130 V200 H0Z" fill="${land}"/><g transform="translate(250 50) scale(1.2)">${art(k, { ground: "transparent", main, accent: "#333" }).replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg>`;
+  const slides = [["제주 숙소 할인 주간", "섬에서 보내는 사흘, 쿠폰까지 챙겨가세요", "#ffb36b", "#ffe2b8", "#2f7a4a", "fruit", "#ff8a1f"], ["가을 페스티벌 티켓 오픈", "음악과 들판, 주말 이틀 (가상 행사)", "#3a2a6a", "#e86a4a", "#1a1a2a", "ticket", "#ffd23f"], ["바다가 보이는 방", "동해 오션뷰 숙소 모음", "#6ab4e8", "#d8eefa", "#2a5a7a", "bed", "#fff"], ["겨울 스키 얼리버드", "시즌권은 지금이 제일 싸요 (예시)", "#9ac8f0", "#f4faff", "#e8f0f6", "sneaker", "#1f5bff"]];
+  const track = document.querySelector("[data-track]");
+  track.innerHTML = slides.map(([t, s, a, b, l, k, m], i) => `<div class="slide" aria-roledescription="slide" aria-label="${i + 1} / ${slides.length}">${scene(a, b, l, k, m)}<div class="t"><span class="chip">기획전</span><b>${t}</b><span>${s}</span></div></div>`).join("");
+  let at = 0; const count = document.querySelector("[data-count]");
+  const go = (d) => { at = (at + d + slides.length) % slides.length; track.style.transform = `translateX(calc(${-at} * (min(900px, 86vw) + 14px) + (100vw - min(900px, 86vw)) / 2))`; count.textContent = `${at + 1} / ${slides.length}`; };
+  go(0);
+  document.querySelector("[data-prev]").addEventListener("click", () => go(-1));
+  document.querySelector("[data-next]").addEventListener("click", () => go(1));
+  addEventListener("resize", () => go(0));
+  document.querySelector("[data-cats]").innerHTML = [["bed", "호텔"], ["sofa", "펜션"], ["plant", "캠핑"], ["ticket", "공연"], ["car", "렌터카"], ["pin", "해외여행"], ["book", "전시"], ["gift", "쿠폰", "N"], ["bowl", "맛집"], ["sneaker", "레저"]].map(([k, t, b], i) => `<button class="cat" type="button" data-demo="비공식 스터디: '${t}' 목록은 없어요."><span aria-hidden="true">${art(k, { ground: "transparent", main: ["#1f5bff", "#ff8a1f", "#2fae6a", "#e03b2c", "#7a4ae8"][i % 5], accent: "#333" })}</span>${t}${b ? `<em>${b}</em>` : ""}</button>`).join("");
+  // Original typographic posters for invented shows, recolored per genre.
+  const shows = { "뮤지컬": ["달의 서커스", "마지막 기차", "소금의 노래", "빨간 우산", "등대지기"], "콘서트": ["밤의 주파수", "여름 끝 라이브", "파도 소리", "첫눈 공연", "새벽 라디오"], "연극": ["세 개의 방", "오래된 편지", "빈 의자", "문 앞의 손님", "낮은 목소리"], "전시": ["빛의 정원", "종이 도시", "파란 시간", "물의 기록", "작은 우주"], "클래식": ["가을 협주곡", "현의 밤", "피아노와 비", "네 개의 계절", "첼로 독주회"] };
+  const rank = document.querySelector("[data-rank]");
+  const hues = ["#2a1f55", "#b8321f", "#0f3a4a", "#e8b41f", "#1f5a3a"];
+  const draw = (g) => { rank.innerHTML = shows[g].map((t, i) => `<article class="poster"><div class="p" aria-hidden="true"><svg viewBox="0 0 100 140" preserveAspectRatio="none" style="width:100%;height:100%"><rect width="100" height="140" fill="${hues[i]}"/><circle cx="${30 + i * 10}" cy="${40 + i * 6}" r="${22 + i * 3}" fill="#fff" opacity=".18"/><path d="M0 ${90 + i * 4} Q50 ${70 + i * 5} 100 ${95 - i * 3} V140H0Z" fill="#000" opacity=".25"/><text x="8" y="26" fill="#fff" font-size="11" font-weight="900" font-family="sans-serif">${t}</text></svg><span class="n">${i + 1}</span></div><h3>${g} &lt;${t}&gt;</h3><p>가상 공연장 &middot; 10.03 ~ 11.30</p></article>`).join(""); };
+  draw("뮤지컬");
+  const pills = [...document.querySelectorAll("[data-genres] button")];
+  pills.forEach((p) => p.addEventListener("click", () => { pills.forEach((o) => o.setAttribute("aria-pressed", String(o === p))); draw(p.textContent); if (!reduced) rank.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 400 }); }));
+  document.querySelector("[data-stays]").innerHTML = [["시청 앞 루프탑 호텔", 38, 189000], ["강변 부티크 스테이", 25, 142000], ["역세권 비즈니스 호텔", 41, 98000], ["공원 옆 레지던스", 19, 156000]].map(([t, off, p], i) => `<article class="stay"><div class="pic" aria-hidden="true">${scene(["#8ab4e8", "#f0a86a", "#1f2f4f", "#b8e0c8"][i], "#f4f6fa", ["#5a6a7a", "#6a4a3a", "#2a3a5a", "#3a6a4a"][i], "bed", "#fff")}</div><h3>${t} (가상)</h3><p class="pr"><em>${off}%</em>${Math.round(p * (1 - off / 100) / 100) * 100}원~</p></article>`).join("");
+  document.querySelector("[data-deals]").innerHTML = [["10만원 이하<br>가성비 글램핑", "#7ac8a0", "#e8f6ec", "#4a7a3a", "plant"], ["가을엔 역시<br>온천 여행", "#e88a4a", "#fbe6d0", "#6a3a2a", "bowl"], ["NOL 단독<br>리조트 시즌권", "#4a78e8", "#e6eeff", "#e8f0f8", "sneaker"]].map(([t, a, b, l, k]) => `<article class="deal">${scene(a, b, l, k, "#fff")}<div class="t"><b>${t}</b><small>예시 기획</small></div></article>`).join("");
+  document.querySelector("[data-expo]").innerHTML = [["함께 떠나는<br>연휴 호캉스", "#3a2a1f", "#c89a6a", "#2a1f18", "bed"], ["10만원대로 떠나는<br>주말 펜션", "#1f3a5a", "#8ab4d8", "#1a2a3a", "sofa"], ["한 번쯤 머물고 싶은<br>리조트", "#0f4a5a", "#6ad8e8", "#0a2a3a", "plant"]].map(([t, a, b, l, k]) => `<article class="deal">${scene(a, b, l, k, "#f4e8d8")}<div class="t"><b>${t}</b><small>기획전 (예시)</small></div></article>`).join("");
+})();
+</script>
+</body>
+</html>

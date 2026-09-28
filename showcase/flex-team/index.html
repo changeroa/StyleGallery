@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>flex - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="flex AX 랜딩의 그레인 그라데이션 히어로, 다크 섹션, 형광 초록 강조를 원본 카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%233ee07a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --bg: #000; --bg-2: #121214; --bg-3: #1b1b1e; --line: rgb(255 255 255 / 0.1); --text: #f4f4f5; --text-2: #b8b8be; --green: #3ee07a; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 110px; --sg-focus: #3ee07a; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--bg); color: var(--text); font: 400 15px/1.6 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1064px; padding-inline: 20px; }
+  .site-header { background: var(--bg-2); position: sticky; top: 0; z-index: 30; }
+  .notice { align-items: center; background: #000; display: flex; font-size: 12px; gap: 8px; justify-content: center; padding: 6px; color: var(--text-2); }
+  .notice b { border: 1px solid #555; border-radius: 999px; color: var(--text); font-size: 10px; padding: 0 6px; }
+  .bar { align-items: center; display: flex; gap: 26px; block-size: 52px; }
+  .logo { color: #fff; font-size: 19px; font-weight: 800; letter-spacing: -0.04em; text-decoration: none; }
+  .bar nav { display: flex; gap: 20px; }
+  .bar nav a { color: var(--text-2); font-size: 13px; text-decoration: none; }
+  .bar nav a:hover { color: #fff; }
+  .acts { display: flex; gap: 6px; margin-inline-start: auto; }
+  .acts button { border-radius: 999px; font-size: 12px; font-weight: 600; padding: 5px 12px; }
+  .line-btn { background: none; border: 1px solid #555; color: #fff; }
+  .white-btn { background: #fff; border: 0; color: #000; }
+  @media (max-width: 760px) { .bar nav { display: none; } }
+
+  /* Hero: vertical color bands melted by a grain filter. */
+  .hero { overflow: hidden; padding-block: 120px 90px; position: relative; text-align: center; }
+  .bands { background: linear-gradient(90deg, #ffb3a8 0%, #ff5a3c 18%, #ff8a1f 32%, #ffd166 46%, #ff6a3d 60%, #e84b6a 72%, #c9b6ff 88%, #9ab8ff 100%); filter: blur(30px) saturate(130%); inset: -60px; position: absolute; animation: sway 14s ease-in-out infinite alternate; }
+  @keyframes sway { to { transform: translateX(-6%) scaleX(1.12); } }
+  .grain { inset: 0; mix-blend-mode: overlay; opacity: 0.55; position: absolute; }
+  .hero .inner { position: relative; }
+  .hero .scrim { background: radial-gradient(50% 55% at 50% 45%, rgb(0 0 0 / 0.28), transparent 75%); inset: 0; position: absolute; }
+  .eyebrow { font-size: 13px; font-weight: 700; position: relative; }
+  .hero h1 { font-size: clamp(2.2rem, 4.8vw, 3.8rem); font-weight: 800; letter-spacing: -0.04em; margin-block: 12px; position: relative; }
+  .hero p.sub { color: #fff; font-size: 14px; position: relative; }
+  .prompt { align-items: center; backdrop-filter: blur(12px); background: rgb(90 30 20 / 0.45); border: 1px solid rgb(255 255 255 / 0.35); border-radius: 999px; display: flex; gap: 10px; margin: 44px auto 0; max-inline-size: 560px; padding: 16px 22px; position: relative; text-align: start; font-weight: 700; }
+  .prompt span { flex: 1; min-block-size: 1.6em; }
+  .prompt .caret { animation: blink 1s steps(1) infinite; background: #fff; block-size: 1.1em; display: inline-block; inline-size: 2px; vertical-align: -2px; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .logos { color: #8a8a90; display: flex; flex-wrap: wrap; font-weight: 800; gap: 18px 40px; justify-content: center; padding-block: 34px; }
+
+  .quote { padding-block: 120px 60px; text-align: center; }
+  .quote h2 { font-size: clamp(1.7rem, 3.4vw, 2.7rem); font-weight: 800; line-height: 1.35; }
+  .wave { block-size: 220px; inline-size: 100%; margin-block: 40px; }
+  .quote p { color: var(--text-2); }
+  .q-actions { display: flex; gap: 8px; justify-content: center; margin-block-start: 26px; }
+  .q-actions button { border: 0; border-radius: 10px; font-weight: 700; padding: 11px 18px; }
+  .sec { padding-block: 130px 40px; text-align: center; }
+  .sec h2 { font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 800; }
+  .sec h2 em { color: var(--green); font-style: normal; }
+  .sec .lede { color: var(--text-2); margin-block: 10px 50px; }
+  .dual { display: grid; gap: 0; grid-template-columns: 1fr 1fr; margin-inline: auto; max-inline-size: 900px; position: relative; text-align: start; }
+  .chat { background: linear-gradient(160deg, #1f1f23, #121214); border: 1px solid var(--line); border-radius: 18px; padding: 22px; font-size: 13px; }
+  .chat:nth-child(2) { margin-block-start: 50px; margin-inline-start: -60px; box-shadow: -30px 30px 60px rgb(0 0 0 / 0.6); }
+  .chat .who { background: rgb(62 224 122 / 0.15); border-radius: 999px; color: var(--green); display: inline-block; font-size: 11px; font-weight: 700; margin-block-end: 12px; padding: 2px 10px; }
+  .chat b { display: block; font-size: 15px; margin-block-end: 8px; }
+  .chat p { color: var(--text-2); }
+  .meter { align-items: center; display: grid; gap: 10px; grid-template-columns: 70px 1fr 40px; margin-block-start: 10px; font-size: 12px; color: var(--text-2); }
+  .meter i { background: #2a2a2e; border-radius: 999px; block-size: 6px; overflow: hidden; }
+  .meter i::after { background: linear-gradient(90deg, #cfcfd4, #fff); block-size: 100%; content: ""; display: block; inline-size: var(--w); transform-origin: left; transform: scaleX(var(--g, 1)); transition: transform 1.2s var(--ease); }
+  .meter i.warn::after { background: linear-gradient(90deg, #e8a33a, #ffcf5a); }
+  @media (max-width: 760px) { .dual { grid-template-columns: 1fr; } .chat:nth-child(2) { margin: 14px 0 0; } }
+  .app { background: var(--bg-2); border: 1px solid var(--line); border-radius: 16px; margin-inline: auto; max-inline-size: 920px; overflow: hidden; text-align: start; }
+  .app .chrome { border-block-end: 1px solid var(--line); display: flex; gap: 6px; padding: 10px 14px; }
+  .app .chrome i { border-radius: 50%; block-size: 10px; inline-size: 10px; }
+  .app .body { display: grid; grid-template-columns: 200px 1fr; font-size: 12px; }
+  .app aside { border-inline-end: 1px solid var(--line); color: var(--text-2); padding: 14px; }
+  .app aside li { padding-block: 5px; }
+  .app .feed { padding: 16px 20px; }
+  .alert { border: 1px solid var(--line); border-radius: 12px; margin-block-end: 10px; padding: 12px 14px; }
+  .alert b { color: #fff; }
+  .alert small { color: var(--text-2); display: block; }
+  .tag { border-radius: 4px; font-size: 10px; font-weight: 700; padding: 1px 6px; margin-inline-end: 6px; }
+  @media (max-width: 760px) { .app .body { grid-template-columns: 1fr; } .app aside { display: none; } }
+  .diagram { background: radial-gradient(60% 80% at 30% 60%, #c9542a, transparent 70%), radial-gradient(60% 80% at 90% 40%, #6a8aa8, transparent 70%), #8a3a22; border-radius: 22px; margin-inline: auto; max-inline-size: 920px; overflow: hidden; padding: 60px 30px; position: relative; }
+  .diagram svg { block-size: auto; inline-size: 100%; position: relative; }
+  .diagram .node { fill: rgb(255 255 255 / 0.18); stroke: rgb(255 255 255 / 0.7); }
+  .diagram .flow { stroke: rgb(255 255 255 / 0.55); stroke-dasharray: 4 8; animation: flow 1.4s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -24; } }
+  .cards3 { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); margin: 20px auto 0; max-inline-size: 920px; text-align: start; }
+  .c3 { background: var(--bg-2); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .c3 span { font-size: 20px; }
+  .c3 h3 { font-size: 16px; margin-block: 14px 8px; }
+  .c3 p { color: var(--text-2); font-size: 13px; }
+  @media (max-width: 760px) { .cards3 { grid-template-columns: 1fr; } }
+  .final { padding-block: 160px; text-align: center; }
+  .final h2 { font-size: clamp(2rem, 4.2vw, 3.3rem); font-weight: 800; line-height: 1.3; }
+  .final .row { display: flex; gap: 10px; justify-content: center; margin-block-start: 34px; }
+  .final button { border: 0; border-radius: 14px; font-size: 16px; font-weight: 800; padding: 16px 26px; }
+  .grey-btn { background: #2a2a2e; color: #fff; }
+  .green-btn { background: var(--green); color: #002a10; }
+  footer { background: var(--bg-2); color: var(--text-2); font-size: 12px; padding-block: 50px; }
+  footer a { color: var(--green); }
+  .fab { background: #000; border: 1px solid #444; border-radius: 50%; block-size: 44px; color: var(--green); font-size: 18px; inline-size: 44px; inset: auto 20px 20px auto; position: fixed; z-index: 20; }
+  html { scroll-padding-bottom: 80px; }
+  .sg-studybar { padding-inline-end: 80px; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <p class="notice"><b>NOTICE</b>이 페이지는 비공식 디자인 스터디예요 &rsaquo;</p>
+  <div class="inner bar">
+    <a class="logo" href="#top">flex</a>
+    <nav aria-label="섹션"><a href="#knows">Knows you</a><a href="#ahead">Ahead</a><a href="#context">Context</a></nav>
+    <div class="acts"><button class="line-btn" type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인</button><button class="white-btn" type="button" data-demo="비공식 스터디: 도입 문의는 전송되지 않아요.">도입 문의하기</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-h" data-ambient>
+    <div class="bands" aria-hidden="true"></div>
+    <svg class="grain" aria-hidden="true" width="100%" height="100%"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="inner">
+      <p class="eyebrow">People-aware AI</p>
+      <h1 id="hero-h">누가, 무엇을, 왜<br>먼저 파악하는 업무 AI</h1>
+      <p class="sub">누가 어떤 일을 하는지 아는 AI가 먼저 도와요.<br>이제 AI가 조직도를 읽습니다.</p>
+      <div class="prompt" aria-label="예시 질문이 바뀌며 입력되는 프롬프트"><span data-prompt></span><span aria-hidden="true">&#8629;</span></div>
+    </div>
+  </section>
+  <div class="logos" aria-label="가상의 고객사 이름"><span>NORTHWIND</span><span>파란돌</span><span>helio</span><span>MERIDIAN</span><span>소금창고</span><span>kite&amp;co</span><span>ARCLINE</span></div>
+
+  <section class="quote inner" aria-labelledby="q-h">
+    <h2 id="q-h">&ldquo;도구는 계속 늘었는데,<br>회의 시간은 왜 그대로일까요?&rdquo;</h2>
+    <canvas class="wave" data-wave aria-hidden="true"></canvas>
+    <p>모두에게 같은 답을 주는 AI는, 결국 아무에게도 딱 맞지 않으니까요.</p>
+    <div class="q-actions"><button class="white-btn" type="button" data-demo="비공식 스터디: 도입 문의는 전송되지 않아요.">도입 문의</button><button class="grey-btn" type="button" data-demo="비공식 스터디: 상세 페이지는 없어요.">더 알아보기</button></div>
+  </section>
+
+  <section class="sec inner" id="knows" aria-labelledby="k-h">
+    <h2 id="k-h">질문한 사람의 <em>자리에서</em> 답하는 AI</h2>
+    <p class="lede">같은 질문에도 역할과 권한에 맞는 답을 줘요.</p>
+    <div class="dual" data-dual>
+      <div class="chat"><span class="who">팀장이 물었을 때</span><b>우리 팀 3분기 목표 달성률 72%</b><p>목표 네 개 중 두 개가 일정보다 늦어요. 채용 공백이 원인으로 보여요.</p><div class="meter"><span>제품 출시</span><i style="--w:88%"></i><span>88%</span></div><div class="meter"><span>채용</span><i class="warn" style="--w:41%"></i><span>41%</span></div></div>
+      <div class="chat"><span class="who">구성원이 물었을 때</span><b>내 목표 진행률 79%</b><p>이번 주 회고를 적으면 평가 준비가 끝나요. 팀 전체 수치는 볼 수 없어요.</p><div class="meter"><span>개인 목표</span><i style="--w:79%"></i><span>79%</span></div><div class="meter"><span>회고</span><i class="warn" style="--w:30%"></i><span>30%</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec inner" id="ahead" aria-labelledby="a-h">
+    <h2 id="a-h">신호가 커지기 <em>전에</em> 올려주는 AI</h2>
+    <p class="lede">묻기 전에, 오늘 봐야 할 신호부터 올려드려요.</p>
+    <div class="app" aria-hidden="true">
+      <div class="chrome"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+      <div class="body"><aside><ul role="list"><li>홈</li><li>목표</li><li>1:1</li><li>근무</li><li>인사이트</li></ul></aside>
+      <div class="feed" data-feed></div></div>
+    </div>
+  </section>
+
+  <section class="sec inner" id="context" aria-labelledby="c-h">
+    <h2 id="c-h">도구 아홉 개를 <em>한 문장으로</em> 읽는 AI</h2>
+    <p class="lede">조직, 목표, 근무, 평가를 연결해서 맥락째 답해요.</p>
+    <div class="diagram" data-ambient><svg viewBox="0 0 800 260" aria-hidden="true"><rect x="250" y="20" width="300" height="60" rx="16" fill="rgb(0 0 0 / .25)" stroke="rgb(255 255 255 / .5)"/><text x="400" y="56" text-anchor="middle" fill="#fff" font-size="18" font-weight="700" font-family="sans-serif">조직 맥락 엔진 (예시)</text></svg></div>
+    <div class="cards3">
+      <article class="c3" data-reveal><span aria-hidden="true">&#9636;</span><h3>한곳에 모인 기록</h3><p>조직도, 목표, 1:1 기록이 한 구조 안에 쌓여요.</p></article>
+      <article class="c3" data-reveal data-delay="100"><span aria-hidden="true">&#8644;</span><h3>밖의 도구와 연결</h3><p>메신저, 캘린더, 문서 도구의 신호도 함께 읽어요.</p></article>
+      <article class="c3" data-reveal data-delay="200"><span aria-hidden="true">&#9635;</span><h3>권한을 지키는 답</h3><p>볼 수 있는 사람에게 볼 수 있는 만큼만 보여줘요.</p></article>
+    </div>
+  </section>
+
+  <section class="final inner" aria-labelledby="f-h">
+    <h2 id="f-h">사람을 아는 AI가<br>일하는 방식을 바꿔요</h2>
+    <div class="row"><button class="grey-btn" type="button" data-demo="비공식 스터디: 체험 계정은 없어요.">무료 체험</button><button class="green-btn" type="button" data-demo="비공식 스터디: 도입 문의는 전송되지 않아요." data-magnet>도입 문의하기</button></div>
+  </section>
+</main>
+<footer><div class="inner"><strong style="color:#fff">Unofficial</strong> 브랜드 스터디 &middot; flex(플렉스)와 무관합니다. 카피, 고객사, 데이터는 모두 지어낸 예시예요. <a href="../">모든 스터디</a></div></footer>
+<button class="fab" type="button" aria-label="상담 (예시)" data-demo="비공식 스터디: 상담 채팅은 없어요.">&#10033;</button>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of flex by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, loop } = window.SG;
+  // Prompt cycles through example questions, typed then erased.
+  const prompts = ["다음 주 1:1 전에, 우리 팀 이슈만 정리해줘", "휴가 겹치는 날 없게 이번 달 일정 봐줘", "목표가 늦는 팀과 이유를 알려줘"];
+  const el = document.querySelector("[data-prompt]");
+  if (reduced) el.textContent = prompts[0];
+  else { let p = 0, i = 0, dir = 1; const caret = '<i class="caret"></i>'; const step = () => { const t = prompts[p]; i += dir; el.innerHTML = t.slice(0, i) + caret; if (i >= t.length) { dir = -1; return setTimeout(step, 1800); } if (i <= 0) { dir = 1; p = (p + 1) % prompts.length; } setTimeout(step, dir > 0 ? 55 : 20); }; setTimeout(step, 600); }
+  // Dot wave under the quote: a slow sine field of dots.
+  const cv = document.querySelector("[data-wave]"), cx = cv.getContext("2d");
+  const size = () => { const r = cv.getBoundingClientRect(); cv.width = r.width * devicePixelRatio; cv.height = r.height * devicePixelRatio; };
+  size(); addEventListener("resize", size);
+  loop(cv, (t) => { const w = cv.width, h = cv.height; cx.clearRect(0, 0, w, h); for (let x = 0; x < 120; x++) for (let k = 0; k < 7; k++) { const u = x / 119; const env = Math.sin(Math.PI * u) ** 2; const y = h / 2 + Math.sin(u * 14 + t / 900 + k) * env * h * 0.3 * (k / 7); cx.fillStyle = `rgba(${k % 3 ? "200,200,210" : "62,224,122"},${0.25 + env * 0.6})`; cx.fillRect(u * w, y, 2 * devicePixelRatio, 2 * devicePixelRatio); } });
+  // Meters grow when the dual panel arrives.
+  const dual = document.querySelector("[data-dual]");
+  if (!reduced) { dual.querySelectorAll(".meter i").forEach((m) => m.style.setProperty("--g", "0")); new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); dual.querySelectorAll(".meter i").forEach((m, k) => setTimeout(() => m.style.setProperty("--g", "1"), k * 120)); }, { threshold: 0.4 }).observe(dual); }
+  // App feed: alerts slide in one by one.
+  const alerts = [["#e8591f", "광고", "광고 단가가 지난주보다 두 배 올랐어요", "마케팅팀 목표에 영향이 있어요"], ["#3a7bd5", "근무", "금요일에 세 명이 동시에 휴가예요", "고객 응대 공백이 생길 수 있어요"], ["#3ee07a", "목표", "채용 목표가 두 달째 멈췄어요", "1:1 안건으로 올려둘까요?"]];
+  const feed = document.querySelector("[data-feed]");
+  feed.innerHTML = alerts.map(([c, t, b, s]) => `<div class="alert"><span class="tag" style="background:${c}33;color:${c}">${t}</span><b>${b}</b><small>${s}</small></div>`).join("");
+  if (!reduced) new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); feed.querySelectorAll(".alert").forEach((a, k) => a.animate([{ opacity: 0, transform: "translateX(-20px)" }, { opacity: 1, transform: "none" }], { duration: 700, delay: k * 250, easing: "cubic-bezier(.16,1,.3,1)", fill: "backwards" })); }, { threshold: 0.4 }).observe(feed);
+  // Diagram: nine source nodes flowing into the engine.
+  const svg = document.querySelector(".diagram svg");
+  const labels = ["조직", "목표", "1:1", "근무", "평가", "급여", "메신저", "캘린더", "문서"];
+  svg.insertAdjacentHTML("beforeend", labels.map((l, i) => { const x = 60 + i * 85; return `<path class="flow" d="M${x} 190 C${x} 130 400 140 400 80" fill="none"/><rect class="node" x="${x - 32}" y="190" width="64" height="44" rx="12"/><text x="${x}" y="218" text-anchor="middle" fill="#fff" font-size="13" font-family="sans-serif">${l}</text>`; }).join(""));
+})();
+</script>
+</body>
+</html>

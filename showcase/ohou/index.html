@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>오늘의집 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="오늘의집의 인테리어 사진 피드와 하늘색 쇼핑 언어를 원본 사진·카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 16 16 5l12 11v12H4z' fill='%2335c5f0'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --sky: #35c5f0; --sky-ink: #0a7fa6; --ink: #2f3438; --grey: #5f666c; --line: #eaedef; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 124px; --sg-focus: #0a7fa6; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 15px/1.5 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1256px; padding-inline: 40px; }
+  .site-header { background: #fff; position: sticky; top: 0; z-index: 20; }
+  .top-row { align-items: center; display: flex; gap: 28px; block-size: 80px; }
+  .logo { align-items: center; color: #000; display: flex; font-size: 22px; font-weight: 800; gap: 6px; letter-spacing: -0.05em; text-decoration: none; }
+  .logo svg { block-size: 26px; inline-size: 26px; }
+  .mainnav { display: flex; gap: 26px; }
+  .mainnav a { color: var(--ink); font-size: 18px; font-weight: 700; text-decoration: none; }
+  .mainnav a:hover, .mainnav a[aria-current] { color: var(--sky-ink); }
+  .search { align-items: center; border: 1px solid #dadce0; border-radius: 4px; display: flex; flex: 1; gap: 8px; max-inline-size: 280px; margin-inline-start: auto; padding: 8px 12px; }
+  .search input { border: 0; flex: 1; font: inherit; font-size: 14px; outline: none; min-inline-size: 0; }
+  .write { background: var(--sky-ink); border: 0; border-radius: 4px; color: #fff; font-weight: 700; padding: 10px 16px; }
+  .subnav { border-block: 1px solid var(--line); }
+  .subnav .inner { display: flex; gap: 24px; overflow-x: auto; scrollbar-width: none; }
+  .subnav a { border-block-end: 2px solid transparent; color: var(--ink); font-size: 15px; font-weight: 600; padding-block: 12px; text-decoration: none; white-space: nowrap; }
+  .subnav a[aria-current] { border-color: var(--sky); color: var(--sky-ink); }
+  @media (max-width: 860px) { .top-row { gap: 12px; } .mainnav { gap: 12px; } .search { display: none; } .mainnav a { font-size: 15px; } .inner { padding-inline: 16px; } .write { margin-inline-start: auto; } }
+
+  /* Hero: a large room photo (painted) with a story card, and a small side carousel. */
+  .hero { display: grid; gap: 20px; grid-template-columns: 2.6fr 1fr; padding-block: 30px 40px; }
+  .room { aspect-ratio: 1.9; border-radius: 6px; overflow: hidden; position: relative; }
+  .room-cap { background: linear-gradient(0deg, rgb(0 0 0 / 0.55), transparent); color: #fff; inset: auto 0 0; padding: 60px 30px 28px; position: absolute; }
+  .room-cap strong { display: block; font-size: clamp(1.3rem, 2.2vw, 1.9rem); line-height: 1.35; }
+  .room-cap span { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-block-start: 10px; }
+  .room-cap i { background: #f3c9a0; border-radius: 50%; block-size: 22px; inline-size: 22px; }
+  .scene { block-size: 100%; inline-size: 100%; }
+  .side { border-radius: 6px; overflow: hidden; position: relative; }
+  .side .slide { inset: 0; position: absolute; transition: opacity .6s; }
+  .side .slide[aria-hidden="true"] { opacity: 0; }
+  .side .label { background: #2f3438; border-radius: 999px; color: #fff; font-size: 12px; inset: auto 12px 12px auto; padding: 3px 10px; position: absolute; z-index: 2; }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .side { aspect-ratio: 1.6; } }
+
+  .icons { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); padding-block: 10px 50px; text-align: center; }
+  .ic { background: none; border: 0; color: var(--ink); display: grid; font: 500 13px var(--sans); gap: 8px; justify-items: center; }
+  .ic span { background: #f5f7f8; border-radius: 22px; block-size: 64px; display: grid; inline-size: 64px; place-items: center; transition: transform .3s var(--ease); }
+  .ic:hover span { transform: translateY(-4px); }
+  .ic svg { block-size: 40px; inline-size: 40px; }
+
+
+  .sec-h { align-items: baseline; display: flex; justify-content: space-between; margin-block-end: 16px; }
+  .sec-h h2 { font-size: 20px; font-weight: 700; }
+  .sec-h button { background: none; border: 0; color: var(--sky-ink); font-size: 14px; font-weight: 700; }
+  .photos { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); margin-block-end: 60px; }
+  .photo { position: relative; }
+  .photo .pic { aspect-ratio: 1; border-radius: 6px; overflow: hidden; }
+  .photo .pic svg { transition: transform .5s var(--ease); }
+  .photo:hover .pic svg { transform: scale(1.05); }
+  .photo .who { align-items: center; display: flex; font-size: 14px; font-weight: 600; gap: 8px; margin-block-start: 10px; }
+  .photo .who i { border-radius: 50%; block-size: 24px; inline-size: 24px; }
+  .save { background: rgb(255 255 255 / 0.9); border: 0; border-radius: 50%; block-size: 34px; color: var(--ink); font-size: 16px; inline-size: 34px; inset: 10px 10px auto auto; position: absolute; }
+  .save[aria-pressed="true"] { background: var(--sky-ink); color: #fff; }
+  .deals { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); margin-block-end: 60px; }
+  .deal .pic { aspect-ratio: 1; border-radius: 6px; overflow: hidden; }
+  .deal .brand { color: var(--grey); font-size: 12px; margin-block-start: 10px; }
+  .deal h3 { font-size: 14px; font-weight: 500; }
+  .deal .pr { font-size: 17px; font-weight: 700; }
+  .deal .pr em { color: var(--sky-ink); font-style: normal; margin-inline-end: 4px; }
+  .deal .tag { background: #f5f7f8; color: var(--grey); display: inline-block; font-size: 11px; margin-block-start: 6px; padding: 1px 6px; }
+  .timer { background: #f5f7f8; border-radius: 6px; color: var(--ink); font-size: 13px; font-variant-numeric: tabular-nums; padding: 4px 10px; }
+  @media (max-width: 860px) { .photos, .deals { grid-template-columns: 1fr 1fr; } }
+  footer { background: #f7f9fa; color: var(--grey); font-size: 12px; padding-block: 40px 50px; }
+  footer a { color: #086a8a; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="inner top-row">
+    <a class="logo" href="#top"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M3 13 13 4l10 9v10H3z" fill="#35c5f0"/><rect x="10" y="15" width="6" height="8" fill="#fff"/></svg>오늘의집</a>
+    <nav class="mainnav" aria-label="섹션"><a href="#photos" aria-current="page">커뮤니티</a><a href="#deals">쇼핑</a></nav>
+    <label class="search"><span aria-hidden="true">&#9906;</span><span class="sg-visually-hidden">검색</span><input type="search" placeholder="어떤 방을 꾸미고 싶나요?"></label>
+    <button class="write" type="button" data-demo="비공식 스터디: 글쓰기는 없어요.">글쓰기</button>
+  </div>
+  <div class="subnav"><div class="inner" aria-hidden="true"><a aria-current="page">홈</a><a>팔로잉</a><a>사진</a><a>집들이</a><a>노하우</a><a>전문가집들이</a><a>셀프가이드</a></div></div>
+</header>
+
+<main id="main" class="inner">
+  <section class="hero" id="top" aria-label="오늘의 이야기 (예시)">
+    <div class="room" data-room="warm"><div class="room-cap"><strong>북향 원룸도 따뜻하게,<br>빛을 모으는 여섯 가지 배치</strong><span><i aria-hidden="true"></i>작은방연구소 (가상)</span></div></div>
+    <div class="side" aria-roledescription="carousel" aria-label="기획전 (예시)">
+      <div class="slide" data-room="blue"></div><div class="slide" aria-hidden="true" data-room="green"></div><div class="slide" aria-hidden="true" data-room="pink"></div>
+      <span class="label" data-side-count>1 / 3</span>
+    </div>
+  </section>
+  <div class="icons" data-icons></div>
+
+  <section id="photos" aria-labelledby="photos-h">
+    <div class="sec-h"><h2 id="photos-h">이런 방을 찾고 있나요?</h2><button type="button" data-demo="비공식 스터디: 사진 목록은 없어요.">더보기</button></div>
+    <div class="photos" data-photos></div>
+  </section>
+  <section id="deals" aria-labelledby="deals-h">
+    <div class="sec-h"><h2 id="deals-h">오늘만 이 가격 <span class="timer" data-timer>00:00:00</span></h2><button type="button" data-demo="비공식 스터디: 특가 목록은 없어요.">더보기</button></div>
+    <div class="deals" data-deals></div>
+  </section>
+</main>
+<footer><div class="inner"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 &middot; 오늘의집과 무관합니다. 캡처가 차단되어 공개된 디자인 언어를 기억으로 재구성했고, 모든 사진은 그린 방이에요. <a href="../">모든 스터디</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Ohouse by StyleGallery. Not affiliated with Bucketplace.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art, reduced } = window.SG;
+  // Painted rooms: wall, floor, window light, and furniture from the shared art kit.
+  const rooms = { warm: ["#efe3d3", "#c9a27a", "#6b4a33", "sofa", "lamp", "plant"], blue: ["#dfe9f2", "#b8a58c", "#2f4b66", "chair", "lamp", "plant"], green: ["#e4ecdf", "#caa98a", "#4a6b3a", "bed", "plant", "lamp"], pink: ["#f3e3e3", "#d9c2a8", "#b0506a", "sofa", "plant", "chair"] };
+  const paint = (key) => { const [wall, floor, main, a, b, c] = rooms[key]; return `<svg class="scene" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="150" fill="${wall}"/><rect y="150" width="400" height="70" fill="${floor}"/><rect x="250" y="20" width="110" height="100" fill="#fff" opacity=".8"/><path d="M250 20h110v100H250z M305 20v100 M250 70h110" stroke="${floor}" stroke-width="4" fill="none"/><path d="M250 120 180 220h230l-50-100z" fill="#fff" opacity=".25"/><g transform="translate(40 70) scale(1.3)">${art(a, { ground: "transparent", main, accent: "#3a2a20" }).replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g><g transform="translate(190 80) scale(.9)">${art(b, { ground: "transparent", main: "#f3efe6", accent: "#6b4a33" }).replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g><g transform="translate(330 110) scale(.8)">${art(c, { ground: "transparent", main: "#5fae6a", accent: "#c9743a" }).replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg>`; };
+  document.querySelectorAll("[data-room]").forEach((el) => el.insertAdjacentHTML("afterbegin", paint(el.dataset.room)));
+  const cats = [["sofa", "가구"], ["lamp", "조명"], ["bed", "침구"], ["plant", "식물"], ["bowl", "주방"], ["box", "수납"], ["chair", "의자"], ["book", "취미"], ["gift", "선물"], ["phone", "가전"]];
+  document.querySelector("[data-icons]").innerHTML = cats.map(([k, t], i) => `<button class="ic" type="button" data-demo="비공식 스터디: '${t}' 카테고리는 없어요."><span aria-hidden="true">${art(k, { ground: "transparent", main: ["#35c5f0", "#f5b83d", "#ff7a7a", "#5fae6a", "#c9743a"][i % 5], accent: "#2f3438" })}</span>${t}</button>`).join("");
+  const people = [["주말목수", "#f3c9a0", "warm"], ["빛모으기", "#a0c9f3", "blue"], ["초록방", "#b9e0a5", "green"], ["분홍의자", "#f3a0b9", "pink"]];
+  document.querySelector("[data-photos]").innerHTML = people.map(([n, c, r]) => `<article class="photo"><div class="pic">${paint(r)}</div><button class="save" type="button" aria-pressed="false" aria-label="${n}님의 방 저장">&#128278;</button><p class="who"><i style="background:${c}" aria-hidden="true"></i>${n} (가상)</p></article>`).join("");
+  const deals = [["sofa", "3인 패브릭 소파", 42], ["lamp", "리넨 쉐이드 스탠드", 35], ["bed", "워싱 코튼 침구 세트", 51], ["chair", "원목 식탁 의자 2개", 28]];
+  document.querySelector("[data-deals]").innerHTML = deals.map(([k, t, off], i) => `<article class="deal"><div class="pic">${art(k, { ground: ["#f1ede7", "#eef2f5", "#f5efe9", "#edf1ea"][i], main: ["#8a9aa8", "#e8dcc6", "#d9b8a0", "#a0784e"][i], accent: "#3a2a20" })}</div><p class="brand">가상브랜드 ${i + 1}</p><h3>${t}</h3><p class="pr"><em>${off}%</em>${(129000 - i * 23000).toLocaleString()}원</p><span class="tag">무료배송</span></article>`).join("");
+  document.addEventListener("click", (e) => { const b = e.target.closest(".save"); if (b) b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true")); });
+  // Countdown to midnight and a side carousel that advances while visible.
+  const timer = document.querySelector("[data-timer]");
+  const pad = (n) => String(n).padStart(2, "0");
+  const tick = () => { const now = new Date(); const end = new Date(now); end.setHours(24, 0, 0, 0); const s = Math.floor((end - now) / 1000); timer.textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`; };
+  tick(); setInterval(tick, 1000);
+  const slides = [...document.querySelectorAll(".side .slide")]; const count = document.querySelector("[data-side-count]"); let at = 0;
+  if (!reduced) setInterval(() => { if (document.hidden) return; at = (at + 1) % slides.length; slides.forEach((s, i) => s.setAttribute("aria-hidden", String(i !== at))); count.textContent = `${at + 1} / 3`; }, 3500);
+})();
+</script>
+</body>
+</html>

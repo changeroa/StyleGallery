@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cursor - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="Cursor 홈의 따뜻한 오프화이트, 풍경화 패널 위 앱 목업, 투톤 기능 헤드라인을 원본 카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2326251e'/%3E%3Cpath d='M10 9 L23 16 L10 23Z' fill='%23f7f6f2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --bg: #f7f6f2; --card: #ecebe5; --ink: #26251e; --grey: #5d5b52; --line: #dcdad2; --orange: #b54708; --sans: "Pretendard Variable", Pretendard, -apple-system, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; --sg-header: 70px; --sg-focus: #b54708; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--bg); color: var(--ink); font: 400 15px/1.6 var(--sans); letter-spacing: -0.015em; word-break: keep-all; }
+  .w { margin-inline: auto; max-inline-size: 1300px; padding-inline: 20px; }
+  .site-header { background: rgb(247 246 242 / .94); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 30; }
+  .site-header .w { align-items: center; display: flex; gap: 24px; block-size: 54px; }
+  .logo { color: var(--ink); font-weight: 700; letter-spacing: .06em; text-decoration: none; font-size: 14px; }
+  .site-header nav { display: flex; gap: 18px; margin-inline: auto; }
+  .site-header nav a { color: var(--ink); font-size: 13px; text-decoration: none; }
+  .site-header nav a:hover { color: var(--orange); }
+  .hr { display: flex; gap: 6px; }
+  .pill { border-radius: 999px; font: 500 13px var(--sans); padding: 7px 14px; }
+  .pill.dark { background: var(--ink); border: 0; color: #f7f6f2; }
+  .pill.line { background: none; border: 1px solid #b8b6ac; color: var(--ink); }
+  .pill.grey { background: var(--card); border: 0; color: var(--ink); }
+  .pill.big { font-size: 15px; padding: 11px 20px; }
+  @media (max-width: 820px) { .site-header nav, .pill.line { display: none; } .hr { margin-inline-start: auto; } }
+
+  .hero { padding-block: 80px 20px; }
+  .hero h1 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.35; max-inline-size: 22ch; }
+  .hero .ctas { display: flex; gap: 8px; margin-block: 22px 44px; }
+  /* Painted landscape panel: layered gradients, an original impression of hills and water. */
+  .land { border-radius: 6px; overflow: hidden; position: relative; }
+  .land::before { content: ""; inset: 0; position: absolute; background: var(--sky); }
+  .land svg.hills { block-size: 100%; inline-size: 100%; inset: 0; position: absolute; }
+  .land .grain { inset: 0; mix-blend-mode: multiply; opacity: .28; position: absolute; }
+  .l1 { --sky: linear-gradient(180deg, #c9cbc4 0%, #dcd3c1 40%, #b9bdb3 62%, #8e9a93 100%); }
+  .l2 { --sky: linear-gradient(180deg, #9fb1bf 0%, #cfd5d3 45%, #7b8b8d 100%); }
+  .l3 { --sky: linear-gradient(180deg, #e7b891 0%, #f1d4b3 40%, #b88b6a 70%, #6e5a4b 100%); }
+  .l4 { --sky: linear-gradient(180deg, #a9c1bd 0%, #d9e0d6 45%, #6f8781 100%); }
+  .stage { min-block-size: 560px; padding: 60px 50px 0; }
+  .app { background: #fbfaf7; border: 1px solid rgb(0 0 0 / .08); border-radius: 10px 10px 0 0; box-shadow: 0 40px 80px -30px rgb(40 36 20 / .45); display: grid; font-size: 12px; grid-template-columns: 240px 1fr 1fr; margin-inline: auto; max-inline-size: 1040px; min-block-size: 500px; position: relative; }
+  .app .bar { border-block-end: 1px solid var(--line); color: var(--grey); grid-column: 1 / -1; padding: 8px 12px; text-align: center; font-size: 11px; }
+  .app .col { border-inline-end: 1px solid var(--line); padding: 12px; }
+  .app .col:last-child { border: 0; }
+  .task { border-radius: 6px; padding: 8px; margin-block-end: 4px; }
+  .task.on { background: #eceae3; }
+  .task b { display: block; font-weight: 600; }
+  .task span { color: var(--grey); font-size: 11px; }
+  .diff { color: #2f7d4b; font: 11px var(--mono); }
+  .chat p { margin-block-end: 10px; }
+  .file { background: #f0eee8; border-radius: 6px; display: inline-block; font: 11px var(--mono); margin: 2px 4px 2px 0; padding: 2px 6px; }
+  .browser { font-family: Georgia, serif; }
+  .browser h4 { font: italic 600 18px Georgia, serif; margin-block: 30px 10px; }
+  .cli { background: #1c1b17; border-radius: 8px; box-shadow: 0 30px 60px -20px rgb(0 0 0 / .5); color: #e8e6de; font: 11px/1.7 var(--mono); inset: auto 20px -30px auto; inline-size: min(380px, 60%); padding: 14px; position: absolute; }
+  .cli .k { color: #f4a261; }
+  .cli .caret::after { animation: caret 1s steps(1) infinite; content: "▍"; }
+  @keyframes caret { 50% { opacity: 0; } }
+  @media (max-width: 900px) { .app { grid-template-columns: 1fr; } .app .col:nth-child(2) { display: none; } .stage { padding: 30px 14px 0; min-block-size: 420px; } .cli { position: static; inline-size: auto; margin: 12px; } }
+
+  .feat { align-items: center; background: var(--card); border-radius: 6px; display: grid; gap: 40px; grid-template-columns: 1fr 1.6fr; margin-block-start: 90px; padding: 30px; }
+  .feat.flip { grid-template-columns: 1.6fr 1fr; }
+  .feat.flip .copy { order: 2; }
+  .copy h2 { font-size: 20px; font-weight: 500; line-height: 1.45; max-inline-size: 30ch; }
+  .copy h2 span { color: var(--grey); }
+  .copy a { color: var(--orange); display: inline-block; font-size: 14px; margin-block-start: 14px; text-decoration: none; }
+  .copy a:hover { text-decoration: underline; }
+  .feat .land { min-block-size: 420px; padding: 40px; display: grid; place-items: center; }
+  .mini { background: #fbfaf7; border-radius: 10px; box-shadow: 0 30px 60px -30px rgb(40 36 20 / .5); font-size: 12px; inline-size: min(460px, 100%); padding: 16px; position: relative; }
+  .mini h4 { font-size: 14px; margin-block-end: 8px; }
+  .mini li { color: var(--grey); list-style: none; padding-block: 3px; }
+  .mini li::before { content: "○ "; }
+  .mini li[data-done]::before { content: "● "; color: #2f7d4b; }
+  .mini li[data-done] { color: var(--ink); }
+  .mini ul { margin: 0; padding: 0; }
+  .slack .msg { display: flex; gap: 8px; margin-block-end: 10px; }
+  .slack i { background: var(--a); block-size: 22px; border-radius: 5px; flex: none; inline-size: 22px; }
+  @media (max-width: 900px) { .feat, .feat.flip { grid-template-columns: 1fr; } .feat.flip .copy { order: 0; } .feat .land { min-block-size: 300px; padding: 16px; } }
+
+  .big-h { font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 500; letter-spacing: -0.035em; margin-block: 140px 30px; text-align: center; }
+  .voices { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
+  .voice { background: var(--card); border-radius: 6px; font-size: 14px; padding: 22px; }
+  .voice footer { align-items: center; color: var(--grey); display: flex; font-size: 12px; gap: 10px; margin-block-start: 18px; }
+  .voice footer i { background: linear-gradient(135deg, var(--a), var(--b)); block-size: 26px; border-radius: 50%; inline-size: 26px; }
+  .sec-t { font-size: 20px; font-weight: 500; margin-block: 110px 16px; }
+  .cards3 { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
+  .c3 { background: var(--card); border-radius: 6px; display: flex; flex-direction: column; padding: 20px; }
+  .c3 h3 { font-size: 15px; font-weight: 600; }
+  .c3 p { color: var(--grey); font-size: 13px; margin-block: 4px 10px; }
+  .c3 a { color: var(--orange); font-size: 13px; text-decoration: none; }
+  .c3 .vis { background: #f4f2ec; border-radius: 6px; margin-block-start: 16px; min-block-size: 220px; padding: 14px; font-size: 12px; }
+  .models li { border-radius: 5px; display: flex; justify-content: space-between; list-style: none; padding: 5px 8px; cursor: pointer; }
+  .models li[aria-selected="true"] { background: #e3e0d6; }
+  .models ul { margin: 0; padding: 0; }
+  .logos { display: grid; gap: 1px; grid-template-columns: repeat(8, minmax(0, 1fr)); margin-block-start: 30px; background: var(--line); border: 1px solid var(--line); }
+  .logos span { background: var(--bg); font-weight: 700; padding: 22px 8px; text-align: center; letter-spacing: -0.02em; }
+  .log { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); }
+  .log div { background: var(--card); border-radius: 6px; font-size: 13px; padding: 14px; }
+  .log time { color: var(--grey); display: block; font-size: 12px; }
+  @media (max-width: 900px) { .voices, .cards3 { grid-template-columns: 1fr; } .logos { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); } .log { grid-template-columns: 1fr 1fr; } }
+  .final { padding-block: 150px 110px; text-align: center; }
+  .final h2 { font-size: clamp(2.6rem, 7vw, 6rem); font-weight: 500; letter-spacing: -0.05em; line-height: 1; margin-block-end: 30px; }
+  footer.site { background: var(--card); color: var(--grey); font-size: 13px; padding-block: 50px; }
+  footer.site .cols { display: grid; gap: 20px; grid-template-columns: repeat(5, 1fr); margin-block-end: 30px; }
+  footer.site h3 { color: var(--ink); font-size: 13px; font-weight: 600; margin-block-end: 8px; }
+  footer.site a { color: var(--orange); }
+  @media (max-width: 760px) { footer.site .cols { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header" data-header>
+  <div class="w">
+    <a class="logo" href="#top">CURSOR</a>
+    <nav aria-label="섹션"><a href="#agents">에이전트</a><a href="#models">모델</a><a href="#changelog">변경 기록</a><a href="#download">다운로드</a></nav>
+    <div class="hr"><button class="pill line" type="button" data-demo="비공식 스터디: 영업 문의는 전송되지 않아요.">문의하기</button><button class="pill dark" type="button" data-demo="비공식 스터디: 다운로드 파일은 없어요.">다운로드</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero w" id="top">
+    <h1 data-reveal>생각을 말하면 코드가 따라오는,<br>당신 옆자리의 코딩 에이전트.</h1>
+    <div class="ctas" data-reveal data-delay="120"><button class="pill dark big" type="button" data-demo="비공식 스터디: 다운로드 파일은 없어요." data-magnet>macOS용 받기 ↓</button><button class="pill grey big" type="button" data-demo="비공식 스터디: 데모 예약은 없어요.">데모 보기 →</button></div>
+    <div class="land l1 stage" data-reveal="scale" data-delay="200">
+      <svg class="hills" viewBox="0 0 1300 600" preserveAspectRatio="none" aria-hidden="true"><path d="M0 330 C180 250 300 290 460 230 S760 150 900 210 1160 260 1300 220 V600 H0Z" fill="#9aa39a" opacity=".55"/><path d="M0 400 C220 350 380 380 600 340 S1000 300 1300 350 V600 H0Z" fill="#7f8c86" opacity=".6"/><path d="M0 470 C300 440 700 460 1300 430 V600 H0Z" fill="#b8c0bb" opacity=".7"/></svg>
+      <svg class="grain" aria-hidden="true" width="100%" height="100%"><filter id="g1"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(#g1)"/></svg>
+      <div class="app" role="img" aria-label="데스크톱 앱 목업: 작업 목록, 에이전트 대화, 브라우저 미리보기, 그리고 터미널">
+        <div class="bar">에디터 · 가상 프로젝트</div>
+        <div class="col"><div class="task on"><b>랜딩 페이지 다듬기</b><span>작업 중 · <span class="diff">+42 −9</span></span></div><div class="task"><b>검색 느린 원인 찾기</b><span>대기</span></div><div class="task"><b>설정 화면 다크 모드</b><span>완료 · <span class="diff">+118 −31</span></span></div><div class="task"><b>결제 오류 재현</b><span>검토 필요</span></div></div>
+        <div class="col chat"><p>제목 서체를 세리프로 바꾸고 소개 문단을 두 줄로 줄여 줘.</p><p style="color:var(--grey)">파일 두 개를 읽었어요. <span class="file">page.tsx</span><span class="file">theme.css</span></p><p>세리프 제목을 적용하고 문단을 줄였어요. 미리보기에서 확인해 보세요.</p></div>
+        <div class="col browser"><span style="font:11px var(--mono);color:var(--grey)">localhost:3000</span><h4>Harbor Lab</h4><p style="font-size:12px;color:var(--grey)">We build quiet tools for people who make things. This preview updates as the agent edits.</p></div>
+        <div class="cli" data-ambient><span class="k">$</span> agent "타입 오류 고쳐 줘"<br>✓ 3개 파일에서 오류 7개 발견<br>✓ 수정 후 테스트 통과<br><span class="caret" data-ambient></span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="w" id="agents">
+    <section class="feat" data-reveal>
+      <div class="copy"><h2>큰 작업은 계획부터. <span>에이전트가 할 일을 먼저 적고, 당신이 고친 뒤에 코드를 쓰기 시작해요.</span></h2><a href="#models">계획 모드 살펴보기 →</a></div>
+      <div class="land l2"><svg class="hills" viewBox="0 0 800 420" preserveAspectRatio="none" aria-hidden="true"><path d="M0 250 C200 170 400 230 800 160 V420 H0Z" fill="#5f7078" opacity=".5"/></svg><div class="mini"><h4>계획 · 다중 창 보기</h4><ul data-plan><li>열린 창을 격자로 모으기</li><li>단축키 연결</li><li>전환 애니메이션 맞추기</li><li>테스트 추가</li></ul></div></div>
+    </section>
+    <section class="feat flip" data-reveal>
+      <div class="copy"><h2>잠든 사이에도 일하게. <span>클라우드 에이전트가 여러 작업을 나눠 돌리고, 아침에 검토할 결과만 남겨요.</span></h2><a href="#changelog">클라우드 에이전트 →</a></div>
+      <div class="land l3"><svg class="hills" viewBox="0 0 800 420" preserveAspectRatio="none" aria-hidden="true"><path d="M0 280 C260 200 520 260 800 210 V420 H0Z" fill="#8a5d42" opacity=".45"/></svg><div class="mini"><h4>밤사이 끝난 일</h4><ul><li data-done>의존성 업데이트 · PR 준비됨</li><li data-done>느린 쿼리 두 개 개선</li><li data-done>대시보드 차트 테스트</li><li>문서 번역 (진행 중)</li></ul></div></div>
+    </section>
+    <section class="feat" data-reveal>
+      <div class="copy"><h2>팀 대화에서 바로 호출. <span>메신저에서 부르면 스레드를 읽고 초안을 만들어 링크로 돌려줘요.</span></h2><a href="#download">연동 보기 →</a></div>
+      <div class="land l4"><svg class="hills" viewBox="0 0 800 420" preserveAspectRatio="none" aria-hidden="true"><path d="M0 230 C220 180 500 250 800 190 V420 H0Z" fill="#56706a" opacity=".5"/></svg><div class="mini slack"><h4>#실시간-동기화</h4><div class="msg"><i style="--a:#d49a6a"></i><p><b>하나</b> 1.2 변경 기록 초안 좀 만들어 줄 수 있어?</p></div><div class="msg"><i style="--a:#26251e"></i><p><b>에이전트</b> 머지된 PR 14개를 읽고 초안을 올렸어요. 검토해 주세요.</p></div></div></div>
+    </section>
+
+    <h2 class="big-h" data-reveal>코드를 만드는 방식이 바뀌는 중.</h2>
+    <div class="voices">
+      <figure class="voice" style="--a:#c98a5a;--b:#6e3e22" data-reveal>"리뷰할 코드가 늘었는데, 이상하게 퇴근은 빨라졌어요."<footer><i></i>가상의 인물 · 스타트업 CTO</footer></figure>
+      <figure class="voice" style="--a:#7a8f88;--b:#2f3f3a" data-reveal data-delay="80">"계획 모드 덕분에 에이전트가 엉뚱한 방향으로 가지 않아요."<footer><i></i>가상의 인물 · 스태프 엔지니어</footer></figure>
+      <figure class="voice" style="--a:#9aa9bf;--b:#3a4a66" data-reveal data-delay="160">"주니어 온보딩이 문서 대신 대화로 바뀌었습니다."<footer><i></i>가상의 인물 · 엔지니어링 매니저</footer></figure>
+    </div>
+    <div class="logos" aria-label="가상의 고객사 이름"><span>northwind</span><span>HELIO</span><span>Quanta</span><span>parallax</span><span>MERIDIAN</span><span>kite&amp;co</span><span>ARCLINE</span><span>sora</span></div>
+
+    <h2 class="sec-t" id="models">앞선 도구를 계속 쓰세요</h2>
+    <div class="cards3">
+      <article class="c3"><h3>모델을 고르세요</h3><p>작업마다 가장 알맞은 모델로 바꿔 써요.</p><a href="#models">모델 목록 →</a><div class="vis models"><ul role="listbox" aria-label="모델 선택 (가상)" data-models tabindex="0"><li role="option" aria-selected="false">Auto <span>추천</span></li><li role="option" aria-selected="true">Model A <span>빠름</span></li><li role="option" aria-selected="false">Model B <span>깊이</span></li><li role="option" aria-selected="false">Model C <span>저렴</span></li></ul><p style="margin-block-start:10px;color:var(--grey)" data-model-note>Model A · 짧은 수정에 알맞아요 (가상)</p></div></article>
+      <article class="c3"><h3>어디서든 에이전트</h3><p>휴대폰에서도 작업을 넘기고 결과를 확인해요.</p><a href="#changelog">모바일 →</a><div class="vis"><b>모든 저장소</b><p style="color:var(--grey)">로그인 리다이렉트 수정 · 작업 중<br>캐시 검색 결과 · 검토<br>CI 불안정 테스트 · 완료</p></div></article>
+      <article class="c3"><h3>큰 조직에서도</h3><p>권한, 감사 기록, 비공개 배포를 지원해요.</p><a href="#download">기업 도입 →</a><div class="vis" style="background:#1c1b17;color:#c8e6c0;font:11px/1.8 var(--mono)">audit.log<br>09:12 agent opened PR #482<br>09:13 policy check passed<br>09:20 reviewer approved</div></article>
+    </div>
+
+    <h2 class="sec-t" id="changelog">변경 기록</h2>
+    <div class="log"><div><time>2026.09.24</time>프로젝트 단위 규칙</div><div><time>2026.09.12</time>원격 작업 머신</div><div><time>2026.08.30</time>저장소 없이 시작하기</div><div><time>2026.08.19</time>클라우드 에이전트 개선</div></div>
+  </div>
+
+  <section class="final w" id="download">
+    <h2 data-split>오늘 바로 써 보세요.</h2>
+    <button class="pill dark big" type="button" data-demo="비공식 스터디: 다운로드 파일은 없어요.">macOS용 받기 ↓</button>
+  </section>
+</main>
+<footer class="site"><div class="w"><div class="cols"><div><h3>제품</h3><p>에디터 · CLI · 에이전트</p></div><div><h3>자료</h3><p>문서 · 블로그</p></div><div><h3>회사</h3><p>소개 · 채용</p></div><div><h3>법적 고지</h3><p>약관 · 개인정보</p></div><div><h3>스터디</h3><p><a href="../">모든 스터디</a></p></div></div><p><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디예요. Cursor와 무관하며 로고, 그림, 카피를 쓰지 않았어요. 인물, 고객사, 변경 기록은 모두 가상이에요.</p></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Cursor by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Plan items tick off one by one when the plan arrives.
+  const plan = [...document.querySelectorAll("[data-plan] li")];
+  if (reduced) plan.forEach((li) => li.setAttribute("data-done", ""));
+  else new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); plan.forEach((li, k) => setTimeout(() => li.setAttribute("data-done", ""), 600 + k * 700)); }, { threshold: .5 }).observe(plan[0].parentElement);
+  // Model picker is a real listbox.
+  const box = document.querySelector("[data-models]"), opts = [...box.querySelectorAll("li")], note = document.querySelector("[data-model-note]");
+  const notes = ["Auto · 작업에 맞게 골라요", "Model A · 짧은 수정에 알맞아요", "Model B · 큰 리팩터링에 알맞아요", "Model C · 반복 작업에 알맞아요"];
+  let at = 1;
+  const pick = (i) => { at = (i + opts.length) % opts.length; opts.forEach((o, k) => o.setAttribute("aria-selected", String(k === at))); note.textContent = notes[at] + " (가상)"; };
+  opts.forEach((o, i) => o.addEventListener("click", () => pick(i)));
+  box.addEventListener("keydown", (e) => { if (e.key === "ArrowDown") { e.preventDefault(); pick(at + 1); } if (e.key === "ArrowUp") { e.preventDefault(); pick(at - 1); } });
+})();
+</script>
+</body>
+</html>

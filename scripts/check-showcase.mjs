@@ -25,7 +25,83 @@ function parseArgs(argv) {
     root: path.resolve(repositoryRoot, value("--root") ?? "showcase"),
     out: path.resolve(repositoryRoot, value("--out") ?? ".tmp/showcase"),
     concurrency: Math.max(1, Number(value("--concurrency") ?? 3)),
+    richness: value("--richness") ?? "warn",
   };
+}
+
+// Richness floor (showcase/QA.md I16-I18), calibrated on expression/measured-benchmarks.md.
+const richness = { surfaceShare: 0.08, textShare: 0.1, transitionsPerScreen: 4, minTransitions: 12, slowHoverMs: 350, minClipped: 2, minHairlines: 3 };
+
+// Runs in the page for the screen currently in view: share of the viewport covered by visual surfaces and by text.
+function screenCoverage() {
+  const W = innerWidth, H = innerHeight;
+  const clip = (r) => Math.max(0, Math.min(r.right, W) - Math.max(r.left, 0)) * Math.max(0, Math.min(r.bottom, H) - Math.max(r.top, 0));
+  const shown = (el) => { const s = getComputedStyle(el); return s.visibility !== "hidden" && s.display !== "none" && Number(s.opacity) > 0.05; };
+  let surface = 0;
+  const counted = [];
+  for (const el of document.querySelectorAll("img, picture, video, canvas, svg, [data-surface], body *")) {
+    const isMedia = el.matches("img, picture, video, canvas, svg, [data-surface]");
+    const bg = !isMedia && /url\(/.test(getComputedStyle(el).backgroundImage);
+    if (!isMedia && !bg) continue;
+    const r = el.getBoundingClientRect();
+    if (r.width < 120 || r.height < 80 || !shown(el)) continue;
+    if (counted.some((parent) => parent.contains(el))) continue;
+    counted.push(el);
+    surface += clip(r);
+  }
+  let text = 0;
+  for (const el of document.querySelectorAll("body *")) {
+    if (![...el.childNodes].some((node) => node.nodeType === 3 && node.textContent.trim())) continue;
+    if (!shown(el)) continue;
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    for (const r of range.getClientRects()) text += clip(r);
+  }
+  return { surface: Math.min(1, surface / (W * H)), text: Math.min(1, text / (W * H)) };
+}
+
+// Runs in the page: responsive elements, link and button transition speed, masks or clips, and hairlines.
+function detailCounts() {
+  let transitions = 0, clipped = 0, hairlines = 0;
+  const hover = [];
+  for (const el of document.querySelectorAll("body *")) {
+    const r = el.getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    const s = getComputedStyle(el);
+    const durations = s.transitionDuration.split(",").map(parseFloat);
+    if (durations.some((d) => d > 0)) {
+      transitions += 1;
+      if (el.matches("a, button")) hover.push(Math.max(...durations) * 1000);
+    }
+    if (s.clipPath !== "none" || (s.maskImage && s.maskImage !== "none")) clipped += 1;
+    if (["Top", "Right", "Bottom", "Left"].some((side) => s[`border${side}Width`] === "1px" && s[`border${side}Style`] !== "none")) hairlines += 1;
+  }
+  hover.sort((a, b) => a - b);
+  return { transitions, clipped, hairlines, hoverMedian: hover.length ? hover[Math.floor(hover.length / 2)] : null, screens: document.documentElement.scrollHeight / innerHeight };
+}
+
+async function checkRichness(page, label) {
+  const findings = [];
+  const height = await page.evaluate(() => document.documentElement.scrollHeight);
+  const stops = [];
+  for (let top = 0; top < height - viewportHeight; top += viewportHeight) stops.push(top);
+  stops.push(Math.max(0, height - viewportHeight));
+  for (const [index, top] of [...new Set(stops)].entries()) {
+    await page.evaluate((y) => window.scrollTo(0, y), top);
+    await page.evaluate(waitForScrollIdle);
+    await page.waitForTimeout(250);
+    const cover = await page.evaluate(screenCoverage);
+    if (cover.surface < richness.surfaceShare && cover.text < richness.textShare) {
+      findings.push(`${label} richness: screen ${index + 1} (${top}-${top + viewportHeight}px) is empty: images, drawn scenes, and product surfaces cover ${Math.round(cover.surface * 100)}% and text ${Math.round(cover.text * 100)}% (floor ${richness.surfaceShare * 100}% or ${richness.textShare * 100}%)`);
+    }
+  }
+  const detail = await page.evaluate(detailCounts);
+  const floor = Math.max(richness.minTransitions, Math.round(richness.transitionsPerScreen * detail.screens));
+  if (detail.transitions < floor) findings.push(`${label} richness: ${detail.transitions} responsive elements with transitions, below ${floor} (${richness.transitionsPerScreen} per screen)`);
+  if (detail.hoverMedian !== null && detail.hoverMedian > richness.slowHoverMs) findings.push(`${label} richness: link and button transitions have a median of ${Math.round(detail.hoverMedian)}ms, slower than ${richness.slowHoverMs}ms`);
+  if (detail.clipped < richness.minClipped) findings.push(`${label} richness: ${detail.clipped} elements use a mask or clip-path, below ${richness.minClipped}`);
+  if (detail.hairlines < richness.minHairlines) findings.push(`${label} richness: ${detail.hairlines} elements carry 1px hairline borders, below ${richness.minHairlines}`);
+  return findings;
 }
 
 function frontmatter(content) {
@@ -441,8 +517,9 @@ async function checkDegraded(browser, url, base, label, contextOptions) {
   return failures;
 }
 
-async function checkPage(browser, { slug, url, base, outDir }) {
+async function checkPage(browser, { slug, url, base, outDir, rich = false }) {
   const failures = [];
+  const warnings = [];
   const screenshots = [];
   fs.mkdirSync(path.join(outDir, slug), { recursive: true });
   for (const reducedMotion of ["no-preference", "reduce"]) {
@@ -462,6 +539,7 @@ async function checkPage(browser, { slug, url, base, outDir }) {
           await scrollToStop(page, stop);
           failures.push(...(await page.evaluate(offscreenAmbientFailures)).map((failure) => `${label} ${stop}: ${failure}`));
         }
+        if (rich) warnings.push(...await checkRichness(page, label));
       }
       if (mode === "motion") failures.push(...await checkFocus(page, label));
       else {
@@ -484,7 +562,7 @@ async function checkPage(browser, { slug, url, base, outDir }) {
   failures.push(...await checkShortViewport(browser, url, base, `motion ${shortViewport.width}x${shortViewport.height}`));
   failures.push(...await checkDegraded(browser, url, base, "offline w390", { blockExternal: true }));
   failures.push(...await checkDegraded(browser, url, base, "no-script w390", { blockScripts: true }));
-  return { failures, screenshots };
+  return { failures, screenshots, warnings };
 }
 
 async function checkHub(browser, showcaseRoot, works, base, outDir) {
@@ -502,7 +580,7 @@ async function checkHub(browser, showcaseRoot, works, base, outDir) {
   return { slug: "(hub)", ok: failures.length === 0, failures: [...new Set(failures)], screenshots };
 }
 
-async function checkWork(browser, showcaseRoot, slug, base, outDir) {
+async function checkWork(browser, showcaseRoot, slug, base, outDir, richnessMode = "warn") {
   const failures = [];
   const workDir = path.join(showcaseRoot, slug);
   const briefPath = path.join(workDir, "brief.md");
@@ -518,15 +596,18 @@ async function checkWork(browser, showcaseRoot, slug, base, outDir) {
     if (!/unofficial/i.test(await page.evaluate(() => document.body.innerText))) failures.push(`${slug}: brand study must show visible Unofficial text`);
     await context.close();
   }
-  const { failures: pageFailures, screenshots } = await checkPage(browser, { slug, url, base, outDir });
+  const { failures: pageFailures, screenshots, warnings } = await checkPage(browser, { slug, url, base, outDir, rich: richnessMode !== "off" });
   failures.push(...pageFailures);
-  return { slug, ok: failures.length === 0, failures: [...new Set(failures)], screenshots };
+  // Richness is a warning by default so existing works keep passing; --richness error makes it a failure.
+  if (richnessMode === "error") failures.push(...warnings);
+  return { slug, ok: failures.length === 0, failures: [...new Set(failures)], warnings: richnessMode === "error" ? [] : [...new Set(warnings)], screenshots };
 }
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const works = listWorks(options.root);
   if (options.work && options.work !== "hub" && !works.includes(options.work)) throw new Error(`unknown showcase work: ${options.work}`);
+  if (!["warn", "error", "off"].includes(options.richness)) throw new Error(`--richness must be warn, error, or off (got ${options.richness})`);
   const server = await serveDirectory(options.root);
   const base = `http://127.0.0.1:${server.address().port}`;
   const browser = await chromium.launch();
@@ -536,7 +617,7 @@ async function main() {
   const hubExists = fs.existsSync(path.join(options.root, "index.html"));
   if ((!options.work || options.work === "hub") && (works.length > 0 || hubExists)) tasks.push({ slug: "(hub)", run: () => checkHub(browser, options.root, works, base, options.out) });
   for (const slug of works) {
-    if (!options.work || options.work === slug) tasks.push({ slug, run: () => checkWork(browser, options.root, slug, base, options.out) });
+    if (!options.work || options.work === slug) tasks.push({ slug, run: () => checkWork(browser, options.root, slug, base, options.out, options.richness) });
   }
   const results = new Array(tasks.length);
   let next = 0;
@@ -559,7 +640,10 @@ async function main() {
   const result = { ok: results.every((work) => work.ok), works: results, ...(results.length === 0 ? { note: "no showcase works to check" } : {}) };
   if (options.json) console.log(JSON.stringify(result, null, 2));
   else if (results.length === 0) console.log("ok: no showcase works to check");
-  else for (const work of results) console.log(`${work.ok ? "ok" : "FAIL"}: ${work.slug}${work.ok ? "" : "\n  " + work.failures.join("\n  ")}`);
+  else for (const work of results) {
+    const warnings = work.warnings ?? [];
+    console.log(`${work.ok ? "ok" : "FAIL"}: ${work.slug}${warnings.length ? ` (${warnings.length} richness warnings)` : ""}${work.ok ? "" : "\n  " + work.failures.join("\n  ")}${warnings.length ? "\n  warn: " + warnings.join("\n  warn: ") : ""}`);
+  }
   process.exitCode = result.ok ? 0 : 1;
 }
 

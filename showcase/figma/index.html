@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Figma - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="Figma 홈의 투톤 헤딩, 컬러 스테이지 패널, 멀티플레이어 커서를 원본 카피·로고 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23c7f464'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #000; --grey: #6b6b6b; --line: #e6e6e6; --lime: #d6f37a; --cyan: #b8efff; --stage: #e8e8e8; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 70px; --sg-focus: #3a5bff; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 16px/1.55 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .pad { padding-inline: 40px; }
+  .site-header { background: #fff; border-block-end: 1px solid var(--line); position: sticky; top: 0; z-index: 30; }
+  .site-header .row { align-items: center; display: flex; gap: 22px; block-size: 56px; }
+  .mark { display: grid; gap: 2px; grid-template-columns: 8px 8px; }
+  .mark i { block-size: 8px; inline-size: 8px; border-radius: 50%; }
+  .site-header nav { display: flex; gap: 18px; }
+  .site-header nav a { color: var(--ink); font-size: 14px; text-decoration: none; }
+  .hr { align-items: center; display: flex; gap: 8px; margin-inline-start: auto; }
+  .login { background: none; border: 0; font-size: 14px; }
+  .line-btn { background: #fff; border: 1px solid #cfcfcf; border-radius: 8px; font-size: 13px; padding: 7px 12px; }
+  .black { background: #000; border: 0; border-radius: 8px; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 14px; }
+  @media (max-width: 860px) { .site-header nav, .line-btn { display: none; } .pad { padding-inline: 16px; } }
+
+  .hero { align-items: center; display: grid; gap: 30px; grid-template-columns: 1fr 1.4fr 0.6fr; min-block-size: 80vh; }
+  .hero h1 { font-size: clamp(2rem, 3.6vw, 3.1rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1.2; }
+  .collage { aspect-ratio: 1.15; position: relative; }
+  .tile { border-radius: 8px; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.5); position: absolute; transition: transform 1.2s var(--ease), opacity 1.2s; }
+  .poster { background: #4a3b8f; color: #e5ff4a; display: grid; inset: 10% 20% 8% 20%; padding: 20px; place-items: center; }
+  .dots { display: grid; gap: 6px; grid-template-columns: repeat(12, 1fr); inline-size: 100%; }
+  .dots i { aspect-ratio: 1; border-radius: 50%; background: currentColor; opacity: 0.12; transition: opacity .4s; }
+  .dots i[data-on] { opacity: 1; }
+  .t2 { background: linear-gradient(160deg, #cde9ff, #7ab8e8); inset: 0 auto auto 0; block-size: 40%; inline-size: 36%; }
+  .t3 { background: linear-gradient(160deg, #f6d6a8, #e88a4a); inset: auto 0 0 auto; block-size: 38%; inline-size: 34%; }
+  .start { background: #000; border: 0; border-radius: 12px; color: #fff; font-size: 18px; font-weight: 600; justify-self: start; padding: 16px 26px; }
+  @media (max-width: 960px) { .hero { grid-template-columns: 1fr; min-block-size: auto; padding-block: 50px; } }
+  .sec { padding-block: 130px 0; }
+  .two h2 { font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.35; max-inline-size: 42ch; }
+  .two h2 span { color: var(--grey); }
+  .indent { padding-inline-start: max(40px, 18vw); }
+  .stage { margin-block-start: 50px; min-block-size: 520px; overflow: hidden; padding: 50px 30px; position: relative; }
+  .stage.lime { background: var(--lime); }
+  .stage.grey { background: var(--stage); }
+  .stage.cyan { background: var(--cyan); display: grid; place-items: center; }
+  .devices { display: flex; gap: 20px; justify-content: center; align-items: flex-end; }
+  .dev { background: #fff; border-radius: 16px; box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.3); padding: 16px; font-size: 12px; }
+  .dev.tab { block-size: 340px; inline-size: 300px; }
+  .dev.ph { block-size: 380px; inline-size: 200px; background: #1b1b1f; color: #fff; }
+  .dev .g { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; margin-block-start: 12px; }
+  .dev .g i { aspect-ratio: 1; border-radius: 10px; background: #f1f1f1; display: block; }
+  .cur { align-items: flex-start; display: flex; gap: 2px; font-size: 12px; position: absolute; transition: transform 1.6s var(--ease); z-index: 3; }
+  .cur svg { block-size: 18px; inline-size: 18px; }
+  .cur b { border-radius: 4px; color: #fff; font-weight: 600; margin-block-start: 12px; padding: 1px 6px; }
+  .links { display: flex; flex-wrap: wrap; gap: 30px; margin-block-start: 22px; }
+  .links a { color: var(--ink); font-size: 14px; }
+  .prompt { align-items: center; background: #fff; border-radius: 999px; box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.2); display: flex; gap: 10px; inset: 60px auto auto 52%; padding: 10px 14px; position: absolute; inline-size: min(360px, 42%); font-size: 14px; }
+  .prompt span { color: var(--grey); flex: 1; }
+  .gen { background: #2a3bd8; border-radius: 22px; color: #fff; inline-size: 240px; min-block-size: 440px; inset: 30px auto auto 22%; padding: 18px; position: absolute; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.5); }
+  .gen .amt { font-size: 32px; font-weight: 700; margin-block: 10px; }
+  .gen .row { background: rgb(255 255 255 / 0.12); border-radius: 12px; margin-block-start: 10px; padding: 10px; font-size: 12px; opacity: 0; transform: translateY(10px); transition: all .6s var(--ease); }
+  .gen .row[data-on] { opacity: 1; transform: none; }
+  .no-js-rows .gen .row { opacity: 1; transform: none; }
+  @media (max-width: 860px) { .prompt { inset: 20px 16px auto; inline-size: auto; } .gen { inset: 90px auto auto 50%; transform: translateX(-50%); } .dev.tab { display: none; } }
+  .tiles { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; margin-block-start: 50px; }
+  .tl { border-radius: 4px; overflow: hidden; position: relative; }
+  .tl svg { block-size: 100%; inline-size: 100%; }
+  .tl .pen path { stroke-dasharray: 600; stroke-dashoffset: var(--d, 0); transition: stroke-dashoffset 2s var(--ease); }
+  @media (max-width: 860px) { .tiles { grid-template-columns: 1fr 1fr; } }
+  .repo { align-items: center; background: #fff; border-radius: 999px; display: flex; font-size: 16px; gap: 16px; padding: 16px 16px 16px 26px; inline-size: min(640px, 100%); box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.25); }
+  .repo code { color: var(--grey); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .repo button { background: #3a5bff; border: 0; border-radius: 50%; block-size: 40px; color: #fff; flex: none; inline-size: 40px; }
+  .checks { background: #fff; border-radius: 16px; font-size: 14px; margin-block-start: 20px; padding: 18px 22px; inline-size: min(640px, 100%); }
+  .checks li { list-style: none; padding-block: 4px; color: var(--grey); }
+  .checks li[data-done] { color: var(--ink); }
+  .checks li[data-done]::before { content: "\2713  "; color: #2a9a4a; }
+  .checks ul { margin: 0; padding: 0; }
+  .proof { display: grid; gap: 40px; grid-template-columns: 2fr 1fr; margin-block-start: 30px; }
+  .proof blockquote { font-size: clamp(1.3rem, 2.2vw, 1.8rem); line-height: 1.4; margin: 0; }
+  .proof .n { font-size: clamp(3rem, 6vw, 5rem); font-weight: 500; letter-spacing: -0.04em; }
+  .proof p { color: var(--grey); font-size: 13px; }
+  .wm { align-items: center; color: #3a3a3a; display: flex; flex-wrap: wrap; font-size: 20px; font-weight: 700; gap: 20px 50px; margin-block-start: 50px; }
+  .wm span:nth-child(2n) { font-family: Georgia, serif; font-weight: 400; }
+  @media (max-width: 860px) { .proof { grid-template-columns: 1fr; } }
+  .carousel { display: flex; gap: 14px; margin-block-start: 30px; overflow-x: auto; padding-block-end: 10px; }
+  .res { flex: 0 0 260px; }
+  .res .pic { aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
+  .res span { display: block; font-size: 14px; margin-block-start: 8px; }
+  footer { background: #000; color: #cfcfcf; font-size: 13px; margin-block-start: 130px; padding: 60px 40px; }
+  footer b { color: #fff; display: block; font-size: 26px; margin-block-end: 20px; }
+  footer a { color: #fff; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="row pad">
+    <a href="#top" style="color:#000;font-weight:700;text-decoration:none">Figma</a>
+    <nav aria-label="섹션"><a href="#workspace">작업공간</a><a href="#ai">AI</a><a href="#tools">도구</a><a href="#code">코드</a></nav>
+    <div class="hr"><button class="login" type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인</button><button class="line-btn" type="button" data-demo="비공식 스터디: 영업 문의는 전송되지 않아요.">영업팀에 문의</button><button class="black" type="button" data-demo="비공식 스터디: 가입은 없어요.">무료로 시작하기</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero pad" id="top" aria-labelledby="hero-h">
+    <h1 id="hero-h" data-split>아이디어가<br>제품이 되는<br>한 장의 캔버스</h1>
+    <div class="collage" aria-hidden="true" data-ambient><div class="tile t2"></div><div class="tile poster"><div class="dots" data-dots></div></div><div class="tile t3"></div></div>
+    <button class="start" type="button" data-demo="비공식 스터디: 가입은 없어요." data-magnet>시작하기</button>
+  </section>
+
+  <section class="sec two" id="workspace" aria-labelledby="ws-h">
+    <h2 class="indent pad" id="ws-h">기획부터 출시까지 한 공간에서. <span>모두가 같은 파일을 보며, 아이디어가 흩어지지 않게 설계했어요.</span></h2>
+    <div class="stage lime pad" data-ambient data-cursors>
+      <div class="devices" aria-hidden="true"><div class="dev tab"><b>아이콘 세트</b><div class="g"><i></i><i></i><i></i><i></i></div></div><div class="dev ph"><b>작은 집 설계</b><p style="opacity:.7;margin-block-start:8px">가상의 건축 앱 화면</p></div></div>
+      <span class="cur" style="inset:120px auto auto 30%" aria-hidden="true"><svg viewBox="0 0 18 18"><path d="M2 2l12 5-5 2-2 5z" fill="#1bc47d"/></svg><b style="background:#1bc47d">Hana</b></span>
+      <span class="cur" style="inset:300px 26% auto auto" aria-hidden="true"><svg viewBox="0 0 18 18"><path d="M2 2l12 5-5 2-2 5z" fill="#e8591f"/></svg><b style="background:#e8591f">Leo</b></span>
+    </div>
+    <div class="links indent pad"><a href="#tools">디자인 도구 둘러보기 &rarr;</a><a href="#code">개발 모드 둘러보기 &rarr;</a></div>
+  </section>
+
+  <section class="sec two" id="ai" aria-labelledby="ai-h">
+    <h2 class="indent pad" id="ai-h">AI와 같은 캔버스에서 빠르게 방향 잡기. <span>팀과 AI가 한 맥락을 공유하며 만들고, 고치고, 다듬어요.</span></h2>
+    <div class="stage grey" data-gen>
+      <div class="prompt" aria-hidden="true"><b>+</b><span data-prompt-text>만들고 싶은 화면을 적어보세요</span>&#127908;</div>
+      <div class="gen" aria-label="AI가 만든 가상 금융 앱 화면 예시" role="img"><div>안녕하세요, 지민</div><div class="amt">&#8361;194,700</div><div class="row">이번 달 저축 목표 72%</div><div class="row">최근 지출 &middot; 식비 42,000</div><div class="row">새 알림 &middot; 적금 만기 D-3</div></div>
+    </div>
+  </section>
+
+  <section class="sec two" id="tools" aria-labelledby="tools-h">
+    <h2 class="pad" id="tools-h">표현은 자유롭게, 디테일은 정확하게. <span>작은 단위까지 다듬는 전문 도구가 모두 들어 있어요.</span></h2>
+    <div class="tiles pad" data-tiles></div>
+  </section>
+
+  <section class="sec two" id="code" aria-labelledby="code-h">
+    <h2 class="indent pad" id="code-h">디자인의 맥락 그대로 코드로. <span>저장소, 컴포넌트, 에이전트가 연결되어 만든 그대로 구현돼요.</span></h2>
+    <div class="stage cyan pad"><div><div class="repo"><b>&#9711; 저장소</b><code>github.com/example/colab-app (가상)</code><button type="button" aria-label="작업 시작 (시연)" data-run>&uarr;</button></div><div class="checks"><ul role="list" data-checks><li>컴포넌트 매핑하기</li><li>디자인 토큰 가져오기</li><li>화면 세 개 구현하기</li><li>변경 사항 요약하기</li></ul></div></div></div>
+  </section>
+
+  <section class="sec pad" aria-labelledby="proof-h">
+    <h2 id="proof-h" style="font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:500">많은 팀이 매일 여는 캔버스</h2>
+    <div class="proof"><blockquote>&ldquo;파일 하나를 두고 모두가 동시에 의견을 남기니까, 회의보다 먼저 결론이 나요.&rdquo;<p style="margin-block-start:16px">가상의 디자인 리드, Harlow Studio</p></blockquote><div><span class="n" data-count="91" data-suffix="%">91%</span><p>설문 응답 팀 중 매주 사용 비율 (가상 수치)</p></div></div>
+    <div class="wm" aria-label="가상의 고객사 이름"><span>Pentaline</span><span>Harlow</span><span>QUANTA</span><span>The Daily Ledger</span><span>zoomy</span><span>northwind</span><span>ARCLINE</span></div>
+  </section>
+
+  <section class="sec pad" aria-labelledby="res-h">
+    <h2 id="res-h" style="font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:500">무엇을 만들 수 있는지 둘러보세요. <span style="color:var(--grey)">커뮤니티가 만든 가상 리소스예요.</span></h2>
+    <div class="carousel" data-res tabindex="0" aria-label="리소스 목록, 가로로 스크롤"></div>
+  </section>
+</main>
+<footer><b>Figma study</b><strong style="color:#fff">Unofficial</strong> 브랜드 스터디 &middot; Figma와 무관합니다. 로고 대신 색 점을, 사진 대신 그림을 썼고 인용과 수치는 모두 가상이에요. <a href="../">모든 스터디</a></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Figma by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { reduced, art } = window.SG;
+  // Dot-matrix poster spells a word, then the collage breathes.
+  const glyphs = { I: ["111", "010", "010", "010", "111"], D: ["110", "101", "101", "101", "110"], E: ["111", "100", "110", "100", "111"], A: ["010", "101", "111", "101", "101"] };
+  const word = "IDEA";
+  const dots = document.querySelector("[data-dots]");
+  const cells = [];
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 12; c++) { const L = word[Math.floor(c / 3)]; const on = glyphs[L][r][c % 3] === "1"; cells.push(on); }
+  dots.innerHTML = cells.map(() => "<i></i>").join("");
+  const ds = [...dots.children];
+  if (reduced) ds.forEach((d, i) => cells[i] && d.setAttribute("data-on", ""));
+  else ds.forEach((d, i) => cells[i] && setTimeout(() => d.setAttribute("data-on", ""), 300 + i * 18));
+  // Multiplayer cursors drift around the lime stage.
+  const curs = document.querySelectorAll("[data-cursors] .cur");
+  if (!reduced) setInterval(() => { if (document.hidden) return; curs.forEach((c) => { c.style.transform = `translate(${Math.random() * 200 - 100}px, ${Math.random() * 120 - 60}px)`; }); }, 2000);
+  // Prompt types, then the generated app rows appear.
+  const gen = document.querySelector("[data-gen]"), pt = gen.querySelector("[data-prompt-text]"), rows = [...gen.querySelectorAll(".row")];
+  const prompt = "저축 목표가 보이는 금융 앱 홈 화면";
+  if (reduced) { pt.textContent = prompt; rows.forEach((r) => r.setAttribute("data-on", "")); }
+  else new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); let i = 0; const t = () => { pt.textContent = prompt.slice(0, ++i); if (i < prompt.length) setTimeout(t, 45); else rows.forEach((r, k) => setTimeout(() => r.setAttribute("data-on", ""), 300 + k * 350)); }; t(); }, { threshold: 0.4 }).observe(gen);
+  // Tool tiles: textures, gradients, a pen path that draws itself.
+  const tiles = [`<svg viewBox="0 0 200 220" preserveAspectRatio="none"><defs><filter id="f"><feTurbulence baseFrequency=".8"/></filter></defs><rect width="200" height="220" fill="#c8b48a"/><rect width="200" height="220" filter="url(#f)" opacity=".25"/><rect x="40" y="80" width="120" height="50" rx="8" fill="#fff"/><text x="56" y="110" font-size="13" font-family="sans-serif">Texture</text></svg>`,
+    `<svg viewBox="0 0 200 220" preserveAspectRatio="none"><rect width="200" height="220" fill="#e8f0ff"/><text x="10" y="80" font-size="56" font-weight="900" fill="#2a3bd8" font-family="Georgia,serif">Fold</text><rect x="40" y="110" width="120" height="90" rx="8" fill="#fff"/><rect x="50" y="130" width="100" height="50" fill="url(#g)"/><defs><linearGradient id="g"><stop offset="0" stop-color="#ff7ab8"/><stop offset="1" stop-color="#6a3bff"/></linearGradient></defs></svg>`,
+    `<svg viewBox="0 0 200 220" preserveAspectRatio="none" class="pen" data-pen><rect width="200" height="220" fill="#1b2bd8"/><path d="M20 190 C60 40 140 40 180 190" stroke="#fff" stroke-width="3" fill="none"/><circle cx="20" cy="190" r="5" fill="#fff"/><circle cx="180" cy="190" r="5" fill="#fff"/></svg>`,
+    `<svg viewBox="0 0 200 220" preserveAspectRatio="none"><rect width="200" height="220" fill="#3a5a2a"/><text x="14" y="70" font-size="22" font-weight="900" fill="#e5ff4a" font-family="sans-serif">SIDE B</text><rect x="14" y="150" width="172" height="8" rx="4" fill="#e5ff4a" opacity=".4"/><rect x="14" y="150" width="96" height="8" rx="4" fill="#e5ff4a"/></svg>`,
+    `<svg viewBox="0 0 200 220" preserveAspectRatio="none"><rect width="200" height="220" fill="#f3e6d6"/><path d="M0 160 Q100 60 200 150 V220 H0Z" fill="#e8591f"/></svg>`,
+    `<svg viewBox="0 0 200 220" preserveAspectRatio="none"><rect width="200" height="220" fill="#101010"/><text x="14" y="120" font-size="54" font-weight="900" fill="#b6ff3b" font-family="sans-serif">DRIFT</text></svg>`,
+    `<svg viewBox="0 0 200 220" preserveAspectRatio="none"><rect width="200" height="220" fill="#ffd8e8"/><circle cx="100" cy="110" r="60" fill="#ff5aa0"/><circle cx="130" cy="90" r="30" fill="#fff" opacity=".6"/></svg>`,
+    `<svg viewBox="0 0 200 220" preserveAspectRatio="none"><rect width="200" height="220" fill="#e8e8e8"/>${Array.from({ length: 6 }, (_, i) => `<rect x="20" y="${20 + i * 32}" width="${60 + (i * 23) % 120}" height="18" rx="4" fill="#bdbdbd"/>`).join("")}</svg>`];
+  const tbox = document.querySelector("[data-tiles]");
+  tbox.innerHTML = tiles.map((t) => `<div class="tl" aria-hidden="true">${t}</div>`).join("");
+  const pen = tbox.querySelector("[data-pen]");
+  if (!reduced) { pen.style.setProperty("--d", "600"); new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); pen.style.setProperty("--d", "0"); }, { threshold: 0.5 }).observe(pen); }
+  // Repo run: the checklist ticks off one by one.
+  const checks = [...document.querySelectorAll("[data-checks] li")];
+  document.querySelector("[data-run]").addEventListener("click", () => { checks.forEach((c) => c.removeAttribute("data-done")); checks.forEach((c, k) => setTimeout(() => c.setAttribute("data-done", ""), reduced ? 0 : 500 + k * 600)); window.SG.announce("시연용 작업을 시작했어요. 실제 저장소에는 연결되지 않아요."); });
+  document.querySelector("[data-res]").innerHTML = [["box", "#eef1f5", "UI 키트"], ["phone", "#fbe7d9", "웹사이트"], ["ticket", "#fff2c8", "소셜 미디어"], ["book", "#e8f0e4", "프레젠테이션"], ["watch", "#efe6ff", "앱 화면"]].map(([k, g, t]) => `<div class="res"><div class="pic" aria-hidden="true">${art(k, { ground: g, main: "#2a3bd8", accent: "#333" })}</div><span>${t} &rarr;</span></div>`).join("");
+})();
+</script>
+</body>
+</html>

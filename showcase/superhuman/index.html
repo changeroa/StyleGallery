@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Superhuman - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Superhuman's suite page: a painted sky hero with floating assistant cards, a hairline logo grid, a tabbed product suite, and a plum footer.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c1a3a'/%3E%3Cpath d='M9 20 16 10l7 10' stroke='%23a78bfa' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --paper: #f7f4ef; --band: #ece7df; --ink: #1c1a2e; --grey: #5a566b; --line: #ddd7cc; --violet: #6d4bd8; --plum: #3a1a24; --sans: "Inter", system-ui, sans-serif; --sg-header: 70px; --sg-focus: #6d4bd8; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--paper); color: var(--ink); font: 400 15px/1.6 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1280px; padding-inline: 24px; }
+  .site-header { background: #fff; color: var(--ink); position: sticky; top: 0; z-index: 30; transition: box-shadow .3s; }
+  .site-header[data-scrolled] { box-shadow: 0 1px 0 var(--line); }
+  .site-header .w { align-items: center; display: flex; gap: 22px; block-size: 58px; }
+  .logo { color: inherit; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-decoration: none; }
+  .site-header nav { display: flex; gap: 18px; }
+  .site-header nav a { color: inherit; font-size: 13px; opacity: .85; text-decoration: none; }
+  .site-header nav a:hover { opacity: 1; }
+  .hr { align-items: center; display: flex; gap: 12px; margin-inline-start: auto; }
+  .ghost { background: none; border: 0; color: inherit; font: 500 13px var(--sans); }
+  .outline { background: none; border: 1px solid currentColor; border-radius: 6px; color: inherit; font: 500 13px var(--sans); padding: 5px 10px; }
+  @media (max-width: 860px) { .site-header nav { display: none; } }
+  /* Sky hero: gradient sky, pink cloud, soft hill; floating cards drift gently. */
+  .hero { background: radial-gradient(40% 30% at 12% 40%, rgb(255 190 220 / .75), transparent 70%), radial-gradient(50% 40% at 80% 20%, rgb(255 255 255 / .35), transparent 70%), linear-gradient(180deg, #5b6fd6 0%, #8a9ae8 45%, #b8b3ec 75%, #e3c9e6 100%); color: #fff; min-block-size: 92vh; overflow: clip; padding-block: 100px 60px; position: relative; text-align: center; }
+  .hero h1 { font-size: clamp(2.4rem, 5.6vw, 4.8rem); font-weight: 300; letter-spacing: -0.035em; line-height: 1.05; text-shadow: 0 6px 40px rgb(40 30 110 / .35); }
+  .hero p { font-size: 18px; margin: 18px auto 26px; max-inline-size: 42ch; }
+  .cta { align-items: center; background: #15132a; border: 0; border-radius: 8px; color: #fff; display: inline-flex; font: 500 14px var(--sans); gap: 12px; padding: 6px 6px 6px 16px; }
+  .cta i { background: linear-gradient(135deg, #7c5cff, #4a8bff); block-size: 28px; border-radius: 6px; display: grid; font-style: normal; inline-size: 28px; place-items: center; }
+  .cards { display: grid; gap: 20px; grid-template-columns: 1fr 1fr 1fr; margin: 60px auto 0; max-inline-size: 1180px; text-align: start; }
+  .fc { backdrop-filter: blur(14px); background: rgb(40 36 90 / .55); border: 1px solid rgb(255 255 255 / .25); border-radius: 16px; color: #fff; font-size: 13px; padding: 16px; animation: bob 7s ease-in-out infinite alternate; }
+  .fc:nth-child(2) { animation-delay: -2.5s; margin-block-start: 60px; }
+  .fc:nth-child(3) { animation-delay: -5s; }
+  @keyframes bob { to { transform: translateY(-12px); } }
+  .fc b { display: block; font-weight: 600; margin-block-end: 6px; }
+  .fc .chip { background: rgb(255 255 255 / .2); border-radius: 999px; display: inline-block; font-size: 12px; margin: 8px 6px 0 0; padding: 3px 10px; }
+  .fc .typing { min-block-size: 3.2em; }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } .fc:nth-child(2) { margin: 0; } }
+  .rail { background-image: repeating-linear-gradient(45deg, var(--line) 0 1px, transparent 1px 8px); inset-block: 0; inline-size: 32px; position: absolute; }
+  .body-wrap { position: relative; }
+  .body-wrap .rail.l { inset-inline-start: 0; } .body-wrap .rail.r { inset-inline-end: 0; }
+  .trust { padding-block: 60px 20px; text-align: center; }
+  .trust p { color: var(--grey); font-size: 13px; }
+  .lg { border: 1px solid var(--line); display: grid; grid-template-columns: repeat(6, 1fr); margin-block-start: 20px; }
+  .lg span { border-inline-end: 1px solid var(--line); font-weight: 700; letter-spacing: .04em; padding: 30px 8px; }
+  .lg span:last-child { border: 0; }
+  @media (max-width: 760px) { .lg { grid-template-columns: repeat(3, 1fr); } .lg span:nth-child(3) { border-inline-end: 0; } .lg span:nth-child(-n+3) { border-block-end: 1px solid var(--line); } }
+  .suite { background: var(--band); margin-block-start: 60px; padding-block: 60px 90px; }
+  .suite-h { align-items: center; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; }
+  .suite-h h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; letter-spacing: -0.03em; }
+  .vb { background: none; border: 1px solid var(--violet); border-radius: 6px; color: var(--violet); font: 500 13px var(--sans); padding: 7px 12px; }
+  .tabbar { border: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); margin-block: 26px 0; background: var(--paper); }
+  .tabbar button { background: none; border: 0; border-inline-end: 1px solid var(--line); color: var(--grey); font: 500 14px var(--sans); padding: 14px 8px; }
+  .tabbar button:last-child { border: 0; }
+  .tabbar button[aria-selected="true"] { background: #e2dcd2; color: var(--ink); }
+  .tabbar button i { border-radius: 4px; display: inline-block; block-size: 12px; inline-size: 12px; margin-inline-end: 6px; vertical-align: -1px; }
+  .panel { background: var(--paper); border: 1px solid var(--line); border-block-start: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-block-size: 440px; }
+  .panel .txt { padding: 34px; }
+  .panel .txt small { color: var(--violet); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .panel .txt h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; margin-block: 10px 12px; }
+  .panel .txt p { color: var(--grey); }
+  .panel ul { list-style: none; margin: 18px 0; padding: 0; }
+  .panel li { padding-block: 4px; }
+  .panel li::before { border: 1.5px solid var(--violet); border-radius: 50%; content: ""; display: inline-block; block-size: 9px; inline-size: 9px; margin-inline-end: 10px; }
+  .more { background: none; border: 0; color: var(--violet); font: 500 14px var(--sans); padding: 0; text-decoration: underline; text-underline-offset: 3px; }
+  .more::after { content: " →"; }
+  .media { background: linear-gradient(160deg, var(--a), var(--b)); display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; align-items: center; padding: 30px; }
+  .mock { background: #fff; border-radius: 12px; box-shadow: 0 30px 60px -30px rgb(30 20 80 / .5); font-size: 13px; inline-size: min(380px, 100%); padding: 16px; }
+  .mock .row { border-block-end: 1px solid #eee; display: flex; gap: 10px; justify-content: space-between; padding-block: 7px; }
+  .mock .row b { font-weight: 600; }
+  .mock .row span { color: var(--grey); min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mock .under { background: linear-gradient(transparent 60%, #ffe38a 60%); }
+  @media (max-width: 860px) { .panel { grid-template-columns: minmax(0, 1fr); } .panel .txt, .media { padding: 20px; } .tabbar { grid-template-columns: 1fr 1fr; } .tabbar button:nth-child(2) { border-inline-end: 0; } }
+  .stats { display: grid; gap: 1px; grid-template-columns: repeat(3, 1fr); margin-block: 90px; background: var(--line); border: 1px solid var(--line); }
+  .stats div { background: var(--paper); padding: 30px 24px; }
+  .stats b { display: block; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; letter-spacing: -0.03em; }
+  .stats span { color: var(--grey); font-size: 13px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: 1fr; } }
+  footer.site { background: var(--plum); border-block-start: 3px solid transparent; border-image: linear-gradient(90deg, #ff9ec7, #a78bfa, #7cc4ff) 1; color: #f0dde3; padding-block: 60px; }
+  footer.site .cols { display: grid; gap: 24px; grid-template-columns: 1.4fr repeat(3, 1fr); }
+  footer.site b { color: #fff; display: block; font-size: 20px; font-weight: 400; line-height: 1.3; }
+  footer.site h3 { color: #fff; font-size: 13px; font-weight: 600; margin-block-end: 8px; }
+  footer.site li { list-style: none; padding-block: 2px; }
+  footer.site ul { margin: 0; padding: 0; }
+  footer.site a { color: #fff; }
+  @media (max-width: 760px) { footer.site .cols { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header" data-header>
+  <div class="w">
+    <a class="logo" href="#top">SUPERHUMAN</a>
+    <nav aria-label="Sections"><a href="#suite">Suite</a><a href="#numbers">Numbers</a></nav>
+    <div class="hr"><button class="ghost" type="button" data-demo="Sales contact is a demo in this unofficial study.">Contact sales</button><button class="outline" type="button" data-demo="Sign in is not available in this unofficial study.">Sign in</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top">
+    <div class="w">
+      <h1 data-split>Your whole workday,<br>a little faster</h1>
+      <p data-reveal data-delay="300">Mail, docs, and an assistant that follows you into every app and every tab.</p>
+      <button class="cta" type="button" data-reveal data-delay="400" data-demo="Sign-up is a demo in this unofficial study." data-magnet>Get started <i aria-hidden="true">→</i></button>
+      <div class="cards" aria-hidden="true" data-ambient>
+        <div class="fc"><b>Assistant</b><div class="typing" data-typing></div><span class="chip">Tue 10:00</span><span class="chip">Thu 14:30</span></div>
+        <div class="fc"><b>Tone check</b>"Can we move this?" reads a little curt for a new client.<span class="chip">Make it warmer</span></div>
+        <div class="fc"><b>Team notes</b>Launch doc · 3 comments · summary ready<span class="chip">Open summary</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="body-wrap">
+    <div class="rail l" aria-hidden="true"></div><div class="rail r" aria-hidden="true"></div>
+    <section class="w trust" aria-label="Fictional customers">
+      <p>Picked by teams that move quickly (fictional names)</p>
+      <div class="lg"><span>NORTHWIND</span><span>Harlow</span><span>QUANTA</span><span>Meridian</span><span>kite&amp;co</span><span>ARCLINE</span></div>
+    </section>
+
+    <section class="suite" id="suite">
+      <div class="w">
+        <div class="suite-h"><h2 data-reveal>One suite, four tools</h2><button class="vb" type="button" data-demo="The suite plan is a demo in this unofficial study.">Get the suite</button></div>
+        <div class="tabbar" role="tablist" aria-label="Products" data-tabs>
+          <button role="tab" aria-selected="true" aria-controls="p0" id="t0"><i style="background:#a78bfa"></i>Mail</button>
+          <button role="tab" aria-selected="false" aria-controls="p1" id="t1"><i style="background:#34c38f"></i>Writing</button>
+          <button role="tab" aria-selected="false" aria-controls="p2" id="t2"><i style="background:#e8a23a"></i>Docs</button>
+          <button role="tab" aria-selected="false" aria-controls="p3" id="t3"><i style="background:#7cc4ff"></i>Assistant</button>
+        </div>
+        <div class="panel" id="p0" role="tabpanel" aria-labelledby="t0">
+          <div class="txt"><small>Mail</small><strong class="sg-visually-hidden">Mail</strong><div data-title style="font-size:clamp(1.4rem,2.4vw,2rem);letter-spacing:-0.02em;line-height:1.2;margin-block:10px 12px">Get four hours back every week</div><div data-copy style="color:var(--grey)">Keyboard-first email with drafts written from your calendar and context.</div><ul data-list><li>Split inbox by what matters</li><li>Auto-drafted replies</li><li>Reminders when nobody answers</li></ul><button class="more" type="button" data-demo="Product pages are illustrative in this unofficial study.">Learn more</button></div>
+          <div class="media" data-media style="--a:#7a9cf0;--b:#c8b8f5" aria-hidden="true"><div class="mock" data-mock></div></div>
+        </div>
+        <div class="panel" id="p1" role="tabpanel" aria-labelledby="t1" hidden></div>
+        <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden></div>
+        <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden></div>
+      </div>
+    </section>
+
+    <section class="w" id="numbers" aria-labelledby="n-h">
+      <h2 class="sg-visually-hidden" id="n-h">Numbers (illustrative)</h2>
+      <div class="stats"><div><b data-count="4" data-suffix="h">4h</b><span>saved per person per week (illustrative)</span></div><div><b data-count="2" data-suffix="x">2x</b><span>faster replies (illustrative)</span></div><div><b data-count="30" data-suffix="%">30%</b><span>fewer meetings (illustrative)</span></div></div>
+    </section>
+  </div>
+</main>
+<footer class="site"><div class="w"><div class="cols"><div><b>Builders of faster<br>working days</b><p style="margin-block-start:14px"><strong style="color:#fff">Unofficial</strong> brand study of Superhuman by StyleGallery. Not affiliated with Superhuman. Copy, customers, and numbers are fictional; no logos or photos are used.</p></div><div><h3>Products</h3><ul role="list"><li>Mail</li><li>Docs</li><li>Assistant</li></ul></div><div><h3>Company</h3><ul role="list"><li>About</li><li>Careers</li></ul></div><div><h3>Study</h3><ul role="list"><li><a href="../">All studies</a></li></ul></div></div></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Superhuman by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  const typing = document.querySelector("[data-typing]"), msg = "You're free Tuesday morning or Thursday afternoon. Want me to offer both?";
+  if (reduced) typing.textContent = msg; else { let i = 0; const t = () => { typing.textContent = msg.slice(0, ++i); if (i < msg.length) setTimeout(t, 32); }; setTimeout(t, 800); }
+  // One visible panel; tabs swap its contents so hidden panels hold no text.
+  const data = [
+    ["Mail", "Get four hours back every week", "Keyboard-first email with drafts written from your calendar and context.", ["Split inbox by what matters", "Auto-drafted replies", "Reminders when nobody answers"], "#7a9cf0", "#c8b8f5", [["Mina", "Offsite dates, can you confirm?"], ["Auto-draft", "Tuesday works, sending the invite now."], ["Leo", "Contract v3 attached"], ["Split: Team", "4 new"]]],
+    ["Writing", "Say it clearly the first time", "Suggestions in every text box, tuned to who you're writing to.", ["Tone checks", "Shorter sentences", "Works in any app"], "#6fcfa0", "#d4f2e2", [["Draft", "<span class='under'>Just wanted to quickly check</span> if you had time"], ["Suggestion", "Do you have time on Friday?"], ["Tone", "Friendly · confident"]]],
+    ["Docs", "One page for the whole plan", "Docs, tables, and projects that AI can fill and your team can edit.", ["Brief to table in one prompt", "Live project status", "Comments that resolve themselves"], "#f0c27a", "#fbe7c8", [["Q2 campaign brief", "Overview · 3 owners"], ["Table", "12 tasks · 8 done"], ["AI", "Draft a launch timeline"]]],
+    ["Assistant", "Help in every tab you open", "Ask about what's on screen and it answers with your context.", ["Meeting prep", "Email triage", "Daily brief"], "#8ec8ff", "#d8ecff", [["Brief", "3 meetings, 2 deadlines today"], ["Prep", "Last notes with Harlow attached"], ["Triage", "7 emails can wait until tomorrow"]]],
+  ];
+  const tabs = [...document.querySelectorAll("[data-tabs] [role=tab]")], p0 = document.getElementById("p0");
+  const render = (i) => { const [lab, h, c, list, a, b, rows] = data[i]; p0.querySelector("small").textContent = lab; p0.querySelector("strong").textContent = lab; p0.querySelector("[data-title]").textContent = h; p0.querySelector("[data-copy]").textContent = c; p0.querySelector("[data-list]").innerHTML = list.map((l) => `<li>${l}</li>`).join(""); const m = p0.querySelector("[data-media]"); m.style.setProperty("--a", a); m.style.setProperty("--b", b); p0.querySelector("[data-mock]").innerHTML = rows.map(([k, v]) => `<div class="row"><b>${k}</b><span>${v}</span></div>`).join(""); p0.setAttribute("aria-labelledby", tabs[i].id); };
+  document.querySelector("[data-tabs]").addEventListener("sg:tab", (e) => { tabs.forEach((t) => document.getElementById(t.getAttribute("aria-controls")).hidden = true); p0.hidden = false; render(e.detail.index); });
+  render(0);
+})();
+</script>
+</body>
+</html>

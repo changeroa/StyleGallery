@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>배달의민족 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="배달의민족 소개 페이지의 풀스크린 음식 장면과 민트색 대형 카피를 원본 사진·카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232ac1bc'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --mint: #2ac1bc; --mint-2: #3fe0d0; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --display: "Black Han Sans", "Pretendard Variable", sans-serif; --sg-header: 0px; --sg-focus: #3fe0d0; }
+  html { scroll-snap-type: y proximity; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; } }
+  body { background: #111; color: #fff; font: 400 15px/1.5 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .site-header { align-items: center; display: flex; gap: 20px; inset: 0 0 auto; padding: 22px clamp(20px, 11vw, 160px); position: fixed; z-index: 20; }
+  .wordmark { color: #fff; font: 400 22px var(--display); letter-spacing: -0.02em; text-decoration: none; }
+  .wordmark small { font-size: 12px; }
+  .site-header nav { display: flex; gap: 22px; margin-inline-start: auto; }
+  .site-header nav a { color: #fff; font-size: 12px; font-weight: 600; text-decoration: none; }
+  .site-header nav a:hover { text-decoration: underline; }
+  .rail { display: grid; gap: 7px; inset: 50% 22px auto auto; mix-blend-mode: difference; position: fixed; transform: translateY(-50%); z-index: 20; }
+  .rail a { background: rgb(255 255 255 / 0.45); block-size: 3px; display: block; inline-size: 10px; margin-inline-start: auto; transition: inline-size .4s, background .4s; }
+  .rail a[aria-current] { background: #fff; inline-size: 24px; }
+  .rail a:focus-visible { outline-offset: 4px; }
+  @media (max-width: 700px) { .site-header nav { display: none; } .rail { display: none; } }
+
+  /* Each scene is one full screen: a painted food table, big mint display type, store buttons. */
+  .scene { align-items: center; display: flex; min-block-size: 100vh; overflow: hidden; padding: 120px clamp(20px, 11vw, 160px) 100px; position: relative; scroll-snap-align: start; }
+  .table { inset: 0; position: absolute; }
+  .table svg { block-size: 100%; inline-size: 100%; transform: scale(var(--s, 1.08)); transition: transform 1.6s cubic-bezier(.16,1,.3,1); }
+  .scene[data-in] .table svg { --s: 1; }
+  .copy { position: relative; z-index: 1; max-inline-size: 760px; }
+  .copy::before { background: radial-gradient(60% 60% at 30% 50%, rgb(0 0 0 / 0.55), transparent 75%); content: ""; inset: -80px -120px; position: absolute; z-index: -1; }
+  .copy h2, .copy h1 { color: var(--mint-2); font: 400 clamp(2.6rem, 1.4rem + 3.6vw, 4.6rem)/1.1 var(--display); letter-spacing: -0.02em; }
+  .copy p { color: var(--mint-2); font: 400 clamp(1.6rem, 3.2vw, 2.8rem)/1.15 var(--display); margin-block-start: 30px; }
+  .stores { display: flex; flex-wrap: wrap; gap: 8px; margin-block-start: 34px; }
+  .store { align-items: center; background: #fff; border: 0; border-radius: 8px; color: #111; display: flex; font-size: 12px; font-weight: 700; gap: 6px; line-height: 1.1; padding: 8px 12px; text-align: start; }
+  .store small { display: block; font-size: 9px; font-weight: 500; }
+  .store.qr { padding: 8px 10px; font-size: 16px; }
+  .down { color: #fff; font-size: 30px; inset: auto 0 18px; position: absolute; text-align: center; text-decoration: none; z-index: 2; }
+  .down span { animation: nudge 1.8s ease-in-out infinite; display: inline-block; }
+  @keyframes nudge { 50% { transform: translateY(6px); } }
+  .end { background: #0f1f1e; flex-direction: column; justify-content: center; text-align: center; }
+  .end .copy::before { display: none; }
+  .end p.small { color: #cfeeed; font: 400 15px var(--sans); }
+  .end a { color: var(--mint-2); }
+  .sg-studybar { scroll-snap-align: end; }
+  .app { background: #fffdf8; border-radius: 34px; box-shadow: 0 0 0 10px #0a1514, 0 40px 90px -30px rgb(0 0 0 / .7); color: #1d1d1b; inline-size: min(340px, 86vw); margin: 0 auto 40px; text-align: start; --sg-frame-radius: 34px; }
+  .app-top { background: var(--mint); color: #062b29; padding: 22px 20px 16px; }
+  .app-top b { display: block; font: 700 18px var(--sans); }
+  .app-top small { font: 400 13px var(--sans); opacity: .95; }
+  .app-list { list-style: none; margin: 0; max-block-size: 290px; overflow: hidden; padding: 6px 0; }
+  .app-list li { align-items: center; border-block-end: 1px solid #ece7dc; display: grid; gap: 12px; grid-template-columns: 48px 1fr auto; padding: 12px 16px; }
+  .app-list li:hover { background: #f4fbfa; }
+  .app-list .th { aspect-ratio: 1; background: radial-gradient(circle at 40% 35%, #fff6 0 20%, transparent 21%), var(--c); border-radius: 12px; }
+  .app-list b { display: block; font: 600 14px var(--sans); }
+  .app-list small { color: #5b5b57; font: 400 12px var(--sans); }
+  .app-list button { background: transparent; border: 1px solid var(--mint); border-radius: 999px; color: #0f7773; font: 600 12px var(--sans); padding: 6px 12px; }
+  .app-list button:hover { background: var(--mint); color: #fff; }
+  .app-bar { border-block-start: 1px solid #ece7dc; color: #5b5b57; display: flex; font: 500 12px var(--sans); justify-content: space-around; padding: 12px 8px 16px; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <a class="wordmark" href="#s1">배달의민족 <small>스터디</small></a>
+  <nav aria-label="장면"><a href="#s2">한밤의 야식</a><a href="#s3">주말 브런치</a><a href="#s5">앱 받기</a></nav>
+</header>
+<nav class="rail" aria-label="장면 위치" data-rail><a href="#s1" aria-label="장면 1" aria-current="true"></a><a href="#s2" aria-label="장면 2"></a><a href="#s3" aria-label="장면 3"></a><a href="#s4" aria-label="장면 4"></a><a href="#s5" aria-label="장면 5"></a></nav>
+
+<main id="main">
+  <section class="scene" id="s1" data-scene data-ambient><div class="table" data-table="noodle|#3a2418|x|x|#f6e3c6"></div><div class="copy"><h1>문 앞까지 온<br>따뜻한 한 그릇</h1><p>오늘 저녁도,<br>누르면 도착해요</p><div class="stores"><button class="store" type="button" data-demo="비공식 스터디: 스토어로 이동하지 않아요."><span aria-hidden="true">&#63743;</span><span><small>Download on the</small>App Store</span></button><button class="store" type="button" data-demo="비공식 스터디: 스토어로 이동하지 않아요."><span aria-hidden="true">&#9654;</span><span><small>Get it on</small>Google Play</span></button><button class="store qr" type="button" aria-label="QR 코드 보기 (예시)" data-demo="비공식 스터디: QR 코드는 없어요.">&#9638;</button></div></div><a class="down" href="#s2" aria-label="다음 장면"><span aria-hidden="true">&#8964;</span></a></section>
+  <section class="scene" id="s2" data-scene><div class="table" data-table="grill|#2a1d18|x|x|#f0a060"></div><div class="copy"><h2>자정의 허기는<br>기다리지 않게</h2><p>늦은 밤에도,<br>불 켜진 가게가 있어요</p></div></section>
+  <section class="scene" id="s3" data-scene><div class="table" data-table="brunch|#6e4e32|x|x|#fff6e6"></div><div class="copy"><h2>느지막한 아침엔<br>식탁까지 배달</h2><p>주말 브런치,<br>현관에서 시작해요</p></div></section>
+  <section class="scene" id="s4" data-scene><div class="table" data-table="rice|#3a2a20|x|x|#e8efe4"></div><div class="copy"><h2>혼자 먹어도<br>제대로 한 상</h2><p>한 사람 분량도,<br>정성은 그대로예요</p></div></section>
+  <section class="scene end" id="s5" aria-labelledby="s5-h"><div class="app sg-frame" data-surface data-reveal="rise"><div class="app-top"><b>우리 동네</b><small>지금 배달 가능한 가게 128곳 (예시)</small></div><ul class="app-list sg-fade-y" role="list"><li><span class="th" style="--c:#e8a04c" aria-hidden="true"></span><span><b>국수 한 그릇 · 동네 면집</b><small>18분 · 배달팁 0원</small></span><button type="button" data-demo="주문은 이 비공식 스터디에서 되지 않아요.">담기</button></li><li><span class="th" style="--c:#c9612e" aria-hidden="true"></span><span><b>바삭 치킨 · 골목 치킨</b><small>24분 · 배달팁 0원</small></span><button type="button" data-demo="주문은 이 비공식 스터디에서 되지 않아요.">담기</button></li><li><span class="th" style="--c:#7fae6a" aria-hidden="true"></span><span><b>아침 샐러드 · 초록 식탁</b><small>15분 · 배달팁 0원</small></span><button type="button" data-demo="주문은 이 비공식 스터디에서 되지 않아요.">담기</button></li><li><span class="th" style="--c:#b58a5a" aria-hidden="true"></span><span><b>한 상 백반 · 엄마 부엌</b><small>21분 · 배달팁 0원</small></span><button type="button" data-demo="주문은 이 비공식 스터디에서 되지 않아요.">담기</button></li></ul><div class="app-bar"><span>홈</span><span>검색</span><span>찜</span><span>주문내역</span></div></div><div class="copy"><h2 id="s5-h">배고플 땐<br>앱부터 열어요</h2><p class="small" style="margin-block-start:26px">이 페이지는 배달의민족의 <strong>Unofficial</strong> 브랜드 스터디입니다. 우아한형제들과 무관하며 사진, 로고, 카피를 사용하지 않았어요.<br><a href="../">모든 스터디 보기</a></p></div></section>
+</main>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Baemin by StyleGallery. Not affiliated with Woowa Brothers.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art } = window.SG;
+  // Purpose-drawn dishes on painted tabletops (no photography).
+  const dishes = {
+    noodle: '<ellipse cx="0" cy="40" rx="250" ry="70" fill="#000" opacity=".25"/><path d="M-230 -20 Q0 260 230 -20Z" fill="#1d1d1f"/><ellipse cx="0" cy="-20" rx="230" ry="70" fill="#2a2a2c"/><ellipse cx="0" cy="-20" rx="205" ry="58" fill="#c9793a"/>' + Array.from({ length: 9 }, (_, i) => '<path d="M' + (-170 + i * 40) + ' -30 q20 -30 40 0 t40 0 t40 0" stroke="#f3d27a" stroke-width="9" fill="none" stroke-linecap="round"/>').join("") + '<ellipse cx="-70" cy="-40" rx="46" ry="30" fill="#fff"/><ellipse cx="-70" cy="-40" rx="22" ry="16" fill="#f5a623"/><g fill="#5fae4a">' + Array.from({ length: 10 }, (_, i) => '<circle cx="' + (40 + (i % 5) * 22) + '" cy="' + (-40 + Math.floor(i / 5) * 18) + '" r="7"/>').join("") + '</g><path d="M-60 -120 q-20 -40 0 -80 M0 -130 q-20 -40 0 -80 M60 -120 q-20 -40 0 -80" stroke="#fff" stroke-width="6" fill="none" opacity=".35" stroke-linecap="round"/><path d="M150 -200 L330 80 M175 -210 L350 70" stroke="#c9a77a" stroke-width="9" stroke-linecap="round"/>',
+    grill: '<rect x="-280" y="-150" width="560" height="320" rx="40" fill="#1a1a1a"/>' + Array.from({ length: 7 }, (_, i) => '<path d="M-250 ' + (-120 + i * 45) + 'h500" stroke="#333" stroke-width="10"/>').join("") + Array.from({ length: 6 }, (_, i) => '<g transform="translate(' + (-180 + (i % 3) * 170) + ' ' + (-60 + Math.floor(i / 3) * 130) + ') rotate(' + (i * 17 - 30) + ')"><rect x="-70" y="-38" width="140" height="76" rx="30" fill="#8a3a22"/><rect x="-70" y="-38" width="140" height="76" rx="30" fill="#c9602a" opacity=".6"/><path d="M-50 -30 l30 60 M-5 -30 l30 60 M40 -30 l20 40" stroke="#3a140a" stroke-width="8" opacity=".7"/></g>').join("") + '<g fill="#f3ead8"><circle cx="220" cy="120" r="16"/><circle cx="250" cy="100" r="14"/><circle cx="200" cy="90" r="12"/></g><path d="M-240 110 q20 -30 60 -10" stroke="#3fa34d" stroke-width="16" fill="none" stroke-linecap="round"/>',
+    brunch: '<ellipse cx="0" cy="0" rx="280" ry="200" fill="#fbf7ef"/><ellipse cx="0" cy="0" rx="240" ry="165" fill="none" stroke="#e8dfcd" stroke-width="6"/><g transform="rotate(-12)"><rect x="-190" y="-90" width="150" height="130" rx="26" fill="#d9a15a"/><rect x="-178" y="-78" width="126" height="106" rx="20" fill="#f1cf8e"/></g><ellipse cx="60" cy="-30" rx="80" ry="64" fill="#fff"/><circle cx="70" cy="-34" r="30" fill="#f5b21e"/><g fill="#b2203a">' + Array.from({ length: 7 }, (_, i) => '<circle cx="' + (-40 + i * 22) + '" cy="' + (80 + (i % 2) * 14) + '" r="14"/>').join("") + '</g><g fill="#3a4fb0"><circle cx="150" cy="70" r="12"/><circle cx="172" cy="84" r="12"/><circle cx="160" cy="100" r="12"/></g><circle cx="330" cy="-150" r="90" fill="#fff"/><circle cx="330" cy="-150" r="70" fill="#6b3a1e"/><ellipse cx="310" cy="-165" rx="30" ry="12" fill="#d9a77a" opacity=".6"/>',
+    rice: '<ellipse cx="0" cy="40" rx="240" ry="60" fill="#000" opacity=".2"/><path d="M-210 -30 Q0 230 210 -30Z" fill="#f4f1ea"/><ellipse cx="0" cy="-30" rx="210" ry="62" fill="#e8e2d4"/><ellipse cx="0" cy="-34" rx="190" ry="52" fill="#fdfbf5"/><path d="M-120 -44 q60 -26 120 0 t110 -4" stroke="#e05a3a" stroke-width="30" fill="none" stroke-linecap="round"/><g fill="#3fa34d"><ellipse cx="-60" cy="-20" rx="40" ry="12"/><ellipse cx="60" cy="-14" rx="36" ry="10"/></g><ellipse cx="0" cy="-58" rx="36" ry="22" fill="#f5b21e"/>' + [[-330, 120], [330, 110], [-300, -150]].map(([x, y]) => '<ellipse cx="' + x + '" cy="' + y + '" rx="80" ry="36" fill="#fbf7ef"/><ellipse cx="' + x + '" cy="' + (y - 6) + '" rx="56" ry="20" fill="' + (x > 0 ? "#c9402a" : "#6b8a3a") + '"/>').join(""),
+  };
+  document.querySelectorAll("[data-table]").forEach((el) => {
+    const [k, wood, , , light] = el.dataset.table.split("|");
+    const id = "l" + k + wood.slice(1);
+    el.innerHTML = `<svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="${id}" cx="75%" cy="30%" r="80%"><stop offset="0" stop-color="${light}" stop-opacity=".5"/><stop offset="1" stop-color="${wood}" stop-opacity="0"/></radialGradient></defs><rect width="1440" height="900" fill="${wood}"/>${Array.from({ length: 18 }, (_, i) => `<rect x="${i * 80}" y="0" width="40" height="900" fill="#000" opacity=".06"/>`).join("")}<g transform="translate(1010 480)">${dishes[k]}</g><rect width="1440" height="900" fill="url(#${id})"/></svg>`;
+  });
+  // Rail follows the scene in view; scenes settle their zoom as they arrive.
+  const rail = [...document.querySelectorAll("[data-rail] a")];
+  const scenes = [...document.querySelectorAll("[data-scene], #s5")];
+  const watch = new IntersectionObserver((entries) => { for (const e of entries) { if (!e.isIntersecting) continue; e.target.dataset.in = "1"; const i = scenes.indexOf(e.target); rail.forEach((a, k) => k === i ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current")); } }, { threshold: 0.55 });
+  scenes.forEach((s) => watch.observe(s));
+})();
+</script>
+</body>
+</html>

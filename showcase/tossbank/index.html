@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>토스뱅크 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="토스뱅크 홈의 어두운 뉴스 그리드와 캐릭터 히어로를 원본 카피·캐릭터 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23101216'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%233182f6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --bg: #101216; --bg-2: #1b1e24; --text: #f2f4f6; --text-2: #b0b8c1; --text-3: #9aa3ad; --blue: #3182f6; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 60px; --sg-focus: #7ab1ff; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--bg); color: var(--text); font: 400 15px/1.6 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .site-header { backdrop-filter: blur(14px); background: rgb(16 18 22 / 0.72); inset: 0 0 auto; position: fixed; z-index: 20; }
+  .site-header .bar { align-items: center; display: flex; gap: 20px; block-size: 52px; padding-inline: clamp(16px, 3vw, 28px); }
+  .logo { align-items: center; color: var(--text); display: flex; font-weight: 800; gap: 6px; letter-spacing: -0.04em; text-decoration: none; }
+  .logo i { background: var(--blue); border-radius: 6px 6px 6px 2px; block-size: 14px; inline-size: 14px; transform: rotate(-12deg); }
+  .site-nav { display: flex; gap: 2px; margin-inline: auto; }
+  .site-nav a { border-radius: 6px; color: var(--text-2); font-size: 13px; padding: 5px 10px; text-decoration: none; }
+  .site-nav a:hover { background: rgb(255 255 255 / 0.08); color: var(--text); }
+  .start { background: none; border: 1px solid rgb(255 255 255 / 0.4); border-radius: 999px; color: var(--text); font-size: 12px; padding: 5px 12px; }
+  @media (max-width: 860px) { .site-nav { display: none; } .start { margin-inline-start: auto; } }
+
+  /* Hero: blue-grey sky falling to black, original mascot, product carousel. */
+  .hero { background: linear-gradient(180deg, #8494a8 0%, #5a6576 35%, #262a31 75%, var(--bg)); min-block-size: 88vh; overflow: hidden; padding-block: 120px 60px; position: relative; }
+  .layout { display: grid; gap: 0 40px; grid-template-columns: 240px 1fr; margin-inline: auto; max-inline-size: 1300px; padding-inline: clamp(16px, 3vw, 28px); }
+  .hero-copy { grid-column: 2; position: relative; z-index: 2; }
+  .hero h1 { font-size: clamp(2rem, 3.6vw, 2.9rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.3; }
+  .hero-copy p { color: #e5e8eb; margin-block: 18px 34px; }
+  .hero-actions { align-items: center; display: flex; gap: 10px; }
+  .more { background: #f2f4f6; border: 0; border-radius: 999px; color: #191f28; font-size: 13px; font-weight: 600; padding: 10px 18px; }
+  .round { background: rgb(0 0 0 / 0.3); border: 0; border-radius: 50%; block-size: 34px; color: #fff; font-size: 16px; inline-size: 34px; }
+  .round:hover { background: rgb(0 0 0 / 0.5); }
+  .mascot { block-size: min(520px, 60vw); inset: 70px 6% auto auto; position: absolute; z-index: 1; transform: translateY(calc(var(--mp, 0) * 60px)); }
+  .mascot svg { block-size: 100%; inline-size: auto; animation: float 5s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-14px) rotate(2deg); } }
+  .dots-count { color: #e5e8eb; font-size: 12px; margin-inline-start: 8px; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .hero-copy { grid-column: 1; } .mascot { opacity: 0.5; inset-inline-end: -20%; } }
+
+  /* News grid with a sticky company column on the left. */
+  .news { padding-block: 20px 120px; }
+  .side { align-self: start; color: var(--text-3); font-size: 11px; line-height: 1.7; position: sticky; top: 120px; }
+  .side h3 { color: var(--text-2); font-size: 12px; margin-block: 14px 4px; }
+  .side .sns { display: flex; gap: 8px; margin-block-start: 14px; }
+  .side .sns span { background: rgb(255 255 255 / 0.1); border-radius: 50%; block-size: 22px; inline-size: 22px; }
+  .news h2 { font-size: 17px; font-weight: 600; margin-block-end: 16px; }
+  .grid { display: grid; gap: 34px 26px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .card { background: var(--bg-2); border-radius: 18px; overflow: hidden; transition: transform .5s var(--ease); }
+  .card:hover { transform: translateY(-6px); }
+  .thumb { aspect-ratio: 1.3; display: grid; place-items: center; }
+  .thumb svg { block-size: 62%; filter: drop-shadow(0 16px 20px rgb(0 0 0 / 0.25)); transition: transform .6s var(--ease); }
+  .card:hover .thumb svg { transform: scale(1.08) rotate(-3deg); }
+  .card-body { padding: 16px 18px 20px; }
+  .card-body small { color: var(--text-3); font-size: 12px; }
+  .card-body h3 { font-size: 15px; font-weight: 600; line-height: 1.45; margin-block: 6px 12px; }
+  .card-body time { color: var(--text-3); font-size: 12px; }
+  .load { background: var(--bg-2); border: 1px solid rgb(255 255 255 / 0.12); border-radius: 12px; color: var(--text); display: block; font-size: 14px; margin: 50px auto 0; padding: 12px 26px; }
+  @media (max-width: 1000px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 860px) { .side { margin-block-start: 50px; order: 2; position: static; } .grid { grid-template-columns: 1fr; } }
+  footer { border-block-start: 1px solid rgb(255 255 255 / 0.08); color: var(--text-2); font-size: 13px; padding-block: 40px; }
+  footer a { color: var(--text); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="bar">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>tossbank</a>
+    <nav class="site-nav" aria-label="섹션"><a href="#news">금융 소식</a><a href="#top">적금</a><a href="#about">은행 소개</a></nav>
+    <button class="start" type="button" data-demo="비공식 스터디: 가입 절차는 없어요.">시작하기</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-h" data-hero>
+    <div class="mascot" aria-hidden="true" data-ambient>
+      <svg viewBox="0 0 320 360">
+        <defs><radialGradient id="bod" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fff4d6"/><stop offset=".6" stop-color="#ffc98a"/><stop offset="1" stop-color="#e8955a"/></radialGradient>
+        <radialGradient id="coin" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff6b0"/><stop offset=".7" stop-color="#f5c542"/><stop offset="1" stop-color="#c9921a"/></radialGradient>
+        <linearGradient id="leaf" x1="0" x2="1"><stop offset="0" stop-color="#7fd48a"/><stop offset="1" stop-color="#3fae62"/></linearGradient></defs>
+        <path d="M160 70c-6-30 10-52 34-58-2 26-14 44-34 58z" fill="url(#leaf)"/><path d="M160 70c-10-22-34-30-54-24 10 20 30 30 54 24z" fill="url(#leaf)"/>
+        <ellipse cx="160" cy="200" rx="118" ry="128" fill="url(#bod)"/>
+        <ellipse cx="118" cy="182" rx="11" ry="15" fill="#3a2a22"/><ellipse cx="198" cy="182" rx="11" ry="15" fill="#3a2a22"/>
+        <circle cx="122" cy="176" r="4" fill="#fff"/><circle cx="202" cy="176" r="4" fill="#fff"/>
+        <ellipse cx="96" cy="212" rx="16" ry="9" fill="#ff9f9f" opacity=".6"/><ellipse cx="224" cy="212" rx="16" ry="9" fill="#ff9f9f" opacity=".6"/>
+        <path d="M146 214q14 12 28 0" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="236" cy="276" r="46" fill="url(#coin)"/><text x="236" y="292" text-anchor="middle" font-size="44" font-weight="800" fill="#b07a10" font-family="sans-serif">&#8361;</text>
+        <ellipse cx="210" cy="262" rx="22" ry="16" fill="#ffc98a"/>
+      </svg>
+    </div>
+    <div class="layout">
+      <div class="hero-copy">
+        <h1 id="hero-h" data-hero-title>매일 한 번,<br>조금씩 채우는 저금통</h1>
+        <p data-hero-text>매일 조금씩 넣으면 금리가 한 칸씩 올라가요<br>(하루 한 번, 최대 연 8%까지 예시)</p>
+        <div class="hero-actions">
+          <button class="more" type="button" data-demo="비공식 스터디: 상품 상세는 없어요.">자세히 보기</button>
+          <button class="round" type="button" aria-label="이전 상품" data-prev>&lsaquo;</button>
+          <button class="round" type="button" aria-label="다음 상품" data-next>&rsaquo;</button>
+          <span class="dots-count" data-count-label>1 / 3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="news" id="news" aria-labelledby="news-h">
+    <div class="layout">
+      <aside class="side" id="about" aria-labelledby="about-h">
+        <h3 id="about-h">은행 소개 (스터디)</h3>
+        <p>가상의 은행 정보입니다.<br>이 페이지는 실제 은행과 무관한 Unofficial 브랜드 스터디예요.</p>
+        <h3>고객센터</h3><p>평일 09:00-18:00 (예시)</p>
+        <h3>정책</h3><p>개인정보 처리방침 &middot; 이용약관 (예시)</p>
+        <div class="sns" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      </aside>
+      <div>
+        <h2 id="news-h">이번 주 돈 공부</h2>
+        <div class="grid" data-grid></div>
+        <button class="load" type="button" data-load>소식 더 보기</button>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="layout"><div style="grid-column:2">Unofficial 브랜드 스터디 &middot; 토스뱅크와 무관 &middot; 캐릭터와 카피는 새로 만들었어요 &middot; <a href="../">모든 스터디</a></div></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Toss Bank by StyleGallery. Not affiliated with Toss Bank.</span><a href="../">&larr; All studies</a></div>
+
+<noscript><style>.load { display: none; }</style></noscript>
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene } = window.SG;
+  // Original icon compositions on pastel grounds stand in for 3D thumbnails.
+  const icons = {
+    house: '<svg viewBox="0 0 120 100"><path d="M20 50 60 18l40 32v40H20z" fill="#5b8def"/><path d="M14 52 60 14l46 38" stroke="#2f5fc9" stroke-width="8" fill="none" stroke-linecap="round"/><rect x="50" y="62" width="20" height="28" rx="3" fill="#fff"/><circle cx="92" cy="26" r="12" fill="#ff7a59"/><text x="92" y="31" font-size="14" text-anchor="middle" fill="#fff" font-weight="800">%</text></svg>',
+    coin: '<svg viewBox="0 0 120 100"><ellipse cx="60" cy="78" rx="40" ry="10" fill="#c9921a"/><rect x="20" y="40" width="80" height="38" fill="#e8b23a"/><ellipse cx="60" cy="40" rx="40" ry="10" fill="#ffd966"/><ellipse cx="60" cy="58" rx="40" ry="10" fill="#f5c542" opacity=".5"/></svg>',
+    chart: '<svg viewBox="0 0 120 100"><rect x="14" y="14" width="92" height="72" rx="10" fill="#fff"/><path d="M26 70 46 52l16 10 30-30" stroke="#3182f6" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="92" cy="32" r="7" fill="#ff5b2e"/></svg>',
+    shield: '<svg viewBox="0 0 120 100"><path d="M60 10 96 22v26c0 22-16 38-36 44-20-6-36-22-36-44V22z" fill="#36c2a3"/><path d="M44 50l12 12 22-24" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    bag: '<svg viewBox="0 0 120 100"><path d="M26 34h68l-6 56H32z" fill="#ff7a45"/><path d="M44 34c0-14 8-22 16-22s16 8 16 22" stroke="#c94a1a" stroke-width="6" fill="none"/><rect x="36" y="50" width="48" height="12" rx="6" fill="#ffd0b8"/></svg>',
+    moon: '<svg viewBox="0 0 120 100"><circle cx="46" cy="40" r="22" fill="#ffe27a"/><circle cx="56" cy="34" r="20" fill="#1e2a4a"/><rect x="58" y="46" width="44" height="38" rx="8" fill="#fff"/><rect x="66" y="56" width="28" height="6" rx="3" fill="#e5484d"/></svg>',
+  };
+  const grounds = ["linear-gradient(160deg,#c9f2c7,#e9f7ff)", "linear-gradient(160deg,#9fb8ff,#dfe6ff)", "linear-gradient(160deg,#bdf0ff,#e6fbff)", "linear-gradient(160deg,#1b2a55,#3a3f8f)", "linear-gradient(160deg,#ffb89a,#ffe3d6)", "linear-gradient(160deg,#fff2b8,#fffbe6)", "linear-gradient(160deg,#5a3aa0,#2a1f55)"];
+  const topics = [["대출", "house", "금리 인하를 요구하면 이자가 얼마나 줄어들까요?"], ["경제", "chart", "이번 달 기준금리 발표, 내 예금에는 어떤 영향이 있을까요?"], ["보안", "shield", "문자로 온 링크, 누르기 전에 확인할 세 가지"], ["예적금", "coin", "사회초년생이 첫 적금을 고르는 기준"], ["소비", "bag", "명절 선물세트, 카드 혜택으로 알뜰하게 사는 법"], ["생활", "moon", "밤에 이체해도 수수료가 붙지 않는 이유"], ["투자", "chart", "처음 산 펀드, 언제 다시 들여다봐야 할까요?"], ["연금", "coin", "연말정산 전에 연금저축을 채우면 달라지는 것"], ["청년", "house", "청년 전용 월세 지원, 신청 순서 정리"]];
+  const grid = document.querySelector("[data-grid]");
+  let made = 0;
+  const addCards = (n) => {
+    for (let k = 0; k < n; k++, made++) {
+      const [cat, icon, title] = topics[made % topics.length];
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `<div class="thumb" style="background:${grounds[made % grounds.length]}" aria-hidden="true">${icons[icon]}</div><div class="card-body"><small>${cat} &middot; 돈 이야기</small><h3>${title}</h3><time>2026.09.${String(28 - (made % 27)).padStart(2, "0")}</time></div>`;
+      grid.append(card);
+      if (!reduced) card.animate([{ opacity: 0, transform: "translateY(30px)" }, { opacity: 1, transform: "none" }], { duration: 700, delay: (k % 3) * 90 + Math.floor(k / 3) * 60, easing: "cubic-bezier(.16,1,.3,1)", fill: "backwards" });
+    }
+  };
+  addCards(9);
+  document.querySelector("[data-load]").addEventListener("click", (e) => { addCards(6); window.SG.announce("소식 6개를 더 불러왔어요."); });
+
+  // Hero carousel: three products; arrows swap copy.
+  const slides = [["매일 한 번,<br>조금씩 채우는 저금통", "매일 조금씩 넣으면 금리가 한 칸씩 올라가요<br>(하루 한 번, 최대 연 8%까지 예시)"], ["잠들어 있는 돈도<br>하루치 이자를 받게", "넣어두기만 해도 매일 이자가 쌓여요<br>(연 2%, 예시)"], ["처음 여는 통장이라면<br>수수료 없이 시작", "이체, 출금 수수료를 걱정하지 마세요<br>(조건 없음, 예시)"]];
+  let at = 0;
+  const title = document.querySelector("[data-hero-title]"), text = document.querySelector("[data-hero-text]"), label = document.querySelector("[data-count-label]");
+  const go = (d) => { at = (at + d + 3) % 3; title.innerHTML = slides[at][0]; text.innerHTML = slides[at][1]; label.textContent = `${at + 1} / 3`; if (!reduced) title.animate([{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "none" }], { duration: 500, easing: "cubic-bezier(.16,1,.3,1)" }); };
+  document.querySelector("[data-prev]").addEventListener("click", () => go(-1));
+  document.querySelector("[data-next]").addEventListener("click", () => go(1));
+  const hero = document.querySelector("[data-hero]");
+  if (!reduced) scene(hero, (p) => hero.style.setProperty("--mp", String(p)));
+})();
+</script>
+</body>
+</html>

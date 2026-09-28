@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>채널톡 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="채널톡 홈의 파스텔 그라디언트 패널, 알약 버튼, AI 상담 체험 입력을 원본 카피·로고 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%236a5cff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --violet: #6a5cff; --ink: #1c1c20; --grey: #5f6068; --line: #ececf0; --warm: #f7f5f1; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 80px; --sg-focus: #6a5cff; --ease: cubic-bezier(.16,1,.3,1); }
+  html { scroll-padding-bottom: 90px; }
+  body { background: #fff; color: var(--ink); font: 400 15px/1.6 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1320px; padding-inline: 24px; }
+  .promo { background: linear-gradient(90deg, #cdeff2, #e6f6f7 60%, #d7f0f4); font-size: 13px; }
+  .promo .inner { align-items: center; display: flex; flex-wrap: wrap; gap: 8px 14px; justify-content: space-between; padding-block: 10px; }
+  .promo b { color: #0a6a78; }
+  .promo button { background: #fff; border: 1px solid #b8dde2; border-radius: 999px; font-size: 12px; padding: 4px 12px; }
+  .site-header { background: rgb(255 255 255 / 0.94); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 20; }
+  .site-header .inner { align-items: center; display: flex; gap: 28px; block-size: 64px; }
+  .logo { align-items: center; color: var(--ink); display: flex; font-size: 18px; font-weight: 800; gap: 8px; text-decoration: none; }
+  .logo i { background: var(--violet); border-radius: 9px; block-size: 26px; display: grid; inline-size: 26px; place-items: center; }
+  .logo i::after { background: #fff; border-radius: 50%; block-size: 10px; content: ""; inline-size: 14px; }
+  .site-header nav { display: flex; gap: 22px; margin-inline: auto; }
+  .site-header nav a { color: var(--ink); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .site-header nav a:hover { color: var(--violet); }
+  .dark { background: var(--ink); border: 0; border-radius: 999px; color: #fff; font-size: 13px; font-weight: 700; padding: 9px 16px; }
+  .ghost { background: #fff; border: 1px solid #cfcfd6; border-radius: 999px; color: var(--ink); font-size: 13px; font-weight: 600; padding: 8px 16px; }
+  @media (max-width: 860px) { .site-header nav { display: none; } .site-header .dark { margin-inline-start: auto; } }
+
+  .split { align-items: center; display: grid; gap: 20px 60px; grid-template-columns: 1.2fr 1fr; padding-block: 60px 40px; }
+  .split h1, .split h2 { font-size: clamp(1.8rem, 3.2vw, 2.7rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.3; }
+  .split p { color: var(--grey); font-size: 14px; margin-block-end: 16px; }
+  .eyebrow { color: var(--grey); display: block; font-size: 13px; margin-block-end: 8px; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+  /* Pastel gradient stage with a floating product window and a phone. */
+  .stage { border-radius: 28px; min-block-size: 520px; overflow: hidden; padding: 60px 40px 0; position: relative; }
+  .stage.pink { background: radial-gradient(60% 80% at 0% 100%, #ff9ad5, transparent 60%), radial-gradient(60% 70% at 40% 20%, #c7b5ff, transparent 60%), radial-gradient(60% 70% at 100% 30%, #9fd8ff, transparent 60%), #e9e3ff; }
+  .stage.sky { background: radial-gradient(70% 90% at 20% 0%, #bfe6ff, transparent 60%), radial-gradient(70% 90% at 100% 100%, #d8e8ff, transparent 60%), #e8f4ff; }
+  .stage.violet { background: radial-gradient(60% 80% at 0% 0%, #d7c8ff, transparent 60%), radial-gradient(60% 80% at 100% 100%, #b8a6ff, transparent 60%), #ebe4ff; }
+  .win { background: #fff; border-radius: 16px 16px 0 0; box-shadow: 0 30px 80px -30px rgb(40 20 120 / 0.45); display: grid; font-size: 12px; grid-template-columns: 180px 1fr 220px; margin-inline: auto; max-inline-size: 1000px; min-block-size: 440px; }
+  .win aside { border-inline-end: 1px solid var(--line); padding: 16px; color: var(--grey); }
+  .win aside li { padding-block: 5px; }
+  .win .thread { padding: 16px 20px; }
+  .msg { display: flex; gap: 10px; margin-block-end: 14px; }
+  .msg i { border-radius: 50%; block-size: 26px; flex: none; inline-size: 26px; }
+  .msg b { display: block; font-size: 12px; }
+  .msg p { color: var(--grey); }
+  .win .side { border-inline-start: 1px solid var(--line); padding: 16px; color: var(--grey); }
+  .phone { background: #fff; border: 8px solid #1c1c20; border-radius: 30px; block-size: 360px; inline-size: 190px; inset: auto auto -40px 6%; padding: 40px 12px; position: absolute; box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.4); font-size: 11px; }
+  .bubble { background: #f1efff; border-radius: 14px; margin-block-end: 8px; padding: 8px 10px; }
+  .bubble.me { background: var(--violet); color: #fff; margin-inline-start: 20px; }
+  @media (max-width: 860px) { .win { grid-template-columns: 1fr; } .win aside, .win .side { display: none; } .phone { display: none; } .stage { min-block-size: 360px; padding-inline: 16px; } }
+
+  .center { padding-block: 80px 20px; text-align: center; }
+  .center h2 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 800; margin-block-end: 18px; }
+  .wall { display: grid; gap: 30px 20px; grid-template-columns: repeat(5, 1fr); margin-block: 40px 20px; }
+  .wall span { color: #6e6e76; font-size: 19px; font-weight: 900; letter-spacing: -0.02em; }
+  .wall span:nth-child(3n) { font-family: Georgia, serif; font-style: italic; font-weight: 400; }
+  .count { font-size: 15px; font-weight: 700; }
+  .try { align-items: center; background: linear-gradient(#fff, #fff) padding-box, linear-gradient(90deg, #ff9ad5, #6a5cff, #5ad0ff) border-box; border: 2px solid transparent; border-radius: 999px; display: flex; gap: 10px; margin: 30px auto 14px; max-inline-size: 640px; padding: 8px 8px 8px 22px; }
+  .try input { border: 0; flex: 1; font: inherit; outline: none; min-inline-size: 0; }
+  .try button { background: var(--ink); border: 0; border-radius: 50%; block-size: 38px; color: #fff; inline-size: 38px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .chips button { background: #f1f1f4; border: 0; border-radius: 999px; color: var(--ink); font-size: 12px; padding: 6px 12px; }
+  .answer { background: var(--warm); border-radius: 16px; margin: 16px auto 0; max-inline-size: 640px; min-block-size: 3em; padding: 16px 20px; text-align: start; color: var(--ink); }
+  .three { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); margin-block-start: 40px; text-align: start; }
+  .three article { background: var(--warm); border-radius: 22px; padding: 26px; }
+  .three h3 { font-size: 18px; margin-block: 16px 6px; }
+  .three p { color: var(--grey); font-size: 14px; }
+  .mini { background: #fff; border-radius: 12px; font-size: 12px; padding: 12px; box-shadow: 0 10px 20px -14px rgb(0 0 0 / 0.3); }
+  @media (max-width: 860px) { .wall { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); } .three { grid-template-columns: 1fr; } }
+  .cases { padding-block: 90px 20px; text-align: center; }
+  .case-tabs { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-block: 24px; }
+  .case-tabs button { background: #f1f1f4; border: 0; border-radius: 999px; color: var(--ink); font-size: 13px; font-weight: 600; padding: 7px 16px; }
+  .case-tabs button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .case { background: linear-gradient(110deg, #3a2a22, #6a4a38 60%, #9a7a60); border-radius: 22px; color: #fff; display: grid; grid-template-columns: 1fr 1fr; min-block-size: 360px; overflow: hidden; text-align: start; }
+  .case .copy { padding: 40px; }
+  .case b.brand { font-size: 22px; font-weight: 900; letter-spacing: 0.02em; }
+  .case .pct { display: block; font-size: 56px; font-weight: 800; letter-spacing: -0.04em; margin-block-start: 30px; }
+  .case p { color: #f0e6de; font-size: 14px; margin-block-start: 10px; max-inline-size: 40ch; }
+  .case .who { background: radial-gradient(30% 40% at 30% 30%, rgb(255 214 170 / 0.55), transparent 70%), radial-gradient(40% 40% at 70% 70%, rgb(255 160 110 / 0.35), transparent 70%), linear-gradient(160deg, transparent, rgb(0 0 0 / 0.3)); }
+  @media (max-width: 860px) { .case { grid-template-columns: 1fr; } .case .who { min-block-size: 180px; } }
+  .stats { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); padding-block: 90px 20px; }
+  .stat { background: var(--warm); border-radius: 18px; padding: 24px; }
+  .stat b { display: block; font-size: 34px; font-weight: 800; letter-spacing: -0.03em; }
+  .stat span { color: var(--grey); font-size: 13px; }
+  @media (max-width: 860px) { .stats { grid-template-columns: 1fr; } }
+  footer { color: var(--grey); font-size: 12px; margin-block-start: 80px; padding-block: 40px 60px; border-block-start: 1px solid var(--line); }
+  footer a { color: var(--violet); }
+  .launcher { inset: auto 22px 22px auto; position: fixed; z-index: 25; display: grid; justify-items: end; gap: 8px; }
+  .launcher .card { background: #fff; border-radius: 16px; box-shadow: 0 12px 30px -10px rgb(0 0 0 / 0.25); font-size: 13px; max-inline-size: 240px; padding: 12px 14px; }
+  .launcher .card button { background: none; border: 0; color: var(--grey); float: right; font-size: 14px; padding: 0 0 0 8px; }
+  .launcher .card[hidden] { display: none; }
+  .launcher > button { background: var(--violet); border: 0; border-radius: 50%; block-size: 52px; box-shadow: 0 10px 24px -8px rgb(106 92 255 / 0.7); color: #fff; font-size: 20px; inline-size: 52px; }
+  .sg-studybar { margin-block-end: 170px; padding-inline-end: 90px; }
+  html { scroll-padding-bottom: 170px; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<div class="promo"><div class="inner"><span><b>AI 비서 기능</b>이 새로 나왔어요 (스터디용 예시 공지)</span><button type="button" data-demo="비공식 스터디: 공지 상세는 없어요.">자세히 보기</button></div></div>
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Channel</a>
+    <nav aria-label="섹션"><a href="#ai">AI 상담</a><a href="#cases">고객 사례</a><a href="#works">워크스페이스</a><a href="#stats">신뢰</a></nav>
+    <button class="dark" type="button" data-demo="비공식 스터디: 가입은 없어요.">무료로 시작하기</button>
+  </div>
+</header>
+<main id="main">
+  <section class="inner" id="top" aria-labelledby="hero-h">
+    <div class="split"><h1 id="hero-h" data-split>고객과 나눈 대화가<br>팀의 다음 할 일이 되는 곳</h1><div><p>상담부터 데이터 분석, 마케팅, 팀 협업까지 고객을 중심에 두고 연결하는 업무 공간이에요.</p><button class="dark" type="button" data-demo="비공식 스터디: 가입은 없어요.">무료로 시작하기</button></div></div>
+    <div class="stage pink" aria-hidden="true">
+      <div class="win"><aside><ul role="list"><li>받은 상담 12</li><li>내 담당 4</li><li>팀 채팅</li><li>캠페인</li></ul></aside>
+        <div class="thread"><div class="msg"><i style="background:#ffc6a8"></i><div><b>고객 &middot; 방금</b><p>주문한 신발 사이즈를 바꾸고 싶어요.</p></div></div><div class="msg"><i style="background:#c7b5ff"></i><div><b>AI 상담원</b><p>주문 번호를 확인했어요. 한 치수 큰 재고가 있어요. 교환 접수할까요?</p></div></div><div class="msg"><i style="background:#ffc6a8"></i><div><b>고객</b><p>네, 부탁드려요!</p></div></div></div>
+        <div class="side"><p><b style="color:var(--ink)">고객 정보</b></p><p>최근 주문 3건</p><p>선호 채널: 앱</p><p>만족도 높음</p></div></div>
+      <div class="phone"><div class="bubble">안녕하세요! 무엇을 도와드릴까요?</div><div class="bubble me">배송 언제 와요?</div><div class="bubble">내일 오전 도착 예정이에요.</div></div>
+    </div>
+  </section>
+
+  <section class="center inner" aria-labelledby="wall-h">
+    <p class="count"><span data-count="248599">248,599</span>개 팀이 쓰는 중 (가상 수치)</p>
+    <h2 class="sg-visually-hidden" id="wall-h">사용 중인 팀</h2>
+    <div class="wall" aria-label="가상의 고객사 이름"><span>NORTHWIND</span><span>오늘상점</span><span>Meridian</span><span>파랑새</span><span>HELIO</span><span>kite&amp;co</span><span>소금창고</span><span>Parallax</span><span>ARCLINE</span><span>모래시계</span></div>
+  </section>
+
+  <section class="center inner" id="ai" aria-labelledby="ai-h">
+    <span class="eyebrow">밤에도 쉬지 않는 첫 응답</span>
+    <h2 id="ai-h">첫 응답은 AI가, 어려운 건 사람이</h2>
+    <form class="try" data-try onsubmit="return false"><label class="sg-visually-hidden" for="q">AI 상담원에게 질문해 보기</label><input id="q" placeholder="우리 가게 상황을 적어보세요. 예: 반품 문의가 많아요" autocomplete="off"><button type="submit" aria-label="질문 보내기">&rarr;</button></form>
+    <div class="chips"><button type="button" data-q="반품 문의가 너무 많아요">반품 문의</button><button type="button" data-q="밤에도 상담이 들어와요">야간 상담</button><button type="button" data-q="같은 질문이 반복돼요">반복 질문</button></div>
+    <div class="answer" role="status" aria-live="polite" data-answer>질문을 보내면 AI 상담원이 어떻게 답할지 여기에 보여드려요. (시연용 답변)</div>
+    <div class="three">
+      <article data-reveal><div class="mini">규칙: 교환은 7일 이내</div><h3>규칙을 지키는 AI</h3><p>우리 가게의 정책을 먼저 확인하고 답해요.</p></article>
+      <article data-reveal data-delay="100"><div class="mini">지식: 사이즈 가이드 문서</div><h3>문서를 읽는 AI</h3><p>도움말과 상품 정보를 근거로 답해요.</p></article>
+      <article data-reveal data-delay="200"><div class="mini">실행: 교환 접수 완료</div><h3>일까지 끝내는 AI</h3><p>조회, 접수, 알림까지 대화 안에서 처리해요.</p></article>
+    </div>
+  </section>
+
+  <section class="cases inner" id="cases" aria-labelledby="cases-h">
+    <h2 id="cases-h" style="font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:800">AI를 먼저 들인 팀들이 얻은 숫자</h2>
+    <div class="case-tabs" role="group" aria-label="업종" data-case-tabs><button type="button" aria-pressed="true">라이프스타일</button><button type="button" aria-pressed="false">패션</button><button type="button" aria-pressed="false">교육</button><button type="button" aria-pressed="false">B2B</button></div>
+    <article class="case"><div class="copy"><b class="brand" data-case-brand>ROUNDHILL</b><span class="pct" data-case-pct>78.4%</span><span>AI 상담 해결률 (가상)</span><p data-case-quote>&ldquo;밤에 들어오던 문의를 AI가 먼저 받아서, 아침에는 정말 사람이 필요한 상담만 남았어요.&rdquo;</p></div><div class="who" aria-hidden="true"></div></article>
+  </section>
+
+  <section class="inner" id="works" aria-labelledby="works-h">
+    <div class="split"><div><span class="eyebrow">팀을 위한 작업 공간</span><h2 id="works-h">대화, 할 일, 지표가<br>같은 탭 안에</h2></div><div><p>고객 상담, 팀 협업, 데이터 분석이 하나의 흐름으로 이어져요.</p><button class="ghost" type="button" data-demo="비공식 스터디: 상세 페이지는 없어요.">자세히 보기</button></div></div>
+    <div class="stage sky" aria-hidden="true" style="min-block-size:380px"><div class="win" style="min-block-size:320px"><aside><ul role="list"><li>팀 채팅</li><li>할 일</li><li>대시보드</li></ul></aside><div class="thread"><div class="msg"><i style="background:#9fd8ff"></i><div><b>마케팅팀</b><p>이번 주 반품 사유 1위가 사이즈예요.</p></div></div><div class="msg"><i style="background:#c7b5ff"></i><div><b>AI 비서</b><p>사이즈 가이드를 상세페이지 위로 올리면 문의가 줄 것으로 보여요.</p></div></div></div><div class="side"><p><b style="color:var(--ink)">이번 주 지표</b></p><p>문의 &minus;18%</p><p>재구매 +6%</p></div></div></div>
+  </section>
+
+  <section class="stats inner" id="stats" aria-label="신뢰 지표 (가상)">
+    <div class="stat"><b data-count="248599">248,599</b><span>누적 사용 팀 (가상)</span></div>
+    <div class="stat"><b data-count="1286781" data-suffix="+">1,286,781+</b><span>AI가 해결한 상담 (가상)</span></div>
+    <div class="stat"><b data-count="98" data-suffix="%">98%</b><span>서비스 유지율 (가상)</span></div>
+  </section>
+</main>
+<footer><div class="inner"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 &middot; 채널코퍼레이션과 무관합니다. 고객사, 수치, 인터뷰는 모두 지어낸 예시예요. <a href="../">모든 스터디</a></div></footer>
+<div class="launcher"><div class="card" data-card><button type="button" aria-label="말풍선 닫기" data-close>&times;</button>궁금한 건 채팅으로 물어보세요. (스터디용 런처)</div><button type="button" aria-label="채팅 열기 (예시)" data-demo="비공식 스터디: 실제 채팅 상담은 없어요.">&#128172;</button></div>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Channel Talk by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  const answers = { "반품": "반품 문의가 들어오면 먼저 주문 날짜와 정책을 확인해 7일 이내면 바로 접수하고, 지났으면 교환 대안을 안내해요.", "밤": "밤에는 AI 상담원이 먼저 받아 주문 조회와 배송 안내를 끝내고, 사람이 필요한 건만 아침 대기열에 남겨요.", "반복": "자주 묻는 질문은 도움말 문서를 근거로 즉시 답하고, 답이 없던 질문은 문서 초안으로 모아드려요." };
+  const out = document.querySelector("[data-answer]");
+  const reply = (q) => { const key = Object.keys(answers).find((k) => q.includes(k)); const text = key ? answers[key] : "상황을 조금 더 알려주시면 규칙, 문서, 실행 순서로 어떻게 처리할지 보여드릴게요."; out.textContent = ""; if (reduced) { out.textContent = text; return; } let i = 0; const t = () => { out.textContent = text.slice(0, ++i); if (i < text.length) setTimeout(t, 18); }; t(); };
+  const input = document.querySelector("#q");
+  document.querySelector("[data-try]").addEventListener("submit", () => reply(input.value.trim()));
+  document.querySelectorAll("[data-q]").forEach((b) => b.addEventListener("click", () => { input.value = b.dataset.q; reply(b.dataset.q); }));
+  const cases = [["ROUNDHILL", "78.4%", "밤에 들어오던 문의를 AI가 먼저 받아서, 아침에는 정말 사람이 필요한 상담만 남았어요."], ["NORTHLINE", "71.2%", "사이즈 문의가 절반이었는데, 이제는 AI가 가이드를 보여주고 교환까지 접수해요."], ["배움터", "83.0%", "수강 신청 기간에 몰리던 질문을 AI가 받아 운영팀이 콘텐츠에 집중하게 됐어요."], ["ARCLINE", "64.5%", "계약 전 질문을 AI가 먼저 정리해 영업팀이 맥락을 알고 통화를 시작해요."]];
+  const tabs = [...document.querySelectorAll("[data-case-tabs] button")];
+  tabs.forEach((t, i) => t.addEventListener("click", () => { tabs.forEach((o) => o.setAttribute("aria-pressed", String(o === t))); const [b, p, q] = cases[i]; document.querySelector("[data-case-brand]").textContent = b; document.querySelector("[data-case-pct]").textContent = p; document.querySelector("[data-case-quote]").textContent = `\u201c${q}\u201d`; }));
+  document.querySelector("[data-close]").addEventListener("click", () => { document.querySelector("[data-card]").hidden = true; });
+})();
+</script>
+</body>
+</html>

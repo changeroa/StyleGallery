@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Stripe - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Stripe's two-tone headlines, flowing gradient ribbon, bento product cards, and navy architecture section.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23533afd'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --indigo: #533afd; --navy: #0a2540; --ink: #0a2540; --slate: #50617a; --soft: #f6f9fc; --line: #e3e8ee; --sans: "Inter", "Helvetica Neue", Arial, sans-serif; --sg-header: 80px; --sg-focus: #533afd; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 16px/1.55 var(--sans); letter-spacing: -0.01em; }
+  .frame { border-inline: 1px solid var(--line); margin-inline: auto; max-inline-size: 1264px; padding-inline: 16px; }
+  .site-header { inset: 0 0 auto; position: absolute; z-index: 20; }
+  .site-header .frame { align-items: center; border: 0; display: flex; gap: 26px; block-size: 64px; }
+  .logo { color: var(--ink); font-size: 21px; font-weight: 600; letter-spacing: -0.04em; text-decoration: none; }
+  .site-header nav { display: flex; gap: 22px; }
+  .site-header nav a { color: var(--ink); font-size: 14px; font-weight: 500; text-decoration: none; }
+  .site-header nav a:hover { color: var(--indigo); }
+  .hbtn { display: flex; gap: 8px; margin-inline-start: auto; }
+  .b1 { background: var(--indigo); border: 0; border-radius: 6px; color: #fff; font: 500 14px var(--sans); padding: 8px 14px; }
+  .b1::after { content: " \203A"; }
+  .b2 { background: #fff; border: 1px solid var(--line); border-radius: 6px; color: var(--indigo); font: 500 14px var(--sans); padding: 7px 14px; }
+  @media (max-width: 860px) { .site-header nav { display: none; } }
+
+  /* Hero: two-tone headline under a flowing ribbon canvas. */
+  .hero { overflow: hidden; position: relative; }
+  .ribbon { block-size: 900px; inline-size: 1100px; inset: -140px -220px auto auto; position: absolute; }
+  .hero .frame { padding-block: 150px 70px; position: relative; }
+  .gdp { color: var(--slate); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .gdp b { color: var(--ink); font-weight: 500; }
+  .tone { font-size: clamp(1.9rem, 3.2vw, 2.7rem); font-weight: 400; letter-spacing: -0.03em; line-height: 1.14; margin-block: 16px 30px; max-inline-size: 26ch; }
+  .tone span { color: var(--slate); }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 8px; }
+  .logos { align-items: center; color: #425466; display: grid; gap: 20px; grid-template-columns: repeat(8, 1fr); padding-block: 26px; position: relative; font-weight: 700; }
+  .logos span:nth-child(3n) { font-weight: 400; font-style: italic; }
+  @media (max-width: 860px) { .logos { grid-template-columns: repeat(4, 1fr); } .ribbon { opacity: .6; } }
+
+  .sec { padding-block: 100px 40px; }
+  .sec.soft { background: var(--soft); }
+  .h2 { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; max-inline-size: 32ch; }
+  .h2 b { font-weight: 500; }
+  .h2 span { color: var(--slate); }
+  .bento { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); margin-block-start: 50px; }
+  .bc { background: #fff; border-radius: 8px; box-shadow: 0 1px 2px rgb(10 37 64 / 0.06), 0 12px 30px -18px rgb(10 37 64 / 0.3); min-block-size: 380px; overflow: hidden; padding: 22px; position: relative; }
+  .bc.wide { grid-column: span 2; }
+  .bc h3 { font-size: 17px; font-weight: 500; max-inline-size: 22ch; }
+  .bc .vis { inset: 90px 0 0; position: absolute; }
+  .checkout { background: #fff; border: 8px solid #1d1f24; border-radius: 26px; block-size: 290px; inline-size: 170px; inset: 20px auto auto 30px; padding: 20px 14px; position: absolute; text-align: center; font-size: 11px; }
+  .checkout b { display: block; font-size: 24px; margin-block: 16px; }
+  .paybtn { background: var(--indigo); border-radius: 6px; color: #fff; padding: 8px; margin-block-start: 60px; }
+  .order { background: #fff; border: 1px solid var(--line); border-radius: 10px; inset: 40px 20px auto 230px; padding: 16px; position: absolute; font-size: 12px; box-shadow: 0 20px 40px -24px rgb(10 37 64 / 0.4); }
+  .order .row { border-block-end: 1px solid var(--line); display: flex; justify-content: space-between; padding-block: 6px; }
+  .ribbon-bg { background: conic-gradient(from 200deg at 80% 40%, #ffb86b, #ff5f9e, #a960ff, #533afd, #ffb86b); filter: blur(30px); inset: 0; opacity: .55; position: absolute; }
+  .plan { background: #fff; border-radius: 10px; inset: 30px 20px auto 20px; padding: 14px; position: absolute; font-size: 12px; box-shadow: 0 16px 30px -20px rgb(10 37 64 / 0.4); }
+  .usage { align-items: flex-end; display: flex; gap: 4px; block-size: 90px; inset: auto 20px 20px 20px; position: absolute; }
+  .usage i { background: var(--indigo); flex: 1; block-size: var(--h); border-radius: 2px 2px 0 0; }
+  @media (max-width: 900px) { .bento { grid-template-columns: 1fr; } .bc.wide { grid-column: auto; } .order { inset-inline-start: 200px; } }
+  @media (max-width: 520px) { .order { display: none; } }
+  .stats { text-align: center; }
+  .stats h2 { font-size: clamp(2rem, 3.6vw, 3rem); font-weight: 400; letter-spacing: -0.03em; }
+  .srow { border-block: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); margin-block-start: 40px; }
+  .srow div { border-inline-start: 1px solid var(--line); padding: 28px 16px; }
+  .srow div:first-child { border: 0; }
+  .srow b { display: block; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; letter-spacing: -0.03em; }
+  .srow span { color: var(--slate); font-size: 13px; }
+  .nc { overflow: hidden; position: relative; }
+  .nc > svg { block-size: 100%; inline-size: 100%; inset: 0; position: absolute; }
+  .nc > b { position: relative; }
+  .burst { block-size: 340px; inline-size: 100%; }
+  @media (max-width: 800px) { .srow { grid-template-columns: 1fr 1fr; } }
+  .ent { display: grid; gap: 30px; grid-template-columns: 1fr 1fr; margin-block-start: 50px; }
+  .ent p { color: var(--slate); }
+  .aerial { aspect-ratio: 2.2; border-radius: 8px; margin-block-start: 30px; overflow: hidden; }
+  .aerial svg { block-size: 100%; inline-size: 100%; }
+  @media (max-width: 800px) { .ent { grid-template-columns: 1fr; } }
+  .dark { background: var(--navy); color: #fff; padding-block: 100px; }
+  .dark .frame { border-color: rgb(255 255 255 / 0.1); }
+  .dark .h2 span { color: #adbdcc; }
+  .dark .b2 { background: transparent; border-color: rgb(255 255 255 / 0.4); color: #fff; }
+  .arch { block-size: auto; inline-size: 100%; margin-block-start: 50px; }
+  .arch .n { fill: #1c3a6e; stroke: #3a5ea8; }
+  .arch text { fill: #dbe6f5; font: 12px var(--sans); }
+  .arch .core { fill: var(--indigo); }
+  .arch path { fill: none; stroke: #3a5ea8; stroke-width: 1.5; }
+  .news-h { align-items: flex-end; display: flex; justify-content: space-between; }
+  .arrows { display: flex; gap: 6px; }
+  .arrows button { background: #eef0ff; border: 0; border-radius: 6px; color: var(--indigo); block-size: 32px; inline-size: 32px; }
+  .news { display: grid; gap: 14px; grid-template-columns: 2fr 1fr 1fr; margin-block-start: 30px; }
+  .nc { border-radius: 8px; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; min-block-size: 360px; overflow: hidden; padding: 22px; position: relative; }
+  .nc b { font-size: 24px; font-weight: 400; line-height: 1.1; position: relative; }
+  .nc::before { background: linear-gradient(0deg, rgb(10 37 64 / 0.6), transparent 60%); content: ""; inset: 0; position: absolute; }
+  @media (max-width: 800px) { .news { grid-template-columns: 1fr; } .nc { min-block-size: 240px; } }
+  footer { background: var(--soft); color: var(--slate); font-size: 13px; padding-block: 60px; }
+  footer a { color: var(--indigo); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="frame">
+    <a class="logo" href="#top">Stripe</a>
+    <nav aria-label="Sections"><a href="#products">Products</a><a href="#scale">Scale</a><a href="#enterprise">Enterprise</a><a href="#developers">Developers</a></nav>
+    <div class="hbtn"><button class="b2" type="button" data-demo="Sign in is not available in this unofficial study.">Sign in</button><button class="b1" type="button" data-demo="Contact sales is a demo in this unofficial study.">Contact sales</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <canvas class="ribbon" data-ribbon aria-hidden="true"></canvas>
+    <div class="frame">
+      <p class="gdp">Volume moved through the study today (illustrative): <b data-gdp>$1,204,558,013</b></p>
+      <h1 class="tone" id="hero-h">Money movement for the whole internet. <span>Take payments, pay people out, and change how you price, without rebuilding the plumbing each time.</span></h1>
+      <div class="ctas"><button class="b1" type="button" data-demo="Get started is a demo in this unofficial study." data-magnet>Start building</button><button class="b2" type="button" data-demo="Google sign-up is not available in this unofficial study.">Sign up with an account</button></div>
+      <div class="logos" aria-label="Fictional customer names"><span>northwind</span><span>HELIO</span><span>Quanta</span><span>parallax</span><span>MERIDIAN</span><span>kite&amp;co</span><span>ARCLINE</span><span>sora</span></div>
+    </div>
+  </section>
+
+  <section class="sec soft" id="products" aria-labelledby="p-h">
+    <div class="frame">
+      <h2 class="h2" id="p-h"><b>One set of tools, many ways to charge.</b> <span>Use each piece on its own or wire them together as the business changes.</span></h2>
+      <div class="bento">
+        <article class="bc wide" data-reveal data-lift><h3>Take cards online and at the counter</h3><div class="vis" aria-hidden="true" data-surface><div class="ribbon-bg"></div><div class="checkout">Corner Roastery<b>$5.46</b>Tap or insert<div class="paybtn">Pay</div></div><div class="order"><b>Order summary</b><div class="row"><span>Pour-over kettle</span><span>$48.00</span></div><div class="row"><span>Beans, 250g</span><span>$16.00</span></div><div class="row"><span>Tax</span><span>$5.12</span></div><div class="row" style="border:0"><b>Total</b><b>$69.12</b></div></div></div></article>
+        <article class="bc" data-reveal data-delay="100" data-lift><h3>Any pricing model, from seats to usage</h3><div class="vis" aria-hidden="true" data-surface><div class="plan"><b>Pro plan</b><br>$29 / seat + usage<div style="background:#eef0ff;border-radius:999px;block-size:6px;margin-block-start:10px"><div style="background:#533afd;block-size:6px;border-radius:999px;inline-size:64%"></div></div></div><div class="usage" data-usage></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec stats" id="scale" aria-labelledby="st-h">
+    <div class="frame">
+      <h2 id="st-h">The rails under<br>a lot of commerce</h2>
+      <div class="srow"><div><b data-count="140" data-suffix="+">140+</b><span>currencies (illustrative)</span></div><div><b data-count="1.8" data-decimals="1" data-prefix="$" data-suffix="T">$1.8T</b><span>annual volume (illustrative)</span></div><div><b data-count="99.99" data-decimals="2" data-suffix="%">99.99%</b><span>uptime target (illustrative)</span></div><div><b data-count="190" data-suffix="M+">190M+</b><span>subscriptions (illustrative)</span></div></div>
+      <canvas class="burst" data-burst aria-hidden="true"></canvas>
+    </div>
+  </section>
+
+  <section class="sec" id="enterprise" aria-labelledby="e-h">
+    <div class="frame">
+      <h2 class="h2" id="e-h"><b>From a first sale to a global rollout.</b> <span>The same platform grows with you, so the migration never comes.</span></h2>
+      <div class="ent"><div><p style="color:var(--ink);font-size:18px">Move a large business onto modern payments in stages, not a rewrite.</p><button class="b1" type="button" style="margin-block-start:16px" data-demo="Enterprise contact is a demo in this unofficial study.">Talk about enterprise</button></div><p>Most very large companies already route some money through tools like these (illustrative claim for this study), from expanding abroad to changing how customers pay.</p></div>
+      <div class="aerial sg-frame" aria-hidden="true" data-surface><svg viewBox="0 0 1000 450" preserveAspectRatio="xMidYMid slice"><rect width="1000" height="450" fill="#3f5a3a"/><g fill="#355033"><circle cx="120" cy="80" r="70"/><circle cx="220" cy="60" r="60"/><circle cx="860" cy="380" r="90"/><circle cx="760" cy="410" r="60"/></g><path d="M0 250 L1000 180" stroke="#4a4f55" stroke-width="120"/><path d="M420 0 L520 450" stroke="#4a4f55" stroke-width="110"/><g data-cars></g></svg></div>
+    </div>
+  </section>
+
+  <section class="dark" id="developers" aria-labelledby="d-h">
+    <div class="frame">
+      <h2 class="h2" id="d-h"><b>Fits the stack you already run.</b> <span>Connect to existing systems, add custom logic, and keep your data flowing both ways.</span></h2>
+      <div style="display:flex;gap:8px;margin-block-start:22px"><button class="b1" type="button" data-demo="Docs are not included in this unofficial study.">Read the docs</button><button class="b2" type="button" data-demo="Source links are not included in this unofficial study.">Browse examples</button></div>
+      <svg class="arch" viewBox="0 0 1000 300" aria-hidden="true" data-arch><path d="M500 150 L300 60 M500 150 L700 60 M500 150 L250 170 M500 150 L760 170 M500 150 L500 260 M300 60 L160 60 M700 60 L840 60"/><g><rect class="n" x="250" y="44" width="100" height="32" rx="4"/><text x="300" y="64" text-anchor="middle">CRM</text><rect class="n" x="650" y="44" width="100" height="32" rx="4"/><text x="700" y="64" text-anchor="middle">Bookings</text><rect class="n" x="190" y="154" width="120" height="32" rx="4"/><text x="250" y="174" text-anchor="middle">App market</text><rect class="n" x="700" y="154" width="120" height="32" rx="4"/><text x="760" y="174" text-anchor="middle">Data pipeline</text><rect class="n" x="440" y="244" width="120" height="32" rx="4"/><text x="500" y="264" text-anchor="middle">Orchestration</text><rect class="core" x="455" y="128" width="90" height="44" rx="6"/><text x="500" y="155" text-anchor="middle" font-weight="500">core</text><rect class="n" x="110" y="44" width="50" height="32" rx="4"/><rect class="n" x="840" y="44" width="50" height="32" rx="4"/></g><g data-dots></g></svg>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="n-h">
+    <div class="frame">
+      <div class="news-h"><h2 class="h2" id="n-h"><b>What&rsquo;s new</b><br><span>Recent notes from this study.</span></h2><div class="arrows"><button type="button" aria-label="Previous" data-demo="The carousel is static in this unofficial study.">&larr;</button><button type="button" aria-label="Next" data-demo="The carousel is static in this unofficial study.">&rarr;</button></div></div>
+      <div class="news"><article class="nc sg-frame" data-lift style="background:linear-gradient(135deg,#7a3cff,#b56cff 50%,#5b2bd8)"><svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="nc-scrim" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient><linearGradient id="nc-coin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1f7f88"/><stop offset=".45" stop-color="#9ff0f0"/><stop offset="1" stop-color="#15505d"/></linearGradient><radialGradient id="nc-loaf" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#f3c27a"/><stop offset=".6" stop-color="#b8702c"/><stop offset="1" stop-color="#6a3a14"/></radialGradient></defs><rect width="600" height="400" fill="#4b1fb8"/><path d="M-40 330 C140 250 260 380 640 120 L640 200 C300 420 150 300 -40 400Z" fill="#ff7a6b" opacity=".75"/><path d="M-40 280 C160 200 300 330 640 60 L640 130 C320 360 150 250 -40 350Z" fill="#d65cff" opacity=".7"/><path d="M-40 240 C180 150 320 290 640 10 L640 70 C330 300 170 200 -40 300Z" fill="#3ab8ff" opacity=".55"/><g transform="rotate(-12 330 70)"><rect x="250" y="20" width="160" height="100" rx="12" fill="#fff" fill-opacity=".16" stroke="#fff" stroke-opacity=".5"/><rect x="268" y="40" width="30" height="22" rx="4" fill="#fff" fill-opacity=".45"/><rect x="268" y="88" width="90" height="6" rx="3" fill="#fff" fill-opacity=".4"/></g><g transform="rotate(8 410 120)"><rect x="330" y="70" width="160" height="100" rx="12" fill="#fff" fill-opacity=".16" stroke="#fff" stroke-opacity=".5"/><rect x="348" y="90" width="30" height="22" rx="4" fill="#fff" fill-opacity=".45"/><rect x="348" y="138" width="90" height="6" rx="3" fill="#fff" fill-opacity=".4"/></g><g transform="rotate(-4 250 150)"><rect x="170" y="100" width="160" height="100" rx="12" fill="#fff" fill-opacity=".16" stroke="#fff" stroke-opacity=".5"/><rect x="188" y="120" width="30" height="22" rx="4" fill="#fff" fill-opacity=".45"/><rect x="188" y="168" width="90" height="6" rx="3" fill="#fff" fill-opacity=".4"/></g><rect width="600" height="400" fill="url(#nc-scrim)"/></svg><b>The year in<br>payments, 2026</b></article><article class="nc sg-frame" data-lift style="background:linear-gradient(160deg,#c89a5a,#5a3a1a)"><svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="nc-scrim" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient><linearGradient id="nc-coin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1f7f88"/><stop offset=".45" stop-color="#9ff0f0"/><stop offset="1" stop-color="#15505d"/></linearGradient><radialGradient id="nc-loaf" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#f3c27a"/><stop offset=".6" stop-color="#b8702c"/><stop offset="1" stop-color="#6a3a14"/></radialGradient></defs><rect width="600" height="400" fill="#3a2414"/><rect width="600" height="400" fill="#f5b85a" opacity=".18"/><radialGradient id="nc-sun"><stop offset="0" stop-color="#ffcf7a" stop-opacity=".45"/><stop offset="1" stop-color="#ffcf7a" stop-opacity="0"/></radialGradient><circle cx="470" cy="60" r="240" fill="url(#nc-sun)"/><rect x="40" y="140" width="260" height="10" fill="#7a4a22"/><rect x="40" y="220" width="260" height="10" fill="#7a4a22"/><ellipse cx="90" cy="120" rx="32" ry="17" fill="url(#nc-loaf)"/><path d="M72 114 l10 8 M86 112 l10 8 M100 113 l10 8" stroke="#f7dca8" stroke-width="2.5"/><ellipse cx="160" cy="120" rx="32" ry="17" fill="url(#nc-loaf)"/><path d="M142 114 l10 8 M156 112 l10 8 M170 113 l10 8" stroke="#f7dca8" stroke-width="2.5"/><ellipse cx="230" cy="120" rx="32" ry="17" fill="url(#nc-loaf)"/><path d="M212 114 l10 8 M226 112 l10 8 M240 113 l10 8" stroke="#f7dca8" stroke-width="2.5"/><ellipse cx="90" cy="200" rx="32" ry="17" fill="url(#nc-loaf)"/><path d="M72 194 l10 8 M86 192 l10 8 M100 193 l10 8" stroke="#f7dca8" stroke-width="2.5"/><ellipse cx="165" cy="200" rx="32" ry="17" fill="url(#nc-loaf)"/><path d="M147 194 l10 8 M161 192 l10 8 M175 193 l10 8" stroke="#f7dca8" stroke-width="2.5"/><rect x="0" y="290" width="600" height="110" fill="#5a3418"/><rect x="0" y="290" width="600" height="8" fill="#8a5a2c"/><g transform="translate(420 200)"><rect x="0" y="0" width="70" height="100" rx="10" fill="#22252b"/><rect x="10" y="10" width="50" height="34" rx="4" fill="#3b4250"/><circle cx="35" cy="70" r="8" fill="#555c6a"/></g><rect x="330" y="258" width="70" height="36" fill="#c9a27a"/><path d="M330 272 h70 M365 258 v36" stroke="#8a6440" stroke-width="2"/><rect width="600" height="400" fill="url(#nc-scrim)"/></svg><b>A bakery that<br>went global</b></article><article class="nc sg-frame" data-lift style="background:linear-gradient(160deg,#2a6a8a,#0a2540)"><svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="nc-scrim" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient><linearGradient id="nc-coin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1f7f88"/><stop offset=".45" stop-color="#9ff0f0"/><stop offset="1" stop-color="#15505d"/></linearGradient><radialGradient id="nc-loaf" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#f3c27a"/><stop offset=".6" stop-color="#b8702c"/><stop offset="1" stop-color="#6a3a14"/></radialGradient></defs><rect width="600" height="400" fill="#0b2233"/><circle cx="300" cy="160" r="220" fill="#1f4e6b" opacity=".6"/><rect x="0" y="150" width="600" height="2" fill="#9ff0f0" opacity=".55"/><rect y="310" width="600" height="90" fill="#08202e"/><ellipse cx="300" cy="312" rx="130" ry="18" fill="#000" opacity=".35"/><ellipse cx="300" cy="304" rx="80" ry="16" fill="#15505d"/><rect x="220" y="282" width="160" height="22" fill="url(#nc-coin)"/><ellipse cx="300" cy="282" rx="80" ry="16" fill="#bff6f3" stroke="#6cc9c9"/><ellipse cx="300" cy="282" rx="80" ry="16" fill="#15505d"/><rect x="220" y="260" width="160" height="22" fill="url(#nc-coin)"/><ellipse cx="300" cy="260" rx="80" ry="16" fill="#bff6f3" stroke="#6cc9c9"/><ellipse cx="300" cy="260" rx="80" ry="16" fill="#15505d"/><rect x="220" y="238" width="160" height="22" fill="url(#nc-coin)"/><ellipse cx="300" cy="238" rx="80" ry="16" fill="#bff6f3" stroke="#6cc9c9"/><ellipse cx="300" cy="238" rx="80" ry="16" fill="#15505d"/><rect x="220" y="216" width="160" height="22" fill="url(#nc-coin)"/><ellipse cx="300" cy="216" rx="80" ry="16" fill="#bff6f3" stroke="#6cc9c9"/><ellipse cx="300" cy="216" rx="80" ry="16" fill="#15505d"/><rect x="220" y="194" width="160" height="22" fill="url(#nc-coin)"/><ellipse cx="300" cy="194" rx="80" ry="16" fill="#bff6f3" stroke="#6cc9c9"/><ellipse cx="300" cy="194" rx="80" ry="16" fill="#15505d"/><rect x="220" y="172" width="160" height="22" fill="url(#nc-coin)"/><ellipse cx="300" cy="172" rx="80" ry="16" fill="#bff6f3" stroke="#6cc9c9"/><ellipse cx="300" cy="172" rx="80" ry="16" fill="#15505d"/><rect x="220" y="150" width="160" height="22" fill="url(#nc-coin)"/><ellipse cx="300" cy="150" rx="80" ry="16" fill="#bff6f3" stroke="#6cc9c9"/><rect width="600" height="400" fill="url(#nc-scrim)"/></svg><b>Stablecoins,<br>explained</b></article></div>
+    </div>
+  </section>
+</main>
+<footer><div class="frame" style="border:0"><strong style="color:var(--ink)">Unofficial</strong> brand study of Stripe by StyleGallery. Not affiliated with Stripe. All numbers, customers, and stories are illustrative. <a href="../">All studies</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Stripe by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, loop } = window.SG;
+  // Ribbon: layered sine bands in warm-to-violet hues, drifting slowly.
+  const cv = document.querySelector("[data-ribbon]"), cx = cv.getContext("2d");
+  cv.width = 1100; cv.height = 900;
+  const hues = ["#ffb86b", "#ff7a6b", "#ff5f9e", "#d65cff", "#a960ff", "#7b5cff", "#533afd", "#3ab8ff"];
+  loop(cv, (t) => {
+    cx.clearRect(0, 0, 1100, 900);
+    for (let i = 0; i < hues.length; i++) {
+      cx.beginPath();
+      for (let x = 0; x <= 1100; x += 10) { const y = 900 - x * 0.8 + Math.sin(x / 160 + t / 2400 + i * 0.35) * 60 + i * 26; x === 0 ? cx.moveTo(x, y) : cx.lineTo(x, y); }
+      cx.lineTo(1100, 0); cx.lineTo(1100, 0); cx.closePath();
+      cx.fillStyle = hues[i]; cx.globalAlpha = 0.85; cx.fill();
+    }
+    cx.globalAlpha = 1;
+  });
+  // Live volume ticker (fictional).
+  const gdp = document.querySelector("[data-gdp]"); let v = 1204558013;
+  setInterval(() => { if (document.hidden) return; v += Math.round(Math.random() * 9000); gdp.textContent = "$" + v.toLocaleString("en-US"); }, 120);
+  document.querySelector("[data-usage]").innerHTML = Array.from({ length: 30 }, (_, i) => `<i style="--h:${10 + Math.round(80 * Math.abs(Math.sin(i / 4)))}%"></i>`).join("");
+  // Starburst of thin lines radiating from below, like volume fanning out.
+  const bc = document.querySelector("[data-burst]"), bx = bc.getContext("2d");
+  const size = () => { const r = bc.getBoundingClientRect(); bc.width = r.width * devicePixelRatio; bc.height = r.height * devicePixelRatio; };
+  size(); addEventListener("resize", size);
+  const rays = Array.from({ length: 220 }, () => ({ a: Math.PI * (1.05 + Math.random() * 0.9), l: 0.3 + Math.random() * 0.7, s: Math.random() * 6.28 }));
+  loop(bc, (t) => { const w = bc.width, h = bc.height; bx.clearRect(0, 0, w, h); for (const r of rays) { const len = h * 1.1 * r.l * (0.85 + 0.15 * Math.sin(t / 900 + r.s)); const g = bx.createLinearGradient(w / 2, h, w / 2 + Math.cos(r.a) * len, h + Math.sin(r.a) * len); g.addColorStop(0, "rgba(255,160,90,.0)"); g.addColorStop(1, r.s > 3 ? "rgba(255,95,158,.8)" : "rgba(83,58,253,.7)"); bx.strokeStyle = g; bx.lineWidth = devicePixelRatio; bx.beginPath(); bx.moveTo(w / 2, h); bx.lineTo(w / 2 + Math.cos(r.a) * len, h + Math.sin(r.a) * len); bx.stroke(); } });
+  // Aerial cars and crosswalk.
+  const aerial = document.querySelector("[data-cars]");
+  aerial.innerHTML = Array.from({ length: 8 }, (_, i) => `<rect x="${430 + (i % 4) * 22}" y="${210 + Math.floor(i / 4) * 80}" width="14" height="44" fill="#e8e8e8"/>`).join("") + `<rect x="${200}" y="${230}" width="46" height="22" rx="6" fill="#f2c94c" data-car/><rect x="${680}" y="${196}" width="46" height="22" rx="6" fill="#dfe6ee"/><rect x="${800}" y="${174}" width="46" height="22" rx="6" fill="#5a6470"/>`;
+  const car = aerial.querySelector("[data-car]");
+  loop(aerial.closest("svg"), (t) => { const x = ((t / 12) % 1100) - 100; car.setAttribute("x", x); car.setAttribute("y", 250 - x * 0.07); });
+  // Dots travel along architecture edges.
+  const arch = document.querySelector("[data-arch]"), dots = arch.querySelector("[data-dots]");
+  const edges = [[500, 150, 300, 60], [500, 150, 700, 60], [500, 150, 250, 170], [500, 150, 760, 170], [500, 150, 500, 260]];
+  dots.innerHTML = edges.map(() => `<circle r="4" fill="#9ad7ff"/>`).join("");
+  const cs = [...dots.children];
+  loop(arch, (t) => edges.forEach(([x1, y1, x2, y2], i) => { const p = ((t / 1400) + i / 5) % 1; cs[i].setAttribute("cx", x1 + (x2 - x1) * p); cs[i].setAttribute("cy", y1 + (y2 - y1) * p); }));
+})();
+</script>
+</body>
+</html>

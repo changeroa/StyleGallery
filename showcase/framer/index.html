@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Framer - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Framer's black product page: a live site-builder window, an agent chat, a nine-cell platform bento, and a site gallery.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%230099ff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --bg: #000; --card: #0f0f10; --card-2: #19191b; --line: rgb(255 255 255 / 0.09); --text: #fff; --text-2: #a8a8ad; --blue: #0099ff; --violet: #9a6bff; --green: #3ddc84; --sans: "Inter", "Helvetica Neue", Arial, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; --sg-header: 70px; --sg-focus: #0099ff; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--bg); color: var(--text); font: 400 15px/1.55 var(--sans); letter-spacing: -0.01em; }
+  .w { margin-inline: auto; max-inline-size: 1140px; padding-inline: 20px; }
+  .site-header { background: #000; position: sticky; top: 0; z-index: 30; }
+  .site-header .w { align-items: center; display: flex; gap: 22px; block-size: 56px; }
+  .logo { color: #fff; font-weight: 600; text-decoration: none; }
+  .site-header nav { display: flex; gap: 18px; }
+  .site-header nav a { color: var(--text-2); font-size: 13px; text-decoration: none; }
+  .site-header nav a:hover { color: #fff; }
+  .hr { align-items: center; display: flex; gap: 12px; margin-inline-start: auto; }
+  .ghost { background: none; border: 0; color: var(--text-2); font-size: 13px; }
+  .white { background: #fff; border: 0; border-radius: 8px; color: #000; font: 500 13px var(--sans); padding: 7px 12px; }
+  .dark { background: #232326; border: 0; border-radius: 8px; color: #fff; font: 500 13px var(--sans); padding: 7px 12px; }
+  @media (max-width: 760px) { .site-header nav { display: none; } }
+  .hero { padding-block: 70px 60px; }
+  .hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.9rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1.05; max-inline-size: 18ch; }
+  .hero .ctas { display: flex; gap: 8px; margin-block: 24px 40px; }
+  /* Live builder window: blocks rearrange themselves as if an agent were laying out a page. */
+  .window { background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 0 0 1px #000, 0 60px 120px -40px rgb(0 153 255 / 0.35); display: grid; grid-template-columns: 1fr 280px; min-block-size: 460px; overflow: hidden; }
+  .canvas { background: radial-gradient(60% 50% at 40% 0%, rgb(0 153 255 / 0.25), transparent 70%), #0a0a0b; padding: 26px; position: relative; }
+  .blocks { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 70px; }
+  .blk { background: linear-gradient(135deg, #1c2a44, #0f1a2e); border: 1px solid #2a4a80; border-radius: 8px; transition: all .8s var(--ease); }
+  .blk.hero-b { background: linear-gradient(120deg, #3a6aff, #b36bff 60%, #ff7ab8); border: 0; }
+  .panel { border-inline-start: 1px solid var(--line); font-size: 12px; padding: 16px; }
+  .panel .tabs { color: var(--text-2); display: flex; gap: 12px; margin-block-end: 14px; }
+  .panel .tabs b { color: #fff; }
+  .chat p { background: var(--card-2); border-radius: 10px; color: #d8d8dc; margin-block-end: 8px; padding: 10px; }
+  .chat p.me { background: #10263f; color: #cfe8ff; }
+  .chat .think { color: var(--text-2); font-style: italic; }
+  @media (max-width: 860px) { .window { grid-template-columns: 1fr; } .panel { display: none; } }
+  .sec { padding-block: 110px 20px; }
+  .sec-h { align-items: flex-end; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; margin-block-end: 30px; }
+  .sec-h h2 { font-size: clamp(1.8rem, 3.2vw, 2.7rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.1; }
+  .agent { display: grid; gap: 14px; grid-template-columns: 1.6fr 1fr; }
+  .steps { display: grid; gap: 10px; }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: 14px; cursor: pointer; padding: 18px; text-align: start; color: inherit; font: inherit; transition: border-color .3s, background .3s; }
+  .step[aria-pressed="true"] { background: var(--card-2); border-color: rgb(0 153 255 / 0.5); }
+  .step b { display: block; }
+  .step span { color: var(--text-2); font-size: 13px; }
+  .term { background: var(--card); border: 1px solid var(--line); border-radius: 14px; color: #d8d8dc; font: 12px/1.8 var(--mono); min-block-size: 320px; padding: 18px; }
+  .term .c { color: var(--blue); }
+  .term .g { color: var(--green); }
+  @media (max-width: 860px) { .agent { grid-template-columns: 1fr; } }
+  .bento { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); }
+  .bx { background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-block-size: 250px; overflow: hidden; padding: 18px; position: relative; }
+  .bx h3 { font-size: 14px; font-weight: 500; }
+  .bx p { color: var(--text-2); font-size: 13px; }
+  .vital { align-items: center; display: grid; gap: 10px; grid-template-columns: 40px 1fr 50px; font-size: 12px; margin-block-start: 12px; color: var(--text-2); }
+  .vital i { background: #1f1f22; block-size: 4px; border-radius: 4px; overflow: hidden; }
+  .vital i::after { background: var(--blue); block-size: 100%; content: ""; display: block; inline-size: var(--w); }
+  .big { font-size: 56px; font-weight: 600; letter-spacing: -0.05em; inset: auto 18px 12px auto; position: absolute; background: linear-gradient(180deg, #fff, #555); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cursor { align-items: center; display: flex; gap: 4px; font-size: 11px; position: absolute; transition: transform 1.2s var(--ease); }
+  .cursor b { border-radius: 4px; color: #fff; font-weight: 500; padding: 1px 6px; }
+  .ab { display: grid; gap: 6px; grid-template-columns: 1fr 1fr; margin-block-start: 14px; }
+  .ab div { background: var(--card-2); border-radius: 8px; padding: 10px; font-size: 12px; }
+  .ab .win { outline: 1px solid var(--violet); }
+  .ab em { background: #6a3fd6; border-radius: 4px; color: #fff; font-size: 10px; font-style: normal; padding: 1px 5px; }
+  @media (max-width: 860px) { .bento { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .bento { grid-template-columns: 1fr; } }
+  .gallery { display: grid; gap: 10px; grid-template-columns: 2fr 1fr 1.2fr; grid-auto-rows: 240px; }
+  .site { border-radius: 12px; overflow: hidden; position: relative; }
+  .site:first-child { grid-row: span 2; }
+  .site span { background: rgb(0 0 0 / 0.6); border-radius: 6px; color: #fff; font-size: 12px; inset: auto auto 12px 12px; padding: 3px 8px; position: absolute; }
+  @media (max-width: 860px) { .gallery { grid-template-columns: 1fr 1fr; } .site:first-child { grid-row: auto; grid-column: span 2; } }
+  .logos { display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); }
+  .lc { align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 14px; display: grid; min-block-size: 200px; place-items: center; position: relative; }
+  .lc b { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; }
+  .lc span { color: var(--text-2); font-size: 12px; inset: auto auto 14px 16px; position: absolute; }
+  @media (max-width: 860px) { .logos { grid-template-columns: 1fr 1fr; } }
+  footer { border-block-start: 1px solid var(--line); color: var(--text-2); font-size: 12px; margin-block-start: 100px; padding-block: 40px 60px; }
+  footer a { color: var(--blue); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="w">
+    <a class="logo" href="#top">Framer</a>
+    <nav aria-label="Sections"><a href="#agent">Agent</a><a href="#platform">Platform</a><a href="#gallery">Gallery</a><a href="#stories">Stories</a></nav>
+    <div class="hr"><button class="ghost" type="button" data-demo="Log in is not available in this unofficial study.">Log in</button><button class="white" type="button" data-demo="Sign up is a demo in this unofficial study.">Sign up</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero w" id="top" aria-labelledby="hero-h">
+    <h1 id="hero-h" data-split>Sketch it, ship it, keep it growing, with an agent on the canvas</h1>
+    <div class="ctas"><button class="white" type="button" data-demo="Free start is a demo in this unofficial study." data-magnet>Start for free</button><button class="dark" type="button" data-demo="There is no app download in this unofficial study.">Get the app &darr;</button></div>
+    <div class="window" aria-label="Illustration: a site builder where page blocks rearrange while an agent chats" role="img">
+      <div class="canvas" aria-hidden="true" data-ambient><div class="blocks" data-blocks></div></div>
+      <div class="panel chat" aria-hidden="true"><div class="tabs"><b>Agent</b><span>Style</span><span>Layers</span></div><p class="me">Make the hero calmer and move pricing above the FAQ.</p><p class="think" data-think>Thinking&hellip;</p><p data-reply></p></div>
+    </div>
+  </section>
+
+  <section class="sec w" id="agent" aria-labelledby="agent-h">
+    <div class="sec-h"><h2 id="agent-h">Your taste,<br>the agent&rsquo;s hands</h2><button class="dark" type="button" data-demo="Agents are a demo in this unofficial study.">Try the agent</button></div>
+    <div class="agent">
+      <div class="term" aria-live="polite" data-term></div>
+      <div class="steps" data-steps>
+        <button class="step" type="button" aria-pressed="true"><b>Design on the canvas</b><span>Ask for layouts, the agent drafts them in place.</span></button>
+        <button class="step" type="button" aria-pressed="false"><b>Fill the CMS</b><span>Turn a spreadsheet into collections and pages.</span></button>
+        <button class="step" type="button" aria-pressed="false"><b>Connect other tools</b><span>Let outside agents edit through a safe bridge.</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec w" id="platform" aria-labelledby="plat-h">
+    <div class="sec-h"><h2 id="plat-h">Everything a real site<br>needs, in one place</h2></div>
+    <div class="bento">
+      <article class="bx"><h3>Performance</h3><p>Fast by default.</p><div class="vital"><span>LCP</span><i style="--w:86%"></i><span>0.9s</span></div><div class="vital"><span>INP</span><i style="--w:92%"></i><span>60ms</span></div><div class="vital"><span>CLS</span><i style="--w:96%"></i><span>0.01</span></div></article>
+      <article class="bx"><h3>CMS</h3><p>Collections that feel like a spreadsheet.</p></article>
+      <article class="bx"><h3>SEO</h3><p>Meta, sitemaps, and redirects handled.</p></article>
+      <article class="bx" data-cursors><h3>Collaboration</h3><p>Everyone on the same canvas.</p><span class="cursor" style="inset:110px auto auto 30px" aria-hidden="true">&#10148;<b style="background:#ff5a8a">Ana</b></span><span class="cursor" style="inset:160px auto auto 140px" aria-hidden="true">&#10148;<b style="background:#0099ff">Jun</b></span></article>
+      <article class="bx"><h3>Hosting</h3><p>Global, automatic, boring in the best way.</p><span class="big" aria-hidden="true">99.99%</span></article>
+      <article class="bx"><h3>Localization</h3><p>One site, many languages.</p></article>
+      <article class="bx"><h3>Security</h3><p>Access controls and audit trails.</p></article>
+      <article class="bx"><h3>Analytics</h3><p>Traffic without extra scripts.</p></article>
+      <article class="bx"><h3>A/B tests</h3><p>Ship variants, keep the winner.</p><div class="ab"><div>Variant A<br>3.1%</div><div class="win">Variant B <em>WINNER</em><br>4.4%</div></div></article>
+    </div>
+  </section>
+
+  <section class="sec w" id="gallery" aria-labelledby="gal-h">
+    <div class="sec-h"><h2 id="gal-h">Built with it</h2><button class="dark" type="button" data-demo="The gallery is illustrative in this unofficial study.">See more sites</button></div>
+    <div class="gallery" data-gallery></div>
+  </section>
+
+  <section class="sec w" id="stories" aria-labelledby="st-h">
+    <div class="sec-h"><h2 id="st-h">Sites with<br>real traffic</h2><button class="dark" type="button" data-demo="Stories are illustrative in this unofficial study.">Read stories</button></div>
+    <div class="logos"><div class="lc"><b>northwind</b><span>Read story &rarr;</span></div><div class="lc"><b style="font-family:Georgia,serif;font-weight:400">Harlow</b><span>Read story &rarr;</span></div><div class="lc"><b>QUANTA</b><span>Read story &rarr;</span></div><div class="lc"><b>kite&amp;co</b><span>Read story &rarr;</span></div></div>
+  </section>
+</main>
+<footer><div class="w"><strong style="color:#fff">Unofficial</strong> brand study of Framer by StyleGallery. Not affiliated with Framer. Sites, customers, and numbers are fictional. <a href="../">All studies</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Framer by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Builder: blocks shuffle between layouts every few seconds while visible.
+  const layouts = [["1/4", "1/2", "2/3", "2/4", "3/4", "3/4"], ["1/4", "2/3", "1/2", "3/4", "2/4", "3/4"], ["1/4", "3/4", "1/2", "1/3", "2/4", "2/3"]];
+  const box = document.querySelector("[data-blocks]");
+  box.innerHTML = Array.from({ length: 6 }, (_, i) => `<div class="blk${i === 0 ? " hero-b" : ""}"></div>`).join("");
+  const blks = [...box.children];
+  let li = 0;
+  const lay = () => { const L = layouts[li % 3]; blks.forEach((b, i) => { b.style.gridColumn = L[i]; b.style.gridRow = i === 0 ? "span 2" : "auto"; }); li++; };
+  lay();
+  const think = document.querySelector("[data-think]"), reply = document.querySelector("[data-reply]");
+  const replies = ["Softened the hero gradient and tightened the headline.", "Moved pricing above the FAQ and matched the spacing.", "Added a quiet footer with three columns."];
+  if (!reduced) { let t = 0; new IntersectionObserver(([e]) => { clearInterval(t); if (e.isIntersecting) t = setInterval(() => { lay(); think.textContent = "Placing layout variations side by side\u2026"; setTimeout(() => { reply.textContent = replies[li % 3]; }, 900); }, 3200); }).observe(box); }
+  else reply.textContent = replies[0];
+  // Agent steps swap the terminal transcript.
+  const scripts = [['<span class="c">agent</span> draft a dark homepage for a research lab', 'Created 3 layout variations', 'Placed hero, results, and team sections', '<span class="g">&#10003;</span> Ready for review'], ['<span class="c">agent</span> import projects.csv into a collection', 'Found 48 rows, 6 fields', 'Generated 48 detail pages', '<span class="g">&#10003;</span> Collection published'], ['<span class="c">bridge</span> external agent requested edit', 'Scoped to page: /pricing', 'Changed 2 text layers', '<span class="g">&#10003;</span> Change awaiting approval']];
+  const term = document.querySelector("[data-term]");
+  const play = (i) => { term.innerHTML = ""; scripts[i].forEach((l, k) => reduced ? term.insertAdjacentHTML("beforeend", (k ? "<br>" : "") + l) : setTimeout(() => term.insertAdjacentHTML("beforeend", (k ? "<br>" : "") + l), k * 450)); };
+  play(0);
+  const steps = [...document.querySelectorAll("[data-steps] .step")];
+  steps.forEach((s, i) => s.addEventListener("click", () => { steps.forEach((o) => o.setAttribute("aria-pressed", String(o === s))); play(i); }));
+  // Collaboration cursors wander.
+  const cursors = document.querySelectorAll("[data-cursors] .cursor");
+  if (!reduced) setInterval(() => { if (document.hidden) return; cursors.forEach((c) => { c.style.transform = `translate(${Math.random() * 120 - 60}px, ${Math.random() * 60 - 30}px)`; }); }, 1800);
+  // Gallery of drawn site thumbnails.
+  const sites = [["Studio Hush", "linear-gradient(160deg,#c89a6a,#5a3a1a)", "#f3e6d0"], ["ORO Gallery", "linear-gradient(180deg,#6ab4c8,#e8a86a)", "#fff"], ["Lumen Lab", "linear-gradient(160deg,#0f1a2e,#3a6aff)", "#cfe0ff"], ["Paper Airline", "linear-gradient(160deg,#f3efe6,#d8cfc0)", "#1d1d1d"], ["Night Swim", "linear-gradient(160deg,#1a1030,#b36bff)", "#fff"]];
+  document.querySelector("[data-gallery]").innerHTML = sites.map(([n, bg, fg]) => `<div class="site" style="background:${bg}"><svg viewBox="0 0 400 240" preserveAspectRatio="none" style="width:100%;height:100%" aria-hidden="true"><rect x="20" y="18" width="360" height="10" rx="3" fill="${fg}" opacity=".15"/><text x="24" y="120" fill="${fg}" font-size="44" font-weight="700" font-family="Inter,sans-serif">${n.split(" ")[0]}</text><rect x="24" y="140" width="160" height="8" rx="4" fill="${fg}" opacity=".35"/></svg><span>${n} (fictional)</span></div>`).join("");
+})();
+</script>
+</body>
+</html>

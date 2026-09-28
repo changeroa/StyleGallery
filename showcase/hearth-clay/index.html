@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hearth Clay - a small pottery studio | StyleGallery</title>
+<meta name="description" content="A fictional pottery studio page built on the StyleGallery Warm Print direction: drawn shelves of glazed pots, a glaze studio you can play with, firing classes, and a map to the door.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f4efe6'/%3E%3Cpath d='M11 6h10v3c0 2-2 3-2 5 0 3 7 6 7 13 0 3-4 3-10 3S6 30 6 27c0-7 7-10 7-13 0-2-2-3-2-5z' fill='%231f4bff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root {
+    --paper: #f4efe6; --paper-2: #ebe4d6; --paper-3: #e1d7c4; --ink: #141210; --ink-dim: #5b534a; --rule: rgb(20 18 16 / 0.16);
+    --spot: #1f4bff; --spot-ink: #1737c9; --clay: #b8784a; --clay-ink: #9a4f1f;
+    --grotesk: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif; --text: "Newsreader", Georgia, serif; --mono: "IBM Plex Mono", ui-monospace, monospace;
+    --gutter: clamp(1rem, 3vw, 2.5rem); --sg-header: 84px; --sg-focus: #1f4bff; --sg-hairline: var(--rule); --sg-frame-radius: 22px;
+  }
+  body { background: var(--paper); color: var(--ink); font: 400 17px/1.55 var(--text); }
+  .w { margin-inline: auto; max-inline-size: 1280px; padding-inline: var(--gutter); }
+  .label { color: var(--ink-dim); font: 500 12px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .label::before { background: var(--rule); block-size: 1px; content: ""; display: inline-block; inline-size: 28px; margin-inline-end: 10px; vertical-align: middle; }
+  h1, h2, h3 { font-family: var(--grotesk); letter-spacing: -0.03em; }
+  h1 { font-size: clamp(2.6rem, 1.5rem + 3.4vw, 4.6rem); font-weight: 800; line-height: 1.02; }
+  h2 { font-size: clamp(1.9rem, 1.3rem + 1.8vw, 2.9rem); font-weight: 800; line-height: 1.05; }
+  h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+  .lede { color: var(--ink-dim); font-size: 1.15rem; max-inline-size: 36rem; }
+  .btn { align-items: center; background: var(--ink); border: 1px solid var(--ink); border-radius: 999px; color: var(--paper); display: inline-flex; font: 500 15px var(--mono); gap: 10px; padding: 12px 20px; text-decoration: none; }
+  .btn:hover { background: var(--spot); border-color: var(--spot); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  .link { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 4px; }
+  .link:hover { color: var(--spot-ink); text-decoration-color: currentColor; }
+
+  /* Header */
+  .site-header { background: rgb(244 239 230 / 0.9); backdrop-filter: blur(10px); border-block-end: 1px solid var(--rule); position: sticky; top: 0; z-index: 30; }
+  .site-header .w { align-items: center; block-size: 68px; display: flex; gap: 28px; }
+  .mark { align-items: center; color: var(--ink); display: flex; font: 800 20px var(--grotesk); gap: 10px; letter-spacing: -0.02em; text-decoration: none; }
+  .mark svg { block-size: 26px; color: var(--spot); inline-size: 22px; }
+  .site-header nav { display: flex; gap: 22px; margin-inline-start: auto; }
+  .site-header nav a { color: var(--ink); font: 500 13px var(--mono); letter-spacing: 0.06em; text-decoration: none; text-transform: uppercase; }
+  .site-header nav a:hover { color: var(--spot-ink); }
+  @media (max-width: 880px) { .site-header nav { display: none; } .site-header .btn { margin-inline-start: auto; } }
+
+  /* Hero: copy left, drawn shelf scene right. */
+  .hero .w { align-items: center; display: grid; gap: clamp(28px, 4vw, 64px); grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); padding-block: clamp(40px, 6vw, 72px) 40px; }
+  .hero h1 { margin-block: 18px 20px; }
+  .hero .lede { margin-block-end: 28px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .facts { border-block-start: 1px solid var(--rule); display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block-start: 36px; padding-block-start: 18px; }
+  .facts b { display: block; font: 800 1.9rem/1 var(--grotesk); letter-spacing: -0.02em; }
+  .facts span { color: var(--ink-dim); font: 400 13px var(--mono); }
+  .scene { aspect-ratio: 5 / 4; background: var(--paper-2); }
+  .scene > svg { block-size: 100%; display: block; inline-size: 100%; }
+  @media (max-width: 900px) { .hero .w { grid-template-columns: 1fr; } }
+
+  /* Glaze marquee */
+  .ribbon { border-block: 1px solid var(--rule); padding-block: 16px; }
+  .ribbon .sg-marquee-track span { align-items: center; display: inline-flex; font: 600 1.35rem var(--grotesk); gap: 14px; letter-spacing: -0.01em; white-space: nowrap; }
+  .ribbon i { block-size: 16px; border-radius: 50%; display: inline-block; inline-size: 16px; }
+
+  /* Shop grid */
+  .band { padding-block: clamp(64px, 8vw, 110px); }
+  .band-head { align-items: end; display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: space-between; margin-block-end: 36px; }
+  .band-head h2 { margin-block-start: 12px; max-inline-size: 20ch; }
+  .shop { display: grid; gap: 20px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .item { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 22px; display: flex; flex-direction: column; overflow: hidden; }
+  .item:hover { border-color: rgb(20 18 16 / 0.34); }
+  .item .plate { aspect-ratio: 1; display: grid; place-items: center; }
+  .item .plate svg { block-size: 72%; inline-size: auto; }
+  .item .meta { border-block-start: 1px solid var(--rule); display: grid; gap: 4px; padding: 16px 18px 18px; }
+  .item .row { align-items: center; display: flex; justify-content: space-between; margin-block-start: 10px; }
+  .item .price { font: 500 14px var(--mono); }
+  .item button { background: transparent; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); font: 500 13px var(--mono); padding: 7px 12px; }
+  .item button:hover { background: var(--ink); color: var(--paper); }
+  @media (max-width: 1000px) { .shop { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  /* Glaze studio: a live product surface. */
+  .studio { background: var(--ink); color: var(--paper); }
+  .studio .label { color: #c9bfae; }
+  .studio .label::before { background: rgb(244 239 230 / 0.3); }
+  .studio .lede { color: #d6ccbb; }
+  .studio-grid { align-items: center; display: grid; gap: clamp(28px, 5vw, 72px); grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+  .kiln-view { aspect-ratio: 1; background: radial-gradient(60% 55% at 50% 42%, #3a2f26, #1d1813 70%); border: 1px solid rgb(244 239 230 / 0.12); display: grid; place-items: center; }
+  .kiln-view svg { block-size: 78%; inline-size: auto; transition: color 0.5s var(--sg-ease); }
+  .picker { display: grid; gap: 22px; }
+  .picker fieldset { border: 0; border-block-start: 1px solid rgb(244 239 230 / 0.16); margin: 0; padding: 18px 0 0; }
+  .picker legend { color: #c9bfae; font: 500 12px var(--mono); letter-spacing: 0.1em; margin-block-end: 12px; text-transform: uppercase; }
+  .swatches, .forms { display: flex; flex-wrap: wrap; gap: 10px; }
+  .swatches button { block-size: 40px; border: 2px solid transparent; border-radius: 50%; box-shadow: inset 0 0 0 2px #141210; inline-size: 40px; padding: 0; }
+  .swatches button:hover { transform: scale(1.1); }
+  .swatches button[aria-pressed="true"] { border-color: var(--paper); }
+  .forms button { background: transparent; border: 1px solid rgb(244 239 230 / 0.3); border-radius: 999px; color: var(--paper); font: 500 13px var(--mono); padding: 8px 14px; }
+  .forms button:hover { border-color: var(--paper); }
+  .forms button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+  .readout { align-items: baseline; border-block-start: 1px solid rgb(244 239 230 / 0.16); display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; padding-block-start: 18px; }
+  .readout strong { font: 800 1.6rem var(--grotesk); letter-spacing: -0.02em; }
+  .readout span { color: #d6ccbb; font: 400 14px var(--mono); }
+  .studio .btn { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+  .studio .btn:hover { background: var(--spot); border-color: var(--spot); color: #fff; }
+  @media (max-width: 900px) { .studio-grid { grid-template-columns: 1fr; } }
+
+  /* Process: three drawn steps. */
+  .steps { display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .step { display: grid; gap: 14px; }
+  .step .scene { aspect-ratio: 4 / 5; }
+  .step p { color: var(--ink-dim); }
+  .step .num { color: var(--clay-ink); font: 500 13px var(--mono); }
+  @media (max-width: 900px) { .steps { grid-template-columns: 1fr; } .step .scene { aspect-ratio: 4 / 3; } }
+  .kiln-temp { align-items: baseline; border-block: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; margin-block-start: 40px; padding-block: 22px; }
+  .kiln-temp b { font: 800 clamp(2.4rem, 1.6rem + 2.4vw, 3.8rem)/1 var(--grotesk); letter-spacing: -0.03em; }
+
+  /* Classes: window scene + schedule with hairlines. */
+  .classes { background: var(--paper-2); }
+  .classes-grid { align-items: start; display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .classes .scene { aspect-ratio: 4 / 5; background: var(--paper-3); }
+  .schedule { list-style: none; margin: 28px 0 0; padding: 0; }
+  .schedule li { align-items: center; border-block-start: 1px solid var(--rule); display: grid; gap: 6px 16px; grid-template-columns: 7rem minmax(0, 1fr) auto; padding-block: 16px; }
+  .schedule li:last-child { border-block-end: 1px solid var(--rule); }
+  .schedule li:hover { background: rgb(20 18 16 / 0.03); }
+  .schedule .when { font: 500 13px var(--mono); }
+  .schedule small { color: var(--ink-dim); display: block; font: 400 13px var(--mono); }
+  .schedule button { background: transparent; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); font: 500 13px var(--mono); padding: 7px 14px; }
+  .schedule button:hover { background: var(--ink); color: var(--paper); }
+  @media (max-width: 900px) { .classes-grid { grid-template-columns: 1fr; } .classes .scene { aspect-ratio: 4 / 3; } }
+
+  /* Journal */
+  .journal { display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .post { color: var(--ink); display: grid; gap: 12px; text-decoration: none; }
+  .post .scene { aspect-ratio: 3 / 2; }
+  .post:hover h3 { color: var(--spot-ink); }
+  .post time { color: var(--ink-dim); font: 400 13px var(--mono); }
+  @media (max-width: 900px) { .journal { grid-template-columns: 1fr; } }
+
+  /* Visit */
+  .visit-grid { align-items: center; display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+  .visit .scene { aspect-ratio: 16 / 11; }
+  .hours { margin-block: 24px; }
+  .hours div { border-block-start: 1px solid var(--rule); display: flex; font: 400 14px var(--mono); justify-content: space-between; padding-block: 10px; }
+  .signup { display: flex; flex-wrap: wrap; gap: 10px; }
+  .signup input { background: #fffaf2; border: 1px solid var(--rule); border-radius: 999px; color: var(--ink); flex: 1; font: 400 15px var(--text); min-inline-size: 0; padding: 12px 18px; }
+  .signup input:focus { border-color: var(--ink); outline: none; }
+  .signup [role="status"] { color: var(--ink-dim); flex-basis: 100%; font: 400 14px var(--mono); min-block-size: 1.4em; }
+  @media (max-width: 900px) { .visit-grid { grid-template-columns: 1fr; } }
+
+  footer.site { border-block-start: 1px solid var(--rule); padding-block: 48px 40px; }
+  footer.site .cols { display: grid; gap: 24px; grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr)); }
+  footer.site ul { display: grid; gap: 6px; list-style: none; margin: 10px 0 0; padding: 0; }
+  footer.site h3 { font: 500 12px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  footer.site p { color: var(--ink-dim); font-size: 15px; max-inline-size: 26rem; }
+  footer.site .fine { border-block-start: 1px solid var(--rule); color: var(--ink-dim); font: 400 13px var(--mono); margin-block-start: 36px; padding-block-start: 18px; }
+  @media (max-width: 800px) { footer.site .cols { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="pot-shade" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset=".28" stop-color="#fff" stop-opacity=".38"/><stop offset=".48" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".34"/></linearGradient>
+    <linearGradient id="wood" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#a8774d"/><stop offset="1" stop-color="#7a5234"/></linearGradient>
+    <linearGradient id="sun" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff6de" stop-opacity=".9"/><stop offset="1" stop-color="#fff6de" stop-opacity="0"/></linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffb35c"/><stop offset=".6" stop-color="#e5561f"/><stop offset="1" stop-color="#7a2410"/></radialGradient>
+  </defs>
+  <symbol id="vase" viewBox="0 0 200 240"><path fill="currentColor" d="M72 14h56v16c0 10-12 16-12 32 0 20 50 40 50 98 0 46-32 66-66 66s-66-20-66-66c0-58 50-78 50-98 0-16-12-22-12-32z"/><path fill="url(#pot-shade)" d="M72 14h56v16c0 10-12 16-12 32 0 20 50 40 50 98 0 46-32 66-66 66s-66-20-66-66c0-58 50-78 50-98 0-16-12-22-12-32z"/><path fill="var(--foot, #c9a27a)" d="M52 214c12 8 28 12 48 12s36-4 48-12c-4 10-22 16-48 16s-44-6-48-16z"/><ellipse cx="100" cy="15" rx="28" ry="5" fill="#000" opacity=".28"/></symbol>
+  <symbol id="bowl" viewBox="0 0 200 240"><path fill="currentColor" d="M16 110h168c0 62-42 96-84 96S16 172 16 110z"/><path fill="url(#pot-shade)" d="M16 110h168c0 62-42 96-84 96S16 172 16 110z"/><path fill="var(--foot, #c9a27a)" d="M70 200h60l-6 16H76z"/><ellipse cx="100" cy="110" rx="84" ry="14" fill="currentColor"/><ellipse cx="100" cy="112" rx="74" ry="10" fill="#000" opacity=".22"/></symbol>
+  <symbol id="cup" viewBox="0 0 200 240"><path d="M150 96c28 0 34 22 34 36s-10 34-38 34" fill="none" stroke="currentColor" stroke-width="12"/><path fill="currentColor" d="M44 64h112v120c0 22-24 34-56 34s-56-12-56-34z"/><path fill="url(#pot-shade)" d="M44 64h112v120c0 22-24 34-56 34s-56-12-56-34z"/><path fill="var(--foot, #c9a27a)" d="M44 184c0 22 24 34 56 34s56-12 56-34v8c0 18-24 30-56 30s-56-12-56-30z"/><ellipse cx="100" cy="64" rx="56" ry="10" fill="#000" opacity=".26"/></symbol>
+  <symbol id="jar" viewBox="0 0 200 240"><rect x="64" y="22" width="72" height="22" rx="6" fill="currentColor"/><path fill="currentColor" d="M64 44h72c34 14 46 44 46 86 0 58-34 86-82 86s-82-28-82-86c0-42 12-72 46-86z"/><path fill="url(#pot-shade)" d="M64 44h72c34 14 46 44 46 86 0 58-34 86-82 86s-82-28-82-86c0-42 12-72 46-86z"/><path fill="var(--foot, #c9a27a)" d="M40 196c14 14 34 20 60 20s46-6 60-20c-6 20-28 28-60 28s-54-8-60-28z"/><rect x="72" y="18" width="56" height="8" rx="4" fill="#000" opacity=".2"/></symbol>
+</svg>
+
+<header class="site-header" data-header>
+  <div class="w">
+    <a class="mark" href="#top"><svg viewBox="0 0 200 240" aria-hidden="true"><use href="#vase"/></svg>Hearth Clay</a>
+    <nav aria-label="Sections"><a href="#shop">Shop</a><a href="#glaze">Glaze studio</a><a href="#process">Process</a><a href="#classes">Classes</a><a href="#visit">Visit</a></nav>
+    <button class="btn" type="button" data-demo="There is no basket in this showcase page.">Basket (0)</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="w">
+      <div>
+        <p class="label">Small-batch stoneware · fired weekly</p>
+        <h1 id="h1" data-split>Pots made slowly, for tables used daily.</h1>
+        <p class="lede" data-reveal data-delay="200">Thrown by hand in a two-wheel studio, glazed in colors mixed from local clay and ash, and fired every Thursday night. Everything on this page is fictional; the shelf is drawn.</p>
+        <div class="ctas" data-reveal data-delay="300"><a class="btn" href="#shop">Shop this firing</a><a class="btn ghost" href="#classes">Take a class</a></div>
+        <div class="facts" data-reveal data-delay="400"><div><b data-count="38">38</b><span>pieces this firing</span></div><div><b data-count="1240" data-suffix="°">1,240°</b><span>peak kiln temp</span></div><div><b data-count="6">6</b><span>house glazes</span></div></div>
+      </div>
+      <figure class="scene sg-frame" data-surface role="img" aria-label="Drawing of a sunlit studio shelf holding vases, bowls, cups, and jars in cobalt, oat, ash, and rust glazes" data-hero-scene>
+        <svg viewBox="0 0 800 640" preserveAspectRatio="xMidYMid slice">
+          <rect width="800" height="640" fill="#ebe4d6"/>
+          <rect x="470" y="0" width="330" height="640" fill="#e1d7c4"/>
+          <path d="M470 0h330L560 640H230z" fill="url(#sun)" opacity=".6"/>
+          <rect x="520" y="60" width="220" height="250" rx="6" fill="#f7f1e4" stroke="#cdbfa6" stroke-width="10"/>
+          <path d="M630 60v250M520 185h220" stroke="#cdbfa6" stroke-width="8"/>
+          <g data-depth="0.4">
+            <rect x="0" y="262" width="800" height="18" fill="url(#wood)"/><rect x="0" y="280" width="800" height="10" fill="#000" opacity=".08"/>
+            <ellipse cx="120" cy="262" rx="60" ry="6" fill="#000" opacity=".12"/><svg x="60" y="120" width="120" height="144" viewBox="0 0 200 240" style="color:#1f4bff"><use href="#vase"/></svg>
+            <ellipse cx="260" cy="262" rx="70" ry="6" fill="#000" opacity=".12"/><svg x="190" y="170" width="140" height="94" viewBox="0 60 200 160" style="color:#e9dfcb"><use href="#bowl"/></svg>
+            <ellipse cx="400" cy="262" rx="46" ry="5" fill="#000" opacity=".12"/><svg x="352" y="176" width="96" height="88" viewBox="0 40 200 190" style="color:#b8784a"><use href="#cup"/></svg>
+          </g>
+          <g data-depth="1">
+            <rect x="0" y="512" width="800" height="22" fill="url(#wood)"/><rect x="0" y="534" width="800" height="106" fill="#d8ccb6"/>
+            <ellipse cx="160" cy="512" rx="96" ry="8" fill="#000" opacity=".14"/><svg x="70" y="316" width="180" height="198" viewBox="0 10 200 220" style="color:#3d4a3f"><use href="#jar"/></svg>
+            <ellipse cx="370" cy="512" rx="80" ry="7" fill="#000" opacity=".14"/><svg x="280" y="340" width="180" height="175" viewBox="0 0 200 230" style="color:#f1ebe0"><use href="#vase"/></svg>
+            <ellipse cx="560" cy="512" rx="90" ry="7" fill="#000" opacity=".14"/><svg x="470" y="400" width="180" height="114" viewBox="0 60 200 160" style="color:#1f4bff"><use href="#bowl"/></svg>
+            <ellipse cx="710" cy="512" rx="50" ry="6" fill="#000" opacity=".14"/><svg x="660" y="420" width="104" height="94" viewBox="0 40 200 190" style="color:#8a3b2e"><use href="#cup"/></svg>
+          </g>
+          <path d="M760 512c-8-50 10-90 30-120M760 512c-30-40-60-60-90-64M760 512c10-40 40-66 60-72" stroke="#5f7a52" stroke-width="7" fill="none" stroke-linecap="round"/>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <div class="ribbon" data-ambient aria-hidden="true">
+    <div class="sg-marquee" style="--sg-marquee-speed:48s">
+      <div class="sg-marquee-track"><span><i style="background:#1f4bff"></i>Cobalt celadon</span><span><i style="background:#e9dfcb;box-shadow:inset 0 0 0 1px #cdbfa6"></i>Oat shino</span><span><i style="background:#3d4a3f"></i>Pine ash</span><span><i style="background:#b8784a"></i>Iron rust</span><span><i style="background:#8a3b2e"></i>Tenmoku red</span><span><i style="background:#f1ebe0;box-shadow:inset 0 0 0 1px #cdbfa6"></i>Chalk white</span></div>
+      <div class="sg-marquee-track"><span><i style="background:#1f4bff"></i>Cobalt celadon</span><span><i style="background:#e9dfcb;box-shadow:inset 0 0 0 1px #cdbfa6"></i>Oat shino</span><span><i style="background:#3d4a3f"></i>Pine ash</span><span><i style="background:#b8784a"></i>Iron rust</span><span><i style="background:#8a3b2e"></i>Tenmoku red</span><span><i style="background:#f1ebe0;box-shadow:inset 0 0 0 1px #cdbfa6"></i>Chalk white</span></div>
+    </div>
+  </div>
+
+  <section class="band" id="shop" aria-labelledby="shop-h">
+    <div class="w">
+      <div class="band-head"><div><p class="label">This firing</p><h2 id="shop-h" data-reveal>Out of the kiln on Thursday.</h2></div><a class="link" href="#glaze">Mix your own glaze →</a></div>
+      <div class="shop">
+        <article class="item" data-lift data-reveal><div class="plate" style="background:#e9e3f6"><svg viewBox="0 0 200 240" aria-hidden="true" data-surface style="color:#1f4bff"><use href="#vase"/></svg></div><div class="meta"><h3>Tall bud vase</h3><span class="label" style="letter-spacing:.06em">Cobalt celadon</span><div class="row"><span class="price">$64</span><button type="button" data-demo="There is no basket in this showcase page.">Add</button></div></div></article>
+        <article class="item" data-lift data-reveal data-delay="80"><div class="plate" style="background:#efe7d6"><svg viewBox="0 60 200 160" aria-hidden="true" data-surface style="color:#e9dfcb"><use href="#bowl"/></svg></div><div class="meta"><h3>Breakfast bowl</h3><span class="label" style="letter-spacing:.06em">Oat shino</span><div class="row"><span class="price">$38</span><button type="button" data-demo="There is no basket in this showcase page.">Add</button></div></div></article>
+        <article class="item" data-lift data-reveal data-delay="160"><div class="plate" style="background:#f3e3d4"><svg viewBox="0 40 200 190" aria-hidden="true" data-surface style="color:#b8784a"><use href="#cup"/></svg></div><div class="meta"><h3>Morning mug</h3><span class="label" style="letter-spacing:.06em">Iron rust</span><div class="row"><span class="price">$32</span><button type="button" data-demo="There is no basket in this showcase page.">Add</button></div></div></article>
+        <article class="item" data-lift data-reveal data-delay="240"><div class="plate" style="background:#e1e6de"><svg viewBox="0 10 200 220" aria-hidden="true" data-surface style="color:#3d4a3f"><use href="#jar"/></svg></div><div class="meta"><h3>Pantry jar</h3><span class="label" style="letter-spacing:.06em">Pine ash</span><div class="row"><span class="price">$72</span><button type="button" data-demo="There is no basket in this showcase page.">Add</button></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band studio" id="glaze" aria-labelledby="glaze-h">
+    <div class="w studio-grid">
+      <div class="kiln-view sg-frame" data-surface role="img" aria-label="The selected pot in the selected glaze, drawn under warm kiln light" data-kiln-view>
+        <svg viewBox="0 0 200 240" data-pot style="color:#1f4bff"><use href="#vase" data-pot-shape/></svg>
+      </div>
+      <div class="picker">
+        <div><p class="label">Glaze studio</p><h2 id="glaze-h" data-reveal>Pick a form, pick a glaze, see it fired.</h2><p class="lede" style="margin-block-start:14px">Every piece can be ordered in any house glaze. The pot on the left updates as you choose.</p></div>
+        <fieldset><legend>Form</legend><div class="forms" data-forms><button type="button" aria-pressed="true" data-shape="vase">Vase</button><button type="button" aria-pressed="false" data-shape="bowl">Bowl</button><button type="button" aria-pressed="false" data-shape="cup">Mug</button><button type="button" aria-pressed="false" data-shape="jar">Jar</button></div></fieldset>
+        <fieldset><legend>Glaze</legend><div class="swatches" data-swatches>
+          <button type="button" aria-pressed="true" aria-label="Cobalt celadon" data-glaze="#1f4bff" style="background:#1f4bff"></button>
+          <button type="button" aria-pressed="false" aria-label="Oat shino" data-glaze="#e9dfcb" style="background:#e9dfcb"></button>
+          <button type="button" aria-pressed="false" aria-label="Pine ash" data-glaze="#3d4a3f" style="background:#3d4a3f"></button>
+          <button type="button" aria-pressed="false" aria-label="Iron rust" data-glaze="#b8784a" style="background:#b8784a"></button>
+          <button type="button" aria-pressed="false" aria-label="Tenmoku red" data-glaze="#8a3b2e" style="background:#8a3b2e"></button>
+          <button type="button" aria-pressed="false" aria-label="Chalk white" data-glaze="#f1ebe0" style="background:#f1ebe0"></button>
+        </div></fieldset>
+        <div class="readout"><div><strong data-readout>Vase in Cobalt celadon</strong><br><span data-price>$64 · ships in 2 weeks</span></div><button class="btn" type="button" data-demo="Custom orders are fictional on this showcase page.">Order this piece</button></div>
+        <p class="sg-visually-hidden" role="status" data-studio-status></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="process" aria-labelledby="process-h">
+    <div class="w">
+      <div class="band-head"><div><p class="label">Process</p><h2 id="process-h" data-reveal>Three days from wet clay to table.</h2></div><p class="lede">Each piece passes the same three benches. Nothing leaves the studio without its maker's mark on the foot.</p></div>
+      <div class="steps">
+        <article class="step" data-reveal>
+          <div class="scene sg-frame" data-surface role="img" aria-label="Drawing of a pottery wheel with a cylinder of wet clay rising on it">
+            <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><rect width="400" height="500" fill="#ebe4d6"/><rect y="360" width="400" height="140" fill="#d8ccb6"/><ellipse cx="200" cy="360" rx="150" ry="26" fill="#6b6259"/><ellipse cx="200" cy="352" rx="150" ry="26" fill="#8b8177"/><ellipse cx="200" cy="344" rx="110" ry="18" fill="#a59a8e"/><path d="M150 344c0-60 10-120 20-170h60c10 50 20 110 20 170z" fill="#b8784a"/><path d="M150 344c0-60 10-120 20-170h20c-8 50-14 110-14 170z" fill="#fff" opacity=".18"/><ellipse cx="200" cy="174" rx="30" ry="6" fill="#8a5530"/><path d="M40 470c40-30 80-40 120-40M360 470c-40-30-80-40-120-40" stroke="#6b6259" stroke-width="10" stroke-linecap="round"/><g opacity=".35" stroke="#8a5530" stroke-width="3"><path d="M160 300c30 6 50 6 80 0M163 250c26 5 48 5 74 0M166 210c22 4 42 4 68 0"/></g></svg>
+          </div>
+          <span class="num">01 · Monday</span><h3>Thrown on the wheel</h3><p>Every form starts as a centered lump and a steady hand. Walls are pulled thin, then left to firm overnight.</p>
+        </article>
+        <article class="step" data-reveal data-delay="100">
+          <div class="scene sg-frame" data-surface role="img" aria-label="Drawing of a leather-hard bowl upside down on a banding wheel, with a trimming tool and curls of clay">
+            <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><rect width="400" height="500" fill="#e8e1d2"/><rect y="340" width="400" height="160" fill="#d2c5ad"/><rect x="170" y="330" width="60" height="30" fill="#6b6259"/><ellipse cx="200" cy="330" rx="120" ry="18" fill="#8b8177"/><path d="M110 322c0-70 40-110 90-110s90 40 90 110z" fill="#c9905f"/><ellipse cx="200" cy="214" rx="34" ry="8" fill="#a86e40"/><path d="M110 322c0-70 40-110 90-110-30 20-50 60-50 110z" fill="#fff" opacity=".15"/><path d="M270 180l60-90" stroke="#6b4a2c" stroke-width="10" stroke-linecap="round"/><path d="M264 190c-10 8-20 6-24-2" stroke="#9aa0a6" stroke-width="6" fill="none" stroke-linecap="round"/><g fill="none" stroke="#c9905f" stroke-width="5" stroke-linecap="round"><path d="M80 420c10-12 24-12 30 0M130 440c8-10 20-10 26 0M250 430c10-12 24-12 30 0M300 450c8-8 18-8 24 0"/></g></svg>
+          </div>
+          <span class="num">02 · Tuesday</span><h3>Trimmed and glazed</h3><p>Feet are carved leather-hard, bisque-fired, then dipped by hand. Drips are kept; they tell you where the glaze pooled.</p>
+        </article>
+        <article class="step" data-reveal data-delay="200">
+          <div class="scene sg-frame" data-surface role="img" aria-label="Drawing of a brick kiln with its door glowing orange at night">
+            <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><rect width="400" height="500" fill="#241d18"/><circle cx="330" cy="70" r="22" fill="#f4efe6" opacity=".85"/><rect y="380" width="400" height="120" fill="#1a1512"/><path d="M70 380V210c0-60 60-100 130-100s130 40 130 100v170z" fill="#8a4a32"/><g stroke="#6e3a26" stroke-width="3"><path d="M70 240h260M70 280h260M70 320h260M70 360h260"/><path d="M110 240v40M170 240v40M230 240v40M290 240v40M140 280v40M200 280v40M260 280v40M110 320v40M170 320v40M230 320v40M290 320v40"/></g><rect x="150" y="250" width="100" height="110" rx="10" fill="url(#glow)"/><rect x="150" y="250" width="100" height="110" rx="10" fill="none" stroke="#3a2016" stroke-width="8"/><rect x="185" y="60" width="30" height="60" fill="#6e3a26"/><g fill="#ffb35c" opacity=".5"><circle cx="200" cy="44" r="6"/><circle cx="212" cy="26" r="4"/><circle cx="192" cy="12" r="3"/></g><ellipse cx="200" cy="384" rx="120" ry="12" fill="#e5561f" opacity=".25"/></svg>
+          </div>
+          <span class="num">03 · Thursday</span><h3>Fired overnight</h3><p>The kiln climbs for eleven hours, peaks, and cools until Saturday morning, when the door opens on the new firing.</p>
+        </article>
+      </div>
+      <div class="kiln-temp" data-reveal><span class="label">Peak temperature, cone 10</span><b data-count="1240" data-suffix="°C">1,240°C</b></div>
+    </div>
+  </section>
+
+  <section class="band classes" id="classes" aria-labelledby="classes-h">
+    <div class="w classes-grid">
+      <div class="scene sg-frame" data-surface role="img" aria-label="Drawing of the studio from inside: a big window, two wheels, and shelves of drying pots">
+        <svg viewBox="0 0 500 625" preserveAspectRatio="xMidYMid slice"><rect width="500" height="625" fill="#e1d7c4"/><rect x="60" y="50" width="380" height="280" fill="#cfe0e6"/><path d="M60 250c80-40 150-20 220-50s110-10 160 10v140H60z" fill="#9fb59a"/><path d="M60 290c90-30 170-10 240-30s100 0 140 10v60H60z" fill="#7f9a7a"/><path d="M60 50h380v280H60z" fill="none" stroke="#f7f1e4" stroke-width="16"/><path d="M250 50v280M60 190h380" stroke="#f7f1e4" stroke-width="10"/><path d="M60 50l200 575H0V50z" fill="url(#sun)" opacity=".35"/><rect y="440" width="500" height="185" fill="#cbbda2"/><g><ellipse cx="140" cy="470" rx="70" ry="14" fill="#8b8177"/><rect x="128" y="470" width="24" height="70" fill="#6b6259"/><path d="M120 470c0-30 6-50 10-70h20c4 20 10 40 10 70z" fill="#b8784a"/></g><g><ellipse cx="350" cy="480" rx="70" ry="14" fill="#8b8177"/><rect x="338" y="480" width="24" height="70" fill="#6b6259"/></g><rect x="20" y="370" width="460" height="10" fill="url(#wood)"/><svg x="40" y="318" width="50" height="54" viewBox="0 10 200 220" style="color:#e9dfcb"><use href="#jar"/></svg><svg x="110" y="330" width="54" height="42" viewBox="0 40 200 190" style="color:#1f4bff"><use href="#cup"/></svg><svg x="190" y="340" width="70" height="32" viewBox="0 60 200 160" style="color:#f1ebe0"><use href="#bowl"/></svg><svg x="290" y="318" width="44" height="54" viewBox="0 0 200 240" style="color:#8a3b2e"><use href="#vase"/></svg><svg x="370" y="330" width="54" height="42" viewBox="0 40 200 190" style="color:#3d4a3f"><use href="#cup"/></svg></svg>
+      </div>
+      <div>
+        <p class="label">Classes</p>
+        <h2 id="classes-h" data-reveal>Six people, two wheels, one long table.</h2>
+        <p class="lede" style="margin-block-start:14px">Evening and weekend sessions for every level. Clay, tools, glaze, and firing are included; you take home what survives the kiln.</p>
+        <ul class="schedule">
+          <li><span class="when">Tue 18:30</span><div><strong>First time on the wheel</strong><small>Beginner · 3 hours · 2 seats left</small></div><button type="button" data-demo="Class booking is fictional on this showcase page.">Book</button></li>
+          <li><span class="when">Thu 18:30</span><div><strong>Mugs with handles</strong><small>Returning · 3 hours · 4 seats left</small></div><button type="button" data-demo="Class booking is fictional on this showcase page.">Book</button></li>
+          <li><span class="when">Sat 10:00</span><div><strong>Glaze mixing morning</strong><small>All levels · 2 hours · 1 seat left</small></div><button type="button" data-demo="Class booking is fictional on this showcase page.">Book</button></li>
+          <li><span class="when">Sat 14:00</span><div><strong>Kiln opening and tea</strong><small>Free · 1 hour · open</small></div><button type="button" data-demo="Class booking is fictional on this showcase page.">Save a seat</button></li>
+          <li><span class="when">Sun 11:00</span><div><strong>Six-week wheel course</strong><small>Beginner · weekly · 3 seats left</small></div><button type="button" data-demo="Class booking is fictional on this showcase page.">Book</button></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="journal" aria-labelledby="journal-h">
+    <div class="w">
+      <div class="band-head"><div><p class="label">Studio journal</p><h2 id="journal-h" data-reveal>Notes from the bench.</h2></div><a class="link" href="#visit">Come by on Saturday →</a></div>
+      <div class="journal">
+        <a class="post" href="#glaze" data-lift data-reveal>
+          <div class="scene sg-frame" data-surface aria-hidden="true"><svg viewBox="0 0 450 300" preserveAspectRatio="xMidYMid slice"><rect width="450" height="300" fill="#ebe4d6"/><g transform="translate(40 40)"><rect width="80" height="60" rx="6" fill="#1f4bff"/><rect x="95" width="80" height="60" rx="6" fill="#3d4a3f"/><rect x="190" width="80" height="60" rx="6" fill="#b8784a"/><rect x="285" width="80" height="60" rx="6" fill="#8a3b2e"/><rect y="75" width="80" height="60" rx="6" fill="#e9dfcb"/><rect x="95" y="75" width="80" height="60" rx="6" fill="#6d82ff"/><rect x="190" y="75" width="80" height="60" rx="6" fill="#d9a36f"/><rect x="285" y="75" width="80" height="60" rx="6" fill="#f1ebe0"/><rect y="150" width="80" height="60" rx="6" fill="#5b6d5c"/><rect x="95" y="150" width="80" height="60" rx="6" fill="#2a3aa8"/><rect x="190" y="150" width="80" height="60" rx="6" fill="#a8583a"/><rect x="285" y="150" width="80" height="60" rx="6" fill="#c9bfae"/></g><g fill="#fff" opacity=".22"><rect x="40" y="40" width="365" height="10"/><rect x="40" y="115" width="365" height="10"/><rect x="40" y="190" width="365" height="10"/></g></svg></div>
+          <time datetime="2026-09-12">12 Sep 2026</time><h3>Forty test tiles for one blue</h3><p class="lede" style="font-size:1rem">How the cobalt celadon got its depth, and the thirty-nine tiles that did not make it.</p>
+        </a>
+        <a class="post" href="#visit" data-lift data-reveal data-delay="100">
+          <div class="scene sg-frame" data-surface aria-hidden="true"><svg viewBox="0 0 450 300" preserveAspectRatio="xMidYMid slice"><rect width="450" height="300" fill="#cfe0e6"/><rect y="200" width="450" height="100" fill="#b9a98b"/><path d="M60 110h330l-20 30H80z" fill="#c2410c"/><path d="M60 110h55l-10 30H80zM170 110h55l-5 30h-50zM280 110h55l5 30h-55z" fill="#f4efe6" opacity=".9"/><rect x="80" y="140" width="290" height="70" fill="#8b6a48"/><rect x="72" y="138" width="8" height="90" fill="#6b4a2c"/><rect x="370" y="138" width="8" height="90" fill="#6b4a2c"/><svg x="100" y="112" width="60" height="30" viewBox="0 60 200 160" style="color:#1f4bff"><use href="#bowl"/></svg><svg x="175" y="100" width="40" height="42" viewBox="0 0 200 240" style="color:#e9dfcb"><use href="#vase"/></svg><svg x="230" y="106" width="44" height="36" viewBox="0 40 200 190" style="color:#b8784a"><use href="#cup"/></svg><svg x="290" y="98" width="44" height="44" viewBox="0 10 200 220" style="color:#3d4a3f"><use href="#jar"/></svg><g fill="#6b6259"><circle cx="40" cy="170" r="14"/><rect x="28" y="184" width="24" height="40" rx="10"/><circle cx="415" cy="176" r="12"/><rect x="404" y="188" width="22" height="36" rx="10"/></g></svg></div>
+          <time datetime="2026-08-30">30 Aug 2026</time><h3>What sold at the harbour market</h3><p class="lede" style="font-size:1rem">Mugs first, always. A note on pricing, packing, and the one jar that came home three times.</p>
+        </a>
+        <a class="post" href="#process" data-lift data-reveal data-delay="200">
+          <div class="scene sg-frame" data-surface aria-hidden="true"><svg viewBox="0 0 450 300" preserveAspectRatio="xMidYMid slice"><rect width="450" height="300" fill="#e8e1d2"/><rect y="230" width="450" height="70" fill="#d2c5ad"/><g><path d="M60 230v-110c0-12 10-20 22-20h76c12 0 22 8 22 20v110z" fill="#cdbfa6"/><path d="M60 140h120" stroke="#b3a386" stroke-width="4"/><text x="120" y="190" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="16" fill="#6b5f4f">B-MIX</text></g><g><path d="M200 230v-90c0-10 8-18 18-18h64c10 0 18 8 18 18v90z" fill="#b8a07c"/><text x="250" y="195" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" fill="#5b4a33">RED</text></g><g><path d="M310 230v-70c0-8 6-14 14-14h56c8 0 14 6 14 14v70z" fill="#d9d2c2"/><text x="352" y="205" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" fill="#6b5f4f">PORC</text></g><path d="M0 230h450" stroke="#b3a386" stroke-width="3"/></svg></div>
+          <time datetime="2026-08-11">11 Aug 2026</time><h3>Three clays and why we mix them</h3><p class="lede" style="font-size:1rem">A stoneware body, a red for warmth, and a little porcelain for the ring when you tap the rim.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band visit" id="visit" aria-labelledby="visit-h" style="background:var(--paper-2)">
+    <div class="w visit-grid">
+      <div class="scene sg-frame" data-surface role="img" aria-label="Drawn street map with the studio marked near the harbour, two streets from the station">
+        <svg viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice"><rect width="640" height="440" fill="#e8e1d2"/><path d="M0 330c120-20 220 10 330-10s220-40 310-20v140H0z" fill="#b9d3dc"/><g fill="#d8ccb6"><rect x="40" y="40" width="120" height="90" rx="6"/><rect x="200" y="40" width="160" height="90" rx="6"/><rect x="400" y="40" width="200" height="90" rx="6"/><rect x="40" y="170" width="120" height="110" rx="6"/><rect x="200" y="170" width="160" height="110" rx="6"/><rect x="400" y="170" width="200" height="100" rx="6"/></g><g stroke="#f7f1e4" stroke-width="18" fill="none"><path d="M0 150h640M180 0v320M380 0v310"/></g><g stroke="#cdbfa6" stroke-width="2" stroke-dasharray="8 8" fill="none"><path d="M0 150h640M180 0v320M380 0v310"/></g><rect x="470" y="190" width="70" height="44" rx="4" fill="#9fb59a"/><circle cx="505" cy="212" r="6" fill="#5f7a52"/><g><circle cx="290" cy="215" r="34" fill="#1f4bff" opacity=".16"/><path d="M290 240c-20-24-30-40-30-54a30 30 0 0 1 60 0c0 14-10 30-30 54z" fill="#1f4bff"/><circle cx="290" cy="186" r="11" fill="#f4efe6"/></g><g font-family="IBM Plex Mono, monospace" font-size="14" fill="#5b534a"><text x="60" y="110">STATION</text><text x="420" y="110">MARKET HALL</text><text x="236" y="276">HEARTH CLAY</text><text x="420" y="390">HARBOUR</text></g></svg>
+      </div>
+      <div>
+        <p class="label">Visit</p>
+        <h2 id="visit-h" data-reveal>Two streets from the station, one from the water.</h2>
+        <div class="hours"><div><span>Thursday - Friday</span><span>12:00 - 19:00</span></div><div><span>Saturday (kiln opening)</span><span>10:00 - 17:00</span></div><div><span>Sunday - Wednesday</span><span>By appointment</span></div></div>
+        <form class="signup" data-signup novalidate><label class="sg-visually-hidden" for="email">Email for firing notes</label><input id="email" type="email" placeholder="Email for firing notes" autocomplete="email"><button class="btn" type="submit">Subscribe</button><p role="status" data-signup-status></p></form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="w">
+    <div class="cols">
+      <div><p class="mark"><svg viewBox="0 0 200 240" aria-hidden="true"><use href="#vase"/></svg>Hearth Clay</p><p style="margin-block-start:12px">A fictional studio made to show what a StyleGallery page looks like when every screen has something to look at.</p></div>
+      <div><h3>Shop</h3><ul><li><a class="link" href="#shop">This firing</a></li><li><a class="link" href="#glaze">Glaze studio</a></li></ul></div>
+      <div><h3>Studio</h3><ul><li><a class="link" href="#process">Process</a></li><li><a class="link" href="#classes">Classes</a></li><li><a class="link" href="#journal">Journal</a></li></ul></div>
+      <div><h3>Find us</h3><ul><li><a class="link" href="#visit">Hours and map</a></li><li><a class="link" href="../">All showcase works</a></li></ul></div>
+    </div>
+    <p class="fine">Showcase work built on the Warm Print direction. Every product, price, class, and place is invented; every image is drawn in SVG.</p>
+  </div>
+</footer>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene } = window.SG;
+  // Hero shelf: the lower shelf drifts a little more than the upper one as the hero scrolls away.
+  const hero = document.querySelector("[data-hero-scene]");
+  if (!reduced) scene(document.querySelector(".hero"), (p) => {
+    hero.querySelectorAll("[data-depth]").forEach((g) => g.setAttribute("transform", `translate(0 ${(-p * 60 * Number(g.dataset.depth)).toFixed(1)})`));
+  }, { start: "top" });
+  // Glaze studio: form and glaze choices redraw the pot and update the readout.
+  const pot = document.querySelector("[data-pot]"), shape = document.querySelector("[data-pot-shape]");
+  const readout = document.querySelector("[data-readout]"), priceEl = document.querySelector("[data-price]"), status = document.querySelector("[data-studio-status]");
+  const boxes = { vase: "0 0 200 240", bowl: "0 60 200 160", cup: "0 40 200 190", jar: "0 10 200 220" };
+  const prices = { vase: 64, bowl: 38, cup: 32, jar: 72 };
+  const names = { vase: "Vase", bowl: "Bowl", cup: "Mug", jar: "Jar" };
+  let form = "vase", glaze = "Cobalt celadon";
+  const paint = () => {
+    readout.textContent = `${names[form]} in ${glaze}`;
+    priceEl.textContent = `$${prices[form]} · ships in 2 weeks`;
+    status.textContent = `${names[form]} in ${glaze}, $${prices[form]}`;
+  };
+  const group = (selector, apply) => {
+    const buttons = [...document.querySelectorAll(`${selector} button`)];
+    buttons.forEach((button) => button.addEventListener("click", () => { buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === button))); apply(button); paint(); }));
+  };
+  group("[data-forms]", (b) => { form = b.dataset.shape; shape.setAttribute("href", `#${form}`); pot.setAttribute("viewBox", boxes[form]); });
+  group("[data-swatches]", (b) => { pot.style.color = b.dataset.glaze; glaze = b.getAttribute("aria-label"); });
+  // Newsletter: validate, then say plainly that nothing was sent.
+  const form2 = document.querySelector("[data-signup]"), note = document.querySelector("[data-signup-status]");
+  form2.addEventListener("submit", (event) => { event.preventDefault(); const email = form2.querySelector("input"); note.textContent = email.value && email.checkValidity() ? "Thanks. Nothing was sent: this is a showcase page." : "Enter a valid email address first."; });
+})();
+</script>
+</body>
+</html>
