@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>MacBook Pro - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Apple's MacBook Pro page: a black product story with a CSS laptop that opens on scroll, a pinned chip stage, a battery night sky, and a light shopping finale.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Crect x='6' y='9' width='20' height='13' rx='2' fill='%23555'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #f5f5f7; --dim: #a1a1a6; --dark: #161617; --soft: #f5f5f7; --blue: #0071e3; --link: #2997ff; --sans: -apple-system, "SF Pro Display", "Inter", "Helvetica Neue", Arial, sans-serif; --sg-header: 60px; --sg-focus: #2997ff; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #000; color: var(--ink); font: 400 17px/1.47 var(--sans); letter-spacing: -0.015em; }
+  .w { margin-inline: auto; max-inline-size: 1180px; padding-inline: clamp(18px, 5vw, 60px); }
+  .lnav { background: rgb(22 22 23 / .85); backdrop-filter: blur(18px); border-block-end: 1px solid #333; position: sticky; top: 0; z-index: 30; transition: background .4s, color .4s, border-color .4s; }
+  .lnav[data-light] { background: rgb(250 250 252 / .88); border-color: #d2d2d7; color: #1d1d1f; }
+  .lnav .w { align-items: center; display: flex; gap: 20px; block-size: 52px; }
+  .lnav .name { color: inherit; font-size: 19px; font-weight: 600; text-decoration: none; }
+  .lnav nav { display: flex; gap: 20px; margin-inline-start: auto; }
+  .lnav nav a { color: inherit; font-size: 12px; opacity: .8; text-decoration: none; }
+  .lnav nav a:hover { opacity: 1; }
+  .buy { background: var(--blue); border: 0; border-radius: 999px; color: #fff; font: 400 12px var(--sans); padding: 4px 11px; }
+  @media (max-width: 760px) { .lnav nav { display: none; } .buy { margin-inline-start: auto; } }
+
+  .hero { min-block-size: 100vh; overflow: clip; position: relative; }
+  .laptop { inset: 6% 4% auto auto; perspective: 1400px; position: absolute; inline-size: min(760px, 70vw); }
+  .lid { aspect-ratio: 1.55; background: linear-gradient(135deg, #3a3a3e, #0d0d0f 60%); border-radius: 18px 18px 6px 6px; box-shadow: inset 0 0 0 2px #4a4a4f, 0 60px 120px -40px rgb(255 255 255 / .12); transform: rotateX(var(--lid, 70deg)); transform-origin: bottom; transition: transform .1s linear; overflow: hidden; }
+  .lid::after { background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / .18) 45%, transparent 60%); content: ""; inset: 0; position: absolute; }
+  .screen { background: radial-gradient(60% 60% at 30% 40%, #1d4fb8, transparent 70%), radial-gradient(50% 60% at 80% 70%, #c04ab8, transparent 70%), #07070a; border-radius: 10px; inset: 4%; opacity: var(--glow, 0); position: absolute; transition: opacity .6s; }
+  .base { background: linear-gradient(180deg, #4a4a4f, #1a1a1c); block-size: 16px; border-radius: 0 0 20px 20px; margin-inline: -4%; }
+  .hero .copy { inset: auto auto 12% 0; position: absolute; }
+  .eyebrow { color: var(--ink); font-size: 19px; font-weight: 600; }
+  .grad { background: linear-gradient(90deg, #9fe0e8, #6f9ad8 55%, #b7a4e8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero h1 { font-size: clamp(2.4rem, 5.2vw, 4rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; margin-block: 6px 8px; }
+  .hero p { font-size: 19px; }
+  .price { align-items: center; background: #1d1d1f; border-radius: 999px; display: inline-flex; font-size: 13px; gap: 16px; margin-block-start: 22px; padding: 8px 8px 8px 18px; }
+  @media (max-width: 760px) { .laptop { inset: 14% -10% auto auto; inline-size: 110vw; opacity: .5; } }
+
+  .sec { padding-block: 110px 40px; }
+  .sec-h { align-items: flex-end; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; margin-block-end: 26px; }
+  .sec h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.08; }
+  .tl { background: none; border: 0; color: var(--link); font: 400 17px var(--sans); padding: 0; }
+  .tl::after { content: " ›"; }
+  .hl { background: var(--dark); border-radius: 28px; display: grid; min-block-size: 560px; overflow: hidden; padding: 40px; position: relative; }
+  .hl h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+  .chips { align-items: center; display: flex; flex-wrap: wrap; gap: 26px; justify-content: center; }
+  .chip { aspect-ratio: 1; border-radius: 14px; box-shadow: 0 30px 60px -20px var(--g), inset 0 0 0 1px rgb(255 255 255 / .25); color: #fff; display: grid; font-size: clamp(1.6rem, 3.4vw, 2.6rem); font-weight: 600; inline-size: min(200px, 26vw); place-content: center; text-align: center; transition: transform .6s var(--ease); background: linear-gradient(135deg, var(--a), var(--b)); }
+  .chip small { display: block; font-size: .42em; letter-spacing: .1em; }
+  .chip:hover { transform: translateY(-8px) rotate(-2deg); }
+  .dots { align-items: center; background: rgb(66 66 69 / .7); border-radius: 999px; display: flex; gap: 8px; inset: auto auto 26px 50%; padding: 10px 16px; position: absolute; transform: translateX(-50%); }
+  .dots i { background: #86868b; block-size: 8px; border-radius: 999px; inline-size: 8px; transition: inline-size .4s; }
+  .dots i[data-on] { background: #f5f5f7; inline-size: 40px; }
+
+  .explore { align-items: center; display: grid; gap: 30px; grid-template-columns: 220px 1fr; min-block-size: 70vh; }
+  .pills { display: grid; gap: 10px; }
+  .pills button { align-items: center; background: #1d1d1f; border: 0; border-radius: 999px; color: var(--ink); display: flex; font: 500 14px var(--sans); gap: 10px; inline-size: max-content; padding: 10px 16px 10px 10px; }
+  .pills button::before { border: 1.5px solid #86868b; border-radius: 50%; block-size: 22px; content: "+"; display: grid; font-size: 14px; inline-size: 22px; place-items: center; }
+  .pills button[aria-pressed="true"] { background: #f5f5f7; color: #1d1d1f; }
+  .pills button[aria-pressed="true"]::before { content: "×"; border-color: #1d1d1f; }
+  .spec { color: var(--dim); font-size: 21px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.35; max-inline-size: 32ch; min-block-size: 5em; }
+  .spec b { color: var(--ink); }
+  @media (max-width: 760px) { .explore { grid-template-columns: 1fr; } .pills { grid-template-columns: 1fr 1fr; } }
+
+  /* Pinned chip stage: three chips take the stage in turn as you scroll. */
+  .perf { background: #000; }
+  .perf .sg-stage { display: grid; place-items: center; }
+  .blob { background: radial-gradient(40% 40% at 40% 45%, var(--c1), transparent 70%), radial-gradient(35% 35% at 65% 55%, var(--c2), transparent 70%); filter: blur(30px); inset: 0; position: absolute; transition: background .8s; animation: breathe 9s ease-in-out infinite alternate; }
+  @keyframes breathe { to { transform: scale(1.12) rotate(6deg); } }
+  .perf .copy { max-inline-size: 760px; padding-inline: 24px; position: relative; text-align: center; }
+  .perf .lab { color: var(--dim); font-size: 17px; font-weight: 600; }
+  .perf .big { display: block; font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-block: 14px; }
+  .perf .line { font-size: 21px; }
+  .steps { display: flex; gap: 8px; justify-content: center; margin-block-start: 30px; }
+  .steps i { background: #333; block-size: 4px; border-radius: 2px; inline-size: 40px; }
+  .steps i[data-on] { background: #f5f5f7; }
+
+  .batt { background: linear-gradient(180deg, #000 0%, #04081a 40%, #0a1230 100%); min-block-size: 90vh; overflow: clip; padding-block: 110px 80px; position: relative; }
+  .stars { background-image: radial-gradient(1.2px 1.2px at 10% 20%, #fff, transparent), radial-gradient(1px 1px at 30% 60%, #fff, transparent), radial-gradient(1.4px 1.4px at 55% 30%, #fff, transparent), radial-gradient(1px 1px at 72% 70%, #fff, transparent), radial-gradient(1.2px 1.2px at 88% 40%, #fff, transparent), radial-gradient(1px 1px at 45% 85%, #fff, transparent); inset: 0; opacity: .8; position: absolute; }
+  .batt .w { position: relative; }
+  .two { font-size: 17px; color: var(--dim); max-inline-size: 48ch; margin-block-start: 22px; }
+  .two b { color: var(--ink); font-weight: 600; }
+  .stat { font-size: clamp(3.4rem, 8vw, 6.4rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-block-start: 50px; }
+  .stat small { color: var(--dim); display: block; font-size: 17px; font-weight: 500; letter-spacing: 0; margin-block-start: 8px; }
+
+  .os { align-items: center; background: linear-gradient(160deg, #cfe3ff 0%, #6aa8f0 30%, #1e5ad8 60%, #0b2a7a 100%); display: grid; min-block-size: 80vh; overflow: clip; position: relative; text-align: center; }
+  .os::before { background: radial-gradient(60% 30% at 30% 60%, rgb(255 255 255 / .55), transparent 70%); content: ""; inset: 0; position: absolute; }
+  .os .copy { position: relative; }
+  .os h2 { color: #fff; font-size: clamp(2.4rem, 6vw, 4.6rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.02; text-shadow: 0 8px 40px rgb(10 30 90 / .5); }
+  .os small { color: #eef4ff; display: block; font-size: 17px; font-weight: 600; margin-block-end: 10px; text-shadow: 0 2px 14px rgb(10 30 90 / .6); }
+
+  .ports .grid { display: grid; gap: 40px; grid-template-columns: 1.4fr 1fr; }
+  .ports .side { color: var(--dim); font-size: 15px; }
+  .ports .side b { color: var(--ink); display: block; font-size: 24px; font-weight: 600; }
+  .edge { background: linear-gradient(180deg, #2a2a2d, #0e0e10); block-size: 70px; border-radius: 0 0 16px 16px; display: flex; gap: 22px; align-items: center; margin-block-start: 60px; padding-inline: 60px; box-shadow: inset 0 2px 0 #444; }
+  .edge i { background: #050506; block-size: 12px; border-radius: 6px; inline-size: 44px; }
+  .edge i.r { inline-size: 14px; border-radius: 50%; block-size: 14px; }
+  @media (max-width: 760px) { .ports .grid { grid-template-columns: 1fr; } }
+
+  .light { background: var(--soft); color: #1d1d1f; }
+  .light .sec h2 { color: #1d1d1f; }
+  .light .tl { color: #0066cc; }
+  .rail { display: grid; gap: 20px; grid-auto-columns: min(320px, 80%); grid-auto-flow: column; overflow-x: auto; padding: 10px 4px 20px; scrollbar-width: none; }
+  .rc { background: #fff; border-radius: 22px; box-shadow: 0 4px 20px rgb(0 0 0 / .08); min-block-size: 380px; padding: 26px; position: relative; }
+  .rc small { font-size: 12px; font-weight: 600; }
+  .rc h3 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-block: 8px 10px; }
+  .rc p { color: #424245; font-size: 14px; }
+  .rc .art { block-size: 120px; border-radius: 16px; inset: auto 26px 60px; position: absolute; background: linear-gradient(135deg, var(--a), var(--b)); }
+  .compare { background: #fff; border-radius: 28px; display: grid; gap: 30px; grid-template-columns: 1fr 1fr; padding: 40px; text-align: center; }
+  .compare .lap { aspect-ratio: 1.6; border-radius: 10px 10px 2px 2px; margin: 0 auto 20px; inline-size: 70%; background: linear-gradient(135deg, var(--a), var(--b)); border: 8px solid #1d1d1f; }
+  .compare h3 { font-size: 22px; font-weight: 600; }
+  .compare p { color: #6e6e73; font-size: 14px; }
+  .sw { display: flex; gap: 8px; justify-content: center; margin-block: 10px; }
+  .sw button { border: 2px solid transparent; border-radius: 50%; block-size: 18px; inline-size: 18px; padding: 0; background: var(--c); box-shadow: inset 0 0 0 1px #0002; }
+  .sw button[aria-pressed="true"] { border-color: var(--blue); }
+  @media (max-width: 760px) { .compare { grid-template-columns: 1fr; padding: 24px; } }
+  .dirx { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); font-size: 14px; padding-block: 60px; }
+  .dirx h3 { color: #6e6e73; font-size: 12px; font-weight: 400; margin-block-end: 8px; }
+  .dirx li { list-style: none; padding-block: 3px; font-weight: 600; }
+  .dirx ul { margin: 0; padding: 0; }
+  footer { background: var(--soft); border-block-start: 1px solid #d2d2d7; color: #6e6e73; font-size: 12px; padding-block: 20px 40px; }
+  footer a { color: #0066cc; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="lnav" data-lnav>
+  <div class="w"><a class="name" href="#top">MacBook Pro</a><nav aria-label="Sections"><a href="#highlights">Highlights</a><a href="#explore">Explore</a><a href="#battery">Battery</a><a href="#shop">Shop</a></nav><button class="buy" type="button" data-demo="Buying is not available in this unofficial study.">Buy</button></div>
+</header>
+<main id="main">
+  <section class="hero" id="top" data-hero>
+    <div class="laptop" aria-hidden="true"><div class="lid" data-lid><div class="screen"></div></div><div class="base"></div></div>
+    <div class="w" style="position:relative;min-block-size:100vh">
+      <div class="copy">
+        <p class="eyebrow">MacBook Pro</p>
+        <h1 data-split><span class="grad">Speed that stays cool.</span></h1>
+        <p data-reveal data-delay="300">Now in three chip sizes, each one a little quieter than the last.</p>
+        <div class="price" data-reveal data-delay="400"><span>From an imagined monthly price, with trade-in.</span><button class="buy" type="button" data-demo="Buying is not available in this unofficial study.">Buy</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec w" id="highlights">
+    <div class="sec-h"><h2 data-reveal>The short version.</h2><button class="tl" type="button" data-demo="The film is not included in this unofficial study.">Watch the film</button></div>
+    <div class="hl">
+      <h3 data-hl-title>X5, X5 Pro, and X5 Max.<br>One family of invented chips.</h3>
+      <div class="chips" aria-hidden="true"><div class="chip" style="--a:#3ad2d0;--b:#2a7ae0;--g:#2a9ad0">X5</div><div class="chip" style="--a:#3a8af0;--b:#5a4ae0;--g:#4a6ae0">X5<small>PRO</small></div><div class="chip" style="--a:#6a4ae0;--b:#c04ad8;--g:#a04ad8">X5<small>MAX</small></div></div>
+      <div class="dots" aria-hidden="true" data-ambient><i data-on></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section class="sec w" id="explore" aria-labelledby="ex-h">
+    <h2 id="ex-h" data-reveal>Take a closer look.</h2>
+    <div class="explore">
+      <div class="pills" role="group" aria-label="Details" data-pills><button type="button" aria-pressed="true">Sizes</button><button type="button" aria-pressed="false">Colors</button><button type="button" aria-pressed="false">Display</button><button type="button" aria-pressed="false">Connectivity</button><button type="button" aria-pressed="false">Camera</button></div>
+      <p class="spec" aria-live="polite" data-spec></p>
+    </div>
+  </section>
+
+  <section class="perf sg-track" style="--track:320vh" aria-labelledby="perf-h" data-perf>
+    <div class="sg-stage">
+      <div class="blob" aria-hidden="true" data-blob data-ambient style="--c1:#1d4fb8;--c2:#3ad2d0"></div>
+      <div class="copy">
+        <span class="lab">Performance</span>
+        <h2 class="big grad" id="perf-h" data-big>X5</h2>
+        <span class="line" data-line>Everyday speed that never spins a fan.</span>
+        <div class="steps" aria-hidden="true" data-steps><i data-on></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="batt" id="battery" aria-labelledby="b-h">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="w">
+      <span class="eyebrow" style="font-size:17px">Battery</span>
+      <h2 id="b-h" style="font-size:clamp(2rem,4.6vw,3.6rem);font-weight:600;letter-spacing:-0.035em;line-height:1.05;margin-block-start:10px" data-reveal>Out past midnight.<br>Still on one charge.</h2>
+      <p class="two">Shoot the night sky, edit the timelapse, and pack up with charge left. <b>An imagined figure of all-day work, then some.</b></p>
+      <p class="stat"><span data-count="24" data-suffix=" hrs">24 hrs</span><small>of video playback (illustrative)</small></p>
+    </div>
+  </section>
+
+  <section class="os" aria-labelledby="os-h"><div class="copy"><small>The system</small><h2 id="os-h" data-reveal="blur">Looks new.<br>Feels familiar.</h2></div></section>
+
+  <section class="sec w ports" aria-labelledby="po-h">
+    <span class="eyebrow" style="font-size:17px">Ports</span>
+    <div class="grid"><div><h2 id="po-h" data-reveal>Plug in<br>everything.</h2><p class="two">Card slot, fast ports on both sides, and room for several displays. <b>Specs here are imagined.</b></p></div><div class="side"><b>Fast wireless</b>Latest wireless and short-range radio standards (study copy).</div></div>
+    <div class="edge" aria-hidden="true"><i></i><i></i><i></i><i class="r"></i></div>
+  </section>
+
+  <div class="light" data-light-zone>
+    <section class="sec w" id="shop" aria-labelledby="shop-h">
+      <div class="sec-h"><h2 id="shop-h" data-reveal>Good reasons to buy here.</h2><button class="tl" type="button" data-demo="Shopping is not available in this unofficial study.">Shop the lineup</button></div>
+      <div class="rail" tabindex="0" aria-label="Reasons, scroll sideways">
+        <article class="rc"><small>Monthly plan</small><h3>Pay over time.<br>Trade up later.</h3><p>An imagined plan with small monthly payments.</p><div class="art" style="--a:#ff9f0a;--b:#ff375f" aria-hidden="true"></div></article>
+        <article class="rc"><small>Trade in</small><h3>Credit for your<br>old laptop.</h3><p>Every value here is invented.</p><div class="art" style="--a:#d2d2d7;--b:#8e8e93" aria-hidden="true"></div></article>
+        <article class="rc"><small>Education</small><h3>Savings for<br>students.</h3><p>For college students and teachers in this study.</p><div class="art" style="--a:#30d158;--b:#0a84ff" aria-hidden="true"></div></article>
+      </div>
+    </section>
+    <section class="sec w" aria-labelledby="cmp-h">
+      <div class="sec-h"><h2 id="cmp-h" data-reveal>Pick the right one.</h2><button class="tl" type="button" data-demo="The comparison tool is not included in this unofficial study.">Compare all</button></div>
+      <div class="compare" data-compare>
+        <article><div class="lap" data-lap style="--a:#e9d8b8;--b:#b8946c"></div><div class="sw" role="group" aria-label="Air color"><button type="button" aria-pressed="true" aria-label="Sand" style="--c:#e9d8b8" data-c="#e9d8b8,#b8946c"></button><button type="button" aria-pressed="false" aria-label="Sky" style="--c:#b8d2ee" data-c="#cfe0f6,#6a98d8"></button><button type="button" aria-pressed="false" aria-label="Night" style="--c:#2a2d3a" data-c="#3a3d4a,#1a1d2a"></button></div><h3>Laptop Air</h3><p>Thin and quiet, for most people.</p></article>
+        <article><div class="lap" data-lap style="--a:#3a3a3e;--b:#0d0d0f"></div><div class="sw" role="group" aria-label="Pro color"><button type="button" aria-pressed="true" aria-label="Space" style="--c:#3a3a3e" data-c="#3a3a3e,#0d0d0f"></button><button type="button" aria-pressed="false" aria-label="Silver" style="--c:#e3e4e6" data-c="#f0f0f2,#b8b8bc"></button></div><h3>MacBook Pro</h3><p>For long renders and big projects.</p></article>
+      </div>
+    </section>
+    <div class="w"><div class="dirx"><div><h3>Explore</h3><ul role="list"><li>All laptops</li><li>Desktops</li><li>Displays</li></ul></div><div><h3>Shop</h3><ul role="list"><li>Buy</li><li>Accessories</li></ul></div><div><h3>More</h3><ul role="list"><li>Support</li><li>Switching</li></ul></div></div></div>
+  </div>
+</main>
+<footer><div class="w"><strong style="color:#1d1d1f">Unofficial</strong> brand study of Apple's MacBook Pro page by StyleGallery. Not affiliated with Apple. Devices are drawn in CSS; chip names, specs, and prices are invented; no logos or product photography are used. <a href="../">All studies</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Apple (MacBook Pro) by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene, range } = window.SG;
+  // Lid opens from 70 degrees to flat-open as the hero scrolls; the screen lights up.
+  const lid = document.querySelector("[data-lid]");
+  const openLid = (p) => { const t = Math.min(1, p * 2.4); lid.style.setProperty("--lid", `${Math.round(70 - 80 * t)}deg`); lid.style.setProperty("--glow", String(t)); };
+  if (reduced) openLid(1); else { scene(document.querySelector("[data-hero]"), openLid, { start: "top" }); setTimeout(() => { if (scrollY < 10) { lid.animate([{ transform: "rotateX(70deg)" }, { transform: "rotateX(40deg)" }], { duration: 1200, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" }); } }, 400); }
+  // Spec pills swap the paragraph.
+  const specs = ["<b>Two sizes.</b> A compact one for the bag and a big one for the desk.", "<b>Two finishes.</b> A deep dark and a classic silver.", "<b>A bright display</b> with deep blacks, even outdoors.", "<b>Fast ports on both sides</b> and a card slot for the camera.", "<b>A sharper camera</b> that keeps you centered on calls."];
+  const spec = document.querySelector("[data-spec]"), pills = [...document.querySelectorAll("[data-pills] button")];
+  const pick = (i) => { pills.forEach((p, k) => p.setAttribute("aria-pressed", String(k === i))); spec.innerHTML = specs[i]; };
+  pills.forEach((p, i) => p.addEventListener("click", () => pick(i))); pick(0);
+  // Pinned stage: three chips in turn, color field follows.
+  const stages = [["X5", "Everyday speed that never spins a fan.", "#1d4fb8", "#3ad2d0"], ["X5 Pro", "Twice the cores for code and color.", "#3a4ae0", "#6a8af0"], ["X5 Max", "Big renders, finished before lunch.", "#7a3ad8", "#d04ab8"]];
+  const perf = document.querySelector("[data-perf]"), big = perf.querySelector("[data-big]"), line = perf.querySelector("[data-line]"), blob = perf.querySelector("[data-blob]"), steps = [...perf.querySelectorAll("[data-steps] i")];
+  let cur = 0;
+  const set = (i) => { if (i === cur) return; cur = i; const [b, l, c1, c2] = stages[i]; big.textContent = b; line.textContent = l; blob.style.setProperty("--c1", c1); blob.style.setProperty("--c2", c2); steps.forEach((s, k) => s.toggleAttribute("data-on", k === i)); };
+  if (!reduced) scene(perf, (p) => set(Math.min(2, Math.floor(range(p, 0.05, 0.95) * 3))));
+  // Nav turns light over the light shopping zone.
+  const nav = document.querySelector("[data-lnav]"), zone = document.querySelector("[data-light-zone]");
+  const chk = () => nav.toggleAttribute("data-light", zone.getBoundingClientRect().top <= 52);
+  addEventListener("scroll", chk, { passive: true }); chk();
+  document.querySelectorAll(".compare article").forEach((art) => { const lap = art.querySelector("[data-lap]"), sw = [...art.querySelectorAll(".sw button")]; sw.forEach((b) => b.addEventListener("click", () => { sw.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); const [a, c] = b.dataset.c.split(","); lap.style.setProperty("--a", a); lap.style.setProperty("--b", c); })); });
+})();
+</script>
+</body>
+</html>

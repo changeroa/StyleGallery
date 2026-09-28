@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Rebellions - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="리벨리온 홈의 다크 하드웨어 히어로, 형광 연두 단일 강조, 헤어라인 분할 레이아웃을 원본 카피·사진 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231c2025'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23b6ff3b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --lime: #b6ff3b; --slate: #262b31; --slate-2: #1c2025; --paper: #f3f5f7; --ink: #15181b; --grey: #5a616a; --line: #dde2e7; --sans: "Inter Tight", "Pretendard Variable", Pretendard, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace; --sg-header: 90px; --sg-focus: #6fae00; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 15px/1.6 var(--sans); letter-spacing: -0.01em; word-break: keep-all; }
+  .bar-note { background: var(--slate); color: #e8ecef; font-size: 12px; padding: 9px; text-align: center; }
+  .bar-note::before, .bar-note::after { background: var(--lime); content: ""; display: inline-block; block-size: 12px; inline-size: 2px; margin-inline: 12px; vertical-align: -2px; }
+  .site-header { background: rgb(28 32 37 / 0.97); backdrop-filter: blur(10px); color: #fff; position: sticky; top: 0; z-index: 30; transition: background .4s, color .4s; }
+  .site-header[data-light] { background: rgb(255 255 255 / 0.97); color: var(--ink); box-shadow: 0 1px 0 var(--line); }
+  .site-header .in { align-items: center; display: flex; gap: 34px; block-size: 72px; padding-inline: 40px; }
+  .logo { color: inherit; font-weight: 500; letter-spacing: -0.02em; text-decoration: none; font-size: 18px; }
+  .logo span { color: var(--lime); }
+  .site-header[data-light] .logo span { color: #5a8f00; }
+  .site-header nav { display: flex; gap: 26px; }
+  .site-header nav a { color: inherit; font-size: 13px; text-decoration: none; opacity: 0.9; }
+  .cta-cell { align-items: center; background: none; border: 0; color: var(--lime); display: flex; font-size: 13px; gap: 6px; margin-inline-start: auto; padding: 8px 12px; }
+  .site-header[data-light] .cta-cell { background: #e7ecf1; color: #3e6a00; }
+  @media (max-width: 860px) { .site-header nav { display: none; } .site-header .in { padding-inline: 20px; } }
+
+  /* Hero: a drawn server chassis in grey light, one lime CTA. */
+  .hero { background: radial-gradient(60% 70% at 60% 30%, #3a3f46, #111316 70%); color: #fff; min-block-size: 92vh; overflow: hidden; position: relative; }
+  .rig { inset: 0; position: absolute; }
+  .rig svg { block-size: 100%; inline-size: 100%; }
+  .hero .copy { background: linear-gradient(0deg, rgb(10 12 14 / 0.85), transparent); inset: auto 0 0; padding: 120px 40px 30px; position: absolute; }
+  .hero h1 { font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 400; letter-spacing: -0.03em; }
+  .hero h1 sup { font-size: 0.4em; }
+  .hero p { color: #d8dde2; margin-block: 6px 0; }
+  .lime-btn { align-items: center; background: var(--lime); border: 0; color: #15180e; display: inline-flex; font-size: 13px; font-weight: 500; gap: 24px; padding: 10px 16px; }
+  .hero .lime-btn { inset: auto 40px 90px auto; position: absolute; }
+  .tabs { border-block-start: 1px solid rgb(255 255 255 / 0.15); display: grid; grid-template-columns: repeat(4, 1fr); margin-block-start: 30px; }
+  .tabs button { background: none; border: 0; border-inline-start: 1px solid rgb(255 255 255 / 0.1); color: #b8bec6; font-size: 12px; padding: 12px 14px; text-align: start; }
+  .tabs button:first-child { border: 0; }
+  .tabs button[aria-selected="true"] { color: var(--lime); }
+  .tabs small { color: #b8bec6; display: block; font-size: 11px; }
+  @media (max-width: 860px) { .hero .lime-btn { inset: 20px auto auto 20px; z-index: 2; } .tabs { grid-template-columns: 1fr 1fr; } }
+  .slogan { background: var(--slate); color: #fff; padding: 140px 40px; }
+  .slogan hr { background: var(--lime); block-size: 2px; border: 0; inline-size: 60px; margin: 0 0 24px; }
+  .slogan h2 { font-size: clamp(2rem, 4.2vw, 3.6rem); font-weight: 400; letter-spacing: -0.03em; line-height: 1.12; }
+  /* Hairline split scenes on pale grey. */
+  .split { background: var(--paper); border-block-end: 1px solid var(--line); display: grid; grid-template-columns: 576px 1fr; min-block-size: 640px; }
+  .split .txt { border-inline-end: 1px solid var(--line); padding: 90px 40px; }
+  .split h2 { font-size: clamp(1.7rem, 2.8vw, 2.4rem); font-weight: 400; letter-spacing: -0.03em; line-height: 1.25; }
+  .split p { color: var(--grey); font-size: 14px; margin-block: 20px 28px; max-inline-size: 38ch; }
+  .split .vis { display: grid; overflow: hidden; padding: 30px; place-items: center; position: relative; }
+  .racks { display: flex; gap: 10px; block-size: 100%; inline-size: 100%; }
+  .rack { background: repeating-linear-gradient(0deg, #2b3036 0 10px, #3a4048 10px 12px), #2b3036; border: 1px solid #454c55; flex: 1; position: relative; }
+  .rack::after { background: var(--lime); block-size: 2px; content: ""; inline-size: 40%; inset: 30% auto auto 30%; position: absolute; box-shadow: 0 0 12px var(--lime); animation: led 2.4s ease-in-out infinite; }
+  .rack:nth-child(2n)::after { animation-delay: -1.2s; }
+  @keyframes led { 50% { opacity: .3; } }
+  .models { display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); inline-size: 100%; }
+  .model { background: #e3e8ee; border-radius: 6px; padding: 14px; font-size: 13px; }
+  .model b { display: block; font-size: 17px; font-weight: 500; }
+  .model small { color: var(--grey); }
+  .compare { background: var(--slate-2); border-radius: 6px; color: #fff; grid-column: 1 / -1; padding: 18px; font: 12px var(--mono); }
+  .cbar { align-items: center; display: grid; gap: 10px; grid-template-columns: 110px 1fr 60px; margin-block: 8px; }
+  .cbar i { background: #3a4048; block-size: 10px; display: block; }
+  .cbar i::after { background: var(--lime); block-size: 100%; content: ""; display: block; inline-size: var(--w); transform-origin: left; transform: scaleX(var(--g, 1)); transition: transform 1.4s var(--ease); }
+  .cbar.gpu i::after { background: #9aa3ad; }
+  .stack { display: grid; gap: 6px; inline-size: min(420px, 100%); }
+  .layer { border: 1px solid #b9c2cc; font: 12px var(--mono); padding: 12px 14px; background: #fff; transform: translateX(calc(var(--i) * 18px)); transition: transform .6s var(--ease); }
+  .layer:first-child { background: var(--lime); border-color: var(--lime); }
+  .split:hover .layer { transform: translateX(calc(var(--i) * 26px)); }
+  .hw { align-items: flex-end; display: flex; gap: 20px; }
+  .hw .card { background: linear-gradient(180deg, #2b3036, #1c2025); block-size: 60px; inline-size: 160px; border: 1px solid #454c55; }
+  .hw .srv { background: repeating-linear-gradient(90deg, #2b3036 0 8px, #3a4048 8px 10px); block-size: 110px; inline-size: 180px; border: 1px solid #454c55; }
+  .hw .rackx { background: repeating-linear-gradient(0deg, #2b3036 0 8px, #3a4048 8px 10px); block-size: 360px; inline-size: 120px; border: 1px solid #454c55; position: relative; }
+  .hw .rackx::after { background: var(--lime); block-size: 2px; content: ""; inline-size: 50%; inset: 20% auto auto 25%; position: absolute; }
+  @media (max-width: 960px) { .split { grid-template-columns: 1fr; } .split .txt { border: 0; padding: 60px 20px 30px; } .split .vis { min-block-size: 320px; } .hw .rackx { block-size: 220px; } }
+  .partners { padding: 110px 40px; }
+  .partners h2 { font-size: 28px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; }
+  .pgrid { display: grid; gap: 40px 30px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); margin-block-start: 60px; }
+  .pgrid span { color: #3a4048; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .quote { border-block: 1px solid var(--line); padding: 110px 40px; text-align: center; }
+  .quote blockquote { font-size: clamp(1.1rem, 1.8vw, 1.4rem); margin: 0 auto; max-inline-size: 36ch; position: relative; }
+  .quote blockquote::before { color: #5a8f00; content: "\201C"; font-size: 5rem; inset: -60px auto auto -40px; position: absolute; line-height: 1; }
+  .quote p { margin-block: 26px; }
+  .updates { padding: 80px 40px; }
+  .updates .h { align-items: center; display: flex; justify-content: space-between; margin-block-end: 26px; }
+  .updates h2 { font-size: 28px; font-weight: 400; }
+  .ugrid { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); }
+  .upd .pic { aspect-ratio: 1.1; background: linear-gradient(135deg, #1c2025, #3a4048); position: relative; overflow: hidden; }
+  .upd .pic::before { background: repeating-linear-gradient(45deg, transparent 0 18px, rgb(182 255 59 / 0.12) 18px 20px); content: ""; inset: 0; position: absolute; }
+  .upd .chip { background: #000; color: var(--lime); font: 10px var(--mono); inset: auto auto 0 0; padding: 3px 8px; position: absolute; }
+  .upd h3 { font-size: 14px; font-weight: 500; margin-block-start: 12px; }
+  @media (max-width: 900px) { .ugrid { grid-template-columns: 1fr 1fr; } }
+  .contact { align-items: center; background: var(--paper); display: flex; gap: 30px; justify-content: space-between; padding: 70px 40px; }
+  .contact h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; }
+  .contact p { color: var(--grey); }
+  .plus { background: #dfe6ed; border: 0; block-size: 90px; color: var(--ink); flex: none; font-size: 40px; inline-size: 90px; transition: background .3s, transform .3s var(--ease); }
+  .plus:hover { background: var(--lime); transform: rotate(90deg); }
+  footer { background: var(--slate-2); color: #c9ced4; font-size: 12px; padding: 60px 40px; }
+  footer a { color: var(--lime); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<p class="bar-note">새 SDK 버전 공개 (스터디용 예시 공지)</p>
+<header class="site-header" data-header data-hdr>
+  <div class="in">
+    <a class="logo" href="#top">Rebellions</a>
+    <nav aria-label="섹션"><a href="#perf">Products</a><a href="#models">Applications</a><a href="#stack">Developers</a><a href="#updates">Resources</a></nav>
+    <button class="cta-cell" type="button" data-demo="비공식 스터디: 도입 문의는 전송되지 않아요.">&#9636; 도입 문의하기</button>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-h" data-hero>
+    <div class="rig" aria-hidden="true"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="m" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6a7078"/><stop offset="1" stop-color="#22262b"/></linearGradient></defs><g transform="translate(420 120) skewY(-8)" data-rig><rect width="760" height="420" fill="url(#m)"/></g></svg></div>
+    <div class="copy">
+      <h1 id="hero-h">NPU Server S1<sup>(가상 제품)</sup></h1>
+      <p>큰 모델을 적은 전력으로 돌리기 위한 추론 서버</p>
+      <div class="tabs" role="tablist" aria-label="제품 (가상)" data-hero-tabs>
+        <button role="tab" aria-selected="true">Server S1<small>랙 한 칸 추론 서버</small></button>
+        <button role="tab" aria-selected="false">Card C1<small>PCIe 가속 카드</small></button>
+        <button role="tab" aria-selected="false">Rack R8<small>여덟 대를 묶은 랙</small></button>
+        <button role="tab" aria-selected="false">Pod P64<small>데이터센터 단위</small></button>
+      </div>
+    </div>
+    <button class="lime-btn" type="button" data-demo="비공식 스터디: 제품 상세는 없어요.">자세히 보기 <span aria-hidden="true">&rsaquo;</span></button>
+  </section>
+
+  <section class="slogan" aria-labelledby="slogan-h"><hr><h2 id="slogan-h">Inference at rack scale,<br>on a power budget<br>you can plan around.</h2></section>
+
+  <section class="split" id="perf" aria-labelledby="perf-h" data-light>
+    <div class="txt"><h2 id="perf-h">큰 모델의 추론을<br>더 적은 전력으로</h2><p>요청이 몰려도 응답 시간을 지키면서, 한 번의 답에 드는 전기를 줄이는 것을 목표로 설계했어요. (스터디용 설명)</p><button class="lime-btn" type="button" data-demo="비공식 스터디: 성능 자료는 없어요.">성능 보기 <span aria-hidden="true">&rsaquo;</span></button></div>
+    <div class="vis" data-ambient aria-hidden="true"><div class="racks"><div class="rack"></div><div class="rack"></div><div class="rack"></div><div class="rack"></div><div class="rack"></div></div></div>
+  </section>
+
+  <section class="split" id="models" aria-labelledby="models-h" data-light>
+    <div class="txt"><h2 id="models-h">수백 가지 공개 모델을<br>바로 올려 쓰는<br>AI 서비스</h2><p>언어, 이미지, 음성 모델을 변환 없이 불러와 서비스로 연결해요. (모델 이름은 모두 일반 명칭 예시)</p><button class="lime-btn" type="button" data-demo="비공식 스터디: 모델 목록은 없어요.">모델 목록 <span aria-hidden="true">&rsaquo;</span></button></div>
+    <div class="vis"><div class="models" aria-label="지원 모델 예시와 가상 성능 비교">
+      <div class="model"><b>LLM 70B</b><small>언어 모델</small></div><div class="model"><b>Diffusion XL</b><small>이미지 생성</small></div><div class="model"><b>Vision-S</b><small>객체 인식</small></div>
+      <div class="model"><b>Speech-M</b><small>음성 인식</small></div><div class="model"><b>Embed-L</b><small>검색 임베딩</small></div><div class="model"><b>Code 34B</b><small>코드 생성</small></div>
+      <div class="compare" data-compare><div>와트당 처리량 (가상 비교)</div><div class="cbar"><span>NPU S1</span><i style="--w:92%"></i><span>1.0x</span></div><div class="cbar gpu"><span>범용 GPU</span><i style="--w:48%"></i><span>0.52x</span></div></div>
+    </div></div>
+  </section>
+
+  <section class="split" id="stack" aria-labelledby="stack-h" data-light>
+    <div class="txt"><h2 id="stack-h">익숙한 도구 그대로,<br>간편한 도입</h2><p>이미 쓰는 프레임워크 위에서 컴파일러와 런타임이 알아서 이어져요.</p><button class="lime-btn" type="button" data-demo="비공식 스터디: 개발자 문서는 없어요.">개발자 문서 <span aria-hidden="true">&rsaquo;</span></button></div>
+    <div class="vis"><div class="stack" aria-label="소프트웨어 스택 예시"><div class="layer" style="--i:0">ML Frameworks</div><div class="layer" style="--i:1">Compiler</div><div class="layer" style="--i:2">Runtime</div><div class="layer" style="--i:3">Driver</div><div class="layer" style="--i:4">Firmware</div><div class="layer" style="--i:5">NPU Hardware</div></div></div>
+  </section>
+
+  <section class="split" aria-labelledby="scale-h" data-light>
+    <div class="txt"><h2 id="scale-h">카드 한 장에서<br>데이터센터까지</h2><p>작게 시작해서 필요한 만큼 늘리는 구성이에요.</p><button class="lime-btn" type="button" data-demo="비공식 스터디: 구성 안내는 없어요.">구성 보기 <span aria-hidden="true">&rsaquo;</span></button></div>
+    <div class="vis" aria-hidden="true"><div class="hw"><div class="card"></div><div class="srv"></div><div class="rackx"></div></div></div>
+  </section>
+
+  <section class="partners" aria-labelledby="partners-h" data-light><h2 id="partners-h">Investors<br>&amp; Partners (fictional)</h2><div class="pgrid"><span>NORTHWIND</span><span>Meridian</span><span>HELIOS</span><span>arcline</span><span>BLUESTONE</span><span>kite&amp;co</span><span>PARALLAX</span><span>Quanta</span><span>sora</span><span>driftwood</span></div></section>
+  <section class="quote" aria-labelledby="quote-h" data-light><h2 class="sg-visually-hidden" id="quote-h">파트너의 말</h2><blockquote>Owning the compute layer is how a region keeps its AI choices in its own hands.</blockquote><p>Mina Ortega, 가상의 투자 파트너</p><button class="lime-btn" type="button" data-demo="비공식 스터디: 도입 사례는 없어요.">도입 사례 <span aria-hidden="true">&rsaquo;</span></button></section>
+  <section class="updates" id="updates" aria-labelledby="up-h" data-light><div class="h"><h2 id="up-h">Latest Updates</h2></div><div class="ugrid">
+    <article class="upd"><div class="pic" aria-hidden="true"><span class="chip">WHITE PAPER</span></div><h3>NPU로 언어 모델 응답 시간을 줄이는 방법 (가상 문서)</h3></article>
+    <article class="upd"><div class="pic" aria-hidden="true"><span class="chip">NEWS</span></div><h3>새 가속 카드 공개 (가상 소식)</h3></article>
+    <article class="upd"><div class="pic" aria-hidden="true"><span class="chip">BLOG</span></div><h3>전력 한계 안에서 모델 키우기 (가상 글)</h3></article>
+    <article class="upd"><div class="pic" aria-hidden="true"><span class="chip">EVENT</span></div><h3>개발자 밋업 기록 (가상 행사)</h3></article>
+  </div></section>
+  <section class="contact" aria-labelledby="ct-h" data-light><div><h2 id="ct-h">도입 문의하기</h2><p>작은 실험부터 대규모 구축까지 이야기를 남겨주세요. (스터디용)</p></div><button class="plus" type="button" aria-label="문의 남기기 (예시)" data-demo="비공식 스터디: 문의는 전송되지 않아요.">+</button></section>
+</main>
+<footer><strong style="color:#fff">Unofficial</strong> brand study of Rebellions by StyleGallery. 리벨리온과 무관하며, 제품명, 파트너, 인용은 모두 가상입니다. <a href="../">모든 스터디</a></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Rebellions by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene } = window.SG;
+  // Draw the server chassis: front bays, vents, and a lime status line.
+  const rig = document.querySelector("[data-rig]");
+  let bays = "";
+  for (let i = 0; i < 10; i++) bays += `<rect x="${40 + i * 70}" y="60" width="54" height="300" fill="#1b1e22" stroke="#4a5058"/><rect x="${48 + i * 70}" y="80" width="38" height="4" fill="${i === 3 ? "#b6ff3b" : "#5a6068"}"/>${Array.from({ length: 14 }, (_, k) => `<rect x="${48 + i * 70}" y="${110 + k * 16}" width="38" height="6" fill="#2a2e33"/>`).join("")}`;
+  rig.innerHTML = `<rect width="760" height="420" fill="url(#m)"/>${bays}<rect x="0" y="400" width="760" height="20" fill="#0f1113"/>`;
+  const hero = document.querySelector("[data-hero]");
+  if (!reduced) scene(hero, (p) => { rig.parentElement.style.transform = `scale(${1 + p * 0.15}) translateY(${p * 40}px)`; });
+  // Header turns light over light scenes.
+  const hdr = document.querySelector("[data-hdr]");
+  const lights = [...document.querySelectorAll("[data-light]")];
+  const check = () => { const y = hdr.getBoundingClientRect().bottom; hdr.toggleAttribute("data-light", lights.some((s) => { const r = s.getBoundingClientRect(); return r.top <= y && r.bottom > y; })); };
+  addEventListener("scroll", check, { passive: true }); check();
+  // Hero tabs are real; comparison bars grow on arrival.
+  const tabs = [...document.querySelectorAll("[data-hero-tabs] [role=tab]")];
+  const names = ["NPU Server S1", "Accelerator Card C1", "Rack R8", "Pod P64"];
+  tabs.forEach((t, i) => t.addEventListener("click", () => { tabs.forEach((o) => o.setAttribute("aria-selected", String(o === t))); document.querySelector("#hero-h").innerHTML = `${names[i]}<sup>(가상 제품)</sup>`; }));
+  const cmp = document.querySelector("[data-compare]");
+  if (!reduced) { cmp.querySelectorAll("i").forEach((i) => i.style.setProperty("--g", "0")); new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); cmp.querySelectorAll("i").forEach((i) => i.style.setProperty("--g", "1")); }, { threshold: 0.5 }).observe(cmp); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>캐치테이블 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="캐치테이블 웹의 모바일 셸 레이아웃과 맛집 큐레이션 피드를 원본 사진·카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff3d00'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --red: #ff3d00; --red-ink: #d42f00; --ink: #111; --grey: #6b6b6b; --line: #eee; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 110px; --sg-focus: #d42f00; }
+  body { background: #2b2b2e; color: var(--ink); font: 400 14px/1.5 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  /* The whole site is one phone-width column centered on a dark desk. */
+  .app { background: #fff; margin-inline: auto; max-inline-size: 480px; min-block-size: 100vh; position: relative; }
+  .top { background: #fff; position: sticky; top: 0; z-index: 20; }
+  .bar { align-items: center; display: flex; gap: 10px; padding: 10px 16px 6px; }
+  .c { background: var(--red-ink); border-radius: 50%; color: #fff; display: grid; font-weight: 900; block-size: 30px; inline-size: 30px; place-items: center; text-decoration: none; flex: none; }
+  .search { background: #f4f4f4; border-radius: 999px; flex: 1; display: flex; min-inline-size: 0; padding: 8px 14px; }
+  .search input { background: none; border: 0; flex: 1; font: inherit; outline: none; min-inline-size: 0; }
+  .ibtn { background: none; border: 0; font-size: 18px; position: relative; }
+  .dot::after { background: var(--red); border-radius: 50%; block-size: 6px; content: ""; inline-size: 6px; inset: 2px 0 auto auto; position: absolute; }
+  .tabs { display: flex; gap: 16px; overflow-x: auto; padding: 4px 16px 0; scrollbar-width: none; border-block-end: 1px solid var(--line); }
+  .tabs a { border-block-end: 2px solid transparent; color: var(--grey); font-weight: 600; padding-block: 8px; text-decoration: none; white-space: nowrap; }
+  .tabs a[aria-current] { border-color: var(--ink); color: var(--ink); }
+  .hero { display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .hcard { aspect-ratio: 0.9; border-radius: 14px; color: #fff; display: flex; flex: 0 0 88%; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 18px; position: relative; scroll-snap-align: center; }
+  .hcard .bg { inset: 0; position: absolute; }
+  .hcard .cap { background: linear-gradient(0deg, rgb(0 0 0 / 0.65), transparent); margin: -18px; padding: 70px 18px 18px; position: relative; }
+  .hcard strong { display: block; font-size: 21px; line-height: 1.3; }
+  .hcard span { font-size: 13px; }
+  .quick { display: grid; gap: 10px 4px; grid-template-columns: repeat(5, 1fr); padding: 6px 12px 16px; text-align: center; }
+  .quick button { background: none; border: 0; color: var(--ink); display: grid; font: 500 11px var(--sans); gap: 4px; justify-items: center; position: relative; }
+  .quick span { background: #fff4f0; border-radius: 14px; block-size: 44px; display: grid; font-size: 20px; inline-size: 44px; place-items: center; }
+  .quick em { background: var(--red-ink); border-radius: 999px; color: #fff; font-size: 9px; font-style: normal; inset: -4px 2px auto auto; padding: 0 5px; position: absolute; }
+  .band { background: #f6f6f6; block-size: 8px; }
+  .sec { padding: 22px 16px 6px; }
+  .sec-h { align-items: flex-end; display: flex; justify-content: space-between; margin-block-end: 12px; }
+  .sec-h h2 { font-size: 18px; font-weight: 700; }
+  .sec-h p { color: var(--grey); font-size: 12px; }
+  .sec-h button { background: none; border: 0; color: var(--grey); font-size: 12px; flex: none; }
+  .row { display: flex; gap: 10px; overflow-x: auto; padding-block-end: 8px; scrollbar-width: none; }
+  .shop { flex: 0 0 150px; }
+  .shop .pic { aspect-ratio: 1; border-radius: 10px; overflow: hidden; }
+  .shop h3 { font-size: 14px; margin-block-start: 8px; }
+  .shop p { color: var(--grey); font-size: 12px; }
+  .star { color: #8a5d00; font-weight: 700; }
+  .price-tabs { display: flex; gap: 16px; margin-block-end: 8px; }
+  .price-tabs button { background: none; border: 0; border-block-end: 2px solid transparent; color: var(--grey); font: 600 14px var(--sans); padding: 4px 0; }
+  .price-tabs button[aria-selected="true"] { border-color: var(--ink); color: var(--ink); }
+  .list li { align-items: center; border-block-end: 1px solid var(--line); display: grid; gap: 12px; grid-template-columns: 64px minmax(0, 1fr) auto; padding-block: 12px; }
+  .list .pic { aspect-ratio: 1; border-radius: 8px; overflow: hidden; }
+  .list h3 { font-size: 15px; }
+  .list p { color: var(--grey); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .save { background: none; border: 0; font-size: 18px; color: #767676; }
+  .save[aria-pressed="true"] { color: var(--red-ink); }
+  .outline { background: #fff; border: 1px solid #ddd; border-radius: 8px; display: block; font: 600 13px var(--sans); inline-size: 100%; margin-block: 12px 10px; padding: 11px; }
+  .legal { background: #f6f6f6; color: var(--grey); font-size: 11px; padding: 20px 16px 90px; }
+  .legal a { color: var(--ink); }
+  .tabbar { background: #fff; border-block-start: 1px solid var(--line); display: grid; grid-template-columns: repeat(5, 1fr); inset: auto 0 0; margin-inline: auto; max-inline-size: 480px; padding: 6px 0 10px; position: fixed; text-align: center; z-index: 20; }
+  .tabbar button { background: none; border: 0; color: var(--grey); display: grid; font: 500 10px var(--sans); gap: 2px; justify-items: center; }
+  .tabbar button[aria-current] { color: var(--ink); }
+  .tabbar span { font-size: 18px; }
+  .desk-note { color: #d0d0d4; font-size: 13px; inset: 40% auto auto 40px; max-inline-size: 260px; position: fixed; }
+  .desk-note b { color: #fff; display: block; font-size: 22px; margin-block-end: 8px; }
+  @media (max-width: 1100px) { .desk-note { display: none; } }
+  .sg-studybar { margin-inline: auto; max-inline-size: 480px; padding-block-end: 80px; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<p class="desk-note" aria-hidden="true"><b>Unofficial</b>캐치테이블 웹을 재해석한 스터디예요. 넓은 화면에서도 앱처럼 가운데 한 줄로 보여요.</p>
+<div class="app">
+  <header class="top">
+    <div class="bar"><a class="c" href="#top" aria-label="처음으로">C</a><label class="search"><span class="sg-visually-hidden">검색</span><input type="search" placeholder="오늘 어디서 먹을까요?"></label><button class="ibtn dot" type="button" aria-label="최근 본 곳 (예시)" data-demo="비공식 스터디: 최근 본 곳은 없어요.">&#9719;</button><button class="ibtn" type="button" aria-label="알림 (예시)" data-demo="비공식 스터디: 알림은 없어요.">&#128276;</button></div>
+    <nav class="tabs" aria-label="섹션"><a href="#top" aria-current="page">홈</a><a href="#near">동네 맛집</a><a href="#price">가격대별</a><a href="#now">바로 예약</a></nav>
+  </header>
+  <main id="main">
+    <section id="top" aria-label="이번 주 추천 (예시)"><div class="hero" data-hero tabindex="0" aria-label="추천 카드, 가로로 넘겨요"></div></section>
+    <div class="quick" data-quick></div>
+    <div class="band"></div>
+    <section class="sec" id="near" aria-labelledby="near-h"><div class="sec-h"><div><h2 id="near-h">퇴근길에 들르기 좋은 곳</h2><p>역에서 걸어서 10분 안쪽</p></div><button type="button" data-demo="비공식 스터디: 전체 목록은 없어요.">전체보기</button></div><div class="row" data-row="bowl,meat,fruit,bowl" tabindex="0" aria-label="가게 목록, 가로로 넘겨요"></div></section>
+    <section class="sec" id="price" aria-labelledby="price-h"><div class="sec-h"><div><h2 id="price-h">가격대로 고르는 저녁</h2><p>1인 기준 (예시)</p></div></div>
+      <div class="price-tabs" role="tablist" aria-label="가격대" data-price><button role="tab" aria-selected="false">~3만원</button><button role="tab" aria-selected="true">3~5만원</button><button role="tab" aria-selected="false">5만원~</button></div>
+      <ul class="list" role="list" data-list></ul>
+      <button class="outline" type="button" data-demo="비공식 스터디: 매장 목록은 없어요.">이 가격대 가게 더 보기</button></section>
+    <div class="band"></div>
+    <section class="sec" id="now" aria-labelledby="now-h"><div class="sec-h"><div><h2 id="now-h">오늘 저녁 바로 예약</h2><p>남은 자리가 있어요</p></div></div><div class="row" data-row="meat,bowl,bowl,fruit" tabindex="0" aria-label="예약 가능한 가게, 가로로 넘겨요"></div></section>
+    <p class="legal"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 &middot; 캐치테이블과 무관합니다. 가게 이름과 평점은 모두 지어낸 예시예요. <a href="../">모든 스터디</a></p>
+  </main>
+  <nav class="tabbar" aria-label="앱 탭 (예시)"><button type="button" aria-current="page" data-demo="이미 홈이에요."><span aria-hidden="true">&#8962;</span>홈</button><button type="button" data-demo="비공식 스터디: 저장 목록은 없어요."><span aria-hidden="true">&#9825;</span>저장</button><button type="button" data-demo="비공식 스터디: 지도는 없어요."><span aria-hidden="true">&#9906;</span>내 주변</button><button type="button" data-demo="비공식 스터디: 예약 내역은 없어요."><span aria-hidden="true">&#128197;</span>예약</button><button type="button" data-demo="비공식 스터디: 내 정보는 없어요."><span aria-hidden="true">&#128100;</span>MY</button></nav>
+</div>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Catch Table by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art } = window.SG;
+  const food = (k, i) => art(k, { ground: ["#3a2418", "#f3e6d6", "#2a2a2a", "#efe4d2"][i % 4], main: ["#c9602a", "#b0402a", "#e0503a", "#8a5a2a"][i % 4], accent: "#f1c27d" });
+  document.querySelector("[data-hero]").innerHTML = [["가을에만 여는<br>제철 코스", "서촌 &middot; 한식 다이닝 (가상)", "meat"], ["예약 없이 못 가는<br>골목 파스타", "성수 &middot; 이탈리안 (가상)", "bowl"], ["바 좌석에서 즐기는<br>오마카세", "청담 &middot; 일식 (가상)", "fruit"]].map(([t, s, k], i) => `<article class="hcard"><div class="bg" aria-hidden="true">${food(k, i)}</div><div class="cap"><strong>${t}</strong><span>${s}</span></div></article>`).join("");
+  document.querySelector("[data-quick]").innerHTML = [["&#128205;", "동네지도", "N"], ["&#127991;", "단독혜택"], ["&#9200;", "웨이팅"], ["&#127863;", "와인바"], ["&#127836;", "라멘"], ["&#127843;", "스시"], ["&#129385;", "고기"], ["&#127856;", "디저트", "N"], ["&#9749;", "카페"], ["&#127866;", "야장"]].map(([e, t, b]) => `<button type="button" data-demo="비공식 스터디: '${t}' 목록은 없어요."><span aria-hidden="true">${e}</span>${t}${b ? `<em>${b}</em>` : ""}</button>`).join("");
+  const shops = ["솔밭식당", "모퉁이화덕", "달빛스시", "오늘의국수", "강변그릴", "소반", "파란문", "작은부엌"];
+  let n = 0;
+  document.querySelectorAll("[data-row]").forEach((row) => { row.innerHTML = row.dataset.row.split(",").map((k) => { n++; return `<article class="shop"><div class="pic" aria-hidden="true">${food(k, n)}</div><h3>${shops[n % shops.length]}</h3><p><span class="star">&#9733; ${(4.3 + (n % 7) / 10).toFixed(1)}</span> &middot; ${["한식", "양식", "일식", "중식"][n % 4]} &middot; 동네 (가상)</p></article>`; }).join(""); });
+  const lists = [["오늘의국수", "국물이 맑고 면이 쫄깃한 동네 국숫집 (예시 설명이 길어지면 말줄임으로 잘려요)", "bowl"], ["소반", "계절 반찬이 매일 바뀌는 한 상 차림", "meat"], ["파란문", "창가 자리가 좋은 작은 비스트로", "fruit"]];
+  const list = document.querySelector("[data-list]");
+  const render = (off) => { list.innerHTML = lists.map(([t, d, k], i) => `<li><div class="pic" aria-hidden="true">${food(k, i + off)}</div><div><h3>${t}</h3><p>${d}</p><p><span class="star">&#9733; 4.${6 + ((i + off) % 4)}</span> &middot; 1인 ${3 + off}만원대</p></div><button class="save" type="button" aria-pressed="false" aria-label="${t} 저장">&#9829;</button></li>`).join(""); };
+  render(1);
+  const tabs = [...document.querySelectorAll("[data-price] button")];
+  tabs.forEach((t, i) => t.addEventListener("click", () => { tabs.forEach((o) => o.setAttribute("aria-selected", String(o === t))); render(i); }));
+  document.addEventListener("click", (e) => { const s = e.target.closest(".save"); if (s) s.setAttribute("aria-pressed", String(s.getAttribute("aria-pressed") !== "true")); });
+})();
+</script>
+</body>
+</html>

@@ -38,18 +38,18 @@ Mood: a well-made independent magazine. Off-white paper, heavy grotesk display, 
 
 | Role | Value |
 | --- | --- |
-| Hero display | `--grotesk` 800, `clamp(3rem, 12vw, 12.5rem)`, tracking -0.05em, line height 0.85, uppercase optional |
-| Section display | `--grotesk` 700, `clamp(2.2rem, 6vw, 6rem)`, tracking -0.04em |
+| Hero display | `--grotesk` 800, `clamp(2.8rem, 1.4rem + 5vw, 7rem)`, tracking -0.03em, line height 1.0, uppercase optional. Measured editorial and creative homepages top out at a median 88px ([Display Type Calibration](../techniques/display-type-calibration.md)) |
+| Section display | `--grotesk` 700, `clamp(2rem, 1.2rem + 2.8vw, 3.8rem)`, tracking -0.025em |
 | Body | `--text` 400, 1.125rem, line height 1.6, max 34rem measure |
 | Labels | `--mono` 0.72rem, uppercase, tracking 0.1em, preceded by a `--rule` hairline |
 | Grid | Visible 1px `--rule` column lines on a 12-column grid at 64rem and wider |
 | Surfaces | Flat `--paper-2`, no shadows, no radius or at most 0.25rem |
-| Images | Duotone via `mix-blend-mode: multiply` over `--spot`, or grayscale plus [halftone](../techniques/grain-and-texture.md#halftone) |
-| Motion density | Few entrances, crisp: 0.6-0.8s, `--ease-out`, line-by-line reveals, one horizontal marquee of headlines |
+| Images | One picture or drawn plate per spread and at least one per screen ([Image Weight](../techniques/image-weight.md)), duotone via `mix-blend-mode: multiply` over `--spot`, or grayscale plus [halftone](../techniques/grain-and-texture.md#halftone) |
+| Motion density | Few entrances, crisp: 0.6-0.8s, `--ease-out`, line-by-line reveals, one horizontal marquee of headlines, and underline or color responses on every link and card at 150-250ms |
 
 ## Opinionated Guidance
 
-Light editorial pages die from timidity. Make the display type uncomfortably big, let one headline break the grid, and keep everything else strictly on it.
+Light editorial pages die from timidity, but the cure is pictures and a strict grid, not size. Give every spread an image, let one headline break the grid, and keep everything else strictly on it.
 
 ## Platform-Specific Guidance
 

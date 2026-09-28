@@ -1,0 +1,69 @@
+/* Shared floor for showcase studies: box model, focus, hash landing, split words,
+   ambient pausing, reduced motion, the demo status region, and the unofficial study bar. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--sg-header, 88px); }
+body { margin: 0; min-block-size: 100vh; overflow-x: clip; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+img, svg, video, canvas { display: block; max-inline-size: 100%; }
+[hidden] { display: none !important; }
+button { cursor: pointer; font: inherit; }
+a { color: inherit; }
+h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
+ul[role="list"], ol[role="list"] { list-style: none; margin: 0; padding: 0; }
+[id] { scroll-margin-top: var(--sg-header, 88px); }
+:focus-visible { outline: 2px solid var(--sg-focus, #4c8dff); outline-offset: 3px; }
+
+.sg-skip { background: #000; color: #fff; left: 12px; padding: 10px 14px; position: fixed; top: -80px; z-index: 1000; border-radius: 8px; }
+.sg-skip:focus { top: 12px; }
+.sg-visually-hidden { block-size: 1px; clip-path: inset(50%); inline-size: 1px; overflow: hidden; position: absolute; white-space: nowrap; }
+
+.sg-word { display: inline-block; overflow: clip; overflow-clip-margin: 0.12em; padding-block-end: 0.06em; vertical-align: top; }
+.sg-word-inner { display: inline-block; }
+
+[data-ambient][data-paused], [data-ambient][data-paused]::before, [data-ambient][data-paused]::after, [data-ambient][data-paused] *, [data-ambient][data-paused] *::before, [data-ambient][data-paused] *::after { animation-play-state: paused !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+
+/* Response layer (expression/measured-benchmarks.md): measured originals give about 76 elements a
+   100-320ms state change. Zero specificity, so a study's own rules always win. */
+:root { --sg-ease: cubic-bezier(0.25, 1, 0.5, 1); }
+:where(a, button, summary, [role="tab"], [role="switch"], input, select, textarea, [data-lift]) {
+  transition: color 0.2s var(--sg-ease), background-color 0.2s var(--sg-ease), border-color 0.2s var(--sg-ease), opacity 0.2s var(--sg-ease), text-decoration-color 0.2s var(--sg-ease), box-shadow 0.25s var(--sg-ease), transform 0.25s var(--sg-ease), translate 0.25s var(--sg-ease), filter 0.25s var(--sg-ease);
+}
+:where(a, button):active { translate: 0 1px; }
+/* Cards opt in with data-lift: they rise, and any image or drawn surface inside eases in. */
+:where([data-lift]) { will-change: transform; }
+:where([data-lift]):hover, :where([data-lift]):focus-within { translate: 0 -4px; }
+:where([data-lift], a, button) :where(img, picture, [data-surface]) { transition: transform 0.6s var(--sg-ease), filter 0.4s var(--sg-ease); }
+:where([data-lift], a):hover :where(img, picture, [data-surface]) { transform: scale(1.035); }
+/* Surface detail: edge fades, rounded media frames, and hairlines (expression/techniques/surface-detail.md). */
+.sg-fade-x, .sg-marquee { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%); }
+.sg-fade-y { -webkit-mask-image: linear-gradient(transparent 0%, #000 12%, #000 88%, transparent 100%); mask-image: linear-gradient(transparent 0%, #000 12%, #000 88%, transparent 100%); }
+.sg-frame { clip-path: inset(0 round var(--sg-frame-radius, 20px)); overflow: clip; }
+.sg-frame > :where(img, svg, video, canvas) { block-size: 100%; inline-size: 100%; object-fit: cover; }
+.sg-hairline { border-block-start: 1px solid var(--sg-hairline, rgb(127 127 127 / 0.22)); }
+
+.sg-status { background: #111; border-radius: 999px; bottom: 20px; box-shadow: 0 12px 40px rgb(0 0 0 / 0.35); color: #fff; font: 500 14px/1.4 system-ui, sans-serif; left: 50%; max-inline-size: calc(100vw - 32px); padding: 12px 18px; position: fixed; transform: translateX(-50%); z-index: 1000; }
+.sg-status:empty { display: none; }
+
+/* Unofficial marker shared by every brand study. */
+.sg-studybar { align-items: center; background: #0b0b0c; color: #f2f2f2; display: flex; flex-wrap: wrap; font: 500 13px/1.5 ui-sans-serif, system-ui, sans-serif; gap: 6px 16px; justify-content: space-between; padding: 14px clamp(16px, 4vw, 40px); }
+.sg-studybar a { color: #f2f2f2; }
+.sg-studybar strong { color: #fff; font-weight: 700; }
+
+/* Infinite marquee: duplicate the track (aria-hidden) and place the pair inside [data-ambient]. */
+.sg-marquee { display: flex; overflow: hidden; }
+.sg-marquee-track { display: flex; flex: none; gap: var(--sg-marquee-gap, 48px); padding-inline-end: var(--sg-marquee-gap, 48px); }
+/* The kit wraps both tracks in one mover so the animated element always overlaps the viewport. */
+.sg-marquee-mover { animation: sg-marquee var(--sg-marquee-speed, 40s) linear infinite; display: flex; flex: none; }
+.sg-marquee[data-reverse] .sg-marquee-mover { animation-direction: reverse; }
+@keyframes sg-marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .sg-marquee { flex-wrap: wrap; } .sg-marquee-track[aria-hidden="true"] { display: none; } .sg-marquee-track { flex-wrap: wrap; } }
+
+/* Pinned stages: sticky only when JavaScript runs and motion is allowed; otherwise a static block.
+   Scroll-driven text fades must use color alpha or clip-path, never opacity, so offline reading holds. */
+.sg-stage { min-block-size: 100vh; overflow: clip; position: relative; }
+.sg-js .sg-track { block-size: var(--track, 300vh); position: relative; }
+.sg-js .sg-stage { block-size: 100vh; inset-block-start: 0; position: sticky; }
+@media (prefers-reduced-motion: reduce) { .sg-js .sg-track { block-size: auto; } .sg-js .sg-stage { block-size: auto; position: relative; } }

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>원티드 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="원티드 홈의 커리어 퀵메뉴, 회사 캐러셀, 포지션 목록을 원본 로고·사진 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233366ff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --blue: #0f5ae0; --ink: #171719; --grey: #5a5c63; --line: #e9e9ec; --soft: #f7f7f8; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 76px; --sg-focus: #0f5ae0; --ease: cubic-bezier(.16,1,.3,1); }
+  html { scroll-padding-bottom: 90px; }
+  body { background: #fff; color: var(--ink); font: 400 14px/1.5 var(--sans); letter-spacing: -0.01em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1296px; padding-inline: 20px; }
+  .site-header { backdrop-filter: blur(10px); background: rgb(255 255 255 / 0.92); border-block-end: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
+  .site-header .inner { align-items: center; display: flex; gap: 24px; block-size: 56px; }
+  .logo { align-items: center; color: var(--ink); display: flex; font-size: 19px; font-weight: 800; gap: 6px; letter-spacing: -0.04em; text-decoration: none; }
+  .logo i { background: linear-gradient(135deg, #36f, #7af); border-radius: 50% 50% 50% 4px; block-size: 16px; inline-size: 16px; }
+  .site-header nav { display: flex; gap: 18px; }
+  .site-header nav a { color: var(--ink); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .site-header nav a:hover { color: var(--blue); }
+  .hr { align-items: center; display: flex; gap: 8px; margin-inline-start: auto; }
+  .btn-line { background: #fff; border: 1px solid var(--blue); border-radius: 6px; color: var(--blue); font-size: 12px; font-weight: 700; padding: 5px 10px; }
+  .btn-grey { background: #fff; border: 1px solid var(--line); border-radius: 6px; color: var(--grey); font-size: 12px; padding: 5px 10px; }
+  @media (max-width: 860px) { .site-header nav { display: none; } .btn-grey { display: none; } }
+  .pill { align-items: center; border: 1px solid var(--line); border-radius: 999px; display: flex; gap: 8px; margin: 34px auto 30px; padding: 6px 14px 6px 8px; inline-size: fit-content; font-size: 13px; }
+  .pill i { background: #ffd8b8; border-radius: 50%; block-size: 22px; inline-size: 22px; }
+  .quick { display: grid; gap: 14px 10px; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); text-align: center; }
+  .qi { background: none; border: 0; color: var(--ink); display: grid; font: 500 12px var(--sans); gap: 8px; justify-items: center; position: relative; }
+  .qi span { block-size: 44px; inline-size: 44px; transition: transform .3s var(--ease); }
+  .qi:hover span { transform: translateY(-4px) rotate(-4deg); }
+  .qi em { background: #ff4d4d; border-radius: 50%; block-size: 8px; inline-size: 8px; inset: 0 22% auto auto; position: absolute; }
+  .sec { padding-block: 50px 0; }
+  .sec-h { align-items: center; display: flex; justify-content: space-between; margin-block-end: 14px; }
+  .sec-h h2 { font-size: 20px; font-weight: 800; }
+  .arrows { align-items: center; display: flex; gap: 6px; }
+  .arrows > button:first-child { background: none; border: 0; color: var(--grey); font-size: 13px; margin-inline-end: 8px; }
+  .arrows .ar { background: #fff; border: 1px solid var(--line); border-radius: 8px; block-size: 30px; color: var(--ink); inline-size: 30px; }
+  .arrows .ar:disabled { color: #6b6d73; background: #fff; }
+  .viewport { overflow: hidden; }
+  .strip { display: grid; gap: 14px; grid-auto-columns: calc((100% - 14px * 4) / 5); grid-auto-flow: column; transition: transform .6s var(--ease); }
+  .co { aspect-ratio: 1.85; border-radius: 12px; color: #fff; overflow: hidden; padding: 16px; position: relative; }
+  .co b { display: block; font-size: 19px; font-weight: 900; letter-spacing: -0.02em; position: relative; }
+  .co span { font-size: 11px; opacity: 0.9; position: relative; }
+  .co::after { background: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.18) 0 10px, transparent 10px 24px); block-size: 70%; content: ""; inline-size: 34%; inset: auto 10px 0 auto; position: absolute; }
+  .news { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
+  .nw { border-radius: 14px; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; min-block-size: 250px; overflow: hidden; padding: 18px; position: relative; }
+  .nw .bg { inset: 0; position: absolute; }
+  .nw .t { background: linear-gradient(0deg, rgb(0 0 0 / 0.6), transparent); margin: -18px; padding: 60px 18px 18px; position: relative; }
+  .nw b { display: block; font-size: 17px; }
+  .nw small { font-size: 12px; }
+  .themes { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
+  .th .pic { aspect-ratio: 1.5; border-radius: 10px; overflow: hidden; }
+  .th h3 { font-size: 14px; margin-block-start: 8px; }
+  .th p { color: var(--grey); font-size: 12px; }
+  .jobs { display: grid; gap: 4px 30px; grid-template-columns: repeat(3, 1fr); }
+  .job { align-items: center; display: grid; gap: 12px; grid-template-columns: 64px minmax(0, 1fr); padding-block: 8px; }
+  .job .lg { aspect-ratio: 1; border-radius: 8px; display: grid; font-weight: 900; font-size: 13px; place-items: center; color: #fff; }
+  .job b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .job p { color: var(--grey); font-size: 12px; }
+  .job button { background: none; border: 0; color: #6b6d73; font-size: 16px; justify-self: end; }
+  .job button[aria-pressed="true"] { color: var(--blue); }
+  .more-cta { padding-block: 70px 20px; text-align: center; }
+  .more-cta h2 { font-size: 20px; }
+  .more-cta p { color: var(--grey); margin-block: 6px 18px; }
+  .more-cta button { background: var(--blue); border: 0; border-radius: 8px; color: #fff; font-weight: 700; padding: 11px 44px; }
+  @media (max-width: 900px) { .strip { grid-auto-columns: calc((100% - 14px) / 2); } .news { grid-template-columns: 1fr; } .themes { grid-template-columns: 1fr 1fr; } .jobs { grid-template-columns: 1fr; } }
+  footer { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 12px; margin-block-start: 60px; padding-block: 30px 60px; }
+  footer a { color: var(--blue); }
+  .chat { background: #111; border: 0; border-radius: 50%; block-size: 48px; color: #fff; font-size: 20px; inline-size: 48px; inset: auto 22px 22px auto; position: fixed; z-index: 15; box-shadow: 0 8px 20px rgb(0 0 0 / 0.25); }
+  .sg-studybar { padding-inline-end: 90px; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>wanted</a>
+    <nav aria-label="섹션"><a href="#companies">회사</a><a href="#news">소식</a><a href="#themes">테마</a><a href="#jobs">포지션</a></nav>
+    <div class="hr"><button class="btn-line" type="button" data-demo="비공식 스터디: 가입은 없어요.">회원가입/로그인</button><button class="btn-grey" type="button" data-demo="비공식 스터디: 기업 서비스는 없어요.">기업 서비스</button></div>
+  </div>
+</header>
+<main id="main" class="inner">
+  <section id="top" aria-label="바로가기">
+    <p class="pill"><i aria-hidden="true"></i>이직 준비, 어디서부터 할지 막막하다면 (예시)</p>
+    <div class="quick" data-quick></div>
+  </section>
+  <section class="sec" id="companies" aria-labelledby="co-h">
+    <div class="sec-h"><h2 id="co-h">요즘 지원이 몰리는 회사</h2><div class="arrows"><button type="button" data-demo="비공식 스터디: 전체 목록은 없어요.">전체보기</button><button class="ar" type="button" aria-label="이전 회사" data-prev disabled>&lsaquo;</button><button class="ar" type="button" aria-label="다음 회사" data-next>&rsaquo;</button></div></div>
+    <div class="viewport"><div class="strip" data-strip></div></div>
+  </section>
+  <section class="sec" id="news" aria-labelledby="news-h">
+    <div class="sec-h"><h2 id="news-h">이번 주 커리어 뉴스</h2></div>
+    <div class="news" data-news></div>
+  </section>
+  <section class="sec" id="themes" aria-labelledby="th-h">
+    <div class="sec-h"><h2 id="th-h">이런 팀은 어때요?</h2></div>
+    <div class="themes" data-themes></div>
+  </section>
+  <section class="sec" id="jobs" aria-labelledby="jobs-h">
+    <div class="sec-h"><h2 id="jobs-h">집에서 가까운 자리</h2></div>
+    <div class="jobs" data-jobs></div>
+  </section>
+  <section class="more-cta" aria-labelledby="more-h"><h2 id="more-h">원하는 조건으로 다시 찾아보기</h2><p>관심 직무를 고르면 맞는 자리를 모아드려요 (예시)</p><button type="button" data-demo="비공식 스터디: 탐색 화면은 없어요.">탐색하기</button></section>
+</main>
+<footer><div class="inner"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 &middot; 원티드랩과 무관합니다. 회사와 포지션은 모두 지어낸 이름이며 로고와 사진을 쓰지 않았어요. <a href="../">모든 스터디</a></div></footer>
+<button class="chat" type="button" aria-label="상담 채팅 (예시)" data-demo="비공식 스터디: 채팅 상담은 없어요.">&#128172;</button>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Wanted by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art, reduced } = window.SG;
+  document.querySelector("[data-quick]").innerHTML = [["book", "채용 공고", "#3366ff"], ["phone", "이력서 코칭", "#29b6f6"], ["box", "이력서 관리", "#4dd0e1"], ["pin", "커리어 추천", "#7e57c2"], ["watch", "지원 현황", "#ff9800"], ["ticket", "이벤트", "#26a69a"], ["book", "커리어 강의", "#5c6bc0"], ["gift", "혜택", "#ffa726", 1], ["lamp", "직군 연봉", "#66bb6a"], ["plant", "추천 회사", "#ef5350", 1]].map(([k, t, c, dot]) => `<button class="qi" type="button" data-demo="비공식 스터디: '${t}' 화면은 없어요."><span aria-hidden="true">${art(k, { ground: "transparent", main: c, accent: "#222" })}</span>${t}${dot ? "<em aria-hidden=\"true\"></em>" : ""}</button>`).join("");
+  const cos = [["NORTHWIND", "#2b3a55"], ["PARALLAX", "#1f5ae0"], ["Quanta", "#6a8ad8"], ["MERIDIAN", "#111318"], ["kite&co", "#e8591f"], ["BLUESTONE", "#1a7a6a"], ["driftwood", "#8a5a3a"], ["HELIO", "#b0283c"], ["ARCLINE", "#4a3a8a"], ["sora", "#2a9ad8"]];
+  const strip = document.querySelector("[data-strip]");
+  strip.innerHTML = cos.map(([n, c], i) => `<article class="co" style="background:linear-gradient(120deg, ${c}, ${c}cc)"><b>${n}</b><span>공고 ${3 + (i * 7) % 20}개 진행 중 (가상)</span></article>`).join("");
+  let page = 0;
+  const prev = document.querySelector("[data-prev]"), next = document.querySelector("[data-next]");
+  const perView = () => (innerWidth <= 900 ? 2 : 5);
+  const go = (d) => { const pages = Math.ceil(cos.length / perView()) - 1; page = Math.max(0, Math.min(pages, page + d)); strip.style.transform = `translateX(calc(${-page} * (100% + 14px)))`; prev.disabled = page === 0; next.disabled = page === pages; };
+  prev.addEventListener("click", () => go(-1)); next.addEventListener("click", () => go(1)); addEventListener("resize", () => go(0));
+  const scene = (g, k, m) => `<div class="bg" aria-hidden="true">${art(k, { ground: g, main: m, accent: "#222" })}</div>`;
+  document.querySelector("[data-news]").innerHTML = [["신입 영업 직군 공개 채용", "10/1 - 10/20 (가상)", "linear-gradient(160deg,#4fc3f7,#1e88e5)", "phone"], ["스타트업 전 직군 채용 박람회", "온라인 개최 (가상)", "linear-gradient(160deg,#ef5350,#b71c1c)", "ticket"], ["보상은 공정했나요? 연봉 리포트", "직군별 평균 공개 (가상)", "linear-gradient(160deg,#5c6bc0,#283593)", "watch"]].map(([t, s, bg, k]) => `<article class="nw" style="background:${bg}">${scene("transparent", k, "#fff")}<div class="t"><b>${t}</b><small>${s}</small></div></article>`).join("");
+  document.querySelector("[data-themes]").innerHTML = [["투자 받고 빠르게 크는 중", "성장 단계 회사 (가상)", "#dfe8f5", "plant"], ["요즘 뜨는 기술 회사", "리서치 중심 팀 (가상)", "#1f2a55", "phone"], ["합류하면 바로 일하는", "빠른 온보딩 (가상)", "#e8f0f5", "sofa"], ["숫자로 증명하는 회사", "흑자 기업 (가상)", "#2a2a2a", "watch"]].map(([t, s, g, k]) => `<article class="th"><div class="pic" aria-hidden="true">${art(k, { ground: g, main: g.startsWith("#2") || g.startsWith("#1") ? "#fff" : "#3366ff", accent: "#222" })}</div><h3>${t}</h3><p>${s}</p></article>`).join("");
+  document.querySelector("[data-jobs]").innerHTML = [["주니어 콘텐츠 마케터", "PARALLAX", "#1f5ae0"], ["CX 매니저", "kite&co", "#e8591f"], ["브랜드 디자이너", "HELIO", "#b0283c"], ["데이터 분석가 (3년 이상)", "Quanta", "#6a8ad8"], ["프로젝트 매니저", "MERIDIAN", "#111318"], ["R&D 엔지니어", "BLUESTONE", "#1a7a6a"], ["세일즈 매니저", "driftwood", "#8a5a3a"], ["프론트엔드 개발자", "sora", "#2a9ad8"], ["인사 담당자", "ARCLINE", "#4a3a8a"]].map(([t, c, col]) => `<article class="job"><div class="lg" style="background:${col}" aria-hidden="true">${c.slice(0, 2)}</div><div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px"><div><b>${t}</b><p>${c} &middot; 서울 &middot; 경력 1-5년 (가상)</p></div><button type="button" aria-pressed="false" aria-label="${t} 북마크">&#9873;</button></div></article>`).join("");
+  document.addEventListener("click", (e) => { const b = e.target.closest(".job button"); if (b) b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true")); });
+})();
+</script>
+</body>
+</html>

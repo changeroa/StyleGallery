@@ -18,6 +18,18 @@ Out of scope: layout mechanics and scroll ownership (Layout), timing, interrupti
 | Add glowing, drifting color behind content. | [Gradient Atmosphere](techniques/gradient-atmosphere.md) |
 | Add film grain, noise, or paper texture. | [Grain And Texture](techniques/grain-and-texture.md) |
 | Put a live WebGL field behind a hero. | [WebGL Hero Field](techniques/webgl-hero.md) |
+| Style a money product: one accent, big numerals, a working calculator. | [Fintech Clarity Direction](directions/fintech-clarity.md) |
+| Present physical products or vehicles one stage at a time. | [Hardware Catalogue Direction](directions/hardware-catalogue.md) |
+| Style a software tool in dark or light, with mono labels and a working mock. | [Developer Tool Direction](directions/developer-tool.md) |
+| Style a Korean service or commerce page with Pretendard and dense grids. | [Korean Service Direction](directions/korean-service.md) |
+| Make an intentionally vector product diagram, not a substitute for photography. | [Drawn Products](techniques/drawn-products.md) |
+| Add a small working product demo that answers honestly. | [Live Product Demos](techniques/live-product-demos.md) |
+| Put a pointer-reactive 3D object field on a page without WebGL. | [Canvas 3D Without WebGL](techniques/canvas-3d.md) |
+| Check a page against measured values from 49 live homepages, and see why the studies read as less expressive. | [Measured Expression Benchmarks](measured-benchmarks.md) |
+| Reuse existing assets, frame imagery, and restrict new assets to graphics/vectors. | [Image Weight](techniques/image-weight.md) |
+| Calibrate display size, weight, tracking, and leading so type reads confident, not loud. | [Display Type Calibration](techniques/display-type-calibration.md) |
+| Add the finishing detail of edge-fade masks, rounded clips, wipes, blur-in, and hairlines. | [Masks, Clips, And Hairlines](techniques/surface-detail.md) |
+| Find a finished brand study to learn from, and the lessons 54 studies taught. | [Study Atlas](study-atlas.md) |
 | Reinterpret a real brand as an unofficial study. | [Brand Studies](brand-studies.md) |
 
 Build the result in [Showcase](../showcase/README.md) and add motion from [Motion techniques](../motion/techniques/scroll-choreography.md).

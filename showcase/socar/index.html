@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>쏘카 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="쏘카 홈의 검색 우선 레이아웃과 4열 카드 그리드를 원본 사진·카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230078ff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --blue: #0066e0; --sky: #e8f3ff; --ink: #1c1f23; --grey: #5c6470; --line: #e6e9ee; --soft: #f7f8fa; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 76px; --sg-focus: #0066e0; }
+  body { background: #fff; color: var(--ink); font: 400 14px/1.5 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1248px; padding-inline: 20px; }
+  .site-header { background: rgb(255 255 255 / 0.96); backdrop-filter: blur(8px); inset: 0 0 auto; position: fixed; z-index: 20; }
+  .site-header .inner { align-items: center; display: flex; gap: 22px; block-size: 60px; }
+  .logo { color: var(--blue); font-size: 22px; font-weight: 900; letter-spacing: -0.05em; text-decoration: none; }
+  .site-header nav { display: flex; gap: 20px; }
+  .site-header nav a { color: var(--ink); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .site-header nav a:hover { color: var(--blue); }
+  .right { align-items: center; display: flex; gap: 12px; margin-inline-start: auto; }
+  .chip { background: var(--sky); border: 0; border-radius: 999px; color: var(--blue); font-size: 12px; font-weight: 700; padding: 5px 10px; }
+  .login { background: none; border: 0; color: var(--ink); font-size: 13px; }
+  @media (max-width: 760px) { .site-header nav { display: none; } }
+  main { padding-block-start: 90px; }
+  h1 { font-size: 26px; font-weight: 800; margin-block: 20px 16px; }
+  .finder { display: grid; gap: 10px; grid-template-columns: 260px 1fr 80px; }
+  .field { align-items: center; border: 1px solid var(--line); border-radius: 10px; display: flex; gap: 8px; padding: 12px 14px; }
+  .field input { border: 0; flex: 1; font: inherit; outline: none; min-inline-size: 0; }
+  .field:focus-within { border-color: var(--blue); }
+  .go { background: #e9edf2; border: 0; border-radius: 10px; color: var(--grey); font-weight: 700; transition: background .3s, color .3s; }
+  .go[data-ready] { background: var(--blue); color: #fff; }
+  .hint { color: var(--grey); font-size: 12px; margin-block-start: 8px; min-block-size: 1.5em; }
+  @media (max-width: 760px) { .finder { grid-template-columns: 1fr; } .go { padding: 12px; } }
+  .sec { padding-block: 56px 0; }
+  .sec h2 { font-size: 20px; font-weight: 800; }
+  .sec > .inner > p, .sec-sub { color: var(--grey); font-size: 13px; margin-block: 4px 16px; }
+  .ways { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .way { align-items: center; border: 1px solid var(--line); border-radius: 12px; display: flex; gap: 14px; padding: 16px 18px; }
+  .way b { display: block; }
+  .way span.i { background: var(--sky); border-radius: 50%; block-size: 40px; display: grid; flex: none; font-size: 18px; inline-size: 40px; place-items: center; }
+  .way em { color: var(--grey); font-size: 18px; font-style: normal; margin-inline-start: auto; }
+  .perks { display: grid; gap: 12px; grid-template-columns: 1.4fr 1fr 1fr; }
+  .perk { border: 1px solid var(--line); border-radius: 12px; display: flex; justify-content: space-between; overflow: hidden; padding: 18px; }
+  .perk.hot { background: var(--sky); border-color: var(--sky); }
+  .perk b { display: block; font-size: 16px; }
+  .perk.hot b { color: var(--blue); font-size: 19px; }
+  .perk p { color: var(--grey); font-size: 12px; }
+  .perk button { background: #fff; border: 1px solid var(--blue); border-radius: 6px; color: var(--blue); font-size: 12px; font-weight: 700; margin-block-start: 14px; padding: 5px 10px; }
+  .perk.hot button { background: var(--blue); color: #fff; }
+  .perk .art { block-size: 90px; flex: none; inline-size: 90px; }
+  .cards4 { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
+  .pcard { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .pcard .pic { aspect-ratio: 1.5; }
+  .pcard .pic svg { block-size: 100%; display: block; inline-size: 100%; }
+  .pcard div.t { padding: 12px 14px 16px; }
+  .pcard h3 { font-size: 14px; }
+  .pcard p { color: var(--grey); font-size: 12px; }
+  .grid4 { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); }
+  .place { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; transition: border-color .2s, transform .2s; }
+  .place:hover { border-color: var(--blue); transform: translateY(-2px); }
+  .place b { display: flex; gap: 6px; align-items: center; }
+  .place b small { background: var(--sky); border-radius: 999px; color: var(--blue); font-size: 10px; padding: 0 6px; }
+  .place p { color: var(--grey); font-size: 12px; }
+  .place[hidden] { display: none; }
+  .trust { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); margin-block-start: 30px; }
+  .trust div { align-items: center; background: var(--soft); border-radius: 10px; display: flex; gap: 10px; padding: 14px; }
+  .trust i { background: var(--blue); border-radius: 50%; block-size: 26px; flex: none; inline-size: 26px; }
+  .trust b { display: block; font-size: 13px; }
+  .trust span { color: var(--grey); font-size: 12px; }
+  .faq details { border-block-end: 1px solid var(--line); }
+  .faq summary { cursor: pointer; font-weight: 600; list-style: none; padding: 16px 4px; display: flex; justify-content: space-between; }
+  .faq summary::after { content: "\2304"; color: var(--grey); transition: transform .3s; }
+  .faq details[open] summary::after { transform: rotate(180deg); }
+  .faq details p { color: var(--grey); padding: 0 4px 16px; }
+  @media (max-width: 900px) { .ways, .perks { grid-template-columns: 1fr; } .cards4, .grid4, .trust { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .trust { grid-template-columns: 1fr; } }
+  footer { color: var(--grey); font-size: 12px; margin-block-start: 70px; padding-block: 30px 50px; border-block-start: 1px solid var(--line); }
+  footer a { color: var(--blue); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header" data-header>
+  <div class="inner">
+    <a class="logo" href="#top">socar</a>
+    <nav aria-label="섹션"><a href="#places">대여 지역</a><a href="#trips">여행 정보</a><a href="#faq">자주 묻는 질문</a></nav>
+    <div class="right"><button class="chip" type="button" data-demo="Unofficial study: no English site here.">For Foreigners</button><button class="login" type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="inner" id="top" aria-labelledby="hero-h">
+    <h1 id="hero-h">오늘 필요한 차, 집 근처에서</h1>
+    <div class="finder">
+      <label class="field"><span aria-hidden="true">&#128197;</span><span class="sg-visually-hidden">이용 시간</span><input type="text" value="오늘 18:30 - 21:00" aria-label="이용 시간 (예시)"></label>
+      <label class="field"><span aria-hidden="true">&#9906;</span><span class="sg-visually-hidden">대여 장소 검색</span><input type="search" placeholder="어디서 빌릴까요? 예: 부산, 공항, 역" data-find></label>
+      <button class="go" type="button" data-go data-demo="비공식 스터디: 실제 대여 검색은 없어요. 아래 지역 목록만 걸러져요.">검색</button>
+    </div>
+    <p class="hint" data-hint role="status"></p>
+  </section>
+
+  <section class="sec" aria-labelledby="ways-h"><div class="inner"><h2 id="ways-h">빌리는 방법은 두 가지</h2><div class="ways" style="margin-block-start:14px">
+    <div class="way"><span class="i" aria-hidden="true">&#128205;</span><div><b>가까운 존에서 빌리기</b><span style="color:var(--grey);font-size:12px">동네 주차장에서 바로 출발</span></div><em aria-hidden="true">&rsaquo;</em></div>
+    <div class="way"><span class="i" aria-hidden="true">&#128666;</span><div><b>원하는 곳으로 부르기</b><span style="color:var(--grey);font-size:12px">집 앞까지 차를 가져다 드려요</span></div><em aria-hidden="true">&rsaquo;</em></div>
+  </div></div></section>
+
+  <section class="sec" aria-labelledby="perks-h"><div class="inner"><h2 id="perks-h">이번 달 챙길 만한 할인</h2><p class="sec-sub">매일 조금씩 바뀌어요 (모두 예시)</p><div class="perks">
+    <div class="perk hot"><div><b>첫 대여 하루 19,900원</b><p>운전 경력 1년이면 OK</p><button type="button" data-demo="비공식 스터디: 예약은 없어요.">첫 예약하기 &rsaquo;</button></div><div class="art" data-art="ticket|transparent|#0066e0|#fff"></div></div>
+    <div class="perk"><div><b>미리 예약하면 할인</b><p>2주 전 예약 시 (예시)</p><button type="button" data-demo="비공식 스터디: 예약은 없어요.">미리 예약 &rsaquo;</button></div><div class="art" data-art="book|transparent|#8aa4c8|#556"></div></div>
+    <div class="perk"><div><b>1시간 천 원대</b><p>짧게 쓸 땐 시간 단위로</p><button type="button" data-demo="비공식 스터디: 예약은 없어요.">바로 이용 &rsaquo;</button></div><div class="art" data-art="watch|transparent|#1c1f23|#556"></div></div>
+  </div></div></section>
+
+  <section class="sec" aria-labelledby="jeju-h"><div class="inner"><h2 id="jeju-h">섬에서 차가 필요할 때</h2><p class="sec-sub">공항에서 바로, 반납도 간단하게</p><div class="cards4" data-jeju></div></div></section>
+
+  <section class="sec" id="places" aria-labelledby="places-h"><div class="inner"><h2 id="places-h">어느 동네에서 빌릴까요?</h2><p class="sec-sub">위 검색창에 지역, 공항, 역 이름을 적으면 바로 걸러져요</p>
+    <div class="grid4" data-places></div>
+    <div class="trust"><div><i aria-hidden="true"></i><div><b>앱 평점 4.8</b><span>예시 수치</span></div></div><div><i aria-hidden="true"></i><div><b>전국 5,000여 곳</b><span>예시 수치</span></div></div><div><i aria-hidden="true"></i><div><b>회원 쿠폰</b><span>매일 바뀌는 혜택</span></div></div><div><i aria-hidden="true"></i><div><b>쓸수록 쌓이는 적립</b><span>최대 10% (예시)</span></div></div></div>
+  </div></section>
+
+  <section class="sec" id="trips" aria-labelledby="trips-h"><div class="inner"><h2 id="trips-h">차로 가기 좋은 여행 이야기</h2><p class="sec-sub">가상의 여행 기사</p><div class="cards4" data-trips></div></div></section>
+
+  <section class="sec faq" id="faq" aria-labelledby="faq-h"><div class="inner"><h2 id="faq-h">자주 묻는 질문</h2>
+    <details><summary>운전 경력이 짧아도 빌릴 수 있나요?</summary><p>이 스터디에서는 예시로 1년 이상이라고 적었어요. 실제 조건은 서비스에서 확인해야 해요.</p></details>
+    <details><summary>반납 장소를 바꿀 수 있나요?</summary><p>스터디용 답변: 같은 존에 반납하는 것이 기본이라고 가정했어요.</p></details>
+    <details><summary>사고가 나면 어떻게 하나요?</summary><p>스터디용 답변: 앱에서 바로 접수하는 흐름을 가정했어요.</p></details>
+  </div></section>
+</main>
+<footer><div class="inner"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 &middot; 쏘카와 무관합니다. 요금, 지역, 기사는 모두 예시이고 사진 대신 그림을 썼어요. <a href="../">모든 스터디</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of SOCAR by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art } = window.SG;
+  document.querySelectorAll("[data-art]").forEach((el) => { const [k, g, m, a] = el.dataset.art.split("|"); el.innerHTML = art(k, { ground: g, main: m, accent: a }); });
+  const scene = (a, b, land, k, main) => `<svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="200" height="130" fill="${a}"/><rect y="70" width="200" height="60" fill="${b}"/><path d="M0 90 Q70 70 120 88 T200 80 V130 H0Z" fill="${land}"/><g transform="translate(60 22) scale(.9)">${art(k, { ground: "transparent", main, accent: "#222" }).replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg>`;
+  document.querySelector("[data-jeju]").innerHTML = [["아이와 함께라면 카시트 포함", "car", "#cfe6f5", "#e9f3fa", "#7aa06a", "#ffffff"], ["공항에서 차까지 걸어서 3분", "pin", "#b9d4ee", "#e4eef8", "#5a7a9a", "#0066e0"], ["전기차는 충전 걱정 없이", "phone", "#d8f0e0", "#eef8f1", "#3a8a5a", "#1c1f23"], ["프리미엄 라운지에서 바로 출발", "sofa", "#efe6d8", "#f8f3ea", "#8a6a4a", "#5a6a8a"]].map(([t, k, a, b, l, m]) => `<article class="pcard"><div class="pic">${scene(a, b, l, k, m)}</div><div class="t"><h3>${t}</h3><p>섬 여행 팁 (예시)</p></div></article>`).join("");
+  const places = [["제주", "공항 근처 존 모음", 1], ["서울", "강남, 홍대, 잠실", 1], ["인천", "송도, 공항, 부평"], ["경기", "판교, 수원, 일산"], ["부산", "해운대, 서면, 부산역", 1], ["대구", "동대구, 수성"], ["울산", "울산역, 삼산"], ["강원", "강릉, 속초, 춘천"], ["김포공항", "국내선 주차장", 1], ["김해공항", "도착층 바로 옆"], ["청주공항", "국내선 앞"], ["서울역", "KTX 환승 존", 1], ["수서역", "SRT 환승 존"], ["부산역", "KTX 도착 후 바로"], ["광주송정역", "역 앞 주차장"], ["여수엑스포역", "바다 여행 출발점"]];
+  const box = document.querySelector("[data-places]");
+  box.innerHTML = places.map(([n, s, hot]) => `<div class="place" data-name="${n} ${s}"><b>${n}${hot ? "<small>인기</small>" : ""}</b><p>${s}</p></div>`).join("");
+  const input = document.querySelector("[data-find]"), go = document.querySelector("[data-go]"), hint = document.querySelector("[data-hint]");
+  input.addEventListener("input", () => {
+    const q = input.value.trim();
+    let n = 0;
+    box.querySelectorAll(".place").forEach((p) => { const hit = !q || p.dataset.name.includes(q); p.hidden = !hit; n += hit; });
+    go.toggleAttribute("data-ready", q.length > 0);
+    hint.textContent = q ? `'${q}'와 맞는 곳 ${n}개를 아래 목록에 남겼어요.` : "";
+  });
+  document.querySelector("[data-trips]").innerHTML = [["가을 주말, 서울 근교 호숫가 드라이브 네 곳", "bowl", "#f0d8b8"], ["바다를 끼고 달리는 남해 해안도로 1박 2일", "car", "#bfe0f0"], ["밤에 더 예쁜 고궁 야경 코스", "pin", "#2a2a4a"], ["빵지순례: 차로 도는 동네 빵집 지도", "fruit", "#f3e2c8"]].map(([t, k, g]) => `<article class="pcard"><div class="pic">${scene(g, "#fff8ee", "#c8b89a", k, "#c9602a")}</div><div class="t"><h3>${t}</h3><p>가상의 여행 기사</p></div></article>`).join("");
+})();
+</script>
+</body>
+</html>

@@ -23,12 +23,20 @@ const externalUrl = `http://127.0.0.1:${external.address().port}/library.js`;
 
 const baseStyle = "html{scroll-padding-top:4rem}body{margin:0;font:16px/1.5 system-ui,sans-serif;background:#fff;color:#111}header{background:#fff;padding:8px 16px;position:sticky;top:0}section{min-height:120vh;padding:96px 16px}a{color:#0645ad}";
 
-function page({ head = "", beforeMain = "", main = "", after = "", icon = true, style = "" } = {}) {
+function page({ head = "", beforeMain = "", main = "", second = "", after = "", icon = true, style = "" } = {}) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Fixture</title>${icon ? '<link rel="icon" href="data:,">' : ""}<style>${baseStyle}${style}</style>${head}</head>
 <body>${beforeMain}<header><nav><a href="#two">Two</a></nav></header>
-<main><section id="one"><h1>One</h1><p>First section text.</p>${main}</section><section id="two"><h2>Two</h2><p>Second section text.</p></section></main>
+<main><section id="one"><h1>One</h1><p>First section text.</p>${main}</section><section id="two"><h2>Two</h2><p>Second section text.</p>${second}</section></main>
 <footer><p><a href="../">Back to the hub</a></p></footer>${after}</body></html>`;
 }
+
+// Richness building blocks: a drawn surface per section, responsive elements, masks, and hairlines.
+const surface = '<svg data-surface viewBox="0 0 10 7" preserveAspectRatio="none" style="display:block;width:70%;height:60vh" aria-hidden="true"><rect width="10" height="7" fill="#dde3ee"/></svg>';
+const responsive = '<p>' + Array.from({ length: 14 }, (_, i) => `<span class="r">Tag ${i + 1}</span>`).join(" ") + '</p>';
+const masked = '<div class="m"></div><div class="m"></div>';
+const hairlines = '<div class="h"></div><div class="h"></div><div class="h"></div>';
+const richStyle = ".r{display:inline-block;padding:4px;transition:color .2s ease}.m{height:8px;background:#ccd;mask-image:linear-gradient(#000,transparent)}.h{border-top:1px solid #ddd;height:8px}";
+const rich = (parts = {}) => page({ style: richStyle, main: `${parts.responsive ?? responsive}${parts.masked ?? masked}${parts.hairlines ?? hairlines}${surface}`, second: parts.second ?? surface });
 
 const brief = (extra = "") => `---\ntype: Showcase Brief\ntitle: Fixture\ndescription: Checker fixture.\nbrand_study: false\n${extra}---\n\n# Fixture\n`;
 
@@ -56,6 +64,11 @@ const fixtures = {
   "offline-break": { html: page({ head: `<script src="${externalUrl}"></script>`, after: "<script>if(!window.fixtureLibrary)throw new Error('external library missing')</script>" }), expect: /offline w390: page error external library missing/ },
   "noscript-break": { html: page({ style: "main{opacity:0}.js main{opacity:1}", head: '<script src="app.js"></script>' }), files: { "app.js": "document.documentElement.classList.add('js');" }, expect: /no-script w390: "/ },
   unlisted: { html: page(), expect: null, hubOmits: true },
+  // Richness is reported as warnings by default: these fixtures must have no failures and only the targeted warnings.
+  rich: { html: rich(), expect: null, warn: null },
+  "empty-screen": { html: rich({ second: "" }), expect: null, warn: /richness: screen \d+ \(\d+-\d+px\) is empty/ },
+  static: { html: rich({ responsive: "" }), expect: null, warn: /richness: \d+ responsive elements with transitions, below \d+/ },
+  flat: { html: rich({ masked: "", hairlines: "" }), expect: null, warn: /richness: \d+ elements (use a mask or clip-path|carry 1px hairline borders), below \d/ },
 };
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), "showcase-selftest-"));
@@ -78,6 +91,13 @@ const run = await new Promise((resolve) => {
   child.stdout.on("data", (chunk) => { stdout += chunk; });
   child.stderr.on("data", (chunk) => { stderr += chunk; });
   child.on("close", (status) => resolve({ status, stdout, stderr }));
+});
+// A second run proves --richness error turns richness findings into failures and a non-zero exit.
+const strict = await new Promise((resolve) => {
+  const child = spawn(process.execPath, [checker, "--root", root, "--out", out, "--json", "--work", "empty-screen", "--richness", "error"]);
+  let stdout = "";
+  child.stdout.on("data", (chunk) => { stdout += chunk; });
+  child.on("close", (status) => resolve({ status, stdout }));
 });
 external.close();
 let report;
@@ -102,6 +122,12 @@ for (const [slug, fixture] of Object.entries(fixtures)) {
       const stray = work.failures.filter((failure) => !fixture.expect.test(failure));
       assert.deepEqual(stray, [], `${slug}: failures outside the targeted check`);
     }
+    if (fixture.warn === null) assert.deepEqual(work.warnings ?? [], [], `${slug}: expected no richness warnings`);
+    else if (fixture.warn) {
+      assert.ok((work.warnings ?? []).length > 0, `${slug}: expected richness warnings matching ${fixture.warn}`);
+      const strayWarnings = work.warnings.filter((warning) => !fixture.warn.test(warning));
+      assert.deepEqual(strayWarnings, [], `${slug}: richness warnings outside the targeted check`);
+    }
     results.push({ name: slug, ok: true });
   } catch (error) {
     results.push({ name: slug, ok: false, message: error.message, failures: work?.failures });
@@ -118,6 +144,17 @@ try {
   results.push({ name: "exit-code", ok: true });
 } catch (error) {
   results.push({ name: "exit-code", ok: false, message: error.message });
+}
+
+try {
+  const strictReport = JSON.parse(strict.stdout);
+  const work = strictReport.works.find((entry) => entry.slug === "empty-screen");
+  assert.equal(strict.status, 1, "--richness error must exit 1 on a richness finding");
+  assert.ok(work && work.failures.length > 0 && work.failures.every((failure) => /richness: screen \d+/.test(failure)), "--richness error must report the empty screen as failures");
+  assert.deepEqual(work.warnings, [], "--richness error must not also report warnings");
+  results.push({ name: "richness-error-mode", ok: true });
+} catch (error) {
+  results.push({ name: "richness-error-mode", ok: false, message: error.message });
 }
 
 const ok = results.every((result) => result.ok);

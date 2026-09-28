@@ -272,7 +272,19 @@ const additionalLocalLeaves = {
     ["directions/warm-print.md", "Warm Print Direction"],
     ["techniques/gradient-atmosphere.md", "Gradient Atmosphere"],
     ["techniques/grain-and-texture.md", "Grain And Texture"],
-    ["techniques/webgl-hero.md", "WebGL Hero Field"]
+    ["techniques/webgl-hero.md", "WebGL Hero Field"],
+    ["directions/fintech-clarity.md", "Fintech Clarity Direction"],
+    ["directions/hardware-catalogue.md", "Hardware Catalogue Direction"],
+    ["directions/developer-tool.md", "Developer Tool Direction"],
+    ["directions/korean-service.md", "Korean Service Direction"],
+    ["techniques/drawn-products.md", "Drawn Products"],
+    ["techniques/live-product-demos.md", "Live Product Demos"],
+    ["techniques/canvas-3d.md", "Canvas 3D Without WebGL"],
+    ["study-atlas.md", "Study Atlas"],
+    ["measured-benchmarks.md", "Measured Expression Benchmarks"],
+    ["techniques/image-weight.md", "Image Weight"],
+    ["techniques/display-type-calibration.md", "Display Type Calibration"],
+    ["techniques/surface-detail.md", "Masks, Clips, And Hairlines"]
   ]
 };
 

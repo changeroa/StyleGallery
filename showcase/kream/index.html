@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>KREAM - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="KREAM 홈의 고정 3단 헤더와 좌 미디어·우 카피 2열 배너 스택을 원본 사진·카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #222; --grey: #5f5f5f; --line: #ebebeb; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 120px; --sg-focus: #222; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 14px/1.5 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .site-header { background: #fff; border-block-end: 1px solid var(--line); inset: 0 0 auto; position: fixed; z-index: 20; }
+  .hwrap { margin-inline: auto; max-inline-size: 1280px; padding-inline: 40px; }
+  .util { display: flex; font-size: 11px; gap: 14px; justify-content: flex-end; padding-block: 8px 0; color: var(--grey); }
+  .main-row { align-items: center; display: flex; gap: 20px; block-size: 52px; }
+  .logo { color: #000; font-size: 22px; font-weight: 800; letter-spacing: 0.02em; text-decoration: none; }
+  .primary { display: flex; gap: 22px; margin-inline-start: auto; }
+  .primary a { color: #000; font-size: 17px; font-weight: 700; text-decoration: none; }
+  .primary a[aria-current] { text-decoration: underline; text-underline-offset: 6px; }
+  .icon-btn { background: none; border: 0; color: #000; font-size: 18px; }
+  .sub { display: flex; gap: 22px; overflow-x: auto; padding-block: 8px 12px; scrollbar-width: none; }
+  .sub a { color: var(--ink); font-size: 14px; text-decoration: none; white-space: nowrap; }
+  .sub a:hover, .sub a[aria-current] { font-weight: 700; }
+  @media (max-width: 700px) { .hwrap { padding-inline: 16px; } .primary a { font-size: 14px; } }
+
+  /* Stacked banner rows: each row pins under the header and the next row slides over it. */
+  main { padding-block-start: 122px; }
+  .row { background: #fff; block-size: min(620px, calc(100vh - 122px)); display: grid; grid-template-columns: 1fr 1fr; position: sticky; top: 122px; box-shadow: 0 -30px 60px -40px rgb(0 0 0 / 0.35); }
+  .media { overflow: hidden; position: relative; }
+  .media .art { inset: 0; position: absolute; transform: scale(var(--z, 1)); transition: transform .2s linear; }
+  .media .art svg { block-size: 100%; inline-size: 100%; }
+  .copy { align-self: start; padding: 40px 40px 40px 32px; }
+  .copy h2 { font-size: clamp(1.5rem, 2.4vw, 2.1rem); font-weight: 700; line-height: 1.3; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+  .copy p { color: var(--grey); margin-block: 16px 22px; max-inline-size: 36ch; }
+  .copy .go { background: none; border: 0; color: var(--grey); font-size: 13px; padding: 0; text-decoration: underline; }
+  .copy .num { display: block; font-size: 64px; font-weight: 900; letter-spacing: -0.05em; margin-block-start: 30px; color: #000; }
+  .ticker { border-block: 1px solid var(--line); display: grid; font-size: 13px; margin-block-start: 26px; }
+  .ticker div { border-block-end: 1px solid var(--line); display: flex; justify-content: space-between; padding-block: 8px; }
+  .ticker .up { color: #d23c28; font-weight: 700; }
+  @media (prefers-reduced-motion: reduce) { .row { position: relative; top: 0; } }
+  @media (max-width: 760px) { .copy { padding: 24px 16px 36px; } .copy .num { font-size: 44px; } .row { block-size: auto; grid-template-columns: 1fr; position: relative; top: 0; } .media { aspect-ratio: 1.2; } }
+  footer { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 12px; margin-block-start: 0; padding-block: 50px 60px; position: relative; background: #fff; z-index: 1; }
+  .fcols { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); }
+  .fcols h3 { color: var(--ink); font-size: 14px; margin-block-end: 10px; }
+  footer a { color: var(--ink); }
+  .pager { border: 1px solid var(--line); border-radius: 999px; display: inline-block; font-size: 12px; margin-block-start: 20px; padding: 3px 12px; }
+  @media (max-width: 700px) { .fcols { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="hwrap">
+    <div class="util" aria-hidden="true"><span>고객센터</span><span>관심</span><span>알림</span><span>로그인</span></div>
+    <div class="main-row">
+      <a class="logo" href="#top">KREAM</a>
+      <nav class="primary" aria-label="섹션"><a href="#r1" aria-current="page">HOME</a><a href="#r3">STYLE</a><a href="#r5">SHOP</a></nav>
+      <button class="icon-btn" type="button" aria-label="검색 (예시)" data-demo="비공식 스터디: 검색은 없어요.">&#9906;</button>
+    </div>
+    <nav class="sub" aria-label="카테고리 (예시)"><a href="#r1" aria-current="page">추천</a><a href="#r2">랭킹</a><a href="#r3">발매정보</a><a href="#r4">럭셔리</a><a href="#r5">남성</a><a href="#r6">여성</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div id="top"></div>
+  <section class="row" id="r1" aria-labelledby="r1-h"><div class="media" data-art="jacket|#ededed|#cfcfcf|#9a9a9a"></div><div class="copy"><h2 id="r1-h">요즘 가장 많이<br>사고판 겉옷 한 벌</h2><p>가벼운 겉옷을 찾는 사람이 늘었어요. 사이즈별 시세를 먼저 확인해 보세요.</p><button class="go" type="button" data-demo="비공식 스터디: 시세 화면은 없어요.">지금 확인하기</button><div class="ticker" aria-label="가상 시세"><div><span>S 사이즈</span><span class="up" data-tick="318000">318,000원</span></div><div><span>M 사이즈</span><span class="up" data-tick="342000">342,000원</span></div><div><span>L 사이즈</span><span class="up" data-tick="356000">356,000원</span></div></div></div></section>
+  <section class="row" id="r2" aria-labelledby="r2-h"><div class="media" data-art="box|#6a3fb8|#f5c542|#2a1a55"></div><div class="copy"><h2 id="r2-h">한정판 카드 박스<br>오늘 밤 추첨 마감</h2><p>응모 한 번으로 끝나는 추첨이에요. 결과는 내일 아침 알림으로 받아요.</p><button class="go" type="button" data-demo="비공식 스터디: 추첨 응모는 없어요.">응모하러 가기</button></div></section>
+  <section class="row" id="r3" aria-labelledby="r3-h"><div class="media" data-art="sneaker|#b85a3a|#2b2b2b|#f0d9b5"></div><div class="copy"><h2 id="r3-h">이번 주 검색창에<br>가장 많이 들어온 이름</h2><p>지난 일주일 가장 많이 찾아본 이름 다섯 개.</p><ol class="ticker" style="list-style:none;padding:0" aria-label="가상 검색어 순위"><li><div><span>1 트레일 러너 GT</span><span class="up">&#9650; 3</span></div></li><li><div><span>2 무선 이어폰 4세대</span><span>-</span></div></li><li><div><span>3 울 블렌드 코트</span><span class="up">&#9650; 5</span></div></li></ol></div></section>
+  <section class="row" id="r4" aria-labelledby="r4-h"><div class="media" data-art="phone|#0f1a2e|#dfe8f5|#556"></div><div class="copy"><h2 id="r4-h">투명한 케이스의 귀환</h2><p>새로 나온 협업 액세서리를 가장 먼저 만나보세요.</p><button class="go" type="button" data-demo="비공식 스터디: 발매 정보는 없어요.">발매 일정 보기</button></div></section>
+  <section class="row" id="r5" aria-labelledby="r5-h"><div class="media" data-art="bag|#3a2418|#1b1b1b|#c8a36a"></div><div class="copy"><h2 id="r5-h">검수까지 마친<br>빈티지 가방</h2><p>한 번 더 확인한 상품만 올려요. 정품 여부가 걱정될 때.</p><button class="go" type="button" data-demo="비공식 스터디: 상품 목록은 없어요.">둘러보기</button></div></section>
+  <section class="row" id="r6" aria-labelledby="r6-h"><div class="media" data-art="ticket|#f2f2f2|#15c26b|#0b6b3a"></div><div class="copy"><h2 id="r6-h">카드 한 장으로 챙기는<br>이달의 혜택</h2><p>이번 달 한정 결제 혜택이에요. 조건은 모두 예시예요.</p><span class="num" data-count="200000" data-suffix="원">200,000원</span></div></section>
+</main>
+<footer><div class="hwrap"><div class="fcols"><div><h3>이용 안내</h3><p>검수 기준 &middot; 이용 정책 (예시)</p></div><div><h3>고객지원</h3><p>공지사항 &middot; 문의 (예시)</p></div><div><h3>스터디</h3><p><a href="../">모든 스터디</a></p></div><div><h3>알림</h3><p>Unofficial 브랜드 스터디. KREAM과 무관합니다. 시세와 상품은 모두 가상이에요.</p></div></div><span class="pager" aria-hidden="true">1 / 6</span></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of KREAM by StyleGallery. Not affiliated with KREAM.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art, reduced, scene } = window.SG;
+  document.querySelectorAll("[data-art]").forEach((el) => { const [k, g, m, a] = el.dataset.art.split("|"); el.innerHTML = `<div class="art">${art(k, { ground: g, main: m, accent: a })}</div>`; });
+  // Each media panel zooms slightly while its row is pinned.
+  if (!reduced) document.querySelectorAll(".row").forEach((row) => scene(row, (p) => row.querySelector(".art").style.setProperty("--z", String(1 + p * 0.12)), { start: "enter" }));
+  // Fictional price ticks.
+  if (!reduced) setInterval(() => { if (document.hidden) return; document.querySelectorAll("[data-tick]").forEach((t) => { const v = Number(t.dataset.tick) + Math.round((Math.random() - 0.4) * 3) * 1000; t.dataset.tick = v; t.textContent = v.toLocaleString() + "원"; }); }, 1800);
+})();
+</script>
+</body>
+</html>

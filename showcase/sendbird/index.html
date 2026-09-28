@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sendbird - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Sendbird's two-product hero: a gradient AI concierge card beside a grey communications API card.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #0d0d0f; --grey: #5a5d66; --card: #eef0f3; --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; --sg-header: 76px; --sg-focus: #3a5bff; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 16px/1.5 var(--sans); letter-spacing: -0.01em; }
+  .inner { margin-inline: auto; max-inline-size: 1320px; padding-inline: 24px; }
+  .site-header { background: #fff; position: sticky; top: 0; z-index: 20; transition: box-shadow .3s; }
+  .site-header[data-scrolled] { box-shadow: 0 1px 0 #e6e8ec; }
+  .site-header .inner { align-items: center; display: flex; gap: 14px; block-size: 64px; }
+  .mark { align-items: center; background: #fff; border: 1px solid #e3e5ea; border-radius: 10px; color: var(--ink); display: flex; font-weight: 600; gap: 8px; padding: 6px 10px; text-decoration: none; }
+  .mark i { background: var(--ink); border-radius: 50% 50% 50% 10%; block-size: 18px; inline-size: 18px; }
+  .site-header nav { display: flex; gap: 18px; margin-inline-start: 20px; }
+  .site-header nav a { color: var(--grey); font-size: 14px; text-decoration: none; }
+  .site-header nav a:hover { color: var(--ink); }
+  .right { align-items: center; display: flex; gap: 14px; margin-inline-start: auto; font-size: 14px; }
+  .login { background: none; border: 0; color: var(--ink); font-size: 14px; }
+  .sales { background: var(--ink); border: 0; border-radius: 8px; color: #fff; font-size: 14px; font-weight: 500; padding: 9px 14px; }
+  @media (max-width: 760px) { .site-header nav { display: none; } .lang { display: none; } }
+  .hero h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 500; letter-spacing: -0.045em; line-height: 1.02; padding-block: 70px 50px; text-align: center; }
+  .pair { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+  .card { border-radius: 22px; min-block-size: 620px; overflow: hidden; padding: 30px; position: relative; }
+  .card .top { align-items: flex-start; display: flex; gap: 20px; justify-content: space-between; position: relative; z-index: 1; }
+  .card h2 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; }
+  .card p { font-size: 15px; margin-block-start: 14px; max-inline-size: 38ch; position: relative; z-index: 1; }
+  .explore { background: #fff; border: 0; border-radius: 8px; color: var(--ink); flex: none; font-size: 14px; font-weight: 500; padding: 9px 16px; box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
+  .ai { background: radial-gradient(60% 50% at 85% 95%, #ff9a7a, transparent 70%), radial-gradient(50% 40% at 60% 80%, #ffc3a8, transparent 70%), linear-gradient(180deg, #a9c3e6, #cdd9ef 55%, #e9eef8); color: #fff; }
+  .ai .copy { background: linear-gradient(180deg, rgb(40 70 130 / 0.55), transparent); margin: -30px -30px 0; padding: 30px; }
+  .api { background: var(--card); }
+  .api p { color: var(--grey); }
+  .memory { background: rgb(255 255 255 / 0.55); backdrop-filter: blur(12px); border: 1px solid rgb(255 255 255 / 0.7); border-radius: 18px; color: var(--ink); inset: auto 12% 70px 12%; padding: 16px; position: absolute; font-size: 13px; }
+  .memory .row { align-items: center; background: #fff; border-radius: 12px; display: flex; gap: 10px; margin-block-start: 8px; padding: 10px 12px; }
+  .memory i { border-radius: 50%; block-size: 22px; flex: none; inline-size: 22px; }
+  .memory .row[data-new] { animation: pop .8s var(--ease); }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.98); } }
+  .phone { background: #1b1b1f; border-radius: 34px; block-size: 400px; inline-size: 210px; inset: auto auto 40px 50%; padding: 8px; position: absolute; transform: translateX(-50%); }
+  .phone .screen { background: linear-gradient(180deg, #f6e2c8, #e7c3a0); border-radius: 26px; block-size: 100%; overflow: hidden; position: relative; }
+  .phone .screen::before { background: radial-gradient(50% 30% at 50% 40%, rgb(255 255 255 / 0.7), transparent 70%), radial-gradient(70% 40% at 50% 100%, rgb(58 74 106 / 0.6), transparent 70%); content: ""; inset: 0; position: absolute; }
+  .phone .call { background: rgb(0 0 0 / 0.55); border-radius: 999px; color: #fff; font-size: 11px; inset: 14px 14px auto; padding: 4px 10px; position: absolute; text-align: center; }
+  .code { background: #111; border-radius: 14px; color: #d8dbe2; font: 12px/1.7 var(--mono); inset: auto auto 30px 30px; padding: 14px 16px; position: absolute; box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.6); }
+  .code .k { color: #b89cff; } .code .s { color: #8fe3b0; } .code .c { color: #8a8f98; }
+  @media (max-width: 900px) { .pair { grid-template-columns: 1fr; } .card { min-block-size: 560px; } }
+  .stats { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); padding-block: 60px; text-align: center; }
+  .stats b { display: block; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 500; letter-spacing: -0.04em; }
+  .stats span { color: var(--grey); font-size: 14px; }
+  @media (max-width: 700px) { .stats { grid-template-columns: 1fr; } }
+  footer { border-block-start: 1px solid #e6e8ec; color: var(--grey); font-size: 13px; padding-block: 30px 50px; }
+  footer a { color: var(--ink); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header" data-header>
+  <div class="inner">
+    <a class="mark" href="#top" aria-label="Sendbird study home"><i aria-hidden="true"></i><span>Sendbird</span></a>
+    <nav aria-label="Sections"><a href="#products">Products</a><a href="#scale">Scale</a></nav>
+    <div class="right"><span class="lang">EN</span><button class="login" type="button" data-demo="Log in is not available in this unofficial study.">Log in</button><button class="sales" type="button" data-demo="Contact sales is a demo in this unofficial study; nothing is sent.">Contact sales</button></div>
+  </div>
+</header>
+<main id="main" class="inner">
+  <section class="hero" id="top" aria-labelledby="hero-h"><h1 id="hero-h" data-split>Every customer conversation,<br>answered well</h1></section>
+  <section class="pair" id="products" aria-label="Two product lines">
+    <article class="card ai">
+      <div class="copy"><div class="top"><h2>AI Concierge</h2><button class="explore" type="button" data-demo="Explore is a demo in this unofficial study.">Explore</button></div>
+      <p>An assistant that remembers each customer and picks up where the last conversation stopped.</p></div>
+      <div class="memory" aria-label="Demo: what the concierge remembers" data-memory><b>Memory</b></div>
+    </article>
+    <article class="card api">
+      <div class="top"><h2>Communications<br>API</h2><button class="explore" type="button" data-demo="Explore is a demo in this unofficial study.">Explore</button></div>
+      <p>Chat, voice, and video building blocks for apps that need conversations to just work.</p>
+      <div class="phone" aria-hidden="true"><div class="screen"><span class="call" data-timer>Support call &middot; 00:00</span></div></div>
+      <pre class="code" aria-hidden="true"><span class="c">// start a call (illustrative)</span>
+<span class="k">const</span> call = client.<span class="k">dial</span>({ to: <span class="s">"agent"</span> })
+call.<span class="k">on</span>(<span class="s">"connected"</span>, show)</pre>
+    </article>
+  </section>
+  <section class="stats" id="scale" aria-label="Scale (illustrative numbers)">
+    <div><b data-count="7" data-suffix="B+">7B+</b><span>messages a month (illustrative)</span></div>
+    <div><b data-count="99.99" data-decimals="2" data-suffix="%">99.99%</b><span>uptime target (illustrative)</span></div>
+    <div><b data-count="150" data-suffix="+">150+</b><span>countries reached (illustrative)</span></div>
+  </section>
+</main>
+<footer><div class="inner"><strong style="color:var(--ink)">Unofficial</strong> brand study of Sendbird. Not affiliated with Sendbird. Product names and numbers here are illustrative; no logos or photography are used. <a href="../">All studies</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Sendbird by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Memory card fills in facts one by one, like a concierge recalling a customer.
+  const facts = [["#ffc3a8", "Prefers messages over calls"], ["#a9c3e6", "Ordered running shoes, size 42"], ["#c7b5ff", "Asked about returns last week"], ["#8fe3b0", "Likes short answers"]];
+  const mem = document.querySelector("[data-memory]");
+  let i = 0;
+  const add = () => { const [c, t] = facts[i % facts.length]; const row = document.createElement("div"); row.className = "row"; row.dataset.new = ""; row.innerHTML = `<i style="background:${c}"></i>${t}`; mem.append(row); if (mem.querySelectorAll(".row").length > 3) mem.querySelector(".row").remove(); i++; };
+  add(); add(); add();
+  if (!reduced) new IntersectionObserver(([e]) => { clearInterval(mem._t); if (e.isIntersecting) mem._t = setInterval(add, 2600); }).observe(mem);
+  const timer = document.querySelector("[data-timer]"); let s = 0;
+  setInterval(() => { if (document.hidden) return; s++; timer.textContent = `Support call \u00b7 ${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; }, 1000);
+})();
+</script>
+</body>
+</html>

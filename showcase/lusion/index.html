@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Lusion - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Lusion's studio-site language: a pale lavender page, one dark rounded stage full of white, cobalt, and black jacks that react to the pointer, pill buttons, and scroll-revealed statements.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0f1d'/%3E%3Cpath d='M16 6v20M6 16h20' stroke='%232f5bff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --paper: #eceaf3; --ink: #0c0f1d; --grey: #5b5d6e; --panel: #0c0f1d; --cobalt: #2f5bff; --pill: #dcdae6; --sans: "Inter Tight", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; --sg-header: 84px; --sg-focus: #2f5bff; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--paper); color: var(--ink); font: 400 16px/1.55 var(--sans); }
+  .edge { padding-inline: clamp(14px, 2.2vw, 32px); }
+  .pill { align-items: center; border: 0; border-radius: 999px; cursor: pointer; display: inline-flex; font: 500 12px var(--mono); gap: 10px; letter-spacing: .08em; padding: 12px 18px; text-transform: uppercase; }
+  .pill.dark { background: var(--ink); color: #fff; }
+  .pill.light { background: var(--pill); color: var(--ink); }
+  .pill i { background: currentColor; border-radius: 50%; block-size: 5px; inline-size: 5px; }
+  .pill:hover { transform: translateY(-1px); }
+
+  /* Header band above the stage. */
+  .site-header { align-items: center; display: flex; gap: 12px; padding-block: 18px; position: sticky; top: 0; z-index: 30; background: rgb(236 234 243 / .9); backdrop-filter: blur(8px); }
+  .mark { color: var(--ink); font: 700 clamp(22px, 2.4vw, 30px) var(--sans); letter-spacing: -.02em; text-decoration: none; }
+  .site-header .end { align-items: center; display: flex; gap: 8px; margin-inline-start: auto; position: relative; }
+  .round { background: var(--pill); border: 0; border-radius: 50%; block-size: 42px; cursor: pointer; display: grid; inline-size: 42px; place-items: center; }
+  .round span { background: var(--ink); block-size: 2px; inline-size: 14px; }
+  .round[aria-pressed="true"] span { block-size: 10px; background: none; border-inline: 3px solid var(--ink); inline-size: 10px; }
+  .menu { background: #fff; border-radius: 20px; box-shadow: 0 30px 60px -30px rgb(12 15 29 / .4); inset: 52px 0 auto auto; min-inline-size: 240px; padding: 14px; position: absolute; }
+  .menu a { border-radius: 12px; color: var(--ink); display: block; font: 600 22px var(--sans); letter-spacing: -.02em; padding: 8px 12px; text-decoration: none; }
+  .menu a:hover { background: var(--paper); }
+  @media (max-width: 560px) { .site-header .talk { display: none; } }
+
+  /* The stage: one dark rounded panel with the jacks. */
+  .hero h1 { font: 500 clamp(1.4rem, 2.6vw, 2.2rem)/1.15 var(--sans); letter-spacing: -.02em; margin-block: 4px 18px; max-inline-size: 30ch; }
+  .stage { background: radial-gradient(80% 90% at 50% 30%, #1a2142, var(--panel) 70%); block-size: min(74vh, 720px); border-radius: 14px; overflow: hidden; position: relative; }
+  .stage canvas { block-size: 100%; display: block; inline-size: 100%; }
+  .stage .fallback { color: #aeb3cc; font: 500 12px var(--mono); inset: auto auto 16px 18px; position: absolute; }
+  .cue { align-items: center; display: flex; font: 500 12px var(--mono); justify-content: space-between; letter-spacing: .1em; padding-block: 14px 40px; text-transform: uppercase; }
+  .cue span:last-child { color: var(--grey); }
+  .cue em { color: var(--grey); font-style: normal; }
+
+  /* Statement revealed word by word with scroll. */
+  .statement { padding-block: 120px; }
+  .statement p { font: 500 clamp(2rem, 5vw, 4.4rem)/1.06 var(--sans); letter-spacing: -.035em; max-inline-size: 20ch; }
+  .statement p span { opacity: var(--o, 1); transition: opacity .3s; }
+  .eyebrow { color: var(--grey); font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+
+  /* Work grid. */
+  .work { padding-block: 40px 120px; }
+  .work h2 { font: 600 clamp(2rem, 1.2rem + 2.8vw, 3.8rem)/1 var(--sans); letter-spacing: -.03em; margin-block: 10px 40px; }
+  .projects { display: grid; gap: clamp(14px, 2vw, 24px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proj { background: none; border: 0; color: inherit; cursor: pointer; padding: 0; text-align: start; }
+  .proj .art { aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; position: relative; }
+  .proj .art::after { background: inherit; content: ""; inset: 0; position: absolute; transform: scale(1); transition: transform 1.2s var(--ease); }
+  .proj:hover .art::after, .proj:focus-visible .art::after { transform: scale(1.06); }
+  .proj .art svg { block-size: 100%; display: block; inline-size: 100%; transition: transform 1.2s var(--ease); }
+  .proj:hover .art svg, .proj:focus-visible .art svg { transform: scale(1.06); }
+  .proj .meta { display: flex; gap: 10px; justify-content: space-between; padding-block: 12px 6px; }
+  .proj strong { font: 600 20px var(--sans); letter-spacing: -.02em; }
+  .proj span { color: var(--grey); font: 500 12px var(--mono); text-transform: uppercase; }
+  @media (max-width: 720px) { .projects { grid-template-columns: 1fr; } }
+
+  /* Numbers on the dark panel, then a big talk block. */
+  .numbers { background: var(--panel); border-radius: 14px; color: #eef0fa; display: grid; gap: 1px; grid-template-columns: repeat(4, 1fr); overflow: hidden; }
+  .numbers div { background: #121633; padding: clamp(20px, 3vw, 40px); }
+  .numbers b { display: block; font: 600 clamp(2.4rem, 5vw, 4.4rem)/1 var(--sans); letter-spacing: -.04em; }
+  .numbers span { color: #aeb3cc; font: 500 12px var(--mono); text-transform: uppercase; }
+  @media (max-width: 760px) { .numbers { grid-template-columns: 1fr 1fr; } }
+  .talk-block { padding-block: 140px 100px; text-align: center; }
+  .talk-block h2 { font: 600 clamp(3rem, 1.6rem + 5vw, 7.5rem)/.95 var(--sans); letter-spacing: -.04em; margin-block-end: 30px; }
+  .talk-block h2 span { color: var(--cobalt); }
+
+  footer.site { border-block-start: 1px solid #d3d0de; color: var(--grey); font-size: 13px; padding-block: 30px 90px; }
+  footer.site a { color: var(--ink); }
+  .proj .meta { border-block-start: 1px solid #d3d0de; margin-block-start: 12px; }
+  .cue { border-block-start: 1px solid #d3d0de; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header edge">
+  <a class="mark" href="#top">LUSION</a>
+  <div class="end">
+    <button class="round" type="button" aria-pressed="false" aria-label="Pause the 3D stage" data-still><span aria-hidden="true"></span></button>
+    <button class="pill dark talk" type="button" data-demo="There is no contact form in this unofficial study.">Let's talk <i aria-hidden="true"></i></button>
+    <button class="pill light" type="button" aria-expanded="false" aria-controls="site-menu" data-menu>Menu <i aria-hidden="true"></i><i aria-hidden="true"></i></button>
+    <nav class="menu" id="site-menu" aria-label="Sections" hidden><a href="#work">Work</a><a href="#about">About</a><a href="#talk">Contact</a></nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero edge" id="top" aria-labelledby="h1">
+    <h1 id="h1" data-split>We make the web feel like a place you can touch.</h1>
+    <div class="stage" data-stage>
+      <canvas data-canvas role="img" aria-label="A dark stage full of white, cobalt, and black six-armed pieces that drift and turn toward the pointer"></canvas>
+      <p class="fallback">Move the pointer over the stage.</p>
+    </div>
+    <div class="cue"><span>Scroll to <em>explore</em></span><span>Study, not a studio</span></div>
+  </section>
+
+  <section class="statement edge" aria-labelledby="st-h">
+    <h2 class="eyebrow" id="st-h">What the studio does</h2>
+    <p data-words>Real-time 3D, motion, and interaction, built for browsers and tuned until the frame rate stops being the story.</p>
+  </section>
+
+  <section class="work edge" id="work" aria-labelledby="w-h">
+    <p class="eyebrow">Selected work (invented)</p>
+    <h2 id="w-h" data-reveal>Featured work</h2>
+    <div class="projects"><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><radialGradient id="lz-w" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#dfe2ee"/><stop offset="1" stop-color="#7f849e"/></radialGradient><radialGradient id="lz-b" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#c3cfff"/><stop offset=".35" stop-color="#2f5bff"/><stop offset="1" stop-color="#0b1f80"/></radialGradient><radialGradient id="lz-k" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#737892"/><stop offset=".3" stop-color="#1b1d26"/><stop offset="1" stop-color="#000"/></radialGradient><radialGradient id="lz-glow"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".25" stop-color="#bfd0ff" stop-opacity=".55"/><stop offset="1" stop-color="#2f5bff" stop-opacity="0"/></radialGradient><linearGradient id="lz-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16308f"/><stop offset="1" stop-color="#03050d"/></linearGradient></defs></svg>
+      <button class="proj" type="button" data-demo="There are no case studies in this unofficial study."><div class="art sg-frame" aria-hidden="true" style="--sg-frame-radius:14px"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><rect width="400" height="300" fill="#0c0f1d"/><circle cx="210" cy="140" r="170" fill="#2a2466" opacity=".35"/><g transform="rotate(-16 200 150)"><ellipse cx="200" cy="150" rx="150" ry="46" fill="none" stroke="#9fb3ff" stroke-opacity=".55" stroke-width="2"/><circle cx="350.0" cy="150.0" r="7" fill="url(#lz-b)"/><circle cx="335.1" cy="170.0" r="4" fill="url(#lz-w)"/><circle cx="293.5" cy="186.0" r="4" fill="url(#lz-w)"/><circle cx="233.4" cy="194.8" r="7" fill="url(#lz-w)"/><circle cx="166.6" cy="194.8" r="4" fill="url(#lz-b)"/><circle cx="106.5" cy="186.0" r="4" fill="url(#lz-w)"/><circle cx="64.9" cy="170.0" r="7" fill="url(#lz-w)"/><circle cx="50.0" cy="150.0" r="4" fill="url(#lz-w)"/><circle cx="64.9" cy="130.0" r="4" fill="url(#lz-b)"/><circle cx="106.5" cy="114.0" r="7" fill="url(#lz-w)"/><circle cx="166.6" cy="105.2" r="4" fill="url(#lz-w)"/><circle cx="233.4" cy="105.2" r="4" fill="url(#lz-w)"/><circle cx="293.5" cy="114.0" r="7" fill="url(#lz-b)"/><circle cx="335.1" cy="130.0" r="4" fill="url(#lz-w)"/></g><circle cx="168" cy="158" r="62" fill="url(#lz-b)"/><circle cx="270" cy="118" r="36" fill="url(#lz-w)"/><circle cx="118" cy="92" r="12" fill="url(#lz-k)"/></svg></div><div class="meta"><strong>Orbit Lab</strong><span>WebGL · Product</span></div></button>
+      <button class="proj" type="button" data-demo="There are no case studies in this unofficial study."><div class="art sg-frame" aria-hidden="true" style="--sg-frame-radius:14px"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><rect width="400" height="300" fill="#e7e4f0"/><rect y="215" width="400" height="85" fill="#d9d5e6"/><ellipse cx="205" cy="248" rx="150" ry="16" fill="#b9b4cc" opacity=".7"/><circle cx="125" cy="200" r="54" fill="url(#lz-w)"/><circle cx="190" cy="178" r="66" fill="url(#lz-w)"/><circle cx="262" cy="204" r="52" fill="url(#lz-w)"/><circle cx="305" cy="168" r="40" fill="url(#lz-w)"/><circle cx="160" cy="118" r="46" fill="url(#lz-w)"/><circle cx="236" cy="112" r="40" fill="url(#lz-b)"/><circle cx="212" cy="70" r="26" fill="url(#lz-w)"/></svg></div><div class="meta"><strong>Soft Matter</strong><span>Installation</span></div></button>
+      <button class="proj" type="button" data-demo="There are no case studies in this unofficial study."><div class="art sg-frame" aria-hidden="true" style="--sg-frame-radius:14px"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><rect width="400" height="300" fill="#05070f"/><rect y="0" width="400" height="180" fill="#0a1236"/><rect y="180" width="400" height="120" fill="url(#lz-sea)"/><ellipse cx="200" cy="190" rx="40" ry="3" fill="none" stroke="#9fb3ff" stroke-opacity="0.35" stroke-width="1.4"/><ellipse cx="200" cy="202" rx="66" ry="4.6" fill="none" stroke="#9fb3ff" stroke-opacity="0.32" stroke-width="1.4"/><ellipse cx="200" cy="214" rx="92" ry="6.2" fill="none" stroke="#9fb3ff" stroke-opacity="0.29" stroke-width="1.4"/><ellipse cx="200" cy="226" rx="118" ry="7.800000000000001" fill="none" stroke="#9fb3ff" stroke-opacity="0.26" stroke-width="1.4"/><ellipse cx="200" cy="238" rx="144" ry="9.4" fill="none" stroke="#9fb3ff" stroke-opacity="0.23" stroke-width="1.4"/><ellipse cx="200" cy="250" rx="170" ry="11" fill="none" stroke="#9fb3ff" stroke-opacity="0.20" stroke-width="1.4"/><ellipse cx="200" cy="262" rx="196" ry="12.600000000000001" fill="none" stroke="#9fb3ff" stroke-opacity="0.17" stroke-width="1.4"/><ellipse cx="200" cy="274" rx="222" ry="14.200000000000001" fill="none" stroke="#9fb3ff" stroke-opacity="0.14" stroke-width="1.4"/><ellipse cx="200" cy="286" rx="248" ry="15.8" fill="none" stroke="#9fb3ff" stroke-opacity="0.11" stroke-width="1.4"/><rect x="194" y="182" width="12" height="118" fill="#bfd0ff" opacity=".25"/><circle cx="200" cy="120" r="70" fill="url(#lz-glow)"/><circle cx="200" cy="120" r="20" fill="url(#lz-w)"/></svg></div><div class="meta"><strong>Night Swim</strong><span>Campaign</span></div></button>
+      <button class="proj" type="button" data-demo="There are no case studies in this unofficial study."><div class="art sg-frame" aria-hidden="true" style="--sg-frame-radius:14px"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><rect width="400" height="300" fill="#ebe8f2"/><rect y="238" width="400" height="62" fill="#dcd8e8"/><path d="M70 250 Q56 185 70 120" stroke="#9a9db3" stroke-width="3" fill="none"/><ellipse cx="70" cy="252" rx="16.2" ry="4" fill="#b9b4cc"/><path d="M118 250 Q132 170 118 90" stroke="#9a9db3" stroke-width="3" fill="none"/><ellipse cx="118" cy="252" rx="19.8" ry="4" fill="#b9b4cc"/><path d="M168 250 Q154 195 168 140" stroke="#9a9db3" stroke-width="3" fill="none"/><ellipse cx="168" cy="252" rx="14.4" ry="4" fill="#b9b4cc"/><path d="M214 250 Q228 160 232 70" stroke="#9a9db3" stroke-width="3" fill="none"/><ellipse cx="214" cy="252" rx="23.400000000000002" ry="4" fill="#b9b4cc"/><path d="M262 250 Q248 184 262 118" stroke="#9a9db3" stroke-width="3" fill="none"/><ellipse cx="262" cy="252" rx="16.2" ry="4" fill="#b9b4cc"/><path d="M306 250 Q320 171 306 92" stroke="#9a9db3" stroke-width="3" fill="none"/><ellipse cx="306" cy="252" rx="18" ry="4" fill="#b9b4cc"/><path d="M344 250 Q330 194 344 138" stroke="#9a9db3" stroke-width="3" fill="none"/><ellipse cx="344" cy="252" rx="13.5" ry="4" fill="#b9b4cc"/><path d="M118 90 L214 70 L306 92" stroke="#2f5bff" stroke-width="1.5" stroke-dasharray="4 5" fill="none"/><circle cx="70" cy="120" r="18" fill="url(#lz-w)"/><circle cx="118" cy="90" r="22" fill="url(#lz-b)"/><circle cx="168" cy="140" r="16" fill="url(#lz-k)"/><circle cx="232" cy="70" r="26" fill="url(#lz-w)"/><circle cx="262" cy="118" r="18" fill="url(#lz-b)"/><circle cx="306" cy="92" r="20" fill="url(#lz-w)"/><circle cx="344" cy="138" r="15" fill="url(#lz-k)"/></svg></div><div class="meta"><strong>Signal Garden</strong><span>Interactive</span></div></button>
+    </div>
+  </section>
+
+  <section class="edge" id="about" aria-labelledby="ab-h">
+    <h2 class="eyebrow" id="ab-h" style="margin-block-end:18px">About the studio (invented numbers)</h2>
+    <div class="numbers"><div><b data-count="12">12</b><span>years in real time</span></div><div><b data-count="60">60</b><span>frames per second</span></div><div><b data-count="140">140</b><span>launches</span></div><div><b data-count="1">1</b><span>small team</span></div></div>
+  </section>
+
+  <section class="talk-block edge" id="talk" aria-labelledby="tk-h">
+    <h2 id="tk-h" data-reveal>Let's <span>talk</span>.</h2>
+    <button class="pill dark" type="button" data-demo="There is no contact form in this unofficial study.">Start a project <i aria-hidden="true"></i></button>
+  </section>
+</main>
+<footer class="site edge"><strong>Unofficial</strong> brand study of Lusion by StyleGallery. Not affiliated with Lusion. Projects, numbers, and copy are invented; the 3D stage is drawn on a 2D canvas; no logos, footage, or renders are reused. <a href="../">All studies</a></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Lusion by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  const $ = (s) => document.querySelector(s);
+  // Menu disclosure.
+  const mb = $("[data-menu]"), menu = $("#site-menu");
+  const setMenu = (open) => { mb.setAttribute("aria-expanded", String(open)); menu.hidden = !open; };
+  mb.addEventListener("click", () => { const open = menu.hidden; setMenu(open); if (open) menu.querySelector("a").focus(); });
+  menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) { setMenu(false); mb.focus(); } });
+  // Statement words brighten as the block crosses the viewport.
+  const words = $("[data-words]");
+  words.innerHTML = words.textContent.split(" ").map((w) => `<span>${w}</span>`).join(" ");
+  const spans = [...words.children];
+  const light = () => { if (reduced) return; const r = words.getBoundingClientRect(); const t = Math.min(1, Math.max(0, (innerHeight * .85 - r.top) / (r.height + innerHeight * .4))); spans.forEach((s, i) => s.style.setProperty("--o", i / spans.length < t ? "1" : ".5")); };
+  addEventListener("scroll", light, { passive: true }); light();
+
+  // The stage: six-armed jacks drawn as depth-sorted shaded spheres on a 2D canvas.
+  const canvas = $("[data-canvas]"), ctx = canvas.getContext("2d"), stage = $("[data-stage]");
+  if (!ctx) return;
+  const COLORS = [["#ffffff", "#aeb3c9"], ["#2f5bff", "#0d238f"], ["#1b1d26", "#000000"]];
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const jacks = Array.from({ length: 22 }, (_, i) => ({ x: rnd(-1.7, 1.7), y: rnd(-1, 1), z: rnd(-.5, 1.1), ax: rnd(0, 6.28), ay: rnd(0, 6.28), vx: rnd(-.003, .003), vy: rnd(-.004, .004), c: COLORS[i % 3], s: rnd(.42, .62) }));
+  const ARMS = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+  let W = 0, H = 0, dpr = 1, mx = 0, my = 0, tx = 0, ty = 0, running = true, still = reduced, visible = true;
+  const size = () => { dpr = Math.min(2, devicePixelRatio || 1); W = stage.clientWidth; H = stage.clientHeight; canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); draw(); };
+  const rot = ([x, y, z], ax, ay) => { const cy = Math.cos(ay), sy = Math.sin(ay), cx = Math.cos(ax), sx = Math.sin(ax); const x1 = x * cy + z * sy, z1 = -x * sy + z * cy; return [x1, y * cx - z1 * sx, y * sx + z1 * cx]; };
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const f = Math.min(W, H) * .55, balls = [];
+    for (const j of jacks) {
+      const ax = j.ax + my * .6, ay = j.ay + mx * .6;
+      const px = j.x + mx * .08 * (1 + j.z), py = j.y + my * .08 * (1 + j.z);
+      balls.push([px, py, j.z, j.s * .55, j.c]);
+      for (const a of ARMS) for (let k = 1; k <= 9; k++) { const [x, y, z] = rot(a.map((v) => v * j.s * k / 9), ax, ay); balls.push([px + x, py + y, j.z + z, j.s * (k === 9 ? .44 : .4), j.c]); }
+    }
+    balls.sort((a, b) => b[2] - a[2]);
+    for (const [x, y, z, r, [c1, c2]] of balls) {
+      const p = 1 / (1.6 + z), sx = W / 2 + x * f * p, sy = H / 2 + y * f * p, sr = r * f * p * .5;
+      if (sr <= 0) continue;
+      const g = ctx.createRadialGradient(sx - sr * .35, sy - sr * .4, sr * .1, sx, sy, sr);
+      g.addColorStop(0, c1 === "#1b1d26" ? "#5a5f78" : "#fff"); g.addColorStop(.35, c1); g.addColorStop(1, c2);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(sx, sy, sr, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  const step = () => {
+    if (!running) return;
+    mx += (tx - mx) * .06; my += (ty - my) * .06;
+    for (const j of jacks) { j.ax += j.vx; j.ay += j.vy; j.y += Math.sin(j.ax) * .0008; }
+    draw(); requestAnimationFrame(step);
+  };
+  const sync = () => { const go = !still && visible && !document.hidden; if (go && !running) { running = true; requestAnimationFrame(step); } else if (!go) running = false; };
+  stage.addEventListener("pointermove", (e) => { const r = stage.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width * 2 - 1; ty = (e.clientY - r.top) / r.height * 2 - 1; if (still) { mx = tx; my = ty; draw(); } });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(stage);
+  document.addEventListener("visibilitychange", sync);
+  const sb = $("[data-still]");
+  if (reduced) { sb.setAttribute("aria-pressed", "true"); sb.setAttribute("aria-label", "Play the 3D stage"); }
+  sb.addEventListener("click", () => { still = !still; sb.setAttribute("aria-pressed", String(still)); sb.setAttribute("aria-label", still ? "Play the 3D stage" : "Pause the 3D stage"); sync(); });
+  addEventListener("resize", size);
+  running = false; size(); sync();
+})();
+</script>
+</body>
+</html>

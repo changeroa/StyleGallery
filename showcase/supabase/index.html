@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Supabase - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Supabase's off-white product page: two-tone headings, hairline product cards, a live query table, and gradient story cards.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Cpath d='M17 5 8 18h8l-1 9 9-13h-8z' fill='%233ecf8e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --bg: #fcfcfc; --ink: #171717; --grey: #5f5f5f; --line: #e6e6e6; --mint: #3ecf8e; --mint-ink: #1f7a53; --sans: "Inter", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; --sg-header: 72px; --sg-focus: #1f7a53; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--bg); color: var(--ink); font: 400 15px/1.6 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1200px; padding-inline: 20px; }
+  .site-header { backdrop-filter: blur(10px); background: rgb(252 252 252 / .85); border-block-end: 1px solid var(--line); position: sticky; top: 0; z-index: 30; }
+  .site-header .w { align-items: center; display: flex; gap: 22px; block-size: 58px; }
+  .logo { align-items: center; color: var(--ink); display: flex; font-weight: 600; gap: 8px; text-decoration: none; }
+  .logo svg { block-size: 20px; inline-size: 20px; }
+  .site-header nav { display: flex; gap: 18px; }
+  .site-header nav a { color: var(--grey); font-size: 14px; text-decoration: none; }
+  .site-header nav a:hover { color: var(--ink); }
+  .hr { display: flex; gap: 8px; margin-inline-start: auto; }
+  .btn { border-radius: 6px; font: 500 13px var(--sans); padding: 7px 12px; }
+  .btn.mint { background: var(--mint); border: 1px solid #2fb57a; color: #0b2a1c; }
+  .btn.line { background: #fff; border: 1px solid #d4d4d4; color: var(--ink); }
+  @media (max-width: 820px) { .site-header nav { display: none; } }
+  .hero { padding-block: 110px 60px; text-align: center; }
+  .hero h1 { font-size: clamp(2.4rem, 5.6vw, 4.6rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1.02; }
+  .hero h1 .l2 { color: var(--mint-ink); display: block; }
+  .hero p { color: var(--grey); margin: 20px auto 26px; max-inline-size: 56ch; }
+  .ctas { display: flex; gap: 8px; justify-content: center; }
+  .logos { color: #6b6b6b; display: flex; flex-wrap: wrap; font-weight: 600; gap: 16px 40px; justify-content: center; margin-block-start: 50px; }
+  .bento { display: grid; gap: 12px; grid-template-columns: repeat(6, 1fr); margin-block-start: 30px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; padding: 20px; position: relative; transition: border-color .3s; }
+  .card:hover { border-color: #bdbdbd; }
+  .card.big { grid-column: span 3; min-block-size: 330px; }
+  .card.sm { grid-column: span 2; min-block-size: 220px; }
+  .card h3 { font-size: 15px; font-weight: 500; }
+  .card p { color: var(--grey); font-size: 13px; }
+  .card p b { color: var(--ink); font-weight: 500; }
+  .tbl { border: 1px solid var(--line); border-radius: 8px; font: 12px var(--mono); margin-block-start: 16px; overflow: hidden; }
+  .tbl div { border-block-end: 1px solid var(--line); display: grid; grid-template-columns: 40px 1fr 90px; padding: 6px 10px; }
+  .tbl div:first-child { background: #f5f5f5; color: var(--grey); }
+  .tbl div.new { background: #ecfaf3; }
+  .check { color: var(--mint-ink); }
+  .rt { display: flex; gap: 6px; margin-block-start: 18px; }
+  .rt i { animation: blip 1.6s ease-in-out infinite; background: var(--mint); block-size: 10px; border-radius: 50%; inline-size: 10px; }
+  .rt i:nth-child(2) { animation-delay: .3s; } .rt i:nth-child(3) { animation-delay: .6s; }
+  @keyframes blip { 50% { opacity: .2; transform: scale(.6); } }
+  .vec { display: grid; gap: 4px; grid-template-columns: repeat(12, 1fr); margin-block-start: 18px; }
+  .vec i { aspect-ratio: 1; background: var(--mint); border-radius: 2px; opacity: var(--o); }
+  @media (max-width: 900px) { .bento { grid-template-columns: 1fr 1fr; } .card.big, .card.sm { grid-column: span 2; } }
+  .sec { padding-block: 120px 20px; }
+  .h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.2; }
+  .h2 .g { color: #8f8f8f; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-block: 26px 14px; }
+  .tabs button { background: #fff; border: 1px solid var(--line); border-radius: 999px; color: var(--grey); font: 500 13px var(--sans); padding: 5px 12px; }
+  .tabs button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
+  .code { background: #fff; border: 1px solid var(--line); border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+  .code pre { border-inline-end: 1px solid var(--line); font: 12px/1.8 var(--mono); margin: 0; overflow-x: auto; padding: 18px; }
+  .code .k { color: #7c3aed; } .code .s { color: var(--mint-ink); }
+  .code .out { font: 12px/1.8 var(--mono); padding: 18px; color: var(--grey); }
+  @media (max-width: 760px) { .code { grid-template-columns: 1fr; } .code pre { border: 0; border-block-end: 1px solid var(--line); } }
+  .stories { display: grid; gap: 12px; grid-template-columns: 1.3fr 1fr 1fr 1fr; margin-block-start: 30px; }
+  .st { border-radius: 12px; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; min-block-size: 360px; overflow: hidden; padding: 20px; position: relative; }
+  .st b { font-size: 18px; font-weight: 500; line-height: 1.3; }
+  .st small { font-size: 12px; margin-block-start: 8px; }
+  .st::after { background: linear-gradient(transparent 40%, rgb(0 0 0 / .45)); content: ""; inset: 0; position: absolute; z-index: 0; }
+  .st > * { position: relative; z-index: 1; }
+  @media (max-width: 900px) { .stories { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .stories { grid-template-columns: 1fr; } .st { min-block-size: 240px; } }
+  .final { padding-block: 130px 90px; text-align: center; }
+  .final .h2 { margin-block-end: 20px; }
+  footer { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 13px; padding-block: 40px 60px; }
+  footer a { color: var(--mint-ink); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="w">
+    <a class="logo" href="#top"><svg viewBox="0 0 20 20" aria-hidden="true"><rect width="20" height="20" rx="5" fill="#171717"/><circle cx="10" cy="10" r="4" fill="#3ecf8e"/></svg>Supabase</a>
+    <nav aria-label="Sections"><a href="#product">Product</a><a href="#code">Developers</a><a href="#stories">Customers</a></nav>
+    <div class="hr"><button class="btn line" type="button" data-demo="Sign in is not available in this unofficial study.">Sign in</button><button class="btn mint" type="button" data-demo="Projects are not created in this unofficial study.">Start a project</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero w" id="top">
+    <h1 data-split>Ship this weekend<span class="l2">and still sleep at scale</span></h1>
+    <p data-reveal data-delay="300">A Postgres database with auth, storage, realtime, functions, and vectors attached, so the backend is a weekend, not a quarter.</p>
+    <div class="ctas" data-reveal data-delay="400"><button class="btn mint" type="button" data-demo="Projects are not created in this unofficial study." data-magnet>Start a project</button><button class="btn line" type="button" data-demo="Demos are not booked in this unofficial study.">Request a demo</button></div>
+    <div class="logos" aria-label="Fictional customer names"><span>NORTHWIND</span><span>Harlow</span><span>quanta</span><span>MERIDIAN</span><span>kite&amp;co</span><span>ARCLINE</span></div>
+  </section>
+
+  <section class="w" id="product">
+    <div class="bento">
+      <article class="card big" data-reveal><h3>Database</h3><p><b>A real Postgres, not a lookalike.</b> Tables, SQL, extensions, and a REST API generated for you.</p><div class="tbl" data-tbl aria-label="Sample rows (illustrative)"><div><span>id</span><span>title</span><span>status</span></div><div><span>1</span><span>Launch notes</span><span class="check">✓ done</span></div><div><span>2</span><span>Pricing page</span><span>open</span></div></div></article>
+      <article class="card big" data-reveal data-delay="100"><h3>Authentication</h3><p><b>Sign-in with rules at the row.</b> Email, magic links, and social providers, with row level security.</p><div class="tbl" aria-hidden="true"><div><span>#</span><span>policy</span><span>role</span></div><div><span>1</span><span>own rows only</span><span>user</span></div><div><span>2</span><span>read all</span><span>admin</span></div></div></article>
+      <article class="card sm" data-reveal><h3>Edge Functions</h3><p><b>Code near your users.</b> Deploy TypeScript in seconds.</p></article>
+      <article class="card sm" data-reveal data-delay="80" data-ambient><h3>Realtime</h3><p><b>Listen to changes.</b> Presence and broadcast built in.</p><div class="rt" aria-hidden="true"><i></i><i></i><i></i></div></article>
+      <article class="card sm" data-reveal data-delay="160"><h3>Vectors</h3><p><b>Embeddings next to your data.</b></p><div class="vec" aria-hidden="true" data-vec></div></article>
+    </div>
+  </section>
+
+  <section class="sec w" id="code">
+    <h2 class="h2" data-reveal>Start with a query.<br><span class="g">Keep the same one at a million rows.</span></h2>
+    <div class="tabs" role="group" aria-label="Client" data-tabs><button type="button" aria-pressed="true">JavaScript</button><button type="button" aria-pressed="false">Python</button><button type="button" aria-pressed="false">SQL</button></div>
+    <div class="code"><pre data-src></pre><div class="out" aria-live="polite" data-out></div></div>
+  </section>
+
+  <section class="sec w" id="stories">
+    <h2 class="h2" data-reveal><span class="g">Built by small teams,</span><br>now serving big numbers</h2>
+    <div class="stories">
+      <article class="st" style="background:linear-gradient(180deg,#ff8fb1,#ff4f4f 55%,#ff9a3c)"><b>A study app went from zero to a million learners on one project.</b><small>Fictional story</small></article>
+      <article class="st" style="background:linear-gradient(180deg,#0f1b3a,#1f3f6b)"><b>A climate startup replaced four services.</b><small>Fictional story</small></article>
+      <article class="st" style="background:linear-gradient(180deg,#0f3b3a,#1a6b62)"><b>An agency ships a client backend per week.</b><small>Fictional story</small></article>
+      <article class="st" style="background:linear-gradient(180deg,#111,#2d2d2d)"><b>A game studio syncs lobbies in realtime.</b><small>Fictional story</small></article>
+    </div>
+  </section>
+
+  <section class="final w" aria-labelledby="f-h">
+    <h2 class="h2" id="f-h" data-reveal>Build this weekend. Scale later.</h2>
+    <button class="btn mint" type="button" data-demo="Projects are not created in this unofficial study.">Start a project</button>
+  </section>
+</main>
+<footer><div class="w"><strong style="color:var(--ink)">Unofficial</strong> brand study of Supabase by StyleGallery. Not affiliated with Supabase. Customers, stories, and numbers are fictional; no logos are used. <a href="../">All studies</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Supabase by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  document.querySelector("[data-vec]").innerHTML = Array.from({ length: 36 }, () => `<i style="--o:${(0.15 + Math.random() * 0.85).toFixed(2)}"></i>`).join("");
+  const src = {
+    JavaScript: ['<span class="k">const</span> { data } = <span class="k">await</span> db', '  .from(<span class="s">"notes"</span>)', '  .select(<span class="s">"id, title"</span>)', '  .eq(<span class="s">"status"</span>, <span class="s">"open"</span>)'],
+    Python: ['data = db.table(<span class="s">"notes"</span>) \\', '  .select(<span class="s">"id, title"</span>) \\', '  .eq(<span class="s">"status"</span>, <span class="s">"open"</span>) \\', '  .execute()'],
+    SQL: ['<span class="k">select</span> id, title', '<span class="k">from</span> notes', '<span class="k">where</span> status = <span class="s">\'open\'</span>;'],
+  };
+  const pre = document.querySelector("[data-src]"), out = document.querySelector("[data-out]"), bs = [...document.querySelectorAll("[data-tabs] button")];
+  const show = (b) => { bs.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); pre.innerHTML = src[b.textContent].join("\n"); out.innerHTML = `// ${b.textContent} client (fictional)<br>[<br>&nbsp;&nbsp;{ "id": 2, "title": "Pricing page" },<br>&nbsp;&nbsp;{ "id": 7, "title": "Onboarding email" }<br>]<br>2 rows · 11 ms`; };
+  bs.forEach((b) => b.addEventListener("click", () => show(b)));
+  show(bs[0]);
+  // New rows land in the table while it is visible.
+  const tbl = document.querySelector("[data-tbl]"), titles = ["Onboarding email", "Docs refresh", "Billing webhook", "Dark mode"];
+  let n = 3;
+  if (!reduced) { let t = 0; new IntersectionObserver(([e]) => { clearInterval(t); if (e.isIntersecting) t = setInterval(() => { const r = document.createElement("div"); r.className = "new"; r.innerHTML = `<span>${n}</span><span>${titles[n % 4]}</span><span>open</span>`; tbl.append(r); n++; if (tbl.children.length > 5) tbl.children[1].remove(); setTimeout(() => r.classList.remove("new"), 900); }, 2200); }).observe(tbl); }
+})();
+</script>
+</body>
+</html>

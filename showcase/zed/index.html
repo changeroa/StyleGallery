@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Zed - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Zed's paper-and-hairline editor page: italic blue serif, drafting-frame rules with diamond markers, and a code editor that types.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23084ccf'/%3E%3Cpath d='M9 10h14L9 22h14' stroke='%23fff' stroke-width='2.5' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;1,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@500&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --paper: #f6f5f1; --ink: #1c1d22; --grey: #5a5c63; --line: #dcdad3; --blue: #084ccf; --serif: "Lora", Georgia, serif; --mono: "IBM Plex Mono", ui-monospace, monospace; --sans: "Inter", system-ui, sans-serif; --sg-header: 64px; --sg-focus: #084ccf; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--paper); color: var(--ink); font: 400 14px/1.65 var(--mono); }
+  .frame { border-inline: 1px solid var(--line); margin-inline: auto; max-inline-size: 1240px; overflow-x: clip; position: relative; }
+  .col { margin-inline: auto; max-inline-size: 1120px; padding-inline: 24px; }
+  .rule { border-block-start: 1px solid var(--line); position: relative; }
+  .rule::before, .rule::after { background: var(--paper); block-size: 7px; border: 1px solid #b9b6ab; content: ""; inline-size: 7px; inset: -4px auto auto -4px; position: absolute; transform: rotate(45deg); }
+  .rule::after { inset-inline: auto -4px; }
+  .site-header { background: rgb(246 245 241 / .94); backdrop-filter: blur(8px); border-block-end: 1px solid var(--line); position: sticky; top: 0; z-index: 30; }
+  .site-header .col { align-items: center; display: flex; gap: 20px; block-size: 52px; }
+  .logo { align-items: center; color: var(--ink); display: flex; font: 500 15px var(--sans); gap: 8px; text-decoration: none; }
+  .logo i { background: var(--blue); block-size: 18px; border-radius: 4px; inline-size: 18px; }
+  .site-header nav { display: flex; gap: 16px; }
+  .site-header nav a { color: var(--ink); font: 500 13px var(--sans); text-decoration: none; }
+  .site-header nav a:hover { color: var(--blue); }
+  .hr { align-items: center; display: flex; gap: 8px; margin-inline-start: auto; }
+  .kbd { border: 1px solid rgb(255 255 255 / .5); border-radius: 3px; font: 10px var(--mono); margin-inline-start: 6px; padding: 0 4px; }
+  .btn { align-items: center; border-radius: 5px; display: inline-flex; font: 500 13px var(--sans); gap: 6px; padding: 7px 12px; }
+  .btn.blue { background: var(--blue); border: 1px solid var(--blue); color: #fff; }
+  .btn.line { background: #fff; border: 1px solid var(--line); color: var(--ink); }
+  .btn.line .kbd { border-color: var(--line); }
+  @media (max-width: 820px) { .site-header nav { display: none; } }
+  .news { color: var(--grey); font-size: 12px; padding-block: 8px; text-align: center; }
+  .news b { color: var(--blue); font-weight: 500; }
+  .hero { padding-block: 70px 50px; text-align: center; }
+  .hero h1 { color: var(--blue); font: italic 500 clamp(2.4rem, 5vw, 4rem)/1.05 var(--serif); letter-spacing: -0.02em; }
+  .hero p { color: var(--grey); margin: 16px auto 24px; max-inline-size: 42ch; }
+  .hero .ctas { display: flex; gap: 8px; justify-content: center; }
+  .hero small { color: var(--grey); display: block; font-size: 12px; margin-block-start: 12px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .trio div { border-inline-end: 1px solid var(--line); padding: 20px 24px; }
+  .trio div:last-child { border: 0; }
+  .trio b { display: block; font: 500 14px var(--sans); }
+  .trio span { color: var(--grey); font-size: 12px; }
+  @media (max-width: 760px) { .trio { grid-template-columns: 1fr; } .trio div { border: 0; border-block-end: 1px solid var(--line); } }
+  /* Editor window: sidebar, agent thread, and a buffer that types. */
+  .editor { background: #fbfbf9; border: 1px solid #cfccc3; border-radius: 10px; box-shadow: 0 30px 60px -30px rgb(40 36 20 / .35); display: grid; font-size: 12px; grid-template-columns: 220px 300px 1fr; margin-block: 0 60px; min-block-size: 420px; overflow: hidden; }
+  .ed-bar { align-items: center; border-block-end: 1px solid var(--line); display: flex; gap: 8px; grid-column: 1 / -1; padding: 7px 10px; color: var(--grey); }
+  .ed-bar i { block-size: 10px; border-radius: 50%; inline-size: 10px; }
+  .ed-side, .ed-thread { border-inline-end: 1px solid var(--line); padding: 10px; }
+  .ed-side .it { border-radius: 4px; padding: 4px 6px; }
+  .ed-side .it.on { background: #e8e6df; }
+  .ed-thread .m { margin-block-end: 10px; }
+  .ed-thread .m.tool { color: var(--grey); }
+  .ed-thread .m.tool::before { content: "⚙ "; }
+  .ed-code { padding: 10px 0; }
+  .ed-code .ln { color: #9b988e; display: inline-block; inline-size: 3em; padding-inline-end: 8px; text-align: end; user-select: none; }
+  .ed-code .k { color: #8a3fb8; } .ed-code .s { color: #2f7d4b; } .ed-code .c { color: #8a8780; }
+  .ed-code pre { margin: 0; font: 12px/1.7 var(--mono); white-space: pre-wrap; }
+  .ed-code .cur { background: #dfe8fb; display: block; }
+  .ed-code .caret::after { animation: blink 1s steps(1) infinite; color: var(--blue); content: "▍"; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (max-width: 960px) { .editor { grid-template-columns: 1fr; } .ed-side, .ed-thread { display: none; } }
+  .sec { padding-block: 60px; }
+  .sec-h { align-items: flex-end; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; margin-block-end: 30px; }
+  .sec-h h2 { font: 500 clamp(1.4rem, 2.4vw, 1.9rem)/1.2 var(--serif); }
+  .sec-h p { color: var(--grey); font-size: 13px; max-inline-size: 44ch; margin-block-start: 8px; }
+  .sec-h .acts { display: flex; gap: 8px; }
+  .link { background: none; border: 0; color: var(--ink); font: 500 13px var(--sans); }
+  .brands { color: #45464c; display: flex; flex-wrap: wrap; font: 600 16px var(--sans); gap: 18px 48px; justify-content: center; margin-block-end: 40px; }
+  .voices { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
+  .voice { background: #fff; border: 1px solid var(--line); border-radius: 6px; font-size: 13px; padding: 18px; }
+  .voice.feature { background: #eef3ff; border-color: #c6d5f7; grid-row: span 2; }
+  .voice mark { background: #d4e1fb; color: inherit; }
+  .voice footer { align-items: center; color: var(--grey); display: flex; font-size: 11px; gap: 8px; margin-block-start: 14px; }
+  .voice footer i { background: linear-gradient(135deg, var(--a), var(--b)); block-size: 24px; border-radius: 50%; inline-size: 24px; }
+  @media (max-width: 860px) { .voices { grid-template-columns: 1fr; } .voice.feature { grid-row: auto; } }
+  .works { display: grid; gap: 1px; grid-template-columns: 1fr 1fr; background: var(--line); border: 1px solid var(--line); }
+  .works article { background: var(--paper); padding: 22px; }
+  .works .shot { aspect-ratio: 1.8; background: linear-gradient(160deg, #2a2d36, #1a1c22); border-radius: 4px; margin-block-end: 14px; padding: 12px; color: #9aa1b3; font-size: 10px; overflow: hidden; }
+  .works .shot b { color: #d7dcea; font-weight: 500; }
+  .works h3 { font: 500 15px var(--sans); }
+  .works p { color: var(--grey); font-size: 12px; }
+  @media (max-width: 760px) { .works { grid-template-columns: 1fr; } }
+  .exts { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); }
+  .ext { background: #fff; border: 1px solid var(--line); border-radius: 5px; padding: 12px; font-size: 12px; }
+  .ext header { display: flex; justify-content: space-between; }
+  .ext b { font-weight: 500; }
+  .ext span { color: var(--grey); }
+  .exts[data-fade] .ext:nth-child(n+9) { opacity: .5; }
+  @media (max-width: 860px) { .exts { grid-template-columns: 1fr 1fr; } }
+  .letter-wrap { background-image: linear-gradient(#d9e3f7 1px, transparent 1px), linear-gradient(90deg, #d9e3f7 1px, transparent 1px); background-size: 24px 24px; padding: 60px 24px; }
+  .letter { background: #fff; border: 1px solid var(--line); box-shadow: 0 0 0 8px #fff, 0 0 0 9px var(--line); margin-inline: auto; max-inline-size: 760px; padding: 34px; }
+  .letter small { color: var(--grey); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+  .letter h2 { font: 500 26px var(--serif); margin-block: 6px 16px; }
+  .letter p { margin-block-end: 14px; max-inline-size: 58ch; }
+  .letter .sig { color: var(--grey); font-size: 12px; margin-block-start: 20px; }
+  .dl { background-image: linear-gradient(#d9e3f7 1px, transparent 1px), linear-gradient(90deg, #d9e3f7 1px, transparent 1px); background-size: 24px 24px; padding: 70px 24px; text-align: center; }
+  .dl .app { background: #fff; border-radius: 18px; box-shadow: 0 10px 30px -10px rgb(0 0 0 / .2); display: inline-grid; block-size: 88px; inline-size: 88px; margin-block-end: 18px; place-items: center; }
+  .dl .app i { background: var(--blue); block-size: 56px; border-radius: 12px; inline-size: 56px; }
+  .dl h2 { font: 500 26px var(--serif); margin-block-end: 16px; }
+  footer.site { background: var(--blue); color: #e6edff; font-size: 12px; padding: 40px 24px 50px; }
+  footer.site a { color: #fff; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="col">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Zed</a>
+    <nav aria-label="Sections"><a href="#trusted">Trusted</a><a href="#works">Features</a><a href="#extensions">Extensions</a><a href="#letter">Letter</a></nav>
+    <div class="hr"><button class="btn line" type="button" data-demo="Sign up is not available in this unofficial study.">Sign up<span class="kbd">S</span></button><button class="btn blue" type="button" data-demo="There is no download in this unofficial study.">Download<span class="kbd">D</span></button></div>
+  </div>
+</header>
+<div class="frame">
+<main id="main">
+  <p class="news">Note: <b>this is a study page</b>, not a release announcement.</p>
+  <section class="hero col" id="top">
+    <h1 data-reveal="blur">The editor you stop replacing</h1>
+    <p data-reveal data-delay="120">A small, very fast code editor made for working alongside people and agents.</p>
+    <div class="ctas" data-reveal data-delay="200"><button class="btn blue" type="button" data-demo="There is no download in this unofficial study." data-magnet>Download now<span class="kbd">D</span></button><button class="btn line" type="button" data-demo="There is no source link in this unofficial study.">Clone source<span class="kbd">C</span></button></div>
+    <small>For macOS, Linux, and Windows (study copy)</small>
+  </section>
+  <div class="rule"></div>
+  <div class="col"><div class="trio"><div><b>Fast</b><span>Native code on every core and the GPU.</span></div><div><b>Agentic</b><span>Run agents in parallel, edit, and review in place.</span></div><div><b>Together</b><span>Share a project, talk, and pair without leaving.</span></div></div></div>
+  <div class="col">
+    <div class="editor" role="img" aria-label="Code editor mockup: file list, an agent thread, and a code buffer being edited">
+      <div class="ed-bar" aria-hidden="true"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span style="margin-inline-start:12px">studio · main · scheduler.ts</span></div>
+      <div class="ed-side" aria-hidden="true"><div class="it on">Add keyboard nav to the picker</div><div class="it">Fix rope panic on big files</div><div class="it">Motion for the sidebar</div><div class="it">Class hide bug on hover</div></div>
+      <div class="ed-thread" aria-hidden="true"><div class="m">Make the date picker keyboard friendly. Arrow keys move, Enter picks.</div><div class="m tool">Read picker.tsx</div><div class="m tool">Search "onKeyDown"</div><div class="m">Adding a handler and roving focus to the day grid.</div></div>
+      <div class="ed-code" aria-hidden="true" data-ambient><pre data-code></pre></div>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <section class="sec col" id="trusted">
+    <div class="sec-h" style="justify-content:center;text-align:center"><h2 data-reveal>Used by careful developers<br>and ambitious teams</h2></div>
+    <div class="brands" aria-label="Fictional company names"><span>NORTHWIND</span><span>Harlow</span><span>QUANTA</span><span>▲ Meridian</span><span>kite&amp;co</span><span>ARCLINE</span></div>
+    <div class="voices">
+      <figure class="voice" style="--a:#c98a5a;--b:#6e3e22" data-reveal>"Opened a 40 MB log and it just scrolled. That was the moment."<footer><i></i>Fictional · infra engineer</footer></figure>
+      <figure class="voice feature" style="--a:#6b7cff;--b:#1f245f" data-reveal data-delay="80">"I described a refactor, <mark>watched three agents split it up</mark>, and reviewed the diff over coffee. <mark>It felt like pairing with a very fast colleague.</mark>"<footer><i></i>Fictional · research lead</footer></figure>
+      <figure class="voice" style="--a:#7a8f88;--b:#2f3f3a" data-reveal data-delay="160">"Vim keys that feel native, not bolted on."<footer><i></i>Fictional · staff engineer</footer></figure>
+      <figure class="voice" style="--a:#e0a36b;--b:#6b3a1e" data-reveal>"Typing latency I stopped noticing, which is the point."<footer><i></i>Fictional · designer who codes</footer></figure>
+      <figure class="voice" style="--a:#9aa9bf;--b:#3a4a66" data-reveal data-delay="160">"Pair sessions without screen sharing lag."<footer><i></i>Fictional · team lead</footer></figure>
+    </div>
+  </section>
+  <div class="rule"></div>
+
+  <section class="sec col" id="works">
+    <div class="sec-h"><div><h2 data-reveal>Works on day one</h2><p>Strong defaults out of the box, and a new version most weeks.</p></div><div class="acts"><button class="link" type="button" data-demo="The roadmap is illustrative in this unofficial study.">Roadmap ›</button><button class="btn line" type="button" data-demo="Release notes are illustrative in this unofficial study.">Releases ›</button></div></div>
+    <div class="works">
+      <article data-reveal><div class="shot" aria-hidden="true"><b>agents</b><br>● refactor-auth · 12 files<br>● docs-pass · 4 files<br>○ tests · queued</div><h3>Parallel agents</h3><p>Run several threads across projects without losing your place.</p></article>
+      <article data-reveal data-delay="100"><div class="shot" aria-hidden="true"><b>debug</b><br>▶ break at scheduler.ts:42<br>  slot = { day: 3, hour: 9 }<br>  step over ⤵</div><h3>Debugger</h3><p>Standard debug adapters for many languages.</p></article>
+      <article data-reveal><div class="shot" aria-hidden="true"><b>git</b><br>+ staged 3 files<br>~ picker.tsx +41 −6<br>⇡ push origin</div><h3>Git built in</h3><p>Stage, commit, pull, and push in the editor.</p></article>
+      <article data-reveal data-delay="100"><div class="shot" aria-hidden="true"><b>predict</b><br>const next = <span style="color:#6b7cff">slots.find(s =&gt; s.free)</span><br><span style="color:#6b7280">tab to accept</span></div><h3>Edit prediction</h3><p>A small model guesses your next edit.</p></article>
+    </div>
+  </section>
+  <div class="rule"></div>
+
+  <section class="sec col" id="extensions">
+    <div class="sec-h"><div><h2 data-reveal>A growing set of extensions</h2><p>Languages, themes, and tools from the community (names invented).</p></div><div class="acts"><button class="link" type="button" data-demo="Extension authoring is illustrative in this unofficial study.">Create ›</button><button class="btn line" type="button" data-demo="The extension gallery is illustrative in this unofficial study.">All extensions ›</button></div></div>
+    <div class="exts" data-fade data-exts></div>
+  </section>
+
+  <section class="letter-wrap" id="letter">
+    <article class="letter" data-reveal>
+      <small>A letter</small>
+      <h2>From the makers (fictional)</h2>
+      <p>Tools for writing software are changing faster than they have in a generation. We think the best editor is the one that stays quick and quiet while more of the work is shared with agents.</p>
+      <p>This page is a study of a design language, not a message from any company. Everything written here is new.</p>
+      <p class="sig">— StyleGallery study team</p>
+    </article>
+  </section>
+  <section class="dl" aria-labelledby="dl-h">
+    <div class="app" aria-hidden="true"><i></i></div>
+    <h2 id="dl-h">Daily drive it for a week</h2>
+    <button class="btn blue" type="button" data-demo="There is no download in this unofficial study.">Download now<span class="kbd">D</span></button>
+  </section>
+</main>
+</div>
+<footer class="site"><strong style="color:#fff">Unofficial</strong> brand study of Zed by StyleGallery. Not affiliated with Zed Industries. Companies, quotes, and extension names are fictional. <a href="../">All studies</a></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Zed by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Buffer types the agent's edit line by line, then keeps a caret.
+  const lines = ['<span class="c">// picker.tsx</span>', '<span class="k">import</span> { useState } <span class="k">from</span> <span class="s">"react"</span>', '', '<span class="k">export function</span> DayGrid({ days }) {', '  <span class="k">const</span> [at, setAt] = useState(0)', '  <span class="k">const</span> onKeyDown = (e) =&gt; {', '    <span class="k">if</span> (e.key === <span class="s">"ArrowRight"</span>) setAt((i) =&gt; i + 1)', '    <span class="k">if</span> (e.key === <span class="s">"ArrowLeft"</span>) setAt((i) =&gt; i - 1)', '    <span class="k">if</span> (e.key === <span class="s">"Enter"</span>) pick(days[at])', '  }', '  <span class="k">return</span> &lt;Grid onKeyDown={onKeyDown} active={at} /&gt;', '}'];
+  const pre = document.querySelector("[data-code]");
+  const render = (n) => { pre.innerHTML = lines.slice(0, n).map((l, i) => `<span class="${i === n - 1 ? "cur" : ""}"><span class="ln">${i + 1}</span>${l}${i === n - 1 ? '<span class="caret"></span>' : ""}</span>`).join("\n"); };
+  if (reduced) render(lines.length);
+  else { let n = 3; render(n); new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); const t = setInterval(() => { render(++n); if (n >= lines.length) clearInterval(t); }, 380); }, { threshold: .4 }).observe(pre); }
+  // Extensions grid.
+  const exts = [["Lumen Theme", "Soft light theme", "1.2M"], ["Rust Tools", "Rust support", "980K"], ["Toml", "TOML syntax", "860K"], ["Nord Night", "Cool dark theme", "720K"], ["Docker Kit", "Dockerfile help", "640K"], ["Sql Lens", "SQL support", "590K"], ["PHP Plus", "PHP support", "510K"], ["Icon Garden", "File icons", "470K"], ["Vue Bits", "Vue support", "420K"], ["Ruby Lane", "Ruby support", "380K"], ["Paper Mono", "Print-like theme", "300K"], ["Csv View", "Table view for CSV", "260K"]];
+  document.querySelector("[data-exts]").innerHTML = exts.map(([n, d, c]) => `<div class="ext"><header><b>${n}</b><span>⭳ ${c}</span></header><span>${d}</span></div>`).join("");
+})();
+</script>
+</body>
+</html>

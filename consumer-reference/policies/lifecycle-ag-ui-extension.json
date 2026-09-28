@@ -94,8 +94,8 @@
         "scripts/test-lifecycle-disposition.mjs",
         "scripts/validate-lifecycle-disposition.mjs"
       ],
-      "scanned_file_count": 508,
-      "scanned_paths_content_id": "sha256:6001abaaf98d0c71c82f8433818c411b74df09a34a759ae00305bf7c3ad8665b"
+      "scanned_file_count": 577,
+      "scanned_paths_content_id": "sha256:c69d6360956b021f58f3b4eeb4e10ce8a12543839564d0fa36119241d3bd1a3f"
     },
     "implementation": {
       "path": "scripts/agent-native/v2/extensions/agui-projection.mjs",
@@ -113,10 +113,10 @@
         "role": "repository_reference",
         "lines": {
           "start": 1,
-          "end": 178
+          "end": 180
         },
-        "file_sha256": "0dbd7b94dfcd52637d1bdfbd9eaee1e926c8d85693a0b78f23df46d8a2d2c428",
-        "content_id": "sha256:0dbd7b94dfcd52637d1bdfbd9eaee1e926c8d85693a0b78f23df46d8a2d2c428",
+        "file_sha256": "cfaf4332f20929f3a6e54b0aec9f40b365ccdf353c327868654ef8dfdf492aa3",
+        "content_id": "sha256:cfaf4332f20929f3a6e54b0aec9f40b365ccdf353c327868654ef8dfdf492aa3",
         "reference_lines": [
           22
         ],

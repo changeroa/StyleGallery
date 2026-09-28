@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>당근 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="당근 웹 홈의 동네 피드와 고정 지도 열을 원본 카피·사진 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 30C8 22 6 16 6 12a10 10 0 0 1 20 0c0 4-2 10-10 18z' fill='%23ff6f0f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --orange: #ff6f0f; --orange-ink: #c24e00; --bg: #f2f3f6; --ink: #212124; --grey: #5e6168; --line: #e9ecef; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 96px; --sg-focus: #ff6f0f; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--bg); color: var(--ink); font: 400 14px/1.55 var(--sans); letter-spacing: -0.01em; word-break: keep-all; }
+  .page { display: grid; gap: 0 24px; grid-template-columns: minmax(0, 600px) 316px; justify-content: center; padding: 24px 20px 60px; }
+  .top { align-items: center; background: var(--bg); display: flex; gap: 14px; grid-column: 1; padding-block: 16px 14px; position: sticky; top: 0; z-index: 10; }
+  .logo { align-items: center; color: var(--orange-ink); display: flex; font-size: 22px; font-weight: 800; gap: 4px; letter-spacing: -0.05em; text-decoration: none; }
+  .logo svg { block-size: 24px; inline-size: 20px; }
+  .search { align-items: center; background: #fff; border-radius: 999px; display: flex; flex: 1; padding: 0 16px; box-shadow: 0 1px 0 rgb(0 0 0 / 0.04); }
+  .search input { background: none; border: 0; flex: 1; font: inherit; outline: none; padding: 11px 0; color: var(--ink); }
+  .search:focus-within { box-shadow: 0 0 0 2px var(--orange); }
+  .side { grid-column: 2; grid-row: 1 / span 3; }
+  .side-inner { display: grid; gap: 12px; position: sticky; top: 16px; }
+  .trend { align-items: center; background: #fff; border-radius: 999px; display: flex; font-size: 13px; gap: 8px; overflow: hidden; padding: 11px 16px; }
+  .trend b { color: var(--grey); font-weight: 500; flex: none; }
+  .trend .roll { block-size: 1.5em; flex: 1; overflow: hidden; position: relative; }
+  .trend .roll span { display: block; font-weight: 700; transition: transform .6s var(--ease); }
+  .map { aspect-ratio: 1.15; background: #fff; border-radius: 16px; overflow: hidden; position: relative; }
+  .map svg { block-size: 100%; inline-size: 100%; }
+  .map .chip { align-items: center; background: #fff; border-radius: 999px; box-shadow: 0 4px 12px rgb(0 0 0 / 0.12); display: flex; font-size: 12px; font-weight: 700; gap: 6px; inset: 12px 12px auto auto; padding: 6px 12px; position: absolute; }
+  .map .chip i { background: var(--orange); border-radius: 50%; block-size: 8px; inline-size: 8px; }
+  .ping { animation: ping 2.2s var(--ease) infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes ping { from { transform: scale(0.4); opacity: 0.8; } to { transform: scale(2.4); opacity: 0; } }
+  .main { grid-column: 1; min-inline-size: 0; }
+  .banner { align-items: flex-end; background: linear-gradient(120deg, #2d4a22, #5f8a3a 50%, #c4d65a); border-radius: 14px; color: #fff; display: flex; block-size: 150px; justify-content: space-between; overflow: hidden; padding: 18px 20px; position: relative; }
+  .banner strong { font-size: 30px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; color: #f5ff6b; text-shadow: 0 2px 0 #1f3317; transform: rotate(-4deg); }
+  .banner span { background: rgb(0 0 0 / 0.45); border-radius: 6px; font-size: 12px; padding: 3px 8px; }
+  .banner::before { background: repeating-linear-gradient(100deg, transparent 0 40px, rgb(255 255 255 / 0.08) 40px 44px); content: ""; inset: 0; position: absolute; }
+  .cats { display: grid; gap: 8px; grid-template-columns: repeat(4, 1fr); margin-block: 12px 36px; }
+  .cat { background: #fff; border: 0; border-radius: 12px; color: var(--ink); display: grid; font: 600 13px var(--sans); gap: 18px; justify-items: start; padding: 14px; text-align: start; transition: transform .3s var(--ease), box-shadow .3s; }
+  .cat:hover { box-shadow: 0 8px 20px -10px rgb(0 0 0 / 0.25); transform: translateY(-2px); }
+  .cat i { border-radius: 6px; block-size: 18px; display: block; inline-size: 18px; }
+  h2 { align-items: center; display: flex; font-size: 17px; font-weight: 700; gap: 6px; margin-block-end: 12px; }
+  .list { background: #fff; border-radius: 14px; padding: 6px 18px; }
+  .post { border-block-end: 1px solid var(--line); display: grid; gap: 14px; grid-template-columns: 18px minmax(0, 1fr) 64px; padding-block: 14px; }
+  .post:last-child { border: 0; }
+  .post .n { font-weight: 700; }
+  .post h3 { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .post .meta { color: var(--grey); font-size: 12px; }
+  .post .thumb { border-radius: 8px; block-size: 64px; inline-size: 64px; overflow: hidden; }
+  .more { background: none; border: 0; color: var(--grey); display: block; font-size: 13px; margin-inline: auto; padding: 12px; }
+  .empty { color: var(--grey); padding: 20px 0; text-align: center; }
+  .eats { display: grid; gap: 8px; margin-block-end: 40px; }
+  .eat { align-items: center; background: #fff; border-radius: 14px; display: flex; justify-content: space-between; padding: 16px 18px; }
+  .eat h3 { font-size: 15px; }
+  .eat .meta { color: var(--grey); font-size: 12px; }
+  .eat .grid4 { display: grid; gap: 3px; grid-template-columns: 1fr 1fr; block-size: 60px; inline-size: 60px; border-radius: 8px; overflow: hidden; }
+  footer { color: var(--grey); font-size: 12px; grid-column: 1; padding-block: 30px; }
+  footer .cols { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); margin-block: 20px; }
+  footer h3 { color: var(--ink); font-size: 12px; margin-block-end: 6px; }
+  footer a { color: var(--ink); }
+  @media (max-width: 960px) { .page { grid-template-columns: minmax(0, 1fr); } .side { grid-column: 1; grid-row: auto; } .side-inner { position: static; } .top { grid-column: 1; } }
+  @media (max-width: 520px) { .cats { grid-template-columns: repeat(2, 1fr); } footer .cols { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<div class="page">
+  <header class="top">
+    <a class="logo" href="#top" aria-label="당근 스터디 처음으로"><svg viewBox="0 0 20 24" aria-hidden="true"><path d="M10 23C3 16 1 11 1 8a9 9 0 0 1 18 0c0 3-2 8-9 15z" fill="#ff6f0f"/><path d="M10 4c0-2 2-3 4-3" stroke="#3dae4f" stroke-width="2" fill="none"/></svg>당근</a>
+    <label class="search"><span class="sg-visually-hidden">동네 소식 검색</span><input type="search" placeholder="동네 이야기를 검색해 보세요" data-search autocomplete="off"><span aria-hidden="true">&#9906;</span></label>
+  </header>
+  <aside class="side" aria-label="지금 뜨는 검색어와 지도">
+    <div class="side-inner">
+      <div class="trend" aria-live="off"><b>지금 뜨는</b><div class="roll" data-roll><span>캠핑의자</span></div><span aria-hidden="true">&#8964;</span></div>
+      <div class="map" data-ambient>
+        <svg viewBox="0 0 316 275" aria-hidden="true">
+          <rect width="316" height="275" fill="#eef1f4"/>
+          <path d="M0 60 316 40M0 150 316 170M0 230 316 210M60 0 90 275M180 0 160 275M260 0 280 275" stroke="#fff" stroke-width="10"/>
+          <path d="M-10 120c60-30 120 20 180-10s110-40 160-20" stroke="#52c07a" stroke-width="6" fill="none"/>
+          <rect x="100" y="70" width="46" height="60" rx="6" fill="#dfe6d8"/><rect x="200" y="190" width="54" height="40" rx="6" fill="#dfe6d8"/>
+          <g fill="#ff6f0f"><circle cx="120" cy="100" r="6"/><circle cx="220" cy="140" r="6"/><circle cx="70" cy="200" r="6"/><circle cx="250" cy="70" r="6"/></g>
+          <g fill="#ff6f0f" opacity=".5"><circle class="ping" cx="120" cy="100" r="6"/><circle class="ping" cx="220" cy="140" r="6" style="animation-delay:-.7s"/><circle class="ping" cx="70" cy="200" r="6" style="animation-delay:-1.4s"/></g>
+        </svg>
+        <span class="chip"><i aria-hidden="true"></i>우리 동네 중고거래</span>
+      </div>
+    </div>
+  </aside>
+  <main class="main" id="main">
+    <div id="top" class="banner" aria-label="동네 달리기 모임 배너 (예시)"><strong aria-hidden="true">동네<br>한 바퀴</strong><span>이번 주말 모임</span></div>
+    <div class="cats">
+      <button class="cat" type="button" data-demo="비공식 스터디: 중고거래 화면은 없어요."><i style="background:#ff8a3d"></i>중고거래</button>
+      <button class="cat" type="button" data-demo="비공식 스터디: 동네가게 화면은 없어요."><i style="background:#f7c948"></i>동네가게</button>
+      <button class="cat" type="button" data-demo="비공식 스터디: 중고차 화면은 없어요."><i style="background:#3b82f6"></i>중고차</button>
+      <button class="cat" type="button" data-demo="비공식 스터디: 동네생활 화면은 없어요."><i style="background:#fb923c"></i>동네생활</button>
+      <button class="cat" type="button" data-demo="비공식 스터디: 모임 화면은 없어요."><i style="background:#f59e0b"></i>모임</button>
+      <button class="cat" type="button" data-demo="비공식 스터디: 알바 화면은 없어요."><i style="background:#ef4444"></i>알바</button>
+      <button class="cat" type="button" data-demo="비공식 스터디: 부동산 화면은 없어요."><i style="background:#ec4899"></i>부동산</button>
+      <button class="cat" type="button" data-demo="비공식 스터디: 카페 화면은 없어요."><i style="background:#eab308"></i>카페</button>
+    </div>
+
+    <section aria-labelledby="posts-h">
+      <h2 id="posts-h"><span aria-hidden="true">&#128293;</span> 이웃들이 오늘 붙잡고 읽은 글</h2>
+      <div class="list" data-list></div>
+      <div class="empty" role="status" data-empty hidden>검색어와 맞는 글이 없어요.</div>
+    </section>
+
+    <section aria-labelledby="eats-h" style="margin-block-start:36px">
+      <h2 id="eats-h"><span aria-hidden="true">&#127860;</span> 걸어서 갈 만한 맛집</h2>
+      <div class="eats" data-eats></div>
+    </section>
+  </main>
+  <footer>
+    <p><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디입니다. 당근과 무관하며 로고, 사진, 카피를 사용하지 않았어요. 모든 글과 가게 이름은 지어낸 예시예요.</p>
+    <div class="cols"><div><h3>둘러보기</h3><p>중고거래 &middot; 동네생활</p></div><div><h3>스터디</h3><p><a href="../">모든 스터디</a></p></div><div><h3>서체</h3><p>Pretendard</p></div><div><h3>지도</h3><p>그려낸 가상 지도</p></div></div>
+  </footer>
+</div>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Daangn by StyleGallery. Not affiliated with Daangn.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { reduced, art } = window.SG;
+  const posts = [["산책하다 주운 강아지 목줄, 주인 찾아요", "반려동물", "8분 전", 14, 23, "bag", "#e8e1d8", "#7a5a3a"], ["아파트 화단에 놓인 빨간 바구니, 누구 거예요?", "생활정보", "12분 전", 6, 12, "box", "#e7f2de", "#d63c3c"], ["새로 생긴 떡집 인절미 드셔보신 분", "맛집", "20분 전", 3, 16, "bowl", "#f7efe2", "#e9d4b0"], ["고양이가 창문 밖을 계속 봐요", "반려동물", "31분 전", 9, 10, "plant", "#e9eef3", "#5fae6a"], ["주말에 같이 한강 뛸 분 구해요", "모임", "1시간 전", 18, 41, "sneaker", "#eef3f8", "#3b82f6"], ["아이 자전거 보조바퀴 나눔합니다", "나눔", "2시간 전", 2, 5, "car", "#f3efe9", "#ff8a3d"]];
+  const list = document.querySelector("[data-list]");
+  const empty = document.querySelector("[data-empty]");
+  const render = (q = "") => {
+    const hits = posts.filter((p) => !q || p[0].includes(q) || p[1].includes(q));
+    list.innerHTML = hits.map((p, i) => `<article class="post"><span class="n">${i + 1}</span><div><h3>${p[0]}</h3><p class="meta">${p[1]} &middot; ${p[2]}</p><p class="meta">&#9825; ${p[3]} &nbsp; &#128172; ${p[4]}</p></div><div class="thumb">${art(p[5], { ground: p[6], main: p[7], accent: "#333" })}</div></article>`).join("");
+    list.hidden = hits.length === 0; empty.hidden = hits.length !== 0;
+  };
+  render();
+  document.querySelector("[data-search]").addEventListener("input", (e) => render(e.target.value.trim()));
+  const eats = [["역 앞 골목 칼국수", 234], ["시장 안 떡볶이", 188], ["공원 옆 브런치", 97], ["밤늦게 여는 순댓국", 152]];
+  document.querySelector("[data-eats]").innerHTML = eats.map(([n, c]) => `<article class="eat"><div><h3>${n}</h3><p class="meta">이웃 후기 ${c}개 (예시)</p></div><div class="grid4" aria-hidden="true">${["bowl", "meat", "fruit", "bowl"].map((k, i) => art(k, { ground: ["#f5e6d3", "#f0d9c6", "#fbe7d9", "#efe3cf"][i], main: ["#c9743a", "#b04a3a", "#e36b4a", "#8a5a2a"][i], accent: "#f1c27d" })).join("")}</div></article>`).join("");
+  // Trending keyword rolls up every 2.4s while the page is visible and motion is allowed.
+  const words = ["캠핑의자", "전기요", "노트북", "유모차", "러닝화", "책상"];
+  const roll = document.querySelector("[data-roll]");
+  let i = 0;
+  if (!reduced) setInterval(() => { if (document.hidden) return; i = (i + 1) % words.length; const next = document.createElement("span"); next.textContent = words[i]; roll.append(next); const first = roll.firstElementChild; first.animate([{ transform: "none" }, { transform: "translateY(-100%)" }], { duration: 500, easing: "cubic-bezier(.16,1,.3,1)" }).onfinish = () => first.remove(); next.animate([{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }], { duration: 500, easing: "cubic-bezier(.16,1,.3,1)" }); }, 2400);
+})();
+</script>
+</body>
+</html>

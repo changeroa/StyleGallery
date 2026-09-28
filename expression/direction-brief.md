@@ -30,8 +30,13 @@ type:
   label: # family, case, tracking
 palette: # 3-6 hex values with roles: ground, text, accent, secondary accent
 texture: # grain, noise, paper, halftone, or none, with strength
-atmosphere: # gradient field, WebGL, photography, illustration, or none
+atmosphere: # gradient field, grain, or WebGL behind content; never in place of content
+imagery: # existing asset per slot: source URL/path, crop, focal point, and role; name any missing asset
+asset_creation: # none by default; only intentionally graphical/vector assets, never generated photos/video/realistic renders
+response: # what answers the pointer (links, cards, tabs, media frames) and how fast; 100-320ms states, 400-500ms reveals
+surface_detail: # edge-fade masks, rounded media clips, hairlines between panels
 motion_density: # entrance sequence count, scroll scenes, ambient loops
+length: # screens planned and the sequence each idea gets (setup, product, proof)
 signature: # the one unusual move this page makes that a template would not
 constraints: # performance budget, accessibility floor, brand rules
 consumer_reference: not_applicable
@@ -40,10 +45,17 @@ consumer_reference_reason: A direction brief selects no consumer reference recor
 
 ### Choosing Values Fast
 
-- Pair one expressive display face with one quiet body face and one mono or small-caps label face. Three families is the ceiling.
-- Set display type larger and tighter than feels safe: `clamp()` from about 3rem at 320px up to 9-13rem at 1440px, tracking around -0.03em, line height 0.85-0.95.
+These defaults come from [Measured Expression Benchmarks](measured-benchmarks.md), which compared 49 live homepages with StyleGallery studies built from the older advice. The studies read as empty and loud; the originals read as full and calm.
+
+- Select existing assets before writing the page: reference-site media, supplied files, then project assets. Reuse photographs, video, and product renders instead of making replacements. New asset creation is limited to intentional graphics/vectors: icons, diagrams, patterns, abstract graphics, and vector illustrations. SVG, canvas, WebGL, or an image generator is not a workaround for recreating a photographic scene.
+- Put existing imagery, an intentional vector graphic, or a live product surface on every screen. Implementing a working UI is page behavior, not permission to fabricate photographic product imagery. If an asset is missing, find an existing one or name the missing slot rather than filling it with a crude drawing. See [Image Weight](techniques/image-weight.md).
+- Size display type from the page's job, not bigger than feels safe: the largest text is 3.5-5.5 times the body (measured median 56px over 14px), tracking 0em on Korean and system faces and about -0.02em on Latin grotesks, line height 1.1-1.2. Only a campaign or editorial hero goes to 6-7 times. See [Display Type Calibration](techniques/display-type-calibration.md).
+- Pair one display face with one body face, plus a mono or small-caps label face only if the page needs it. Two families is the measured median; three is the ceiling.
+- Make many things answer the pointer: every link, button, card, tab, and media frame gets a 100-320ms state change on `opacity`, `color`, `transform`, or `background-color` (measured median: 76 responsive elements per page). Reserve 400-500ms for reveals.
+- Finish surfaces: edge-fade masks on anything that scrolls or bleeds, rounded clips on media, 1px hairlines between panels instead of soft shadows. See [Masks, Clips, And Hairlines](techniques/surface-detail.md).
+- Pace the page at 6-10 screens and give each idea a sequence (setup, product, proof) instead of one beat. Change the background band about every three screens, not every screen.
 - Pick a ground that is not pure black or pure white (`#07070a`, `#f4efe6`). Use one hot accent and at most one cool counter-accent.
-- Spend expression in a few places: one hero moment, one signature scroll scene, one closing moment. Leave the rest quiet so those land.
+- Spend the big moments in a few places: one hero moment, one signature scroll scene, one closing moment. Everywhere else stays calm but never empty: quiet sections still carry imagery and respond to the pointer.
 
 ## Opinionated Guidance
 
@@ -59,7 +71,7 @@ No palette, type pairing, or density is correct for every subject. A filled brie
 
 ## Verification Contract
 
-The brief is ready when every field has a concrete value and `signature` names a specific move. The built page is verified by `node scripts/check-showcase.mjs --work <slug>` and by reviewing its screenshots against `memory` and `signature`.
+The brief is ready when every field has a concrete value, `imagery` names a slot for every screen, and `signature` names a specific move. The built page is verified by `node scripts/check-showcase.mjs --work <slug> --richness error`, which fails an empty screen, too few responsive elements, slow link transitions, and missing masks or hairlines, and by reviewing its screenshots against `memory` and `signature`.
 
 ## Source, License, And Attribution
 

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>마이리얼트립 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="마이리얼트립 홈의 도시 전환형 랭킹과 4열 여행 상품 그리드를 원본 사진·카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232b96ed'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --blue: #1864ab; --ink: #141719; --grey: #5a6168; --line: #e9ecef; --soft: #f1f3f5; --sale: #e03131; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 24px; --sg-focus: #1c7ed6; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 14px/1.5 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1080px; padding-inline: 20px; }
+  .site-header .row { align-items: center; display: flex; flex-wrap: wrap; gap: 10px 14px; min-block-size: 68px; padding-block: 10px; }
+  .logo { color: var(--ink); font-size: 21px; font-weight: 800; letter-spacing: -0.05em; text-decoration: none; }
+  .seg { background: var(--soft); border-radius: 999px; display: flex; padding: 3px; }
+  .seg button { background: none; border: 0; border-radius: 999px; font: 700 12px var(--sans); padding: 4px 10px; color: var(--grey); }
+  .seg button[aria-pressed="true"] { background: #111; color: #fff; }
+  .search { align-items: center; background: var(--soft); border-radius: 8px; display: flex; flex: 1; max-inline-size: 360px; padding: 9px 14px; }
+  .search input { background: none; border: 0; flex: 1; font: inherit; outline: none; min-inline-size: 0; }
+  .login { background: var(--blue); border: 0; border-radius: 6px; color: #fff; font-size: 13px; font-weight: 700; margin-inline-start: auto; padding: 8px 14px; white-space: nowrap; }
+  .catnav { display: flex; gap: 18px; overflow-x: auto; padding-block: 6px 12px; scrollbar-width: none; }
+  .catnav a { align-items: center; color: var(--ink); display: flex; font-size: 13px; font-weight: 600; gap: 6px; text-decoration: none; white-space: nowrap; }
+  .catnav i { border-radius: 4px; block-size: 14px; display: inline-block; inline-size: 14px; }
+  @media (max-width: 760px) { .search { display: none; } }
+  .banners { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); padding-block: 16px 30px; }
+  .banner { aspect-ratio: 1.55; border-radius: 16px; color: #fff; overflow: hidden; padding: 20px; position: relative; }
+  .banner .scene { inset: 0; position: absolute; }
+  .banner .t { background: linear-gradient(180deg, rgb(0 0 0 / 0.5), transparent); margin: -20px; padding: 20px 20px 50px; position: relative; }
+  .banner b { display: block; font-size: 20px; line-height: 1.3; }
+  .banner small { font-size: 12px; }
+  .banner .ad { background: #333; border-radius: 4px; font-size: 10px; inset: auto 12px 12px auto; padding: 1px 6px; position: absolute; }
+  @media (max-width: 860px) { .banners { grid-template-columns: 1fr; } }
+
+  /* City switcher: the heading is a real dropdown that swaps the ranking below. */
+  .city-h { align-items: center; display: flex; gap: 6px; }
+  .city-h label { font-size: 26px; font-weight: 800; }
+  .city-h select { appearance: none; background: none; border: 0; color: var(--ink); cursor: pointer; font: 800 26px var(--sans); padding-inline-end: 22px; background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 10px) 55%, calc(100% - 4px) 55%; background-size: 6px 6px; background-repeat: no-repeat; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-block: 12px 16px; }
+  .chips button { background: var(--soft); border: 0; border-radius: 999px; color: var(--ink); font: 600 12px var(--sans); padding: 6px 12px; }
+  .chips button[aria-pressed="true"] { background: #111; color: #fff; }
+  .ranking { column-count: 2; column-gap: 40px; }
+  .ranking li { align-items: center; break-inside: avoid; display: grid; gap: 14px; grid-template-columns: 72px 18px minmax(0, 1fr); padding-block: 8px; }
+  .ranking .th { aspect-ratio: 1; border-radius: 10px; overflow: hidden; }
+  .ranking .n { font-size: 18px; font-weight: 800; }
+  .ranking p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+  .ranking .pr { font-weight: 700; }
+  .ranking .pr em { color: var(--sale); font-style: normal; margin-inline-end: 4px; }
+  @media (max-width: 760px) { .ranking { column-count: 1; } }
+  .rounds { display: flex; gap: 18px; overflow-x: auto; padding-block: 40px 10px; scrollbar-width: none; }
+  .round { background: none; border: 0; color: var(--ink); display: grid; flex: none; font: 500 12px var(--sans); gap: 8px; justify-items: center; }
+  .round span { border-radius: 50%; block-size: 76px; display: block; inline-size: 76px; overflow: hidden; }
+  .sec { padding-block: 50px 0; }
+  .sec-h { align-items: baseline; display: flex; justify-content: space-between; margin-block-end: 16px; }
+  .sec-h h2 { font-size: 20px; font-weight: 800; }
+  .sec-h button { background: none; border: 0; color: var(--grey); font-size: 13px; text-decoration: underline; }
+  .grid { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); }
+  .card { position: relative; }
+  .card .pic { aspect-ratio: 1; border-radius: 12px; overflow: hidden; position: relative; }
+  .card .pic svg { transition: transform .6s var(--ease); }
+  .card:hover .pic svg { transform: scale(1.06); }
+  .badge { background: #f3e8ff; border-radius: 999px; color: #6a2ab8; font-size: 11px; font-weight: 700; inset: 10px auto auto 10px; padding: 2px 8px; position: absolute; }
+  .mark { background: #333; border: 0; border-radius: 50%; block-size: 30px; color: #fff; font-size: 15px; inline-size: 30px; inset: 8px 8px auto auto; position: absolute; }
+  .mark[aria-pressed="true"] { color: #ffd43b; }
+  .card h3 { font-size: 14px; font-weight: 500; margin-block-start: 10px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+  .card .pr { font-weight: 700; }
+  .card .pr em { color: var(--sale); font-style: normal; margin-inline-end: 4px; }
+  .card .rv { color: var(--grey); font-size: 12px; }
+  .card .rv b { color: #8a5d00; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr 1fr; } }
+  footer { background: #f8f9fa; color: var(--grey); font-size: 12px; margin-block-start: 70px; padding-block: 40px 50px; }
+  footer a { color: var(--ink); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="inner row">
+    <a class="logo" href="#top">myrealtrip</a>
+    <div class="seg" role="group" aria-label="여행 지역"><button type="button" aria-pressed="true" data-demo="해외 여행 상품을 보고 있어요.">해외</button><button type="button" aria-pressed="false" data-demo="비공식 스터디: 국내 상품은 없어요.">국내</button></div>
+    <label class="search"><span class="sg-visually-hidden">검색</span><input type="search" placeholder="도시나 상품을 검색해 보세요"></label>
+    <button class="login" type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인 및 회원가입</button>
+  </div>
+  <nav class="inner catnav" aria-label="섹션"><a href="#ranking"><i style="background:#1c7ed6"></i>도시 랭킹</a><a href="#tours"><i style="background:#f59f00"></i>투어·티켓</a><a href="#stays"><i style="background:#37b24d"></i>숙소</a><a href="#moves"><i style="background:#ae3ec9"></i>현지 교통</a></nav>
+</header>
+
+<main id="main" class="inner">
+  <section class="banners" id="top" aria-label="이번 주 혜택 (예시)" data-banners></section>
+  <section id="ranking" aria-labelledby="city-label">
+    <div class="city-h"><label id="city-label" for="city" class="sg-visually-hidden">도시 선택</label><h2 class="sg-visually-hidden">도시별 인기 랭킹</h2><select id="city" data-city><option>리스본</option><option>교토</option><option>밴쿠버</option><option>이스탄불</option></select></div>
+    <div class="chips" role="group" aria-label="분류" data-chips><button type="button" aria-pressed="true">투어·티켓</button><button type="button" aria-pressed="false">숙소</button><button type="button" aria-pressed="false">교통</button><button type="button" aria-pressed="false">액티비티</button></div>
+    <ol class="ranking" role="list" data-ranking></ol>
+  </section>
+  <div class="rounds" data-rounds></div>
+  <section class="sec" id="tours" aria-labelledby="tours-h"><div class="sec-h"><h2 id="tours-h" data-city-title>리스본 여행, 오늘 추천 상품</h2><button type="button" data-demo="비공식 스터디: 더보기 목록은 없어요.">더보기</button></div><div class="grid" data-grid="tours"></div></section>
+  <section class="sec" id="stays" aria-labelledby="stays-h"><div class="sec-h"><h2 id="stays-h">실시간 인기 숙소</h2><button type="button" data-demo="비공식 스터디: 더보기 목록은 없어요.">더보기</button></div><div class="grid" data-grid="stays"></div></section>
+  <section class="sec" id="moves" aria-labelledby="moves-h"><div class="sec-h"><h2 id="moves-h">도착해서 헤매지 않게, 현지 이동</h2><button type="button" data-demo="비공식 스터디: 더보기 목록은 없어요.">더보기</button></div><div class="grid" data-grid="moves"></div></section>
+</main>
+<footer><div class="inner"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 &middot; 마이리얼트립과 무관합니다. 상품, 가격, 후기는 모두 가상이고 사진 대신 그린 장면을 썼어요. <a href="../">모든 스터디</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Myrealtrip by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art } = window.SG;
+  const scene = (a, b, land, k, main) => `<svg class="scene" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block"><rect width="200" height="200" fill="${a}"/><rect y="90" width="200" height="110" fill="${b}"/><path d="M0 130 Q60 100 110 125 T200 115 V200 H0Z" fill="${land}"/><circle cx="160" cy="40" r="16" fill="#fff" opacity=".7"/><g transform="translate(40 60) scale(1.1)">${art(k, { ground: "transparent", main, accent: "#333" }).replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg>`;
+  document.querySelector("[data-banners]").innerHTML = [["이번 연휴엔 어디로?<br>이동은 앱 하나로", "공항 픽업까지 한 번에 (예시)", "#0f4a3a", "#2f8a5a", "#1a3a2a", "car", "#ffd43b"], ["내리자마자 터지는<br>여행 데이터", "여행 eSIM 할인 (예시)", "#6ab4f0", "#d8eefa", "#2a5a8a", "phone", "#1c7ed6"], ["파도 소리로 시작하는<br>아침", "남쪽 섬 리조트 모음 (예시)", "#e8a86a", "#f6d8b0", "#3a6a7a", "bed", "#fff"]].map(([t, s, a, b, l, k, m]) => `<article class="banner">${scene(a, b, l, k, m)}<div class="t"><b>${t}</b><small>${s}</small></div><span class="ad">광고</span></article>`).join("");
+  const cities = { "리스본": ["#f0a86a", "#f6e2c8", "#c9602a"], "교토": ["#e8b0a0", "#f4e4d8", "#6a3a2a"], "밴쿠버": ["#8ab8e0", "#dcecf6", "#2a5a4a"], "이스탄불": ["#e0c080", "#f4ead0", "#2a3a6a"] };
+  const items = ["구시가지 골목 걷기 투어", "노을 전망대 입장권", "근교 해안 마을 일일 투어", "현지 요리 클래스", "야경 크루즈", "박물관 우선 입장권"];
+  const kinds = ["pin", "ticket", "car", "bowl", "ticket", "book"];
+  const ranking = document.querySelector("[data-ranking]");
+  const draw = (city) => {
+    const [a, b, l] = cities[city];
+    ranking.innerHTML = items.map((t, i) => `<li><div class="th" aria-hidden="true">${scene(a, b, l, kinds[i], "#fff")}</div><span class="n">${i + 1}</span><div><p>[${city}] ${t} (가상)</p><p class="pr"><em>${[5, 10, 12, 8, 15, 6][i]}%</em>${(38000 + i * 17300).toLocaleString()}원</p></div></li>`).join("");
+    document.querySelector("[data-city-title]").textContent = `${city} 여행, 오늘 추천 상품`;
+    grid("tours", city);
+  };
+  const grid = (key, city = "리스본") => {
+    const [a, b, l] = cities[city];
+    const sets = { tours: [["pin", "도보 투어"], ["ticket", "전망대 입장권"], ["book", "미술관 가이드"], ["bowl", "시장 먹거리 투어"]], stays: [["bed", "강변 부티크 호텔"], ["sofa", "구시가지 아파트"], ["bed", "공항 근처 호텔"], ["plant", "정원 딸린 게스트하우스"]], moves: [["car", "공항 픽업 샌딩"], ["ticket", "시내 교통 3일권"], ["car", "근교 렌터카"], ["phone", "현지 데이터 eSIM"]] };
+    const pal = [[a, b, l], ["#8ab8e0", "#dcecf6", "#2a5a4a"], ["#2a2a4a", "#6a5a8a", "#1a1a2a"], ["#e8d8a0", "#f6f0dc", "#5a7a3a"]];
+    document.querySelector(`[data-grid="${key}"]`).innerHTML = sets[key].map(([k, t], i) => `<article class="card"><div class="pic">${scene(...pal[(i + key.length) % 4], k, "#fff")}${i % 2 ? '<span class="badge">예약 가능</span>' : ""}<button class="mark" type="button" aria-pressed="false" aria-label="${t} 저장">&#9733;</button></div><h3>[${city}] ${t} (가상 상품)</h3><p class="pr"><em>${[5, 12, 8, 10][i]}%</em>${(52000 + i * 23100).toLocaleString()}원</p><p class="rv"><b>&#9733; ${(4.5 + i / 10).toFixed(1)}</b> (${120 + i * 87})</p></article>`).join("");
+  };
+  draw("리스본"); grid("stays"); grid("moves");
+  document.querySelector("[data-city]").addEventListener("change", (e) => draw(e.target.value));
+  const chips = [...document.querySelectorAll("[data-chips] button")];
+  chips.forEach((c) => c.addEventListener("click", () => chips.forEach((o) => o.setAttribute("aria-pressed", String(o === c)))));
+  document.querySelector("[data-rounds]").innerHTML = [["지금이 최저가", "ticket"], ["연휴 특가", "gift"], ["야간 투어", "pin"], ["근교 여행", "car"], ["미식 여행", "bowl"], ["리조트", "bed"], ["공연", "book"]].map(([t, k], i) => `<button class="round" type="button" data-demo="비공식 스터디: '${t}' 목록은 없어요."><span aria-hidden="true">${art(k, { ground: ["#ffe3e3", "#fff3bf", "#d0ebff", "#d3f9d8", "#ffe8cc", "#e5dbff", "#c5f6fa"][i], main: ["#e03131", "#f59f00", "#1c7ed6", "#37b24d", "#e8590c", "#7048e8", "#0c8599"][i], accent: "#333" })}</span>${t}</button>`).join("");
+  document.addEventListener("click", (e) => { const m = e.target.closest(".mark"); if (m) m.setAttribute("aria-pressed", String(m.getAttribute("aria-pressed") !== "true")); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Rivian - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Rivian's homepage language: a floating rounded header, giant model names behind drawn vehicles, pill buttons, dusk landscapes, a charge estimator, and four earth-tone tiles.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23f2b33d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --paper: #eceeed; --mist: #dfe5e8; --ink: #111; --grey: #555b5e; --gold: #f2b33d; --night: #0f1112; --sans: "Inter", system-ui, sans-serif; --sg-header: 92px; --sg-focus: #1d5fd1; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--paper); color: var(--ink); font: 400 16px/1.55 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1280px; padding-inline: clamp(16px, 4vw, 40px); }
+  .pill { border: 0; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font: 600 14px var(--sans); padding: 12px 22px; text-decoration: none; }
+  .pill.dark { background: var(--ink); color: #fff; }
+  .pill.light { background: #d9dcdc; color: var(--ink); }
+  .pill.gold { background: var(--gold); color: var(--ink); }
+  .pill.line { background: transparent; border: 1.5px solid #fff; color: #fff; }
+  .pill:hover { filter: brightness(1.08); }
+  .round { align-items: center; background: #fff; border: 0; border-radius: 50%; block-size: 44px; color: var(--ink); cursor: pointer; display: inline-grid; font: 600 18px var(--sans); inline-size: 44px; justify-content: center; }
+
+  /* Floating rounded header, inset from the edges. */
+  .site-header { inset: 14px 14px auto; position: sticky; top: 14px; z-index: 30; margin: 14px 14px 0; }
+  .bar { align-items: center; background: rgb(255 255 255 / .94); backdrop-filter: blur(10px); border-radius: 14px; box-shadow: 0 8px 30px -18px rgb(0 0 0 / .4); display: flex; gap: 24px; min-block-size: 58px; padding: 8px 10px 8px 22px; }
+  .mark { color: var(--ink); font: 800 15px var(--sans); letter-spacing: .32em; text-decoration: none; }
+  .bar nav { display: flex; gap: 24px; margin-inline: auto; }
+  .bar nav a { color: var(--ink); font: 500 14px var(--sans); text-decoration: none; }
+  .bar nav a:hover { text-decoration: underline; text-underline-offset: 5px; }
+  .bar .pill { padding: 10px 18px; }
+  @media (max-width: 860px) { .bar nav { display: none; } .bar .pill { margin-inline-start: auto; } }
+
+  /* Hero carousel on a drawn dusk landscape. */
+  .hero { background: #2c3a4d; color: #fff; margin-block-start: -72px; min-block-size: 100svh; overflow: clip; position: relative; }
+  .scene { inset: 0; position: absolute; transition: opacity .8s var(--ease); }
+  .scene[data-s="0"] { background: linear-gradient(180deg, #2c3a4d 0%, #7a6f79 38%, #e3a06b 62%, #3b3230 62.2%, #1c1817 100%); }
+  .scene[data-s="1"] { background: linear-gradient(180deg, #8fb3c9 0%, #cfdbe0 50%, #7b6a55 50.2%, #4a3f33 100%); }
+  .scene[data-s="2"] { background: linear-gradient(180deg, #0f1c2e 0%, #33476b 55%, #1a1f26 55.2%, #0c0e10 100%); }
+  .scene[data-s="3"] { background: linear-gradient(180deg, #d9c7a6 0%, #c98c5a 45%, #8a5a3a 45.2%, #3c2a20 100%); }
+  .scene::before { background: linear-gradient(90deg, rgb(0 0 0 / .45), transparent 60%); content: ""; inset: 0; position: absolute; }
+  .scene svg { block-size: 46%; bottom: 20%; inline-size: 100%; position: absolute; }
+  .scene[hidden] { display: block; opacity: 0; visibility: hidden; }
+  .hero .w { display: flex; flex-direction: column; justify-content: center; min-block-size: 100svh; padding-block: 140px 120px; position: relative; }
+  .hero h1 { font: 700 clamp(2.6rem, 6vw, 5rem)/1.02 var(--sans); letter-spacing: -.03em; max-inline-size: 12ch; }
+  .hero p { font-size: 18px; margin-block: 18px 26px; max-inline-size: 44ch; }
+  .hero-ctrl { align-items: center; bottom: 40px; display: flex; gap: 14px; inset-inline: 0; justify-content: center; position: absolute; }
+  .dots { background: rgb(0 0 0 / .35); border-radius: 999px; display: flex; gap: 8px; padding: 9px 12px; }
+  .dots button { background: rgb(255 255 255 / .5); border: 0; border-radius: 999px; block-size: 8px; cursor: pointer; inline-size: 8px; padding: 0; transition: inline-size .4s var(--ease); }
+  .dots button[aria-current="true"] { background: #fff; inline-size: 28px; }
+
+  /* Lineup: giant model name, the vehicle drives in front of it. */
+  .lineup { padding-block: 100px 40px; text-align: center; }
+  .lineup > h2 { font: 700 clamp(1.6rem, 3vw, 2.4rem)/1.1 var(--sans); letter-spacing: -.02em; margin-block-end: 60px; }
+  .model { margin-block-end: 110px; }
+  .model .name { color: var(--ink); font: 800 clamp(6rem, 24vw, 22rem)/.8 var(--sans); letter-spacing: -.05em; }
+  .model .car { color: var(--body, #3e4a52); inline-size: min(1000px, 96%); margin: clamp(-9rem, -12vw, -3rem) auto 0; position: relative; transform: translateX(calc((1 - var(--in, 1)) * -30%)); }
+  .model .car svg { display: block; filter: drop-shadow(0 30px 24px rgb(0 0 0 / .25)); inline-size: 100%; }
+  .model h3 { font: 500 clamp(1.1rem, 2vw, 1.5rem)/1.35 var(--sans); margin-block: 26px 8px; }
+  .model .price { color: var(--grey); font-size: 15px; }
+  .model .acts { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-block-start: 20px; }
+  .swatches { display: flex; gap: 10px; justify-content: center; margin-block-start: 18px; }
+  .swatches button { border: 2px solid transparent; border-radius: 50%; block-size: 30px; box-shadow: inset 0 0 0 3px var(--paper); cursor: pointer; inline-size: 30px; padding: 0; }
+  .swatches button[aria-pressed="true"] { border-color: var(--ink); }
+
+  /* Tabbed card carousel on blue-grey. */
+  .tabsec { background: var(--mist); padding-block: 100px; text-align: center; }
+  .tabsec h2 { font: 700 clamp(2.2rem, 4.6vw, 3.8rem)/1.02 var(--sans); letter-spacing: -.03em; }
+  .tablist { background: #cfd6da; border-radius: 999px; display: inline-flex; flex-wrap: wrap; justify-content: center; max-inline-size: 100%; gap: 4px; margin-block: 28px 36px; padding: 5px; }
+  .tablist button { background: transparent; border: 0; border-radius: 999px; cursor: pointer; font: 600 14px var(--sans); padding: 10px 20px; }
+  .tablist button[aria-selected="true"] { background: var(--ink); color: #fff; }
+  .panel { margin-inline: auto; max-inline-size: 860px; }
+  .media { aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; position: relative; }
+  .media .gauge { align-items: end; bottom: 10%; color: #fff; display: flex; font: 800 clamp(3rem, 8vw, 6rem)/1 var(--sans); gap: 10px; left: 8%; position: absolute; }
+  .media .gauge small { font: 500 16px var(--sans); padding-block-end: 12px; }
+  .m-perf { background: linear-gradient(170deg, #1a2733, #3a5163 60%, #9a8466); }
+  .m-tech { background: radial-gradient(60% 60% at 70% 40%, #2b3e5c, #0e1520); }
+  .m-design { background: linear-gradient(180deg, #d8d2c6, #a89f8f); }
+  .media .road { background: repeating-linear-gradient(90deg, #f4f1ea 0 40px, transparent 40px 90px); block-size: 6px; bottom: 26%; inset-inline: 0; position: absolute; animation: road 1.2s linear 6; }
+  @keyframes road { to { background-position: 90px 0; } }
+  p.panel { margin: 22px auto 10px; max-inline-size: 60ch; }
+  @media (max-width: 420px) { .tablist button { padding: 9px 12px; } }
+  .panel .links { display: flex; gap: 24px; justify-content: center; }
+  .panel .links button { background: none; border: 0; cursor: pointer; font: 600 15px var(--sans); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Safety on a drawn snow ridge, then two cards. */
+  .safety { background: linear-gradient(180deg, #8ea3b3 0%, #c9d5dd 40%, #f2f4f5 40.2%, #dfe6ea 100%); color: var(--ink); overflow: clip; padding-block: 140px 80px; position: relative; }
+  .safety .ridge { block-size: 260px; inset: 22% 0 auto; position: absolute; }
+  .safety .intro { margin-inline: auto; max-inline-size: 640px; position: relative; text-align: center; }
+  .badge { background: var(--ink); border-radius: 8px; color: var(--gold); display: inline-block; font: 800 12px var(--sans); letter-spacing: .12em; padding: 8px 12px; }
+  .safety h2 { font: 700 clamp(2.4rem, 5vw, 4.2rem)/1 var(--sans); letter-spacing: -.03em; margin-block: 16px; }
+  .duo { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; margin-block-start: 120px; position: relative; }
+  .duo > * { border-radius: 24px; overflow: hidden; }
+  .space { background: #f4f4f3; display: flex; flex-direction: column; }
+  .space .ph { aspect-ratio: 16 / 10; background: radial-gradient(circle at 20% 30%, #f7d58a 0 2px, transparent 3px) 0 0 / 40px 30px, linear-gradient(180deg, #1c1f24, #3b3a36); }
+  .space div:last-child { padding: 28px; }
+  .space h3, .keep h3 { font: 700 26px/1.1 var(--sans); letter-spacing: -.02em; margin-block-end: 10px; }
+  .keep { background: var(--ink); color: #fff; padding: 32px; }
+  .keep form { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-block-start: 18px; }
+  .keep label { display: grid; font: 500 13px var(--sans); gap: 6px; }
+  .keep label.full { grid-column: 1 / -1; }
+  .keep input { min-inline-size: 0; background: #1e2123; border: 1px solid #3a3e40; border-radius: 10px; color: #fff; font: 400 15px var(--sans); padding: 12px; }
+  .keep small { color: #b9bfc2; font-size: 12px; grid-column: 1 / -1; }
+  .keep .pill { justify-self: start; }
+  .keep [role="status"] { color: var(--gold); font-size: 14px; grid-column: 1 / -1; min-block-size: 1.4em; }
+  @media (max-width: 860px) { .duo { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .keep form { grid-template-columns: 1fr; } .keep { padding: 22px; } }
+
+  /* Charging and software on charcoal. */
+  .night { background: var(--night); color: #f1f3f3; padding-block: 110px; }
+  .night h2 { font: 700 clamp(2.2rem, 4.8vw, 4rem)/1.02 var(--sans); letter-spacing: -.03em; max-inline-size: 14ch; }
+  .night .lede { color: #b8bec1; margin-block: 16px 30px; max-inline-size: 50ch; }
+  .charge { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); margin-block-start: 40px; }
+  .charge article { background: #1a1d1f; border-radius: 22px; overflow: hidden; }
+  .charge .ph { aspect-ratio: 4 / 3; }
+  .ph > svg { block-size: 100%; display: block; inline-size: 100%; }
+  .charge article div:last-child { padding: 22px; }
+  .charge h3 { font: 600 19px var(--sans); margin-block-end: 6px; }
+  .charge p { color: #b8bec1; font-size: 14px; }
+  @media (max-width: 860px) { .charge { grid-template-columns: 1fr; } }
+  .est { align-items: center; background: #1a1d1f; border-radius: 22px; display: grid; gap: 24px; grid-template-columns: 1.2fr 1fr; margin-block-start: 16px; padding: 28px; }
+  .est label { display: block; font: 600 15px var(--sans); margin-block-end: 14px; }
+  .est input { accent-color: var(--gold); inline-size: 100%; }
+  .meter { background: #2b2f31; border-radius: 999px; block-size: 14px; overflow: hidden; }
+  .meter i { background: linear-gradient(90deg, var(--gold), #f7d58a); block-size: 100%; display: block; inline-size: var(--p, 20%); transition: inline-size .4s var(--ease); }
+  .est output { display: block; font: 800 clamp(2.4rem, 5vw, 3.6rem)/1 var(--sans); letter-spacing: -.03em; }
+  .est small { color: #b8bec1; }
+  @media (max-width: 760px) { .est { grid-template-columns: 1fr; } }
+  .soft { text-align: center; }
+  .soft h2, .soft .lede { margin-inline: auto; }
+  .dash { aspect-ratio: 2.6; background: linear-gradient(180deg, #202427, #121416); border: 1px solid #2d3134; border-radius: 26px; display: grid; gap: 16px; grid-template-columns: 1fr 2fr 1fr; margin: 40px auto 0; max-inline-size: 1000px; padding: 3%; }
+  .dash > div { background: #0b0c0d; border-radius: 14px; }
+  .dash .map { background: repeating-linear-gradient(35deg, #16303a 0 2px, transparent 2px 26px), repeating-linear-gradient(-55deg, #16303a 0 2px, transparent 2px 34px), #0b1418; position: relative; }
+  .dash .map::after { background: var(--gold); border-radius: 50%; box-shadow: 0 0 0 8px rgb(242 179 61 / .25); block-size: 12px; content: ""; inline-size: 12px; inset: 50% auto auto 46%; position: absolute; }
+  .dash .ver { color: #dfe3e4; display: grid; font: 600 13px var(--sans); padding: 14px; place-content: center; text-align: center; }
+  .dash .ver b { color: var(--gold); display: block; font: 800 28px var(--sans); }
+  .soft .pill { margin-block-start: 30px; }
+
+  /* Four earth-tone tiles and a newsletter card. */
+  .explore { background: linear-gradient(180deg, #13191b, #1f2d31); color: #fff; padding-block: 100px; }
+  .explore h2 { font: 700 clamp(2rem, 4vw, 3.2rem)/1 var(--sans); letter-spacing: -.03em; margin-block-end: 30px; }
+  .tiles { display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .tile { align-items: end; aspect-ratio: 1; border: 0; border-radius: 22px; color: var(--ink); cursor: pointer; display: flex; font: 700 20px/1.1 var(--sans); justify-content: space-between; padding: 22px; text-align: start; transition: transform .5s var(--ease); }
+  .tile:hover { transform: translateY(-6px); }
+  .tile span:last-child { align-items: center; background: var(--ink); border-radius: 50%; block-size: 40px; color: #fff; display: grid; flex: none; inline-size: 40px; justify-content: center; }
+  @media (max-width: 860px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .tile { font-size: 16px; padding: 14px; } .tile span:last-child { block-size: 32px; inline-size: 32px; } }
+  .news { align-items: center; background: #000; border-radius: 22px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; margin-block-start: 16px; padding: 28px; }
+  .news h3 { font: 700 22px var(--sans); }
+  .news form { display: flex; flex-wrap: wrap; gap: 10px; }
+  .news input { background: #1a1d1f; border: 1px solid #3a3e40; border-radius: 999px; color: #fff; font: 400 15px var(--sans); inline-size: min(300px, 100%); padding: 12px 18px; }
+  .news [role="status"] { color: var(--gold); flex-basis: 100%; font-size: 14px; min-block-size: 1.4em; }
+
+  /* Mission at dusk over the desert. */
+  .mission { background: linear-gradient(180deg, #2a2440 0%, #7b4f64 35%, #e39a5c 58%, #6b4a33 58.2%, #2d2019 100%); color: #fff; min-block-size: 90vh; display: grid; place-items: center; padding-block: 120px; text-align: center; }
+  .mission h2 { font: 700 clamp(2.6rem, 6vw, 5rem)/1 var(--sans); letter-spacing: -.035em; margin-block-end: 26px; }
+  footer.site { background: #0a0b0b; color: #9aa1a4; font-size: 12px; padding-block: 60px 80px; }
+  footer.site ol { display: grid; gap: 8px; margin: 0 0 26px; max-inline-size: 110ch; padding-inline-start: 18px; }
+  footer.site strong, footer.site a { color: #fff; }
+  .media-art { block-size: 100%; inline-size: 100%; inset: 0; position: absolute; }
+  .media .gauge, .media .road { z-index: 1; }
+  .tile { flex-wrap: wrap; position: relative; }
+  .tile-art { block-size: auto; inline-size: 46%; inset: 22px auto auto 22px; opacity: .85; position: absolute; transition: transform .5s var(--ease); }
+  .tile:hover .tile-art { transform: translateY(-4px) rotate(-3deg); }
+  .mission { isolation: isolate; overflow: hidden; position: relative; }
+  .mission-art { block-size: 100%; inline-size: 100%; inset: 0; position: absolute; z-index: -1; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="suv" viewBox="0 0 1000 300"><path fill="currentColor" d="M60 210 C60 170 80 150 130 142 L250 128 L330 70 C345 60 360 56 380 56 L720 56 C750 56 770 64 790 84 L850 140 L930 152 C955 156 968 172 968 196 L968 222 C968 232 960 238 950 238 L60 238 C52 238 48 230 60 210Z"/><path fill="#9fb2bd" opacity=".75" d="M350 78 L480 78 L480 138 L286 138Z M500 78 L700 78 C722 78 736 84 750 98 L790 138 L500 138Z"/><rect x="140" y="170" width="70" height="8" rx="4" fill="#f5f1e6"/><rect x="890" y="168" width="54" height="10" rx="5" fill="#f5f1e6"/><g fill="#141617"><circle cx="230" cy="238" r="58"/><circle cx="790" cy="238" r="58"/></g><g fill="#6c7478"><circle cx="230" cy="238" r="30"/><circle cx="790" cy="238" r="30"/></g></symbol>
+  <symbol id="truck" viewBox="0 0 1000 300"><path fill="currentColor" d="M50 200 C50 168 70 150 120 146 L260 134 L340 72 C352 62 366 58 384 58 L560 58 C584 58 598 66 612 84 L640 132 L940 132 C958 132 968 144 968 162 L968 222 C968 232 960 238 950 238 L60 238 C52 238 46 228 50 200Z"/><path fill="#9fb2bd" opacity=".75" d="M356 80 L470 80 L470 136 L296 136Z M490 80 L570 80 C586 80 594 86 602 98 L622 136 L490 136Z"/><rect x="130" y="168" width="70" height="8" rx="4" fill="#f5f1e6"/><g fill="#141617"><circle cx="225" cy="238" r="58"/><circle cx="800" cy="238" r="58"/></g><g fill="#6c7478"><circle cx="225" cy="238" r="30"/><circle cx="800" cy="238" r="30"/></g></symbol>
+</svg>
+<header class="site-header">
+  <div class="bar">
+    <a class="mark" href="#top">RIVIAN</a>
+    <nav aria-label="Sections"><a href="#vehicles">Vehicles</a><a href="#technology">Technology</a><a href="#charging">Charging</a><a href="#explore">Discover</a></nav>
+    <button class="pill gold" type="button" data-demo="There are no demo drives in this unofficial study.">Demo drive</button>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top" aria-roledescription="carousel" aria-label="Featured">
+    <div class="scene" data-s="0"><svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMax meet" aria-hidden="true" style="color:#1d2226"><use href="#suv"/></svg></div>
+    <div class="scene" data-s="1" hidden><svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMax meet" aria-hidden="true" style="color:#6f7a4e"><use href="#truck"/></svg></div>
+    <div class="scene" data-s="2" hidden><svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMax meet" aria-hidden="true" style="color:#c9cdd0"><use href="#suv"/></svg></div>
+    <div class="scene" data-s="3" hidden><svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMax meet" aria-hidden="true" style="color:#8a3b2e"><use href="#truck"/></svg></div>
+    <div class="w">
+      <h1 data-hero-h>Your weekend starts on dirt.</h1>
+      <p data-hero-p>Book a drive in any of the three study vehicles, or stop by a space and ask us anything. No appointment needed.</p>
+      <div><button class="pill line" type="button" data-demo="There are no demo drives in this unofficial study.">Find a time</button></div>
+    </div>
+    <div class="hero-ctrl">
+      <button class="round" type="button" data-prev aria-label="Previous slide">&larr;</button>
+      <div class="dots" data-dots role="group" aria-label="Choose slide"></div>
+      <button class="round" type="button" data-next aria-label="Next slide">&rarr;</button>
+    </div>
+    <p class="sg-visually-hidden" role="status" data-hero-status></p>
+  </section>
+
+  <section class="lineup" id="vehicles" aria-labelledby="v-h">
+    <h2 id="v-h">Three study vehicles, one garage</h2>
+    <article class="model" data-model>
+      <p class="name" aria-hidden="true">S7</p>
+      <div class="car" data-car style="--body:#3e4a52"><svg viewBox="0 0 1000 300" aria-hidden="true"><use href="#suv"/></svg></div>
+      <h3>S7 (study): a seven-seat SUV made for long weekends.</h3>
+      <p class="price">From $76,000 (invented) · Est. range 400 mi (invented)</p>
+      <div class="swatches" role="group" aria-label="S7 paint"><button type="button" aria-label="Slate" aria-pressed="true" style="background:#3e4a52" data-c="#3e4a52"></button><button type="button" aria-label="Forest" aria-pressed="false" style="background:#44543c" data-c="#44543c"></button><button type="button" aria-label="Glacier" aria-pressed="false" style="background:#c9cdd0" data-c="#c9cdd0"></button><button type="button" aria-label="Canyon" aria-pressed="false" style="background:#8a3b2e" data-c="#8a3b2e"></button></div>
+      <div class="acts"><button class="pill dark" type="button" data-demo="There are no model pages in this unofficial study.">Explore</button><button class="pill light" type="button" data-demo="There is no configurator in this unofficial study.">Design yours</button></div>
+    </article>
+    <article class="model" data-model>
+      <p class="name" aria-hidden="true">S3</p>
+      <div class="car" data-car style="--body:#b9bec1"><svg viewBox="0 0 1000 300" aria-hidden="true"><use href="#suv"/></svg></div>
+      <h3>S3 (study): everything you need to say yes to a new trail.</h3>
+      <p class="price">From $45,000 (invented) · Est. range 330 mi (invented)</p>
+      <div class="swatches" role="group" aria-label="S3 paint"><button type="button" aria-label="Silver" aria-pressed="true" style="background:#b9bec1" data-c="#b9bec1"></button><button type="button" aria-label="Sand" aria-pressed="false" style="background:#c7b28f" data-c="#c7b28f"></button><button type="button" aria-label="Ocean" aria-pressed="false" style="background:#2f5c78" data-c="#2f5c78"></button><button type="button" aria-label="Midnight" aria-pressed="false" style="background:#1d2226" data-c="#1d2226"></button></div>
+      <div class="acts"><button class="pill dark" type="button" data-demo="There are no model pages in this unofficial study.">Explore</button><button class="pill light" type="button" data-demo="There is no configurator in this unofficial study.">Design yours</button></div>
+    </article>
+    <article class="model" data-model>
+      <p class="name" aria-hidden="true">T7</p>
+      <div class="car" data-car style="--body:#2f4a3a"><svg viewBox="0 0 1000 300" aria-hidden="true"><use href="#truck"/></svg></div>
+      <h3>T7 (study): an electric truck for whatever you call a road.</h3>
+      <p class="price">From $80,000 (invented) · Est. range 410 mi (invented)</p>
+      <div class="swatches" role="group" aria-label="T7 paint"><button type="button" aria-label="Pine" aria-pressed="true" style="background:#2f4a3a" data-c="#2f4a3a"></button><button type="button" aria-label="Clay" aria-pressed="false" style="background:#a5583b" data-c="#a5583b"></button><button type="button" aria-label="Chalk" aria-pressed="false" style="background:#e5e3dc" data-c="#e5e3dc"></button><button type="button" aria-label="Graphite" aria-pressed="false" style="background:#3a3d40" data-c="#3a3d40"></button></div>
+      <div class="acts"><button class="pill dark" type="button" data-demo="There are no model pages in this unofficial study.">Explore</button><button class="pill light" type="button" data-demo="There is no configurator in this unofficial study.">Design yours</button></div>
+    </article>
+  </section>
+
+  <section class="tabsec" id="technology" aria-labelledby="t-h">
+    <div class="w">
+      <h2 id="t-h" data-reveal>Engineered for<br>getting out there</h2>
+      <div data-tabs>
+        <div class="tablist" role="tablist" aria-label="Topics">
+          <button role="tab" id="tab-tech" aria-controls="p-tech" aria-selected="false" type="button">Technology</button>
+          <button role="tab" id="tab-perf" aria-controls="p-perf" aria-selected="true" type="button">Performance</button>
+          <button role="tab" id="tab-design" aria-controls="p-design" aria-selected="false" type="button">Design</button>
+        </div>
+        <div class="panel" role="tabpanel" id="p-tech" aria-labelledby="tab-tech" hidden>
+          <div class="media m-tech sg-frame" aria-hidden="true" data-surface><svg class="media-art" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M250 450 L380 230 L420 230 L560 450Z" fill="#1b2433"/><path d="M300 450 L392 240 M500 450 L408 240" stroke="#6fb3ff" stroke-width="3" opacity=".7"/><rect x="330" y="300" width="70" height="46" fill="none" stroke="#3ecf6a" stroke-width="3"/><rect x="460" y="270" width="54" height="36" fill="none" stroke="#f2b33d" stroke-width="3"/><svg x="330" y="310" width="70" height="30" viewBox="0 0 1000 300" style="color:#9aa4ad"><use href="#suv"/></svg><circle cx="487" cy="288" r="8" fill="#f2b33d" opacity=".8"/><g fill="#6fb3ff" opacity=".35"><circle cx="120" cy="80" r="2"/><circle cx="640" cy="60" r="2"/><circle cx="700" cy="140" r="2"/></g></svg><div class="gauge">12<small>cameras (invented)</small></div></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-perf" aria-labelledby="tab-perf">
+          <div class="media m-perf sg-frame" aria-hidden="true" data-surface><svg class="media-art" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 250 L120 170 L220 220 L360 130 L500 230 L620 160 L800 240 V450 H0Z" fill="#2f3f4c" opacity=".85"/><path d="M0 300 L160 250 L320 290 L480 240 L660 300 L800 270 V450 H0Z" fill="#1d2a33"/><path d="M300 450 L380 300 L420 300 L520 450Z" fill="#3a3530"/><path d="M398 320 v18 M396 360 v26 M394 410 v34" stroke="#f4f1ea" stroke-width="4"/><svg x="430" y="300" width="260" height="78" viewBox="0 0 1000 300" style="color:#8a3b2e"><use href="#suv"/></svg></svg><div class="road"></div><div class="gauge" data-speed>0<small>mph</small></div></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-design" aria-labelledby="tab-design" hidden>
+          <div class="media m-design sg-frame" aria-hidden="true" data-surface><svg class="media-art" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="0" y="320" width="800" height="130" fill="#8f8678"/><g fill="#5b4a3a"><rect x="130" y="170" width="160" height="170" rx="26"/><rect x="330" y="170" width="160" height="170" rx="26"/><rect x="530" y="170" width="160" height="170" rx="26"/></g><g fill="#c9b99f"><rect x="140" y="240" width="140" height="90" rx="18"/><rect x="340" y="240" width="140" height="90" rx="18"/><rect x="540" y="240" width="140" height="90" rx="18"/></g><path d="M0 140 C200 110 600 110 800 140 V160 C600 130 200 130 0 160Z" fill="#6b4a2c"/><rect x="600" y="60" width="140" height="70" rx="10" fill="#cfe0e6" opacity=".7"/></svg><div class="gauge" style="color:#111">3<small>rows of seats</small></div></div>
+        </div>
+        <p class="panel" data-tab-caption aria-live="polite">Quick, efficient, and happy off pavement, with drive modes that retune the vehicle for sand, snow, or rock at the press of a button.</p>
+        <div class="panel links"><button type="button" data-demo="There are no model pages in this unofficial study.">Explore S7</button><button type="button" data-demo="There are no model pages in this unofficial study.">Explore T7</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="safety" aria-labelledby="s-h">
+    <svg class="ridge" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true"><path d="M0 260 L0 170 L180 70 L300 140 L470 20 L640 150 L780 80 L960 170 L1120 40 L1300 150 L1440 90 L1440 260Z" fill="#f2f4f5"/><path d="M470 20 L520 60 L490 70 L440 45Z M1120 40 L1170 80 L1130 86 L1090 60Z" fill="#fff"/></svg>
+    <div class="w">
+      <div class="intro">
+        <span class="badge">TOP SAFETY RATING (INVENTED)</span>
+        <h2 id="s-h" data-reveal>Built to bring everyone home</h2>
+        <p>Every study vehicle here earns an imaginary top crash rating. The real awards belong on the real site.</p>
+      </div>
+      <div class="duo">
+        <article class="space"><div class="ph" aria-hidden="true"><svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice"><rect width="640" height="400" fill="#141820"/><rect y="0" width="640" height="200" fill="#1d2432"/><rect x="60" y="70" width="520" height="240" fill="#2a2620"/><rect x="80" y="100" width="480" height="190" fill="#f3c877" opacity=".85"/><rect x="80" y="100" width="480" height="190" fill="#fff3d6" opacity=".25"/><rect x="200" y="100" width="6" height="190" fill="#2a2620"/><rect x="320" y="100" width="6" height="190" fill="#2a2620"/><rect x="440" y="100" width="6" height="190" fill="#2a2620"/><rect x="80" y="160" width="480" height="4" fill="#2a2620" opacity=".6"/><circle cx="60" cy="62" r="3" fill="#ffe3a0"/><circle cx="82.6" cy="67.88579128538505" r="3" fill="#ffe3a0"/><circle cx="105.2" cy="69.97267594405336" r="3" fill="#ffe3a0"/><circle cx="127.80000000000001" cy="66.91370170151734" r="3" fill="#ffe3a0"/><circle cx="150.4" cy="60.68324327775413" r="3" fill="#ffe3a0"/><circle cx="173" cy="55.302668173899775" r="3" fill="#ffe3a0"/><circle cx="195.60000000000002" cy="54.24479787248536" r="3" fill="#ffe3a0"/><circle cx="218.20000000000002" cy="58.19242085570341" r="3" fill="#ffe3a0"/><circle cx="240.8" cy="64.59759575363746" r="3" fill="#ffe3a0"/><circle cx="263.4" cy="69.32618661324047" r="3" fill="#ffe3a0"/><circle cx="286" cy="69.32618661324047" r="3" fill="#ffe3a0"/><circle cx="308.6" cy="64.59759575363746" r="3" fill="#ffe3a0"/><circle cx="331.20000000000005" cy="58.19242085570342" r="3" fill="#ffe3a0"/><circle cx="353.8" cy="54.24479787248536" r="3" fill="#ffe3a0"/><circle cx="376.40000000000003" cy="55.302668173899775" r="3" fill="#ffe3a0"/><circle cx="399" cy="60.68324327775414" r="3" fill="#ffe3a0"/><circle cx="421.6" cy="66.91370170151734" r="3" fill="#ffe3a0"/><circle cx="444.20000000000005" cy="69.97267594405336" r="3" fill="#ffe3a0"/><circle cx="466.8" cy="67.88579128538505" r="3" fill="#ffe3a0"/><circle cx="489.40000000000003" cy="62.00000000000001" r="3" fill="#ffe3a0"/><circle cx="512" cy="56.114208714614946" r="3" fill="#ffe3a0"/><circle cx="534.6" cy="54.02732405594664" r="3" fill="#ffe3a0"/><circle cx="557.2" cy="57.08629829848266" r="3" fill="#ffe3a0"/><circle cx="579.8000000000001" cy="63.316756722245884" r="3" fill="#ffe3a0"/><rect y="310" width="640" height="90" fill="#0e1116"/><svg x="150" y="232" width="340" height="102" viewBox="0 0 1000 300" style="color:#2f4a3a"><use href="#suv"/></svg><rect y="310" width="640" height="90" fill="#f3c877" opacity=".06"/></svg></div><div><h3>Visit a space</h3><p>Sit in every seat, fold every row, and ask the people who build them.</p><p style="margin-block-start:16px"><button class="pill dark" type="button" data-demo="There are no locations in this unofficial study.">Find a space</button></p></div></article>
+        <article class="keep" aria-labelledby="k-h">
+          <h3 id="k-h">Keep up with the study</h3>
+          <form data-form novalidate>
+            <label>First name<input name="first" autocomplete="given-name"></label>
+            <label>Last name<input name="last" autocomplete="family-name"></label>
+            <label class="full">Email<input name="email" type="email" autocomplete="email"></label>
+            <small>This form sends nothing. It shows how the original asks for details on a black card.</small>
+            <button class="pill gold" type="submit">Submit</button>
+            <p role="status" data-form-status></p>
+          </form>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="night" id="charging" aria-labelledby="c-h">
+    <div class="w">
+      <h2 id="c-h" data-reveal>Charge where the road goes</h2>
+      <p class="lede">Fast chargers near trailheads, a plug at home, and thousands of public stations on one map. Numbers below are invented.</p>
+      <div class="charge">
+        <article><div class="ph" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><rect width="400" height="300" fill="#34485a"/><rect width="400" height="150" fill="#e39a5c" opacity=".35"/><path d="M0 190 L80 110 L140 160 L220 80 L300 150 L360 110 L400 140 L400 300 L0 300Z" fill="#1b2630"/><path d="M220 80 L240 100 L226 104 L208 92Z" fill="#dfe6ea"/><rect y="236" width="400" height="64" fill="#11181e"/><rect x="300" y="170" width="26" height="70" rx="4" fill="#dfe3e4"/><rect x="306" y="180" width="14" height="10" rx="2" fill="#f2b33d"/><path d="M313 215 C 290 230 270 225 250 232" stroke="#111" stroke-width="3" fill="none"/><svg x="50" y="196" width="230" height="69" viewBox="0 0 1000 300" style="color:#8a3b2e"><use href="#suv"/></svg></svg></div><div><h3>Trailhead chargers</h3><p>Fast charging where the pavement ends.</p></div></article>
+        <article><div class="ph" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><rect width="400" height="300" fill="#2a241c"/><rect x="0" y="0" width="400" height="236" fill="#3a3326"/><defs><radialGradient id="rv-lamp"><stop offset="0" stop-color="#f7d58a" stop-opacity=".45"/><stop offset="1" stop-color="#f7d58a" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="20" r="190" fill="url(#rv-lamp)"/><rect x="186" y="10" width="28" height="6" fill="#fff4d0"/><rect x="310" y="120" width="44" height="60" rx="8" fill="#e5e3dc"/><circle cx="332" cy="140" r="6" fill="#f2b33d"/><path d="M332 180 C 332 220 300 230 270 214" stroke="#1a1a1a" stroke-width="4" fill="none"/><rect y="236" width="400" height="64" fill="#1c1812"/><svg x="20" y="180" width="280" height="84" viewBox="0 0 1000 300" style="color:#c9cdd0"><use href="#suv"/></svg></svg></div><div><h3>Home plug</h3><p>Wake up to a full battery every day.</p></div></article>
+        <article><div class="ph" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><rect width="400" height="300" fill="#0f1417"/><rect x="0" y="40" width="400" height="18" fill="#2b353b"/><rect x="40" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="70" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="100" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="130" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="160" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="190" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="220" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="250" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="280" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="310" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><rect x="340" y="58" width="14" height="3" fill="#f7d58a" opacity=".7"/><path d="M0 58 L400 58 L400 120 L0 120Z" fill="#f7d58a" opacity=".06"/><rect y="220" width="400" height="80" fill="#161d21"/><rect x="50" y="130" width="32" height="92" rx="5" fill="#dfe3e4"/><rect x="58" y="144" width="16" height="12" rx="2" fill="#f2b33d"/><rect x="44" y="222" width="44" height="6" fill="#0a0d0f"/><rect x="140" y="130" width="32" height="92" rx="5" fill="#dfe3e4"/><rect x="148" y="144" width="16" height="12" rx="2" fill="#3ecf6a"/><rect x="134" y="222" width="44" height="6" fill="#0a0d0f"/><rect x="230" y="130" width="32" height="92" rx="5" fill="#dfe3e4"/><rect x="238" y="144" width="16" height="12" rx="2" fill="#f2b33d"/><rect x="224" y="222" width="44" height="6" fill="#0a0d0f"/><rect x="320" y="130" width="32" height="92" rx="5" fill="#dfe3e4"/><rect x="328" y="144" width="16" height="12" rx="2" fill="#f2b33d"/><rect x="314" y="222" width="44" height="6" fill="#0a0d0f"/><path d="M0 260 H400" stroke="#f2b33d" stroke-width="3" stroke-dasharray="26 18" opacity=".7"/></svg></div><div><h3>Public network</h3><p>One app, one account, many plugs.</p></div></article>
+      </div>
+      <div class="est">
+        <div>
+          <label for="soc">Battery when you arrive: <span data-soc-label>20%</span></label>
+          <input id="soc" type="range" min="5" max="75" step="5" value="20">
+          <div class="meter" aria-hidden="true" style="margin-block-start:18px"><i data-meter></i></div>
+        </div>
+        <div><output for="soc" data-out>24 min</output><small>to reach 80% on a fast charger (invented curve)</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="night soft" aria-labelledby="sw-h">
+    <div class="w">
+      <h2 id="sw-h" data-reveal>Gets better while it's parked</h2>
+      <p class="lede">Updates arrive overnight and add features you didn't have yesterday.</p>
+      <div class="dash" aria-hidden="true" data-surface><div class="ver"><span>Software</span><b data-ver>4.12</b><span>installed</span></div><div class="map"></div><div class="ver"><span>Range</span><b>312</b><span>mi left</span></div></div>
+      <button class="pill light" type="button" data-update>Check for update</button>
+      <p class="sg-visually-hidden" role="status" data-update-status></p>
+    </div>
+  </section>
+
+  <section class="explore" id="explore" aria-labelledby="e-h">
+    <div class="w">
+      <h2 id="e-h">Keep exploring</h2>
+      <div class="tiles">
+        <button class="tile" type="button" style="background:#d8a13a" data-demo="There is no demo drive booking in this unofficial study." data-lift><svg class="tile-art" viewBox="0 0 140 120" aria-hidden="true" data-surface><circle cx="60" cy="60" r="40" fill="none" stroke="#1a1a1a" stroke-width="8"/><circle cx="60" cy="60" r="8" fill="#1a1a1a"/><path d="M60 68v32M52 60H20M68 60h32" stroke="#1a1a1a" stroke-width="8"/></svg><span>Book a drive</span><span aria-hidden="true">&rarr;</span></button>
+        <button class="tile" type="button" style="background:#8a9a6b" data-demo="There is no inventory in this unofficial study." data-lift><svg class="tile-art" viewBox="0 0 140 120" aria-hidden="true" data-surface><svg x="0" y="36" width="140" height="42" viewBox="0 0 1000 300" style="color:#1a1a1a"><use href="#suv"/></svg><path d="M10 96h120" stroke="#1a1a1a" stroke-width="4" stroke-dasharray="8 8"/></svg><span>Shop inventory</span><span aria-hidden="true">&rarr;</span></button>
+        <button class="tile" type="button" style="background:#b9533f" data-demo="There is no gear shop in this unofficial study." data-lift><svg class="tile-art" viewBox="0 0 140 120" aria-hidden="true" data-surface><path d="M40 30h60l10 20v60H30V50z" fill="none" stroke="#1a1a1a" stroke-width="8" stroke-linejoin="round"/><path d="M50 30c0-16 40-16 40 0" fill="none" stroke="#1a1a1a" stroke-width="8"/><rect x="48" y="70" width="44" height="18" rx="4" fill="#1a1a1a"/></svg><span>Gear shop</span><span aria-hidden="true">&rarr;</span></button>
+        <button class="tile" type="button" style="background:#6f8fa8" data-demo="There are no offers in this unofficial study." data-lift><svg class="tile-art" viewBox="0 0 140 120" aria-hidden="true" data-surface><path d="M20 60 60 20h50v50L70 110z" fill="none" stroke="#1a1a1a" stroke-width="8" stroke-linejoin="round"/><circle cx="90" cy="40" r="8" fill="#1a1a1a"/><path d="M50 70l20 -20" stroke="#1a1a1a" stroke-width="6"/></svg><span>Current offers</span><span aria-hidden="true">&rarr;</span></button>
+      </div>
+      <div class="news">
+        <h3>Get trail notes by email</h3>
+        <form data-news novalidate><label class="sg-visually-hidden" for="nemail">Email</label><input id="nemail" type="email" placeholder="Email address" autocomplete="email"><button class="pill gold" type="submit">Subscribe</button><p role="status" data-news-status></p></form>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission" aria-labelledby="mi-h"><svg class="mission-art" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMax slice" aria-hidden="true" data-surface><g fill="#fff" opacity=".6"><circle cx="160" cy="90" r="2"/><circle cx="420" cy="60" r="1.5"/><circle cx="700" cy="120" r="1.8"/><circle cx="980" cy="70" r="1.5"/><circle cx="1260" cy="110" r="2"/></g><path d="M0 560 L180 440 L330 520 L520 390 L700 500 L880 410 L1060 520 L1250 430 L1440 520 V800 H0Z" fill="#4a3346" opacity=".85"/><path d="M0 640 L240 560 L460 620 L700 540 L960 630 L1200 570 L1440 630 V800 H0Z" fill="#2d2019"/><path d="M560 800 C640 700 700 660 760 640 L800 640 C780 680 760 740 780 800Z" fill="#6b4a33"/><svg x="600" y="600" width="220" height="66" viewBox="0 0 1000 300" style="color:#1d2226"><use href="#truck"/></svg><path d="M800 630 L1100 600 L1100 660Z" fill="#f7d58a" opacity=".22"/></svg>
+    <div class="w">
+      <h2 id="mi-h" data-reveal>Keep the world<br>wild forever</h2>
+      <button class="pill dark" type="button" data-demo="There is no video in this unofficial study.">&#9654; Watch the film</button>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="w">
+    <ol>
+      <li>All prices, ranges, ratings, and charge times on this page are invented for the study.</li>
+      <li>Model names S7, S3, and T7 are placeholders and do not describe real vehicles.</li>
+      <li>Vehicles and landscapes are drawn with SVG and CSS gradients; no photography is used.</li>
+    </ol>
+    <p><strong>Unofficial</strong> brand study of Rivian by StyleGallery. Not affiliated with Rivian Automotive. Copy is original; no logos or photos are used. <a href="../">All studies</a></p>
+  </div>
+</footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Rivian by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Hero carousel: manual only, four drawn scenes.
+  const slides = [
+    ["Your weekend starts on dirt.", "Book a drive in any of the three study vehicles, or stop by a space and ask us anything. No appointment needed."],
+    ["Offers worth a detour.", "Invented financing and lease numbers live here in the study. The real ones live on the real site."],
+    ["Quiet enough to hear snow.", "Night mode dims the cabin, warms the seats, and keeps the cameras on the road."],
+    ["Canyons, then coffee.", "Range for the long way round, and a charger waiting at the other end."]
+  ];
+  const scenes = [...document.querySelectorAll(".scene")], h = document.querySelector("[data-hero-h]"), p = document.querySelector("[data-hero-p]"), st = document.querySelector("[data-hero-status]"), dots = document.querySelector("[data-dots]");
+  dots.innerHTML = slides.map((_, i) => `<button type="button" aria-label="Slide ${i + 1}" aria-current="${i === 0}"></button>`).join("");
+  let cur = 0;
+  const go = (n) => {
+    cur = (n + slides.length) % slides.length;
+    scenes.forEach((s, i) => { s.hidden = i !== cur; });
+    [...dots.children].forEach((d, i) => d.setAttribute("aria-current", String(i === cur)));
+    h.textContent = slides[cur][0]; p.textContent = slides[cur][1]; st.textContent = `Slide ${cur + 1} of ${slides.length}`;
+  };
+  [...dots.children].forEach((d, i) => d.addEventListener("click", () => go(i)));
+  document.querySelector("[data-prev]").addEventListener("click", () => go(cur - 1));
+  document.querySelector("[data-next]").addEventListener("click", () => go(cur + 1));
+  // One shared caption follows the selected tab.
+  const capText = { "p-tech": "A driver-assist system that watches every lane and learns from each drive, updated overnight.", "p-perf": "Quick, efficient, and happy off pavement, with drive modes that retune the vehicle for sand, snow, or rock at the press of a button.", "p-design": "Wood, wool, and a cabin that folds flat enough to sleep in." };
+  const capEl = document.querySelector("[data-tab-caption]");
+  const syncCap = () => { const open = document.querySelector("[role=tabpanel]:not([hidden])"); if (open) capEl.textContent = capText[open.id]; };
+  new MutationObserver(syncCap).observe(document.querySelector("[data-tabs]"), { attributes: true, subtree: true, attributeFilter: ["hidden"] });
+  // Paint swatches recolour the drawn vehicle.
+  document.querySelectorAll("[data-model]").forEach((m) => {
+    const car = m.querySelector("[data-car]"), sw = [...m.querySelectorAll(".swatches button")];
+    sw.forEach((b) => b.addEventListener("click", () => { sw.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); car.style.setProperty("--body", b.dataset.c); }));
+  });
+  // Vehicles roll in as each model scrolls into view.
+  if (!reduced) {
+    const cars = [...document.querySelectorAll("[data-car]")];
+    const roll = () => cars.forEach((c) => { const r = c.getBoundingClientRect(), vh = innerHeight; const t = Math.min(1, Math.max(0, (vh - r.top) / (vh * .6))); c.style.setProperty("--in", t.toFixed(3)); });
+    addEventListener("scroll", roll, { passive: true }); roll();
+  }
+  // Speed gauge counts up once when the performance card is seen.
+  const sp = document.querySelector("[data-speed]");
+  new IntersectionObserver((es, o) => es.forEach((e) => { if (!e.isIntersecting) return; o.disconnect(); if (reduced) { sp.firstChild.textContent = "60"; return; } let v = 0; const t = setInterval(() => { v += 3; sp.firstChild.textContent = String(Math.min(v, 60)); if (v >= 60) clearInterval(t); }, 40); }), { threshold: .5 }).observe(sp);
+  // Forms: validate, then say honestly that nothing was sent.
+  const hook = (sel, statusSel) => { const f = document.querySelector(sel), s = document.querySelector(statusSel); f.addEventListener("submit", (e) => { e.preventDefault(); const em = f.querySelector("input[type=email]"); s.textContent = em.value && em.checkValidity() ? "Thanks. Nothing was sent: this is an unofficial study." : "Enter a valid email address first."; }); };
+  hook("[data-form]", "[data-form-status]"); hook("[data-news]", "[data-news-status]");
+  // Charge estimator: invented curve, slower as the battery fills.
+  const soc = document.querySelector("#soc"), out = document.querySelector("[data-out]"), lab = document.querySelector("[data-soc-label]"), meter = document.querySelector("[data-meter]");
+  const est = () => { const v = +soc.value; const min = Math.round((80 - v) * .4 + (80 - v) ** 2 / 180); out.textContent = `${Math.max(1, min)} min`; lab.textContent = `${v}%`; meter.style.setProperty("--p", `${v}%`); };
+  soc.addEventListener("input", est); est();
+  // Software update: bump the version once.
+  const ub = document.querySelector("[data-update]"), ver = document.querySelector("[data-ver]"), us = document.querySelector("[data-update-status]");
+  ub.addEventListener("click", () => { if (ver.textContent === "4.12") { ver.textContent = "4.13"; us.textContent = "Updated to version 4.13 (invented)."; ub.textContent = "Up to date"; } else { us.textContent = "Already up to date."; } });
+})();
+</script>
+</body>
+</html>

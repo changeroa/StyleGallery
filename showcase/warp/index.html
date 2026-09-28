@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Warp - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Warp's monospace blueprint page: dot-grid paper, numbered figure panels, a live factory grid, and a royal-blue anchor bar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314163a'/%3E%3Crect x='9' y='9' width='14' height='14' fill='%233a3cf5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@500;600&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --paper: #fbfbfd; --ink: #14163a; --grey: #55586e; --line: #dfe0ea; --blue: #2f31e6; --blue-ink: #2224b8; --lime: #e7f56a; --lav: #f1f1f8; --mono: "IBM Plex Mono", ui-monospace, monospace; --sans: "Inter", system-ui, sans-serif; --sg-header: 64px; --sg-focus: #2f31e6; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: var(--paper); background-image: radial-gradient(circle, #d6d7e4 1px, transparent 1.2px); background-size: 22px 22px; color: var(--ink); font: 400 14px/1.6 var(--mono); }
+  .w { margin-inline: auto; max-inline-size: 1130px; padding-inline: 20px; position: relative; }
+  .guides { background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: calc(100% / 6) 100%; inset: 0 20px; pointer-events: none; position: absolute; z-index: -1; }
+  .site-header { background: var(--paper); border-block-end: 1px solid var(--line); position: sticky; top: 0; z-index: 30; transition: background .3s, color .3s; }
+  .site-header .w { align-items: center; display: flex; gap: 20px; block-size: 52px; }
+  .site-header[data-blue] { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .mark { align-items: center; border: 1.5px solid currentColor; color: inherit; display: grid; block-size: 22px; inline-size: 22px; place-items: center; text-decoration: none; font-size: 11px; font-weight: 600; }
+  .site-header nav { display: flex; gap: 16px; flex-wrap: wrap; }
+  .site-header nav a { color: inherit; font-size: 12px; text-decoration: none; }
+  .site-header nav a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .site-header nav a b { font-weight: 500; opacity: .7; }
+  .hbtn { display: flex; gap: 6px; margin-inline-start: auto; }
+  .b { border: 0; font: 500 12px var(--mono); padding: 7px 12px; }
+  .b-ink { background: var(--ink); color: #fff; }
+  .b-line { background: #fff; border: 1px solid var(--ink); color: var(--ink); }
+  .b-lime { background: var(--lime); color: var(--ink); }
+  .site-header[data-blue] .b-ink { background: #fff; color: var(--blue-ink); }
+  .site-header[data-blue] .b-lime { display: none; }
+  @media (max-width: 860px) { .site-header nav { display: none; } }
+
+  .hero { padding-block: 70px 30px; }
+  .hero h1 { font-size: clamp(1.8rem, 3.6vw, 2.9rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.12; }
+  .hero .sub { color: var(--blue-ink); margin-block: 16px 20px; max-inline-size: 52ch; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 8px; }
+  .hero small { color: var(--grey); display: block; margin-block-start: 12px; font-size: 12px; }
+  .hero small b { color: var(--blue-ink); font-weight: 600; }
+
+  .fig { background: var(--lav); border: 1px solid var(--line); margin-block-start: 34px; }
+  .fig-h { align-items: center; border-block-end: 1px solid var(--line); color: var(--grey); display: flex; font-size: 11px; gap: 10px; padding: 6px 10px; }
+  .fig-h::before, .fig-h::after { background: var(--line); block-size: 1px; content: ""; flex: 1; }
+  .fig-h span { order: 0; } .fig-h i { font-style: normal; }
+  .fig-b { padding: 20px; position: relative; }
+  .factory { display: grid; gap: 10px; grid-template-columns: repeat(20, 1fr); }
+  .factory b { aspect-ratio: 1; border: 1px solid #c9cad9; display: block; transition: background .4s, border-color .4s; }
+  .factory b[data-s="run"] { background: var(--blue); border-color: var(--blue); }
+  .factory b[data-s="wait"] { background: #d7d8a4; border-color: #b5b67a; }
+  .factory b[data-s="done"] { background: #fff; border-color: var(--blue); }
+  .live { align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 999px; display: inline-flex; font-size: 11px; gap: 6px; inset: 14px 14px auto auto; padding: 1px 8px; position: absolute; }
+  .live i { animation: pulse 1.4s ease-in-out infinite; background: #1faa59; block-size: 7px; border-radius: 50%; inline-size: 7px; }
+  @keyframes pulse { 50% { opacity: .3; } }
+  .stats { color: var(--grey); font-size: 12px; margin-block-start: 14px; text-align: center; }
+  .stats b { color: var(--blue-ink); font-weight: 600; }
+  @media (max-width: 700px) { .factory { grid-template-columns: repeat(10, 1fr); } .factory b:nth-child(n+101) { display: none; } }
+
+  .sec { border-block-start: 1px solid var(--line); margin-block-start: 90px; padding-block-start: 70px; }
+  .eyebrow { color: var(--blue-ink); font-size: 12px; }
+  .sec h2 { font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 500; letter-spacing: -0.02em; margin-block: 6px 6px; }
+  .sec .lede { color: var(--grey); font-size: 13px; }
+  .sdlc { display: grid; grid-template-columns: 1fr 1fr; }
+  .sdlc ol { border-inline-end: 1px solid var(--line); counter-reset: s; list-style: none; margin: 0; padding: 0; }
+  .sdlc li { border-block-end: 1px solid var(--line); counter-increment: s; }
+  .sdlc button { background: none; border: 0; color: var(--ink); cursor: pointer; font: inherit; inline-size: 100%; padding: 14px 16px; text-align: start; }
+  .sdlc button[aria-pressed="true"] { background: #e6e6f3; }
+  .sdlc button::before { color: var(--blue-ink); content: counter(s, decimal-leading-zero) "  "; font-size: 11px; }
+  .sdlc b { font-weight: 600; }
+  .sdlc span { color: var(--grey); display: block; font-size: 12px; margin-block-start: 2px; }
+  .sdlc .out { background: #fff; margin: 20px; border: 1px solid var(--line); padding: 16px; font-size: 12px; }
+  .sdlc .out p { margin-block-end: 8px; }
+  .sdlc .out p::before { color: #1faa59; content: "✓ "; }
+  @media (max-width: 760px) { .sdlc { grid-template-columns: 1fr; } .sdlc ol { border: 0; } }
+
+  .charts { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
+  .chart { background: #fff; border: 1px solid var(--line); padding: 14px; font-size: 12px; }
+  .badge { border: 1px solid var(--blue); color: var(--blue-ink); font-size: 10px; margin-inline-end: 6px; padding: 0 5px; }
+  .chart .big { font-size: 20px; font-weight: 600; }
+  .chart svg { block-size: 90px; inline-size: 100%; margin-block: 8px; }
+  .chart svg path.l { fill: none; stroke: var(--blue); stroke-width: 2; stroke-dasharray: 400; stroke-dashoffset: var(--d, 0); transition: stroke-dashoffset 1.6s var(--ease); }
+  .chart .row { border-block-start: 1px solid var(--line); display: flex; justify-content: space-between; padding-block: 4px; color: var(--grey); }
+  .chart .fail { color: #b3261e; }
+  @media (max-width: 860px) { .charts { grid-template-columns: 1fr; } }
+
+  .band { background: var(--blue); color: #fff; margin-block-start: 90px; padding-block: 60px; }
+  .band .w { align-items: center; display: grid; gap: 30px; grid-template-columns: 1fr 1.2fr; }
+  .band .eyebrow { color: #d6d7ff; }
+  .band h2 { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 500; }
+  .band p { color: #e4e5ff; margin-block: 10px 18px; }
+  .band .b-w { background: #fff; border: 0; color: var(--blue-ink); font: 500 12px var(--mono); padding: 8px 14px; }
+  .band .panel { background: #fff; color: var(--ink); padding: 16px; font-size: 12px; }
+  .band .panel .row { border-block-end: 1px solid var(--line); display: flex; justify-content: space-between; padding-block: 6px; }
+  @media (max-width: 760px) { .band .w { grid-template-columns: 1fr; } }
+
+  .layers { display: grid; gap: 10px; justify-items: center; padding-block: 20px; }
+  .layer { align-items: center; background: #dcdcf5; border: 1px solid #b8b9ea; display: flex; font-family: var(--sans); font-size: 14px; gap: 14px; inline-size: calc(52% + var(--i) * 12%); justify-content: space-between; padding: 12px 16px; transition: transform .6s var(--ease); }
+  .layer small { color: var(--grey); font: 10px var(--mono); }
+  .layer:last-child { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .layer:last-child small { color: #d6d7ff; }
+  .fig:hover .layer { transform: translateY(calc(var(--i) * -4px)); }
+  @media (max-width: 700px) { .layer { inline-size: 100%; flex-wrap: wrap; } }
+
+  .gov { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+  .gov .chart .big { font-size: 26px; }
+  .queue li { align-items: center; border-block-end: 1px solid var(--line); display: flex; gap: 8px; list-style: none; padding-block: 7px; }
+  .queue ul { margin: 0; padding: 0; }
+  .queue .tag { border: 1px solid var(--line); font-size: 10px; margin-inline-start: auto; padding: 0 5px; }
+  .queue .tag.hot { border-color: var(--blue); color: var(--blue-ink); }
+  @media (max-width: 760px) { .gov { grid-template-columns: 1fr; } }
+
+  .every { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: #fff; }
+  .every article { border-inline-end: 1px solid var(--line); padding: 16px; }
+  .every article:last-child { border: 0; }
+  .every .shot { aspect-ratio: 1.5; background: #1b1d3b; margin-block-end: 14px; padding: 12px; color: #c8cbff; font-size: 10px; overflow: hidden; }
+  .every h3 { font-size: 13px; font-weight: 600; }
+  .every p { color: var(--grey); font-size: 12px; margin-block: 4px 12px; }
+  .every .b-ink { inline-size: 100%; }
+  @media (max-width: 760px) { .every { grid-template-columns: 1fr; } .every article { border: 0; border-block-end: 1px solid var(--line); } }
+
+  .faq details { border-block-end: 1px solid var(--line); }
+  .faq summary { cursor: pointer; display: flex; justify-content: space-between; list-style: none; padding: 12px 4px; font-size: 13px; }
+  .faq summary::before { content: "> "; color: var(--blue-ink); }
+  .faq summary::after { color: var(--grey); content: "[+]"; margin-inline-start: auto; }
+  .faq details[open] summary::after { content: "[-]"; }
+  .faq details p { color: var(--grey); font-size: 12px; padding: 0 4px 14px 18px; }
+  footer { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 12px; margin-block-start: 90px; padding-block: 30px 50px; }
+  footer a { color: var(--blue-ink); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header" data-hdr>
+  <div class="w">
+    <a class="mark" href="#top" aria-label="Warp study home">W</a>
+    <nav aria-label="Sections"><a href="#sdlc"><b>[S]</b> SDLC</a><a href="#quality"><b>[Q]</b> Quality loop</a><a href="#layers"><b>[L]</b> Layers</a><a href="#gov"><b>[G]</b> Governance</a><a href="#faq"><b>[F]</b> FAQ</a></nav>
+    <div class="hbtn"><button class="b b-lime" type="button" data-demo="Demo booking is not available in this unofficial study.">book a demo</button><button class="b b-ink" type="button" data-demo="Early access is a demo in this unofficial study.">request access</button></div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero w" id="top">
+    <div class="guides" aria-hidden="true"></div>
+    <h1 data-reveal>Shared rails<br>for teams of<br>coding agents</h1>
+    <p class="sub" data-reveal data-delay="120">Define a factory in code, bring any model, and watch every run get measured and a little better.</p>
+    <div class="ctas" data-reveal data-delay="200"><button class="b b-ink" type="button" data-demo="Early access is a demo in this unofficial study.">request early access</button><button class="b b-line" type="button" data-demo="There is no download in this unofficial study.">download the terminal</button></div>
+    <small data-reveal data-delay="260">Start with <b>fictional credits</b> for your first factory.</small>
+    <figure class="fig" data-reveal="fade" data-delay="300">
+      <figcaption class="fig-h"><i>&gt;_</i><span>[ fig. 1 · the factory floor ]</span><i>#</i></figcaption>
+      <div class="fig-b" data-ambient>
+        <span class="live" aria-hidden="true"><i></i>LIVE</span>
+        <div class="factory" data-factory role="img" aria-label="A grid of factory slots: blue slots are agents running, yellow are waiting, outlined are finished"></div>
+        <p class="stats" aria-live="off"><b data-running>12</b> agents running · <b data-done>1,408</b> PRs shipped (illustrative)</p>
+      </div>
+    </figure>
+  </section>
+
+  <section class="sec w" id="sdlc">
+    <div class="guides" aria-hidden="true"></div>
+    <p class="eyebrow"># lifecycle coverage</p>
+    <h2 data-reveal>Past CI, into the whole delivery loop</h2>
+    <p class="lede">Written as code, sized for many agents, cheap to throw away.</p>
+    <figure class="fig">
+      <figcaption class="fig-h"><i>&gt;_</i><span>[ fig. 2 · pipeline ]</span><i>#</i></figcaption>
+      <div class="sdlc">
+        <ol data-sdlc>
+          <li><button type="button" aria-pressed="true"><b>Opinionated defaults</b><span>First factory running in minutes; reshape it later.</span></button></li>
+          <li><button type="button" aria-pressed="false"><b>Factories as code</b><span>Repos, agents, models, and checkpoints in one file.</span></button></li>
+          <li><button type="button" aria-pressed="false"><b>Any surface</b><span>Watch and steer from chat, mobile, terminal, or editor.</span></button></li>
+          <li><button type="button" aria-pressed="false"><b>Scored runs</b><span>Every run is graded; the grade feeds the next one.</span></button></li>
+        </ol>
+        <div class="out" aria-live="polite" data-out></div>
+      </div>
+    </figure>
+  </section>
+
+  <section class="sec w" id="quality">
+    <div class="guides" aria-hidden="true"></div>
+    <p class="eyebrow"># quality loop</p>
+    <h2 data-reveal>Measure first, then improve on purpose</h2>
+    <p class="lede">Evals, cross-model benchmarks, and self-improvement loops, side by side.</p>
+    <figure class="fig">
+      <figcaption class="fig-h"><i>&gt;_</i><span>[ fig. 3 · quality loop, sample run ]</span><i>#</i></figcaption>
+      <div class="fig-b charts" data-charts>
+        <div class="chart"><span class="badge">PASS</span><span class="big">94%</span><br>evals on your own work<svg viewBox="0 0 200 90" aria-hidden="true"><path class="l" d="M0 70 L40 60 L80 64 L120 50 L160 40 L200 20"/></svg><div class="row"><span>run 812</span><span>pass</span></div><div class="row"><span>run 813</span><span class="fail">fail</span></div></div>
+        <div class="chart"><span class="badge">BEST</span><span class="big">1.00x</span><br>benchmarks across models<svg viewBox="0 0 200 90" aria-hidden="true"><path class="l" d="M0 60 L50 55 L100 45 L150 40 L200 38"/></svg><div class="row"><span>model A</span><span>1.00x</span></div><div class="row"><span>model B</span><span>0.91x</span></div></div>
+        <div class="chart"><span class="badge">AUTO-FIX</span><span class="big">+3.2</span><br>self-improvement loops<svg viewBox="0 0 200 90" aria-hidden="true"><path class="l" d="M0 80 L40 72 L80 66 L120 54 L160 36 L200 14"/></svg><div class="row"><span>prompt tuned</span><span>+1.1</span></div><div class="row"><span>regression caught</span><span class="fail">fixed</span></div></div>
+      </div>
+    </figure>
+  </section>
+
+  <section class="band" aria-labelledby="case-h">
+    <div class="w">
+      <div><p class="eyebrow"># case study (fictional)</p><h2 id="case-h" data-reveal>A clinic network halved its cost per merged change</h2><p>A two-person platform team moved review, tests, and migrations onto one factory. The numbers here are invented.</p><button class="b-w" type="button" data-demo="Case studies are illustrative in this unofficial study.">&gt; read the story</button></div>
+      <div class="panel" aria-label="Illustrative cost per merged change"><div class="row"><b>cost per PR</b><b data-count="4.12" data-decimals="2" data-prefix="$">$4.12</b></div><div class="row"><span>last quarter</span><span>$9.40</span></div><div class="row"><span>agents on floor</span><span>18</span></div><div class="row" style="border:0"><span>human review time</span><span>−41%</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec w" id="layers">
+    <div class="guides" aria-hidden="true"></div>
+    <p class="eyebrow"># no lock-in</p>
+    <h2 data-reveal>Swap any layer without starting over</h2>
+    <figure class="fig">
+      <figcaption class="fig-h"><i>&gt;_</i><span>[ fig. 4 · layers ]</span><i>#</i></figcaption>
+      <div class="fig-b layers">
+        <div class="layer" style="--i:0"><span><small>LAYER 01</small> Any agent</span><small>bring your own harness</small></div>
+        <div class="layer" style="--i:1"><span><small>LAYER 02</small> Any model</span><small>frontier or open-weight</small></div>
+        <div class="layer" style="--i:2"><span><small>LAYER 03</small> Your compute or ours</span><small>cloud or your VPC</small></div>
+        <div class="layer" style="--i:3"><span><small>LAYER 04</small> Data stays where you want</span><small>you own the output</small></div>
+      </div>
+    </figure>
+  </section>
+
+  <section class="sec w" id="gov">
+    <div class="guides" aria-hidden="true"></div>
+    <p class="eyebrow"># governance</p>
+    <h2 data-reveal>One control plane for a noisy fleet</h2>
+    <p class="lede">Spend, permissions, and a live queue for every agent.</p>
+    <figure class="fig">
+      <figcaption class="fig-h"><i>&gt;_</i><span>[ fig. 5 · control plane ]</span><i>#</i></figcaption>
+      <div class="fig-b gov">
+        <div class="chart"><span class="big" data-count="18.09" data-decimals="2" data-prefix="$">$18.09</span> cost per PR, trailing (illustrative)<svg viewBox="0 0 200 90" aria-hidden="true"><path d="M0 30 C40 40 80 20 120 34 S180 50 200 44 V90 H0Z" fill="#dcdcf5"/><path d="M0 50 C40 60 80 46 120 56 S180 68 200 64 V90 H0Z" fill="#b8b9ea"/></svg></div>
+        <div class="chart queue"><b>queue</b><ul role="list" data-queue><li>resolve merge conflicts on server<span class="tag hot">RUNNING</span></li><li>refactor auth middleware<span class="tag">QUEUED</span></li><li>investigate flaky test<span class="tag">QUEUED</span></li><li>fix desktop tab crash<span class="tag">QUEUED</span></li></ul></div>
+      </div>
+    </figure>
+  </section>
+
+  <section class="sec w" aria-labelledby="every-h">
+    <div class="guides" aria-hidden="true"></div>
+    <p class="eyebrow"># everywhere</p>
+    <h2 id="every-h" data-reveal>Three ways in</h2>
+    <div class="every" style="margin-block-start:24px">
+      <article><div class="shot" aria-hidden="true">factory.yaml<br>agents: 18<br>model: auto</div><h3>Factories</h3><p>Automate and run a software factory.</p><button class="b b-ink" type="button" data-demo="Early access is a demo in this unofficial study.">request access</button></article>
+      <article><div class="shot" aria-hidden="true">$ run tests<br>✓ 412 passed</div><h3>Terminal</h3><p>A terminal built for agent-assisted work.</p><button class="b b-ink" type="button" data-demo="There is no download in this unofficial study.">download</button></article>
+      <article><div class="shot" aria-hidden="true">agent &gt; plan<br>1 read repo<br>2 draft fix</div><h3>Agent CLI</h3><p>A coding agent for any terminal.</p><button class="b b-ink" type="button" data-demo="There is no installer in this unofficial study.">copy install</button></article>
+    </div>
+  </section>
+
+  <section class="sec w faq" id="faq">
+    <div class="guides" aria-hidden="true"></div>
+    <h2 data-reveal>Questions people ask</h2>
+    <details><summary>what is a software factory?</summary><p>In this study: a file that says which agents work on which repos, with which models, and how their work is checked.</p></details>
+    <details><summary>do i have to use your models?</summary><p>No. The study assumes any model can be plugged in per stage.</p></details>
+    <details><summary>where does our data live?</summary><p>Wherever you choose; the study assumes your cloud or a hosted option.</p></details>
+    <details><summary>can we start small?</summary><p>Yes. One repo, one agent, one check is a factory too.</p></details>
+  </section>
+</main>
+<footer><div class="w"><strong style="color:var(--ink)">Unofficial</strong> brand study of Warp by StyleGallery. Not affiliated with Warp. Case studies, numbers, and product names are fictional; no logos or screenshots are used. <a href="../">All studies</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Warp by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Factory floor: slots flip between running, waiting, and done while visible.
+  const fac = document.querySelector("[data-factory]");
+  fac.innerHTML = "<b></b>".repeat(160);
+  const cells = [...fac.children], states = ["run", "wait", "done"];
+  cells.forEach((c) => { const r = Math.random(); if (r < .08) c.dataset.s = "run"; else if (r < .12) c.dataset.s = "wait"; else if (r < .2) c.dataset.s = "done"; });
+  const run = document.querySelector("[data-running]"), done = document.querySelector("[data-done]");
+  let shipped = 1408;
+  const tick = () => { for (let k = 0; k < 6; k++) { const c = cells[(Math.random() * cells.length) | 0]; const s = c.dataset.s; if (s === "run") { c.dataset.s = "done"; shipped++; } else if (s === "done") delete c.dataset.s; else c.dataset.s = states[(Math.random() * 2) | 0]; } run.textContent = cells.filter((c) => c.dataset.s === "run").length; done.textContent = shipped.toLocaleString("en-US"); };
+  tick();
+  if (!reduced) { let t = 0; new IntersectionObserver(([e]) => { clearInterval(t); if (e.isIntersecting) t = setInterval(tick, 700); }).observe(fac); }
+  // Pipeline steps swap the output log.
+  const logs = [["factory created from template", "2 repos connected", "first run scored 88%"], ["factory.yaml parsed", "18 agents, 3 models, 4 checkpoints", "diff reviewed and applied"], ["steered from phone", "handed off to terminal", "resumed in editor"], ["run 812 graded: pass", "grade fed back into prompts", "next run +2.1 points"]];
+  const out = document.querySelector("[data-out]"), btns = [...document.querySelectorAll("[data-sdlc] button")];
+  const show = (i) => { btns.forEach((b, k) => b.setAttribute("aria-pressed", String(k === i))); out.innerHTML = logs[i].map((l) => `<p>${l}</p>`).join(""); };
+  btns.forEach((b, i) => b.addEventListener("click", () => show(i)));
+  show(0);
+  // Chart lines draw on arrival.
+  const charts = document.querySelector("[data-charts]");
+  if (!reduced) { charts.style.setProperty("--d", "400"); new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); charts.style.setProperty("--d", "0"); }, { threshold: .4 }).observe(charts); }
+  // Queue advances: the top item finishes and the next one starts.
+  const q = document.querySelector("[data-queue]");
+  if (!reduced) { let t = 0; new IntersectionObserver(([e]) => { clearInterval(t); if (e.isIntersecting) t = setInterval(() => { const first = q.firstElementChild; q.append(first); [...q.children].forEach((li, k) => { const tag = li.querySelector(".tag"); tag.textContent = k ? "QUEUED" : "RUNNING"; tag.classList.toggle("hot", !k); }); }, 2200); }).observe(q); }
+  // Header turns blue once the hero is behind you.
+  const hdr = document.querySelector("[data-hdr]"), hero = document.getElementById("top");
+  const chk = () => hdr.toggleAttribute("data-blue", hero.getBoundingClientRect().bottom < 60);
+  addEventListener("scroll", chk, { passive: true }); chk();
+})();
+</script>
+</body>
+</html>

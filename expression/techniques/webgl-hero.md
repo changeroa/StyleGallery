@@ -120,4 +120,4 @@ Locally authored recipe. three.js is MIT licensed and loaded at runtime; no thre
 ## IA Navigation
 
 Parent: [Expression](../index.md).
-Next: [Brand Studies](../brand-studies.md).
+Next: [Fintech Clarity Direction](../directions/fintech-clarity.md).

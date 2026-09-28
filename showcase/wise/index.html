@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Wise - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Wise's homepage language: heavy uppercase display type, lime on forest green, pill buttons, a live fee-transparent converter, and a globe of currency coins.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23163300'/%3E%3Cpath d='M8 20 L16 8 L24 20Z' fill='%239fe870'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #0e0f0c; --grey: #454745; --lime: #9fe870; --forest: #163300; --band: #e8ebe6; --sans: "Inter", system-ui, sans-serif; --sg-header: 12px; --sg-focus: #163300; --ease: cubic-bezier(.2,.8,.2,1); }
+  body { background: #fff; color: var(--ink); font: 400 16px/1.5 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1240px; padding-inline: clamp(16px, 4vw, 24px); }
+  .display { font: 900 clamp(2.6rem, 8.4vw, 7.6rem)/.86 var(--sans); letter-spacing: -.035em; text-transform: uppercase; }
+  .title { font: 600 clamp(2rem, 4vw, 3.4rem)/1.05 var(--sans); letter-spacing: -.03em; }
+  .muted { color: var(--grey); }
+  .pill { border: 0; border-radius: 999px; cursor: pointer; font: 600 16px var(--sans); padding: 12px 22px; }
+  .pill.lime { background: var(--lime); color: var(--forest); }
+  .pill.lime:hover { background: #80e142; }
+  .pill.line { background: transparent; box-shadow: inset 0 0 0 1.5px var(--forest); color: var(--forest); }
+  .ulink { background: none; border: 0; color: var(--forest); cursor: pointer; font: 600 16px var(--sans); padding: 0; text-decoration: underline; text-underline-offset: 4px; }
+  .center { text-align: center; }
+  .acts { align-items: center; display: flex; flex-wrap: wrap; gap: 14px 22px; justify-content: center; }
+
+  .site-header .w { align-items: center; display: flex; gap: 26px; padding-block: 18px; }
+  .mark { color: var(--forest); font: 900 26px var(--sans); letter-spacing: -.04em; text-decoration: none; }
+  .site-header nav { display: flex; gap: 6px; }
+  .site-header nav a { border-radius: 999px; color: var(--forest); font: 600 15px var(--sans); padding: 8px 14px; text-decoration: none; }
+  .site-header nav a:hover { background: var(--band); }
+  .site-header .end { align-items: center; display: flex; gap: 12px; margin-inline-start: auto; }
+  .site-header .pill { padding: 9px 16px; font-size: 15px; }
+  @media (max-width: 860px) { .site-header nav, .site-header .ulink { display: none; } }
+
+  /* Hero: centred display type, a converter, and a globe with coins. */
+  .hero { overflow: clip; padding-block: 50px 0; }
+  .hero .lede { font-size: 19px; margin: 22px auto 26px; max-inline-size: 48ch; }
+  .globe-wrap { block-size: clamp(260px, 36vw, 440px); margin-block-start: 50px; position: relative; }
+  .globe { aspect-ratio: 1; background: radial-gradient(circle at 35% 30%, #b8f0e0 0, #37b3a4 30%, #4b5fc2 62%, #2a2270 85%); border-radius: 50%; inline-size: min(560px, 86vw); inset: 0 auto auto 50%; position: absolute; transform: translateX(-50%); }
+  .globe::before { background: radial-gradient(40% 30% at 30% 40%, rgb(159 232 112 / .7), transparent), radial-gradient(30% 20% at 70% 60%, rgb(159 232 112 / .6), transparent); border-radius: 50%; content: ""; inset: 0; position: absolute; }
+  .coin { align-items: center; aspect-ratio: 1; background: radial-gradient(circle at 35% 30%, #fff1b8, #e3b341 45%, #9a6a12); border-radius: 50%; box-shadow: 0 14px 24px -10px rgb(0 0 0 / .4); color: #5a3d05; display: grid; font: 900 clamp(13px, 1.8vw, 20px) var(--sans); inline-size: clamp(56px, 8vw, 96px); justify-content: center; position: absolute; transform: translateY(calc(var(--lift, 0) * -1px)) rotate(var(--r, 0deg)); }
+  .pause { background: #fff; border: 1.5px solid var(--forest); border-radius: 50%; block-size: 44px; color: var(--forest); cursor: pointer; font: 700 14px var(--sans); inline-size: 44px; inset: 0 4% auto auto; position: absolute; z-index: 2; }
+
+  /* Converter card. */
+  .conv { background: #fff; border-radius: 28px; box-shadow: 0 30px 60px -30px rgb(22 51 0 / .35), 0 0 0 1px #e2e5df; margin: 0 auto; max-inline-size: 480px; padding: 24px; position: relative; text-align: start; z-index: 3; }
+  .conv label { color: var(--grey); display: block; font: 500 13px var(--sans); }
+  .field { align-items: center; border: 1.5px solid #c9ccc6; border-radius: 14px; display: flex; gap: 10px; margin-block: 6px 12px; padding: 6px 8px 6px 14px; }
+  .field:focus-within { border-color: var(--forest); }
+  .field input, .field output { background: none; border: 0; flex: 1; font: 700 26px var(--sans); inline-size: 100%; min-inline-size: 0; outline: 0; }
+  .field select { background: var(--band); border: 0; border-radius: 999px; font: 700 15px var(--sans); padding: 8px 10px; }
+  .fees { border-inline-start: 2px solid #c9ccc6; display: grid; font-size: 14px; gap: 6px; margin: 4px 0 14px 12px; padding-inline-start: 14px; }
+  .fees div { display: flex; justify-content: space-between; gap: 10px; }
+  .fees b { font-weight: 600; }
+  .conv .pill { inline-size: 100%; }
+  .conv small { color: var(--grey); display: block; font-size: 12px; margin-block-start: 10px; text-align: center; }
+
+  /* Band with one feature card. */
+  .band { background: var(--band); padding-block: 100px; }
+  .feature { background: #fff; border-radius: 28px; margin: 40px auto 0; max-inline-size: 360px; padding: 24px; text-align: start; }
+  .stackart { block-size: 140px; margin-block-end: 18px; position: relative; }
+  .stackart div { background: var(--c); border-radius: 16px; block-size: 110px; color: #fff; font: 600 13px var(--sans); inline-size: 80%; padding: 12px; position: absolute; }
+  .feature h3 { font: 600 22px var(--sans); margin-block-end: 6px; }
+  .feature .check { align-items: center; display: flex; gap: 8px; margin-block: 14px; }
+  .feature .check i { background: var(--lime); border-radius: 50%; block-size: 20px; display: inline-grid; font-size: 12px; font-style: normal; inline-size: 20px; place-items: center; }
+
+  /* Forest panel with lime display. */
+  .panel { background: var(--forest); border-radius: 36px; color: var(--lime); margin-block: 80px; overflow: clip; padding: clamp(40px, 7vw, 90px) clamp(20px, 5vw, 70px); }
+  .panel p { color: #e2f6d5; font-size: 18px; margin-block: 20px 26px; max-inline-size: 44ch; }
+  .panel .ulink { color: var(--lime); }
+
+  /* Security trio. */
+  .trio { display: grid; gap: 30px; grid-template-columns: repeat(3, 1fr); margin-block-start: 40px; }
+  .trio article { border-block-start: 2px solid var(--ink); padding-block-start: 18px; }
+  .trio b { display: block; font: 900 clamp(2.4rem, 4vw, 3.4rem)/1 var(--sans); letter-spacing: -.03em; }
+  .trio h3 { font: 600 20px var(--sans); margin-block: 10px 6px; }
+  @media (max-width: 760px) { .trio { grid-template-columns: 1fr; } }
+
+  /* Currency chip strip that drifts with scroll. */
+  .strip { display: flex; gap: 12px; margin-block: 70px; overflow: clip; }
+  .strip .row { display: flex; flex: none; gap: 12px; transform: translateX(calc(var(--drift, 0) * -1px)); }
+  .chip { align-items: center; background: var(--band); border-radius: 999px; display: flex; flex: none; font: 700 15px var(--sans); gap: 10px; padding: 8px 16px 8px 8px; }
+  .chip i { background: var(--c); border-radius: 50%; block-size: 30px; inline-size: 30px; }
+
+  /* Alternating media rows. */
+  .rowfeat { align-items: center; display: grid; gap: clamp(24px, 5vw, 70px); grid-template-columns: 1fr 1fr; padding-block: 70px; }
+  .rowfeat.flip > :first-child { order: 2; }
+  .rowfeat p { color: var(--grey); font-size: 18px; margin-block: 16px 22px; }
+  .media { aspect-ratio: 1.1; background: var(--band); border-radius: 32px; display: grid; overflow: hidden; padding: 8%; place-items: center; }
+  .phone { background: #fff; border-radius: 30px; box-shadow: 0 30px 50px -30px rgb(0 0 0 / .4); display: grid; gap: 10px; inline-size: min(260px, 80%); padding: 18px; }
+  .phone .bal { font: 800 30px var(--sans); letter-spacing: -.03em; }
+  .phone .tx { align-items: center; display: flex; font-size: 13px; gap: 10px; }
+  .phone .tx i { background: var(--c); border-radius: 50%; block-size: 28px; flex: none; inline-size: 28px; }
+  .phone .tx b { margin-inline-start: auto; }
+  @media (max-width: 820px) { .rowfeat { grid-template-columns: 1fr; } .rowfeat.flip > :first-child { order: 0; } }
+
+  /* App card on a painted gradient. */
+  .app { background: radial-gradient(50% 60% at 15% 20%, #b8e0ff, transparent 70%), radial-gradient(50% 60% at 85% 80%, #ffc9a8, transparent 70%), radial-gradient(40% 50% at 70% 20%, #c7f0a8, transparent 70%), #e6ddf5; border-radius: 36px; margin-block: 30px 80px; padding: clamp(24px, 5vw, 60px); }
+  .app .card { align-items: center; background: #fff; border-radius: 28px; display: grid; gap: 30px; grid-template-columns: 1.4fr 1fr; padding: clamp(24px, 4vw, 50px); }
+  .qr { aspect-ratio: 1; background: conic-gradient(from 90deg at 50% 50%, #000 25%, #fff 0 50%, #000 0 75%, #fff 0) 0 0 / 22% 22%; border: 12px solid #fff; border-radius: 12px; box-shadow: 0 0 0 1px #d6d9d3; inline-size: min(200px, 100%); justify-self: center; }
+  @media (max-width: 760px) { .app .card { grid-template-columns: 1fr; } }
+
+  /* Country links. */
+  .countries { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); margin-block-start: 30px; }
+  .countries button { align-items: center; background: #fff; border: 0; border-radius: 999px; cursor: pointer; display: flex; font: 600 15px var(--sans); gap: 10px; padding: 8px 14px 8px 8px; text-align: start; }
+  .countries button:hover { box-shadow: inset 0 0 0 1.5px var(--forest); }
+  .countries i { background: var(--c); border-radius: 50%; block-size: 26px; flex: none; inline-size: 26px; }
+
+  footer.site { background: #fff; color: var(--grey); font-size: 13px; padding-block: 50px 120px; }
+  footer.site strong, footer.site a { color: var(--forest); }
+  .fcols { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-block: 30px 40px; }
+  .fcols ul { list-style: none; margin: 8px 0 0; padding: 0; }
+  .biz { display: grid; column-gap: 40px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .biz > * { grid-column: 1; }
+  .biz .biz-art { grid-column: 2; grid-row: 1 / span 3; align-self: center; inline-size: 100%; transition: transform .6s var(--ease); }
+  .biz:hover .biz-art { transform: rotate(-1deg) scale(1.02); }
+  @media (max-width: 860px) { .biz { grid-template-columns: 1fr; } .biz .biz-art { grid-column: 1; grid-row: auto; order: 5; } }
+  .app .card { grid-template-columns: 1.4fr auto auto; }
+  .app-phone { inline-size: 280px; transition: transform .6s var(--ease); }
+  .app .card:hover .app-phone { transform: translateY(-6px) rotate(-2deg); }
+  @media (max-width: 760px) { .app .card { grid-template-columns: 1fr; } .app-phone { justify-self: center; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="w">
+    <a class="mark" href="#top">wise</a>
+    <nav aria-label="Sections"><a href="#convert">Send</a><a href="#business">Business</a><a href="#security">Security</a><a href="#countries">Countries</a></nav>
+    <div class="end"><button class="ulink" type="button" data-demo="There is no help centre in this unofficial study.">Help</button><button class="ulink" type="button" data-demo="There is no login in this unofficial study.">Log in</button><button class="pill lime" type="button" data-demo="There is no sign-up in this unofficial study.">Sign up</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero center" id="top" aria-labelledby="h1">
+    <div class="w">
+      <h1 class="display" id="h1" data-split>Money that moves<br>like you do</h1>
+      <p class="lede muted" data-reveal data-delay="300">Hold, send, and spend in dozens of currencies with the fee shown before you press send. Every figure on this page is invented.</p>
+      <div class="acts" data-reveal data-delay="400"><button class="pill lime" type="button" data-demo="There is no account opening in this unofficial study." data-magnet>Open an account</button><button class="ulink" type="button" data-demo="There is no sending in this unofficial study.">Send money now</button></div>
+      <div class="globe-wrap" aria-hidden="true" data-globe>
+        <div class="globe"></div>
+        <span class="coin" style="left:22%;top:18%;--r:-12deg" data-coin="1.2">€</span>
+        <span class="coin" style="left:68%;top:6%;--r:10deg" data-coin=".8">$</span>
+        <span class="coin" style="left:74%;top:44%;--r:-6deg" data-coin="1.6">£</span>
+        <span class="coin" style="left:14%;top:52%;--r:8deg" data-coin=".6">¥</span>
+        <span class="coin" style="left:44%;top:-2%;--r:4deg" data-coin="1">₩</span>
+      </div>
+      <button class="pause" type="button" aria-pressed="false" data-pause aria-label="Pause coin motion" style="position:relative;inset:auto;margin-block-start:-60px;margin-inline-start:auto;display:block">II</button>
+    </div>
+  </section>
+
+  <section class="band center" id="convert" aria-labelledby="cv-h">
+    <div class="w">
+      <h2 class="title" id="cv-h" data-reveal>See the fee before you send</h2>
+      <p class="muted" style="margin:14px auto 30px;max-inline-size:52ch">Type an amount. The fee, the rate, and what arrives are all on the card, in that order.</p>
+      <form class="conv" data-surface data-conv onsubmit="return false">
+        <label for="amt">You send exactly</label>
+        <div class="field"><input id="amt" inputmode="decimal" value="1000" autocomplete="off"><label class="sg-visually-hidden" for="from">From currency</label><select id="from"><option>GBP</option><option>USD</option><option>EUR</option><option>KRW</option></select></div>
+        <div class="fees" aria-live="polite">
+          <div><span>Fee (invented)</span><b data-fee>-4.10 GBP</b></div>
+          <div><span>We convert</span><b data-net>995.90 GBP</b></div>
+          <div><span>Rate (invented)</span><b data-rate>1.1700</b></div>
+        </div>
+        <label for="got">Recipient gets</label>
+        <div class="field"><output id="got" data-got>1,165.20</output><label class="sg-visually-hidden" for="to">To currency</label><select id="to"><option>EUR</option><option>USD</option><option>GBP</option><option>KRW</option></select></div>
+        <button class="pill lime" type="button" data-demo="Nothing is sent in this unofficial study.">Get started</button>
+        <small>Should arrive in seconds (invented). No real money moves here.</small>
+      </form>
+      <article class="feature" data-surface data-lift data-reveal>
+        <div class="stackart" aria-hidden="true"><div style="--c:#2a2270;left:14%;top:0">USD balance</div><div style="--c:#163300;left:6%;top:24px">GBP balance<br><strong style="font-size:22px">1,289.09</strong></div></div>
+        <h3>Get paid from abroad</h3>
+        <p class="muted">Local account details in several currencies, so clients pay you like a neighbour.</p>
+        <p class="check"><i aria-hidden="true">✓</i><button class="ulink" type="button" data-demo="There is no currency list in this unofficial study.">20+ currencies</button></p>
+        <button class="pill line" type="button" data-demo="There is no receiving in this unofficial study.">Explore getting paid</button>
+      </article>
+    </div>
+  </section>
+
+  <div class="w">
+    <section class="panel biz" id="business" aria-labelledby="bz-h">
+      <svg class="biz-art" viewBox="0 0 520 380" aria-hidden="true" data-surface><g transform="translate(40 30) rotate(-4)"><rect width="300" height="300" rx="18" fill="#f3f7ef"/><text x="28" y="50" font-family="Inter, sans-serif" font-weight="900" font-size="22" fill="#163300">INVOICE #2041</text><text x="28" y="78" font-family="Inter, sans-serif" font-size="14" fill="#454745">Due in 14 days · EUR</text><g font-family="Inter, sans-serif" font-size="15" fill="#0e0f0c"><text x="28" y="130">Design sprint</text><text x="272" y="130" text-anchor="end">€4,800</text><text x="28" y="165">Prototype build</text><text x="272" y="165" text-anchor="end">€3,200</text><text x="28" y="200">Travel</text><text x="272" y="200" text-anchor="end">€420</text></g><path d="M28 220h244" stroke="#c9ccc6"/><text x="28" y="258" font-family="Inter, sans-serif" font-weight="900" font-size="22" fill="#0e0f0c">Total</text><text x="272" y="258" text-anchor="end" font-family="Inter, sans-serif" font-weight="900" font-size="22" fill="#0e0f0c">€8,420</text></g><g transform="translate(250 190) rotate(6)"><rect width="240" height="150" rx="16" fill="#9fe870"/><rect x="22" y="26" width="42" height="30" rx="6" fill="#163300" opacity=".85"/><text x="22" y="104" font-family="JetBrains Mono, monospace" font-size="16" fill="#163300">•••• 7302</text><text x="22" y="128" font-family="Inter, sans-serif" font-weight="700" font-size="13" fill="#163300">BUSINESS · STUDY</text><circle cx="200" cy="120" r="14" fill="#163300" opacity=".25"/></g><g transform="translate(360 40)"><circle r="34" fill="#e3b341"/><text y="9" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="26" fill="#5a3d05">€</text></g></svg>
+      <h2 class="display" id="bz-h" data-reveal>Built for<br>business too</h2>
+      <p>Pay suppliers, invoice clients, and run payroll across borders from one account.</p>
+      <div class="acts" style="justify-content:start"><button class="pill lime" type="button" data-demo="There is no business account in this unofficial study.">Get started</button><button class="ulink" type="button" data-demo="There is no business page in this unofficial study.">Learn more</button></div>
+    </section>
+
+    <section id="security" aria-labelledby="sc-h">
+      <h2 class="title" id="sc-h" data-reveal>Make thieves work harder</h2>
+      <div class="trio">
+        <article><b data-count="24">24</b><h3>hour monitoring</h3><p class="muted">Suspicious payments get a second look, day or night.</p></article>
+        <article><b>2-step</b><h3>login</h3><p class="muted">A code on your phone every time something new happens.</p></article>
+        <article><b data-count="1">1</b><h3>tap to freeze</h3><p class="muted">Lose your card, freeze it before you've finished looking.</p></article>
+      </div>
+    </section>
+  </div>
+
+  <div class="strip" aria-hidden="true" data-strip>
+    <div class="row"><span class="chip"><i style="--c:#2a2270"></i>USD</span><span class="chip"><i style="--c:#163300"></i>GBP</span><span class="chip"><i style="--c:#37b3a4"></i>EUR</span><span class="chip"><i style="--c:#e3b341"></i>JPY</span><span class="chip"><i style="--c:#c2410c"></i>KRW</span><span class="chip"><i style="--c:#4b5fc2"></i>AUD</span><span class="chip"><i style="--c:#9fe870"></i>CAD</span><span class="chip"><i style="--c:#7a3b8f"></i>SGD</span><span class="chip"><i style="--c:#0a7d6b"></i>NZD</span><span class="chip"><i style="--c:#b3141b"></i>CHF</span><span class="chip"><i style="--c:#2a2270"></i>HKD</span><span class="chip"><i style="--c:#163300"></i>SEK</span><span class="chip"><i style="--c:#e3b341"></i>MXN</span><span class="chip"><i style="--c:#37b3a4"></i>BRL</span></div>
+  </div>
+
+  <div class="w">
+    <section class="rowfeat" aria-labelledby="mv-h">
+      <div class="media sg-frame" aria-hidden="true" data-surface><div class="phone" data-surface><small class="muted">Total balance</small><span class="bal">£4,212</span><div class="tx"><i style="--c:#37b3a4"></i>To Léa<b>-€120</b></div><div class="tx"><i style="--c:#e3b341"></i>From Kenji<b>+¥18,000</b></div><div class="tx"><i style="--c:#2a2270"></i>Card, Denver<b>-$9.40</b></div></div></div>
+      <div><h2 class="title" id="mv-h" data-reveal>Move your<br>money anywhere</h2><p>One account to send, spend, and receive, with the exchange rate you'd find on a search engine (in principle).</p><button class="ulink" type="button" data-demo="There is no account page in this unofficial study.">Explore the account</button></div>
+    </section>
+    <section class="rowfeat flip" aria-labelledby="gp-h">
+      <div class="media sg-frame" aria-hidden="true" data-surface style="background:#e6ddf5"><div class="phone" data-surface><small class="muted">Your account details</small><span class="bal">EUR</span><div class="tx"><i style="--c:#37b3a4"></i>IBAN<b>XX00 0000</b></div><div class="tx"><i style="--c:#163300"></i>Bank code<b>STUDY00</b></div></div></div>
+      <div><h2 class="title" id="gp-h" data-reveal>Get paid in the currency they have</h2><p>Share local details, get paid like a local, and convert only when you want to.</p><button class="ulink" type="button" data-demo="There is no receiving in this unofficial study.">Learn more</button></div>
+    </section>
+
+    <section class="panel center" aria-labelledby="ms-h">
+      <h2 class="display" id="ms-h" data-reveal>Money without<br>borders</h2>
+      <p style="margin-inline:auto">The mission in one line: instant, convenient, transparent, and eventually free. This study only paraphrases it.</p>
+    </section>
+
+    <section class="app" aria-labelledby="ap-h">
+      <div class="card">
+        <div><h2 class="display" id="ap-h" style="font-size:clamp(2rem,4.6vw,4rem)">Get the app for money everywhere</h2><p class="muted" style="margin-block:14px 20px">Scan to download. In this study the code is a pattern, not a link.</p><button class="pill lime" type="button" data-demo="There is no app in this unofficial study.">Try demo</button></div>
+        <svg class="app-phone" viewBox="0 0 220 400" aria-hidden="true" data-surface><rect x="4" y="4" width="212" height="392" rx="34" fill="#163300"/><rect x="16" y="16" width="188" height="368" rx="24" fill="#f7f9f5"/><rect x="80" y="26" width="60" height="10" rx="5" fill="#163300"/><text x="34" y="80" font-family="Inter, sans-serif" font-size="13" fill="#454745">Total balance</text><text x="34" y="112" font-family="Inter, sans-serif" font-weight="900" font-size="30" fill="#0e0f0c">£4,212</text><rect x="34" y="132" width="72" height="28" rx="14" fill="#9fe870"/><text x="70" y="151" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#163300">Send</text><rect x="114" y="132" width="72" height="28" rx="14" fill="#e8ebe6"/><text x="150" y="151" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#163300">Add</text><circle cx="46" cy="200" r="13" fill="#37b3a4"/><rect x="68" y="192" width="70" height="8" rx="4" fill="#c9ccc6"/><rect x="68" y="205" width="44" height="6" rx="3" fill="#e1e4de"/><rect x="152" y="194" width="34" height="9" rx="4" fill="#0e0f0c"/><circle cx="46" cy="248" r="13" fill="#e3b341"/><rect x="68" y="240" width="70" height="8" rx="4" fill="#c9ccc6"/><rect x="68" y="253" width="44" height="6" rx="3" fill="#e1e4de"/><rect x="152" y="242" width="34" height="9" rx="4" fill="#0e0f0c"/><circle cx="46" cy="296" r="13" fill="#2a2270"/><rect x="68" y="288" width="70" height="8" rx="4" fill="#c9ccc6"/><rect x="68" y="301" width="44" height="6" rx="3" fill="#e1e4de"/><rect x="152" y="290" width="34" height="9" rx="4" fill="#0e0f0c"/><circle cx="46" cy="344" r="13" fill="#c2410c"/><rect x="68" y="336" width="70" height="8" rx="4" fill="#c9ccc6"/><rect x="68" y="349" width="44" height="6" rx="3" fill="#e1e4de"/><rect x="152" y="338" width="34" height="9" rx="4" fill="#0e0f0c"/></svg><div class="qr" data-surface role="img" aria-label="Decorative square pattern standing in for a download code"></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="band" id="countries" aria-labelledby="co-h" style="padding-block-start:180px">
+    <div class="w">
+      <h2 class="title" id="co-h">Works nearly everywhere</h2>
+      <p class="muted" style="margin-block-start:10px">Pick a destination. Each one is a demo.</p>
+      <div class="countries" data-countries></div>
+    </div>
+  </section>
+</main>
+<footer class="site"><div class="w"><div class="fcols"><div><strong>Personal</strong><ul><li>Send money</li><li>Card</li><li>Account</li></ul></div><div><strong>Business</strong><ul><li>Invoices</li><li>Payroll</li><li>Integrations</li></ul></div><div><strong>Company</strong><ul><li>Mission</li><li>Pricing</li><li>Help</li></ul></div></div><strong>Unofficial</strong> brand study of Wise by StyleGallery. Not affiliated with Wise. Rates, fees, and copy are invented; the globe, coins, and code are drawn in CSS; no logos or photos are used. <a href="../">All studies</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Wise by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Converter with an invented rate table and fee.
+  const USD = { GBP: 1.27, USD: 1, EUR: 1.086, KRW: .00074 };
+  const amt = document.querySelector("#amt"), from = document.querySelector("#from"), to = document.querySelector("#to");
+  const $ = (s) => document.querySelector(s);
+  const f2 = (v, c) => v.toLocaleString("en-US", { maximumFractionDigits: c === "KRW" ? 0 : 2, minimumFractionDigits: c === "KRW" ? 0 : 2 });
+  const calc = () => {
+    const a = Math.max(0, parseFloat(amt.value.replace(/,/g, "")) || 0), fc = from.value, tc = to.value;
+    const fee = a === 0 ? 0 : Math.max(fc === "KRW" ? 1500 : 1, a * .0041);
+    const net = Math.max(0, a - fee), rate = USD[fc] / USD[tc];
+    $("[data-fee]").textContent = `-${f2(fee, fc)} ${fc}`; $("[data-net]").textContent = `${f2(net, fc)} ${fc}`;
+    $("[data-rate]").textContent = rate.toFixed(rate < .01 ? 6 : 4); $("[data-got]").textContent = f2(net * rate, tc);
+  };
+  [amt, from, to].forEach((el) => el.addEventListener("input", calc)); calc();
+  // Coins drift with scroll unless paused or reduced.
+  const coins = [...document.querySelectorAll("[data-coin]")], pause = $("[data-pause]"), strip = $("[data-strip] .row");
+  let paused = reduced;
+  if (reduced) { pause.hidden = true; }
+  pause.addEventListener("click", () => { paused = !paused; pause.setAttribute("aria-pressed", String(paused)); pause.textContent = paused ? "▶" : "II"; pause.setAttribute("aria-label", paused ? "Play coin motion" : "Pause coin motion"); });
+  const onScroll = () => {
+    if (paused) return;
+    coins.forEach((c) => c.style.setProperty("--lift", String(scrollY * .15 * +c.dataset.coin)));
+    const r = strip.parentElement.getBoundingClientRect();
+    strip.style.setProperty("--drift", String(Math.max(0, (innerHeight - r.top) * .4)));
+  };
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  // Country buttons.
+  const C = [["South Korea", "#c2410c"], ["Japan", "#e3b341"], ["United States", "#2a2270"], ["United Kingdom", "#163300"], ["Germany", "#37b3a4"], ["Australia", "#4b5fc2"], ["Canada", "#b3141b"], ["Singapore", "#7a3b8f"], ["Mexico", "#0a7d6b"], ["Brazil", "#9fe870"], ["India", "#e3b341"], ["France", "#2a2270"]];
+  $("[data-countries]").innerHTML = C.map(([n, c]) => `<button type="button" data-demo="There is no ${n} page in this unofficial study."><i style="--c:${c}" aria-hidden="true"></i>Send to ${n}</button>`).join("");
+})();
+</script>
+</body>
+</html>

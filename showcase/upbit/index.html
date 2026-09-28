@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>업비트 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="업비트 홈의 시장 데이터 히어로와 서비스 탭 구성을 원본 카피·로고 없이 재해석한 비공식 스터디. 모든 시세는 가상 데이터.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23093687'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --navy: #093687; --blue: #115dcb; --up: #b33a22; --down: #1261c4; --ink: #1b1b1b; --grey: #555; --line: #e3e5ea; --soft: #f4f5f8; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 70px; --sg-focus: #115dcb; }
+  body { background: #fff; color: var(--ink); font: 400 14px/1.6 var(--sans); letter-spacing: -0.01em; word-break: keep-all; }
+  .wrap { margin-inline: auto; max-inline-size: 1440px; padding-inline: clamp(16px, 3vw, 40px); }
+  .num { font-variant-numeric: tabular-nums; }
+  .site-header { background: #fff; border-block-end: 1px solid var(--line); inset: 0 0 auto; position: fixed; z-index: 20; }
+  .site-header .wrap { align-items: center; display: flex; gap: 24px; block-size: 58px; }
+  .logo { color: var(--navy); font-size: 21px; font-style: italic; font-weight: 900; letter-spacing: -0.03em; text-decoration: none; }
+  .site-nav { display: flex; gap: 2px; }
+  .site-nav a { color: var(--ink); font-size: 14px; font-weight: 600; padding: 6px 10px; text-decoration: none; }
+  .site-nav a:hover { color: var(--blue); }
+  .util { display: flex; gap: 6px; margin-inline-start: auto; }
+  .btn { border: 0; border-radius: 3px; font-size: 13px; font-weight: 600; padding: 7px 12px; }
+  .btn.blue { background: var(--blue); color: #fff; } .btn.grey { background: #e9ebef; color: var(--ink); } .btn.navy { background: var(--navy); color: #fff; }
+  @media (max-width: 900px) { .site-nav { display: none; } }
+
+  /* Hero: three-line identity left, a live treemap right (Korean convention: red up, blue down). */
+  .hero { display: grid; gap: 30px; grid-template-columns: 0.8fr 2fr; padding-block: 90px 20px; }
+  .hero h1 { font-size: clamp(1.6rem, 2.4vw, 2.1rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.35; }
+  .hero h1 em { color: var(--blue); font-style: normal; }
+  .hero .row { display: flex; gap: 8px; margin-block-start: 24px; }
+  .tree { display: grid; gap: 2px; grid-template-columns: 2fr 3fr 1.3fr; grid-template-rows: 1.4fr 1fr; block-size: 300px; }
+  .tile { color: #fff; display: flex; flex-direction: column; justify-content: center; padding: 10px; text-align: center; transition: background-color .8s; }
+  .tile b { font-size: 17px; }
+  .tile span { font-size: 12px; }
+  .tile:nth-child(1) { grid-row: span 2; }
+  .strip { background: #eef1f6; display: flex; flex-wrap: wrap; font-size: 13px; gap: 8px 30px; margin-block-start: 22px; padding: 12px 18px; }
+  .strip b { font-weight: 700; }
+  .up { color: var(--up); } .down { color: var(--down); }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .tree { block-size: 220px; } }
+
+  .market { display: grid; gap: 40px; grid-template-columns: 1.3fr 1fr; padding-block: 30px 90px; }
+  .tabs-mini { display: flex; gap: 16px; font-size: 14px; font-weight: 700; margin-block-end: 12px; }
+  .tabs-mini [role="tab"] { background: none; border: 0; color: #767676; font: inherit; padding: 0; }
+  .tabs-mini [role="tab"][aria-selected="true"] { color: var(--ink); }
+  table { border-collapse: collapse; font-size: 13px; inline-size: 100%; }
+  th { color: #666; font-weight: 500; padding: 6px 4px; text-align: end; border-block-end: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: start; }
+  td { border-block-end: 1px solid #f0f1f4; padding: 9px 4px; text-align: end; }
+  .flash-up { animation: fu .8s; } .flash-down { animation: fd .8s; }
+  @keyframes fu { from { background: #fbe4df; } } @keyframes fd { from { background: #dfe9fb; } }
+  .notices h2 { font-size: 14px; margin-block-end: 12px; }
+  .notices li { border-block-end: 1px solid #f0f1f4; display: flex; font-size: 13px; gap: 10px; justify-content: space-between; padding-block: 9px; }
+  .notices time { color: #666; flex: none; }
+  .warn { background: #2f6fd1; color: #fff; font-size: 14px; font-weight: 600; margin-block-start: 22px; padding: 18px; }
+  @media (max-width: 900px) { .market { grid-template-columns: 1fr; } }
+
+  /* Service tabs: copy left, mockup right, with a soft curve behind. */
+  .services { background: linear-gradient(180deg, #f5f8fd, #fff); overflow: hidden; padding-block: 80px; position: relative; }
+  .services::before { border: 70px solid rgb(17 93 203 / 0.06); border-radius: 50%; block-size: 900px; content: ""; inline-size: 900px; inset: 10% -200px auto auto; position: absolute; }
+  .svc-tabs { display: flex; gap: 30px; justify-content: center; margin-block-end: 50px; position: relative; }
+  .svc-tabs [role="tab"] { background: none; border: 0; border-block-end: 3px solid transparent; color: #767676; font: 700 16px var(--sans); padding: 6px 2px; }
+  .svc-tabs [role="tab"][aria-selected="true"] { border-color: var(--navy); color: var(--ink); }
+  .svc-panel { align-items: center; display: grid; gap: 40px; grid-template-columns: 1fr 1fr; padding-inline: clamp(0px, 6vw, 100px); position: relative; }
+  .svc-panel .t { display: block; font-size: 28px; letter-spacing: -0.03em; }
+  .svc-panel .d { color: var(--grey); display: block; margin-block: 12px 24px; max-inline-size: 40ch; }
+  .mock { background: #fff; border-radius: 26px; box-shadow: 0 30px 70px -30px rgb(9 54 135 / 0.35); inline-size: 280px; justify-self: center; padding: 22px 18px; }
+  .mock .h { color: #666; font-size: 12px; }
+  .mock .big { font-size: 22px; font-weight: 700; }
+  .mock svg { block-size: 90px; inline-size: 100%; margin-block: 12px; }
+  .mock svg path { stroke-dasharray: 400; animation: draw 1.6s ease-out both; }
+  @keyframes draw { from { stroke-dashoffset: 400; } }
+  .mock .li { border-block-start: 1px solid #f0f1f4; display: flex; font-size: 12px; justify-content: space-between; padding-block: 8px; }
+  .calendar { background: #fff; border-radius: 14px; box-shadow: 0 16px 30px -12px rgb(0 0 0 / 0.2); inline-size: 70px; padding: 8px; text-align: center; position: absolute; inset: auto 8% 6% auto; }
+  .calendar b { display: block; font-size: 28px; }
+  @media (max-width: 900px) { .svc-panel { grid-template-columns: 1fr; } }
+
+  .security { padding-block: 90px 60px; text-align: center; }
+  .security h2 { font-size: 24px; letter-spacing: -0.03em; margin-block-end: 36px; }
+  .sec-row { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); }
+  .sec { border: 1px solid var(--line); padding: 34px 24px; }
+  .sec h3 { font-size: 16px; margin-block-end: 8px; }
+  .sec p { color: var(--grey); font-size: 13px; }
+  .sec svg { block-size: 44px; margin: 18px auto 0; }
+  @media (max-width: 900px) { .sec-row { grid-template-columns: 1fr; } }
+  footer { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 12px; padding-block: 40px 60px; }
+  .foot { display: grid; gap: 30px; grid-template-columns: 1.5fr 1fr 1fr; }
+  .foot b { color: var(--ink); display: block; font-size: 24px; }
+  .foot a { color: var(--ink); }
+  @media (max-width: 900px) { .foot { grid-template-columns: 1fr; } }
+  .sg-studybar { padding-inline-end: 120px; }
+  .qr { background: #fff; border: 1px solid var(--line); box-shadow: 0 8px 20px rgb(0 0 0 / 0.1); inset: auto 18px 18px auto; padding: 8px; position: fixed; text-align: center; z-index: 15; font-size: 11px; }
+  .qr i { background: repeating-conic-gradient(#111 0 25%, #fff 0 50%) 0 0 / 10px 10px; display: block; block-size: 60px; inline-size: 60px; }
+  @media (max-width: 900px) { .qr { display: none; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top">UPbit</a>
+    <nav class="site-nav" aria-label="섹션"><a href="#market">시세</a><a href="#services">서비스</a><a href="#security">보안</a></nav>
+    <div class="util"><button class="btn blue" type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인</button><button class="btn grey" type="button" data-demo="비공식 스터디: 회원가입은 없어요.">회원가입</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="wrap" id="top" aria-labelledby="hero-h">
+    <div class="hero">
+      <div>
+        <h1 id="hero-h">오늘의 시장을<br>숫자로 먼저<br><em>업비트 스터디</em></h1>
+        <div class="row"><button class="btn navy" type="button" data-demo="비공식 스터디: 거래 화면은 없어요.">시장 둘러보기</button><button class="btn blue" type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인</button></div>
+      </div>
+      <div>
+        <div class="tree" data-tree aria-label="가상 섹터별 등락률 (1초마다 바뀌는 예시 데이터)" role="img"></div>
+      </div>
+    </div>
+    <div class="strip num" aria-label="가상 지수">
+      <span>종합 지수 <b data-idx="11390.85">11,390.85</b> <span class="up" data-chg>+0.31%</span></span>
+      <span>대형주 지수 <b data-idx="3173.65">3,173.65</b> <span class="up" data-chg>+0.96%</span></span>
+      <span>공포·탐욕 <b>61/100</b> 탐욕</span>
+      <span>24시간 거래대금 <b>1.9조</b> <span class="down">-18.58%</span></span>
+    </div>
+  </section>
+
+  <section class="wrap market" id="market" aria-labelledby="market-h">
+    <div>
+      <h2 class="sg-visually-hidden" id="market-h">시세 순위 (가상)</h2>
+      <div class="tabs-mini" role="tablist" aria-label="순위 기준" data-tabs>
+        <button role="tab" aria-selected="true" aria-controls="rank-vol" id="t-vol">1시간 거래대금</button>
+        <button role="tab" aria-selected="false" aria-controls="rank-up" id="t-up">1시간 급상승</button>
+      </div>
+      <div id="rank-vol" role="tabpanel" aria-labelledby="t-vol"><table class="num"><thead><tr><th>가상 자산</th><th>현재가</th><th>변동률</th><th>거래대금</th></tr></thead><tbody data-rank></tbody></table></div>
+      <div id="rank-up" role="tabpanel" aria-labelledby="t-up"><table class="num"><thead><tr><th>가상 자산</th><th>현재가</th><th>변동률</th></tr></thead><tbody><tr><td>1 해오름</td><td>842</td><td class="up">+14.20%</td></tr><tr><td>2 물결</td><td>12.4</td><td class="up">+9.81%</td></tr><tr><td>3 별빛</td><td>3,210</td><td class="up">+7.02%</td></tr></tbody></table></div>
+    </div>
+    <div class="notices">
+      <h2>공지사항 (예시)</h2>
+      <ul role="list"><li><span>점검 안내: 입출금 일시 중단 (예시)</span><time>09.28</time></li><li><span>새 가상 자산 거래 지원 안내 (예시)</span><time>09.26</time></li><li><span>수수료 인하 이벤트 종료 안내 (예시)</span><time>09.24</time></li><li><span>보안 강화를 위한 인증 방식 변경 (예시)</span><time>09.21</time></li></ul>
+      <p class="warn">투자 전에 가상 자산의 위험을 꼭 확인하세요.</p>
+    </div>
+  </section>
+
+  <section class="services" id="services" aria-labelledby="svc-h">
+    <h2 class="sg-visually-hidden" id="svc-h">서비스</h2>
+    <div class="wrap">
+      <div class="svc-tabs" role="tablist" aria-label="서비스" data-tabs>
+        <button role="tab" aria-selected="false" aria-controls="p-stake" id="s1">예치</button>
+        <button role="tab" aria-selected="true" aria-controls="p-save" id="s2">자동 모으기</button>
+        <button role="tab" aria-selected="false" aria-controls="p-lab" id="s3">데이터 보기</button>
+      </div>
+      <div class="svc-panel" id="p-stake" role="tabpanel" aria-labelledby="s1"><div><strong class="t">맡겨두고 보상받기</strong><span class="d">보유한 자산을 예치하면 정해진 규칙에 따라 보상이 쌓여요. 수치는 모두 예시예요.</span></div><div class="mock" aria-hidden="true"><div class="h">예상 연 보상률</div><div class="big">4.2%</div><svg viewBox="0 0 200 90"><path d="M0 80 C40 70 80 50 120 40 S180 12 200 8" stroke="#115dcb" stroke-width="3" fill="none"/></svg></div></div>
+      <div class="svc-panel" id="p-save" role="tabpanel" aria-labelledby="s2"><div><strong class="t">날짜만 정하면 자동으로</strong><span class="d">원하는 날짜와 금액을 정해 두면 알아서 조금씩 모아요. 한 번에 사는 부담을 나눠요.</span></div><div style="position:relative;justify-self:center"><div class="mock" aria-hidden="true"><div class="h">매주 금요일 &middot; 1만원씩</div><div class="big">누적 36회</div><svg viewBox="0 0 200 90"><path d="M0 70 L30 62 L60 66 L90 44 L120 50 L150 30 L200 22" stroke="#c84a31" stroke-width="3" fill="none"/></svg><div class="li"><span>평균 매수가</span><span>예시</span></div><div class="li"><span>수익률</span><span class="up">+6.4%</span></div></div><div class="calendar" aria-hidden="true">FRI<b>03</b></div></div></div>
+      <div class="svc-panel" id="p-lab" role="tabpanel" aria-labelledby="s3"><div><strong class="t">숫자로 읽는 시장</strong><span class="d">거래량, 지갑 이동, 섹터 흐름을 차트로 모아 보여줘요.</span></div><div class="mock" aria-hidden="true"><div class="h">섹터 흐름</div><div class="big">+2.8%</div><svg viewBox="0 0 200 90"><path d="M0 50 L25 40 L50 60 L75 30 L100 45 L125 20 L150 35 L175 15 L200 25" stroke="#093687" stroke-width="3" fill="none"/></svg></div></div>
+      <p style="margin-block-start:30px;position:relative;text-align:center"><button class="btn blue" type="button" data-demo="비공식 스터디: 선택한 서비스의 상세 화면은 없어요.">선택한 서비스 알아보기</button></p>
+    </div>
+  </section>
+
+  <section class="wrap security" id="security" aria-labelledby="sec-h">
+    <h2 id="sec-h">잠든 사이에도 지키는 세 겹의 보안</h2>
+    <div class="sec-row">
+      <div class="sec" data-reveal><h3>지갑 보안</h3><p>대부분의 자산을 네트워크와 분리된 지갑에 보관해요.</p><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18" fill="#115dcb"/><path d="M14 22h16M22 14v16" stroke="#fff" stroke-width="4"/></svg></div>
+      <div class="sec" data-reveal data-delay="100"><h3>계정 보안</h3><p>로그인과 출금에 서로 다른 인증 단계를 거쳐요.</p><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="10" y="18" width="24" height="18" rx="4" fill="#115dcb"/><path d="M15 18v-4a7 7 0 0 1 14 0v4" stroke="#115dcb" stroke-width="4" fill="none"/></svg></div>
+      <div class="sec" data-reveal data-delay="200"><h3>이상 거래 탐지</h3><p>평소와 다른 패턴을 학습해 먼저 멈추고 확인해요.</p><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 4 38 10v12c0 10-7 16-16 18-9-2-16-8-16-18V10z" fill="#115dcb"/></svg></div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap foot"><div>고객센터 (예시)<b class="num">0000-0000</b>Unofficial 브랜드 스터디 &middot; 업비트와 무관 &middot; 모든 시세는 가상 데이터</div><div><p>서체: Pretendard</p></div><div><a href="../">모든 스터디 보기</a></div></div></footer>
+<aside class="qr" aria-label="앱 다운로드 안내 (예시)"><i aria-hidden="true"></i>앱 다운로드</aside>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Upbit by StyleGallery. Not affiliated with Upbit. All market data is fictional.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  // Fictional market: a random walk updated once a second while the section is visible.
+  const sectors = ["플랫폼", "인프라", "결제", "게임", "데이터", "스토리지", "AI"];
+  const tree = document.querySelector("[data-tree]");
+  const tiles = sectors.slice(0, 6).map((name) => { const t = document.createElement("div"); t.className = "tile num"; tree.append(t); return { t, name, v: (Math.random() - 0.3) * 2 }; });
+  const coins = [["해오름", 1946], ["물결", 9.31], ["별빛", 3659000], ["단단", 111232000], ["고요", 1366], ["모래", 1288]].map(([n, p]) => ({ n, p, c: (Math.random() - 0.4) * 2 }));
+  const rank = document.querySelector("[data-rank]");
+  const fmt = (x) => x.toLocaleString("ko-KR", { maximumFractionDigits: x < 100 ? 2 : 0 });
+  const paint = (first) => {
+    tiles.forEach((s) => { if (!first) s.v += (Math.random() - 0.5) * 0.3; const up = s.v >= 0; const k = Math.min(1, Math.abs(s.v) / 2); s.t.style.backgroundColor = up ? `rgb(${176 + 20 * k} ${70 - 30 * k} ${50 - 20 * k})` : `rgb(${40 - 20 * k} ${110 - 30 * k} ${200 + 20 * k})`; s.t.innerHTML = `<b>${s.name}</b><span>${up ? "+" : ""}${s.v.toFixed(2)}%</span>`; });
+    rank.innerHTML = coins.map((c, i) => { const prev = c.p; if (!first) { c.c += (Math.random() - 0.5) * 0.2; c.p *= 1 + (Math.random() - 0.5) * 0.002; } const cls = c.c >= 0 ? "up" : "down"; const flash = first ? "" : c.p > prev ? "flash-up" : "flash-down"; return `<tr><td>${i + 1} ${c.n}</td><td class="${cls} ${flash}">${fmt(c.p)}</td><td class="${cls}">${c.c >= 0 ? "+" : ""}${c.c.toFixed(2)}%</td><td>${(12 + i * 7.3).toFixed(1)}억</td></tr>`; }).join("");
+  };
+  paint(true);
+  if (!reduced) { let timer = 0; new IntersectionObserver(([e]) => { clearInterval(timer); if (e.isIntersecting) timer = setInterval(() => paint(false), 1000); }).observe(document.getElementById("top")); }
+})();
+</script>
+</body>
+</html>

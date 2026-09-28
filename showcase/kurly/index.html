@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>컬리 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="컬리 홈의 보라색 신뢰감과 4열 상품 캐러셀을 원본 사진·카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235f0080'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --purple: #5f0080; --purple-2: #7a1fa2; --lav: #f4ecfa; --ink: #333; --grey: #666; --line: #e2e2e2; --sale: #c4410e; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 72px; --sg-focus: #5f0080; }
+  body { background: #fff; color: var(--ink); font: 400 14px/1.5 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 1050px; padding-inline: 16px; }
+  .promo { background: var(--purple); color: #fff; font-size: 13px; padding: 9px; text-align: center; }
+  .promo b { font-weight: 700; }
+  .util { color: var(--grey); display: flex; font-size: 12px; gap: 14px; justify-content: flex-end; padding-block: 8px; }
+  .brandrow { align-items: center; display: flex; flex-wrap: wrap; gap: 12px 20px; padding-block: 6px 18px; }
+  .logo { color: var(--purple); font: 800 26px var(--sans); letter-spacing: -0.04em; text-decoration: none; }
+  .mk { color: var(--purple); font-weight: 700; font-size: 17px; } .mk + span { color: #767676; font-size: 17px; }
+  .search { border: 1px solid var(--purple); border-radius: 6px; display: flex; flex: 1; max-inline-size: 400px; padding: 10px 14px; }
+  .search input { border: 0; flex: 1; font: inherit; outline: none; }
+  .icons { display: flex; gap: 16px; margin-inline-start: auto; position: relative; font-size: 20px; }
+  .icons button { background: none; border: 0; color: var(--ink); font-size: 20px; position: relative; }
+  .cart-count { background: var(--purple); border-radius: 999px; color: #fff; font-size: 10px; font-weight: 700; inset: -4px -8px auto auto; min-inline-size: 16px; padding: 1px 4px; position: absolute; text-align: center; }
+  .navbar { background: #fff; border-block-end: 1px solid var(--line); box-shadow: 0 3px 4px -2px rgb(0 0 0 / 0.06); position: sticky; top: 0; z-index: 20; }
+  .navbar .inner { align-items: center; display: flex; gap: 28px; block-size: 56px; }
+  .navbar a { color: var(--ink); font-size: 15px; font-weight: 600; text-decoration: none; }
+  .navbar a:hover { color: var(--purple); }
+  .ship { border: 1px solid var(--line); border-radius: 999px; color: var(--grey); font-size: 12px; margin-inline-start: auto; padding: 5px 12px; }
+  .ship b { color: var(--purple); }
+  @media (max-width: 760px) { .navbar a:nth-child(n+4) { display: none; } .search { display: none; } }
+
+  /* Hero: full-width carousel with a pause button and counter. */
+  .hero { background: #4a1a2a; block-size: 370px; overflow: hidden; position: relative; }
+  .slide { inset: 0; position: absolute; transition: opacity .9s; }
+  .slide[aria-hidden="true"] { opacity: 0; }
+  .slide .copy { color: #fff; inset: 50% auto auto max(16px, calc(50% - 525px)); position: absolute; transform: translateY(-50%); z-index: 1; max-inline-size: 420px; }
+  .slide .copy strong { display: block; font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.25; }
+  .slide .copy span { display: block; font-size: 15px; margin-block-start: 10px; }
+  .slide .still { display: flex; gap: 20px; inset: 16% 6% 12% auto; position: absolute; }
+  .slide .still > div { border-radius: 10px; inline-size: 140px; overflow: hidden; box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.6); }
+  .ctrl { align-items: center; background: rgb(0 0 0 / 0.35); border-radius: 999px; color: #fff; display: flex; font-size: 12px; gap: 8px; inset: auto max(16px, calc(50% - 525px)) 20px auto; padding: 4px 6px 4px 12px; position: absolute; z-index: 2; }
+  .ctrl button { background: rgb(255 255 255 / 0.15); border: 0; border-radius: 999px; color: #fff; font-size: 12px; padding: 4px 10px; }
+  @media (max-width: 760px) { .slide .still { display: none; } }
+
+  .coupon { align-items: center; background: var(--lav); border-radius: 10px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; margin-block: 30px 10px; padding: 18px 22px; }
+  .coupon strong { color: var(--purple); font-size: 20px; }
+  .coupon button { background: var(--purple); border: 0; border-radius: 6px; color: #fff; font-weight: 700; padding: 11px 18px; }
+
+  .shelf { padding-block: 50px 10px; }
+  .shelf-h { margin-block-end: 26px; text-align: center; }
+  .shelf-h h2 { font-size: 26px; font-weight: 600; }
+  .shelf-h h2::after { content: " \203A"; }
+  .shelf-h p { color: #767676; margin-block-start: 6px; }
+  .track-wrap { position: relative; }
+  .track { display: grid; gap: 18px; grid-auto-columns: calc((100% - 54px) / 4); grid-auto-flow: column; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .next { background: #fff; border: 1px solid var(--line); border-radius: 50%; box-shadow: 0 4px 10px rgb(0 0 0 / 0.1); block-size: 46px; font-size: 20px; inline-size: 46px; inset: 120px -22px auto auto; position: absolute; z-index: 2; }
+  @media (max-width: 1110px) { .next { inset-inline-end: 4px; } }
+  .prod { scroll-snap-align: start; }
+  .prod .img { aspect-ratio: 0.77; overflow: hidden; position: relative; }
+  .prod .img svg { transition: transform .5s; }
+  .prod:hover .img svg { transform: scale(1.05); }
+  .badge { background: var(--purple); color: #fff; font-size: 11px; inset: 0 auto auto 0; padding: 3px 8px; position: absolute; z-index: 1; }
+  .add { align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 4px; color: var(--ink); display: flex; font: 500 14px var(--sans); gap: 6px; inline-size: 100%; justify-content: center; margin-block: 8px 10px; padding: 8px; }
+  .add:hover { border-color: var(--purple); color: var(--purple); }
+  .prod h3 { font-size: 15px; font-weight: 400; line-height: 1.4; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+  .was { color: #767676; font-size: 13px; text-decoration: line-through; }
+  .now { font-size: 16px; font-weight: 700; }
+  .now em { color: var(--sale); font-style: normal; margin-inline-end: 4px; }
+  .rev { color: #767676; font-size: 12px; }
+  @media (max-width: 760px) { .track { grid-auto-columns: 45%; } .next { display: none; } }
+  .aside { display: grid; gap: 6px; inset: 260px 16px auto auto; position: absolute; inline-size: 80px; font-size: 11px; text-align: center; }
+  .aside .card { background: linear-gradient(160deg, #6b2a8a, #3a1450); border-radius: 4px; color: #fff; padding: 12px 4px; font-weight: 700; }
+  .aside span { border: 1px solid var(--line); display: block; padding: 6px 0; background: #fff; color: var(--grey); }
+  @media (max-width: 1260px) { .aside { display: none; } }
+  footer { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 12px; margin-block-start: 60px; padding-block: 30px 40px; }
+  footer a { color: var(--purple); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<p class="promo">처음 오셨다면 <b>첫 주문 무료배송</b>과 쿠폰을 챙겨가세요 (예시)</p>
+<div class="inner">
+  <div class="util"><span>회원가입</span><span>로그인</span><span>고객센터</span></div>
+  <div class="brandrow">
+    <span class="logo">Kurly</span><span class="mk">장보기</span><span>뷰티</span>
+    <label class="search"><span class="sg-visually-hidden">상품 검색</span><input type="search" placeholder="오늘 저녁 뭐 먹지?"><span aria-hidden="true">&#9906;</span></label>
+    <div class="icons"><button type="button" aria-label="배송지 (예시)" data-demo="비공식 스터디: 배송지 설정은 없어요.">&#9906;</button><button type="button" aria-label="찜 목록 (예시)" data-demo="비공식 스터디: 찜 목록은 없어요.">&#9825;</button><button type="button" aria-label="장바구니" data-demo="비공식 스터디: 장바구니 화면은 없어요. 담기 버튼으로 숫자만 올라가요.">&#128722;<span class="cart-count" data-cart>0</span></button></div>
+  </div>
+</div>
+<header class="navbar">
+  <div class="inner">
+    <nav aria-label="섹션" style="display:flex;gap:28px"><a href="#gift">선물</a><a href="#beauty">뷰티 선물</a><a href="#deal">특가</a><a href="#health">건강</a></nav>
+    <span class="ship"><b>새벽</b> &middot; 저녁 배송 안내 (예시)</span>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-roledescription="carousel" aria-label="기획전 (예시)" data-hero>
+    <div class="slide" style="background:linear-gradient(110deg,#3a1020,#7a2a3a 55%,#c89a78)"><div class="copy"><strong>한 상 가득 차리는<br>명절 선물 기획전</strong><span>과일, 고기, 전통 간식까지 (예시)</span></div><div class="still" aria-hidden="true" data-still="fruit,meat,gift"></div></div>
+    <div class="slide" aria-hidden="true" style="background:linear-gradient(110deg,#1d2a40,#3a5a7a 55%,#b8c8d8)"><div class="copy"><strong>피부가 먼저 아는<br>가을 스킨케어</strong><span>세럼과 크림 골라보기 (예시)</span></div><div class="still" aria-hidden="true" data-still="serum,bottle,lipstick"></div></div>
+    <div class="slide" aria-hidden="true" style="background:linear-gradient(110deg,#2a3a20,#5a7a3a 55%,#d8d0a0)"><div class="copy"><strong>아침이 가벼워지는<br>샐러드 한 그릇</strong><span>새벽 배송으로 받아보기 (예시)</span></div><div class="still" aria-hidden="true" data-still="bowl,fruit,bottle"></div></div>
+    <div class="ctrl"><button type="button" data-pause aria-pressed="false">일시정지</button><span data-counter>1 / 3</span><button type="button" data-demo="비공식 스터디: 전체 기획전 목록은 없어요.">전체보기</button></div>
+  </section>
+
+  <div class="inner" style="position:relative">
+    <div class="coupon"><div><strong>첫 주문 쿠폰 10,000원</strong><p>4만원 이상 주문 시 (예시)</p></div><button type="button" data-demo="비공식 스터디: 쿠폰은 발급되지 않아요.">쿠폰 받기 &rsaquo;</button></div>
+    <section class="shelf" id="gift" aria-labelledby="gift-h"><div class="shelf-h"><h2 id="gift-h">고민될 땐 이 선물부터</h2><p>받는 분 취향 몰라도 실패 없는 구성</p></div><div class="track-wrap"><div class="track" data-track="gift,fruit,meat,box,gift,fruit,meat,bowl"></div><button class="next" type="button" aria-label="다음 상품 보기" data-next>&rsaquo;</button></div></section>
+    <section class="shelf" id="beauty" aria-labelledby="beauty-h"><div class="shelf-h"><h2 id="beauty-h">포장부터 설레는 뷰티 선물</h2><p>선물 포장 무료 (예시)</p></div><div class="track-wrap"><div class="track" data-track="serum,bottle,lipstick,gift,serum,bottle,lipstick,serum"></div><button class="next" type="button" aria-label="다음 상품 보기" data-next>&rsaquo;</button></div></section>
+    <section class="shelf" id="deal" aria-labelledby="deal-h"><div class="shelf-h"><h2 id="deal-h">지금 제일 많이 담는 특가</h2><p>매일 오전 11시 새로 열려요 (예시)</p></div><div class="track-wrap"><div class="track" data-track="meat,meat,bowl,meat,fruit,meat,bowl,fruit"></div><button class="next" type="button" aria-label="다음 상품 보기" data-next>&rsaquo;</button></div></section>
+    <section class="shelf" id="health" aria-labelledby="health-h"><div class="shelf-h"><h2 id="health-h">건강을 챙기는 선물</h2><p>부모님께, 동료에게</p></div><div class="track-wrap"><div class="track" data-track="bottle,box,gift,bottle,box,serum,bottle,gift"></div><button class="next" type="button" aria-label="다음 상품 보기" data-next>&rsaquo;</button></div></section>
+    <aside class="aside" aria-label="배송 안내 (예시)"><div class="card">새벽<br>배송<br>안내</div><span>등급 혜택</span><span>레시피</span><span>베스트 후기</span></aside>
+  </div>
+</main>
+<footer><div class="inner"><strong style="color:var(--ink)">Unofficial</strong> 브랜드 스터디 &middot; 컬리와 무관합니다. 로고 대신 이름을 글자로만 썼고, 상품과 가격은 모두 예시예요. <a href="../">모든 스터디</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Kurly by StyleGallery. Not affiliated with Kurly.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art, reduced, announce } = window.SG;
+  const pal = { gift: ["#f4eee8", "#8a2f4a", "#e7c46a"], fruit: ["#f7efe6", "#c8412c", "#3d8a3a"], meat: ["#efe7e2", "#b9474a", "#f3d6c8"], box: ["#eef0f3", "#c9a26b", "#6b4a2a"], bowl: ["#f3f1ea", "#fff", "#7ab65a"], serum: ["#eef0f5", "#2f2f35", "#caa46a"], bottle: ["#f2f4f7", "#4a78c8", "#1c2a44"], lipstick: ["#f7ecee", "#b0283c", "#333"] };
+  const names = { gift: "정성 가득 선물 세트", fruit: "제철 과일 선물 상자 3kg", meat: "한우 구이용 모둠 500g", box: "전통 한과 선물 세트", bowl: "아침 샐러드 정기 구성", serum: "수분 앰플 2종 기획", bottle: "약산성 바디워시 세트", lipstick: "매트 립 3종 선물" };
+  document.querySelectorAll("[data-still]").forEach((el) => { el.innerHTML = el.dataset.still.split(",").map((k) => `<div>${art(k, { ground: pal[k][0], main: pal[k][1], accent: pal[k][2] })}</div>`).join(""); });
+  let n = 0;
+  document.querySelectorAll("[data-track]").forEach((t) => {
+    t.innerHTML = t.dataset.track.split(",").map((k) => { n++; const off = [12, 20, 25, 30, 43][n % 5]; const was = 30000 + (n * 13331) % 150000; return `<article class="prod"><div class="img">${n % 3 === 0 ? `<span class="badge">+추가 할인</span>` : ""}${art(k, { ground: pal[k][0], main: pal[k][1], accent: pal[k][2] })}</div><button class="add" type="button" data-add>&#128722; 담기</button><h3>[가상 브랜드] ${names[k]}</h3><p class="was">${was.toLocaleString()}원</p><p class="now"><em>${off}%</em>${(Math.round(was * (1 - off / 100) / 10) * 10).toLocaleString()}원</p><p class="rev">후기 ${(n * 97) % 999}+</p></article>`; }).join("");
+  });
+  // Real cart counter: every 담기 increments the header badge and announces it.
+  const cart = document.querySelector("[data-cart]");
+  let count = 0;
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-add]")) { count++; cart.textContent = count; announce(`장바구니에 담았어요 (${count}개). 비공식 스터디라 결제는 없어요.`); if (!reduced) cart.animate([{ transform: "scale(1.6)" }, { transform: "none" }], { duration: 400 }); }
+    const nx = e.target.closest("[data-next]");
+    if (nx) { const t = nx.previousElementSibling; t.scrollBy({ left: t.clientWidth, behavior: reduced ? "auto" : "smooth" }); if (t.scrollLeft + t.clientWidth >= t.scrollWidth - 4) t.scrollTo({ left: 0 }); }
+  });
+  // Hero carousel: advances every 5s while visible; pause is a real toggle.
+  const slides = [...document.querySelectorAll(".slide")];
+  const counter = document.querySelector("[data-counter]");
+  const pause = document.querySelector("[data-pause]");
+  let at = 0, paused = reduced, visible = true;
+  if (reduced) { pause.setAttribute("aria-pressed", "true"); pause.textContent = "재생"; }
+  const show = (i) => { at = i; slides.forEach((s, k) => s.setAttribute("aria-hidden", String(k !== i))); counter.textContent = `${i + 1} / ${slides.length}`; };
+  pause.addEventListener("click", () => { paused = !paused; pause.setAttribute("aria-pressed", String(paused)); pause.textContent = paused ? "재생" : "일시정지"; });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(document.querySelector("[data-hero]"));
+  setInterval(() => { if (!paused && visible && !document.hidden) show((at + 1) % slides.length); }, 5000);
+})();
+</script>
+</body>
+</html>

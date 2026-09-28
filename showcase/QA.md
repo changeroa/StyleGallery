@@ -40,6 +40,9 @@ A user in any row above never meets a snag, a surprise, a regression, or a degra
 13. **I13 Checks that can fail.** Every machine-checkable item above is enforced by `scripts/check-showcase.mjs`, and a committed self-test proves that each check fails on a page built to violate it.
 14. **I14 Short route.** An agent gets from AGENTS.md to a running preview and a passing check within three reads.
 15. **I15 No regression.** The repository's existing validators report the same failures as before, the material registry stays consistent, and every new Markdown file passes OKF and link validation.
+16. **I16 No empty screen.** Every screen a visitor scrolls to shows a picture, drawn scene, render, or live product surface, or dense text; never a headline alone on a gradient.
+17. **I17 The page answers.** Links, buttons, cards, tabs, and media frames change state under the pointer, quickly (100-320ms), on enough elements that the page feels alive between its big moments.
+18. **I18 Finished surfaces.** Masks, rounded clips, and hairlines finish the surfaces, as they do on the measured originals in [Measured Expression Benchmarks](../expression/measured-benchmarks.md).
 
 ## QA Scenarios
 
@@ -68,6 +71,9 @@ Automated scenarios run in `node scripts/check-showcase.mjs` for every work and 
 | Q19 | I14 | Read AGENTS.md, then the showcase README. | Both commands and the SSH note are reachable from those two pages. | Manual: document review |
 | Q20 | I15 | Run the repository validator suite. | Failure sets are identical to the recorded baseline; the material registry validates. | Automated: validator comparison |
 | Q21 | I8 | Load each work with JavaScript disabled. | All content reads as a static document. | Automated: no-script pass |
+| Q22 | I16 | 1440x900 with motion: scroll one screen at a time and measure coverage. | Images, video, canvas, SVG of at least 120x80, background images, and `data-surface` elements cover at least 8% of each screen, or text covers at least 10%. | Automated: richness (warning by default, failure with `--richness error`) |
+| Q23 | I17 | 1440x900 with motion: count elements with a non-zero transition, and link and button transition durations. | At least 4 per screen of page length and at least 12 in total; the median link and button duration is 350ms or less. | Automated: richness |
+| Q24 | I18 | 1440x900 with motion: count masked or clipped elements and 1px hairline borders. | At least 2 masked or clipped elements and at least 3 hairlines. | Automated: richness |
 
 ## IA Navigation
 

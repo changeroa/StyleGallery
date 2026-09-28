@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Clerk - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Clerk's auth product page: circuit-line hero, notched light and dark bands, a working sign-in component, and a billing toggle.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23131316'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%236c47ff' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --light: #f7f7f8; --dark: #131316; --dark-2: #1c1c21; --ink: #131316; --grey: #5e5f6e; --dim: #a7a7b3; --line: #e3e3e8; --violet: #6c47ff; --violet-ink: #5b3ae6; --teal: #0fa5a0; --sans: "Inter", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; --sg-header: 84px; --sg-focus: #6c47ff; --ease: cubic-bezier(.16,1,.3,1); }
+  html { scroll-padding-bottom: 80px; }
+  body { background: var(--light); color: var(--ink); font: 400 15px/1.6 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1180px; padding-inline: 20px; }
+  .announce { background: var(--dark); color: #e6e6ec; font-size: 12px; padding: 7px; text-align: center; }
+  .announce b { color: #fff; }
+  .site-header { inset: 10px 0 auto; position: sticky; top: 10px; z-index: 30; }
+  .capsule { align-items: center; backdrop-filter: blur(12px); background: rgb(255 255 255 / .92); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 6px 20px -12px rgb(0 0 0 / .25); display: flex; gap: 22px; margin-inline: auto; max-inline-size: 1180px; padding: 8px 10px 8px 16px; transition: background .3s, border-color .3s, color .3s; }
+  .site-header[data-dark] .capsule { background: rgb(28 28 33 / .94); border-color: #2c2c33; color: #fff; }
+  .logo { align-items: center; color: inherit; display: flex; font-weight: 700; gap: 8px; text-decoration: none; }
+  .logo i { block-size: 18px; border: 3px solid var(--violet); border-radius: 50%; inline-size: 18px; }
+  .capsule nav { display: flex; gap: 18px; }
+  .capsule nav a { color: inherit; font-size: 13px; font-weight: 500; opacity: .8; text-decoration: none; }
+  .capsule nav a:hover { opacity: 1; }
+  .hr { display: flex; gap: 6px; margin-inline-start: auto; }
+  .btn { border-radius: 8px; font: 600 13px var(--sans); padding: 7px 12px; }
+  .btn.plain { background: none; border: 0; color: inherit; }
+  .btn.dark { background: #2a2a31; border: 0; color: #fff; }
+  .site-header[data-dark] .btn.dark { background: #fff; color: var(--ink); }
+  @media (max-width: 820px) { .capsule nav { display: none; } }
+  .band { position: relative; }
+  .band.dark { background: var(--dark); color: #fff; }
+  /* Notch: the dark band's top edge is cut at both ends with angled shoulders. */
+  .band.dark::before { background: var(--dark); block-size: 28px; clip-path: polygon(0 100%, 4% 0, 96% 0, 100% 100%); content: ""; inset: -28px 0 auto; position: absolute; }
+  .band.dark.bottom::after { background: var(--dark); block-size: 28px; clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%); content: ""; inset: auto 0 -28px; position: absolute; z-index: 1; }
+
+  .hero { overflow: clip; padding-block: 100px 70px; position: relative; text-align: center; }
+  .circuit { inset: 0; opacity: .6; position: absolute; }
+  .circuit path { fill: none; stroke: #d9d9e2; stroke-width: 1.2; }
+  .circuit .pulse { stroke: var(--violet); stroke-dasharray: 40 900; stroke-width: 2; animation: run 6s linear infinite; }
+  @keyframes run { to { stroke-dashoffset: -940; } }
+  .hero .w { position: relative; }
+  .hero h1 { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800; letter-spacing: -0.045em; line-height: 1.05; }
+  .hero p { color: var(--grey); margin: 20px auto 26px; max-inline-size: 56ch; }
+  .cmd { align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 30px -20px rgb(0 0 0 / .3); display: inline-flex; font: 13px var(--mono); gap: 12px; padding: 8px 8px 8px 14px; max-inline-size: 100%; }
+  .cmd code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cmd button { background: #f1f1f4; border: 0; border-radius: 8px; font: 500 12px var(--sans); padding: 5px 10px; }
+  .logos { background: #fff; border-block: 1px solid var(--line); }
+  .logos .w { align-items: center; display: grid; grid-template-columns: 1.2fr repeat(4, 1fr); }
+  .logos .w > * { border-inline-start: 1px solid var(--line); font-weight: 700; padding: 30px 16px; text-align: center; }
+  .logos .w > p { border: 0; color: var(--grey); font-size: 13px; font-weight: 400; text-align: start; }
+  @media (max-width: 760px) { .logos .w { grid-template-columns: 1fr 1fr; } .logos .w > p { grid-column: 1 / -1; } }
+
+  .eyebrow { color: var(--violet-ink); font-size: 13px; font-weight: 600; }
+  .band.dark .eyebrow { color: #a58dff; }
+  .h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.15; margin-block: 6px 12px; }
+  .lede { color: var(--grey); max-inline-size: 50ch; }
+  .band.dark .lede { color: var(--dim); }
+  .more { background: none; border: 0; color: inherit; font: 600 13px var(--sans); margin-block-start: 14px; padding: 0; }
+  .more::after { content: " ▸"; }
+  .comp { align-items: center; display: grid; gap: 50px; grid-template-columns: 1fr 1fr; overflow-x: clip; padding-block: 110px; }
+  .signin { background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 30px 60px -30px rgb(80 50 200 / .35); justify-self: center; inline-size: min(380px, 100%); padding: 30px; position: relative; }
+  .signin::before { background: radial-gradient(closest-side, rgb(108 71 255 / .18), transparent); content: ""; inset: -80px; position: absolute; z-index: -1; }
+  .signin h3 { font-size: 17px; text-align: center; }
+  .signin > p { color: var(--grey); font-size: 13px; margin-block-end: 18px; text-align: center; }
+  .oauth { display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); }
+  .oauth button { background: #fff; border: 1px solid var(--line); border-radius: 8px; font: 600 12px var(--sans); padding: 8px; }
+  .or { align-items: center; color: var(--grey); display: flex; font-size: 12px; gap: 10px; margin-block: 16px; }
+  .or::before, .or::after { background: var(--line); block-size: 1px; content: ""; flex: 1; }
+  .signin label { display: block; font-size: 13px; font-weight: 500; margin-block-end: 6px; }
+  .signin input { border: 1px solid #d5d5dd; border-radius: 8px; font: inherit; inline-size: 100%; padding: 9px 10px; }
+  .signin input[aria-invalid="true"] { border-color: #d6343b; }
+  .err { color: #c12a31; font-size: 12px; min-block-size: 1.4em; }
+  .go { background: #2a2a31; border: 0; border-radius: 8px; color: #fff; font: 600 13px var(--sans); inline-size: 100%; margin-block-start: 6px; padding: 10px; }
+  .go::after { content: " ▸"; }
+  .signin .ok { color: #1c7c4a; font-size: 13px; text-align: center; }
+  @media (max-width: 860px) { .comp { grid-template-columns: 1fr; } }
+
+  .auth { padding-block: 110px 140px; text-align: center; }
+  .auth .lede { margin-inline: auto; }
+  .agrid { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); margin-block-start: 50px; text-align: start; }
+  .ac { background: var(--dark-2); border: 1px solid #2a2a31; border-radius: 16px; min-block-size: 230px; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .ac.tall { grid-row: span 2; }
+  .ac h3 { font-size: 14px; font-weight: 600; }
+  .ac p { color: var(--dim); font-size: 13px; }
+  .otp { display: flex; gap: 6px; margin-block-end: auto; }
+  .otp span { background: #26262c; border: 1px solid #34343c; border-radius: 6px; block-size: 36px; display: grid; font: 16px var(--mono); inline-size: 30px; place-items: center; }
+  .sessions { font: 12px var(--mono); margin-block-end: auto; }
+  .sessions div { border-block-end: 1px solid #2a2a31; color: #cfcfd8; display: flex; justify-content: space-between; padding-block: 7px; }
+  .sessions b { color: #6fe09c; font-weight: 400; }
+  @media (max-width: 860px) { .agrid { grid-template-columns: 1fr; } .ac.tall { grid-row: auto; } }
+
+  .b2b { padding-block: 120px 60px; }
+  .cards3 { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); margin-block-start: 34px; }
+  .wc { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+  .wc h3 { font-size: 14px; font-weight: 600; }
+  .wc p { color: var(--grey); font-size: 13px; }
+  .roles { display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); margin-block-start: 16px; }
+  .roles i { aspect-ratio: 1; background: linear-gradient(160deg, var(--a), var(--b)); border-radius: 12px; }
+  .rtabs { display: flex; gap: 4px; margin-block-start: 12px; }
+  .rtabs button { background: #f1f1f4; border: 0; border-radius: 6px; font: 500 11px var(--sans); padding: 4px 8px; }
+  .rtabs button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  @media (max-width: 860px) { .cards3 { grid-template-columns: 1fr; } }
+  .billing { align-items: center; display: grid; gap: 40px; grid-template-columns: 1fr 1.2fr; padding-block: 60px 140px; }
+  .billing ul { color: var(--grey); list-style: none; margin: 16px 0 0; padding: 0; font-size: 14px; }
+  .billing li::before { color: var(--violet-ink); content: "◉ "; }
+  .shop { background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 30px 60px -30px rgb(0 0 0 / .25); padding: 26px; text-align: center; }
+  .shop h3 { font-size: 18px; }
+  .toggle { align-items: center; background: #f1f1f4; border-radius: 999px; display: inline-flex; margin-block: 12px 18px; padding: 3px; }
+  .toggle button { background: none; border: 0; border-radius: 999px; font: 600 12px var(--sans); padding: 5px 12px; }
+  .toggle button[aria-pressed="true"] { background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .15); }
+  .plans { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; text-align: start; }
+  .plan { border: 1px solid var(--line); border-radius: 10px; padding: 14px; font-size: 13px; }
+  .plan b { display: block; }
+  .plan .price { font-size: 26px; font-weight: 700; }
+  .plan li { color: var(--grey); list-style: none; padding-block: 2px; }
+  .plan li::before { content: "✓ "; color: var(--violet-ink); }
+  .plan ul { margin: 8px 0; padding: 0; }
+  .plan .go::after { content: ""; }
+  @media (max-width: 860px) { .billing { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .plans { grid-template-columns: 1fr; } }
+
+  .fw { padding-block: 110px 140px; }
+  .fw .w { display: grid; gap: 40px; grid-template-columns: 1fr 1fr; text-align: center; }
+  .fw .eyebrow.teal { color: #3fd0c9; }
+  .fgrid { border: 1px solid #2a2a31; display: grid; grid-template-columns: repeat(3, 1fr); margin-block-start: 30px; }
+  .fgrid span { aspect-ratio: 1.3; border: 1px solid #2a2a31; display: grid; font-size: 13px; font-weight: 600; place-items: center; color: #dcdce4; transition: background .3s, color .3s; }
+  .fgrid span:hover { background: #1f1f25; color: #fff; }
+  @media (max-width: 860px) { .fw .w { grid-template-columns: 1fr; } }
+
+  .trust { display: grid; gap: 40px; grid-template-columns: 1fr 1.5fr; padding-block: 120px 60px; }
+  .wall { columns: 2 240px; column-gap: 12px; }
+  .q { background: #fff; border: 1px solid var(--line); border-radius: 12px; break-inside: avoid; font-size: 14px; margin-block-end: 12px; padding: 16px; }
+  .q footer { align-items: center; color: var(--grey); display: flex; font-size: 12px; gap: 8px; margin-block-start: 12px; }
+  .q footer i { background: linear-gradient(135deg, var(--a), var(--b)); block-size: 24px; border-radius: 50%; inline-size: 24px; }
+  @media (max-width: 860px) { .trust { grid-template-columns: 1fr; } }
+  footer.site { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 13px; padding-block: 40px 60px; }
+  footer.site a { color: var(--violet-ink); }
+  .fab { background: var(--ink); border: 0; border-radius: 50%; block-size: 44px; color: #fff; font-size: 16px; inline-size: 44px; inset: auto 20px 20px auto; position: fixed; z-index: 20; }
+  .sg-studybar { padding-inline-end: 80px; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<p class="announce"><b>Study note:</b> this is an unofficial design study, not a funding announcement ›</p>
+<header class="site-header" data-hdr>
+  <div class="capsule">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Clerk</a>
+    <nav aria-label="Sections"><a href="#components">Components</a><a href="#auth">Authentication</a><a href="#orgs">Organizations</a><a href="#billing">Billing</a><a href="#sdks">SDKs</a></nav>
+    <div class="hr"><button class="btn plain" type="button" data-demo="Sign in is not available in this unofficial study.">Sign in</button><button class="btn dark" type="button" data-demo="Sign up is a demo in this unofficial study.">Sign up</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top">
+    <svg class="circuit" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true" data-ambient><path d="M0 120 H300 V240 H620 M1440 90 H1130 V220 H820 M0 470 H260 V380 H540 M1440 500 H1180 V400 H900 M300 240 V330 M1130 220 V320"/><path class="pulse" d="M0 120 H300 V240 H620"/><path class="pulse" style="animation-delay:-2s" d="M1440 90 H1130 V220 H820"/><path class="pulse" style="animation-delay:-4s" d="M0 470 H260 V380 H540"/></svg>
+    <div class="w">
+      <h1 data-split>Sign-in is the easy part.<br>Users are the whole job.</h1>
+      <p data-reveal data-delay="300">Accounts, sessions, teams, and payments as drop-in components, so the login screen stops being a project and your product gets the time.</p>
+      <div class="cmd" data-reveal data-delay="400"><span aria-hidden="true">›</span><code data-cmd>npx add-auth --framework next</code><button type="button" data-copy>Copy</button></div>
+    </div>
+  </section>
+  <div class="logos"><div class="w"><p>Picked by fast-moving teams (fictional names).</p><span>NORTHWIND</span><span>Harlow</span><span>quanta</span><span>MERIDIAN</span></div></div>
+
+  <section class="w comp" id="components">
+    <div><p class="eyebrow">Components</p><h2 class="h2" data-reveal>A full sign-in flow<br>in one tag</h2><p class="lede">Drop in a component and get email codes, social buttons, errors, and sessions. Try the form: any address works; a typo shows the error state.</p><button class="more" type="button" data-demo="The component gallery is illustrative in this unofficial study.">See every component</button></div>
+    <form class="signin" data-signin novalidate>
+      <h3>Sign in to Harbor</h3><p>Welcome back. Pick a way in.</p>
+      <div class="oauth"><button type="button" data-demo="Social sign-in is a demo in this unofficial study.">Git</button><button type="button" data-demo="Social sign-in is a demo in this unofficial study.">Mail</button><button type="button" data-demo="Social sign-in is a demo in this unofficial study.">Apple</button></div>
+      <div class="or">or</div>
+      <label for="em">Email address</label><input id="em" type="email" autocomplete="off" placeholder="you@studio.example" aria-describedby="em-err">
+      <div class="err" id="em-err" role="status"></div>
+      <button class="go" type="submit">Continue</button>
+    </form>
+  </section>
+
+  <section class="band dark bottom auth" id="auth">
+    <div class="w">
+      <p class="eyebrow">User authentication</p>
+      <h2 class="h2" data-reveal>Everything the login page needs</h2>
+      <p class="lede">Requirements shift every quarter. The defaults here keep up so you don't have to.</p>
+      <button class="more" type="button" data-demo="Auth docs are illustrative in this unofficial study.">Explore authentication</button>
+      <div class="agrid">
+        <article class="ac"><div class="otp" aria-hidden="true" data-otp><span></span><span></span><span></span><span></span><span></span><span></span></div><h3>Two-step codes</h3><p>Authenticator apps and backup codes on by setting.</p></article>
+        <article class="ac tall"><div class="sessions" aria-label="Active sessions (illustrative)"><div><span>MacBook · Seoul</span><b>active</b></div><div><span>Phone · Busan</span><b>active</b></div><div><span>Tablet · Lisbon</span><span>2d ago</span></div><div><span>Browser · Austin</span><span>revoked</span></div></div><h3>Session control</h3><p>See every device, revoke any of them, and set how long a login lasts.</p></article>
+        <article class="ac"><h3>Email and SMS codes</h3><p>One-time passcodes with rate limits built in.</p></article>
+        <article class="ac"><h3>Abuse protection</h3><p>Block throwaway domains and bot sign-ups before they land.</p></article>
+        <article class="ac"><h3>Magic links</h3><p>Password-free sign-in with a link that expires.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="w b2b" id="orgs">
+    <p class="eyebrow">Multi-tenancy</p>
+    <h2 class="h2" data-reveal>Teams, roles, and invites for B2B</h2>
+    <p class="lede">Organizations as a first-class object: members, permissions, domains, and invitations.</p>
+    <div class="cards3">
+      <article class="wc"><h3>Roles and permissions</h3><p>Define what each seat can do.</p><div class="roles" aria-hidden="true"><i style="--a:#c9b8ff;--b:#6c47ff"></i><i style="--a:#bfe8e4;--b:#0fa5a0"></i><i style="--a:#ffd9b8;--b:#e8733a"></i><i style="--a:#e3e3e8;--b:#b8b8c4"></i><i style="--a:#ffc8d8;--b:#d6346a"></i><i style="--a:#d8e8ff;--b:#3a78e8"></i></div><div class="rtabs" role="group" aria-label="Role" data-roles><button type="button" aria-pressed="false">Member</button><button type="button" aria-pressed="true">Admin</button><button type="button" aria-pressed="false">Billing</button></div></article>
+      <article class="wc"><h3>Domain auto-join</h3><p>People with your company domain find their team on sign-up.</p><p style="margin-block-start:16px;font:12px var(--mono)">@studio.example → Studio (12 members)</p></article>
+      <article class="wc"><h3>Invitations</h3><p>Send, resend, and expire invites without writing email code.</p><button class="btn dark" style="margin-block-start:14px" type="button" data-demo="No invitation is sent from this unofficial study.">Invite a teammate</button></article>
+    </div>
+  </section>
+
+  <section class="w billing" id="billing">
+    <div><p class="eyebrow">Billing</p><h2 class="h2" data-reveal>Charge for plans<br>without the plumbing</h2><p class="lede">Put a pricing table in your app and gate features by plan.</p><ul><li>Define plans and prices</li><li>Tie plans to users or teams</li><li>Gate features by plan</li></ul></div>
+    <div class="shop">
+      <h3>Pricing for Harbor (fictional)</h3>
+      <div class="toggle" role="group" aria-label="Billing period" data-period><button type="button" aria-pressed="true">Monthly</button><button type="button" aria-pressed="false">Yearly −20%</button></div>
+      <div class="plans">
+        <div class="plan"><b>Starter</b><span class="price" data-price="9">$9</span>/mo<ul><li>Custom branding</li><li>Mobile app</li><li>Daily backups</li></ul><button class="go" type="button" data-demo="Checkout is a demo in this unofficial study.">Get started</button></div>
+        <div class="plan"><b>Pro</b><span class="price" data-price="19">$19</span>/mo<ul><li>Everything in Starter</li><li>Unlimited projects</li><li>Priority support</li></ul><button class="go" type="button" data-demo="Checkout is a demo in this unofficial study.">Get started</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark fw bottom" id="sdks">
+    <div class="w">
+      <div><p class="eyebrow teal">Frameworks</p><h2 class="h2" data-reveal>SDKs for the frameworks<br>you already ship</h2><p class="lede" style="margin-inline:auto">Helpful hooks and components on web and mobile.</p><div class="fgrid" aria-label="Framework names"><span>React</span><span>Next</span><span>Remix</span><span>Vue</span><span>Expo</span><span>Astro</span></div></div>
+      <div><p class="eyebrow">Integrations</p><h2 class="h2" data-reveal>Plug into the tools<br>you already use</h2><p class="lede" style="margin-inline:auto">Use your user data as the source of truth for everything else.</p><div class="fgrid" aria-label="Integration categories"><span>Database</span><span>Analytics</span><span>Email</span></div></div>
+    </div>
+  </section>
+
+  <section class="w trust" aria-labelledby="t-h">
+    <div><h2 class="h2" id="t-h" data-reveal>People who stopped<br>writing auth</h2><p class="lede">Free for your first 10,000 monthly users in this fictional plan.</p></div>
+    <div class="wall">
+      <figure class="q" style="--a:#c9b8ff;--b:#6c47ff">"Shipped login, teams, and billing in a weekend. I kept waiting for the catch."<footer><i></i>Fictional · indie maker</footer></figure>
+      <figure class="q" style="--a:#bfe8e4;--b:#0fa5a0">"The session list alone saved us a support queue."<footer><i></i>Fictional · CTO</footer></figure>
+      <figure class="q" style="--a:#ffd9b8;--b:#e8733a">"Our security review took a day instead of a month."<footer><i></i>Fictional · platform lead</footer></figure>
+      <figure class="q" style="--a:#ffc8d8;--b:#d6346a">"I deleted four hundred lines of password reset code. Felt great."<footer><i></i>Fictional · engineer</footer></figure>
+    </div>
+  </section>
+</main>
+<footer class="site"><div class="w"><strong style="color:var(--ink)">Unofficial</strong> brand study of Clerk by StyleGallery. Not affiliated with Clerk. Companies, quotes, and prices are fictional; no logos are used. <a href="../">All studies</a></div></footer>
+<button class="fab" type="button" aria-label="Help (demo)" data-demo="Help chat is not available in this unofficial study.">?</button>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Clerk by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, announce } = window.SG;
+  document.querySelector("[data-copy]").addEventListener("click", () => { navigator.clipboard?.writeText(document.querySelector("[data-cmd]").textContent).catch(() => {}); announce("Copied the command (it installs nothing; this is a study)."); });
+  // Sign-in: validates the address and shows the success state.
+  const form = document.querySelector("[data-signin]"), em = form.querySelector("#em"), err = form.querySelector("#em-err");
+  form.addEventListener("submit", (e) => { e.preventDefault(); const ok = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value); em.setAttribute("aria-invalid", String(!ok)); err.textContent = ok ? `Code sent to ${em.value} (study demo).` : "Enter an address like you@studio.example."; err.style.color = ok ? "#1c7c4a" : ""; });
+  // One-time code fills itself in when the auth band arrives.
+  const otp = [...document.querySelectorAll("[data-otp] span")], code = "428913";
+  if (reduced) otp.forEach((s, i) => (s.textContent = code[i]));
+  else new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); otp.forEach((s, i) => setTimeout(() => { s.textContent = code[i]; s.animate([{ transform: "scale(1.3)" }, { transform: "none" }], { duration: 300 }); }, 300 + i * 180)); }, { threshold: .5 }).observe(otp[0].parentElement);
+  const tog = (sel, cb) => { const bs = [...document.querySelectorAll(sel + " button")]; bs.forEach((b, i) => b.addEventListener("click", () => { bs.forEach((o) => o.setAttribute("aria-pressed", String(o === b))); cb?.(i); })); };
+  tog("[data-roles]");
+  tog("[data-period]", (i) => document.querySelectorAll("[data-price]").forEach((p) => { const m = Number(p.dataset.price); p.textContent = "$" + (i ? Math.round(m * 0.8) : m); }));
+  // Capsule header switches to dark over dark bands.
+  const hdr = document.querySelector("[data-hdr]"), darks = [...document.querySelectorAll(".band.dark")];
+  const chk = () => { const y = hdr.getBoundingClientRect().bottom - 20; hdr.toggleAttribute("data-dark", darks.some((d) => { const r = d.getBoundingClientRect(); return r.top <= y && r.bottom > y; })); };
+  addEventListener("scroll", chk, { passive: true }); chk();
+})();
+</script>
+</body>
+</html>

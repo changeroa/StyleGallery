@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>무신사 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="무신사 홈의 검정 헤더와 촘촘한 상품 큐레이션을 원본 사진·카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Crect x='7' y='13' width='18' height='6' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #000; --grey: #555; --line: #eee; --red: #d6260f; --blue: #0b61d8; --orange: #c9502a; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 104px; --sg-focus: #0b61d8; }
+  body { background: #fff; color: var(--ink); font: 400 13px/1.45 var(--sans); letter-spacing: -0.01em; word-break: keep-all; }
+  .site-header { background: #000; color: #fff; position: sticky; top: 0; z-index: 30; }
+  .row1 { align-items: center; display: flex; gap: 14px; padding: 10px 16px; }
+  .logo { color: #fff; font-size: 15px; font-weight: 900; letter-spacing: 0.02em; text-decoration: none; }
+  .cats { display: flex; gap: 12px; font-size: 12px; font-weight: 800; overflow: hidden; }
+  .cats span { color: #ddd; white-space: nowrap; }
+  .login { background: none; border: 1px solid #777; border-radius: 4px; color: #fff; font-size: 11px; margin-inline-start: auto; padding: 4px 8px; white-space: nowrap; }
+  .search-row { padding: 0 16px 10px; transition: padding .3s; }
+  .search-row input { background: #fff; border: 0; border-radius: 4px; font: inherit; inline-size: 100%; padding: 9px 12px; }
+  .site-header[data-scrolled] .search-row { block-size: 0; overflow: hidden; padding-block: 0; }
+  .tabs { background: #000; display: flex; gap: 16px; overflow-x: auto; padding: 8px 16px 10px; scrollbar-width: none; }
+  .tabs a { color: #ccc; font-size: 12px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .tabs a:hover, .tabs a[aria-current] { color: #fff; }
+  .tabs .hot { color: #7fdc6a; }
+
+  /* Hero: three full-bleed editorial panels, no gaps. */
+  .hero { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .panel { aspect-ratio: 0.95; color: #fff; text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 22px; position: relative; }
+  .panel .art { inset: 0; position: absolute; transition: transform 1.2s cubic-bezier(.16,1,.3,1); }
+  .panel:hover .art { transform: scale(1.05); }
+  .panel .art svg { block-size: 100%; inline-size: 100%; }
+  .panel .cap { background: linear-gradient(0deg, rgb(0 0 0 / 0.65), transparent); margin: -22px; padding: 80px 22px 22px; position: relative; z-index: 1; }
+  .panel h2 { font-size: clamp(1.1rem, 1.8vw, 1.5rem); font-weight: 800; line-height: 1.3; position: relative; z-index: 1; }
+  .panel p { font-size: 12px; margin-block-start: 6px; position: relative; z-index: 1; }
+  @media (max-width: 760px) { .hero { grid-template-columns: 1fr; } .panel { aspect-ratio: 1.3; } }
+
+  .collabs { display: grid; gap: 8px 10px; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); padding: 16px; }
+  .collab { align-items: center; background: none; border: 0; display: grid; font: 600 11px var(--sans); gap: 4px; justify-items: center; color: var(--ink); }
+  .collab .t { block-size: 44px; inline-size: 44px; border-radius: 6px; overflow: hidden; }
+  .quick { border-block: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 12px 16px; font-size: 12px; font-weight: 600; }
+  .quick span::before { background: #f5c518; border-radius: 3px; content: ""; display: inline-block; block-size: 12px; inline-size: 12px; margin-inline-end: 6px; vertical-align: -2px; }
+
+  .promo { align-items: center; background: var(--orange); color: #fff; display: flex; flex-direction: column; gap: 12px; padding: 26px 16px; position: relative; overflow: hidden; }
+  .promo h2 { font-size: 30px; font-weight: 900; letter-spacing: -0.04em; }
+  .promo p { font-size: 12px; }
+  .seg { background: rgb(255 255 255 / 0.2); border-radius: 999px; display: flex; padding: 3px; }
+  .seg button { background: none; border: 0; border-radius: 999px; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 14px; }
+  .seg button[aria-pressed="true"] { background: #000; }
+  .float-icons span { animation: bob 3s ease-in-out infinite; position: absolute; font-size: 30px; }
+  @keyframes bob { 50% { transform: translateY(-10px) rotate(8deg); } }
+
+  .section { padding: 34px 16px 10px; }
+  .section-h { align-items: flex-end; display: flex; justify-content: space-between; margin-block-end: 12px; }
+  .section-h h2 { font-size: 18px; font-weight: 800; line-height: 1.3; }
+  .section-h button { background: none; border: 0; color: var(--grey); font-size: 12px; text-decoration: underline; }
+  .rail { --n: 6; display: grid; gap: 2px 8px; grid-auto-columns: calc((100% - 8px * (var(--n) - 1)) / var(--n)); grid-auto-flow: column; overflow-x: auto; padding-block-end: 12px; scrollbar-width: thin; }
+  @media (max-width: 1000px) { .rail { grid-auto-flow: row; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); overflow: visible; } }
+  .rail.wrap { grid-auto-flow: row; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); overflow: visible; }
+  .item { scroll-snap-align: start; position: relative; }
+  .item .img { aspect-ratio: 0.83; background: #f4f4f4; overflow: hidden; }
+  .item .img svg { transition: transform .5s; }
+  .item:hover .img svg { transform: scale(1.06); }
+  .item .brand { font-weight: 700; margin-block-start: 8px; font-size: 12px; }
+  .item .name { color: #333; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: 12px; }
+  .item .price { font-weight: 800; margin-block-start: 3px; }
+  .item .price em { color: var(--red); font-style: normal; margin-inline-end: 4px; }
+  .item .ship { color: var(--blue); font-size: 11px; }
+  .heart { background: none; border: 0; color: #444; font-size: 18px; inset: auto 6px 6px auto; position: absolute; }
+  .heart[aria-pressed="true"] { color: var(--red); }
+  .item .img { position: relative; }
+  .brands { display: grid; gap: 14px 8px; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); }
+  .bm { align-items: center; display: grid; gap: 4px; justify-items: center; font-size: 10px; color: #444; }
+  .bm b { align-items: center; border: 1px solid var(--line); border-radius: 50%; color: #111; display: flex; font-size: 11px; font-weight: 900; block-size: 52px; inline-size: 52px; justify-content: center; letter-spacing: -0.02em; }
+  .all { background: #111; border: 0; color: #fff; display: block; font-size: 12px; font-weight: 700; margin: 16px auto 0; padding: 10px 40px; }
+  footer { background: #f5f5f5; color: var(--grey); font-size: 12px; margin-block-start: 40px; padding: 30px 16px; }
+  footer a { color: var(--ink); }
+  .fab { background: #fff; border: 1px solid var(--line); border-radius: 50%; box-shadow: 0 4px 12px rgb(0 0 0 / 0.12); block-size: 40px; font-size: 16px; inline-size: 40px; inset: auto 16px 16px auto; position: fixed; z-index: 20; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header" data-header>
+  <div class="row1">
+    <a class="logo" href="#top">MUSINSA</a>
+    <div class="cats" aria-hidden="true"><span>BEAUTY</span><span>SPORTS</span><span>OUTLET</span><span>BOUTIQUE</span><span>KICKS</span><span>KIDS</span><span>USED</span></div>
+    <button class="login" type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인 / 회원가입</button>
+  </div>
+  <div class="search-row"><label><span class="sg-visually-hidden">상품 검색</span><input type="search" placeholder="오늘은 어떤 옷을 찾으세요?" data-search></label></div>
+  <nav class="tabs" aria-label="큐레이션"><a href="#new" aria-current="page">추천</a><a href="#new">랭킹</a><a href="#sale">세일</a><a href="#brands">브랜드</a><a class="hot" href="#sports">러닝</a><a href="#beauty">뷰티</a></nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-label="이번 주 기획전 (예시)">
+    <a class="panel" href="#new"><div class="art" aria-hidden="true" data-art="jacket|#2d3340|#0f1114|#c8a36a"></div><div class="cap"><h2>바람이 바뀌면<br>겉옷부터</h2><p>가을 아우터 모아보기 &middot; 최대 30%</p></div></a>
+    <a class="panel" href="#sports"><div class="art" aria-hidden="true" data-art="sneaker|#b6452c|#1b1b1b|#f2d8a0"></div><div class="cap"><h2>밤에 뛰는 사람들의<br>러닝 한 벌</h2><p>러닝 기획 &middot; 새로 들어온 신발</p></div></a>
+    <a class="panel" href="#beauty"><div class="art" aria-hidden="true" data-art="serum|#9fb6c9|#f5f1ea|#2f4b66"></div><div class="cap"><h2>건조한 계절의<br>기초 루틴</h2><p>뷰티 &middot; 첫 구매 쿠폰</p></div></a>
+  </section>
+  <div class="collabs" data-collabs aria-label="협업 바로가기 (예시)"></div>
+  <div class="quick" aria-label="혜택 바로가기 (예시)"><span>오늘만 특가</span><span>스포츠 브랜드위크</span><span>무료 반품</span><span>쿠폰팩</span><span>신상 입고</span><span>첫 구매 할인</span></div>
+
+  <section class="promo" data-ambient aria-labelledby="promo-h">
+    <div class="float-icons" aria-hidden="true"><span style="inset:18% auto auto 8%">&#127890;</span><span style="inset:50% auto auto 18%;animation-delay:-1s">&#129523;</span><span style="inset:22% 12% auto auto;animation-delay:-2s">&#128374;</span><span style="inset:58% 22% auto auto;animation-delay:-.5s">&#127915;</span></div>
+    <h2 id="promo-h">떠나기 좋은 주간</h2>
+    <p>여행 가방부터 편한 신발까지 (예시 기획)</p>
+    <div class="seg" role="group" aria-label="대상"><button type="button" aria-pressed="true" data-seg>전체</button><button type="button" aria-pressed="false" data-seg>남성</button><button type="button" aria-pressed="false" data-seg>여성</button></div>
+  </section>
+
+  <section class="section" id="new" aria-labelledby="new-h">
+    <div class="section-h"><h2 id="new-h">요즘 많이 담는<br>가방과 신발</h2><button type="button" data-demo="비공식 스터디: 전체 상품 목록은 없어요.">더보기</button></div>
+    <div class="rail" data-rail="bag,tote,boot,bag,shoe,tote,bag,boot" tabindex="0" aria-label="가방과 신발 상품 목록, 가로로 스크롤"></div>
+  </section>
+  <section class="section" id="sale" aria-labelledby="sale-h">
+    <div class="section-h"><h2 id="sale-h">지금 세일 중인<br>가을 아우터</h2><button type="button" data-demo="비공식 스터디: 세일 목록은 없어요.">더보기</button></div>
+    <div class="rail wrap" data-rail="jacket,pants,tee,jacket,cap,pants,tee,jacket,jacket,pants,tee,cap"></div>
+    <button class="all" type="button" data-demo="비공식 스터디: 세일 상품 전체 보기는 없어요.">세일 상품 전체 보기</button>
+  </section>
+  <section class="section" id="brands" aria-labelledby="brands-h">
+    <div class="section-h"><h2 id="brands-h">지금 주목할 만한 브랜드</h2></div>
+    <div class="brands" data-brands aria-label="가상의 브랜드 이름"></div>
+  </section>
+  <section class="section" id="sports" aria-labelledby="sports-h">
+    <div class="section-h"><h2 id="sports-h">러닝 추천<br><span style="font-weight:500;font-size:14px">새벽에도, 퇴근 후에도</span></h2><button type="button" data-demo="비공식 스터디: 러닝 기획전은 없어요.">더보기</button></div>
+    <div class="rail" data-rail="sneaker,cap,tee,pants,sneaker,sneaker,watch,sneaker" tabindex="0" aria-label="러닝 상품 목록, 가로로 스크롤"></div>
+  </section>
+  <section class="section" id="beauty" aria-labelledby="beauty-h">
+    <div class="section-h"><h2 id="beauty-h">요즘 뷰티 추천<br><span style="font-weight:500;font-size:14px">입술과 피부 먼저</span></h2><button type="button" data-demo="비공식 스터디: 뷰티 목록은 없어요.">더보기</button></div>
+    <div class="rail" data-rail="lipstick,serum,bottle,lipstick,serum,lipstick,bottle,serum" tabindex="0" aria-label="뷰티 상품 목록, 가로로 스크롤"></div>
+  </section>
+</main>
+<footer><strong style="color:#000">Unofficial</strong> 브랜드 스터디 &middot; 무신사와 무관합니다. 상품, 브랜드, 가격은 모두 지어낸 예시이며 사진 대신 그림을 썼어요. <a href="../">모든 스터디</a></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Musinsa by StyleGallery. Not affiliated with Musinsa.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art } = window.SG;
+  document.querySelectorAll("[data-art]").forEach((el) => { const [k, g, m, a] = el.dataset.art.split("|"); el.innerHTML = art(k, { ground: g, main: m, accent: a }); });
+  const brands = ["NORTHLINE", "모래시계", "OKAY STUDIO", "라운드힐", "BLNK", "소금창고", "FIELD 9", "하루공방", "MONO LAB", "은하사", "KIDO", "PARADE"];
+  const names = { bag: "데일리 크로스백", tote: "캔버스 토트백", boot: "스퀘어 토 부츠", shoe: "레더 더비 슈즈", jacket: "울 블렌드 자켓", pants: "와이드 치노 팬츠", tee: "헤비 코튼 티셔츠", cap: "워시드 볼캡", sneaker: "쿠션 러닝화", watch: "러닝 GPS 워치", lipstick: "벨벳 립 틴트", serum: "수분 세럼", bottle: "약산성 클렌저" };
+  const grounds = ["#f3f3f3", "#ece8e1", "#e9edf1", "#f1ebe6", "#eef0ea"];
+  const mains = ["#1d1d1d", "#6b4a33", "#2f4b66", "#8a2f2f", "#556b2f", "#c9c3b8"];
+  let n = 0;
+  document.querySelectorAll("[data-rail]").forEach((rail) => {
+    rail.innerHTML = rail.dataset.rail.split(",").map((k) => { n++; const off = [10, 15, 22, 30, 41, 53][n % 6]; const price = (39000 + (n * 7919) % 160000); return `<article class="item"><div class="img">${art(k, { ground: grounds[n % 5], main: mains[n % 6], accent: "#444" })}<button class="heart" type="button" aria-pressed="false" aria-label="${names[k]} 좋아요">&#9825;</button></div><p class="brand">${brands[n % brands.length]}</p><p class="name">${names[k]} ${["BLACK", "OLIVE", "GREY", "NAVY"][n % 4]}</p><p class="price"><em>${off}%</em>${Math.round(price * (1 - off / 100) / 100) * 100}원</p><p class="ship">무료배송</p></article>`; }).join("");
+  });
+  document.querySelector("[data-brands]").innerHTML = brands.concat(["SEOUL 88", "파도소리", "UNDERLINE", "COSMO"]).map((b) => `<div class="bm"><b>${b.slice(0, 5)}</b>${b}</div>`).join("");
+  document.querySelector("[data-collabs]").innerHTML = ["jacket", "tee", "cap", "sneaker", "bag", "pants", "boot", "tote", "lipstick", "serum", "watch", "shoe"].map((k, i) => `<button class="collab" type="button" data-demo="비공식 스터디: 협업 기획전은 없어요."><span class="t" aria-hidden="true">${art(k, { ground: ["#e9f0e3", "#f6e9dd", "#e7ecf5", "#f3e6ee"][i % 4], main: mains[i % 6], accent: "#444" })}</span>${brands[i].slice(0, 6)} &times; ${["모래시계", "KIDO", "BLNK"][i % 3]}</button>`).join("");
+  // Hearts toggle for real; the segment control is a real single-select.
+  document.addEventListener("click", (e) => {
+    const h = e.target.closest(".heart");
+    if (h) { const on = h.getAttribute("aria-pressed") !== "true"; h.setAttribute("aria-pressed", String(on)); h.innerHTML = on ? "&#9829;" : "&#9825;"; if (!window.SG.reduced) h.animate([{ transform: "scale(1.5)" }, { transform: "none" }], { duration: 400, easing: "cubic-bezier(.16,1,.3,1)" }); }
+    const s = e.target.closest("[data-seg]");
+    if (s) document.querySelectorAll("[data-seg]").forEach((b) => b.setAttribute("aria-pressed", String(b === s)));
+  });
+})();
+</script>
+</body>
+</html>

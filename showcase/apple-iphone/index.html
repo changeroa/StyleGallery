@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>iPhone store hub - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Apple's iPhone store hub: a giant product title, an icon strip of CSS-drawn phones, a rounded hero card, a sideways reasons carousel, and an expandable devices panel.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='9' y='3' width='14' height='26' rx='4' fill='%231d1d1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #1d1d1f; --grey: #6e6e73; --soft: #f5f5f7; --line: #d2d2d7; --blue: #0066cc; --new: #b64400; --sans: -apple-system, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif; --sg-header: 60px; --sg-focus: #0066cc; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 17px/1.47 var(--sans); letter-spacing: -0.02em; }
+  .w { margin-inline: auto; max-inline-size: 1260px; padding-inline: clamp(18px, 5vw, 70px); }
+  .locale { align-items: center; background: var(--soft); display: flex; flex-wrap: wrap; font-size: 12px; gap: 12px; justify-content: center; padding: 10px 16px; color: var(--grey); }
+  .locale[hidden] { display: none; }
+  .locale button { background: var(--ink); border: 0; border-radius: 8px; color: #fff; font: 500 12px var(--sans); padding: 5px 12px; }
+  .locale .x { background: none; color: var(--grey); font-size: 16px; padding: 0 4px; }
+  .gnav { background: rgb(250 250 252 / .92); backdrop-filter: blur(16px); font-size: 12px; position: sticky; top: 0; z-index: 30; }
+  .gnav .w { align-items: center; display: flex; gap: 22px; justify-content: center; block-size: 44px; }
+  .gnav a { color: var(--ink); opacity: .85; text-decoration: none; }
+  .gnav a:hover { opacity: 1; }
+  .gnav .home { font-weight: 600; opacity: 1; }
+  @media (max-width: 760px) { .gnav .w { justify-content: flex-start; overflow-x: auto; } }
+  .promo { font-size: 13px; padding: 12px 16px; text-align: center; }
+  .promo button { background: none; border: 0; color: var(--blue); font: inherit; padding: 0; }
+  .promo button::after { content: " ›"; }
+
+  .title { font-size: clamp(3rem, 7vw, 5rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1.05; padding-block: 40px 30px; }
+  .strip { display: flex; gap: 26px; list-style: none; margin: 0; overflow-x: auto; padding: 0 0 26px; }
+  .strip li { flex: none; }
+  @media (max-width: 1100px) { .strip { flex-wrap: wrap; gap: 18px 22px; overflow: visible; } }
+  .strip button { align-items: center; background: none; border: 0; color: var(--ink); display: grid; font: 500 12px var(--sans); gap: 8px; justify-items: center; padding: 0; }
+  .strip button:hover .ph { transform: translateY(-4px); }
+  .strip .new { color: var(--new); font-size: 11px; }
+  .ph { background: linear-gradient(160deg, var(--a), var(--b)); border: 2px solid #1d1d1f22; border-radius: 9px; block-size: 56px; inline-size: 28px; position: relative; transition: transform .4s var(--ease); }
+  .ph::after { background: #1d1d1f; border-radius: 4px; block-size: 4px; content: ""; inline-size: 8px; inset: 4px auto auto 50%; position: absolute; transform: translateX(-50%); }
+  .ph.wide { border-radius: 8px; inline-size: 46px; }
+  .ph.box { border-radius: 10px; inline-size: 46px; block-size: 46px; }
+
+  .hero { background: var(--soft); border-radius: 28px; min-block-size: 560px; overflow: hidden; padding: 40px 44px 0; position: relative; }
+  .hero .row { align-items: flex-start; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; }
+  .hero h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; }
+  .hero p { font-size: 19px; margin-block-start: 4px; }
+  .acts { align-items: center; display: flex; gap: 18px; }
+  .pill { background: var(--blue); border: 0; border-radius: 999px; color: #fff; font: 400 15px var(--sans); padding: 9px 18px; }
+  .tl { background: none; border: 0; color: var(--blue); font: 400 15px var(--sans); padding: 0; }
+  .tl::after { content: " ›"; }
+  /* The device: a foldable drawn in CSS that opens as the card enters. */
+  .fold { display: flex; gap: 4px; inset: auto 50% -60px auto; position: absolute; transform: translateX(50%); }
+  .half { background: linear-gradient(160deg, #cfe0f6, #8aa8d8 60%, #5a78b8); border: 9px solid #2a2a2e; border-radius: 34px; block-size: 360px; inline-size: 210px; padding: 18px; transition: transform 1.2s var(--ease); }
+  .half.l { border-inline-end-width: 3px; border-radius: 34px 6px 6px 34px; transform-origin: right; transform: perspective(900px) rotateY(var(--f, 0deg)); }
+  .half.r { border-inline-start-width: 3px; border-radius: 6px 34px 34px 6px; }
+  .widget { background: rgb(255 255 255 / .55); border-radius: 18px; color: #1d1d1f; font-size: 13px; font-weight: 600; margin-block-end: 10px; padding: 12px; }
+  .widget b { display: block; font-size: 30px; font-weight: 500; letter-spacing: -0.04em; }
+  .apps { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); }
+  .apps i { aspect-ratio: 1; background: var(--c); border-radius: 10px; }
+  @media (max-width: 700px) { .hero { min-block-size: 480px; padding: 28px 22px 0; } .half { block-size: 280px; inline-size: 150px; } }
+
+  .why { padding-block: 100px 20px; }
+  .why-h { align-items: flex-end; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; }
+  .why h2, .sig h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.08; }
+  .rail { display: grid; gap: 20px; grid-auto-columns: min(340px, 82%); grid-auto-flow: column; margin-block-start: 30px; overflow-x: auto; padding: 10px 4px 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .rc { background: #fff; border-radius: 22px; box-shadow: 0 4px 20px rgb(0 0 0 / .08); display: flex; flex-direction: column; min-block-size: 440px; padding: 26px; position: relative; scroll-snap-align: start; transition: transform .4s var(--ease), box-shadow .4s; }
+  .rc:hover { box-shadow: 0 10px 30px rgb(0 0 0 / .14); transform: scale(1.015); }
+  .rc small { font-size: 12px; font-weight: 600; }
+  .rc h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin-block: 8px 12px; }
+  .rc p { font-size: 14px; }
+  .rc .art { display: grid; flex: 1; place-items: center; }
+  .rc .plus { background: var(--ink); border: 0; border-radius: 50%; block-size: 32px; color: #fff; font-size: 15px; inline-size: 32px; inset: auto 20px 20px auto; position: absolute; }
+  .railbg { background: var(--soft); border-radius: 28px; margin-inline: calc(-1 * clamp(18px, 5vw, 70px)); padding-inline: clamp(18px, 5vw, 70px); padding-block-end: 20px; }
+  .ctl { display: flex; gap: 10px; justify-content: flex-end; padding-block-end: 10px; }
+  .ctl button { background: #e8e8ed; border: 0; border-radius: 50%; block-size: 36px; color: var(--ink); font-size: 18px; inline-size: 36px; }
+  .dot { border-radius: 50%; block-size: 120px; inline-size: 120px; }
+
+  .acc { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; padding-block: 60px 0; }
+  .tile { background: var(--soft); border-radius: 22px; display: grid; min-block-size: 280px; place-items: center; }
+  .rings { display: flex; gap: 14px; }
+  .rings i { border: 10px solid var(--c); border-radius: 50%; block-size: 90px; inline-size: 90px; }
+  .cases { display: flex; gap: 14px; }
+  .cases i { background: linear-gradient(160deg, var(--c), #0003); border-radius: 22px; block-size: 170px; inline-size: 86px; }
+  @media (max-width: 760px) { .acc { grid-template-columns: 1fr; } }
+
+  .sig { padding-block: 100px 40px; }
+  .panel { background: var(--soft); border-radius: 28px; display: grid; gap: 30px; grid-template-columns: 0.8fr 1.2fr; margin-block-start: 30px; min-block-size: 480px; overflow: hidden; padding: 44px; }
+  .items { list-style: none; margin: 0; padding: 0; }
+  .items li { border-block-end: 1px solid var(--line); }
+  .items button { align-items: center; background: none; border: 0; color: var(--ink); display: flex; font: 600 19px var(--sans); inline-size: 100%; justify-content: space-between; padding: 16px 0; text-align: start; }
+  .items button::after { content: "⌄"; font-size: 16px; transition: transform .3s; }
+  .items button[aria-expanded="true"]::after { transform: rotate(180deg); }
+  .items .body { color: var(--ink); font-size: 15px; padding-block-end: 16px; }
+  .items .body[hidden] { display: none; }
+  .devs { align-items: flex-end; display: flex; gap: 20px; justify-content: center; }
+  .mac { background: linear-gradient(160deg, #e9d7c0, #b8946c); border: 12px solid #2a2a2e; border-radius: 16px 16px 4px 4px; block-size: 260px; inline-size: 380px; max-inline-size: 60vw; transition: background .6s; }
+  .mini { background: linear-gradient(160deg, #cfe0f6, #7a98c8); border: 7px solid #2a2a2e; border-radius: 22px; block-size: 200px; inline-size: 96px; transition: background .6s; }
+  @media (max-width: 860px) { .panel { grid-template-columns: 1fr; padding: 26px; } .mac { block-size: 180px; } }
+
+  .dir { background: var(--soft); margin-block-start: 80px; padding-block: 50px; }
+  .dir .cols { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); font-size: 12px; }
+  .dir h3 { color: var(--grey); font-size: 12px; font-weight: 400; margin-block-end: 8px; }
+  .dir li { list-style: none; padding-block: 3px; }
+  .dir ul { margin: 0; padding: 0; }
+  .notes { color: var(--grey); font-size: 12px; margin-inline: auto; max-inline-size: 980px; padding: 40px 20px; }
+  .notes ol { margin: 0; padding-inline-start: 18px; }
+  .notes li { margin-block-end: 10px; }
+  footer { border-block-start: 1px solid var(--line); color: var(--grey); font-size: 12px; margin-inline: auto; max-inline-size: 980px; padding: 20px 20px 40px; }
+  footer a { color: var(--blue); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<div class="locale" data-locale><span>This study page is in English. A region notice sat here in the original.</span><button type="button" data-demo="There is no regional store in this unofficial study.">Continue</button><button class="x" type="button" aria-label="Close notice" data-close>&times;</button></div>
+<header class="gnav">
+  <nav class="w" aria-label="Sections"><a class="home" href="#top">Store study</a><a href="#lineup">Lineup</a><a href="#why">Why buy here</a><a href="#extras">Accessories</a><a href="#together">Together</a></nav>
+</header>
+<p class="promo">Pay monthly and trade up each year in this imagined plan. <button type="button" data-demo="Plans are illustrative in this unofficial study.">See how</button></p>
+
+<main id="main">
+  <div class="w" id="top">
+    <h1 class="title" data-split>iPhone</h1>
+    <ul class="strip" role="list" id="lineup" aria-label="Lineup (invented model names)" data-strip></ul>
+    <section class="hero" aria-labelledby="hero-h" data-hero>
+      <div class="row">
+        <div><h2 id="hero-h" data-reveal>Phone Fold</h2><p data-reveal data-delay="100">Open wide, close small.</p></div>
+        <div class="acts" data-reveal data-delay="200"><button class="pill" type="button" data-demo="Product pages are illustrative in this unofficial study.">Learn more</button><button class="tl" type="button" data-demo="Prices are illustrative in this unofficial study.">See pricing</button></div>
+      </div>
+      <div class="fold" aria-hidden="true">
+        <div class="half l" data-half><div class="widget">Seoul<b>21°</b>Clear evening</div><div class="apps"><i style="--c:#ff9f0a"></i><i style="--c:#30d158"></i><i style="--c:#0a84ff"></i><i style="--c:#ff375f"></i></div></div>
+        <div class="half r"><div class="apps"><i style="--c:#bf5af2"></i><i style="--c:#64d2ff"></i><i style="--c:#ffd60a"></i><i style="--c:#ff453a"></i><i style="--c:#32d74b"></i><i style="--c:#5e5ce6"></i><i style="--c:#ff9f0a"></i><i style="--c:#0a84ff"></i></div></div>
+      </div>
+    </section>
+
+    <section class="why" id="why" aria-labelledby="why-h">
+      <div class="why-h"><h2 id="why-h" data-reveal>Good reasons to<br>buy it right here.</h2><button class="tl" type="button" data-demo="Shopping is not available in this unofficial study.">Shop the lineup</button></div>
+      <div class="railbg">
+        <div class="rail" data-rail tabindex="0" aria-label="Reasons, scroll sideways">
+          <article class="rc"><small>Monthly plan</small><h3>Pay a little.<br>Trade up yearly.</h3><p>Spread the cost over 12 or 24 months in this imagined plan.</p><div class="art" aria-hidden="true"><div class="dot" style="background:conic-gradient(#ff375f,#ff9f0a,#ffd60a,#30d158,#0a84ff,#bf5af2,#ff375f)"></div></div><button class="plus" type="button" aria-label="More about the monthly plan" data-demo="Plans are illustrative in this unofficial study.">+</button></article>
+          <article class="rc"><small>Carrier offers</small><h3>Credit toward a new phone when you switch.</h3><p>Offers vary by carrier; every number here is invented.</p><div class="art" aria-hidden="true"><div class="dot" style="background:linear-gradient(135deg,#0a84ff,#64d2ff)"></div></div><button class="plus" type="button" aria-label="More about carrier offers" data-demo="Offers are illustrative in this unofficial study.">+</button></article>
+          <article class="rc"><small>Trade in</small><h3>Bring the old one.<br>Save on the new one.</h3><p>Get credit for an eligible phone in this imagined program.</p><div class="art" aria-hidden="true"><div class="dot" style="background:linear-gradient(135deg,#8e8e93,#1d1d1f)"></div></div><button class="plus" type="button" aria-label="More about trade in" data-demo="Trade-in is illustrative in this unofficial study.">+</button></article>
+          <article class="rc"><small>Setup</small><h3>Help moving everything across.</h3><p>A specialist walks you through photos, apps, and settings.</p><div class="art" aria-hidden="true"><div class="dot" style="background:linear-gradient(135deg,#30d158,#0a6b2a)"></div></div><button class="plus" type="button" aria-label="More about setup" data-demo="Setup help is illustrative in this unofficial study.">+</button></article>
+        </div>
+        <div class="ctl"><button type="button" aria-label="Previous reason" data-go="-1">‹</button><button type="button" aria-label="Next reason" data-go="1">›</button></div>
+      </div>
+    </section>
+
+    <section class="acc" id="extras" aria-labelledby="acc-h">
+      <h2 class="sg-visually-hidden" id="acc-h">Accessories</h2>
+      <div class="tile" aria-hidden="true"><div class="cases"><i style="--c:#9fb6d6"></i><i style="--c:#6b2a3a"></i><i style="--c:#b8a78a"></i></div></div>
+      <div class="tile" aria-hidden="true"><div class="rings"><i style="--c:#1d1d1f"></i><i style="--c:#8fb2e6"></i><i style="--c:#7a2a3a"></i></div></div>
+    </section>
+
+    <section class="sig" id="together" aria-labelledby="sig-h">
+      <h2 id="sig-h" data-reveal>Better together.</h2>
+      <div class="panel">
+        <ul class="items" role="list" data-items>
+          <li><button type="button" aria-expanded="true">Phone and laptop</button><div class="body">Answer calls on the laptop, copy on one and paste on the other, and see the phone screen in a window.</div></li>
+          <li><button type="button" aria-expanded="false">Phone and watch</button><div class="body" hidden>Unlock, pay, and find your phone from your wrist.</div></li>
+          <li><button type="button" aria-expanded="false">Phone and earbuds</button><div class="body" hidden>They pair the moment you open the case.</div></li>
+        </ul>
+        <div class="devs" aria-hidden="true" data-devs><div class="mac"></div><div class="mini"></div></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="dir" aria-labelledby="dir-h">
+    <div class="w"><h2 class="sg-visually-hidden" id="dir-h">Directory</h2><div class="cols">
+      <div><h3>Explore</h3><ul role="list"><li>All models</li><li>Compare</li><li>Switch</li></ul></div>
+      <div><h3>Shop</h3><ul role="list"><li>Buy</li><li>Accessories</li><li>Plans</li></ul></div>
+      <div><h3>More</h3><ul role="list"><li>Support</li><li>Privacy</li></ul></div>
+    </div></div>
+  </section>
+  <div class="notes"><ol><li>Every offer, plan, price, and model name on this page is invented for a design study.</li><li>Long legal footnotes follow the original's layout; their content is replaced with this note.</li></ol></div>
+</main>
+<footer><strong style="color:var(--ink)">Unofficial</strong> brand study of Apple's iPhone store page by StyleGallery. Not affiliated with Apple. No logos, product photography, or marketing copy are used; devices are drawn in CSS. <a href="../">All studies</a></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Apple (iPhone) by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene } = window.SG;
+  const models = [["Phone Fold", "#dfe6ef", "#8aa8d8", "wide", true], ["Phone Pro", "#5a2a3a", "#2a1a22", "", true], ["Phone Thin", "#e8eef6", "#b8c8dc"], ["Phone", "#d8c8f0", "#a88cd8"], ["Phone Mini", "#ffd0dc", "#f08aa8"], ["Phone Lite", "#8ab4f0", "#3a6ac8"], ["Compare", "#e8e8ed", "#c8c8cc"], ["Accessories", "#c8b89a", "#8a6a4a", "box"], ["Shop", "#6a3a4a", "#2a1a22"]];
+  document.querySelector("[data-strip]").innerHTML = models.map(([n, a, b, k, nw]) => `<li><button type="button" data-demo="Model pages are illustrative in this unofficial study."><span class="ph ${k || ""}" style="--a:${a};--b:${b}" aria-hidden="true"></span>${n}${nw ? '<span class="new">New</span>' : ""}</button></li>`).join("");
+  // The fold opens from 60 degrees to flat as the hero enters.
+  const hero = document.querySelector("[data-hero]"), half = document.querySelector("[data-half]");
+  if (!reduced) scene(hero, (p) => half.style.setProperty("--f", `${Math.round(60 * (1 - Math.min(1, p * 2.2)))}deg`), { start: "enter" });
+  const rail = document.querySelector("[data-rail]");
+  document.querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => rail.scrollBy({ left: Number(b.dataset.go) * 360, behavior: reduced ? "auto" : "smooth" })));
+  const tints = [["#e9d7c0", "#b8946c", "#cfe0f6", "#7a98c8"], ["#d8e8d0", "#7aa86a", "#f0d0d8", "#c8708a"], ["#e8e0f8", "#8a78c8", "#d0e8f0", "#6aa8c8"]];
+  const items = [...document.querySelectorAll("[data-items] li")], devs = document.querySelector("[data-devs]");
+  items.forEach((li, i) => li.querySelector("button").addEventListener("click", () => {
+    items.forEach((o, k) => { o.querySelector("button").setAttribute("aria-expanded", String(k === i)); o.querySelector(".body").hidden = k !== i; });
+    const [a, b, c, d] = tints[i]; devs.querySelector(".mac").style.background = `linear-gradient(160deg,${a},${b})`; devs.querySelector(".mini").style.background = `linear-gradient(160deg,${c},${d})`;
+  }));
+  document.querySelector("[data-close]").addEventListener("click", () => { document.querySelector("[data-locale]").hidden = true; });
+})();
+</script>
+</body>
+</html>

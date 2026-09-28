@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>teenage engineering - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of teenage engineering's catalogue language: white paper, square corners, near-black product stages, hairline grids, one orange knob, and a pocket step sequencer you can play.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f4f2'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23ff5a1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --paper: #fff; --off: #f3f3f1; --ink: #111; --grey: #5f5f5f; --line: #dcdcd8; --orange: #ff5a1f; --orange-ink: #c2410c; --blue: #0a56d6; --night: #0e0e0e; --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace; --sg-header: 12px; --sg-focus: #0a56d6; }
+  body { background: var(--paper); color: var(--ink); font: 400 15px/1.55 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1320px; padding-inline: clamp(16px, 3vw, 40px); }
+  .site-header { border-block-end: 1px solid var(--line); }
+  .site-header .w { align-items: baseline; display: flex; flex-wrap: wrap; gap: 8px 40px; padding-block: 18px; }
+  .mark { color: var(--ink); font: 600 17px var(--sans); letter-spacing: -.01em; text-decoration: none; }
+  .site-header nav { display: flex; flex-wrap: wrap; gap: 6px 26px; margin-inline-start: auto; }
+  .site-header nav a { color: var(--ink); font: 400 13px var(--mono); text-decoration: none; }
+  .site-header nav a:hover { color: var(--orange-ink); text-decoration: underline; }
+  .cap { color: var(--grey); font: 400 12px var(--mono); letter-spacing: .04em; }
+  .link { background: none; border: 0; color: var(--blue); cursor: pointer; font: 500 14px var(--sans); padding: 0; text-decoration: underline; text-underline-offset: 3px; }
+  .link:hover { color: var(--ink); }
+
+  /* Opening: white page, a big lowercase headline, and a device you can play. */
+  .open .w { align-items: center; display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); padding-block: clamp(48px, 8vw, 110px); }
+  .open h1 { font: 600 clamp(2.4rem, 1.4rem + 3vw, 4rem)/1.02 var(--sans); letter-spacing: -.03em; }
+  .open p.lede { color: var(--grey); font-size: 17px; margin-block: 24px 20px; max-inline-size: 42ch; }
+  .unit { background: #d9dad6; border: 1px solid #b9bab5; box-shadow: 0 40px 60px -40px rgb(0 0 0 / .45); display: grid; gap: 14px; padding: clamp(14px, 2.4vw, 26px); }
+  .unit-top { align-items: center; display: flex; gap: 12px; justify-content: space-between; }
+  .screen { background: #0b0b0b; color: #f4f4f2; display: flex; flex: 1; font: 400 12px var(--mono); gap: 10px; justify-content: space-between; min-inline-size: 0; padding: 10px 12px; }
+  .screen b { color: var(--orange); font-weight: 500; }
+  .knobs { display: flex; gap: 10px; }
+  .knob { aspect-ratio: 1; background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--k, #9a9b97) 13%); border-radius: 50%; inline-size: clamp(28px, 4vw, 40px); position: relative; }
+  .knob::after { background: #111; block-size: 40%; content: ""; inline-size: 2px; inset: 6% auto auto 48%; position: absolute; transform: rotate(var(--r, 0deg)); transform-origin: 50% 110%; }
+  .steps { display: grid; gap: clamp(4px, .8vw, 8px); grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .steps button { aspect-ratio: 1; background: #ececea; border: 1px solid #a9aaa5; color: #555; font: 400 11px var(--mono); padding: 0; position: relative; }
+  .steps button[aria-pressed="true"] { background: #111; color: #f4f4f2; }
+  .steps button[data-head]::after { background: var(--orange); block-size: 6px; content: ""; inline-size: 6px; inset: 6px 6px auto auto; position: absolute; }
+  .unit-bottom { align-items: center; display: flex; flex-wrap: wrap; gap: 10px; }
+  .unit-bottom button.pill { background: #111; border: 0; color: #fff; font: 500 12px var(--mono); padding: 9px 14px; }
+  .unit-bottom button.pill[data-orange] { background: var(--orange); color: #111; }
+  .unit-bottom small { color: #333; font: 400 12px var(--mono); margin-inline-start: auto; }
+  @media (max-width: 880px) { .open .w { grid-template-columns: 1fr; } }
+
+  /* Near-black full-width product stage. */
+  .stage { background: var(--night); color: #f4f4f2; }
+  .stage .w { align-items: end; display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); min-block-size: 80vh; padding-block: 90px; }
+  .stage h2 { font: 600 clamp(2rem, 1.2rem + 2.6vw, 3.6rem)/1.02 var(--sans); letter-spacing: -.03em; }
+  .stage p { color: #bdbdb8; margin-block: 18px; max-inline-size: 44ch; }
+  .stage .cap { color: #a8a8a3; }
+  .stage .link { color: #8db4ff; }
+  .stage .link:hover { color: #fff; }
+  .field { align-self: center; aspect-ratio: 2.4; background: linear-gradient(180deg, #2a2b2d, #1a1b1c); border: 1px solid #3b3c3e; display: grid; gap: 8%; grid-template-columns: 1.1fr 2fr 1fr; padding: 6%; }
+  .field .scr { background: #000; border: 1px solid #333; display: grid; place-items: center; }
+  .field .scr svg { inline-size: 80%; }
+  .field .keys { background: repeating-linear-gradient(90deg, #d9d9d6 0 calc(12.5% - 3px), transparent calc(12.5% - 3px) 12.5%); }
+  .field .dials { display: grid; gap: 10%; grid-template-columns: 1fr 1fr; place-items: center; }
+  .field .dials i { aspect-ratio: 1; background: var(--c); border-radius: 50%; inline-size: 70%; }
+  @media (max-width: 880px) { .stage .w { grid-template-columns: 1fr; min-block-size: 0; } }
+
+  /* Off-white grid with hairline dividers. */
+  .grid { background: var(--off); padding-block: 80px; }
+  .grid h2 { font: 600 clamp(1.8rem, 3.4vw, 2.8rem)/1 var(--sans); letter-spacing: -.03em; margin-block: 10px 30px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-block-end: 22px; }
+  .filters button { background: transparent; border: 1px solid var(--ink); color: var(--ink); font: 400 12px var(--mono); padding: 6px 12px; }
+  .filters button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .items { border-block-start: 1px solid var(--line); border-inline-start: 1px solid var(--line); display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+  .item { border-block-end: 1px solid var(--line); border-inline-end: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; padding: 22px; }
+  .item .art { aspect-ratio: 4 / 3; display: grid; margin-block-end: 12px; place-items: center; }
+  .item .art > * { transition: transform .5s cubic-bezier(.16,1,.3,1); }
+  .item:hover .art > * { transform: translateY(-6px) rotate(-2deg); }
+  .item strong { font: 600 16px var(--sans); }
+  .item span { color: var(--grey); font: 400 12px var(--mono); }
+  .item .row { align-items: baseline; display: flex; justify-content: space-between; margin-block-start: auto; padding-block-start: 10px; }
+  .dev { background: var(--bg, #d9dad6); border: 1px solid #9c9d98; block-size: var(--h, 46%); display: grid; gap: 6%; grid-template-columns: repeat(var(--n, 4), 1fr); inline-size: var(--wd, 76%); padding: 5%; }
+  .dev i { aspect-ratio: 1; align-self: center; background: var(--c, #111); border-radius: var(--rad, 50%); }
+  .empty { color: var(--grey); font: 400 13px var(--mono); padding: 22px; }
+
+  .all { border-block-start: 1px solid var(--line); padding-block: 70px; text-align: center; }
+  .all h2 { font: 600 clamp(2rem, 4.6vw, 4rem)/1 var(--sans); letter-spacing: -.04em; margin-block: 8px 20px; }
+  .all .big { background: var(--ink); border: 0; color: #fff; font: 500 14px var(--mono); padding: 14px 22px; }
+  .all .big:hover { background: var(--orange); color: #111; }
+
+  footer.site { background: var(--night); color: #cfcfca; font-size: 13px; padding-block: 50px 70px; }
+  footer.site .cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-block-end: 30px; }
+  footer.site strong { color: #fff; }
+  footer.site ul { list-style: none; margin: 8px 0 0; padding: 0; }
+  footer.site li { color: #a8a8a3; font: 400 12px var(--mono); padding-block: 2px; }
+  footer.site a { color: #fff; }
+  .finder-art { display: block; inline-size: min(900px, 100%); margin: 48px auto 0; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="w">
+    <a class="mark" href="#top">teenage engineering (study)</a>
+    <nav aria-label="Sections"><a href="#unit">products</a><a href="#field">field</a><a href="#catalogue">store</a><a href="#all">finder</a></nav>
+  </div>
+</header>
+<main id="main">
+  <section class="open" id="top" aria-labelledby="h1">
+    <div class="w">
+      <div>
+        <p class="cap">journal no. 41 · a tuesday in the workshop</p>
+        <h1 id="h1" data-split>small boxes that make big noises.</h1>
+        <p class="lede" data-reveal data-delay="300">A catalogue of pocket instruments, drawn in CSS and priced in nothing. Start with the sequencer on the right: tap steps, then press play.</p>
+        <button class="link" type="button" data-reveal data-delay="400" data-demo="There is no journal archive in this unofficial study.">read the rest of the journal</button>
+      </div>
+      <div class="unit" id="unit" data-surface role="group" aria-label="Pocket step sequencer (study)">
+        <div class="unit-top">
+          <div class="screen" aria-hidden="true"><span>PAT <b data-pat>A</b></span><span>BPM <b>118</b></span><span data-pos>--/16</span></div>
+          <div class="knobs" aria-hidden="true"><span class="knob" style="--r:-40deg"></span><span class="knob" style="--k:#ff5a1f;--r:30deg"></span><span class="knob" style="--k:#3a3b3d;--r:110deg"></span></div>
+        </div>
+        <div class="steps" data-steps></div>
+        <div class="unit-bottom">
+          <button class="pill" type="button" data-orange data-play>play</button>
+          <button class="pill" type="button" data-clear>clear</button>
+          <button class="pill" type="button" data-random>random</button>
+          <small role="status" data-seqstatus>6 of 16 steps on</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" id="field" aria-labelledby="f-h">
+    <div class="w">
+      <div>
+        <p class="cap">FX-40 field unit (invented)</p>
+        <h2 id="f-h" data-reveal>everything, in one aluminium slab.</h2>
+        <p data-reveal>Synth, sampler, four-track tape, and a radio, in a machined body the size of a hardcover book. The screen draws waveforms like a comic strip.</p>
+        <button class="link" type="button" data-demo="There is no store in this unofficial study.">buy now</button>
+      </div>
+      <div class="field sg-frame" aria-hidden="true" data-surface style="--sg-frame-radius:2px">
+        <div class="scr"><svg viewBox="0 0 100 60"><path d="M0 30 Q12 5 25 30 T50 30 T75 30 T100 30" fill="none" stroke="#ff5a1f" stroke-width="2.5"/><path d="M0 40 L100 40" stroke="#3aa0ff" stroke-width="1" stroke-dasharray="3 3"/></svg></div>
+        <div class="keys"></div>
+        <div class="dials"><i style="--c:#3aa0ff"></i><i style="--c:#3ecf6a"></i><i style="--c:#f4f4f2"></i><i style="--c:#ff5a1f"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid" id="catalogue" aria-labelledby="c-h">
+    <div class="w">
+      <p class="cap">store · all prices invented</p>
+      <h2 id="c-h">the catalogue.</h2>
+      <div class="filters" role="group" aria-label="Filter the catalogue" data-filters>
+        <button type="button" aria-pressed="true" data-f="all">all</button><button type="button" aria-pressed="false" data-f="sound">sound</button><button type="button" aria-pressed="false" data-f="record">record</button><button type="button" aria-pressed="false" data-f="desk">desk</button>
+      </div>
+      <p class="sg-visually-hidden" role="status" data-filterstatus>Showing 6 products</p>
+      <div class="items" data-items>
+        <article class="item" data-k="sound"><div class="art sg-frame" aria-hidden="true" data-surface style="--sg-frame-radius:0"><div class="dev" style="--n:4"><i style="--c:#3aa0ff"></i><i style="--c:#3ecf6a"></i><i style="--c:#f4f4f2"></i><i style="--c:#ff5a1f"></i></div></div><strong>SQ-12 pocket sequencer</strong><span>16 steps, one battery, no menu</span><div class="row"><span>$89 (invented)</span><button class="link" type="button" data-demo="There is no store in this unofficial study.">buy now</button></div></article>
+        <article class="item" data-k="record"><div class="art sg-frame" aria-hidden="true" data-surface style="--sg-frame-radius:0"><div class="dev" style="--bg:#f4f4f2;--n:3;--wd:60%;--h:60%"><i style="--c:#111;--rad:0"></i><i style="--c:#ff5a1f"></i><i style="--c:#111;--rad:0"></i></div></div><strong>MC-3 field microphone</strong><span>stereo capsule, clip-on</span><div class="row"><span>$149 (invented)</span><button class="link" type="button" data-demo="There is no store in this unofficial study.">buy now</button></div></article>
+        <article class="item" data-k="sound"><div class="art sg-frame" aria-hidden="true" data-surface style="--sg-frame-radius:0"><div class="dev" style="--bg:#1b1c1d;--n:6;--h:36%"><i style="--c:#d9dad6"></i><i style="--c:#d9dad6"></i><i style="--c:#ff5a1f"></i><i style="--c:#d9dad6"></i><i style="--c:#d9dad6"></i><i style="--c:#d9dad6"></i></div></div><strong>MX-8 table mixer</strong><span>eight channels, cast feet</span><div class="row"><span>$620 (invented)</span><button class="link" type="button" data-demo="There is no store in this unofficial study.">buy now</button></div></article>
+        <article class="item" data-k="record"><div class="art sg-frame" aria-hidden="true" data-surface style="--sg-frame-radius:0"><div class="dev" style="--bg:#ff5a1f;--n:2;--wd:44%;--h:70%"><i style="--c:#111"></i><i style="--c:#f4f4f2"></i></div></div><strong>SP-9 sampler brick</strong><span>twelve pads, one speaker</span><div class="row"><span>$299 (invented)</span><button class="link" type="button" data-demo="There is no store in this unofficial study.">buy now</button></div></article>
+        <article class="item" data-k="desk"><div class="art sg-frame" aria-hidden="true" data-surface style="--sg-frame-radius:0"><div class="dev" style="--bg:#f4f4f2;--n:4;--wd:50%;--h:66%"><i style="--c:#111;--rad:2px"></i><i style="--c:#111;--rad:2px"></i><i style="--c:#111;--rad:2px"></i><i style="--c:#ff5a1f;--rad:2px"></i></div></div><strong>CL-2 desk calculator</strong><span>it only adds, beautifully</span><div class="row"><span>$59 (invented)</span><button class="link" type="button" data-demo="There is no store in this unofficial study.">buy now</button></div></article>
+        <article class="item" data-k="desk"><div class="art sg-frame" aria-hidden="true" data-surface style="--sg-frame-radius:0"><div class="dev" style="--bg:#d9dad6;--n:1;--wd:34%;--h:74%"><i style="--c:repeating-radial-gradient(circle,#111 0 2px,#d9dad6 2px 5px)"></i></div></div><strong>RD-1 radio</strong><span>fm, one dial, a strap</span><div class="row"><span>$199 (invented)</span><button class="link" type="button" data-demo="There is no store in this unofficial study.">buy now</button></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="all" id="all" aria-labelledby="a-h">
+    <div class="w">
+      <p class="cap">finder</p>
+      <h2 id="a-h" data-reveal>explore every product.</h2>
+      <button class="big" type="button" data-demo="There is no product finder in this unofficial study.">open the finder</button><svg class="finder-art" viewBox="0 0 900 160" aria-hidden="true" data-surface><g transform="translate(20 30)"><rect width="150" height="100" fill="#d9dad6" stroke="#9c9d98"/><g fill="#111"><circle cx="30" cy="30" r="10"/><circle cx="65" cy="30" r="10"/></g><circle cx="100" cy="30" r="10" fill="#ff5a1f"/><g fill="#ececea" stroke="#a9aaa5"><rect x="12" y="58" width="24" height="24"/><rect x="44" y="58" width="24" height="24"/><rect x="76" y="58" width="24" height="24"/><rect x="108" y="58" width="24" height="24"/></g></g><g transform="translate(200 20)"><rect width="110" height="120" fill="#f4f4f2" stroke="#9c9d98"/><rect x="18" y="16" width="74" height="40" fill="#0b0b0b"/><path d="M24 36 q10 -14 20 0 t20 0 t20 0" stroke="#ff5a1f" stroke-width="3" fill="none"/><circle cx="55" cy="88" r="16" fill="#111"/></g><g transform="translate(340 40)"><rect width="220" height="80" fill="#1b1c1d" stroke="#3b3c3e"/><g fill="#d9dad6"><rect x="14" y="16" width="14" height="48"/><rect x="40" y="16" width="14" height="48"/><rect x="66" y="16" width="14" height="48"/><rect x="92" y="16" width="14" height="48"/><rect x="118" y="16" width="14" height="48"/><rect x="144" y="16" width="14" height="48"/><rect x="170" y="16" width="14" height="48"/><rect x="196" y="16" width="14" height="48"/></g><rect x="118" y="16" width="14" height="48" fill="#ff5a1f"/></g><g transform="translate(590 10)"><rect width="100" height="140" fill="#ff5a1f" stroke="#c2410c"/><g fill="#111"><circle cx="25" cy="30" r="8"/><circle cx="50" cy="30" r="8"/><circle cx="75" cy="30" r="8"/><circle cx="25" cy="55" r="8"/><circle cx="50" cy="55" r="8"/><circle cx="75" cy="55" r="8"/><circle cx="25" cy="80" r="8"/><circle cx="50" cy="80" r="8"/><circle cx="75" cy="80" r="8"/></g></g><g transform="translate(720 30)"><rect width="150" height="100" rx="4" fill="#d9dad6" stroke="#9c9d98"/><circle cx="50" cy="50" r="32" fill="#111"/><circle cx="50" cy="50" r="22" fill="none" stroke="#d9dad6" stroke-width="2" stroke-dasharray="3 4"/><rect x="100" y="24" width="30" height="52" fill="#0b0b0b"/><rect x="106" y="30" width="18" height="10" fill="#3ecf6a"/></g></svg>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="w">
+    <div class="cols">
+      <div><strong>products</strong><ul><li>pocket</li><li>field</li><li>desk</li></ul></div>
+      <div><strong>support</strong><ul><li>manuals</li><li>repairs</li><li>shipping</li></ul></div>
+      <div><strong>about</strong><ul><li>journal</li><li>workshop</li><li>jobs</li></ul></div>
+    </div>
+    <p><strong>Unofficial</strong> brand study of teenage engineering by StyleGallery. Not affiliated with teenage engineering. Products, codes, prices, and copy are invented; devices are drawn in CSS; no logos or photos are used. <a href="../">All studies</a></p>
+  </div>
+</footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of teenage engineering by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  // Pocket step sequencer: 16 steps, plays two bars through Web Audio on demand, then stops.
+  const wrap = document.querySelector("[data-steps]"), status = document.querySelector("[data-seqstatus]"), pos = document.querySelector("[data-pos]");
+  let on = [1,0,0,1, 0,0,1,0, 1,0,0,0, 1,0,1,0].map(Boolean);
+  wrap.innerHTML = on.map((_, i) => `<button type="button" aria-label="Step ${i + 1}" aria-pressed="false">${i + 1}</button>`).join("");
+  const btns = [...wrap.children];
+  const paint = () => { btns.forEach((b, i) => b.setAttribute("aria-pressed", String(on[i]))); status.textContent = `${on.filter(Boolean).length} of 16 steps on`; };
+  btns.forEach((b, i) => b.addEventListener("click", () => { on[i] = !on[i]; paint(); }));
+  document.querySelector("[data-clear]").addEventListener("click", () => { on = on.map(() => false); paint(); });
+  document.querySelector("[data-random]").addEventListener("click", () => { on = on.map(() => Math.random() < .4); paint(); });
+  let ctx = null, timer = 0;
+  const blip = (i) => {
+    if (!ctx) return;
+    const o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime;
+    o.type = "square"; o.frequency.value = [220, 247, 262, 294, 330, 392, 440, 523][i % 8];
+    g.gain.setValueAtTime(.06, t); g.gain.exponentialRampToValueAtTime(.0001, t + .12);
+    o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + .13);
+  };
+  const stop = () => { clearInterval(timer); timer = 0; btns.forEach((b) => b.removeAttribute("data-head")); pos.textContent = "--/16"; play.textContent = "play"; };
+  const play = document.querySelector("[data-play]");
+  play.addEventListener("click", () => {
+    if (timer) { stop(); status.textContent = "Stopped"; return; }
+    try { ctx = ctx || new (window.AudioContext || window.webkitAudioContext)(); } catch { ctx = null; }
+    let n = 0; play.textContent = "stop"; status.textContent = "Playing two bars";
+    timer = setInterval(() => {
+      const i = n % 16; btns.forEach((b, k) => b.toggleAttribute("data-head", k === i)); pos.textContent = `${String(i + 1).padStart(2, "0")}/16`;
+      if (on[i]) blip(i);
+      if (++n >= 32) { stop(); status.textContent = "Played two bars"; }
+    }, 127);
+  });
+  paint();
+  // Catalogue filters.
+  const fb = [...document.querySelectorAll("[data-filters] button")], items = [...document.querySelectorAll("[data-items] .item")], fs = document.querySelector("[data-filterstatus]");
+  fb.forEach((b) => b.addEventListener("click", () => {
+    fb.forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+    let n = 0; items.forEach((it) => { const show = b.dataset.f === "all" || it.dataset.k === b.dataset.f; it.hidden = !show; n += show; });
+    fs.textContent = `Showing ${n} products`;
+  }));
+})();
+</script>
+</body>
+</html>

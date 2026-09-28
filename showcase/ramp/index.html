@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ramp - Unofficial brand study | StyleGallery</title>
+<meta name="description" content="An unofficial StyleGallery study of Ramp's homepage language: a dot-grid hero, one lime accent, two-tone headings, an expense queue you can clear, a bento of products, and scattered tools that snap into one platform on scroll.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Cpath d='M9 22 L22 9 M13 9 H22 V18' stroke='%23e4f222' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #111; --grey: #5c5c57; --soft: #74746e; --paper: #fbfaf7; --card: #f1efe9; --line: #e3e0d8; --lime: #e4f222; --sans: "Inter Tight", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; --sg-header: 104px; --sg-focus: #111; --ease: cubic-bezier(.2,.8,.2,1); }
+  body { background: var(--paper); color: var(--ink); font: 400 16px/1.5 var(--sans); }
+  .w { margin-inline: auto; max-inline-size: 1376px; padding-inline: clamp(16px, 4.4vw, 64px); }
+  .btn { border: 0; border-radius: 8px; cursor: pointer; font: 600 14px var(--sans); padding: 10px 16px; white-space: nowrap; }
+  .btn.lime { background: var(--lime); color: var(--ink); }
+  .btn.lime:hover { background: #d4e314; }
+  .btn.black { background: var(--ink); color: #fff; }
+  .btn.pale { background: #e9e7e1; color: var(--ink); }
+  .eyebrow { color: var(--grey); font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+  .two { font: 600 clamp(2rem, 4.2vw, 3.6rem)/1.04 var(--sans); letter-spacing: -.035em; }
+  .two span { color: var(--soft); }
+  .center { text-align: center; }
+  .muted { color: var(--grey); }
+  .email { align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 10px; display: flex; flex-wrap: wrap; gap: 6px; max-inline-size: 460px; padding: 5px 5px 5px 14px; }
+  .email input { background: none; border: 0; flex: 1; font: 400 15px var(--sans); min-inline-size: 150px; outline: 0; padding-block: 8px; }
+  .email:focus-within { border-color: var(--ink); }
+  .email [role="status"] { flex-basis: 100%; font-size: 13px; }
+
+  /* Announcement bar and sticky white header. */
+  .top { position: sticky; top: 0; z-index: 30; }
+  .announce { align-items: center; background: #000; color: #fff; display: flex; font-size: 13px; gap: 12px; justify-content: center; padding: 9px 44px; position: relative; text-align: center; }
+  .announce .x { background: none; border: 0; color: #fff; cursor: pointer; font-size: 18px; inset: 50% 14px auto auto; position: absolute; transform: translateY(-50%); }
+  .announce .lm { background: none; border: 0; color: #fff; cursor: pointer; font: 600 13px var(--sans); text-decoration: underline; }
+  .site-header { background: rgb(251 250 247 / .92); backdrop-filter: blur(10px); border-block-end: 1px solid var(--line); }
+  .site-header .w { align-items: center; display: flex; gap: 28px; block-size: 62px; }
+  .mark { color: var(--ink); font: 700 24px var(--sans); letter-spacing: -.05em; text-decoration: none; }
+  .site-header nav { display: flex; gap: 22px; }
+  .site-header nav a { color: var(--ink); font: 500 14px var(--sans); text-decoration: none; }
+  .site-header nav a:hover { color: var(--grey); }
+  .site-header .end { align-items: center; display: flex; gap: 8px; margin-inline-start: auto; }
+  @media (max-width: 900px) { .site-header nav, .site-header .signin { display: none; } }
+
+  /* Hero on a dot grid. */
+  .hero { background: radial-gradient(circle, #d8d5cc 1px, transparent 1.4px) 0 0 / 22px 22px, var(--paper); padding-block: 70px 60px; }
+  .chip { background: var(--lime); border-radius: 6px; font: 500 12px var(--mono); margin-inline-start: 6px; padding: 2px 7px; }
+  .hero h1 { font: 600 clamp(2.8rem, 7.4vw, 6.6rem)/.98 var(--sans); letter-spacing: -.045em; margin-block: 16px 16px; }
+  .hero .lede { color: var(--grey); font-size: 19px; margin-block-end: 24px; }
+  .hero .lede u { text-decoration-style: dotted; text-underline-offset: 4px; }
+  .mock { background: var(--card); border-radius: 22px; display: grid; gap: 16px; grid-template-columns: 1.4fr 1fr; margin-block-start: 48px; padding: clamp(14px, 2.4vw, 28px); }
+  .win { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .win header { align-items: center; border-block-end: 1px solid var(--line); display: flex; gap: 10px; justify-content: space-between; padding: 12px 16px; }
+  .win header b { font-weight: 600; }
+  .queue { list-style: none; margin: 0; padding: 0; }
+  .queue li { align-items: center; border-block-end: 1px solid var(--line); display: grid; gap: 10px; grid-template-columns: 34px 1fr auto auto; padding: 10px 16px; transition: opacity .4s, background .4s; }
+  .queue li[data-done] { background: #f7fbd9; }
+  .queue li[data-done] .acts { display: none; }
+  .queue i { background: var(--c); border-radius: 8px; block-size: 34px; inline-size: 34px; }
+  .queue small { color: var(--grey); display: block; font-size: 12px; }
+  .queue .amt { font: 500 14px var(--mono); }
+  .queue .acts { display: flex; gap: 6px; }
+  .queue .acts button { background: #f1efe9; border: 0; border-radius: 6px; cursor: pointer; font: 600 12px var(--sans); padding: 6px 9px; }
+  .queue .acts button:first-child { background: var(--lime); }
+  @media (max-width: 560px) { .queue li { grid-template-columns: 34px minmax(0, 1fr) auto; } .queue .acts { grid-column: 2 / -1; } }
+  .queue .state { color: var(--grey); font: 500 12px var(--mono); grid-column: 3 / -1; justify-self: end; }
+  .cardart { aspect-ratio: 1.586; background: linear-gradient(135deg, #1a1a1a, #3a3a36); border-radius: 14px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; margin: 16px; padding: 18px; }
+  .cardart b { font: 700 20px var(--sans); letter-spacing: -.04em; }
+  .cardart span { font: 500 13px var(--mono); letter-spacing: .1em; }
+  .limit { padding: 0 16px 16px; }
+  .limit label { display: flex; font-size: 13px; justify-content: space-between; }
+  .limit input { accent-color: var(--ink); inline-size: 100%; }
+  @media (max-width: 860px) { .mock { grid-template-columns: 1fr; } }
+  .ticker { border-block: 1px solid var(--line); display: flex; flex-wrap: wrap; font: 500 12px var(--mono); gap: 10px 40px; justify-content: center; margin-block-start: 30px; padding: 12px; text-transform: uppercase; }
+  .ticker b { background: var(--ink); border-radius: 4px; color: var(--lime); padding: 1px 6px; }
+
+  /* Bento of five products. */
+  .bento-sec { padding-block: 110px; }
+  .bento { display: grid; gap: 24px; grid-template-columns: repeat(6, 1fr); margin-block-start: 50px; }
+  .b { background: var(--card); border-radius: 20px; display: flex; flex-direction: column; min-block-size: 300px; padding: 26px; position: relative; }
+  .b:nth-child(1), .b:nth-child(2) { grid-column: span 3; }
+  .b:nth-child(n+3) { grid-column: span 2; }
+  .b h3 { font: 600 24px/1.1 var(--sans); letter-spacing: -.02em; max-inline-size: 18ch; }
+  .b h3 span { color: var(--soft); }
+  .b .go { background: #fff; border: 0; border-radius: 8px; block-size: 36px; cursor: pointer; font-size: 16px; inline-size: 36px; inset: 20px 20px auto auto; position: absolute; }
+  .b .go:hover { background: var(--lime); }
+  .b .vis { flex: 1; margin-block-start: 22px; }
+  .bars { align-items: end; display: flex; gap: 6px; block-size: 100%; min-block-size: 110px; }
+  .bars i { background: var(--ink); border-radius: 4px 4px 0 0; block-size: calc(var(--v) * 1%); flex: 1; transform: scaleY(var(--in, 1)); transform-origin: bottom; transition: transform .8s var(--ease); }
+  .bars i:last-child { background: var(--lime); }
+  @media (max-width: 900px) { .bento { grid-template-columns: 1fr; } .b:nth-child(n) { grid-column: auto; min-block-size: 220px; } }
+
+  /* Recommendation panel on a blurred grey field. */
+  .reco { background: radial-gradient(60% 80% at 30% 20%, #d9d7cf, transparent 70%), radial-gradient(50% 70% at 80% 70%, #cfccc2, transparent 70%), #e7e5de; border-radius: 0 0 32px 32px; padding-block: 110px; }
+  .reco form { background: #fff; border-radius: 18px; box-shadow: 0 30px 60px -40px rgb(0 0 0 / .35); display: grid; gap: 14px; grid-template-columns: 1fr 1fr auto; margin: 40px auto 0; max-inline-size: 860px; padding: 18px; text-align: start; }
+  .reco label { color: var(--grey); display: grid; font: 500 12px var(--mono); gap: 6px; text-transform: uppercase; }
+  .reco select { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; font: 500 15px var(--sans); padding: 10px; }
+  .reco .btn { align-self: end; padding-block: 12px; }
+  .recs { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); margin: 20px auto 0; max-inline-size: 860px; text-align: start; }
+  .recs article { background: #fff; border-radius: 14px; padding: 18px; }
+  .recs b { display: block; font: 600 26px var(--sans); letter-spacing: -.03em; }
+  @media (max-width: 760px) { .reco form, .recs { grid-template-columns: 1fr; } }
+
+  /* Pinned: scattered tools converge into one. */
+  .scatter { block-size: 260vh; position: relative; }
+  .scatter .stage { align-items: center; block-size: 100vh; display: grid; overflow: clip; position: sticky; top: 0; }
+  .scatter h2 { position: relative; z-index: 2; }
+  .tools { inset: 0; position: absolute; }
+  .tool { background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 30px -20px rgb(0 0 0 / .3); font: 600 13px var(--sans); inset: calc(50% + 90px) auto auto 50%; opacity: calc(1 - var(--p, 0) * .85); padding: 12px 14px; position: absolute; transform: translate(-50%, -50%) translate(calc(var(--x) * (1 - var(--p, 0)) * 1vw), calc(var(--y) * (1 - var(--p, 0)) * 1vh)) rotate(calc(var(--r) * (1 - var(--p, 0)) * 1deg)); white-space: nowrap; }
+  .tool small { color: var(--grey); display: block; font: 500 11px var(--mono); }
+  .one { background: var(--ink); border-radius: 18px; color: #fff; font: 600 18px var(--sans); inset: calc(50% + 90px) auto auto 50%; opacity: var(--p, 0); padding: 20px 26px; position: absolute; transform: translate(-50%, -50%) scale(calc(.8 + var(--p, 0) * .2)); z-index: 3; }
+  .one span { color: var(--lime); }
+
+  /* Quote split, two cards, wall. */
+  .split { align-items: center; display: grid; gap: 50px; grid-template-columns: 1fr 1fr; padding-block: 110px; }
+  .split blockquote { font: 500 clamp(1.5rem, 2.6vw, 2.2rem)/1.2 var(--sans); letter-spacing: -.02em; margin: 0; }
+  .split figcaption { color: var(--grey); margin-block-start: 16px; }
+  .policy { background: var(--card); border-radius: 20px; padding: 22px; }
+  .policy .row { align-items: center; background: #fff; border-radius: 10px; display: flex; justify-content: space-between; margin-block-start: 8px; padding: 12px 14px; }
+  .switch { background: #d8d5cc; border: 0; border-radius: 999px; block-size: 24px; cursor: pointer; inline-size: 42px; padding: 3px; }
+  .switch::after { background: #fff; border-radius: 50%; block-size: 18px; content: ""; display: block; inline-size: 18px; transition: transform .25s var(--ease); }
+  .switch[aria-checked="true"] { background: var(--ink); }
+  .switch[aria-checked="true"]::after { background: var(--lime); transform: translateX(18px); }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+  .pair { display: grid; gap: 24px; grid-template-columns: 1fr 1fr; padding-block-end: 110px; }
+  .pair article { background: var(--card); border-radius: 20px; padding: 30px; }
+  .pair h3 { font: 600 26px/1.1 var(--sans); letter-spacing: -.02em; margin-block-end: 10px; }
+  .pair h3 span { color: var(--soft); }
+  @media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+  .wall { columns: 3 280px; column-gap: 24px; margin-block-start: 40px; }
+  .wall figure { background: #fff; border: 1px solid var(--line); border-radius: 16px; break-inside: avoid; margin: 0 0 24px; padding: 20px; }
+  .wall blockquote { margin: 0 0 12px; }
+  .wall figcaption { color: var(--grey); font-size: 13px; }
+
+  footer.site { background: #0d0d0c; color: #b9b8b2; margin-block-start: 110px; padding-block: 70px 90px; }
+  footer.site .two { color: #fff; }
+  footer.site .email { background: #1b1b19; border-color: #333; margin-block: 24px 50px; }
+  footer.site .email input { color: #fff; }
+  footer.site .cols { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-block-end: 30px; }
+  footer.site ul { list-style: none; margin: 8px 0 0; padding: 0; font-size: 14px; }
+  footer.site strong, footer.site a { color: #fff; }
+  footer.site p { font-size: 12px; }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">Skip to content</a>
+<div class="top">
+  <div class="announce" data-announce><span>New in the study: an invented AI spend dashboard.</span><button class="lm" type="button" data-demo="There is no launch page in this unofficial study.">Learn more</button><button class="x" type="button" aria-label="Dismiss announcement" data-dismiss>&times;</button></div>
+  <header class="site-header">
+    <div class="w">
+      <a class="mark" href="#top">ramp</a>
+      <nav aria-label="Sections"><a href="#products">Products</a><a href="#reco">Solutions</a><a href="#one">Platform</a><a href="#customers">Customers</a></nav>
+      <div class="end"><button class="btn pale signin" type="button" data-demo="There is no sign-in in this unofficial study.">Sign in</button><button class="btn lime" type="button" data-demo="There is no demo in this unofficial study.">See a demo</button><button class="btn black" type="button" data-demo="There is no sign-up in this unofficial study.">Get started</button></div>
+    </div>
+  </header>
+</div>
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="w">
+      <p class="eyebrow">Share of invented payments in this study:<span class="chip" data-share>0.8890%</span></p>
+      <h1 id="h1" data-split>Time is money. Keep both.</h1>
+      <p class="lede" data-reveal data-delay="300">Cards, expenses, bills, and <u>banking</u>* that close themselves while you do real work.</p>
+      <form class="email" data-email novalidate><label class="sg-visually-hidden" for="we">Work email</label><input id="we" type="email" placeholder="What's your work email?" autocomplete="email"><button class="btn lime" type="submit">Get started free</button><p role="status" data-email-status></p></form>
+      <div class="mock">
+        <div class="win">
+          <header><b>Needs your review</b><span class="muted" data-left style="font-size:13px">4 left</span></header>
+          <ul class="queue" data-queue>
+            <li><i style="--c:#e4f222" aria-hidden="true"></i><span>Team lunch<small>Receipt matched · Meals</small></span><span class="amt">$184.20</span><span class="acts"><button type="button" data-a="approve">Approve</button><button type="button" data-a="flag">Flag</button></span></li>
+            <li><i style="--c:#c7d4ff" aria-hidden="true"></i><span>Design software<small>Recurring · Software</small></span><span class="amt">$60.00</span><span class="acts"><button type="button" data-a="approve">Approve</button><button type="button" data-a="flag">Flag</button></span></li>
+            <li><i style="--c:#ffd2b8" aria-hidden="true"></i><span>Flight, SFO to JFK<small>Missing memo · Travel</small></span><span class="amt">$412.90</span><span class="acts"><button type="button" data-a="approve">Approve</button><button type="button" data-a="flag">Flag</button></span></li>
+            <li><i style="--c:#d6f0d8" aria-hidden="true"></i><span>Cloud hosting<small>Over budget by 8% · Infra</small></span><span class="amt">$2,318.00</span><span class="acts"><button type="button" data-a="approve">Approve</button><button type="button" data-a="flag">Flag</button></span></li>
+          </ul>
+          <p class="sg-visually-hidden" role="status" data-queue-status></p>
+        </div>
+        <div class="win">
+          <header><b>Card for Alex</b><span class="muted" style="font-size:13px">Virtual</span></header>
+          <div class="cardart" aria-hidden="true"><b>ramp</b><span>•••• 4021</span></div>
+          <div class="limit"><label for="lim"><span>Monthly limit</span><output for="lim" data-lim>$2,500</output></label><input id="lim" type="range" min="500" max="10000" step="500" value="2500"></div>
+        </div>
+      </div>
+      <p class="ticker" aria-label="Invented counters"><span>Agents at work today: <b data-agents>1,204</b></span><span>Receipts matched: <b>98.6%</b></span><span>Hours saved this week: <b>3,480</b></span></p>
+    </div>
+  </section>
+
+  <section class="bento-sec" id="products" aria-labelledby="bn-h">
+    <div class="w">
+      <h2 class="two center" id="bn-h" data-reveal>One platform. <span>Five jobs off your plate.</span></h2>
+      <div class="bento">
+        <article class="b"><h3>Cards and expenses <span>that handle themselves</span></h3><button class="go" type="button" aria-label="Cards and expenses" data-demo="There is no product page in this unofficial study.">&nearr;</button><div class="vis bars" aria-hidden="true" data-bars><i style="--v:40"></i><i style="--v:62"></i><i style="--v:48"></i><i style="--v:80"></i><i style="--v:55"></i><i style="--v:92"></i></div></article>
+        <article class="b"><h3>Procurement <span>without the email chains</span></h3><button class="go" type="button" aria-label="Procurement" data-demo="There is no product page in this unofficial study.">&nearr;</button><div class="vis" aria-hidden="true" style="background:repeating-linear-gradient(0deg,#fff 0 34px,transparent 34px 44px);border-radius:10px"></div></article>
+        <article class="b"><h3>Accounting <span>closed in days</span></h3><button class="go" type="button" aria-label="Accounting" data-demo="There is no product page in this unofficial study.">&nearr;</button><div class="vis" aria-hidden="true" style="background:conic-gradient(var(--ink) 0 72%,var(--lime) 0);border-radius:50%;aspect-ratio:1;max-inline-size:140px"></div></article>
+        <article class="b"><h3>Treasury <span>that earns</span></h3><button class="go" type="button" aria-label="Treasury" data-demo="There is no product page in this unofficial study.">&nearr;</button><div class="vis" aria-hidden="true" style="background:linear-gradient(180deg,transparent 60%,#fff 60%),linear-gradient(90deg,var(--lime) 0 3px,transparent 3px) 0 0/20% 100%;border-radius:10px"></div></article>
+        <article class="b"><h3>Integrations <span>with what you already use</span></h3><button class="go" type="button" aria-label="Integrations" data-demo="There is no product page in this unofficial study.">&nearr;</button><div class="vis" aria-hidden="true" style="background:radial-gradient(circle,#fff 0 18px,transparent 19px) 0 0/56px 56px;border-radius:10px"></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="reco center" id="reco" aria-labelledby="rc-h">
+    <div class="w">
+      <h2 class="two" id="rc-h" data-reveal>See what you'd save <span>before you sign up</span></h2>
+      <form data-reco onsubmit="return false">
+        <label>Industry<select data-ind><option value="1">Software</option><option value="1.3">Retail</option><option value="1.6">Healthcare</option><option value="1.1">Agency</option></select></label>
+        <label>Team size<select data-size><option value="40">1-50</option><option value="200">51-250</option><option value="800">251-1,000</option><option value="3000">1,000+</option></select></label>
+        <button class="btn lime" type="button" data-go>Get recommendations</button>
+      </form>
+      <div class="recs" aria-live="polite" data-recs>
+        <article><span class="eyebrow">Hours back / month</span><b>60</b><span class="muted">Invented estimate</span></article>
+        <article><span class="eyebrow">Savings / year</span><b>$48k</b><span class="muted">Invented estimate</span></article>
+        <article><span class="eyebrow">Start with</span><b>Cards</b><span class="muted">Invented pick</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="scatter" id="one" aria-labelledby="one-h" data-scatter>
+    <div class="stage">
+      <div class="tools" aria-hidden="true">
+        <span class="tool" style="--x:-34;--y:-30;--r:-8">Spreadsheet<small>budget_v12_final.xlsx</small></span>
+        <span class="tool" style="--x:30;--y:-28;--r:6">Inbox<small>RE: RE: receipt?</small></span>
+        <span class="tool" style="--x:-38;--y:24;--r:5">Bank portal<small>session expired</small></span>
+        <span class="tool" style="--x:36;--y:26;--r:-6">Chat<small>who approved this?</small></span>
+        <span class="tool" style="--x:-10;--y:-38;--r:3">Card statement<small>PDF, 14 pages</small></span>
+        <span class="tool" style="--x:12;--y:36;--r:-4">Ledger<small>unreconciled: 212</small></span>
+      </div>
+      <div class="w center"><h2 class="two" id="one-h">Systems that never spoke. <span>Now one place.</span></h2></div>
+      <div class="one" aria-hidden="true">ramp <span>one platform</span></div>
+    </div>
+  </section>
+
+  <div class="w">
+    <section class="split" aria-labelledby="sp-h">
+      <figure><h2 class="sg-visually-hidden" id="sp-h">A customer on policy (invented)</h2><blockquote>“We wrote the policy once. Now it enforces itself before anyone taps a card.”</blockquote><figcaption>Invented finance lead, a 300-person company</figcaption></figure>
+      <div class="policy">
+        <p class="eyebrow">Policy (study)</p>
+        <div class="row"><span>Block personal merchants</span><button class="switch" type="button" role="switch" aria-checked="true" aria-label="Block personal merchants"></button></div>
+        <div class="row"><span>Require receipts over $75</span><button class="switch" type="button" role="switch" aria-checked="true" aria-label="Require receipts over $75"></button></div>
+        <div class="row"><span>Auto-approve under $25</span><button class="switch" type="button" role="switch" aria-checked="false" aria-label="Auto-approve under $25"></button></div>
+        <p class="sg-visually-hidden" role="status" data-policy-status></p>
+      </div>
+    </section>
+    <section class="pair" aria-label="Less bureaucracy">
+      <article><h3>Access on autopilot. <span>New hires get the right card on day one.</span></h3><p class="muted">Roles map to limits, so nobody files a ticket for a card.</p></article>
+      <article><h3>Spend anywhere. <span>Pay vendors in their currency.</span></h3><p class="muted">Local cards and transfers in dozens of countries (invented count).</p></article>
+    </section>
+    <section id="customers" aria-labelledby="cu-h">
+      <h2 class="two center" id="cu-h" data-reveal>Finance teams <span>sleeping better</span></h2>
+      <div class="wall">
+        <figure><blockquote>“Month end used to be a week. Now it's a Tuesday.”</blockquote><figcaption>Invented controller, logistics</figcaption></figure>
+        <figure><blockquote>“I stopped chasing receipts. The app does it and it's nicer about it than I was.”</blockquote><figcaption>Invented office manager, agency</figcaption></figure>
+        <figure><blockquote>“We found three duplicate software subscriptions in the first hour.”</blockquote><figcaption>Invented CFO, SaaS</figcaption></figure>
+        <figure><blockquote>“Approvals happen in chat, not in meetings.”</blockquote><figcaption>Invented VP finance, retail</figcaption></figure>
+        <figure><blockquote>“Our auditors asked what changed. Everything, apparently.”</blockquote><figcaption>Invented accountant, healthcare</figcaption></figure>
+        <figure><blockquote>“Cards for 400 people and I haven't lost sleep once.”</blockquote><figcaption>Invented ops lead, construction</figcaption></figure>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site">
+  <div class="w">
+    <h2 class="two">Get the product newsletter. <span>Invented, but nicely written.</span></h2>
+    <form class="email" data-news novalidate><label class="sg-visually-hidden" for="ne">Email</label><input id="ne" type="email" placeholder="Email address" autocomplete="email"><button class="btn lime" type="submit">Get updates</button><p role="status" data-news-status></p></form>
+    <div class="cols"><div><strong>Product</strong><ul><li>Cards</li><li>Bills</li><li>Treasury</li></ul></div><div><strong>Company</strong><ul><li>About</li><li>Careers</li><li>Press</li></ul></div><div><strong>Resources</strong><ul><li>Guides</li><li>Blog</li><li>Status</li></ul></div></div>
+    <p><strong>Unofficial</strong> brand study of Ramp by StyleGallery. Not affiliated with Ramp. *No banking, cards, or payments exist here; all counters, estimates, and quotes are invented; no logos or photos are used. <a href="../">All studies</a></p>
+  </div>
+</footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Ramp by StyleGallery.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced } = window.SG;
+  const $ = (s) => document.querySelector(s);
+  // Keep hash and focus offsets equal to the real sticky stack; the announcement can be dismissed.
+  const topStack = $(".top");
+  const offset = () => document.documentElement.style.setProperty("--sg-header", `${topStack.offsetHeight + 12}px`);
+  offset(); addEventListener("resize", offset);
+  $("[data-dismiss]").addEventListener("click", () => { $("[data-announce]").remove(); offset(); document.querySelector(".site-header .mark").focus(); });
+  // Email forms: validate and say nothing was sent.
+  const hook = (f, s) => { const form = $(f), st = $(s); form.addEventListener("submit", (e) => { e.preventDefault(); const em = form.querySelector("input"); st.textContent = em.value && em.checkValidity() ? "Thanks. Nothing was sent: this is an unofficial study." : "Enter a valid email address first."; }); };
+  hook("[data-email]", "[data-email-status]"); hook("[data-news]", "[data-news-status]");
+  // Share chip ticks up slowly while the hero is on screen.
+  const share = $("[data-share]"), agents = $("[data-agents]");
+  let v = .889, n = 1204, tick = 0;
+  new IntersectionObserver(([e]) => { clearInterval(tick); if (e.isIntersecting && !reduced) tick = setInterval(() => { v += .0001; n += 1; share.textContent = `${v.toFixed(4)}%`; agents.textContent = n.toLocaleString("en-US"); }, 900); }).observe($(".hero"));
+  // Expense queue: approve or flag each row.
+  const left = $("[data-left]"), qs = $("[data-queue-status]");
+  const update = () => { const k = document.querySelectorAll("[data-queue] li:not([data-done])").length; left.textContent = k ? `${k} left` : "All clear"; };
+  document.querySelectorAll("[data-queue] li").forEach((li) => li.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+    li.setAttribute("data-done", ""); const s = document.createElement("span"); s.className = "state"; s.textContent = b.dataset.a === "approve" ? "Approved" : "Flagged for review"; li.append(s);
+    qs.textContent = `${li.querySelector("span").firstChild.textContent.trim()} ${s.textContent.toLowerCase()}`; update();
+  })));
+  // Card limit slider.
+  const lim = $("#lim"), lo = $("[data-lim]");
+  lim.addEventListener("input", () => { lo.textContent = `$${(+lim.value).toLocaleString("en-US")}`; });
+  // Bars grow in once.
+  const bars = [...document.querySelectorAll("[data-bars] i")];
+  if (!reduced) { bars.forEach((b) => b.style.setProperty("--in", "0")); new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { o.disconnect(); bars.forEach((b, i) => setTimeout(() => b.style.setProperty("--in", "1"), i * 80)); } }), { threshold: .4 }).observe($("[data-bars]")); }
+  // Recommendations from an invented formula.
+  $("[data-go]").addEventListener("click", () => {
+    const m = +$("[data-ind]").value, s = +$("[data-size]").value;
+    const hrs = Math.round(s * .9 * m), save = Math.round(s * 1.2 * m);
+    const pick = s >= 800 ? "Procurement" : m > 1.2 ? "Bills" : "Cards";
+    const arts = document.querySelectorAll("[data-recs] b");
+    arts[0].textContent = hrs.toLocaleString("en-US"); arts[1].textContent = save >= 1000 ? `$${(save / 1000).toFixed(1)}M` : `$${save}k`; arts[2].textContent = pick;
+  });
+  // Scattered tools converge as the pinned stage scrolls.
+  const sc = $("[data-scatter]");
+  const conv = () => { if (reduced) { sc.style.setProperty("--p", "1"); return; } const r = sc.getBoundingClientRect(); const t = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight) * 1.25)); sc.style.setProperty("--p", t.toFixed(3)); };
+  addEventListener("scroll", conv, { passive: true }); conv();
+  // Policy switches.
+  const ps = $("[data-policy-status]");
+  document.querySelectorAll(".switch").forEach((sw) => sw.addEventListener("click", () => { const on = sw.getAttribute("aria-checked") !== "true"; sw.setAttribute("aria-checked", String(on)); ps.textContent = `${sw.getAttribute("aria-label")} ${on ? "on" : "off"}`; }));
+})();
+</script>
+</body>
+</html>

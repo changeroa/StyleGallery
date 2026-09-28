@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>29CM - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="29CM 홈의 확장-압축 헤더와 3열 브랜드 피드를 원본 사진·카피 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Ctext x='4' y='21' font-size='12' font-family='sans-serif' font-weight='700'%3E29%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --ink: #000; --grey: #5d5d5d; --line: #e4e4e4; --sale: #c4320f; --sans: "Inter", "Pretendard Variable", Pretendard, -apple-system, sans-serif; --sg-header: 120px; --sg-focus: #000; }
+  body { background: #fff; color: var(--ink); font: 400 13px/1.5 var(--sans); letter-spacing: -0.01em; word-break: keep-all; }
+  .site-header { background: #fff; border-block-end: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
+  .hd { display: grid; grid-template-columns: 90px 1fr auto; padding: 14px 20px 12px; align-items: start; gap: 0 20px; }
+  .mark { font-weight: 700; font-size: 13px; letter-spacing: 0.02em; color: var(--ink); text-decoration: none; }
+  .big { display: flex; gap: 0 22px; flex-wrap: wrap; font-size: clamp(20px, 2.1vw, 28px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; transition: font-size .35s cubic-bezier(.16,1,.3,1); }
+  .big a { color: var(--ink); text-decoration: none; }
+  .big a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .site-header[data-scrolled] .big { font-size: 15px; }
+  .cats { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 11px; font-weight: 700; margin-block-start: 12px; text-transform: uppercase; }
+  .cats i { color: var(--grey); font-weight: 400; text-transform: none; }
+  .util { display: flex; gap: 12px; font-size: 11px; align-items: center; }
+  .util button { background: none; border: 1px solid #aaa; border-radius: 3px; font-size: 11px; padding: 3px 7px; }
+  @media (max-width: 760px) { .hd { grid-template-columns: 1fr auto; } .mark { grid-column: 1 / -1; } .cats { display: none; } }
+
+  .hero { display: grid; grid-auto-rows: min(64vh, 580px); grid-template-columns: 1.2fr 1fr 1fr; }
+  .hcol { color: #fff; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 26px; position: relative; text-align: center; text-decoration: none; }
+  .hcol .bg { inset: 0; position: absolute; transition: transform 1.4s cubic-bezier(.16,1,.3,1); }
+  .hcol:hover .bg { transform: scale(1.04); }
+  .hcol .cap { background: linear-gradient(0deg, rgb(0 0 0 / 0.55), transparent); margin: -26px; padding: 90px 26px 26px; position: relative; }
+  .hcol strong { display: block; font-size: clamp(26px, 3.2vw, 44px); font-weight: 300; letter-spacing: -0.02em; line-height: 1; }
+  .hcol span { display: block; font-size: 12px; margin-block-start: 12px; }
+  .knit { background: repeating-linear-gradient(90deg, #4a4a4a 0 6px, #3c3c3c 6px 12px), #444; }
+  .knit::after { background: #f1ece2; content: "29 Edit"; color: #222; font: 400 38px Georgia, serif; inset: 18% 10% auto 20%; padding: 10px 16px; position: absolute; transform: rotate(-3deg); }
+  .lilac { background: linear-gradient(180deg, #e7c6e6, #c89ac6); }
+  .cream { background: linear-gradient(180deg, #f3ecde, #e0d4bd); }
+  @media (max-width: 760px) { .hero { grid-auto-rows: 70vw; grid-template-columns: 1fr; } }
+
+  /* Feed: a full-height brand column, then two curation columns separated by hairlines. */
+  .block { border-block-start: 1px solid var(--line); display: grid; grid-template-columns: 1.2fr 1fr 1fr; }
+  .brandcol { color: #fff; min-block-size: 720px; overflow: hidden; position: relative; }
+  .brandcol .bg { inset: 0; position: absolute; }
+  .brandcol .bg svg { block-size: 100%; inline-size: 100%; }
+  .brandcol .name { font-weight: 300; background: linear-gradient(180deg, rgb(0 0 0 / 0.4), transparent); font-size: clamp(26px, 2.6vw, 38px); font-weight: 300; inset: 0 0 auto; letter-spacing: 0.02em; padding: 26px 24px 60px; position: absolute; text-transform: uppercase; }
+  .brandcol .name small { display: block; font-size: 12px; letter-spacing: 0; margin-block-start: 6px; text-transform: none; }
+  .cur { border-inline-start: 1px solid var(--line); padding: 26px 24px; }
+  .cur .pic { aspect-ratio: 1; overflow: hidden; }
+  .cur h3 { font-family: "Pretendard Variable", Pretendard, sans-serif; font-size: 18px; font-weight: 700; margin-block: 18px 4px; }
+  .cur > p { color: var(--grey); margin-block-end: 16px; }
+  .p { align-items: center; border-block-start: 1px solid var(--line); display: grid; gap: 12px; grid-template-columns: 56px minmax(0, 1fr) 28px; padding-block: 10px; }
+  .p .th { aspect-ratio: 1; overflow: hidden; }
+  .p b { display: block; font-size: 11px; }
+  .p .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .p .pr em { color: var(--sale); font-style: normal; font-weight: 700; margin-inline-end: 4px; }
+  .p .pr { font-weight: 700; }
+  .like { background: none; border: 0; color: #444; font-size: 16px; text-align: center; }
+  .like small { display: block; font-size: 10px; color: var(--grey); }
+  .like[aria-pressed="true"] { color: var(--sale); }
+  @media (max-width: 960px) { .block { grid-template-columns: 1fr 1fr; } .brandcol { grid-column: 1 / -1; min-block-size: 420px; } }
+  @media (max-width: 600px) { .block { grid-template-columns: 1fr; } .cur { border-inline-start: 0; } }
+  footer { border-block-start: 1px solid var(--line); color: var(--grey); display: grid; gap: 20px; grid-template-columns: 1fr 1fr 1fr; font-size: 11px; padding: 40px 20px 60px; }
+  footer strong { color: var(--ink); font-size: 13px; }
+  footer a { color: var(--ink); }
+  @media (max-width: 760px) { footer { grid-template-columns: 1fr; } }
+  .cats { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent); }
+  .pic, .th { clip-path: inset(0 round 6px); }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header" data-header>
+  <div class="hd">
+    <a class="mark" href="#top">29CM</a>
+    <div>
+      <nav class="big" aria-label="큐레이션"><a href="#feed">Edition</a><a href="#feed2">Showroom</a><a href="#feed3">Journal</a><a href="#feed4">Picks</a></nav>
+      <div class="cats" aria-hidden="true"><span>Best</span><span>Women</span><span>Men</span><span>Interior</span><span>Kitchen</span><span>Digital</span><span>Beauty</span><span>Food</span><span>Leisure</span><span>Kids</span><span>Culture</span><i>Event</i><i>Lookbook</i></div>
+    </div>
+    <div class="util"><span aria-hidden="true">&#9825; &#128100; &#128722;</span><button type="button" data-demo="비공식 스터디: 로그인은 없어요.">로그인/회원가입</button></div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-label="이번 주 기획 (예시)">
+    <a class="hcol" href="#feed"><div class="bg knit" aria-hidden="true"></div><div class="cap"><strong>Single Brand Week</strong><span>단독 브랜드의 조금 다른 혜택 &middot; 10.1 - 10.12</span></div></a>
+    <a class="hcol" href="#feed2"><div class="bg lilac" aria-hidden="true" data-art="shoe|#e7c6e6|#6a2a58|#f3dcef"></div><div class="cap"><strong style="font-family:Georgia,serif;font-style:italic">Walk Club</strong><span>걷기 좋은 신발만 모았어요</span></div></a>
+    <a class="hcol" href="#feed3"><div class="bg cream" aria-hidden="true" data-art="bed|#f3ecde|#8a3a5a|#6b4a33"></div><div class="cap"><strong style="font-weight:700;letter-spacing:.3em">이 달 의 집</strong><span>10월에 만나는 우리집 취향</span></div></a>
+  </section>
+  <div data-feed></div>
+</main>
+<footer><div><strong>29CM study</strong><p>Unofficial 브랜드 스터디 &middot; 29CM와 무관합니다. 브랜드와 상품은 모두 지어낸 예시이며 사진 대신 그림을 썼어요.</p></div><div><p>서체: Inter, Pretendard</p></div><div><a href="../">모든 스터디</a></div></footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of 29CM by StyleGallery. Not affiliated with 29CM.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script src="../_kit/products.js"></script>
+<script>
+(() => {
+  const { art } = window.SG;
+  document.querySelectorAll("[data-art]").forEach((el) => { const [k, g, m, a] = el.dataset.art.split("|"); el.innerHTML = `<div style="position:absolute;inset:10% 10% 30%">${art(k, { ground: "transparent", main: m, accent: a })}</div>`; });
+  const blocks = [
+    ["feed", "NORDLIGHT", "빛을 오래 두는 방법", "sofa", "#b9a58c", "#6b4a33", [["가을 담요 소개해요", "포근한 것들만 골랐어요", "bed", "#efe7dc"], ["향으로 남는 방", "작은 방을 채우는 향 이야기", "bottle", "#e6efe4"]], ["tote", "bag", "tee", "lamp", "plant", "cap"]],
+    ["feed2", "HAZEL & CO", "가벼운 겉옷의 계절", "jacket", "#8a9a7a", "#2d3a24", [["오늘의 스타일 기록", "직원들이 입어본 한 주", "pants", "#eef0ea"], ["브랜드 소식 모음", "새로 들어온 것과 다시 온 것", "boot", "#f1ebe6"]], ["jacket", "pants", "boot", "tee", "cap", "shoe"]],
+    ["feed3", "MOONSEED", "몸을 먼저 챙기는 시간", "serum", "#c9b6d6", "#3a2a55", [["향을 담은 선물", "계절이 바뀔 때 건네기 좋은", "gift", "#f6ede4"], ["빛이 채우는 오후", "창가에 두는 조명들", "lamp", "#f2ecdc"]], ["serum", "bottle", "lipstick", "gift", "lamp", "plant"]],
+    ["feed4", "ROUND TABLE", "천천히 차리는 식탁", "bowl", "#d8c7a8", "#5a4a2a", [["겨울에도 가볍게", "얇지만 따뜻한 것들", "tee", "#eef1f5"], ["시간이 남긴 무늬", "손으로 빚은 그릇 모음", "bowl", "#f3eee6"]], ["bowl", "box", "chair", "lamp", "book", "plant"]],
+  ];
+  const names = { tote: "캔버스 토트", bag: "레더 숄더백", tee: "헤비 티셔츠", lamp: "테이블 조명", plant: "올리브 화분", cap: "코튼 볼캡", jacket: "라이트 블루종", pants: "와이드 슬랙스", boot: "앵클 부츠", shoe: "스웨이드 로퍼", serum: "나이트 세럼", bottle: "핸드 워시", lipstick: "립 밤", gift: "향 선물 세트", bowl: "스톤웨어 볼", box: "우드 트레이", chair: "스툴 체어", book: "레시피 북", bed: "리넨 침구" };
+  let n = 0;
+  const prod = (k) => { n++; const off = [12, 18, 25, 33][n % 4]; const price = 29000 + (n * 11113) % 180000; return `<div class="p"><div class="th" aria-hidden="true">${art(k, { ground: ["#f2f2f2", "#efe9e1", "#e9eef2"][n % 3], main: ["#222", "#6b4a33", "#2f4b66", "#8a2f2f"][n % 4], accent: "#777" })}</div><div><b>${["NORDLIGHT", "HAZEL & CO", "MOONSEED", "ROUND TABLE", "PAPER MOON"][n % 5]}</b><div class="nm">${names[k]} ${["Ivory", "Olive", "Charcoal", "Sand"][n % 4]} (가상 상품)</div><div class="pr"><em>${off}%</em>${(Math.round(price * (1 - off / 100) / 10) * 10).toLocaleString()}원</div></div><button class="like" type="button" aria-pressed="false" aria-label="${names[k]} 좋아요">&#9825;<small>${(n * 37) % 900}</small></button></div>`; };
+  document.querySelector("[data-feed]").innerHTML = blocks.map(([id, brand, sub, k, g, m, curs, prods]) => `<section class="block" id="${id}" aria-labelledby="${id}-h"><div class="brandcol"><div class="bg" aria-hidden="true">${art(k, { ground: g, main: m, accent: "#f3efe6" })}</div><h2 class="name" id="${id}-h">${brand}<small>${sub}</small></h2></div>${curs.map(([t, s, ck, cg], i) => `<div class="cur"><div class="pic" aria-hidden="true">${art(ck, { ground: cg, main: m, accent: "#999" })}</div><h3>${t}</h3><p>${s}</p>${prods.slice(i * 3, i * 3 + 3).map(prod).join("")}</div>`).join("")}</section>`).join("");
+  document.addEventListener("click", (e) => { const b = e.target.closest(".like"); if (!b) return; const on = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", String(on)); const c = b.querySelector("small"); c.textContent = Number(c.textContent) + (on ? 1 : -1); b.firstChild.textContent = on ? "\u2665" : "\u2661"; });
+})();
+</script>
+</body>
+</html>

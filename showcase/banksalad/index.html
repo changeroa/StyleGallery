@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>뱅크샐러드 - 비공식 브랜드 스터디 (Unofficial) | StyleGallery</title>
+<meta name="description" content="뱅크샐러드 홈의 민트 톤 히어로와 비교 추천 구성을 원본 카피·일러스트 없이 재해석한 비공식 스터디.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%2300c28a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../_kit/study.css">
+<style>
+  :root { --green: #007a57; --green-2: #00c28a; --mint: #e9f8f2; --ink: #1e2124; --grey: #5b6168; --line: #e6e8ea; --sans: "Pretendard Variable", Pretendard, -apple-system, "Noto Sans KR", sans-serif; --sg-header: 84px; --sg-focus: #00a676; --ease: cubic-bezier(.16,1,.3,1); }
+  body { background: #fff; color: var(--ink); font: 400 15px/1.6 var(--sans); letter-spacing: -0.02em; word-break: keep-all; }
+  .inner { margin-inline: auto; max-inline-size: 960px; padding-inline: 24px; }
+  .site-header { background: #fff; border-block-end: 1px solid var(--line); inset: 0 0 auto; position: fixed; z-index: 20; }
+  .site-header .bar { align-items: center; display: flex; gap: 28px; block-size: 64px; margin-inline: auto; max-inline-size: 1200px; padding-inline: 24px; }
+  .logo { align-items: center; color: var(--ink); display: flex; font-size: 19px; font-weight: 700; gap: 7px; letter-spacing: -0.04em; text-decoration: none; }
+  .logo i { background: var(--green-2); border-radius: 50% 50% 50% 8px; block-size: 18px; inline-size: 18px; }
+  .site-nav { display: flex; gap: 4px; }
+  .site-nav a { border-radius: 8px; color: var(--ink); font-size: 14px; font-weight: 600; padding: 6px 10px; text-decoration: none; }
+  .site-nav a:hover { background: var(--mint); color: var(--green); }
+  @media (max-width: 760px) { .site-nav { display: none; } }
+
+  /* Hero: mint field, ripple rings, objects orbit an original round avatar; four-slide pager. */
+  .hero { background: var(--mint); margin-block-start: 64px; overflow: hidden; position: relative; }
+  .hero .inner { align-items: center; display: grid; grid-template-columns: 1fr 1fr; min-block-size: 480px; position: relative; }
+  .rings { inset: 0; position: absolute; pointer-events: none; }
+  .rings i { animation: ripple 6s linear infinite; border: 2px solid rgb(255 255 255 / 0.9); border-radius: 50%; block-size: 260px; inline-size: 260px; inset: 50% auto auto 70%; position: absolute; transform: translate(-50%, -50%) scale(0.6); }
+  .rings i:nth-child(2) { animation-delay: -2s; } .rings i:nth-child(3) { animation-delay: -4s; }
+  @keyframes ripple { to { transform: translate(-50%, -50%) scale(4); opacity: 0; } }
+  .hero h1 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); font-weight: 800; letter-spacing: -0.045em; line-height: 1.3; }
+  .ctas { display: grid; gap: 10px; justify-items: start; margin-block-start: 28px; }
+  .pill { border: 2px solid var(--green); border-radius: 999px; font-size: 14px; font-weight: 700; padding: 8px 18px; }
+  .pill.solid { background: var(--green); color: #fff; }
+  .pill.line { background: #fff; color: var(--green); }
+  .orbit { aspect-ratio: 1; justify-self: center; position: relative; inline-size: min(380px, 80%); }
+  .avatar { background: #fff; border-radius: 50%; inset: 18%; position: absolute; box-shadow: 0 30px 60px -30px rgb(0 80 50 / 0.3); overflow: hidden; }
+  .avatar svg { block-size: 100%; inline-size: 100%; }
+  .obj { inset: 0; position: absolute; animation: spin 24s linear infinite; }
+  .obj span { position: absolute; transform-origin: center; animation: spin 24s linear infinite reverse; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .pager { display: flex; gap: 6px; inset: auto 0 18px; justify-content: center; position: absolute; }
+  .pager button { background: rgb(0 0 0 / 0.15); border: 0; border-radius: 999px; block-size: 8px; inline-size: 8px; padding: 0; transition: inline-size .4s var(--ease); }
+  .pager button[aria-current="true"] { background: var(--green); inline-size: 24px; }
+  @media (max-width: 760px) { .hero .inner { grid-template-columns: 1fr; padding-block: 50px 70px; } .orbit { inline-size: 240px; } }
+
+  .compare { padding-block: 70px 60px; text-align: center; }
+  .compare small { color: var(--grey); font-size: 13px; }
+  .compare h2 { font-size: 22px; font-weight: 700; margin-block: 4px 36px; }
+  .values { display: grid; gap: 30px; grid-template-columns: 1fr 1fr; }
+  .values svg { block-size: 72px; margin: 0 auto 12px; }
+  .values h3 { font-size: 15px; }
+  .values p { color: var(--grey); font-size: 13px; margin-block-start: 6px; }
+  .picks { border-block-start: 8px solid #f3f5f6; padding-block: 50px 70px; }
+  .picks h2 { font-size: 20px; margin-block-end: 20px; }
+  .pick-row { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
+  .pick { background: #fff; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); font: inherit; overflow: hidden; padding: 0; text-align: start; transition: box-shadow .3s, transform .3s var(--ease); }
+  .pick:hover { box-shadow: 0 16px 30px -18px rgb(0 0 0 / 0.3); transform: translateY(-4px); }
+  .pick .art { aspect-ratio: 1.3; display: grid; place-items: center; }
+  .pick .art svg { block-size: 60%; }
+  .pick span { display: block; padding: 10px 12px 14px; font-size: 13px; }
+  .pick small { color: var(--grey); display: block; }
+  @media (max-width: 760px) { .values, .pick-row { grid-template-columns: 1fr 1fr; } }
+
+  .band { background: radial-gradient(50% 80% at 70% 60%, #6b4a33, #2c1e16 70%); color: #fff; overflow: hidden; position: relative; }
+  .band .inner { align-items: center; display: grid; grid-template-columns: 1fr 1fr; min-block-size: 340px; }
+  .band small { color: #e8dccf; font-size: 12px; }
+  .band h2 { font-size: 22px; line-height: 1.4; margin-block: 10px 20px; }
+  .stores { display: flex; gap: 8px; }
+  .store { background: #000; border: 1px solid rgb(255 255 255 / 0.4); border-radius: 6px; color: #fff; font-size: 12px; font-weight: 600; padding: 7px 12px; }
+  .phone { background: #fff; border: 8px solid #111; border-radius: 34px; block-size: 400px; inline-size: 200px; justify-self: center; padding: 30px 12px; transform: rotate(14deg) translateY(calc(40px - var(--bp, 0) * 80px)); box-shadow: 0 40px 60px -20px rgb(0 0 0 / 0.6); color: var(--ink); font-size: 11px; }
+  .phone .bal { background: var(--green); border-radius: 12px; color: #fff; padding: 12px; }
+  .phone .bal b { display: block; font-size: 18px; }
+  .phone .r { border-block-end: 1px solid var(--line); display: flex; justify-content: space-between; padding-block: 8px; }
+  @media (max-width: 760px) { .band .inner { grid-template-columns: 1fr; padding-block: 40px; } .phone { display: none; } }
+
+  .partners { padding-block: 50px; text-align: center; }
+  .partners p { color: var(--grey); font-size: 13px; }
+  .marks { margin-block-start: 24px; --sg-marquee-speed: 30s; }
+  .marks span { color: #6b7178; font-size: 18px; font-weight: 700; white-space: nowrap; }
+  .notice { background: #eef2f6; color: var(--grey); font-size: 12px; padding-block: 18px; text-align: center; }
+  footer { padding-block: 40px 50px; }
+  .foot { display: grid; gap: 30px; grid-template-columns: 1.4fr 1fr 1fr; font-size: 13px; color: var(--grey); }
+  .foot h3 { color: var(--ink); font-size: 13px; margin-block-end: 8px; }
+  .foot a { color: var(--ink); }
+  @media (max-width: 760px) { .foot { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a class="sg-skip" href="#main">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="bar">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>banksalad</a>
+    <nav class="site-nav" aria-label="섹션"><a href="#compare">비교</a><a href="#picks">추천</a><a href="#app">앱</a><a href="#partners">제휴</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-roledescription="carousel" aria-label="소개">
+    <div class="rings" aria-hidden="true" data-ambient><i></i><i></i><i></i></div>
+    <div class="inner">
+      <div>
+        <h1 data-hero-title>내 돈의 전체 그림을<br>먼저 보여줄게요</h1>
+        <div class="ctas">
+          <button class="pill solid" type="button" data-demo="비공식 스터디: 서비스 이용은 연결되어 있지 않아요.">지금 써보기</button>
+          <button class="pill line" type="button" data-demo="비공식 스터디: 소개 페이지는 없어요.">서비스 더 보기</button>
+        </div>
+      </div>
+      <div class="orbit" aria-hidden="true" data-ambient>
+        <div class="avatar"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="100" fill="#fff"/><path d="M100 30c46 10 66 50 58 92-6 32-32 50-58 50s-52-18-58-50c-8-42 12-82 58-92z" fill="#5fd39a"/><path d="M100 36v130" stroke="#3aa876" stroke-width="4" opacity=".5"/><circle cx="80" cy="104" r="8" fill="#1f3b2d"/><circle cx="120" cy="104" r="8" fill="#1f3b2d"/><circle cx="83" cy="101" r="2.5" fill="#fff"/><circle cx="123" cy="101" r="2.5" fill="#fff"/><path d="M88 126q12 10 24 0" stroke="#1f3b2d" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="66" cy="120" rx="8" ry="5" fill="#ff9fb0" opacity=".7"/><ellipse cx="134" cy="120" rx="8" ry="5" fill="#ff9fb0" opacity=".7"/></svg></div>
+        <div class="obj">
+          <span style="inset:2% auto auto 44%"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M6 18 20 6l14 12v16H6z" fill="#6f7ff5"/></svg></span>
+          <span style="inset:36% auto auto 0"><svg width="46" height="34" viewBox="0 0 46 34"><rect width="46" height="22" y="6" rx="6" fill="#2d7ff9"/><circle cx="12" cy="30" r="4" fill="#222"/><circle cx="34" cy="30" r="4" fill="#222"/></svg></span>
+          <span style="inset:14% 2% auto auto"><svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="17" r="16" fill="#ffb400"/><text x="17" y="23" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">&#8361;</text></svg></span>
+          <span style="inset:56% 0 auto auto"><svg width="46" height="34" viewBox="0 0 46 34"><rect width="44" height="30" x="1" y="2" rx="5" fill="#16c784" transform="rotate(-18 23 17)"/></svg></span>
+          <span style="inset:10% auto auto 14%"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M13 2 24 22H2z" fill="#ff6b8a"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <div class="pager" role="group" aria-label="소개 슬라이드">
+      <button type="button" aria-label="슬라이드 1" aria-current="true" data-go="0"></button><button type="button" aria-label="슬라이드 2" data-go="1"></button><button type="button" aria-label="슬라이드 3" data-go="2"></button><button type="button" aria-label="슬라이드 4" data-go="3"></button>
+    </div>
+  </section>
+
+  <section class="compare inner" id="compare" aria-labelledby="compare-h">
+    <small>어떤 상품이 나한테 맞는지 헷갈릴 때</small>
+    <h2 id="compare-h">고르기 전에, 조건부터 한 줄로</h2>
+    <div class="values">
+      <div data-reveal><svg viewBox="0 0 90 72" aria-hidden="true"><rect x="10" y="20" width="60" height="44" rx="8" fill="#16c784"/><circle cx="32" cy="40" r="4" fill="#fff"/><circle cx="48" cy="40" r="4" fill="#fff"/><path d="M30 50q10 8 20 0" stroke="#fff" stroke-width="4" fill="none"/><path d="M64 50l14 14-6 2-4 6z" fill="#222"/></svg><h3>넓게 모은 상품 정보</h3><p>금리 숫자만이 아니라 우대 조건과 한도까지 한 줄에 놓고 봐요.</p></div>
+      <div data-reveal data-delay="120"><svg viewBox="0 0 90 72" aria-hidden="true"><circle cx="30" cy="44" r="16" fill="#16c784"/><circle cx="54" cy="46" r="14" fill="#2d7ff9"/><path d="M50 10c10 0 22 8 26 18" stroke="#ff6b8a" stroke-width="10" stroke-linecap="round" fill="none"/></svg><h3>나에게 맞춘 순서</h3><p>내 소비와 대출 조건을 반영해 추천 순서를 다시 정렬해요.</p></div>
+    </div>
+  </section>
+
+  <section class="picks inner" id="picks" aria-labelledby="picks-h">
+    <h2 id="picks-h">이번 주 추천</h2>
+    <div class="pick-row">
+      <button class="pick" type="button" data-demo="비공식 스터디: 카드 추천은 시연이에요." data-reveal><div class="art" style="background:#f1f3f5" aria-hidden="true"><svg viewBox="0 0 80 60"><rect x="8" y="14" width="50" height="32" rx="5" fill="#8a7dff" transform="rotate(-10 33 30)"/><rect x="20" y="18" width="50" height="32" rx="5" fill="#ffcf5c" transform="rotate(6 45 34)"/></svg></div><span><small>카드</small>생활비 카드 추천</span></button>
+      <button class="pick" type="button" data-demo="비공식 스터디: 보험 비교는 시연이에요." data-reveal data-delay="80"><div class="art" style="background:linear-gradient(160deg,#9b8cff,#6b5bff)" aria-hidden="true"><svg viewBox="0 0 80 60"><path d="M40 6 62 14v16c0 14-10 22-22 26-12-4-22-12-22-26V14z" fill="#fff" opacity=".9"/><path d="M40 20v18M31 29h18" stroke="#6b5bff" stroke-width="6" stroke-linecap="round"/></svg></div><span><small>보험</small>실손보험 비교</span></button>
+      <button class="pick" type="button" data-demo="비공식 스터디: 대출 조회는 시연이에요." data-reveal data-delay="160"><div class="art" style="background:radial-gradient(60% 60% at 50% 20%,#f0a24a,#2b3a55 70%)" aria-hidden="true"><svg viewBox="0 0 80 60"><path d="M20 50c10-20 30-20 40 0" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/></svg></div><span><small>대출</small>조건 없는 대출 찾기</span></button>
+      <button class="pick" type="button" data-demo="비공식 스터디: 보험금 조회는 시연이에요." data-reveal data-delay="240"><div class="art" style="background:linear-gradient(160deg,#1e3a3a,#0f2020)" aria-hidden="true"><svg viewBox="0 0 80 60"><circle cx="40" cy="30" r="16" fill="#16c784"/><path d="M40 22v16M32 30h16" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg></div><span><small>보험</small>숨은 보험금 찾기</span></button>
+    </div>
+  </section>
+
+  <section class="band" id="app" aria-labelledby="app-h" data-band>
+    <div class="inner">
+      <div>
+        <small>매일 여는 금융 앱을 목표로 (예시 문구)</small>
+        <h2 id="app-h">내 돈의 전체 그림,<br>앱에서 먼저 확인해요</h2>
+        <div class="stores"><button class="store" type="button" data-demo="비공식 스터디: 스토어로 이동하지 않아요.">Google Play</button><button class="store" type="button" data-demo="비공식 스터디: 스토어로 이동하지 않아요.">App Store</button></div>
+      </div>
+      <div class="phone" aria-hidden="true"><div class="bal">이번 달 남은 돈<b>482,300원</b></div><div class="r"><span>식비</span><span>312,000</span></div><div class="r"><span>교통</span><span>84,500</span></div><div class="r"><span>구독</span><span>41,900</span></div><div class="r"><span>저축</span><span>500,000</span></div></div>
+    </div>
+  </section>
+
+  <section class="partners inner" id="partners" aria-labelledby="partners-h">
+    <h2 class="sg-visually-hidden" id="partners-h">제휴</h2>
+    <p>여러 금융사와 함께 정확한 조건을 전해요 (아래는 가상의 이름)</p>
+    <div class="marks sg-marquee" data-ambient aria-label="가상의 제휴사 이름">
+      <div class="sg-marquee-track"><span>한결카드</span><span>새벽은행</span><span>푸른보험</span><span>온길캐피탈</span><span>다온증권</span><span>하람저축</span></div>
+      <div class="sg-marquee-track" aria-hidden="true"><span>한결카드</span><span>새벽은행</span><span>푸른보험</span><span>온길캐피탈</span><span>다온증권</span><span>하람저축</span></div>
+    </div>
+  </section>
+  <p class="notice">이 페이지는 실제 서비스가 아닌 디자인 스터디입니다. 금리와 금액은 모두 예시예요.</p>
+</main>
+<footer>
+  <div class="inner foot">
+    <div><span class="logo"><i aria-hidden="true"></i>banksalad</span><p style="margin-block-start:10px">Unofficial 브랜드 스터디 &middot; 뱅크샐러드와 무관합니다.</p></div>
+    <div><h3>둘러보기</h3><p>카드 &middot; 대출 &middot; 보험</p></div>
+    <div><h3>스터디</h3><p><a href="../">모든 스터디 보기</a></p></div>
+  </div>
+</footer>
+<div class="sg-studybar"><span><strong>Unofficial brand study</strong> of Banksalad by StyleGallery. Not affiliated with Banksalad.</span><a href="../">&larr; All studies</a></div>
+
+<script src="../_kit/study.js"></script>
+<script>
+(() => {
+  const { reduced, scene } = window.SG;
+  const titles = ["내 돈의 전체 그림을<br>먼저 보여줄게요", "흩어진 카드값을<br>한 장의 표로", "건강검진 결과도<br>보험과 함께 읽기", "대출 금리를<br>한 번에 나란히"];
+  const title = document.querySelector("[data-hero-title]");
+  const dots = [...document.querySelectorAll("[data-go]")];
+  let at = 0, timer = 0;
+  const go = (n) => { at = n; title.innerHTML = titles[n]; dots.forEach((d, i) => d.setAttribute("aria-current", String(i === n))); if (!reduced) title.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 500, easing: "cubic-bezier(.16,1,.3,1)" }); };
+  dots.forEach((d, i) => d.addEventListener("click", () => { go(i); clearInterval(timer); }));
+  // Auto-advance only while the hero is visible and motion is allowed; any click stops it.
+  if (!reduced) new IntersectionObserver(([e]) => { clearInterval(timer); if (e.isIntersecting) timer = setInterval(() => go((at + 1) % 4), 4500); }).observe(document.querySelector(".hero"));
+  const band = document.querySelector("[data-band]");
+  if (!reduced) scene(band, (p) => band.style.setProperty("--bp", String(p)), { start: "enter" });
+})();
+</script>
+</body>
+</html>
