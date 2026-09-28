@@ -77,4 +77,4 @@ Consumer reference record: consumer-reference/agent-native/registry.json
 ## Navigation
 
 Parent: [Interaction Lab](README.md).
-Next: [Game UI verification workflow](../../game-ui/verification-workflow.md).
+Next: [Platform compatibility matrix](../../platform-guides/compatibility-matrix.md).

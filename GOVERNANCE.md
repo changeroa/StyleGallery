@@ -40,9 +40,10 @@ Use this file before editing repository documentation. It names which file is au
 | Layout domain hub | `layout/index.md` | Manual | None | `stable` | Layout route or ownership changes. | `scripts/validate-domains.mjs`, `scripts/validate-ia.mjs` | Pattern-data owner |
 | Motion domain guidance | `motion/*.md` | Manual | None | `experimental` | Upstream revision, evidence boundary, or guidance changes. | `scripts/validate-domains.mjs` | Motion domain owner |
 | Design Engineering domain guidance | `design-engineering/*.md`, `design-engineering/state-management/**/*.md` | Manual | None | `experimental` | Upstream revision, evidence boundary, or guidance changes. | `scripts/validate-domains.mjs` | Design Engineering domain owner |
-| Game UI domain guidance | `game-ui/**/*.md` | Manual | None | `experimental` | Classification, hierarchy, engine implementation, evidence boundary, or route changes. | `scripts/validate-domains.mjs` | Game UI domain owner |
 | Platform Guides domain guidance | `platform-guides/*.md` | Manual | None | `experimental` | Platform version, upstream revision, evidence boundary, or guidance changes. | `scripts/validate-domains.mjs` | Platform Guides domain owner |
 | Design Terminology domain guidance | `design-terminology/*.md` | Manual; term and relation tables remain authoring sources | None | `experimental` | Source-kind, source-vocabulary, concept-family, relation-model, or conflict-case changes. | `scripts/validate-domains.mjs`, `scripts/validate-design-terminology.mjs` | Design Terminology domain owner |
+| Expression domain guidance | `expression/**/*.md` | Manual | None | `experimental` | Direction value, technique code, brand-study policy, or guidance changes. | `scripts/validate-domains.mjs` | Expression domain owner |
+| Showcase works | `showcase/**` | Manual | None | `experimental` | Work content, brief contract, or outcome-check changes. | `scripts/check-showcase.mjs`, `scripts/test-check-showcase.mjs` | Expression domain owner |
 | Pattern data and examples | `scripts/pattern-data.mjs` | Manual data source | `patterns/**/*.md`, `patterns/**/index.md`, `patterns/index.md`, `CATALOG.md` | `generated` output from `stable` source | Source-lineage URL changes, generated drift, category changes, or pattern count changes. | `scripts/validate-patterns.mjs`, `scripts/validate-catalog.mjs`, `scripts/validate-governance.mjs` | Pattern-data owner |
 | Pattern generator | `scripts/generate-patterns.mjs` | Manual code source | `patterns/**/*.md`, `patterns/**/index.md`, `patterns/index.md`, `CATALOG.md` | `stable` generator, `generated` output | Generated structure changes, generated-warning changes, or generated metadata changes. | `node -c scripts/generate-patterns.mjs`, generated drift check, `scripts/validate-governance.mjs` | Pattern-data owner |
 | Validation scripts | `scripts/validate-*.mjs`, `scripts/test-validate-*.mjs` | Manual code source | CI validation output | `stable` | Validator scope changes, fixture changes, or CI parity changes. | `node -c`, matching fixture tests, `.github/workflows/validate.yml` | Validation owner |
@@ -105,7 +106,8 @@ Use these states in reviews and governance notes. Do not invent new lifecycle la
 Default lifecycle:
 
 - Root docs, guides, recipes, quality docs, validators, and CI are `stable` unless a page explicitly says otherwise.
-- `DOMAINS.md`, the scope decision, and `layout/index.md` are `stable`; domain leaves under `motion/`, `design-engineering/`, `game-ui/`, `platform-guides/`, and `design-terminology/` begin `experimental`.
+- `DOMAINS.md`, the scope decision, and `layout/index.md` are `stable`; domain leaves under `motion/`, `design-engineering/`, `platform-guides/`, `design-terminology/`, and `expression/` begin `experimental`.
+- `showcase/` works are `experimental` product pages. Layout authoring rules do not apply to them; the `scripts/check-showcase.mjs` outcome checks in [Showcase QA](showcase/QA.md) do.
 - Generated pattern docs, generated pattern indexes, and `CATALOG.md` are `generated`.
 - Draft research artifacts under `.omo/` are `draft` or `experimental` and are not contributor-facing source of truth.
 
@@ -130,9 +132,9 @@ Consumer-reference ownership records the current truth as `owner.enforcement: "p
 | `design-engineering/**` | Design Engineering domain owner | Separation of product heuristics from shared quality gates. |
 | `design-engineering/reference-profiles/**` | Design Engineering owner with Validation owner | Profile-local identity and values, pinned Layout provenance, explicit non-default selection, and related-fixture truth. |
 | `tests/**`, `playwright.config.mjs`, `consumer-reference/baselines/**`, `scripts/*baseline*.mjs`, `scripts/*sentinel*.mjs`, `scripts/*renderer-purity.mjs` | Repository governance owner with Validation owner | Pure rendering, computed semantics before screenshots, immutable browser pins, required consumer-conformance semantics, optional raster capture, calibration cardinality, and pending owner approval. |
-| `game-ui/**` | Game UI domain owner | Player-task classification, hierarchy responsibility, reference records, engine-specific subtrees, and cross-engine boundaries. |
 | `platform-guides/**` | Platform Guides domain owner | Platform/source/version limits, comparison boundaries, and stale review. |
 | `design-terminology/**` | Design Terminology domain owner | Term-family classification, comparative system definitions, conflict-case boundaries, and external vocabulary citations. |
+| `expression/**`, `showcase/**`, `scripts/*showcase*.mjs` | Expression domain owner | Direction values stay out of Layout, brand studies follow policy, and techniques keep reduced-motion and offscreen behavior explicit. |
 | `scripts/validate-*.mjs`, `scripts/test-validate-*.mjs`, `.github/workflows/validate.yml`, `.github/workflows/evidence-freshness.yml` | Validation owner | Validator scope, negative fixtures, blocking/advisory boundaries, CI parity. |
 
 ## Shared Promotion Governance

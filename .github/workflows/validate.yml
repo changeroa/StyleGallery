@@ -123,16 +123,6 @@ jobs:
           node scripts/validate-design-terminology.mjs --json
           node scripts/test-validate-design-terminology.mjs
 
-      - name: Unity organization compressed wiki check
-        run: |
-          node scripts/validate-unity-org-wiki.mjs --json
-          node scripts/test-validate-unity-org-wiki.mjs
-
-      - name: Unity source citation contract
-        run: |
-          node scripts/validate-unity-source-contracts.mjs --json
-          node scripts/test-validate-unity-source-contracts.mjs
-
       - name: Consumer reference receiver contract
         run: |
           node scripts/validate-consumer-reference.mjs --json

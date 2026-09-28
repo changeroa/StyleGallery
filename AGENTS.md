@@ -6,7 +6,7 @@ description: Rules coding agents must follow when editing this governed multi-do
 
 # Agent Instructions
 
-This repository is StyleGallery: a governed gallery with Layout, Motion, Design Engineering, Game UI, Platform Guides, and Design Terminology domains. Read [StyleGallery Domains](DOMAINS.md) before adding a domain, changing a domain boundary, or adapting an external source.
+This repository is StyleGallery: a governed gallery with Layout, Motion, Design Engineering, Platform Guides, Design Terminology, and Expression domains, plus a free-form `showcase/` work area. Read [StyleGallery Domains](DOMAINS.md) before adding a domain, changing a domain boundary, or adapting an external source.
 
 Before editing generated artifacts, validators, lifecycle state, or ownership policy, read [Governance, Lifecycle, And Docs-As-Code](GOVERNANCE.md).
 
@@ -41,6 +41,18 @@ Before editing generated artifacts, validators, lifecycle state, or ownership po
 - Use `sg-material context` as a fallback when repository files cannot be read directly or when a bounded, provenance-linked context package must be transferred to another process. Do not make context packaging the default local retrieval path.
 
 The remaining pattern, CSS, naming, token, checklist, and verification rules apply to the Layout domain. Non-Layout domain documents may discuss product-layer behavior, but they do not authorize decorative or motion properties in reusable Layout pattern CSS.
+
+## Creative Build Route
+
+Use this route when the task is to make a finished, expressive page (a landing page, brand study, or art-directed experiment) rather than to edit governed knowledge.
+
+- Read only [Showcase](showcase/README.md), one [Expression](expression/index.md) direction, and the Expression or [Motion techniques](motion/techniques/scroll-choreography.md) the page needs. Skip governance, lifecycle, provenance, and consumer-reference documents: a showcase work creates no governed record.
+- Build in `showcase/<slug>/` with an `index.html` and a `brief.md`. The Layout CSS Authoring, CSS Scope, Class Naming, and Token rules do not apply there. Any property, selector, library, font, or WebGL is allowed.
+- Preview with `npm run showcase:serve`; over SSH, it prints the `ssh -L` command to run on the local machine. Add the work to the hub, `showcase/index.html`, creating the hub with the first work.
+- Layout remains the floor, checked by outcome: run `node scripts/check-showcase.mjs --work <slug>` and fix every failure (errors, overflow, focus, reduced motion, contrast, honest actions, hash navigation, short viewports, offscreen loops, offline and no-script reading; see [Showcase QA](showcase/QA.md)). Then review the settled screenshots in `.tmp/showcase/<slug>/` for taste, which the check does not judge.
+- A brand study of a real brand must follow [Brand Studies](expression/brand-studies.md): name the subject, mark the page Unofficial, set `noindex`, and use no copied logos or verbatim copy.
+- Handoff: `consumer_reference: not_applicable` because a showcase work selects no consumer reference record.
+- Promote a value or technique out of a showcase work only by writing it into an Expression or Motion page. Never copy showcase CSS into `patterns/**`.
 
 ## Pattern Boundary Gate
 

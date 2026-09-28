@@ -6,7 +6,7 @@ description: Executable browser examples with local, source-bound observations f
 
 # Domain Interaction Lab
 
-This standalone browser example applies the [component contract](../../design-engineering/component-contract.md), [Motion recipes](../../motion/interaction-recipes.md), [Game UI verification](../../game-ui/verification-workflow.md), and [platform target matrix](../../platform-guides/compatibility-matrix.md). Product implementation belongs to Design Engineering; the inventory and reward scenarios are web adaptations of Game UI tasks. No native engine project is implied.
+This standalone browser example applies the [component contract](../../design-engineering/component-contract.md), [Motion recipes](../../motion/interaction-recipes.md), and [platform target matrix](../../platform-guides/compatibility-matrix.md). Product implementation belongs to Design Engineering; the inventory and reward scenarios are web adaptations of Game UI tasks. No native engine project is implied.
 
 The lab has five sections: explicit save, search/detail, nested inventory dialogs, reward reveal, and disclosure/range input. Responses are manually resolved in the interface so failures and out-of-order completion are reproducible. Data exists only in memory and resets on reload.
 
@@ -58,7 +58,7 @@ The smaller viewports run inside the Mac browser; they are not Android/iPhone ha
 ## Implementation Handoff
 
 - `consumer_reference: consumer-reference/agent-native/registry.json`
-- Owning domain: Design Engineering product example, with explicit Motion and Game UI adaptations and Platform Guides verification axes.
+- Owning domain: Design Engineering product example, with explicit Motion adaptations and Platform Guides verification axes.
 - Semantics: native forms, labels, buttons, details/summary, range/radio inputs, and dialog elements.
 - Spatial owner: example-local CSS; normal document scroll, modal overflow owned by the open dialog.
 - Constraints: `65rem` content maximum, `40rem` list/detail change point, intrinsic wrapping, `90dvh` modal maximum.

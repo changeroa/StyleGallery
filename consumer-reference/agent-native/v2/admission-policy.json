@@ -250,63 +250,43 @@
       "lifecycle": "experimental"
     },
     {
-      "repository_path": "game-ui/classification.md",
-      "domain": "game-ui",
+      "repository_path": "expression/brand-studies.md",
+      "domain": "expression",
       "lifecycle": "experimental"
     },
     {
-      "repository_path": "game-ui/decision-tree.md",
-      "domain": "game-ui",
+      "repository_path": "expression/direction-brief.md",
+      "domain": "expression",
       "lifecycle": "experimental"
     },
     {
-      "repository_path": "game-ui/index.md",
-      "domain": "game-ui",
+      "repository_path": "expression/directions/nocturne-editorial.md",
+      "domain": "expression",
       "lifecycle": "experimental"
     },
     {
-      "repository_path": "game-ui/reference-record.md",
-      "domain": "game-ui",
+      "repository_path": "expression/directions/warm-print.md",
+      "domain": "expression",
       "lifecycle": "experimental"
     },
     {
-      "repository_path": "game-ui/screen-hierarchy.md",
-      "domain": "game-ui",
+      "repository_path": "expression/index.md",
+      "domain": "expression",
       "lifecycle": "experimental"
     },
     {
-      "repository_path": "game-ui/screen-recipes.md",
-      "domain": "game-ui",
+      "repository_path": "expression/techniques/gradient-atmosphere.md",
+      "domain": "expression",
       "lifecycle": "experimental"
     },
     {
-      "repository_path": "game-ui/unity/architecture.md",
-      "domain": "game-ui",
+      "repository_path": "expression/techniques/grain-and-texture.md",
+      "domain": "expression",
       "lifecycle": "experimental"
     },
     {
-      "repository_path": "game-ui/unity/cli-loop.md",
-      "domain": "game-ui",
-      "lifecycle": "experimental"
-    },
-    {
-      "repository_path": "game-ui/unity/org-wiki.md",
-      "domain": "game-ui",
-      "lifecycle": "experimental"
-    },
-    {
-      "repository_path": "game-ui/unity/repository-map.md",
-      "domain": "game-ui",
-      "lifecycle": "experimental"
-    },
-    {
-      "repository_path": "game-ui/unity/ui-systems.md",
-      "domain": "game-ui",
-      "lifecycle": "experimental"
-    },
-    {
-      "repository_path": "game-ui/verification-workflow.md",
-      "domain": "game-ui",
+      "repository_path": "expression/techniques/webgl-hero.md",
+      "domain": "expression",
       "lifecycle": "experimental"
     },
     {
@@ -396,6 +376,16 @@
     },
     {
       "repository_path": "motion/review-workflow.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/techniques/kinetic-type.md",
+      "domain": "motion",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "motion/techniques/scroll-choreography.md",
       "domain": "motion",
       "lifecycle": "experimental"
     },
@@ -908,6 +898,11 @@
       "repository_path": "recipes/saas-settings.md",
       "domain": "layout",
       "lifecycle": "stable"
+    },
+    {
+      "repository_path": "showcase/README.md",
+      "domain": "shared",
+      "lifecycle": "experimental"
     }
   ],
   "exclusions": [
@@ -987,5 +982,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:9f2fc214681572314282a56dccc425d7faa1ac9aa939416892a97ab89c6c9b30"
+  "version_id": "sg:policy/material-admission-v2@sha256:02255d8e50f11d93e31481ce0014e0ec70062b56fc7be4dc3c34389875dad754"
 }

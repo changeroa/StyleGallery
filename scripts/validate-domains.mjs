@@ -18,12 +18,12 @@ const referenceDocuments = [
 const requiredCrossDomainStrings = [
   {
     relative: "guides/vocabulary.md",
-    required: "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, root routing, and `domain` frontmatter on governed leaves.",
+    required: "Use for: Layout, Motion, Design Engineering, Platform Guides, Design Terminology, Expression, root routing, and `domain` frontmatter on governed leaves.",
     failure: "guides/vocabulary.md: missing canonical domain vocabulary list",
   },
   {
     relative: "quality/index.md",
-    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, Platform Guides, and Design Terminology claims are admissible.",
+    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Platform Guides, Design Terminology, and Expression claims are admissible.",
     failure: "quality/index.md: missing canonical domain quality scope",
   },
   {
@@ -40,11 +40,6 @@ const requiredCrossDomainStrings = [
     relative: "quality/evidence/executable-evidence.md",
     required: "Six governed domains and their declared leaves are reachable and attributed.",
     failure: "quality/evidence/executable-evidence.md: missing canonical domain validator coverage",
-  },
-  {
-    relative: "quality/index.md",
-    required: "| Find the authority route for uGUI, UI Toolkit, or NGUI. | [README](../README.md) | [Unity UI Systems](../game-ui/unity/ui-systems.md) | The first selected route is Game UI, and the system-specific source and version boundary is reached within three hops. |",
-    failure: "quality/index.md: missing Game UI findability QA scenario",
   },
 ];
 
@@ -64,6 +59,8 @@ export const canonicalDomains = [
       { path: "motion/motion-brief.md", provenance: "local" },
       { path: "motion/interaction-recipes.md", provenance: "local" },
       { path: "motion/observed-choreography.md", provenance: "local" },
+      { path: "motion/techniques/scroll-choreography.md", provenance: "local" },
+      { path: "motion/techniques/kinetic-type.md", provenance: "local" },
     ],
   },
   {
@@ -101,23 +98,6 @@ export const canonicalDomains = [
     referenceDocuments: [...referenceDocuments, "design-engineering/state-management/index.md", "design-engineering/state-management/recipes/index.md"],
   },
   {
-    slug: "game-ui",
-    label: "Game UI",
-    leaves: [
-      { path: "game-ui/classification.md", provenance: "repository" },
-      { path: "game-ui/screen-hierarchy.md", provenance: "repository" },
-      { path: "game-ui/reference-record.md", provenance: "repository" },
-      { path: "game-ui/unity/architecture.md", provenance: "external", sourcePath: "README.md" },
-      { path: "game-ui/unity/ui-systems.md", provenance: "repository" },
-      { path: "game-ui/unity/cli-loop.md", provenance: "external", sourcePath: "README.md" },
-      { path: "game-ui/unity/repository-map.md", provenance: "repository" },
-      { path: "game-ui/unity/org-wiki.md", provenance: "repository" },
-      { path: "game-ui/decision-tree.md", provenance: "local" },
-      { path: "game-ui/screen-recipes.md", provenance: "local" },
-      { path: "game-ui/verification-workflow.md", provenance: "local" },
-    ],
-  },
-  {
     slug: "platform-guides",
     label: "Platform Guides",
     leaves: [
@@ -146,6 +126,19 @@ export const canonicalDomains = [
       { path: "design-terminology/comparison-workflow.md", provenance: "local" },
     ],
   },
+  {
+    slug: "expression",
+    label: "Expression",
+    leaves: [
+      { path: "expression/direction-brief.md", provenance: "local" },
+      { path: "expression/brand-studies.md", provenance: "local" },
+      { path: "expression/directions/nocturne-editorial.md", provenance: "local" },
+      { path: "expression/directions/warm-print.md", provenance: "local" },
+      { path: "expression/techniques/gradient-atmosphere.md", provenance: "local" },
+      { path: "expression/techniques/grain-and-texture.md", provenance: "local" },
+      { path: "expression/techniques/webgl-hero.md", provenance: "local" },
+    ],
+  },
 ];
 export const domainRegistry = canonicalDomains;
 
@@ -153,16 +146,7 @@ let domains = canonicalDomains;
 let root = process.cwd();
 let failures = [];
 
-const sourceOverrides = {
-  "game-ui/unity/architecture.md": {
-    repository: "https://github.com/annulusgames/UGUIAnimationSamples",
-    revision: "343c8110e5683be209cc01ccb4cb986175e61643",
-  },
-  "game-ui/unity/cli-loop.md": {
-    repository: "https://github.com/hatayama/unity-cli-loop",
-    revision: "61a0fe6d7da0aa9d0bcbc6d95944dd069c483ff0",
-  },
-};
+const sourceOverrides = {};
 
 const requiredLeafSections = [
   "Repository Boundary",

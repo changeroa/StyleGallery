@@ -54,7 +54,7 @@ This guide classifies what kind of thing a vocabulary source is before any of it
 
 ## Platform-Specific Guidance
 
-Platform guideline sources are recorded here only for terminology. Bounded comparison of their interaction conventions belongs to [Platform Guides](../platform-guides/index.md); engine vocabulary belongs to Game UI.
+Platform guideline sources are recorded here only for terminology. Bounded comparison of their interaction conventions belongs to [Platform Guides](../platform-guides/index.md).
 
 ## Unsupported Absolutes
 

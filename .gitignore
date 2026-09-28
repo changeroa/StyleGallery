@@ -2,6 +2,7 @@ node_modules/
 playwright-report/
 test-results/
 blob-report/
+.tmp/
 
 # style.gallery website lives in the private changeroa/style-gallery-site repository; clone it here for local builds.
 site/

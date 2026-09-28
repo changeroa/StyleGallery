@@ -75,7 +75,7 @@ Test fallback paths deliberately rather than waiting for accidental unsupported 
 
 ## Platform-Specific Guidance
 
-Apple, Android, and Windows guide pages own their dated official-source sets. Recheck them for native claims and separately verify the target runtime. Game-engine adaptation routes to [Game UI](../game-ui/index.md).
+Apple, Android, and Windows guide pages own their dated official-source sets. Recheck them for native claims and separately verify the target runtime.
 
 ## Unsupported Absolutes
 

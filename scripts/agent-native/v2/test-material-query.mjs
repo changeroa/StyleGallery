@@ -106,7 +106,7 @@ test("material-discover returns exactly the six governed domains and determinist
   assert.equal(first.ok, true);
   assert.equal(canonicalize(first), canonicalize(second));
   assert.deepEqual(first.result.domains.map(({ identity }) => identity.stable_ref), [
-    "sg:domain/design-engineering", "sg:domain/design-terminology", "sg:domain/game-ui", "sg:domain/layout", "sg:domain/motion", "sg:domain/platform-guides",
+    "sg:domain/design-engineering", "sg:domain/design-terminology", "sg:domain/expression", "sg:domain/layout", "sg:domain/motion", "sg:domain/platform-guides",
   ]);
   const layout = recordForPath("layout/index.md");
   const page = recordForPath("patterns/index.md");
@@ -190,14 +190,10 @@ test("paths-only search preserves ranking while projecting repository-relative p
 test("public domain leaf queries resolve to npm-portable repository paths", () => {
   const cases = [
     ["interface craft critique", "design-engineering/interface-craft.md"],
-    ["game screen hierarchy", "game-ui/screen-hierarchy.md"],
-    ["unity architecture", "game-ui/unity/architecture.md"],
-    ["unity cli loop", "game-ui/unity/cli-loop.md"],
     ["motion review workflow", "motion/review-workflow.md"],
     ["Apple interaction", "platform-guides/apple-interaction.md"],
     ["motion interaction recipes", "motion/interaction-recipes.md"],
     ["component contract", "design-engineering/component-contract.md"],
-    ["game ui screen recipes", "game-ui/screen-recipes.md"],
     ["android interaction", "platform-guides/android-interaction.md"],
     ["windows interaction", "platform-guides/windows-interaction.md"],
     ["design term comparison workflow", "design-terminology/comparison-workflow.md"],
@@ -220,7 +216,7 @@ test("duplicate query and field occurrences are idempotent", () => {
 test("synthetic equal scores tie strictly by projected StableRef", () => {
   const root = temporaryRepository();
   try {
-    const paths = ["motion/index.md", "game-ui/index.md"];
+    const paths = ["motion/index.md", "platform-guides/index.md"];
     for (const repositoryPath of paths) fs.appendFileSync(path.join(root, repositoryPath), "\nzzztietoken\nzzztietoken\n");
     rebindSources(root, paths);
     const result = createMaterialOperationRegistry({ repositoryRoot: root }).invoke("material-search", { query: "zzztietoken", limit: 10 }).result;

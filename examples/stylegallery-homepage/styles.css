@@ -336,7 +336,6 @@ input {
 .map-node-layout { color: var(--blue); left: 3%; top: 18%; }
 .map-node-motion { color: var(--coral); right: 4%; top: 12%; }
 .map-node-engineering { color: var(--cyan); right: 0; top: 55%; }
-.map-node-game { bottom: 7%; color: var(--accent); left: 13%; }
 .map-node-platform { bottom: 12%; color: var(--purple); right: 18%; }
 
 .console-command {
@@ -488,7 +487,6 @@ input {
 .domain-layout { --card-color: var(--blue); }
 .domain-motion { --card-color: var(--coral); }
 .domain-engineering { --card-color: var(--cyan); }
-.domain-game { --card-color: var(--accent); }
 .domain-platform { --card-color: var(--purple); }
 
 .domain-card-head {
