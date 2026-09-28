@@ -60,8 +60,8 @@ Scroll owner, pinned or sticky regions, and how the page collapses at 320px.
 ## Preview
 
 ```sh
-npm run showcase:serve              # http://localhost:4180/ (hub) and one URL per work
-npm run showcase:serve -- --port 4190
+bun run showcase:serve              # http://localhost:4180/ (hub) and one URL per work
+bun run showcase:serve -- --port 4190
 ```
 
 Working on a remote machine over SSH? Run this on your own machine, then open `http://localhost:4180/` in your local browser:
@@ -76,7 +76,7 @@ Once any work exists, `showcase/index.html` is the hub that lists every work: th
 
 ## Outcome Checks
 
-`npm run test:showcase` (or `node scripts/check-showcase.mjs --work <slug>`) runs the hub and every work in headless Chromium. Each check maps to a scenario in the [QA contract](QA.md):
+`bun run test:showcase` (or `node scripts/check-showcase.mjs --work <slug>`) runs the hub and every work in headless Chromium. Each check maps to a scenario in the [QA contract](QA.md):
 
 | Check | Failure |
 | --- | --- |
@@ -97,7 +97,7 @@ Once any work exists, `showcase/index.html` is the hub that lists every work: th
 
 Fictional actions (subscribe, book, get a key) must be `<button type="button" data-demo="...">` elements that show an honest message in a `role="status"` region, never links that jump to the top.
 
-Screenshots are taken after entrance tweens and CSS transitions settle and are written to `.tmp/showcase/<slug>/`. The checks do not judge taste: review the screenshots. `npm run test:showcase:self` proves each check can fail by running the checker against fixtures built to violate it.
+Screenshots are taken after entrance tweens and CSS transitions settle and are written to `.tmp/showcase/<slug>/`. The checks do not judge taste: review the screenshots. `bun run test:showcase:self` proves each check can fail by running the checker against fixtures built to violate it.
 
 ## Works
 
@@ -105,7 +105,7 @@ The repository ships the contract, the checker, and the guidance, but no committ
 
 ## Starting A Work Fast
 
-Read this page, one [Expression direction](../expression/index.md), and the [Motion techniques](../motion/techniques/scroll-choreography.md) you need. Skip governance, provenance, and consumer-reference documents: a showcase work creates no governed record. Build, add a hub card, run `npm run showcase:serve` and `node scripts/check-showcase.mjs --work <slug>`, look at the screenshots, and iterate.
+Read this page, one [Expression direction](../expression/index.md), and the [Motion techniques](../motion/techniques/scroll-choreography.md) you need. Skip governance, provenance, and consumer-reference documents: a showcase work creates no governed record. Build, add a hub card, run `bun run showcase:serve` and `node scripts/check-showcase.mjs --work <slug>`, look at the screenshots, and iterate.
 
 ## IA Navigation
 

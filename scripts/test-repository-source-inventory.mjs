@@ -200,7 +200,7 @@ test("wires the RFC3339 format suite immediately after source inventory without 
   const packageJson = JSON.parse(fs.readFileSync(packagePath, "utf8"));
   const workflow = fs.readFileSync(workflowPath, "utf8");
   const inventoryCommand = "node scripts/repository-source-inventory.mjs --json";
-  const formatCommand = "npm run test:json-schema-formats";
+  const formatCommand = "bun run test:json-schema-formats";
   const whitespaceCommand = "git diff --check";
   const directCalibrationCommand = "node scripts/test-calibration-raw-contract.mjs";
   const envelopeCalibrationCommand = "node scripts/test-summarize-sentinel-calibration.mjs";

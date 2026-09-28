@@ -57,9 +57,9 @@ const OWNER_TRUST_ROOT = Object.freeze({
 });
 const AUTHORIZED_APPROVAL_COMMITS = Object.freeze([]);
 const SENTINEL_WORKFLOW_PATH = ".github/workflows/validate.yml";
-const SENTINEL_ACTIVE_WORKFLOW_SHA256 = "15fb5dd1fa09755a386af6a202be6c7600a80aa79214ec1286d7e71a9b5c7061";
-const SENTINEL_RETIRED_WORKFLOW_SHA256 = "c0b25d65eca60bc15b22ad3d23d3cc755a7a21ad4c6f643e0dc423e96551451b";
-const SENTINEL_JOB_SHA256 = "86228e7fb44c2ba5d0abe160d6bd3c4f5228e7c1ec40189b3b4f528acfd45e62";
+const SENTINEL_ACTIVE_WORKFLOW_SHA256 = "aeef68c41281ee1e66afa108820f26824252acaff607f378bb17a88174c5a443";
+const SENTINEL_RETIRED_WORKFLOW_SHA256 = "e439a08c050cf5c28cb893cb66c7df5e725079eae839b54dc6a0b212f403d04f";
+const SENTINEL_JOB_SHA256 = "94f5749b0a7bc17a676e56a4e5fa550e406272086e8ac5cdc36eb22ea26c77a4";
 const SENTINEL_PROTECTED = Object.freeze([
   ["consumer-reference/baselines/calibration.json", "b537b0c3acb3ac55e4b926b1d12b41d2cb8050a85de2410ad4b42e1b7b53f88e", "raw_20_run_aggregate_and_provenance"],
   ["consumer-reference/baselines/manifest.json", "3396593e1486583d55313098ed26c3b2e048c55eb5589d11e7cfbf026709d6d3", "baseline_manifest"],
@@ -80,9 +80,9 @@ const SENTINEL_PROTECTED = Object.freeze([
   ["tests/helpers/render-consumer-reference.mjs", "88802a948909d5e40470be6b5481766ce2de498e59c053ac68af370b46e72ca9", "sentinel_renderer_source"],
   ["tests/snapshots/consumer-reference-card-grid.png", "5528358e957a6115793155e501f62716f7db31dc1c86856d9e1234868d672837", "historical_baseline_bytes"],
 ]);const PAGE_WORKFLOW_PATH = ".github/workflows/validate.yml";
-const PAGE_ACTIVE_WORKFLOW_SHA256 = "15fb5dd1fa09755a386af6a202be6c7600a80aa79214ec1286d7e71a9b5c7061";
-const PAGE_RETIRED_WORKFLOW_SHA256 = "56501c9e4624c9fc214b06f9fcf9b03b945b5360950965f8d60b05b50832845d";
-const PAGE_JOB_SHA256 = "11d0fe7ea2880c5d32d32bb419493600afdfd221aef728f3c0e36e22cf52b116";
+const PAGE_ACTIVE_WORKFLOW_SHA256 = "aeef68c41281ee1e66afa108820f26824252acaff607f378bb17a88174c5a443";
+const PAGE_RETIRED_WORKFLOW_SHA256 = "93934db00034e33fb9284c56278497aa2d18751b13d084d67d4199775555aac9";
+const PAGE_JOB_SHA256 = "090f6c7a9f9f645c982fdf90be4b1907c7a10c420a79ad46292a21cff34f0937";
 const PAGE_SYNTHETIC_REPOSITORIES = Object.freeze(["ark-jo/stylegallery", "changeroa/stylegallery", "example/stylegallery-page-evidence-ci"]);
 const PAGE_PROTECTED = Object.freeze([
   ["consumer-reference/contract.md", "b914920989ff2ce08ebc67fa3167d0da766c260c93f03257a9144c6093ff6713", "lifecycle_documentation"],
@@ -93,14 +93,14 @@ const PAGE_PROTECTED = Object.freeze([
   ["scripts/page-artifact-metadata.mjs", "59c57b0da5b8a503d6f14fb507c57680d5854c59c8bc2838856e50d15eb7260b", "artifact_metadata_validator"],
   ["scripts/page-evidence-contract.mjs", "9ec6b6c5167dae75e5b106cfcbb2078be9f89d0f9e45a640dbc1efda2e47bc9e", "source_and_packet_contract"],
   ["scripts/page-evidence-fixture.mjs", "efa0a17d90d010953c98a0957ab1c6936d2a80a82f2958d6080523298c78eafa", "closed_fixture_provider"],
-  ["scripts/run-consumer-page-evidence-ci.mjs", "2a5f58aacd3ebf2985b3115c492f0a9a39e849c0e619fca3464b47b6eaf400e8", "synthetic_ci_adapter"],
+  ["scripts/run-consumer-page-evidence-ci.mjs", "9cde8536dd5d19be1651b7919f7acb61f7914604961b79d74407b80213bf642f", "synthetic_ci_adapter"],
   ["scripts/test-consumer-conformance-sentinel.mjs", "9f524b45592c4cd89ffee7cef7b04790f73544dc9dd1f25d8cc1df9504bb5ce5", "state_capture_negative_controls"],
   ["scripts/test-validate-page-evidence.mjs", "2db7bffabf9a92c6f6fccb3fce3f902f219027915a02cb1d710eee169560022a", "page_evidence_negative_controls"],
   ["scripts/validate-page-evidence.mjs", "39be91eeb532a015f54d5a542a2bfe0fc641d79a2e18e7fe88f06800258831f0", "packet_validator"],
   ["tests/consumer-conformance.spec.mjs", "e19df0d1131b7a65fd6e5b7b79c993d05f4a4559b64a18da673e1beede5421a3", "browser_capture_surface"],
   ["tests/fixtures/consumer-conformance-scenarios.mjs", "927d185f523e70e7f2e1fccee0013360d126e02aa532c2367670e64cdef43f12", "state_w1024_focus_contract"],
   ["tests/helpers/render-consumer-conformance.mjs", "6d5db609aaadb2f68fec1a0f1f51af1c17157cf1364631a42b35da2d6c1a0865", "capture_renderer"],
-  ["quality/evidence/executable-evidence.md", "fb441412dabc0b57aeac8355f92321a9873aa67612e489e3137953d7680312b1", "archive_and_retrieval_documentation"],
+  ["quality/evidence/executable-evidence.md", "3f505237a2412704f41f4823edb6611eb84692d99ddcac88b39da92a0c820c79", "archive_and_retrieval_documentation"],
   ["playwright.config.mjs", "7dcc2ae21602ac89af47d2bbf122f5945098f0e8fda9d47db7d33980592e60ae", "pinned_browser_configuration"],
 ]);
 const PAGE_ADOPTER_TRUST_ROOTS = Object.freeze([]);

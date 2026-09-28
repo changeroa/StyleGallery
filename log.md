@@ -2,6 +2,17 @@
 
 ## 2026-09-28
 
+Understood as: switch the repository package manager from npm to Bun and release `stylegallery@0.1.8`.
+
+- Replaced `package-lock.json` with `bun.lock`, migrated from the npm lockfile so every one of the 184 resolved package versions and the `brace-expansion` override are unchanged, and declared `"packageManager": "bun@1.3.14"`. Scripts still run on Node.js 22; Bun installs dependencies and runs package scripts.
+- CI workflows add `oven-sh/setup-bun` pinned by commit, install with `bun install --frozen-lockfile --ignore-scripts`, and run `bun run` and `bunx playwright`. Playwright container jobs install `unzip` first because the pinned image does not include it. The setup-bun pin joins the immutable action pins.
+- New capture sessions and the conformance matrix source binding hash `bun.lock` in place of `package-lock.json`. Existing capture evidence remains bound to its recorded revision.
+- With owner approval, the sentinel-calibration and page-evidence records and their validator constants were refreshed for the new workflow bytes, including the calibration and page-evidence job hashes and the protected hashes of `scripts/run-consumer-page-evidence-ci.mjs` and `quality/evidence/executable-evidence.md`, whose commands now name Bun. Owners, deadlines, and decisions are unchanged.
+- Development commands in the documentation now use `bun run`. Consumer install commands such as `npx stylegallery` and `npm install --global stylegallery` are unchanged because the package is still published to the npm registry.
+
+Consumer reference: not_applicable
+Consumer reference reason: This change replaces the repository package manager and selects no consumer-reference profile or record.
+
 Understood as: remove the Game UI domain from the repository together with the Expression change.
 
 - Removed the Game UI domain: its thirteen governed files under `game-ui/`, the Unity organization-wiki and Unity source-contract validators with their fixture tests and CI steps, and every route, manifest row, governance row, ownership entry, quality scenario, validator requirement, example link, and packaged path that referred to it. Earlier log entries remain as history.

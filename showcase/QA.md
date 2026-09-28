@@ -62,7 +62,7 @@ Automated scenarios run in `node scripts/check-showcase.mjs` for every work and 
 | Q13 | I8 | 390 wide, all non-local requests blocked. | No page errors, no hidden text, no horizontal overflow. | Automated: offline |
 | Q14 | I9 | Load each page. | A favicon link exists; no same-origin request returns 4xx; the title is not empty. | Automated: identity |
 | Q15 | I10 | 1440 wide with motion, at the top and bottom of the page: collect infinite CSS animations and repeating GSAP tweens. | None runs on an element that is entirely offscreen. Every WebGL render loop gates on an IntersectionObserver. | Automated: offscreen ambient; manual source review for WebGL loops |
-| Q16 | I11 | Run `npm run showcase:serve -- --port 4190`. | It prints the hub and work URLs plus an SSH forwarding command, and serves every work with correct content types. | Manual: command output recorded |
+| Q16 | I11 | Run `bun run showcase:serve -- --port 4190`. | It prints the hub and work URLs plus an SSH forwarding command, and serves every work with correct content types. | Manual: command output recorded |
 | Q17 | I12 | Inspect the checker's screenshots for a work with entrance tweens. | Entrance headlines are fully risen and reveals fully opaque. | Manual: screenshots reviewed |
 | Q18 | I13 | Run `node scripts/test-check-showcase.mjs`. | The good fixture passes; each bad fixture fails with exactly its targeted check. | Automated: self-test |
 | Q19 | I14 | Read AGENTS.md, then the showcase README. | Both commands and the SSH note are reachable from those two pages. | Manual: document review |

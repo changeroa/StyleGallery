@@ -6,7 +6,7 @@ import { resolveProfileRecords } from "./profile-record-contract.mjs";
 import { parseStrictJson } from "./strict-json.mjs";
 
 export const captureSourcePaths = Object.freeze([
-  "package-lock.json",
+  "bun.lock",
   "package.json",
   "playwright.config.mjs",
   "consumer-reference/schema/ax-evidence.schema.json",

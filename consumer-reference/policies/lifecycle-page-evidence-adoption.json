@@ -39,11 +39,11 @@
     "workflow": {
       "path": ".github/workflows/validate.yml",
       "mode": "100644",
-      "active_sha256": "15fb5dd1fa09755a386af6a202be6c7600a80aa79214ec1286d7e71a9b5c7061",
-      "retired_sha256": "56501c9e4624c9fc214b06f9fcf9b03b945b5360950965f8d60b05b50832845d",
+      "active_sha256": "aeef68c41281ee1e66afa108820f26824252acaff607f378bb17a88174c5a443",
+      "retired_sha256": "93934db00034e33fb9284c56278497aa2d18751b13d084d67d4199775555aac9",
       "job_id": "consumer-page-evidence",
       "job_name": "Consumer page-evidence raster capture (nonblocking)",
-      "job_sha256": "11d0fe7ea2880c5d32d32bb419493600afdfd221aef728f3c0e36e22cf52b116",
+      "job_sha256": "090f6c7a9f9f645c982fdf90be4b1907c7a10c420a79ad46292a21cff34f0937",
       "triggers": [
         "pull_request",
         "workflow_dispatch"
@@ -121,7 +121,7 @@
       {
         "path": "scripts/run-consumer-page-evidence-ci.mjs",
         "mode": "100644",
-        "sha256": "2a5f58aacd3ebf2985b3115c492f0a9a39e849c0e619fca3464b47b6eaf400e8",
+        "sha256": "9cde8536dd5d19be1651b7919f7acb61f7914604961b79d74407b80213bf642f",
         "role": "synthetic_ci_adapter"
       },
       {
@@ -163,7 +163,7 @@
       {
         "path": "quality/evidence/executable-evidence.md",
         "mode": "100644",
-        "sha256": "fb441412dabc0b57aeac8355f92321a9873aa67612e489e3137953d7680312b1",
+        "sha256": "3f505237a2412704f41f4823edb6611eb84692d99ddcac88b39da92a0c820c79",
         "role": "archive_and_retrieval_documentation"
       },
       {

@@ -162,7 +162,7 @@ export function consumerEvidenceGovernanceFailures({ evidence, freshnessWorkflow
       ["mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a"],
     ]));
     failures.push(...missingCommands(`${validatePath}: consumer-conformance`, executableRunText(blocking), [
-      ["npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line"],
+      ["bunx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line"],
       ["node scripts/test-consumer-conformance-sentinel.mjs --json"],
     ]));
   }
@@ -177,7 +177,7 @@ export function consumerEvidenceGovernanceFailures({ evidence, freshnessWorkflow
     ]));
     failures.push(...missingCommands(`${validatePath}: consumer-page-evidence`, executableRunText(capture), [
       ["node scripts/create-page-evidence-session.mjs"],
-      ["npx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line"],
+      ["bunx playwright test tests/consumer-conformance.spec.mjs --project=chromium --reporter=line"],
       ["node scripts/finalize-page-evidence.mjs"],
       ["node scripts/validate-page-evidence.mjs"],
     ]));

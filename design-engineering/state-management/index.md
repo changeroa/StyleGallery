@@ -49,7 +49,7 @@ Neither a reducer nor a state machine guarantees race freedom. No library is the
 
 ## Verification Contract
 
-A reader should find a pattern from a failure symptom, identify its owner and minimal implementation, compose it into a screen, and locate a repeatable acceptance sequence. Run `npm run test:state-management` for the 12 local examples; record browser and backend checks separately.
+A reader should find a pattern from a failure symptom, identify its owner and minimal implementation, compose it into a screen, and locate a repeatable acceptance sequence. Run `bun run test:state-management` for the 12 local examples; record browser and backend checks separately.
 
 ## Source, License, And Attribution
 

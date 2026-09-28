@@ -53,7 +53,7 @@ function sha256(file) { return crypto.createHash("sha256").update(fs.readFileSyn
 export function sourceBinding() {
   return Object.freeze({
     ".github/workflows/validate.yml": sha256(".github/workflows/validate.yml"),
-    "package-lock.json": sha256("package-lock.json"),
+    "bun.lock": sha256("bun.lock"),
     "package.json": sha256("package.json"),
     "playwright.config.mjs": sha256("playwright.config.mjs"),
     "scripts/agent-native/v2/consumer-conformance-matrix-comparator.mjs": sha256("scripts/agent-native/v2/consumer-conformance-matrix-comparator.mjs"),

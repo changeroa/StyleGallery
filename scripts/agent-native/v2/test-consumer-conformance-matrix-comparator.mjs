@@ -85,7 +85,7 @@ function runUnitContract() {
     ["empty counters", (copy) => { copy.runs.full[0].assertion_policy = {}; }],
     ["empty evidence IDs", (copy) => { copy.runs.candidate[0].assertion_policy.evidence_ids = []; }],
     ["empty sentinel IDs", (copy) => { copy.runs.candidate[0].assertion_policy.scenario_sentinel_ids = []; }],
-    ["forged source binding", (copy) => { copy.source_binding["package-lock.json"] = "0".repeat(64); }],
+    ["forged source binding", (copy) => { copy.source_binding["bun.lock"] = "0".repeat(64); }],
     ["unbound run source", (copy) => { delete copy.runs.full[0].source_binding; }],
     ["wrong image", (copy) => { copy.runs.full[0].image_id = "sha256:abc"; }],
     ["wrong image manifest", (copy) => { copy.pin.image_manifest_linux_amd64 = "sha256:abc"; }],

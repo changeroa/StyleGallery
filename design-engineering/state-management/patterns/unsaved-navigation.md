@@ -33,7 +33,7 @@ The form owns dirty; the router integration owns a pending destination and guard
 
 ### Minimal Executable Example
 
-Run this standalone JavaScript block with Node.js 22 or newer, or run all pattern examples from a repository checkout with `npm run test:state-management`. The assertions exercise the local model, not a browser or backend.
+Run this standalone JavaScript block with Node.js 22 or newer, or run all pattern examples from a repository checkout with `bun run test:state-management`. The assertions exercise the local model, not a browser or backend.
 
 ```js
 import assert from "node:assert/strict";
