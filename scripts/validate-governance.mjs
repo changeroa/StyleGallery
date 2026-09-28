@@ -64,7 +64,6 @@ function requireGovernanceMatrix() {
     "Layout domain hub",
     "Motion domain guidance",
     "Design Engineering domain guidance",
-    "Game UI domain guidance",
     "Platform Guides domain guidance",
     "Design Terminology domain guidance",
     "Expression domain guidance",

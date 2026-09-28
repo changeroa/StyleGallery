@@ -16,7 +16,7 @@ Primary role: repository guide.
 
 The existing Layout corpus remains a gallery of minimal, portable CSS layout patterns at its current paths. Each pattern documents one primary spatial problem and the smallest robust HTML/CSS structure that solves it. Motion, visual treatment, and platform guidance do not expand reusable Layout pattern CSS; they live in their own domains and carry explicit evidence boundaries.
 
-[Consumer Reference](consumer-reference/index.md) is shared non-domain infrastructure for optional consumer-owned reference handoffs. It carries schema, routing, provenance, and evidence metadata without owning profiles, visual values, components, or an eighth domain.
+[Consumer Reference](consumer-reference/index.md) is shared non-domain infrastructure for optional consumer-owned reference handoffs. It carries schema, routing, provenance, and evidence metadata without owning profiles, visual values, components, or a seventh domain.
 
 [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) documents the frozen v1 claim/evidence/governance interface. The `sg` CLI and main MCP server also expose [website compilation](scripts/compiler/README.md) through a separately installed compiler; isolated material v2 indexes admitted Markdown through `sg-material` and its read-only MCP. Lifecycle records own extension and archive dispositions. These interfaces do not create a seventh domain, replace the Markdown corpus, permit mutation of governed knowledge, or feed visual defaults back into Layout.
 
@@ -145,7 +145,6 @@ For UI state ownership, asynchronous races, drafts, URL/history, and persistence
 | [Layout](layout/index.md) | Semantic spatial structure, flow, sizing, alignment, containment, scrolling, and composition. | Brand, typography, color, shadow, animation, and product decoration. |
 | [Motion](motion/index.md) | Motion terminology, review procedure, and evidence-bounded practice guidance. | Universal timing/easing rules or permission to add motion to reusable Layout CSS. |
 | [Design Engineering](design-engineering/index.md) | Product-layer craft decisions and verification questions. | A second universal principle set or taste as evidence. |
-| [Game UI](game-ui/index.md) | Game-interface classification, hierarchy, reference records, and engine-specific implementation guides. | Reusable Layout CSS or claims that one engine structure is universal. |
 | [Platform Guides](platform-guides/index.md) | Bounded comparison with named platform conventions. | Affiliation, imitation, or authority over web and accessibility contracts. |
 | [Design Terminology](design-terminology/index.md) | Comparative design-term definitions, term families, and cross-system conflict cases for named systems. | StyleGallery's own vocabulary, motion terminology, visual token values, or authority over external vocabularies. |
 | [Expression](expression/index.md) | Art direction for finished pages: direction briefs, named directions with values, visual technique recipes, and brand-study policy. | Layout mechanics, motion timing, governed tokens, or decorative values in reusable Layout pattern CSS. |
@@ -158,7 +157,6 @@ The canonical domain manifest and provenance policy are in [StyleGallery Domains
 | --- | --- | --- |
 | Design a transition | [Motion Decision Tree](motion/decision-tree.md) | [Brief](motion/motion-brief.md), [interaction recipes](motion/interaction-recipes.md), and [review](motion/review-workflow.md) |
 | Build a product interaction | [Design Engineering Decision Tree](design-engineering/decision-tree.md) | [Component contract](design-engineering/component-contract.md) and [worked examples](design-engineering/worked-examples.md) |
-| Compose a game screen | [Game UI Decision Tree](game-ui/decision-tree.md) | [Screen recipes](game-ui/screen-recipes.md) and [verification workflow](game-ui/verification-workflow.md) |
 | Adapt a platform convention | [Platform Adaptation Workflow](platform-guides/adaptation-workflow.md) | [Apple](platform-guides/apple-interaction.md), [Android](platform-guides/android-interaction.md), [Windows](platform-guides/windows-interaction.md), and [compatibility matrix](platform-guides/compatibility-matrix.md) |
 | Resolve a terminology conflict | [Design Term Comparison Workflow](design-terminology/comparison-workflow.md) | [Directly sourced term cases](design-terminology/conflict-cases.md) and [relation rules](design-terminology/relation-types.md) |
 
@@ -183,7 +181,6 @@ Use each root hub for one primary job.
 | [Layout](layout/index.md) | Layout domain hub | You need reusable spatial patterns, recipes, or planning routes. |
 | [Motion](motion/index.md) | Motion domain hub | You need motion terminology, review procedure, or practice evidence. |
 | [Design Engineering](design-engineering/index.md) | Design Engineering domain hub | You need product-level interface-craft decision guidance. |
-| [Game UI](game-ui/index.md) | Game UI domain hub | You need to classify a game interface or understand its screen hierarchy. |
 | [Platform Guides](platform-guides/index.md) | Platform Guides domain hub | You need a bounded platform comparison. |
 | [Design Terminology](design-terminology/index.md) | Design Terminology domain hub | You need to compare how named design systems define or classify design terms. |
 | [Expression](expression/index.md) | Expression domain hub | You need a page to look and feel finished: type, color, texture, atmosphere, or a brand study. |
@@ -200,7 +197,6 @@ Each common task has one primary route. Use secondary links only after the prima
 | `name or review interface motion` | [Motion](motion/index.md) | It routes to bounded terminology and review guidance. |
 | `review product-level interface craft` | [Design Engineering](design-engineering/index.md) | It separates practitioner heuristics from shared quality gates. |
 | `compare adversarial consumer identities` | [Reference Profiles](design-engineering/reference-profiles/index.md) | It keeps non-default product values in related Design Engineering examples over one pinned Layout source. |
-| `classify a game interface or map it to an engine` | [Game UI](game-ui/index.md) | It separates engine-neutral roles from implementation-specific guidance. |
 | `compare a named platform convention` | [Platform Guides](platform-guides/index.md) | It requires platform and evidence boundaries before adaptation. |
 | `compare how design systems define a term` | [Design Terminology](design-terminology/index.md) | It separates external terminology comparison from StyleGallery's own controlled vocabulary. |
 | `build a striking landing page in one shot` | [Showcase](showcase/README.md) | It removes Layout authoring rules, supplies directions and techniques, and checks the result by outcome. |
@@ -230,7 +226,7 @@ Each common task has one primary route. Use secondary links only after the prima
 ## How To Use This Repository
 
 - Start with [StyleGallery Domains](DOMAINS.md) when the owning domain is not already clear.
-- Use [Layout](layout/index.md), [Motion](motion/index.md), [Design Engineering](design-engineering/index.md), [Game UI](game-ui/index.md), [Platform Guides](platform-guides/index.md), [Design Terminology](design-terminology/index.md), or [Expression](expression/index.md) as the domain-local entry point.
+- Use [Layout](layout/index.md), [Motion](motion/index.md), [Design Engineering](design-engineering/index.md), [Platform Guides](platform-guides/index.md), [Design Terminology](design-terminology/index.md), or [Expression](expression/index.md) as the domain-local entry point.
 - Start with [Layout Planning Guide](GUIDE.md) when you are designing a screen before a layout problem is obvious.
 - Use the [Webpage Generation Workflow](guides/webpage-generation-workflow.md) when raw content needs to become a homepage or ordinary webpage before a layout recipe is obvious.
 - Use the [Documentation Mode Taxonomy](guides/documentation-mode-taxonomy.md) when adding or reviewing docs so each page has a clear primary reading mode.

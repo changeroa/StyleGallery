@@ -127,7 +127,7 @@ Query phrasing: `Dynamic Type typography token`, `Material Typography Fluent typ
 
 ## Platform-Specific Guidance
 
-When a case involves a platform guideline source, cite that platform's surface and route deeper convention comparison to [Platform Guides](../platform-guides/index.md); engine terms route to Game UI; motion terms to Motion.
+When a case involves a platform guideline source, cite that platform's surface and route deeper convention comparison to [Platform Guides](../platform-guides/index.md); motion terms route to Motion.
 
 ## Unsupported Absolutes
 

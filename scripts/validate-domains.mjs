@@ -18,33 +18,28 @@ const referenceDocuments = [
 const requiredCrossDomainStrings = [
   {
     relative: "guides/vocabulary.md",
-    required: "Use for: Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, Expression, root routing, and `domain` frontmatter on governed leaves.",
+    required: "Use for: Layout, Motion, Design Engineering, Platform Guides, Design Terminology, Expression, root routing, and `domain` frontmatter on governed leaves.",
     failure: "guides/vocabulary.md: missing canonical domain vocabulary list",
   },
   {
     relative: "quality/index.md",
-    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Game UI, Platform Guides, Design Terminology, and Expression claims are admissible.",
+    required: "`quality/` is shared StyleGallery infrastructure for deciding whether Layout, Motion, Design Engineering, Platform Guides, Design Terminology, and Expression claims are admissible.",
     failure: "quality/index.md: missing canonical domain quality scope",
   },
   {
     relative: "README.md",
-    required: "without owning profiles, visual values, components, or an eighth domain",
+    required: "without owning profiles, visual values, components, or a seventh domain",
     failure: "README.md: missing canonical Consumer Reference boundary",
   },
   {
     relative: "quality/index.md",
-    required: "without classifying it as an eighth domain",
+    required: "without classifying it as a seventh domain",
     failure: "quality/index.md: missing canonical Consumer Reference boundary",
   },
   {
     relative: "quality/evidence/executable-evidence.md",
-    required: "Seven governed domains and their declared leaves are reachable and attributed.",
+    required: "Six governed domains and their declared leaves are reachable and attributed.",
     failure: "quality/evidence/executable-evidence.md: missing canonical domain validator coverage",
-  },
-  {
-    relative: "quality/index.md",
-    required: "| Find the authority route for uGUI, UI Toolkit, or NGUI. | [README](../README.md) | [Unity UI Systems](../game-ui/unity/ui-systems.md) | The first selected route is Game UI, and the system-specific source and version boundary is reached within three hops. |",
-    failure: "quality/index.md: missing Game UI findability QA scenario",
   },
 ];
 
@@ -103,23 +98,6 @@ export const canonicalDomains = [
     referenceDocuments: [...referenceDocuments, "design-engineering/state-management/index.md", "design-engineering/state-management/recipes/index.md"],
   },
   {
-    slug: "game-ui",
-    label: "Game UI",
-    leaves: [
-      { path: "game-ui/classification.md", provenance: "repository" },
-      { path: "game-ui/screen-hierarchy.md", provenance: "repository" },
-      { path: "game-ui/reference-record.md", provenance: "repository" },
-      { path: "game-ui/unity/architecture.md", provenance: "external", sourcePath: "README.md" },
-      { path: "game-ui/unity/ui-systems.md", provenance: "repository" },
-      { path: "game-ui/unity/cli-loop.md", provenance: "external", sourcePath: "README.md" },
-      { path: "game-ui/unity/repository-map.md", provenance: "repository" },
-      { path: "game-ui/unity/org-wiki.md", provenance: "repository" },
-      { path: "game-ui/decision-tree.md", provenance: "local" },
-      { path: "game-ui/screen-recipes.md", provenance: "local" },
-      { path: "game-ui/verification-workflow.md", provenance: "local" },
-    ],
-  },
-  {
     slug: "platform-guides",
     label: "Platform Guides",
     leaves: [
@@ -168,16 +146,7 @@ let domains = canonicalDomains;
 let root = process.cwd();
 let failures = [];
 
-const sourceOverrides = {
-  "game-ui/unity/architecture.md": {
-    repository: "https://github.com/annulusgames/UGUIAnimationSamples",
-    revision: "343c8110e5683be209cc01ccb4cb986175e61643",
-  },
-  "game-ui/unity/cli-loop.md": {
-    repository: "https://github.com/hatayama/unity-cli-loop",
-    revision: "61a0fe6d7da0aa9d0bcbc6d95944dd069c483ff0",
-  },
-};
+const sourceOverrides = {};
 
 const requiredLeafSections = [
   "Repository Boundary",
@@ -233,8 +202,8 @@ function checkManifest() {
     && content.includes(`snapshot \`${revision}\``)
     && content.includes("## Shared Non-Domain Infrastructure")
     && content.includes("[Consumer Reference](consumer-reference/index.md)")
-    && content.includes("infrastructure outside the seven-domain contract")
-    && content.includes("cannot add an eighth domain row");
+    && content.includes("infrastructure outside the six-domain contract")
+    && content.includes("cannot add a seventh domain row");
 
   for (const domain of domains) {
     const domainRow = domainRows.find((row) => row[0] === domain.label);
