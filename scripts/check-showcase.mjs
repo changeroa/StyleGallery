@@ -200,7 +200,7 @@ function topBarBottom(exclude) {
   return bottom;
 }
 
-function hiddenTextFailures() {
+export function hiddenTextFailures() {
   const failures = [];
   const hiddenBy = (element) => {
     for (let node = element; node && node.nodeType === 1; node = node.parentElement) {
@@ -218,7 +218,7 @@ function hiddenTextFailures() {
   return failures;
 }
 
-function infiniteAnimationFailures() {
+export function infiniteAnimationFailures() {
   return document.getAnimations()
     .filter((animation) => animation.playState === "running" && animation.effect?.getComputedTiming().iterations === Infinity)
     .map((animation) => `infinite animation ${animation.animationName ?? animation.id ?? "unnamed"} is running`);
@@ -318,11 +318,11 @@ function fixedTooTall() {
 
 // ---------- node-side helpers ----------
 
-async function settle(page) {
+export async function settle(page) {
   await page.waitForFunction(pageIsSettled, null, { timeout: settleTimeoutMs, polling: "raf" }).catch(() => {});
 }
 
-async function openPage(browser, url, contextOptions, sameOriginBase, failures, label) {
+export async function openPage(browser, url, contextOptions, sameOriginBase, failures, label) {
   const { blockExternal, blockScripts, ...browserContextOptions } = contextOptions;
   const context = await browser.newContext(browserContextOptions);
   if (blockExternal || blockScripts) {
@@ -353,7 +353,7 @@ async function openPage(browser, url, contextOptions, sameOriginBase, failures, 
   return { context, page };
 }
 
-async function scrollToStop(page, stop) {
+export async function scrollToStop(page, stop) {
   await page.evaluate(async (stop) => {
     const max = document.documentElement.scrollHeight - innerHeight;
     const target = stop === "top" ? 0 : stop === "middle" ? max / 2 : stop === "bottom" ? max : max * stop;
@@ -367,12 +367,12 @@ async function scrollToStop(page, stop) {
   await settle(page);
 }
 
-async function overflowFailure(page, label) {
+export async function overflowFailure(page, label) {
   const { scrollWidth, clientWidth } = await page.evaluate(() => ({ scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth }));
   return scrollWidth > clientWidth + 1 ? [`${label}: horizontal overflow ${scrollWidth}px > ${clientWidth}px`] : [];
 }
 
-async function checkFocus(page, label) {
+export async function checkFocus(page, label) {
   const failures = [];
   const tabbables = await page.evaluate(() => {
     const selector = "a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex='-1'])";

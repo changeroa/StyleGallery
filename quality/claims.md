@@ -63,13 +63,36 @@ Consumer reference reason: This blank claim template declares no consumer-specif
 Boundary or limitation:
 Debt or escalation:
 Decision:
+Evidence refs:
+Verified by:
+Reviewed at:
+Review by: not applicable
+Source revision: not applicable
+Conflicts with: not applicable
 ```
 
 `Use case` and `Implementation handoff` are required for harmony claims. For other claim types, write `not applicable` rather than deleting the fields.
 
+## Machine Fields
+
+Records under `claim-records/` carry machine-readable fields so a validator can check them in CI. `scripts/validate-claim-records.mjs` enforces these fields; `scripts/test-validate-claim-records.mjs` guards the validator with positive and negative fixtures.
+
+- `Evidence refs`: one or more backticked refs, comma-separated. A ref is a repository-relative path that must resolve to an existing file, or an agent-native StableRef-style id (for example `sg://...` or a dotted `domain.kind`). At least one ref is required. Inline code is used so link checking does not treat a ref as a navigable link.
+- `Verified by`: exactly one of `auto`, `human`, or `mixed`.
+- `Reviewed at`: a real `YYYY-MM-DD` date (the freshness review date).
+- `Review by`: a real `YYYY-MM-DD` date or `not applicable`.
+- `Source revision`: a commit SHA, URL, or `not applicable`, recorded for the deferred external-source drift audit.
+- `Conflicts with`: backticked claim refs or `not applicable`, recorded for the deferred conflict index.
+
+Automation certifies only what it can check: `Verified by: auto` is allowed only when the `Decision` is `pass`, and every `Evidence refs` entry must then be executable (a `scripts/` or `tests/` path, or a StableRef id). A `review_required` or `blocked` decision needs `human` or `mixed` verification, which in turn must cite at least one human-review artifact under `quality/evidence/` or `quality/gates/`. This keeps the repository's own rule that a scan cannot certify complete accessibility.
+
+## Source Of Truth
+
+Markdown claim records under `quality/claim-records/*.md` are the canonical, human-authored source of truth for claims, consistent with the governance matrix (quality docs are a Manual `quality/**/*.md` family). The agent-native epistemic graph under `consumer-reference/agent-native/` is a separate machine representation; the machine field names here align with its `claim` record (`evidence_refs`, `validation_refs`, `observed_at`) so the two can converge through a future projection, without making either import the other.
+
 ## Review Rule
 
-A record is complete only when the evidence family names what the artifact can support and the boundary says what it cannot prove. Evidence without a warrant remains a blocking condition.
+A record is complete only when the evidence family names what the artifact can support and the boundary says what it cannot prove. Evidence without a warrant remains a blocking condition, and a machine-readable record is complete only when its machine fields pass `scripts/validate-claim-records.mjs`.
 
 ## IA Navigation
 
