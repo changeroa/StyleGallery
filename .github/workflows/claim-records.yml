@@ -1,0 +1,74 @@
+name: Claim record checks
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stylegallery-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  claim-records:
+    name: Claim record machine schema
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Validate claim record fields and verdicts
+        run: |
+          node -c scripts/validate-claim-records.mjs
+          node -c scripts/test-validate-claim-records.mjs
+          node scripts/validate-claim-records.mjs --json
+          node scripts/test-validate-claim-records.mjs
+
+  pattern-oracle:
+    name: Pattern render oracle (scroll-body-shell)
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
+      options: --platform linux/amd64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Install unzip for Bun setup
+        run: apt-get update && apt-get install -y --no-install-recommends unzip
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.3.14
+
+      - name: Install exact oracle dependencies
+        run: bun install --frozen-lockfile --ignore-scripts
+
+      - name: Render the pattern oracle at 320, 768, and 1440
+        run: |
+          node -c scripts/check-pattern-oracle.mjs
+          node -c scripts/test-check-pattern-oracle.mjs
+          node scripts/check-pattern-oracle.mjs --json
+
+      - name: Pattern oracle positive and negative fixtures
+        run: node scripts/test-check-pattern-oracle.mjs

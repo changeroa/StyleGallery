@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>scroll-body-shell oracle fixture</title>
+<style>
+/* Layout-only demonstration of the scroll-body-shell pattern: the shell fills the viewport,
+   header and footer stay fixed in the grid, and only the named body region owns scrolling.
+   A little color and spacing is added so the render passes contrast and reads clearly; the
+   pattern contract itself is the grid, sizing, and overflow declarations. */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+body { color: #111; font: 16px/1.5 system-ui, sans-serif; margin: 0; }
+
+.scroll_body_shell {
+    block-size: 100dvh;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    max-block-size: 100dvh;
+}
+
+.scroll_body_shell_body {
+    min-block-size: 0;
+    overflow: auto;
+    padding-block: 16px;
+    padding-inline: 16px;
+}
+
+.scroll_body_shell_header,
+.scroll_body_shell_footer {
+    padding-block: 12px;
+    padding-inline: 16px;
+}
+
+.scroll_body_shell_header { background: #10233f; color: #fff; }
+.scroll_body_shell_footer { background: #10233f; color: #fff; }
+
+.scroll_body_shell_header nav a,
+.scroll_body_shell_footer a { color: #fff; }
+
+.scroll_body_shell_body a { color: #0a3a8a; }
+
+.scroll_body_shell_nav { display: flex; gap: 16px; }
+
+button {
+    background: #10233f;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    padding-block: 8px;
+    padding-inline: 16px;
+}
+</style>
+</head>
+<body>
+<section class="scroll_body_shell" aria-label="Inbox">
+    <header class="scroll_body_shell_header">
+        <nav class="scroll_body_shell_nav" aria-label="Inbox filters">
+            <a href="#all">All</a>
+            <a href="#unread">Unread</a>
+            <a href="#flagged">Flagged</a>
+        </nav>
+    </header>
+    <main class="scroll_body_shell_body" data-scroll-owner tabindex="-1">
+        <h1>Message list owns vertical scrolling</h1>
+        <p><button type="button">Compose</button> <button type="button">Refresh</button></p>
+        <p>The body region below scrolls on its own while the header above and the footer
+        below remain pinned by the shell grid. Only this region should produce a scrollbar.</p>
+        <p>Message one: layout patterns keep reading order and focus order independent of visual
+        placement. <a href="#one">Open message one</a></p>
+        <p>Message two: the shell constrains its own height with a viewport unit, and the body row
+        is allowed to shrink to zero so its overflow is the single scroll owner.
+        <a href="#two">Open message two</a></p>
+        <p>Message three: longer threads keep flowing here without pushing the document root into a
+        second scrollbar. <a href="#three">Open message three</a></p>
+        <p>Message four: a keyboard user can tab through every control in document order, and each
+        focused control scrolls into this region, never under the header.
+        <a href="#four">Open message four</a></p>
+        <p>Message five: additional content below guarantees the body overflows at every tested
+        width, from a narrow phone to a wide desktop. <a href="#five">Open message five</a></p>
+        <p>Message six: the pattern adds no animation, so reduced-motion rendering is identical.
+        <a href="#six">Open message six</a></p>
+        <p>Message seven: padding and intrinsic sizing adapt the body without a media query.
+        <a href="#seven">Open message seven</a></p>
+        <p>Message eight: the final control sits at the end of the body so focus travel can be
+        checked end to end. <a href="#eight">Open message eight</a></p>
+        <ol>
+            <li>Older thread: weekly layout review notes.</li>
+            <li>Older thread: container query migration checklist.</li>
+            <li>Older thread: scroll container naming conventions.</li>
+            <li>Older thread: logical property audit results.</li>
+            <li>Older thread: focus order regression report.</li>
+            <li>Older thread: reduced motion review summary.</li>
+            <li>Older thread: viewport unit fallback discussion.</li>
+            <li>Older thread: sticky header composition notes.</li>
+            <li>Older thread: grid track sizing questions.</li>
+            <li>Older thread: intrinsic sizing examples.</li>
+            <li>Older thread: overflow ownership decisions.</li>
+            <li>Older thread: shell pattern adoption plan.</li>
+            <li>Older thread: content stress test cases.</li>
+            <li>Older thread: unbroken string handling.</li>
+            <li>Older thread: right-to-left layout checks.</li>
+            <li>Older thread: archive of resolved questions.</li>
+        </ol>
+        <p><button type="button">Load older messages</button></p>
+    </main>
+    <footer class="scroll_body_shell_footer">
+        <a href="#selected">Selected message actions</a>
+    </footer>
+</section>
+</body>
+</html>

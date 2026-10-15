@@ -33,6 +33,12 @@ Boundary or limitation: The image cannot prove usability, accessibility, brand f
 Debt or escalation: If the visual reference conflicts with source order, focus order, accessibility, or content stress behavior, regenerate the prompt or record a blocked decision.
 
 Decision: pass when the harmony gate is complete before the image is generated.
+Evidence refs: `quality/gates/harmony-evaluation.md`
+Verified by: human
+Reviewed at: 2026-10-15
+Review by: not applicable
+Source revision: not applicable
+Conflicts with: not applicable
 
 ## Claim Record 2 - Screenshot Diff Limits
 
@@ -59,6 +65,12 @@ Boundary or limitation: A screenshot can hide focus order, screen-reader output,
 Debt or escalation: Escalate to accessibility or user evidence when the claim says readable, usable, accessible, clear, good, better, or harmonious for a person or task.
 
 Decision: review_required when screenshots are the only evidence for a human-outcome claim.
+Evidence refs: `quality/evidence/visual-qa.md`, `quality/gates/visual-evidence.md`
+Verified by: mixed
+Reviewed at: 2026-10-15
+Review by: not applicable
+Source revision: not applicable
+Conflicts with: not applicable
 
 ## Claim Record 3 - Accessibility Scan Limits
 
@@ -85,6 +97,44 @@ Boundary or limitation: The scan cannot prove accessibility for every user, devi
 Debt or escalation: Accessibility debt must name affected users, owner, review trigger, and the evidence gap before it can be accepted.
 
 Decision: blocked when a known accessibility failure is treated as a taste tradeoff or ordinary visual debt.
+Evidence refs: `quality/evidence/accessibility.md`, `quality/gates/accessibility-evidence.md`
+Verified by: human
+Reviewed at: 2026-10-15
+Review by: not applicable
+Source revision: not applicable
+Conflicts with: not applicable
+
+## Claim Record 4 - Scroll-Body-Shell Scroll Ownership
+
+Principle: A layout pattern owns its named scroll container.
+
+Claim: The `scroll-body-shell` pattern keeps header and footer regions fixed while only the named body region scrolls, with no horizontal overflow and keyboard focus following DOM order, at 320, 768, and 1440 CSS pixels.
+
+Context: Viewport-shell patterns regress silently when a layout change hands scroll to the document root, traps focus, or overflows a narrow viewport; prose alone cannot catch this.
+
+Use case: not applicable.
+
+Warrant: A browser render oracle loads a faithful demo of the pattern at three widths and asserts the body is the only scroll owner, the document root does not overflow, Tab order matches DOM order, reduced motion shows no running infinite animation, and axe-core reports no serious or critical violation.
+
+Evidence family: `validator`, `rendered`.
+
+Verification protocol: `node scripts/check-pattern-oracle.mjs --json` renders the demo fixture and fails when any width breaks the contract; `node scripts/test-check-pattern-oracle.mjs` guards the oracle with positive and negative fixtures.
+
+Implementation handoff: not applicable.
+Consumer reference: not_applicable
+Consumer reference reason: This pattern-oracle sample contains no consumer-specific reference record.
+
+Boundary or limitation: The oracle proves the demo's rendered layout contract on one Chromium engine; it does not prove the pattern is usable, accessible for every assistive technology, or correct in browsers it does not render.
+
+Debt or escalation: Extend the oracle to more patterns only after measuring CI time and render stability; a flaky render is a blocking defect, not an accepted cost.
+
+Decision: pass when the oracle is green at all three widths.
+Evidence refs: `scripts/check-pattern-oracle.mjs`, `scripts/test-check-pattern-oracle.mjs`, `tests/fixtures/pattern-oracle/scroll-body-shell/index.html`
+Verified by: auto
+Reviewed at: 2026-10-15
+Review by: not applicable
+Source revision: not applicable
+Conflicts with: not applicable
 
 ## IA Navigation
 
