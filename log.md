@@ -1,5 +1,15 @@
 # StyleGallery Log
 
+## 2026-10-15
+
+Understood as: release `stylegallery@0.1.9` with the machine-verifiable claim records and the scroll-body-shell render oracle from PR #53.
+
+- Bumped the package version from `0.1.8` to `0.1.9`. The release carries PR #53: `scripts/validate-claim-records.mjs` checks the machine-readable fields of every `## Claim Record` section under `quality/claim-records/`, `scripts/check-pattern-oracle.mjs` renders `tests/fixtures/pattern-oracle/scroll-body-shell/index.html` at 320, 768, and 1440 CSS pixels, and the Claim record checks workflow runs both with their fixture tests.
+- The package `files` list is unchanged. The updated `quality/claims.md` and the new `quality/claim-records/samples.md` were already packaged. The two new checks stay repository-only like the other validators (`validate-domains`, `check-showcase`): the claim-record validator imports the unpackaged `scripts/markdown-structure.mjs`, and the oracle needs the development dependencies Playwright and `@axe-core/playwright` plus a fixture under `tests/`, which the package does not ship. Run them from a repository checkout.
+
+Consumer reference: not_applicable
+Consumer reference reason: This change releases a package version and selects no consumer-reference profile or record.
+
 ## 2026-09-28
 
 Understood as: switch the repository package manager from npm to Bun and release `stylegallery@0.1.8`.
