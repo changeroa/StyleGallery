@@ -2,6 +2,14 @@
 
 ## 2026-10-16
 
+Understood as: release `stylegallery@0.1.10` with the Registrar, the Conservator, and the holy-grail and icon-frame doc fixes from PR #55.
+
+- Bumped the package version from `0.1.9` to `0.1.10`. The release carries PR #55: `sg registrar` checks every claim record against 35 rules, `sg conservator` renders all 46 Layout pattern exhibits at 320, 768, and 1440 CSS pixels with negative controls, `holy-grail` stacks below 48rem, and the `icon-frame` sample has `role="img"`.
+- The package `files` list already gained `scripts/registrar.mjs`, `scripts/conservator.mjs`, `scripts/conservator-exhibits.mjs`, `scripts/markdown-structure.mjs`, and `scripts/pattern-data.mjs` in PR #55. This release changes only the version, this log entry, the material registry for the log bytes, and the A2A and AG-UI caller inventories bound to `package.json` and the registry.
+
+Consumer reference: not_applicable
+Consumer reference reason: This change releases a package version and selects no consumer-reference profile or record.
+
 Understood as: fix the two Layout doc defects the Conservator found, then measure both patterns without workarounds.
 
 - `holy-grail` now has the breakpoint its `breakpointed` responsiveness promised. `scripts/pattern-data.mjs` adds `@media (max-width: 47.99rem) { .holy_grail { grid-template: "header" auto "left" auto "main" 1fr "right" auto "footer" auto / 1fr; } }`, so below 48rem the five regions stack in one column in DOM order and a 320px viewport no longer overflows by 96px. 1440px is unchanged. `scripts/generate-patterns.mjs` accepts an at-rule entry (`["@media ...", [[selector, declarations]], note]`), renders it as a nested block, counts its properties under Core Properties, and writes the change point and its note under Constraints And Change Points.
