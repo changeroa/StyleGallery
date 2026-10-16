@@ -1,5 +1,18 @@
 # StyleGallery Log
 
+## 2026-10-16
+
+Understood as: rename the claim-record validator to the Registrar and the pattern render oracle to the Conservator, raise both to their widest useful coverage, and ship both as `sg` subcommands.
+
+- Renamed `scripts/validate-claim-records.mjs` to `scripts/registrar.mjs` and `scripts/check-pattern-oracle.mjs` to `scripts/conservator.mjs`, with their tests, package scripts, and the `.github/workflows/registrar-conservator.yml` workflow (formerly `claim-records.yml`; jobs `registrar` and `conservator`). The names describe the gallery roles: the Registrar keeps the claim register and the provenance of each record, and the Conservator inspects each exhibit directly.
+- The Registrar grows from 15 to 35 rules. New rules check every template field and the template itself, repeated fields, record numbering and title uniqueness, evidence-family names against `quality/evidence/families.md`, the consumer-reference shape, review dates that are in the future, out of order, or overdue (a warning), the source-revision format, a review date for claims bound to an external source, conflict refs that must name another record and be reciprocal, `sg://conservator/<pattern>` refs, `auto` verdicts that use human-outcome terms or lack the `validator` family, record-file indexing, and one record per Conservator exhibit. `sg registrar --stale` and `--unverified` list records that need review. Every rule has a failing fixture.
+- The Conservator grows from one pattern to all 46 Layout patterns. Each exhibit renders the pattern doc's CSS block verbatim and measures that pattern's claimed geometry. Each negative control removes one declaration the doc lists as breaking and must fail on the named behavior. Claim Records 5 to 49 in `quality/claim-records/samples.md` bind each exhibit, and record 4 covers `scroll-body-shell`. Sample 4's evidence family `rendered` was not in the glossary and is now `validator`, `screenshot`, `accessibility`. The per-pattern records live in the existing samples file because the material corpus is sealed at 180 documents. The committed `tests/fixtures/pattern-oracle/` fixture is replaced by in-memory exhibits.
+- Findings left for the Layout owner: the `icon-frame` doc sample puts `aria-label` on a span with no role, which axe-core reports as serious, so the exhibit adds `role="img"`. `holy-grail` is documented as breakpointed, but its CSS has no breakpoint and overflows a 320px viewport by 96px, so the exhibit is measured at 768 and 1440 only.
+- Owner decision (2026-10-16): Playwright may be a required package dependency. `playwright` and `@axe-core/playwright` move to `dependencies` (about 22MB). Browsers are not downloaded at install. `sg conservator` reports `browser_missing` with the install command, accepts `--install-browser`, and accepts `--channel chrome` for an installed Chrome. The package now ships `scripts/registrar.mjs`, `scripts/conservator.mjs`, `scripts/conservator-exhibits.mjs`, and `scripts/markdown-structure.mjs`. In an installed package, evidence refs to repository-only files are warnings, not failures.
+
+Consumer reference: not_applicable
+Consumer reference reason: This change renames and extends repository quality checks and selects no consumer-reference profile or record.
+
 ## 2026-10-15
 
 Understood as: release `stylegallery@0.1.9` with the machine-verifiable claim records and the scroll-body-shell render oracle from PR #53.

@@ -46,6 +46,18 @@ sg context sg:profile/editorial-reference-profile --format json
 sg ops --format json
 ```
 
+Check the gallery's own claims with the Registrar and the Conservator:
+
+```sh
+sg registrar
+sg registrar --stale
+sg registrar --unverified
+sg conservator
+sg conservator --pattern sidebar,reel --controls
+```
+
+`sg registrar` checks every claim record in `quality/claim-records/` against the [claim template and machine-field rules](quality/claims.md). `--stale` lists records whose review date has passed, and `--unverified` lists records whose verdict is not fully automated. `sg conservator` renders every Layout pattern's documented CSS in Chromium at 320, 768, and 1440 CSS pixels and measures the spatial behavior the pattern doc claims. `--controls` also removes a declaration each pattern depends on and requires the matching measurement to fail. Playwright is installed with the package, but its browser is not. If Chromium is missing, the command reports `browser_missing`; run `npx playwright install chromium`, add `--install-browser`, or use an installed Chrome with `--channel chrome`.
+
 Every command writes JSON to stdout. Knowledge results retain their deterministic v1 payloads; `discover` and `ops` also report the local compiler installation. Invalid input returns an error object and a nonzero exit status. See [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) for the frozen knowledge contract, StableRef and VersionID model, MCP resources, and trust boundaries.
 
 Compile a website directly through SG after [installing the compiler](scripts/compiler/README.md#setup):

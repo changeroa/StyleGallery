@@ -75,16 +75,23 @@ Conflicts with: not applicable
 
 ## Machine Fields
 
-Records under `claim-records/` carry machine-readable fields so a validator can check them in CI. `scripts/validate-claim-records.mjs` enforces these fields; `scripts/test-validate-claim-records.mjs` guards the validator with positive and negative fixtures.
+Records under `claim-records/` carry machine-readable fields so the Registrar can check them in CI. The Registrar (`scripts/registrar.mjs`, also `sg registrar`) enforces these fields and the rules below; `scripts/test-registrar.mjs` guards every Registrar rule with a failing fixture and the valid shapes with passing fixtures.
+
+- Every field in the template above is present exactly once, and the template itself must list the same fields the Registrar checks. `Principle`, `Claim`, `Context`, `Warrant`, `Evidence family`, `Verification protocol`, `Boundary or limitation`, and `Debt or escalation` must state something rather than `not applicable`.
+- Each record heading reads `Claim Record <number> - <title>`; numbers are unique within a file and titles are unique across all records. Every file that holds records is linked from [Claim Records](claim-records/index.md).
+- `Evidence family`: backticked names defined in the [Evidence Family Glossary](evidence/families.md).
+- `Consumer reference`: `not_applicable` with a one-sentence `Consumer reference reason`, or one existing repository-relative JSON record.
+- `Decision`: begins with `pass`, `review_required`, or `blocked`.
 
 - `Evidence refs`: one or more backticked refs, comma-separated. A ref is a repository-relative path that must resolve to an existing file, or an agent-native StableRef-style id (for example `sg://...` or a dotted `domain.kind`). At least one ref is required. Inline code is used so link checking does not treat a ref as a navigable link.
 - `Verified by`: exactly one of `auto`, `human`, or `mixed`.
-- `Reviewed at`: a real `YYYY-MM-DD` date (the freshness review date).
-- `Review by`: a real `YYYY-MM-DD` date or `not applicable`.
-- `Source revision`: a commit SHA, URL, or `not applicable`, recorded for the deferred external-source drift audit.
-- `Conflicts with`: backticked claim refs or `not applicable`, recorded for the deferred conflict index.
+- `Reviewed at`: a real `YYYY-MM-DD` date (the freshness review date), not after today.
+- `Review by`: a real `YYYY-MM-DD` date no earlier than `Reviewed at`, or `not applicable`. A passed date is reported as a warning so the claim is re-reviewed; `sg registrar --stale` lists those records.
+- `Source revision`: a 7-40 character lowercase commit SHA, an `https` URL, or `not applicable`. A claim bound to an external source revision must set a `Review by` date, because the source can drift.
+- `Conflicts with`: backticked record refs of the form `quality/claim-records/<file>.md#claim-record-<number>`, or `not applicable`. Each ref must name another existing record, and that record must list the conflict back.
+- A `sg://conservator/<pattern>` evidence ref must name a Conservator exhibit, and every exhibit must be cited by exactly one record; see the [Layout Pattern Records](claim-records/samples.md#layout-pattern-records).
 
-Automation certifies only what it can check: `Verified by: auto` is allowed only when the `Decision` is `pass`, and every `Evidence refs` entry must then be executable (a `scripts/` or `tests/` path, or a StableRef id). A `review_required` or `blocked` decision needs `human` or `mixed` verification, which in turn must cite at least one human-review artifact under `quality/evidence/` or `quality/gates/`. This keeps the repository's own rule that a scan cannot certify complete accessibility.
+Automation certifies only what it can check: `Verified by: auto` is allowed only when the `Decision` is `pass`, the evidence family includes `validator`, the `Claim` uses none of the human-outcome terms listed under High-Impact Claim (good, better, best, harmonious, usable, accessible, readable, credible, clear), and every `Evidence refs` entry is executable (a `scripts/` or `tests/` path, or a StableRef id). `sg registrar --unverified` lists the records that are not fully automated. A `review_required` or `blocked` decision needs `human` or `mixed` verification, which in turn must cite at least one human-review artifact under `quality/evidence/` or `quality/gates/`. This keeps the repository's own rule that a scan cannot certify complete accessibility.
 
 ## Source Of Truth
 
@@ -92,7 +99,7 @@ Markdown claim records under `quality/claim-records/*.md` are the canonical, hum
 
 ## Review Rule
 
-A record is complete only when the evidence family names what the artifact can support and the boundary says what it cannot prove. Evidence without a warrant remains a blocking condition, and a machine-readable record is complete only when its machine fields pass `scripts/validate-claim-records.mjs`.
+A record is complete only when the evidence family names what the artifact can support and the boundary says what it cannot prove. Evidence without a warrant remains a blocking condition, and a machine-readable record is complete only when it passes the Registrar (`scripts/registrar.mjs`).
 
 ## IA Navigation
 
