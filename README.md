@@ -277,6 +277,16 @@ Every pattern documents its primary problem, structure, constraints, scroll owne
 
 Pattern verification covers the relevant viewport, container, content, direction, writing-mode, interaction, overflow, focus, and sticky/scroll cases. See the [detailed verification matrix](layout/index.md#verification-matrix).
 
+## Releasing
+
+The npm package is published from GitHub Actions through [npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers). The repository stores no npm token, and nothing is published from a local machine.
+
+1. Open a pull request that bumps `version` in `package.json`, adds the `log.md` entry, and refreshes the material registry and lifecycle hashes that the version change touches. Merge it after CI passes.
+2. Create a GitHub Release from `main` whose tag is `v` plus the new version, for example `v0.1.11`.
+3. Publishing the release runs [`.github/workflows/publish.yml`](.github/workflows/publish.yml). The workflow checks that the tag matches `package.json`, runs the governance, lifecycle, reference-artifact, material, and Registrar checks, and runs `npm publish` with a short-lived OIDC credential. npm attaches provenance automatically.
+
+The npm Trusted Publisher entry for `stylegallery` must name owner `changeroa`, repository `StyleGallery`, and workflow `publish.yml`, and must allow `npm publish`. A new entry expires unless its first publish succeeds within two days, so register it in the same sitting as a release.
+
 ## License
 
 Source code is licensed under the MIT License ([LICENSE](LICENSE)). Documentation is licensed under Creative Commons Attribution 4.0 International ([LICENSE-DOCS](LICENSE-DOCS)). Material adapted from external sources keeps its original rights; see [NOTICE](NOTICE) and the [External Adaptation Contract](DOMAINS.md#external-adaptation-contract).
