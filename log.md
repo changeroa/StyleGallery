@@ -2,6 +2,14 @@
 
 ## 2026-10-16
 
+Understood as: release `stylegallery@0.1.11`, the first version published by the Trusted Publishing workflow from PR #57.
+
+- Bumped the package version from `0.1.10` to `0.1.11`. The release carries PR #57: `.github/workflows/publish.yml` publishes the package when a GitHub Release is published, authenticating to npm with GitHub OIDC instead of a token, and the README Releasing section describes the flow. This version is published by creating the GitHub Release `v0.1.11`, not from a local machine.
+- The package `files` list is unchanged. This release changes only the version, this log entry, the material registry for the log bytes, and the A2A and AG-UI caller inventories bound to `package.json` and the registry.
+
+Consumer reference: not_applicable
+Consumer reference reason: This change releases a package version and selects no consumer-reference profile or record.
+
 Understood as: publish the npm package from GitHub Actions through npm Trusted Publishing (OIDC) instead of a local token.
 
 - Added `.github/workflows/publish.yml`. A published GitHub Release runs it on a GitHub-hosted runner with `id-token: write`, Node 22, and npm 11.21.1 (Trusted Publishing needs npm 11.5.1 or later and Node 22.14 or later). It checks that the release tag is `v` plus the `package.json` version, runs the governance, lifecycle, reference-artifact, material, and Registrar checks and `npm pack --dry-run`, then runs `npm publish`. No npm token secret is used, and npm generates provenance for the public repository. Actions are pinned to the same commit SHAs as the other workflows.
