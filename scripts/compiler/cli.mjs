@@ -7,8 +7,28 @@ export function withCompilerDiscovery(report, config = {}) {
   return { ...report, compiler: compilerDiscovery(config) };
 }
 
+// The Registrar and the Conservator check this gallery's own claim register and Layout patterns.
+// They load lazily so knowledge and compiler commands never import a browser.
+async function runQualityCommand(command, args) {
+  try {
+    if (command === "registrar") {
+      const { parseRegistrarArgs, registrarView, runRegistrar } = await import("../registrar.mjs");
+      const options = parseRegistrarArgs(args.filter((arg) => arg !== "--format" && arg !== "json"));
+      return { operation: command, ...registrarView(runRegistrar(options.root ? { root: options.root } : {}), options) };
+    }
+    const { parseConservatorArgs, runConservator } = await import("../conservator.mjs");
+    return { operation: command, ...await runConservator(parseConservatorArgs(args.filter((arg) => arg !== "--format" && arg !== "json"))) };
+  } catch (error) {
+    return failure(command, error.code ?? `${command}_failed`, error.message);
+  }
+}
+
 export async function runSgCli(argv, config = {}) {
   const args = [...argv];
+  if (args[0] === "registrar" || args[0] === "conservator") {
+    const report = await runQualityCommand(args[0], args.slice(1));
+    return { report, exitCode: report.ok ? 0 : 1, output: `${JSON.stringify(report, null, 2)}\n` };
+  }
   const options = { ...config };
   let report;
   const rootIndex = args.indexOf("--compiler-root");

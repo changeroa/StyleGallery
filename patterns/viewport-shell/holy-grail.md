@@ -66,6 +66,12 @@ Use this pattern when you need to place header, footer, sidebars, and main conte
 .holy_grail_footer {
     grid-area: footer;
 }
+
+@media (max-width: 47.99rem) {
+    .holy_grail {
+        grid-template: "header" auto "left" auto "main" 1fr "right" auto "footer" auto / 1fr;
+    }
+}
 ```
 
 ## Core Properties
@@ -79,6 +85,7 @@ Use this pattern when you need to place header, footer, sidebars, and main conte
 ## Constraints And Change Points
 
 - breakpointed responsiveness is part of the contract; change sizing values only when the new minimum, maximum, or wrap point is documented with the pattern.
+- Change point `@media (max-width: 47.99rem)` overrides `grid-template` on `.holy_grail`. Below 48rem the two 12rem side columns no longer fit beside main content, so all five regions stack in one column in DOM order: header, left, main, right, footer. At 48rem and wider the three-column shell applies.
 - Keep the HTML class hooks and CSS selectors in one-to-one agreement.
 
 ## Scroll Ownership

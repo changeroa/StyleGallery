@@ -27,7 +27,7 @@ Use this pattern when you need to keep an icon aligned inside a fixed square slo
 ## HTML
 
 ```html
-<span class="icon_frame" aria-label="Calendar">
+<span class="icon_frame" role="img" aria-label="Calendar">
     <svg aria-hidden="true" viewBox="0 0 24 24"></svg>
 </span>
 ```

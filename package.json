@@ -256,6 +256,11 @@
     "scripts/compiler/mcp.mjs",
     "scripts/compiler/operations.mjs",
     "scripts/compiler/runtime.mjs",
+    "scripts/conservator-exhibits.mjs",
+    "scripts/conservator.mjs",
+    "scripts/markdown-structure.mjs",
+    "scripts/pattern-data.mjs",
+    "scripts/registrar.mjs",
     "scripts/sg-entry.mjs",
     "scripts/sg-material-mcp.mjs",
     "scripts/sg-material.mjs",
@@ -304,6 +309,10 @@
     "validate": "node scripts/validate-reference-artifacts.mjs --manifest consumer-reference/generated/manifest.json --json",
     "validate:component-state": "node scripts/validate-component-state.mjs --json && node scripts/generate-consumer-reference-evidence.mjs --check --json",
     "test:state-management": "node --test scripts/test-state-management-examples.mjs",
+    "registrar": "node scripts/registrar.mjs",
+    "test:registrar": "node scripts/test-registrar.mjs",
+    "conservator": "node scripts/conservator.mjs",
+    "test:conservator": "node scripts/test-conservator.mjs",
     "test:showcase": "node scripts/check-showcase.mjs",
     "test:showcase:self": "node scripts/test-check-showcase.mjs",
     "showcase:serve": "node scripts/serve-showcase.mjs",
@@ -312,14 +321,15 @@
     "sg:mcp:v1": "node scripts/sg-mcp.mjs"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.12.1",
     "@playwright/test": "1.61.0",
     "ajv": "8.20.0",
     "ajv-formats": "3.0.1"
   },
   "dependencies": {
+    "@axe-core/playwright": "4.12.1",
     "@chenglou/pretext": "0.0.8",
     "@modelcontextprotocol/sdk": "1.29.0",
+    "playwright": "1.61.0",
     "style-dictionary": "5.5.0",
     "zod": "4.4.3"
   },

@@ -1,4 +1,4 @@
-name: Claim record checks
+name: Registrar and Conservator
 
 on:
   workflow_dispatch:
@@ -15,8 +15,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  claim-records:
-    name: Claim record machine schema
+  registrar:
+    name: Registrar (claim register)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,15 +29,15 @@ jobs:
         with:
           node-version: 22
 
-      - name: Validate claim record fields and verdicts
+      - name: Registrar checks every claim record
         run: |
-          node -c scripts/validate-claim-records.mjs
-          node -c scripts/test-validate-claim-records.mjs
-          node scripts/validate-claim-records.mjs --json
-          node scripts/test-validate-claim-records.mjs
+          node -c scripts/registrar.mjs
+          node -c scripts/test-registrar.mjs
+          node scripts/registrar.mjs --json
+          node scripts/test-registrar.mjs
 
-  pattern-oracle:
-    name: Pattern render oracle (scroll-body-shell)
+  conservator:
+    name: Conservator (Layout pattern exhibits)
     runs-on: ubuntu-24.04
     container:
       image: mcr.microsoft.com/playwright:v1.61.0-noble@sha256:57b65fdc9ceabe0ef613124c7bbe2babcf9362c4d85e382fe3b03604e84b428a
@@ -61,14 +61,15 @@ jobs:
         with:
           bun-version: 1.3.14
 
-      - name: Install exact oracle dependencies
+      - name: Install exact Conservator dependencies
         run: bun install --frozen-lockfile --ignore-scripts
 
-      - name: Render the pattern oracle at 320, 768, and 1440
+      - name: Conservator renders every exhibit and negative control at 320, 768, and 1440
         run: |
-          node -c scripts/check-pattern-oracle.mjs
-          node -c scripts/test-check-pattern-oracle.mjs
-          node scripts/check-pattern-oracle.mjs --json
+          node -c scripts/conservator.mjs
+          node -c scripts/conservator-exhibits.mjs
+          node -c scripts/test-conservator.mjs
+          node scripts/conservator.mjs --controls --json --out .tmp/conservator
 
-      - name: Pattern oracle positive and negative fixtures
-        run: node scripts/test-check-pattern-oracle.mjs
+      - name: Conservator self-test
+        run: node scripts/test-conservator.mjs
