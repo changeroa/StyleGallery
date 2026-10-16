@@ -2,6 +2,14 @@
 
 ## 2026-10-16
 
+Understood as: publish the npm package from GitHub Actions through npm Trusted Publishing (OIDC) instead of a local token.
+
+- Added `.github/workflows/publish.yml`. A published GitHub Release runs it on a GitHub-hosted runner with `id-token: write`, Node 22, and npm 11.21.1 (Trusted Publishing needs npm 11.5.1 or later and Node 22.14 or later). It checks that the release tag is `v` plus the `package.json` version, runs the governance, lifecycle, reference-artifact, material, and Registrar checks and `npm pack --dry-run`, then runs `npm publish`. No npm token secret is used, and npm generates provenance for the public repository. Actions are pinned to the same commit SHAs as the other workflows.
+- `README.md` gains a Releasing section: merge the version-bump pull request, create a GitHub Release tagged `v<version>`, and the workflow publishes. The workflow cannot publish until the `stylegallery` package names `changeroa/StyleGallery` and `publish.yml` as a Trusted Publisher on npmjs.com with `npm publish` allowed. That registration is not done yet, because a new entry expires unless its first publish succeeds within two days. Source: https://docs.npmjs.com/trusted-publishers, read 2026-10-16.
+
+Consumer reference: not_applicable
+Consumer reference reason: This change adds a release workflow and its documentation and selects no consumer-reference profile or record.
+
 Understood as: release `stylegallery@0.1.10` with the Registrar, the Conservator, and the holy-grail and icon-frame doc fixes from PR #55.
 
 - Bumped the package version from `0.1.9` to `0.1.10`. The release carries PR #55: `sg registrar` checks every claim record against 35 rules, `sg conservator` renders all 46 Layout pattern exhibits at 320, 768, and 1440 CSS pixels with negative controls, `holy-grail` stacks below 48rem, and the `icon-frame` sample has `role="img"`.

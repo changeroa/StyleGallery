@@ -1,0 +1,73 @@
+name: Publish to npm
+
+# Publishes stylegallery to npm through npm Trusted Publishing (GitHub OIDC).
+# No npm token is stored in this repository. npmjs.com trusts only this file,
+# publish.yml in changeroa/StyleGallery, so keep the filename unchanged.
+# https://docs.npmjs.com/trusted-publishers
+
+on:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stylegallery-npm-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish stylegallery
+    if: github.repository == 'changeroa/StyleGallery'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Install npm with Trusted Publishing support
+        run: |
+          npm install --global npm@11.21.1
+          npm --version
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.3.14
+
+      - name: Install pinned dependencies
+        run: bun install --frozen-lockfile --ignore-scripts
+
+      - name: Check the release tag matches package.json
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          version="$(node -p 'require("./package.json").version')"
+          if [ "$RELEASE_TAG" != "v$version" ]; then
+            echo "Release tag $RELEASE_TAG does not match package.json version v$version" >&2
+            exit 1
+          fi
+
+      - name: Validate before publishing
+        run: |
+          node scripts/validate-governance.mjs --json
+          node scripts/validate-lifecycle-disposition.mjs --json
+          npm run validate
+          npm run validate:material
+          npm run registrar
+          npm pack --dry-run
+
+      - name: Publish with OIDC and provenance
+        run: npm publish --access public
