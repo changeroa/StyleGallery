@@ -8,6 +8,8 @@
 // `c.expect(condition, behavior, message)` records a failure tagged with the behavior id.
 // This module is plain data so the Registrar can import the exhibit list without a browser.
 
+import { samples } from "./pattern-data.mjs";
+
 const sentence = (topic, index) => `${topic} note ${index + 1}: layout contracts keep reading order, focus order, and spatial order aligned while content grows.`;
 const paragraphs = (topic, count) => Array.from({ length: count }, (_, index) => `<p>${sentence(topic, index)}</p>`).join("\n");
 const links = (labels) => labels.map((label) => `<a href="#${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}">${label}</a>`).join("\n");
@@ -161,10 +163,9 @@ ${links(twelveLabels)}
   {
     slug: "icon-frame",
     claim: "`icon-frame` is a 2.5rem square slot with its icon centered.",
-    // role="img" is added: the doc sample's role-less aria-label fails axe-core (see notMeasured).
-    html: `<p>Next event <span class="icon_frame" role="img" aria-label="Calendar">
-    <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><rect width="24" height="24" fill="#345"></rect></svg>
-</span> on Monday.</p>`,
+    // The doc sample verbatim; the harness gives its empty svg a 24px intrinsic size to center.
+    html: `<p>Next event ${samples["icon-frame"].trim()} on Monday.</p>`,
+    harness: ".icon_frame > svg { block-size: 24px; inline-size: 24px; }",
     measure: (c) => {
       const frame = c.r(".icon_frame");
       const icon = c.r(".icon_frame > svg");
@@ -290,7 +291,7 @@ ${links(twelveLabels)}
   },
   {
     slug: "holy-grail",
-    claim: "`holy-grail` spans header and footer across three columns, keeps left, main, and right side by side, and fills the viewport block size.",
+    claim: "`holy-grail` spans header and footer across three columns and keeps left, main, and right side by side from 48rem, stacks all five regions in one column in DOM order below 48rem without inline overflow, and fills the viewport block size.",
     html: `<section class="holy_grail" aria-label="News page">
     <header class="holy_grail_header">Daily briefing</header>
     <aside class="holy_grail_left">Topic navigation</aside>
@@ -298,13 +299,17 @@ ${links(twelveLabels)}
     <aside class="holy_grail_right">Market snapshot</aside>
     <footer class="holy_grail_footer">Edition links</footer>
 </section>`,
-    // The doc CSS has no breakpoint: two 12rem side columns plus gaps exceed a 320px viewport.
-    widths: [768, 1440],
     measure: (c) => {
       const root = c.r(".holy_grail");
-      const [header, left, main, right, footer] = ["header", "left", "main", "right", "footer"].map((area) => c.r(`.holy_grail_${area}`));
-      c.expect(c.near(left.top, main.top, 1) && c.near(main.top, right.top, 1) && left.right < main.left && main.right < right.left, "holy-grail-columns", "left, main, and right are not side by side");
-      c.expect(c.near(header.width, root.width, 1) && c.near(footer.width, root.width, 1), "holy-grail-span", "header or footer does not span all columns");
+      const regions = ["header", "left", "main", "right", "footer"].map((area) => c.r(`.holy_grail_${area}`));
+      const [header, left, main, right, footer] = regions;
+      if (c.W < 768) {
+        c.expect(regions.every((region) => c.near(region.left, root.left, 1) && c.near(region.width, root.width, 1)), "holy-grail-stack", "a region does not take the full single-column width");
+        c.expect(regions.every((region, index) => index === 0 || region.top >= regions[index - 1].bottom + 15), "holy-grail-stack", "regions do not stack in DOM order with the 1rem gap");
+      } else {
+        c.expect(c.near(left.top, main.top, 1) && c.near(main.top, right.top, 1) && left.right < main.left && main.right < right.left, "holy-grail-columns", "left, main, and right are not side by side");
+        c.expect(c.near(header.width, root.width, 1) && c.near(footer.width, root.width, 1), "holy-grail-span", "header or footer does not span all columns");
+      }
       c.expect(root.height >= c.H - 1 && c.near(footer.bottom, root.bottom, 1), "holy-grail-fill", "shell does not fill the viewport block size");
     },
     negative: { selector: ".holy_grail", property: "grid-template", behavior: "holy-grail-columns", allow: ["holy-grail-span"] },
@@ -758,8 +763,6 @@ export const exhibitSlugs = Object.freeze(exhibits.map(({ slug }) => slug));
 
 // Doc claims the Conservator does not measure, with the reason. Reported with every run.
 export const notMeasured = Object.freeze([
-  { pattern: "holy-grail", scope: "320px viewport", reason: "The doc marks the pattern breakpointed, but its CSS has no breakpoint: two minmax(12rem, auto) side columns plus gaps overflow a 320px viewport by 96px, so the exhibit is measured at 768 and 1440 only." },
   { pattern: "frame", scope: "object-fit: cover", reason: "Cropping is a paint result; element geometry cannot tell cover from fill once the media box equals the slot." },
-  { pattern: "icon-frame", scope: "doc HTML sample", reason: "The doc sample puts aria-label on a span with no role, which axe-core reports as serious aria-prohibited-attr; the exhibit adds role=\"img\" and measures the layout only." },
   { pattern: "all patterns", scope: "Properties That Break The Layout If Removed", reason: "Each doc lists every core declaration as breaking; a negative control removes one declaration per pattern, so the remaining declarations are not individually proven." },
 ]);

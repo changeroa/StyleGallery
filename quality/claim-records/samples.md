@@ -352,7 +352,7 @@ Implementation handoff: not applicable.
 Consumer reference: not_applicable
 Consumer reference reason: This Layout pattern record selects no consumer-specific reference record.
 
-Boundary or limitation: The render covers one Chromium engine, the exhibit's stress content, and 320, 768, 1440 CSS pixels at a 720px viewport height; it does not prove usability, complete accessibility, or behavior in other browsers. Not measured: doc HTML sample. The doc sample puts aria-label on a span with no role, which axe-core reports as serious aria-prohibited-attr; the exhibit adds role="img" and measures the layout only.
+Boundary or limitation: The render covers one Chromium engine, the exhibit's stress content, and 320, 768, 1440 CSS pixels at a 720px viewport height; it does not prove usability, complete accessibility, or behavior in other browsers.
 
 Debt or escalation: A failing exhibit blocks the change until the pattern CSS or the doc claim is corrected; a flaky measurement is a blocking defect, not an accepted cost.
 
@@ -560,13 +560,13 @@ Conflicts with: not applicable
 
 Principle: A layout pattern's documented spatial behavior must survive a real render.
 
-Claim: `holy-grail` spans header and footer across three columns, keeps left, main, and right side by side, and fills the viewport block size.
+Claim: `holy-grail` spans header and footer across three columns and keeps left, main, and right side by side from 48rem, stacks all five regions in one column in DOM order below 48rem without inline overflow, and fills the viewport block size.
 
 Context: [`holy-grail`](../../patterns/viewport-shell/holy-grail.md) states this behavior in prose and CSS; without a render, a CSS or sample edit can break it while every text check stays green.
 
 Use case: not applicable.
 
-Warrant: The Conservator renders the doc's CSS block unchanged around stress content at 768, 1440 CSS pixels and measures the claimed geometry; removing `grid-template` from `.holy_grail` makes the `holy-grail-columns` measurement fail, so the measurement discriminates the claimed behavior from ordinary flow.
+Warrant: The Conservator renders the doc's CSS block unchanged around stress content at 320, 768, 1440 CSS pixels and measures the claimed geometry; removing `grid-template` from `.holy_grail` makes the `holy-grail-columns` measurement fail, so the measurement discriminates the claimed behavior from ordinary flow.
 
 Evidence family: `validator`, `screenshot`, `accessibility`.
 
@@ -576,7 +576,7 @@ Implementation handoff: not applicable.
 Consumer reference: not_applicable
 Consumer reference reason: This Layout pattern record selects no consumer-specific reference record.
 
-Boundary or limitation: The render covers one Chromium engine, the exhibit's stress content, and 768, 1440 CSS pixels at a 720px viewport height; it does not prove usability, complete accessibility, or behavior in other browsers. Not measured: 320px viewport. The doc marks the pattern breakpointed, but its CSS has no breakpoint: two minmax(12rem, auto) side columns plus gaps overflow a 320px viewport by 96px, so the exhibit is measured at 768 and 1440 only.
+Boundary or limitation: The render covers one Chromium engine, the exhibit's stress content, and 320, 768, 1440 CSS pixels at a 720px viewport height; it does not prove usability, complete accessibility, or behavior in other browsers. The negative control removes the base three-column `grid-template`, which the 48rem breakpoint overrides at 320px, so it fails at 768 and 1440 only.
 
 Debt or escalation: A failing exhibit blocks the change until the pattern CSS or the doc claim is corrected; a flaky measurement is a blocking defect, not an accepted cost.
 

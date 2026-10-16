@@ -8,7 +8,17 @@ const root = process.cwd();
 const patternsDir = path.join(root, "patterns");
 const generatedWarning = "<!-- Generated from `scripts/generate-patterns.mjs` and `scripts/pattern-data.mjs`. Do not hand-edit generated catalog or pattern docs; edit the source files and regenerate. -->";
 
+// An entry whose selector is an at-rule holds nested [selector, declarations] rules and an optional
+// change-point note: ["@media (...)", [[selector, declarations], ...], note].
+function isAtRule(selector) {
+  return selector.startsWith("@");
+}
+
 function rule(selector, declarations) {
+  if (isAtRule(selector)) {
+    const nested = declarations.map(([inner, innerDeclarations]) => rule(inner, innerDeclarations).replace(/^/gm, "    "));
+    return `${selector} {\n${nested.join("\n\n")}\n}`;
+  }
   const body = Object.entries(declarations)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([property, value]) => `    ${property}: ${value};`)
@@ -33,7 +43,14 @@ function normalize(raw) {
 }
 
 function declarationNames(pattern) {
-  return [...new Set(pattern.rules.flatMap(([, declarations]) => Object.keys(declarations)))];
+  const flat = pattern.rules.flatMap(([selector, declarations]) => (isAtRule(selector) ? declarations : [[selector, declarations]]));
+  return [...new Set(flat.flatMap(([, declarations]) => Object.keys(declarations)))];
+}
+
+function changePoints(pattern) {
+  return pattern.rules
+    .filter(([selector]) => isAtRule(selector))
+    .map(([selector, nested, note]) => `- Change point \`${selector}\` overrides ${inlineCodeList([...new Set(nested.flatMap(([, declarations]) => Object.keys(declarations)))])} on ${inlineCodeList(nested.map(([inner]) => inner))}.${note ? ` ${note}` : ""}`);
 }
 
 function inlineCodeList(values) {
@@ -65,6 +82,7 @@ function contractSections(pattern, rootClass) {
     "## Constraints And Change Points",
     "",
     `- ${pattern.responsiveness} responsiveness is part of the contract; change sizing values only when the new minimum, maximum, or wrap point is documented with the pattern.`,
+    ...changePoints(pattern),
     "- Keep the HTML class hooks and CSS selectors in one-to-one agreement.",
     "",
     "## Scroll Ownership",

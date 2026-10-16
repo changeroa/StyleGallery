@@ -259,6 +259,7 @@
     "scripts/conservator-exhibits.mjs",
     "scripts/conservator.mjs",
     "scripts/markdown-structure.mjs",
+    "scripts/pattern-data.mjs",
     "scripts/registrar.mjs",
     "scripts/sg-entry.mjs",
     "scripts/sg-material-mcp.mjs",

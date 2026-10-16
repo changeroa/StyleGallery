@@ -2,6 +2,15 @@
 
 ## 2026-10-16
 
+Understood as: fix the two Layout doc defects the Conservator found, then measure both patterns without workarounds.
+
+- `holy-grail` now has the breakpoint its `breakpointed` responsiveness promised. `scripts/pattern-data.mjs` adds `@media (max-width: 47.99rem) { .holy_grail { grid-template: "header" auto "left" auto "main" 1fr "right" auto "footer" auto / 1fr; } }`, so below 48rem the five regions stack in one column in DOM order and a 320px viewport no longer overflows by 96px. 1440px is unchanged. `scripts/generate-patterns.mjs` accepts an at-rule entry (`["@media ...", [[selector, declarations]], note]`), renders it as a nested block, counts its properties under Core Properties, and writes the change point and its note under Constraints And Change Points.
+- The `icon-frame` sample adds `role="img"` to the labelled span, which clears axe-core's serious `aria-prohibited-attr`.
+- The Conservator measures `holy-grail` at 320, 768, and 1440. Below 768px it checks the `holy-grail-stack` behavior: every region takes the full column width and follows the previous one with the 1rem gap, and the shared root-overflow check stays at 0. The negative control is unchanged (remove the base `grid-template`) and fails at 768 and 1440; at 320 the breakpoint overrides the removed declaration. The `icon-frame` exhibit imports the doc sample from `scripts/pattern-data.mjs` verbatim instead of adding its own `role`, and only a harness rule sizes the empty svg. Both `not_measured` entries and their claim-record notes (records 11 and 18) are removed. The package now ships `scripts/pattern-data.mjs` because the packaged exhibits import it.
+
+Consumer reference: not_applicable
+Consumer reference reason: This change corrects two Layout pattern docs and their render exhibits and selects no consumer-reference profile or record.
+
 Understood as: rename the claim-record validator to the Registrar and the pattern render oracle to the Conservator, raise both to their widest useful coverage, and ship both as `sg` subcommands.
 
 - Renamed `scripts/validate-claim-records.mjs` to `scripts/registrar.mjs` and `scripts/check-pattern-oracle.mjs` to `scripts/conservator.mjs`, with their tests, package scripts, and the `.github/workflows/registrar-conservator.yml` workflow (formerly `claim-records.yml`; jobs `registrar` and `conservator`). The names describe the gallery roles: the Registrar keeps the claim register and the provenance of each record, and the Conservator inspects each exhibit directly.
