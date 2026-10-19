@@ -1298,6 +1298,36 @@
       "qrels": {
         "platform-guides/hig-universal-principles.md": 3
       }
+    },
+    {
+      "id": "p2-persona",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "How do I define personas and journeys for a design audit?",
+      "qrels": {
+        "quality/audit/persona-journey.md": 3
+      }
+    },
+    {
+      "id": "p2-ideal",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "How do I link audit ideal states to principles and checks?",
+      "qrels": {
+        "quality/audit/ideal-state.md": 3
+      }
+    },
+    {
+      "id": "p2-severity",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "How should I rate audit findings from zero to four?",
+      "qrels": {
+        "quality/audit/severity.md": 3
+      }
     }
   ]
 }

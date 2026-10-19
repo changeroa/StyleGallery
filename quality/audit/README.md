@@ -12,7 +12,23 @@ Primary role: progress record for a design audit.
 
 A design audit against HIG-derived principles and AI-slop patterns produces many findings. The ledger records each finding once and follows it to a verified fix, so progress is computed instead of re-described in every report.
 
-## Structure
+## Audit Kit
+
+Start with [Persona And Journey](persona-journey.md), define [Ideal States And Checks](ideal-state.md), and prioritize observations with the [Severity Scale](severity.md).
+
+```sh
+stylegallery audit init https://example.com --out ./audit
+stylegallery audit check https://example.com --json --viewports 320,768,1440
+stylegallery audit check ./index.html --json
+```
+
+`init` writes `audit.md` and `ledger.json` without overwriting existing files. The ledger pre-lists universal/adapt HIG principles and every slop catalog id with no violations triaged. Fill the product-specific assumptions and manual scenarios before claiming coverage.
+
+`check` runs the shared showcase browser measurements and every machine-detectable [slop rule](../../expression/anti-patterns.md). JSON includes check ids, principle/slop ids, verdicts, and evidence. Review-only rules remain review questions, never machine failures. Use on a test instance: the dishonest-CTA rule activates controls and can trigger real actions. Third-party blocking is the offline test; it does not simulate a service-worker cache or a fully disconnected first visit.
+
+The public MCP server exposes `audit_init`, `audit_check`, and `audit_status` separately from the frozen v1 knowledge interface. `audit_init` writes consumer-owned files; `audit_check` visits and interacts with its target; neither mutates governed knowledge.
+
+## Ledger Structure
 
 The schema is [`ledger.schema.json`](ledger.schema.json). One ledger covers one audited subject:
 

@@ -32,7 +32,7 @@
     "principleId": {
       "description": "An HIG universal principle id (hig.<section>.<slug>) or an AI-slop catalog id (slop.<slug>).",
       "type": "string",
-      "pattern": "^(?:hig\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*|slop\\.[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*)$"
+      "pattern": "^(?:hig\\.[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*){1,}|slop\\.[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*)$"
     },
     "repositoryPath": {
       "description": "Relative path without traversal, scheme, query, or fragment.",

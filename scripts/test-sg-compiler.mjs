@@ -137,7 +137,7 @@ test("MCP advertises unprefixed commands with effects and retains frozen resourc
   const connection = await connect();
   try {
     const { tools } = await connection.client.listTools();
-    const expected = ["claims", "context", "discover", "ops", "resolve", "retrieve", "compile", "timeline", "transcribe", "sale", "gate", "build", "shots", "probe", "batch-triage", "triage", "batch-capture", "pack-status", "pack-release", "workflow", "search", "read"].sort();
+    const expected = ["claims", "context", "discover", "ops", "resolve", "retrieve", "compile", "timeline", "transcribe", "sale", "gate", "build", "shots", "probe", "batch-triage", "triage", "batch-capture", "pack-status", "pack-release", "workflow", "search", "read", "audit_init", "audit_check", "audit_status"].sort();
     assert.deepEqual(tools.map(({ name }) => name), expected);
     assert.equal(tools.find(({ name }) => name === "compile").annotations.readOnlyHint, false);
     assert.equal(tools.find(({ name }) => name === "workflow").annotations.readOnlyHint, true);
@@ -191,7 +191,7 @@ test("packaged entrypoints use the new CLI and real MCP stdio without stdout pol
   const client = new Client({ name: "sg-compiler-stdio", version: "1.0.0" });
   try {
     await client.connect(transport);
-    assert.equal((await client.listTools()).tools.length, 22);
+    assert.equal((await client.listTools()).tools.length, 25);
     const result = envelope(await client.callTool({ name: "workflow", arguments: { document: "readme" } }));
     assert.equal(result.result.text, "# Installed compiler\n");
     assert.equal(envelope(await client.callTool({ name: "discover", arguments: {} })).compiler.installation.configured, true);

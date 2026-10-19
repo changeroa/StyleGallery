@@ -48,7 +48,12 @@ Connect your agents:
       --uninstall               Remove what setup installed.
       --force                   Replace or remove a different existing entry with the same name.
 
-Audit ledger:
+Audit kit:
+  audit init <url>              Write audit.md and a starter ledger with HIG/slop ids.
+      --out <dir>               Consumer-owned output directory (default ./audit); never overwrites.
+  audit check <url|file>        Run shared browser checks and machine-detectable slop rules; prints JSON.
+      --viewports <widths>      Comma-separated widths (default 320,768,1440).
+      --json                    Explicit JSON output.
   audit status <ledger.json>    Validate an audit ledger (quality/audit/ledger.schema.json) and print progress:
                                 counts per status, percent verified, principles with no violations triaged.
       --principles <json>       Also fail when a principle id in this list is missing from the ledger.
@@ -164,7 +169,7 @@ export async function runStylegalleryCli(argv, config = {}) {
   if (command === "retrieve") return runRetrieve(rest);
   if (command === "audit") {
     const { runAuditCli } = await import("./stylegallery-audit.mjs");
-    return runAuditCli(rest);
+    return runAuditCli(rest, config);
   }
   if (command === "context" && rest.includes("--query")) {
     const { runMaterialCli } = await import("./agent-native/v2/material-cli-adapter.mjs");

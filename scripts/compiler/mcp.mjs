@@ -8,6 +8,7 @@ import { withCompilerDiscovery } from "./cli.mjs";
 import { executeCompiler, failure } from "./runtime.mjs";
 import { materialRuntimeOptions } from "../agent-native/v2/material-cli-adapter.mjs";
 import { invokeSearchOperation } from "../agent-native/v2/material-search-v3.mjs";
+import { auditToolDefinitions, invokeAuditTool } from "../audit-mcp.mjs";
 
 const readOnly = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
 export const searchToolDefinitions = Object.freeze([
@@ -63,7 +64,7 @@ export function createSgMcpServer(config = {}) {
     };
   });
   server.server.setRequestHandler(ListToolsRequestSchema, async () => ({
-    tools: [...legacyTools, ...compilerToolDefinitions(), ...searchToolDefinitions].sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0),
+    tools: [...legacyTools, ...compilerToolDefinitions(), ...searchToolDefinitions, ...auditToolDefinitions].sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0),
   }));
   const callSchema = CallToolRequestSchema.extend({
     params: CallToolRequestSchema.shape.params.extend({ arguments: z.unknown().optional() }),
@@ -72,7 +73,10 @@ export function createSgMcpServer(config = {}) {
     const operation = request.params.name;
     let input = request.params.arguments ?? {};
     let report;
-    if (operation === "search" || operation === "read") {
+    if (auditToolDefinitions.some(({ name }) => name === operation)) {
+      const signals = [lifetime.signal, extra.signal, config.signal].filter(Boolean);
+      report = await invokeAuditTool(operation, input, { signal: AbortSignal.any(signals) });
+    } else if (operation === "search" || operation === "read") {
       report = await invokeSearchOperation(operation, input, materialRuntimeOptions());
     } else if (Object.hasOwn(compilerOperations, operation) || operation === "workflow") {
       const signals = [lifetime.signal, extra.signal, config.signal].filter(Boolean);
