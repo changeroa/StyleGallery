@@ -2,6 +2,16 @@
 
 ## 2026-10-19
 
+Understood as: release `stylegallery@0.1.16`, which ships hybrid search from PR #68: BM25F fused with an English embedding model so everyday wording finds documents that use different words.
+
+- `stylegallery search` and the MCP `search` tool take `--mode hybrid|lexical` (`mode`), default `hybrid`: weighted reciprocal rank fusion (k 60, semantic weight 0.5) of BM25F and bge-small-en-v1.5 (quantized ONNX, 34 MB). The result reports the `mode` that ran and a `mode_reason` on fallback.
+- The model is not packaged. The first hybrid search downloads it from a pinned revision into `~/.cache/stylegallery/models/` and checks its SHA-256; it runs on `onnxruntime-web`, an optional dependency. Offline (`STYLEGALLERY_OFFLINE=1`), without the dependency, or for Korean without `query_en`, search warns once and ranks with BM25F alone.
+- Document vectors ship precomputed in `consumer-reference/agent-native/v2/search-embeddings.json`; `generate-search-embeddings.mjs --check --vectors` runs in the Search evaluation workflow.
+- Search evaluation adds 20 vocabulary-mismatch questions (111 total). Hit@5 lexical to hybrid: overall 0.892 to 0.937, held-out 0.867 to 0.933, mismatch 0.50 to 0.70; must-pass 35/35 in both modes.
+
+Consumer reference: not_applicable
+Consumer reference reason: This release changes search ranking tooling and selects no consumer-reference profile or record.
+
 Understood as: release `stylegallery@0.1.15`, which ships OmO support for `stylegallery setup` from PR #66.
 
 - `stylegallery setup` adds `--agent omo`, detected by `~/.omo` or `omo` on PATH and included by default and in `all`. It registers `mcpServers.stylegallery` (`npx -y --package stylegallery stylegallery-mcp`) in `<agentDir>/mcp.json`, where agentDir is `$OMO_CODING_AGENT_DIR` or `~/.omo/agent`, with the same backup, `--force`, and idempotence rules as Claude Code and Codex. An identical hand-made entry is reported unchanged.

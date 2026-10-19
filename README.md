@@ -345,7 +345,7 @@ Pattern verification covers the relevant viewport, container, content, direction
 
 The npm package is published from GitHub Actions through [npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers). The repository stores no npm token, and nothing is published from a local machine.
 
-1. Open a pull request that bumps `version` in `package.json`, adds the `log.md` entry, and refreshes the material registry and lifecycle hashes that the version change touches. Merge it after CI passes.
+1. Open a pull request that bumps `version` in `package.json`, adds the `log.md` entry, and refreshes the search embeddings (`bun run generate:search-embeddings`, since `log.md` is embedded), the material registry, and the lifecycle hashes that the version change touches. Merge it after CI passes.
 2. Create a GitHub Release from `main` whose tag is `v` plus the new version, for example `v0.1.11`.
 3. Publishing the release runs [`.github/workflows/publish.yml`](.github/workflows/publish.yml). The workflow checks that the tag matches `package.json`, runs the governance, lifecycle, reference-artifact, material, and Registrar checks, and runs `npm publish` with a short-lived OIDC credential. npm attaches provenance automatically.
 
