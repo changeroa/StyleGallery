@@ -1,14 +1,17 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import { materialCorpus } from "./agent-native/v2/material-queries.mjs";
 import {
-  SEARCH_BUDGET_BYTES, buildSearchIndex, frontmatterList, parseSections, readIndex, readableIds, searchIndex, searchTerms,
+  SEARCH_BUDGET_BYTES, buildSearchIndex, frontmatterList, parseSections, readIndex, readableIds, searchIndex, searchTerms, semanticQueryText,
 } from "./agent-native/v2/material-search-v3.mjs";
+import { createTokenizer, dequantize, quantize } from "./agent-native/v2/search-embeddings.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const index = buildSearchIndex(materialCorpus({ repositoryRoot: root }));
@@ -52,6 +55,53 @@ test("no match is ok with a query_en hint for Korean", () => {
   const result = searchIndex(index, { query: "존재하지않는낱말" });
   assert.deepEqual(result.results, []);
   assert.match(result.hint, /query_en/);
+});
+
+test("hybrid input falls back to lexical with a reason, and mode is validated", () => {
+  const lexical = searchIndex(index, { query: "sticky header", mode: "lexical" });
+  assert.equal(lexical.mode, "lexical");
+  assert.equal(lexical.mode_reason, undefined);
+  const fallback = searchIndex(index, { query: "sticky header" }, { mode: "lexical", semantic: null, reason: "test reason" });
+  assert.equal(fallback.mode, "lexical");
+  assert.equal(fallback.mode_reason, "test reason");
+  assert.deepEqual(fallback.results, lexical.results);
+  assert.throws(() => searchIndex(index, { query: "x", mode: "vector" }), { code: "search_mode_invalid" });
+  assert.equal(semanticQueryText("헤더 고정"), null);
+  assert.equal(semanticQueryText("헤더 고정", "sticky header"), "sticky header");
+});
+
+test("semantic fusion adds documents BM25F missed, deterministically", () => {
+  const target = index.documents.find((document) => document.record.repository_path === "patterns/split-sidebar/sidebar.md");
+  const vectors = new Map(index.documents.map((document) => [document.id, Float32Array.from({ length: 4 }, (_, position) => (document === target ? Number(position === 0) : Number(position === 1)))]));
+  const prepared = { mode: "hybrid", semantic: { queryVector: [1, 0, 0, 0], vectors } };
+  const result = searchIndex(index, { query: "zzzzqx", response_format: "detailed" }, prepared);
+  assert.equal(result.mode, "hybrid");
+  assert.equal(result.results[0].path, "patterns/split-sidebar/sidebar.md");
+  assert.deepEqual(result.results[0].matched_fields, ["semantic"]);
+  assert.equal(result.ranking.fusion.method, "RRF");
+  assert.deepEqual(searchIndex(index, { query: "zzzzqx", response_format: "detailed" }, prepared), result);
+});
+
+test("WordPiece tokenizer and int8 vectors round-trip", () => {
+  const vocab = { "[PAD]": 0, "[UNK]": 1, "[CLS]": 2, "[SEP]": 3, side: 4, "##bar": 5, ",": 6, cafe: 7 };
+  const tokenize = createTokenizer({ model: { vocab } });
+  assert.deepEqual(tokenize("Sidebar, CAFÉ zzz"), [2, 4, 5, 6, 7, 1, 3]);
+  const vector = [0.5, -0.25, 1, -1];
+  assert.deepEqual(Array.from(dequantize(quantize(vector)), (value) => Math.round(value * 100) / 100), [0.5, -0.25, 1, -1]);
+});
+
+test("the CLI warns and searches lexically when the model cannot be loaded offline", () => {
+  const cache = fs.mkdtempSync(path.join(os.tmpdir(), "sg-search-cache-"));
+  try {
+    const env = { ...process.env, STYLEGALLERY_CACHE_DIR: cache, STYLEGALLERY_OFFLINE: "1" };
+    const run = spawnSync(process.execPath, [path.join(root, "scripts", "sg-entry.mjs"), "search", "sticky header", "--paths-only"], { cwd: root, encoding: "utf8", env });
+    assert.equal(run.status, 0, run.stdout);
+    const result = JSON.parse(run.stdout).result;
+    assert.equal(result.mode, "lexical");
+    assert.match(result.mode_reason, /STYLEGALLERY_OFFLINE|onnxruntime-web/);
+    assert.match(run.stderr, /hybrid search unavailable/);
+    assert.equal(result.paths[0], "patterns/viewport-shell/sticky-header.md");
+  } finally { fs.rmSync(cache, { recursive: true, force: true }); }
 });
 
 test("read resolves ids, paths, and StableRefs and reads one section", () => {

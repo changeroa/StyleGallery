@@ -267,19 +267,135 @@
   },
   "after": {
     "ranker": "v3",
+    "mode": "hybrid",
     "overall": {
-      "n": 75,
-      "hit3": 0.9333,
-      "hit5": 0.9733,
-      "mrr": 0.876,
-      "ndcg5": 0.8631
+      "n": 111,
+      "hit3": 0.9189,
+      "hit5": 0.9369,
+      "mrr": 0.8782,
+      "ndcg5": 0.8602
     },
     "english": {
-      "n": 56,
-      "hit3": 0.9107,
-      "hit5": 0.9643,
-      "mrr": 0.8458,
-      "ndcg5": 0.8405
+      "n": 92,
+      "hit3": 0.9022,
+      "hit5": 0.9239,
+      "mrr": 0.8602,
+      "ndcg5": 0.8455
+    },
+    "korean": {
+      "n": 19,
+      "hit3": 1,
+      "hit5": 1,
+      "mrr": 0.9649,
+      "ndcg5": 0.9312
+    },
+    "heldout": {
+      "n": 15,
+      "hit3": 0.8667,
+      "hit5": 0.9333,
+      "mrr": 0.7151,
+      "ndcg5": 0.7079
+    },
+    "mismatch": {
+      "n": 20,
+      "hit3": 0.65,
+      "hit5": 0.7,
+      "mrr": 0.6458,
+      "ndcg5": 0.6234
+    },
+    "must_pass": {
+      "n": 35,
+      "passed": 35
+    },
+    "misses": [
+      {
+        "id": "h02",
+        "query": "grid that adapts column count to available width",
+        "top3": [
+          "patterns/grid-repetition/index.md",
+          "patterns/grid-repetition/grid-wrapper.md",
+          "patterns/grid-repetition/masonry-approx.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m04",
+        "query": "put something exactly in the middle of the screen",
+        "top3": [
+          "GUIDE.md",
+          "expression/index.md",
+          "patterns/split-sidebar/split-screen.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m07",
+        "query": "swipe through a row of items sideways",
+        "top3": [
+          "patterns/in-line-grouping/index.md",
+          "patterns/in-line-grouping/wrap-row.md",
+          "motion/interaction-recipes.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m08",
+        "query": "people who get dizzy from animation",
+        "top3": [
+          "expression/techniques/gradient-atmosphere.md",
+          "motion/motion-brief.md",
+          "motion/interruption-and-retargeting.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m12",
+        "query": "what to show when a list has nothing in it",
+        "top3": [
+          "showcase/README.md",
+          "recipes/primitive-to-recipe-matrix.md",
+          "motion/vocabulary.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m13",
+        "query": "keep picture proportions when resizing thumbnails",
+        "top3": [
+          "patterns/containment/content-limiter.md",
+          "patterns/viewport-shell/sticky-footer.md",
+          "design-engineering/evidence-patterns/dark-mode-contrast.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m17",
+        "query": "suggest matches while someone types in a box",
+        "top3": [
+          "design-engineering/evidence-patterns/faceted-filters.md",
+          "patterns/containment/box.md",
+          "guides/layout-brief.md"
+        ],
+        "must_pass": false
+      }
+    ]
+  },
+  "lexical": {
+    "ranker": "v3",
+    "mode": "lexical",
+    "overall": {
+      "n": 111,
+      "hit3": 0.8649,
+      "hit5": 0.8919,
+      "mrr": 0.8089,
+      "ndcg5": 0.7984
+    },
+    "english": {
+      "n": 92,
+      "hit3": 0.837,
+      "hit5": 0.8696,
+      "mrr": 0.7767,
+      "ndcg5": 0.7713
     },
     "korean": {
       "n": 19,
@@ -292,12 +408,19 @@
       "n": 15,
       "hit3": 0.7333,
       "hit5": 0.8667,
-      "mrr": 0.6856,
-      "ndcg5": 0.6831
+      "mrr": 0.6744,
+      "ndcg5": 0.6744
+    },
+    "mismatch": {
+      "n": 20,
+      "hit3": 0.5,
+      "hit5": 0.5,
+      "mrr": 0.4544,
+      "ndcg5": 0.4396
     },
     "must_pass": {
-      "n": 19,
-      "passed": 19
+      "n": 35,
+      "passed": 35
     },
     "misses": [
       {
@@ -314,9 +437,109 @@
         "id": "h03",
         "query": "two pane email client layout",
         "top3": [
+          "design-engineering/evidence-patterns/inline-validation.md",
           "patterns/split-sidebar/split-screen.md",
-          "patterns/split-sidebar/index.md",
-          "design-engineering/state-management/patterns/single-flight.md"
+          "patterns/split-sidebar/index.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m01",
+        "query": "sidebar layout that collapses on mobile",
+        "top3": [
+          "design-engineering/evidence-patterns/breadcrumbs.md",
+          "recipes/homepage.md",
+          "design-engineering/evidence-patterns/faceted-filters.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m02",
+        "query": "animate elements as the user scrolls down the story",
+        "top3": [
+          "motion/rendering-and-performance.md",
+          "motion/techniques/kinetic-type.md",
+          "motion/review-workflow.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m04",
+        "query": "put something exactly in the middle of the screen",
+        "top3": [
+          "motion/techniques/scroll-choreography.md",
+          "quality/claims.md",
+          "layout/index.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m06",
+        "query": "show where I am in the site hierarchy",
+        "top3": [
+          "motion/observed-choreography.md",
+          "quality/gates/visual-evidence.md",
+          "expression/brand-studies.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m07",
+        "query": "swipe through a row of items sideways",
+        "top3": [
+          "design-engineering/worked-examples.md",
+          "platform-guides/compatibility-matrix.md",
+          "motion/interaction-recipes.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m08",
+        "query": "people who get dizzy from animation",
+        "top3": [
+          "expression/brand-studies.md",
+          "motion/motion-brief.md",
+          "expression/techniques/gradient-atmosphere.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m12",
+        "query": "what to show when a list has nothing in it",
+        "top3": [
+          "showcase/README.md",
+          "motion/vocabulary.md",
+          "design-engineering/loading-and-feedback.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m13",
+        "query": "keep picture proportions when resizing thumbnails",
+        "top3": [
+          "expression/directions/warm-print.md",
+          "expression/brand-studies.md",
+          "platform-guides/compatibility-matrix.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m17",
+        "query": "suggest matches while someone types in a box",
+        "top3": [
+          "expression/techniques/grain-and-texture.md",
+          "design-engineering/evidence-patterns/tabs-and-segmented-controls.md",
+          "design-terminology/index.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "m18",
+        "query": "make paragraphs not stretch too wide on big monitors",
+        "top3": [
+          "expression/direction-brief.md",
+          "patterns/in-line-grouping/deconstructed-pancake.md",
+          "AGENTS.md"
         ],
         "must_pass": false
       }

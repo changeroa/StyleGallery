@@ -22,6 +22,9 @@ Find and read documents (offline, deterministic):
       --limit <n>               Results to return, 1-50 (default 5).
       --paths-only              Print repository-relative paths only.
       --detailed                Add scores, hash identities, and ranking terms.
+      --mode <hybrid|lexical>   hybrid (default) fuses BM25F with an English embedding model downloaded
+                                once to ~/.cache/stylegallery; lexical is BM25F only. Falls back to
+                                lexical with a warning when the model cannot load.
   read <id|path>                Read one document by id (sg:layout/sticky-header), path, or StableRef.
       --outline                 List headings with section slugs instead of the content.
       --section <slug>          Read one section only.
@@ -83,7 +86,7 @@ function parseOptions(command, args, specs) {
 async function runSearch(args) {
   const parsed = parseOptions("search", args, {
     "--query": { field: "query" }, "--query-en": { field: "query_en" }, "--limit": { field: "limit", integer: true },
-    "--paths-only": { field: "paths_only", flag: true }, "--detailed": { field: "detailed", flag: true },
+    "--paths-only": { field: "paths_only", flag: true }, "--detailed": { field: "detailed", flag: true }, "--mode": { field: "mode" },
   });
   if (parsed.error) return parsed.error;
   const { values, positional } = parsed;
@@ -94,7 +97,9 @@ async function runSearch(args) {
   const input = { ...rest, query, ...(detailed ? { response_format: "detailed" } : {}) };
   const { invokeSearchOperation } = await import("./agent-native/v2/material-search-v3.mjs");
   const { materialRuntimeOptions } = await import("./agent-native/v2/material-cli-adapter.mjs");
-  return report(invokeSearchOperation("search", input, materialRuntimeOptions()));
+  const outcome = await invokeSearchOperation("search", input, materialRuntimeOptions());
+  if (outcome.ok && outcome.result.mode_reason) process.stderr.write(`stylegallery: hybrid search unavailable (${outcome.result.mode_reason}); using lexical BM25F ranking\n`);
+  return report(outcome);
 }
 
 async function runRead(args) {
@@ -103,7 +108,7 @@ async function runRead(args) {
   if (parsed.positional.length !== 1) return failure("read", "argument_value_required", "give exactly one id, path, or StableRef: stylegallery read sg:layout/sticky-header");
   const { invokeSearchOperation } = await import("./agent-native/v2/material-search-v3.mjs");
   const { materialRuntimeOptions } = await import("./agent-native/v2/material-cli-adapter.mjs");
-  return report(invokeSearchOperation("read", { reference: parsed.positional[0], ...parsed.values }, materialRuntimeOptions()));
+  return report(await invokeSearchOperation("read", { reference: parsed.positional[0], ...parsed.values }, materialRuntimeOptions()));
 }
 
 async function runRetrieve(args) {

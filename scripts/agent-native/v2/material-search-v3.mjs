@@ -1,7 +1,9 @@
-// Search v3: readable IDs, BM25F field ranking, section-aware read.
-// Offline and deterministic: no model, no network, stable tie-breaks.
+// Search v3: readable IDs, BM25F field ranking fused with embedding similarity
+// (hybrid mode), section-aware read. Deterministic with stable tie-breaks; when
+// the embedding model is unavailable, search falls back to BM25F alone.
 import { deepFreeze } from "../canonical-json.mjs";
 import { MaterialQueryError, materialCorpus, tokenizeMaterialText } from "./material-queries.mjs";
+import { EMBEDDING_MODEL, documentTextHash, loadEmbedder, loadStoredEmbeddings } from "./search-embeddings.mjs";
 
 export const SEARCH_SCHEMA_VERSION = "3.0";
 export const SEARCH_DEFAULT_LIMIT = 5;
@@ -24,6 +26,9 @@ export const SEARCH_FIELDS = deepFreeze({
   ko: { w: 1.5, b: 0.3 },
 });
 export const SEARCH_K1 = 1.2;
+export const SEARCH_MODES = Object.freeze(["hybrid", "lexical"]);
+// Weighted reciprocal rank fusion of the BM25F and embedding rankings.
+export const SEARCH_FUSION = deepFreeze({ method: "RRF", k: 60, lexical_weight: 1, semantic_weight: 0.5, depth: 50 });
 
 const STOPWORDS = new Set(("a an and are as at be by can do does for from how i in into is it its me my of on or should "
   + "so that the this to use using what when where which with you your").split(" "));
@@ -275,7 +280,7 @@ function bestSnippet(document, terms) {
 
 function validateSearchInput(input) {
   if (!input || typeof input !== "object" || Array.isArray(input)) fail("material_input_invalid", "input must be an object");
-  const allowed = new Set(["query", "query_en", "limit", "paths_only", "response_format"]);
+  const allowed = new Set(["query", "query_en", "limit", "paths_only", "response_format", "mode"]);
   if (Object.keys(input).some((key) => !allowed.has(key))) fail("material_input_unknown", "input contains an unsupported field");
   for (const key of ["query", "query_en"]) {
     const value = input[key];
@@ -289,12 +294,39 @@ function validateSearchInput(input) {
   if (input.paths_only !== undefined && typeof input.paths_only !== "boolean") fail("material_paths_only_invalid", "paths_only must be a boolean");
   const format = input.response_format ?? "concise";
   if (!["concise", "detailed"].includes(format)) fail("search_response_format_invalid", "response_format must be concise or detailed");
-  return { query: input.query, queryEn: input.query_en, limit, pathsOnly: input.paths_only === true, detailed: format === "detailed" };
+  const mode = input.mode ?? "hybrid";
+  if (!SEARCH_MODES.includes(mode)) fail("search_mode_invalid", "mode must be hybrid or lexical");
+  return { query: input.query, queryEn: input.query_en, limit, pathsOnly: input.paths_only === true, detailed: format === "detailed", mode };
 }
 
-/** Rank documents for a query. Pure over an index; exported for evaluation. */
-export function rankSearchIndex(index, query, queryEn) {
-  const terms = queryTerms(query, queryEn);
+/** The text embedded for a query: the English rewrite when given, else the query unless it is Korean. */
+export function semanticQueryText(query, queryEn) {
+  if (queryEn) return queryEn;
+  return /[\p{Script=Hangul}]/u.test(query) ? null : query;
+}
+
+/**
+ * Prepare the semantic half of a hybrid search. Resolves to { mode, semantic, reason }:
+ * mode "lexical" with a reason whenever hybrid was requested but cannot run.
+ */
+export async function prepareSemantic(index, query, queryEn, requestedMode = "hybrid", options = {}) {
+  if (requestedMode === "lexical") return { mode: "lexical", semantic: null };
+  const text = semanticQueryText(query, queryEn);
+  if (text === null) return { mode: "lexical", semantic: null, reason: "Korean query without query_en; the embedding model reads English only" };
+  const stored = loadStoredEmbeddings(options.embeddingsPath);
+  if (!stored) return { mode: "lexical", semantic: null, reason: "precomputed document embeddings are missing" };
+  const embedder = await loadEmbedder(options);
+  if (embedder.error) return { mode: "lexical", semantic: null, reason: `embedding model unavailable: ${embedder.error}` };
+  const vectors = new Map();
+  for (const document of index.documents) {
+    const entry = stored.get(document.record.repository_path);
+    // A document edited after the vectors were built ranks on BM25F alone.
+    if (entry && entry.textHash === documentTextHash(document)) vectors.set(document.id, entry.vector);
+  }
+  return { mode: "hybrid", semantic: { queryVector: await embedder.embed(`${EMBEDDING_MODEL.query_prefix}${text}`), vectors } };
+}
+
+function lexicalRanking(index, terms) {
   const idf = inverseDocumentFrequency(index, terms);
   const ranked = [];
   for (const document of index.documents) {
@@ -302,23 +334,64 @@ export function rankSearchIndex(index, query, queryEn) {
     if (score > 0) ranked.push({ document, score, matched });
   }
   ranked.sort((left, right) => right.score - left.score || compare(left.document.id, right.document.id));
-  return { terms, ranked };
+  return ranked;
+}
+
+function fuse(index, lexical, semantic) {
+  const { k, lexical_weight: lexicalWeight, semantic_weight: semanticWeight, depth } = SEARCH_FUSION;
+  const similarity = [];
+  for (const document of index.documents) {
+    const vector = semantic.vectors.get(document.id);
+    if (!vector) continue;
+    let dot = 0;
+    for (let position = 0; position < vector.length; position += 1) dot += vector[position] * semantic.queryVector[position];
+    similarity.push({ document, similarity: Math.round(dot * 1e6) / 1e6 });
+  }
+  similarity.sort((left, right) => right.similarity - left.similarity || compare(left.document.id, right.document.id));
+  const fused = new Map();
+  lexical.slice(0, depth).forEach(({ document, score, matched }, rank) => {
+    fused.set(document.id, { document, lexical_score: score, matched: new Set(matched), score: lexicalWeight / (k + rank + 1) });
+  });
+  similarity.slice(0, depth).forEach(({ document, similarity: value }, rank) => {
+    const entry = fused.get(document.id) ?? { document, matched: new Set(), score: 0 };
+    entry.matched.add("semantic");
+    entry.similarity = value;
+    entry.score += semanticWeight / (k + rank + 1);
+    fused.set(document.id, entry);
+  });
+  return [...fused.values()].map((entry) => ({ ...entry, score: Math.round(entry.score * 1e9) / 1e9 }))
+    .sort((left, right) => right.score - left.score || compare(left.document.id, right.document.id));
+}
+
+/** Rank documents for a query. Pure over an index and an optional semantic input; exported for evaluation. */
+export function rankSearchIndex(index, query, queryEn, semantic = null) {
+  const terms = queryTerms(query, queryEn);
+  const lexical = lexicalRanking(index, terms);
+  return { terms, ranked: semantic ? fuse(index, lexical, semantic) : lexical };
 }
 
 function readCommand(document, section) {
   return `stylegallery read ${document.id}${section && section.level > 1 ? ` --section ${section.slug}` : ""}`;
 }
 
-export function searchIndex(index, input) {
+/**
+ * Search a built index. `prepared` is the result of prepareSemantic; without it
+ * the search is lexical. Synchronous and deterministic for a given input.
+ */
+export function searchIndex(index, input, prepared = null) {
   const normalized = validateSearchInput(input);
-  const { terms, ranked } = rankSearchIndex(index, normalized.query, normalized.queryEn);
+  const semantic = normalized.mode === "hybrid" ? prepared?.semantic ?? null : null;
+  const mode = semantic ? "hybrid" : "lexical";
+  const reason = normalized.mode === "hybrid" && !semantic ? prepared?.reason ?? "embedding model not loaded" : null;
+  const { terms, ranked } = rankSearchIndex(index, normalized.query, normalized.queryEn, semantic);
   const selected = ranked.slice(0, normalized.limit);
   const query = { text: normalized.query, ...(normalized.queryEn ? { query_en: normalized.queryEn } : {}) };
   const page = { returned: selected.length, total: ranked.length, next_cursor: null };
+  const modeFields = { mode, ...(reason ? { mode_reason: reason } : {}) };
   if (normalized.pathsOnly) {
-    return deepFreeze({ schema_version: SEARCH_SCHEMA_VERSION, query, snapshot: index.manifestVersionId, paths: selected.map(({ document }) => document.record.repository_path), page });
+    return deepFreeze({ schema_version: SEARCH_SCHEMA_VERSION, query, ...modeFields, snapshot: index.manifestVersionId, paths: selected.map(({ document }) => document.record.repository_path), page });
   }
-  const results = selected.map(({ document, score, matched }) => {
+  const results = selected.map(({ document, score, matched, lexical_score: lexicalScore, similarity }) => {
     const best = bestSnippet(document, terms);
     return {
       id: document.id,
@@ -329,11 +402,14 @@ export function searchIndex(index, input) {
       matched_fields: [...matched].sort(),
       snippets: best ? [best.snippet] : [],
       next: { read: readCommand(document, best?.section) },
-      ...(normalized.detailed ? { score, source_ref: document.record.stable_ref, version_id: document.record.version_id, material_ref: document.identity.stable_ref } : {}),
+      ...(normalized.detailed ? { score, ...(semantic ? { lexical_score: lexicalScore ?? 0, ...(similarity !== undefined ? { similarity } : {}) } : {}), source_ref: document.record.stable_ref, version_id: document.record.version_id, material_ref: document.identity.stable_ref } : {}),
     };
   });
-  const envelope = { schema_version: SEARCH_SCHEMA_VERSION, query, snapshot: index.manifestVersionId, results, page, coverage: { truncated: false } };
-  if (normalized.detailed) envelope.ranking = { method: "BM25F", k1: SEARCH_K1, fields: SEARCH_FIELDS, terms };
+  const envelope = { schema_version: SEARCH_SCHEMA_VERSION, query, ...modeFields, snapshot: index.manifestVersionId, results, page, coverage: { truncated: false } };
+  if (normalized.detailed) {
+    envelope.ranking = { method: "BM25F", k1: SEARCH_K1, fields: SEARCH_FIELDS, terms };
+    if (semantic) envelope.ranking.fusion = { ...SEARCH_FUSION, model: EMBEDDING_MODEL.source, revision: EMBEDDING_MODEL.revision };
+  }
   while (Buffer.byteLength(JSON.stringify(envelope), "utf8") > SEARCH_BUDGET_BYTES && envelope.results.length > 1) {
     envelope.results.pop();
     envelope.page.returned = envelope.results.length;
@@ -394,13 +470,19 @@ export function loadSearchIndex(options) {
 
 const PUBLIC_CODES = new Set(["material_input_invalid", "material_input_unknown", "material_query_invalid", "material_query_oversized",
   "material_query_empty", "search_limit_invalid", "material_paths_only_invalid", "search_response_format_invalid", "read_reference_required",
-  "read_reference_not_found", "read_section_invalid", "read_outline_invalid", "read_mode_conflict", "read_section_not_found", "search_id_collision"]);
+  "read_reference_not_found", "read_section_invalid", "read_outline_invalid", "read_mode_conflict", "read_section_not_found", "search_id_collision",
+  "search_mode_invalid"]);
 
 /** Run `search` or `read` and wrap it in the ok/failures envelope shared by CLI and MCP. */
-export function invokeSearchOperation(operation, input, options) {
+export async function invokeSearchOperation(operation, input, options) {
   try {
     const index = loadSearchIndex(options);
-    const result = operation === "search" ? searchIndex(index, input) : readIndex(index, input);
+    let result;
+    if (operation === "search") {
+      validateSearchInput(input);
+      const prepared = await prepareSemantic(index, input.query, input.query_en, input.mode ?? "hybrid", options?.semantic);
+      result = searchIndex(index, input, prepared);
+    } else result = readIndex(index, input);
     return deepFreeze({ ok: true, operation, result });
   } catch (error) {
     const known = typeof error?.code === "string" && (PUBLIC_CODES.has(error.code) || error.code.startsWith("material_"));

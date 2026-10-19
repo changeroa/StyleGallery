@@ -73,7 +73,7 @@ stylegallery workflow
 
 Start with `stylegallery workflow` to select the stages for reconstruction, adaptation, or sale-package production. For a faithful clone, use available original media and fill document gaps by inspecting the source. The automatic `build` command is a sale-edition preview with restricted source access; it is not the general clone builder.
 
-`search` ranks the admitted Markdown corpus offline (BM25F over title, aliases, description, questions, path, headings, and body) and returns JSON (schema 3.0) without a format flag. Each result carries a readable id such as `sg:layout/sticky-header`, a verbatim snippet, and the next `read` command:
+`search` ranks the admitted Markdown corpus and returns JSON (schema 3.0) without a format flag. The default `hybrid` mode fuses BM25F (over title, aliases, description, questions, path, headings, and body) with the similarity of a small English embedding model, so everyday wording such as "sidebar layout that collapses on mobile" finds documents that use different words; `--mode lexical` ranks with BM25F alone. The result's `mode` field says which ranking ran. Each result carries a readable id such as `sg:layout/sticky-header`, a verbatim snippet, and the next `read` command:
 
 ```sh
 npx stylegallery search "sticky header"
@@ -84,6 +84,13 @@ npx stylegallery read sg:layout/sticky-header --section css
 npx stylegallery context --query "responsive sidebar" --budget-tokens 4096
 npx stylegallery --help
 ```
+
+Search modes and the embedding model:
+
+- The model ([bge-small-en-v1.5](https://huggingface.co/Xenova/bge-small-en-v1.5), quantized ONNX, 34 MB) is not part of the npm package. The first hybrid search downloads it into `~/.cache/stylegallery/models/` (or `$STYLEGALLERY_CACHE_DIR`, or `$XDG_CACHE_HOME/stylegallery`) from a pinned revision and checks its SHA-256; later searches run offline. Document vectors are precomputed and shipped with the package.
+- It runs with `onnxruntime-web` (WebAssembly), an optional dependency. When that dependency is missing, the download fails or is disabled with `STYLEGALLERY_OFFLINE=1`, or the query is Korean without `--query-en`, search falls back to BM25F, sets `mode` to `lexical` with a `mode_reason`, and the CLI prints one warning to stderr. Results are then identical to `--mode lexical`.
+- Ranking is deterministic: the same query and corpus give the same order. On an Apple M4 a CLI search takes about 0.4 s in hybrid mode (about 0.15 s lexical), most of it process and model start; inside the running MCP server a query takes about 0.1 s, of which ranking is about 25 ms.
+- Maintainers regenerate the vectors with `bun run generate:search-embeddings` after editing documents; CI fails when they are stale.
 
 Agents asking in another language should pass `--query-en` (MCP: `query_en`) with an English rewrite; Korean words match only documents that declare Korean `aliases`. The old `sg` alias is gone (it collided with ast-grep); `sg-material`, `stylegallery-material`, and `stylegallery-material-mcp` still work in 0.1.12 with a rename notice and are removed in the next release.
 
@@ -117,7 +124,7 @@ Find and read documents (offline, deterministic):
 
 | Command | Options | Purpose |
 | --- | --- | --- |
-| `search <query...>` | `--limit <n>` (1-50, default 5), `--paths-only`, `--detailed`, `--query-en <text>` | Rank the Markdown corpus; JSON schema 3.0 with id, snippet, and next `read` command |
+| `search <query...>` | `--limit <n>` (1-50, default 5), `--paths-only`, `--detailed`, `--query-en <text>`, `--mode <hybrid\|lexical>` (default `hybrid`) | Rank the Markdown corpus; JSON schema 3.0 with id, snippet, and next `read` command |
 | `read <id\|path>` | `--outline`, `--section <slug>` | Read one document by id (`sg:layout/sticky-header`), repository path, or StableRef |
 | `context --query <text>` | `--budget-tokens <n>` (256-32768, default 8192) | Build a bounded, provenance-linked context package |
 
