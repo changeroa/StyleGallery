@@ -4,6 +4,8 @@ name: scroll-body-shell
 title: scroll-body-shell
 category: Viewport / Shell
 description: Keep shell regions fixed while only the body scrolls.
+aliases: ["fixed header and footer with scrolling body","app shell","스크롤 영역","본문만 스크롤"]
+questions: ["How do I make only the body scroll between a fixed header and footer?"]
 primary_spatial_problem: Keep shell regions fixed while only the body scrolls.
 secondary_spatial_problems: none
 layout_axis: block

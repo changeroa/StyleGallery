@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 try {
-  const { runSgCli } = await import("./compiler/cli.mjs");
+  const { runStylegalleryCli } = await import("./stylegallery-cli.mjs");
   const controller = new AbortController();
   const cancel = () => controller.abort();
   process.once("SIGINT", cancel);
   process.once("SIGTERM", cancel);
   try {
-    const result = await runSgCli(process.argv.slice(2), { signal: controller.signal });
+    const result = await runStylegalleryCli(process.argv.slice(2), { signal: controller.signal });
     process.stdout.write(result.output);
     process.exitCode = result.exitCode;
   } finally {

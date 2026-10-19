@@ -4,6 +4,7 @@ name: cluster
 title: cluster
 category: In-line grouping
 description: Keep related items together while allowing wrapping.
+aliases: ["inline group that wraps","tag group","항목 묶음","줄바꿈 그룹"]
 primary_spatial_problem: Keep related items together while allowing wrapping.
 secondary_spatial_problems: none
 layout_axis: inline

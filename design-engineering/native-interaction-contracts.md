@@ -2,6 +2,8 @@
 type: Domain Guide
 title: Native Interaction Contracts
 description: Choose disclosure, dialog, popover, menu, and combobox behavior by semantics, focus, dismissal, and input ownership.
+aliases: ["dialog","popover","modal","menu","combobox","다이얼로그","팝오버","모달"]
+questions: ["When should I use a dialog instead of a popover?"]
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local

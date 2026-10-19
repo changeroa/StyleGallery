@@ -2,6 +2,8 @@
 type: Domain Guide
 title: Accessible Motion And Equivalent Feedback
 description: Separate motion preferences, automatic updates, flashing, and semantic feedback before designing reduced-motion behavior.
+aliases: ["reduced motion","prefers-reduced-motion","motion sensitivity","모션 줄이기","애니메이션 줄이기","접근성 모션"]
+questions: ["How should the interface respond to prefers-reduced-motion?"]
 domain: motion
 lifecycle: experimental
 provenance_kind: local

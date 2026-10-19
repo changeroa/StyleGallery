@@ -4,6 +4,7 @@ name: imposter
 title: imposter
 category: Overlay / Exception
 description: Place an overlay region over a parent without changing document order.
+aliases: ["overlay over parent","positioned overlay","modal over card","오버레이","겹쳐 띄우기"]
 primary_spatial_problem: Place an overlay region over a parent without changing document order.
 secondary_spatial_problems: none
 layout_axis: both

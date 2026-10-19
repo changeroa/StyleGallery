@@ -2,6 +2,7 @@
 type: Domain Guide
 title: Nocturne Editorial Direction
 description: A dark, glowing, editorial direction with concrete type, color, texture, and motion-density values.
+aliases: ["dark theme direction","dark editorial","다크 에디토리얼"]
 domain: expression
 lifecycle: experimental
 provenance_kind: local

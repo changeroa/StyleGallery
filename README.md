@@ -18,7 +18,7 @@ The existing Layout corpus remains a gallery of minimal, portable CSS layout pat
 
 [Consumer Reference](consumer-reference/index.md) is shared non-domain infrastructure for optional consumer-owned reference handoffs. It carries schema, routing, provenance, and evidence metadata without owning profiles, visual values, components, or a seventh domain.
 
-[Agent-Native StyleGallery](consumer-reference/agent-native/README.md) documents the frozen v1 claim/evidence/governance interface. The `sg` CLI and main MCP server also expose [website compilation](scripts/compiler/README.md) through a separately installed compiler; isolated material v2 indexes admitted Markdown through `sg-material` and its read-only MCP. Lifecycle records own extension and archive dispositions. These interfaces do not create a seventh domain, replace the Markdown corpus, permit mutation of governed knowledge, or feed visual defaults back into Layout.
+[Agent-Native StyleGallery](consumer-reference/agent-native/README.md) documents the frozen v1 claim/evidence/governance interface. The `stylegallery` CLI and main MCP server also expose [website compilation](scripts/compiler/README.md) through a separately installed compiler; isolated material v2 indexes admitted Markdown, searched and read through `stylegallery search` / `stylegallery read` and the matching MCP tools. Lifecycle records own extension and archive dispositions. These interfaces do not create a seventh domain, replace the Markdown corpus, permit mutation of governed knowledge, or feed visual defaults back into Layout.
 
 ## Quick Start
 
@@ -32,7 +32,7 @@ Or install the CLI globally:
 
 ```sh
 npm install --global stylegallery
-sg discover --format json
+stylegallery discover --format json
 ```
 
 The npm package includes the pinned `@chenglou/pretext@0.0.8` browser text-layout engine. StyleGallery uses it as a measurement and verification dependency for text-fit QA; the Node CLI and MCP servers do not execute browser Canvas APIs.
@@ -40,23 +40,23 @@ The npm package includes the pinned `@chenglou/pretext@0.0.8` browser text-layou
 Common read-only commands:
 
 ```sh
-sg resolve sg:profile/editorial-reference-profile --format json
-sg claims sg:profile/editorial-reference-profile --format json
-sg context sg:profile/editorial-reference-profile --format json
-sg ops --format json
+stylegallery resolve sg:profile/editorial-reference-profile --format json
+stylegallery claims sg:profile/editorial-reference-profile --format json
+stylegallery context sg:profile/editorial-reference-profile --format json
+stylegallery ops --format json
 ```
 
 Check the gallery's own claims with the Registrar and the Conservator:
 
 ```sh
-sg registrar
-sg registrar --stale
-sg registrar --unverified
-sg conservator
-sg conservator --pattern sidebar,reel --controls
+stylegallery registrar
+stylegallery registrar --stale
+stylegallery registrar --unverified
+stylegallery conservator
+stylegallery conservator --pattern sidebar,reel --controls
 ```
 
-`sg registrar` checks every claim record in `quality/claim-records/` against the [claim template and machine-field rules](quality/claims.md). `--stale` lists records whose review date has passed, and `--unverified` lists records whose verdict is not fully automated. `sg conservator` renders every Layout pattern's documented CSS in Chromium at 320, 768, and 1440 CSS pixels and measures the spatial behavior the pattern doc claims. `--controls` also removes a declaration each pattern depends on and requires the matching measurement to fail. Playwright is installed with the package, but its browser is not. If Chromium is missing, the command reports `browser_missing`; run `npx playwright install chromium`, add `--install-browser`, or use an installed Chrome with `--channel chrome`.
+`stylegallery registrar` checks every claim record in `quality/claim-records/` against the [claim template and machine-field rules](quality/claims.md). `--stale` lists records whose review date has passed, and `--unverified` lists records whose verdict is not fully automated. `stylegallery conservator` renders every Layout pattern's documented CSS in Chromium at 320, 768, and 1440 CSS pixels and measures the spatial behavior the pattern doc claims. `--controls` also removes a declaration each pattern depends on and requires the matching measurement to fail. Playwright is installed with the package, but its browser is not. If Chromium is missing, the command reports `browser_missing`; run `npx playwright install chromium`, add `--install-browser`, or use an installed Chrome with `--channel chrome`.
 
 Every command writes JSON to stdout. Knowledge results retain their deterministic v1 payloads; `discover` and `ops` also report the local compiler installation. Invalid input returns an error object and a nonzero exit status. See [Agent-Native StyleGallery](consumer-reference/agent-native/README.md) for the frozen knowledge contract, StableRef and VersionID model, MCP resources, and trust boundaries.
 
@@ -64,24 +64,28 @@ Compile a website directly through SG after [installing the compiler](scripts/co
 
 ```sh
 export SG_COMPILER_ROOT=/absolute/path/to/site-compiler
-sg compile --url https://example.com --out ./captures/example
-sg timeline --url https://example.com --out ./captures/example --step 500
-sg workflow
+stylegallery compile --url https://example.com --out ./captures/example
+stylegallery timeline --url https://example.com --out ./captures/example --step 500
+stylegallery workflow
 ```
 
 `compile`, `timeline`, `transcribe`, `sale`, `gate`, and `build` are direct SG commands and MCP tool names. See [SG Website Compilation](scripts/compiler/README.md) for all commands, configuration, output ownership, and verification.
 
-Start with `sg workflow` to select the stages for reconstruction, adaptation, or sale-package production. For a faithful clone, use available original media and fill document gaps by inspecting the source. The automatic `build` command is a sale-edition preview with restricted source access; it is not the general clone builder.
+Start with `stylegallery workflow` to select the stages for reconstruction, adaptation, or sale-package production. For a faithful clone, use available original media and fill document gaps by inspecting the source. The automatic `build` command is a sale-edition preview with restricted source access; it is not the general clone builder.
 
-Material v2 searches the admitted Markdown corpus and returns JSON without an additional format flag:
+`search` ranks the admitted Markdown corpus offline (BM25F over title, aliases, description, questions, path, headings, and body) and returns JSON (schema 3.0) without a format flag. Each result carries a readable id such as `sg:layout/sticky-header`, a verbatim snippet, and the next `read` command:
 
 ```sh
-npx --package stylegallery sg-material discover
-npx --package stylegallery sg-material search --query "sticky layout" --paths-only --limit 5
-npx --package stylegallery sg-material context --query "responsive sidebar" --budget-tokens 4096
+npx stylegallery search "sticky header"
+npx stylegallery search "헤더 고정" --query-en "sticky header"
+npx stylegallery search "sticky layout" --paths-only --limit 5
+npx stylegallery read sg:layout/sticky-header --outline
+npx stylegallery read sg:layout/sticky-header --section css
+npx stylegallery context --query "responsive sidebar" --budget-tokens 4096
+npx stylegallery --help
 ```
 
-With a global install, the same commands are available as `sg-material discover`, `sg-material search`, and `sg-material context`.
+Agents asking in another language should pass `--query-en` (MCP: `query_en`) with an English rewrite; Korean words match only documents that declare Korean `aliases`. The old `sg` alias is gone (it collided with ast-grep); `sg-material`, `stylegallery-material`, and `stylegallery-material-mcp` still work in 0.1.12 with a rename notice and are removed in the next release.
 
 For a coding agent with repository filesystem access, local guided traversal is the default: read `AGENTS.md` and this README, follow the narrowest relevant task route or domain index, and inspect the selected Markdown files directly. Use `search --paths-only` only when the path is unclear; it returns a deterministic `paths` array of repository-relative candidates without full result metadata. Reserve `context` for environments that cannot read repository files or for transferring a bounded, provenance-linked package.
 
@@ -116,18 +120,7 @@ Example MCP client configuration:
 
 The main MCP server exposes governed read operations and compiler execution tools. Configure `SG_COMPILER_ROOT` in its environment to use the compiler. Execution tools declare file and network effects; the knowledge registry remains a read-only API. The frozen read-only server remains available as `bun run sg:mcp:v1`.
 
-The separate Material v2 MCP server is available as `stylegallery-material-mcp`. Attach it for Markdown retrieval and authoring work; the main server covers governed knowledge reads and compiler execution.
-
-```json
-{
-  "mcpServers": {
-    "stylegallery-material": {
-      "command": "npx",
-      "args": ["--yes", "--package", "stylegallery", "stylegallery-material-mcp"]
-    }
-  }
-}
-```
+The main server also exposes `search` and `read`, the same operations and JSON as the CLI commands, so one server covers Markdown retrieval. The former Material v2 server (`material-*` tools) still runs as `stylegallery-material-mcp` in 0.1.12 with a rename notice on stderr.
 
 ## 한국어 빠른 시작
 
@@ -141,10 +134,10 @@ npx stylegallery discover --format json
 
 ```sh
 npm install --global stylegallery
-sg discover --format json
+stylegallery discover --format json
 ```
 
-`discover`는 사용 가능한 인터페이스를 보여주고, `resolve`는 하나의 레코드를 조회하며, `claims`는 관련 주장과 근거를 분리해서 보여줍니다. `context`는 에이전트에 전달할 수 있는 제한된 컨텍스트 패키지를 만들고, `ops`는 지원하는 작업 목록을 반환합니다. 저장소를 직접 읽을 수 있는 에이전트는 `AGENTS.md`와 이 README의 작업 경로에서 시작해 로컬 Markdown을 따라가는 방식이 기본입니다. 경로가 불명확할 때만 `sg-material search --query "검색어" --paths-only --limit 5`로 후보 경로를 좁히고, `context`는 파일에 직접 접근할 수 없거나 제한된 패키지를 전달해야 할 때 사용합니다. 모든 결과는 자동화에 바로 사용할 수 있는 JSON입니다.
+`discover`는 사용 가능한 인터페이스를 보여주고, `resolve`는 하나의 레코드를 조회하며, `claims`는 관련 주장과 근거를 분리해서 보여줍니다. `context`는 에이전트에 전달할 수 있는 제한된 컨텍스트 패키지를 만들고, `ops`는 지원하는 작업 목록을 반환합니다. 저장소를 직접 읽을 수 있는 에이전트는 `AGENTS.md`와 이 README의 작업 경로에서 시작해 로컬 Markdown을 따라가는 방식이 기본입니다. 경로가 불명확할 때만 `stylegallery search "검색어" --paths-only --limit 5`로 후보 경로를 좁히고, `context`는 파일에 직접 접근할 수 없거나 제한된 패키지를 전달해야 할 때 사용합니다. 모든 결과는 자동화에 바로 사용할 수 있는 JSON입니다.
 
 CLI와 MCP의 상세 사용법은 [Agent-Native StyleGallery 가이드](consumer-reference/agent-native/README.md)를 참고하세요. 사람이 문서를 탐색하려면 아래의 도메인 표에서 목적에 맞는 진입점을 선택하면 됩니다.
 

@@ -415,6 +415,27 @@ export function materialSearch({ repositoryRoot, input, fileSystem = fs, sourceR
   return deepFreeze({ ...envelope, results: selected.map(({ result }) => result), total_matches: ranked.length });
 }
 
+/**
+ * Read every admitted material under the same manifest, tracking, and hash
+ * checks as material-search. Ranking layers (search v3) build on this.
+ */
+export function materialCorpus({ repositoryRoot, fileSystem = fs, sourceReader, gitRunner }) {
+  const { root, manifest } = loadMetadata(repositoryRoot, fileSystem);
+  const beforeInventory = trackedInventory(repositoryRoot, gitRunner);
+  const documents = manifest.materials.map((record) => {
+    const bytes = readRecord({ repositoryRoot, root, record, fileSystem, sourceReader, gitRunner, inventory: beforeInventory });
+    let text;
+    try { text = utf8Fatal.decode(bytes); } catch { fail("material_source_utf8_invalid", "material source is not valid UTF-8"); }
+    return { record, identity: materialIdentityForRecord(record), text };
+  });
+  const afterInventory = trackedInventory(repositoryRoot, gitRunner);
+  for (const record of manifest.materials) {
+    assertTracked(record, afterInventory);
+    if (canonicalize(beforeInventory.get(record.repository_path)) !== canonicalize(afterInventory.get(record.repository_path))) fail("material_source_race", "material source tracking changed during read");
+  }
+  return { manifestVersionId: manifest.version_id, documents };
+}
+
 function validateGetInput(input) {
   assertObject(input);
   assertOnly(input, new Set(["reference", "offset", "length"]));

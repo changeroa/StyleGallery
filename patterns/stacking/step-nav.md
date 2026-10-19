@@ -4,6 +4,7 @@ name: step-nav
 title: step-nav
 category: Stacking
 description: Present sequential steps with consistent vertical rhythm.
+aliases: ["stepper","steps list","단계 표시","스텝 내비게이션"]
 primary_spatial_problem: Present sequential steps with consistent vertical rhythm.
 secondary_spatial_problems: none
 layout_axis: block

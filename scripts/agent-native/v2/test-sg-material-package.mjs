@@ -45,7 +45,7 @@ function relativeImports(source) {
 function runtimeClosure(root, manifest) {
   const seen = new Set();
   const declaredScripts = Object.entries(manifest.scripts)
-    .filter(([name]) => name === "sg" || name.startsWith("sg:"))
+    .filter(([name]) => name === "stylegallery" || name.startsWith("sg:"))
     .map(([, command]) => /^node (scripts\/[^ ]+\.mjs)$/.exec(command)?.[1])
     .filter(Boolean);
   const pending = [...new Set([
@@ -127,6 +127,8 @@ const required = new Set([
   // Transport setup documentation is packaged without admitting tool code or
   // private upstream documents to the governed material corpus.
   "scripts/compiler/README.md",
+  // The one search how-to skill ships beside the CLI it documents.
+  "skills/stylegallery-search/SKILL.md",
 ]);
 assert.deepEqual(files, [...required].sort(), "package files must equal the closed runtime/schema/material inventory");
 
@@ -148,7 +150,8 @@ try {
   });
   assert.equal(packed.status, 0, packed.stderr || packed.stdout);
   assert.equal(packed.stderr, "");
-  const description = JSON.parse(packed.stdout)[0];
+  const packedJson = JSON.parse(packed.stdout);
+  const description = Array.isArray(packedJson) ? packedJson[0] : Object.values(packedJson)[0];
   const inventory = description.files.map(({ path: entry }) => entry).sort();
   const expected = [...new Set([...files, ...mandatory])].sort();
   assert.deepEqual(inventory, expected, "packed inventory must equal allow-list plus npm mandatory metadata");
@@ -202,7 +205,7 @@ try {
   fs.writeFileSync(path.join(compilerRoot, "package.json"), '{"name":"site-compiler","version":"0.1.0","type":"module"}');
   fs.writeFileSync(path.join(compilerRoot, "compile.mjs"), 'console.log(JSON.stringify({args:process.argv.slice(2),cwd:process.cwd()}));\n');
   const compilerEnv = { ...process.env, SG_COMPILER_ROOT: compilerRoot };
-  const installedSg = spawnSync(process.execPath, [path.join(installedRoot, packageJson.bin.sg), "compile", "--url", "https://example.com/", "--out", "capture output"], {
+  const installedSg = spawnSync(process.execPath, [path.join(installedRoot, packageJson.bin.stylegallery), "compile", "--url", "https://example.com/", "--out", "capture output"], {
     cwd: externalCwd, env: compilerEnv, encoding: "utf8", timeout: 30_000,
   });
   assert.equal(installedSg.status, 0, installedSg.stderr || installedSg.stdout);
@@ -217,7 +220,7 @@ try {
   try {
     await bounded(currentClient.connect(currentTransport), "installed SG MCP initialize");
     const tools = (await bounded(currentClient.listTools(), "installed SG MCP tools")).tools;
-    assert.equal(tools.length, 20);
+    assert.equal(tools.length, 22);
     assert.equal(tools.find(({ name }) => name === "compile").annotations.readOnlyHint, false);
     const compiled = toolEnvelope(await bounded(currentClient.callTool({ name: "compile", arguments: { url: "https://example.com/", out: "capture output" } }), "installed SG MCP compile"));
     assert.deepEqual(compiled, installedCompile, "installed direct CLI and MCP compile must agree");

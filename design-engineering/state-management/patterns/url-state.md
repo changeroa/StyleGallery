@@ -2,6 +2,7 @@
 type: Domain Guide
 title: URL State And History
 description: Keep shareable screen state consistent across links, refresh, and browser history.
+aliases: ["query string state","filters in URL","deep link","URL 상태","쿼리 파라미터"]
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local

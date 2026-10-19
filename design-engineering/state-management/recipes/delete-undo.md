@@ -2,6 +2,7 @@
 type: Domain Guide
 title: Deletion And Supported Undo
 description: Remove the intended entity and provide recovery that matches actual backend capabilities.
+aliases: ["undo delete","delete with undo","삭제 취소","실행 취소"]
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local

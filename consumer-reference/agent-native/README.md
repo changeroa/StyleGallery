@@ -6,7 +6,7 @@ description: Machine-facing identity, query, execution, protocol-projection, and
 
 # Agent-Native StyleGallery
 
-Primary role: frozen v1 knowledge interface guide. For the current `sg` CLI and main MCP server, including compiler execution, use [SG Website Compilation](../../scripts/compiler/README.md).
+Primary role: frozen v1 knowledge interface guide. For the current `stylegallery` CLI and main MCP server, including compiler execution, use [SG Website Compilation](../../scripts/compiler/README.md).
 
 Agent-Native StyleGallery lets a person, script, or agent inspect the governed StyleGallery knowledge graph without learning repository paths first. The Markdown corpus remains the human-readable source material; the agent-native layer gives its governed fixture records stable identities, closed schemas, deterministic operations, and protocol-specific projections.
 
@@ -58,13 +58,13 @@ All machine-mode results are deterministic JSON on stdout. A failed request retu
 
 ## Governed Material v2
 
-Material v2 is an isolated, read-only interface over admitted Markdown. Use `sg-material discover`, `search`, `get`, and `context`, or the equivalent `material-*` tools exposed by `stylegallery-material-mcp`. It does not merge material with v1 trust records or expand the admission policy.
+Material v2 is an isolated, read-only interface over admitted Markdown. Use `stylegallery search`, `stylegallery read`, and `stylegallery context --query`, or the `search` and `read` tools of `stylegallery-mcp`. It does not merge material with v1 trust records or expand the admission policy.
 
-Search keeps the fixed field weights `title: 16`, `path: 8`, and `body: 1`. For a multi-token query, each field contribution is multiplied by `ceil(material_count / max(1, token_document_frequency))` so a specific, uncommon term such as `sticky` is not outranked by a corpus-wide term such as `layout`. Results expose the document frequency and multiplier for every normalized query token; ties remain ordered by projected StableRef. `--paths-only` preserves the same ranking while returning repository-relative paths.
+`stylegallery search` (search v3, `scripts/agent-native/v2/material-search-v3.mjs`) ranks with BM25F (`k1` 1.2) over the fields title (weight 4), aliases (4), description (2.5), questions (2.5), path (2), headings (1.5), and body (1), each with its own length normalization. Terms are NFKC-lowercased Unicode words with English stopwords removed and light plural/-ing/-ed stemming. Hangul 2-grams are indexed only from Korean `aliases`, `questions`, and titles. `aliases` and `questions` are frontmatter JSON lists (`aliases: ["sticky top navigation", "헤더 고정"]`); add only names and questions the document's own sections answer. `query_en` adds an English rewrite of a non-English query. Ties order by readable id (`sg:<domain>/<slug>`, from the file name, or the path when names collide). `--paths-only` keeps the same ranking. The legacy `material-search` operation keeps its fixed `title: 16`, `path: 8`, `body: 1` weights with a rarity multiplier for the material v2 MCP. `node scripts/search-eval.mjs` scores both rankers on `eval/search/questions.json`.
 
 ```sh
-sg-material search --query "sticky layout" --paths-only --limit 5
-stylegallery-material search --query "design terminology source kinds" --paths-only --limit 5
+stylegallery search "sticky layout" --paths-only --limit 5
+stylegallery search "design terminology source kinds" --paths-only --limit 5
 ```
 
 ## MCP

@@ -4,6 +4,8 @@ name: sidebar
 title: sidebar
 category: Split / Sidebar
 description: Let a narrow sidebar and wider content wrap when space is tight.
+aliases: ["wrapping sidebar","intrinsic sidebar","사이드바","사이드바 레이아웃"]
+questions: ["How do I make a sidebar wrap under the content when space is tight?"]
 primary_spatial_problem: Let a narrow sidebar and wider content wrap when space is tight.
 secondary_spatial_problems: none
 layout_axis: inline

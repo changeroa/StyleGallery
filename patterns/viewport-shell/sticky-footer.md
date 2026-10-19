@@ -4,6 +4,8 @@ name: sticky-footer
 title: sticky-footer
 category: Viewport / Shell
 description: Keep footer at the bottom when content is short.
+aliases: ["footer at bottom","push footer down","푸터 고정","하단 푸터","푸터를 화면 아래에 붙이기"]
+questions: ["How do I keep the footer at the bottom when content is short?"]
 primary_spatial_problem: Keep footer at the bottom when content is short.
 secondary_spatial_problems: none
 layout_axis: block

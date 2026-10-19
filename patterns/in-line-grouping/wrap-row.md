@@ -4,6 +4,7 @@ name: wrap-row
 title: wrap-row
 category: In-line grouping
 description: Wrap controls into rows with stable gaps.
+aliases: ["wrapping toolbar","button row that wraps","버튼 줄바꿈"]
 primary_spatial_problem: Wrap controls into rows with stable gaps.
 secondary_spatial_problems: none
 layout_axis: inline

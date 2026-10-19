@@ -2,6 +2,7 @@
 type: Layout Recipe
 title: Form Flow
 description: Compose sequential form content with constrained width and reachable actions.
+aliases: ["form layout","checkout form","폼 레이아웃","입력 폼"]
 screen_type: Form flow
 primary_user_task: Complete a sequence of related inputs.
 spatial_model: Single primary column with grouped fields and action placement.

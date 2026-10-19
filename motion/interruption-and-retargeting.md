@@ -2,6 +2,8 @@
 type: Domain Guide
 title: Interruption And Retargeting
 description: Keep semantic intent, presented motion, cancellation, and teardown consistent under repeated input.
+aliases: ["interrupted animation","animation cancellation","repeated clicks during animation","애니메이션 중단"]
+questions: ["What happens when the user triggers the same transition again mid-animation?"]
 domain: motion
 lifecycle: experimental
 provenance_kind: local

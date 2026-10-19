@@ -2,6 +2,7 @@
 type: Layout Recipe
 title: Dashboard
 description: Compose repeated panels and action clusters on a page grid.
+aliases: ["admin dashboard","panel dashboard","대시보드","대시보드 레이아웃"]
 screen_type: Dashboard
 primary_user_task: Scan and compare repeated status, metric, or workflow panels.
 spatial_model: Page grid containing repeated local grids and action groups.

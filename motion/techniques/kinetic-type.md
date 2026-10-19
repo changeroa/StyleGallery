@@ -2,6 +2,7 @@
 type: Domain Recipe
 title: Kinetic Type Technique
 description: Copy-ready split-word headline rises, scroll-lit paragraphs, count-ups, and marquees that keep accessible text intact.
+aliases: ["text animation","headline animation","kinetic typography","텍스트 애니메이션","타이포 애니메이션"]
 domain: motion
 lifecycle: experimental
 provenance_kind: local

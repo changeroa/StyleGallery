@@ -4,6 +4,7 @@ name: columns
 title: columns
 category: Grid / Repetition
 description: Flow long content into balanced text columns.
+aliases: ["multi-column text","css columns","다단 텍스트"]
 primary_spatial_problem: Flow long content into balanced text columns.
 secondary_spatial_problems: none
 layout_axis: inline

@@ -37,8 +37,8 @@ Before editing generated artifacts, validators, lifecycle state, or ownership po
 ## Agent Retrieval Route
 
 - When repository filesystem access is available, traverse the local Markdown corpus first: start at this file and `README.md`, follow the relevant task route or domain index, and read the selected source files directly.
-- When the relevant path is not yet clear, use `sg-material search --query "<narrow query>" --paths-only --limit <N>` to obtain a small deterministic set of repository-relative candidate paths, then continue by reading those files locally.
-- Use `sg-material context` as a fallback when repository files cannot be read directly or when a bounded, provenance-linked context package must be transferred to another process. Do not make context packaging the default local retrieval path.
+- When the relevant path is not yet clear, use `stylegallery search "<narrow query>" --paths-only --limit <N>` to obtain a small deterministic set of repository-relative candidate paths, then continue by reading those files locally.
+- Use `stylegallery read <id> --outline` and `--section <slug>` to read one part of a long document. Use `stylegallery context --query` as a fallback when repository files cannot be read directly or when a bounded, provenance-linked context package must be transferred to another process. Do not make context packaging the default local retrieval path.
 
 The remaining pattern, CSS, naming, token, checklist, and verification rules apply to the Layout domain. Non-Layout domain documents may discuss product-layer behavior, but they do not authorize decorative or motion properties in reusable Layout pattern CSS.
 

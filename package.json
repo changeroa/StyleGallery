@@ -1,6 +1,6 @@
 {
   "name": "stylegallery",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "A governed gallery of portable interface knowledge with knowledge CLIs, website compilation, and MCP servers.",
   "type": "module",
   "license": "MIT",
@@ -251,6 +251,7 @@
     "scripts/agent-native/v2/material-operation-registry.mjs",
     "scripts/agent-native/v2/material-queries.mjs",
     "scripts/agent-native/v2/material-registry.mjs",
+    "scripts/agent-native/v2/material-search-v3.mjs",
     "scripts/compiler/README.md",
     "scripts/compiler/cli.mjs",
     "scripts/compiler/mcp.mjs",
@@ -258,6 +259,8 @@
     "scripts/compiler/runtime.mjs",
     "scripts/conservator-exhibits.mjs",
     "scripts/conservator.mjs",
+    "scripts/legacy-sg-material-mcp.mjs",
+    "scripts/legacy-sg-material.mjs",
     "scripts/markdown-structure.mjs",
     "scripts/pattern-data.mjs",
     "scripts/registrar.mjs",
@@ -268,14 +271,15 @@
     "scripts/sg-server.mjs",
     "scripts/sg.mjs",
     "scripts/strict-json.mjs",
-    "showcase/README.md"
+    "scripts/stylegallery-cli.mjs",
+    "showcase/README.md",
+    "skills/stylegallery-search/SKILL.md"
   ],
   "bin": {
-    "sg": "scripts/sg-entry.mjs",
-    "sg-material": "scripts/sg-material.mjs",
+    "sg-material": "scripts/legacy-sg-material.mjs",
     "stylegallery": "scripts/sg-entry.mjs",
-    "stylegallery-material": "scripts/sg-material.mjs",
-    "stylegallery-material-mcp": "scripts/sg-material-mcp.mjs",
+    "stylegallery-material": "scripts/legacy-sg-material.mjs",
+    "stylegallery-material-mcp": "scripts/legacy-sg-material-mcp.mjs",
     "stylegallery-mcp": "scripts/sg-server.mjs"
   },
   "publishConfig": {
@@ -301,7 +305,6 @@
     "test:material": "node scripts/agent-native/v2/test-material-admission.mjs && node scripts/agent-native/v2/test-material-registry.mjs && node scripts/agent-native/v2/test-material-query.mjs && node scripts/agent-native/v2/test-material-context.mjs && node scripts/agent-native/v2/test-sg-material-cli.mjs && node scripts/agent-native/v2/test-material-mcp.mjs && node scripts/agent-native/v2/test-material-mcp-stdio.mjs && node scripts/agent-native/v2/test-sg-material-package.mjs",
     "test:lifecycle-dispositions": "node scripts/test-lifecycle-disposition.mjs",
     "validate:lifecycle-dispositions": "node scripts/validate-lifecycle-disposition.mjs --json",
-    "sg": "node scripts/sg-entry.mjs",
     "sg:material": "node scripts/sg-material.mjs",
     "sg:material:mcp": "node scripts/sg-material-mcp.mjs",
     "sg:mcp": "node scripts/sg-server.mjs",
@@ -318,7 +321,10 @@
     "showcase:serve": "node scripts/serve-showcase.mjs",
     "test:compiler": "node --test scripts/test-sg-compiler.mjs",
     "sg:v1": "node scripts/sg.mjs",
-    "sg:mcp:v1": "node scripts/sg-mcp.mjs"
+    "sg:mcp:v1": "node scripts/sg-mcp.mjs",
+    "stylegallery": "node scripts/sg-entry.mjs",
+    "test:search": "node --test scripts/test-stylegallery-search.mjs",
+    "eval:search": "node scripts/search-eval.mjs --gate"
   },
   "devDependencies": {
     "@playwright/test": "1.61.0",

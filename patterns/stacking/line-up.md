@@ -4,6 +4,8 @@ name: line-up
 title: line-up
 category: Stacking
 description: Keep card footer actions aligned at the bottom.
+aliases: ["equal height cards","buttons aligned at bottom","card footer alignment","카드 버튼 하단 정렬"]
+questions: ["How do I align card footer actions at the bottom?"]
 primary_spatial_problem: Keep card footer actions aligned at the bottom.
 secondary_spatial_problems: none
 layout_axis: block

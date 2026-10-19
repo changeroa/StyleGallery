@@ -2,6 +2,7 @@
 type: Domain Guide
 title: Warm Print Direction
 description: A light, warm, print-inspired direction with concrete type, color, texture, and motion-density values.
+aliases: ["light print style","warm editorial","따뜻한 인쇄 느낌"]
 domain: expression
 lifecycle: experimental
 provenance_kind: local

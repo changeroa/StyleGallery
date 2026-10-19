@@ -4,6 +4,7 @@ name: media-object
 title: media-object
 category: Split / Sidebar
 description: Align media and descriptive content as a stable pair.
+aliases: ["image beside text","avatar with text","미디어 오브젝트","이미지와 텍스트 나란히"]
 primary_spatial_problem: Align media and descriptive content as a stable pair.
 secondary_spatial_problems: none
 layout_axis: inline

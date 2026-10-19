@@ -4,6 +4,7 @@ name: list-detail
 title: list-detail
 category: Split / Sidebar
 description: Place an explorable list beside its detail region.
+aliases: ["master detail","list and detail panes","목록 상세","리스트 디테일"]
 primary_spatial_problem: Place an explorable list beside its detail region.
 secondary_spatial_problems: none
 layout_axis: inline

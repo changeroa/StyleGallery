@@ -4,6 +4,8 @@ name: ram-grid
 title: ram-grid
 category: Grid / Repetition
 description: Repeat items into as many useful columns as space allows.
+aliases: ["repeat auto-fit minmax","responsive grid without media queries","auto-fit grid","반응형 그리드","반응형 카드 그리드"]
+questions: ["How do I make a grid that fits as many columns as space allows without media queries?"]
 primary_spatial_problem: Repeat items into as many useful columns as space allows.
 secondary_spatial_problems: none
 layout_axis: both

@@ -115,12 +115,14 @@ function packagedInventoryRunner(root) {
   };
 }
 
-function runtimeRegistry() {
+/** Repository root plus the packaged inventory runner when installed without Git metadata. */
+export function materialRuntimeOptions() {
   const hasGitMetadata = fs.existsSync(path.join(repositoryRoot, ".git"));
-  return createMaterialOperationRegistry({
-    repositoryRoot,
-    ...(hasGitMetadata ? {} : { gitRunner: packagedInventoryRunner(repositoryRoot) }),
-  });
+  return { repositoryRoot, ...(hasGitMetadata ? {} : { gitRunner: packagedInventoryRunner(repositoryRoot) }) };
+}
+
+function runtimeRegistry() {
+  return createMaterialOperationRegistry(materialRuntimeOptions());
 }
 
 export function executeMaterialCli(args, registry = runtimeRegistry()) {

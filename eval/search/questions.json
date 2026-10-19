@@ -1,0 +1,798 @@
+{
+  "schema_version": "1.0",
+  "description": "Agent-style retrieval questions for stylegallery search. qrels grade 3 = the answer document, 2 = a strong alternative, 1 = useful context. must_pass items must place a grade >= 2 document in the top 5. kind heldout = written after aliases were added, never used to tune them.",
+  "questions": [
+    {
+      "id": "q01",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "sticky header",
+      "qrels": {
+        "patterns/viewport-shell/sticky-header.md": 3
+      }
+    },
+    {
+      "id": "q02",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "keep the header visible while the page scrolls",
+      "qrels": {
+        "patterns/viewport-shell/sticky-header.md": 3,
+        "patterns/viewport-shell/scroll-body-shell.md": 1
+      }
+    },
+    {
+      "id": "q03",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "footer stays at the bottom when content is short",
+      "qrels": {
+        "patterns/viewport-shell/sticky-footer.md": 3,
+        "patterns/viewport-shell/cover.md": 1
+      }
+    },
+    {
+      "id": "q04",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "responsive card grid without media queries",
+      "qrels": {
+        "patterns/grid-repetition/ram-grid.md": 3,
+        "patterns/grid-repetition/card-grid.md": 3
+      }
+    },
+    {
+      "id": "q05",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "sidebar that wraps under the content on narrow screens",
+      "qrels": {
+        "patterns/split-sidebar/sidebar.md": 3,
+        "patterns/split-sidebar/switcher.md": 2
+      }
+    },
+    {
+      "id": "q06",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "only the body should scroll, header and footer fixed",
+      "qrels": {
+        "patterns/viewport-shell/scroll-body-shell.md": 3,
+        "patterns/viewport-shell/fixed-sidenav-shell.md": 1
+      }
+    },
+    {
+      "id": "q07",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "center a div horizontally and vertically",
+      "qrels": {
+        "patterns/centering/super-center.md": 3,
+        "patterns/centering/center.md": 2
+      }
+    },
+    {
+      "id": "q08",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "readable line length for long articles",
+      "qrels": {
+        "patterns/containment/content-limiter.md": 3,
+        "recipes/article-page.md": 2,
+        "patterns/containment/fluid-styles.md": 1
+      }
+    },
+    {
+      "id": "q09",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "horizontal scrolling row of cards",
+      "qrels": {
+        "patterns/in-line-grouping/reel.md": 3
+      }
+    },
+    {
+      "id": "q10",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "breadcrumb layout",
+      "qrels": {
+        "patterns/in-line-grouping/breadcrumb.md": 3
+      }
+    },
+    {
+      "id": "q11",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "image aspect ratio in a responsive slot",
+      "qrels": {
+        "patterns/media-fit/frame.md": 3
+      }
+    },
+    {
+      "id": "q12",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "modal overlay on top of a card without moving DOM order",
+      "qrels": {
+        "patterns/overlay-exception/imposter.md": 3,
+        "patterns/overlay-exception/overlay-stack.md": 2
+      }
+    },
+    {
+      "id": "q13",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "settings page with side navigation",
+      "qrels": {
+        "recipes/saas-settings.md": 3,
+        "patterns/viewport-shell/fixed-sidenav-shell.md": 2,
+        "design-engineering/state-management/recipes/settings-save.md": 1
+      }
+    },
+    {
+      "id": "q14",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "dashboard layout",
+      "qrels": {
+        "recipes/dashboard.md": 3
+      }
+    },
+    {
+      "id": "q15",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "list detail master detail view",
+      "qrels": {
+        "recipes/list-detail.md": 3,
+        "patterns/split-sidebar/list-detail.md": 3
+      }
+    },
+    {
+      "id": "q16",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "which layout pattern should I pick",
+      "qrels": {
+        "guides/decision-tree.md": 3,
+        "GUIDE.md": 2,
+        "guides/layout-brief.md": 2
+      }
+    },
+    {
+      "id": "q17",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "build a landing page homepage from raw content",
+      "qrels": {
+        "recipes/homepage.md": 3,
+        "guides/webpage-generation-workflow.md": 3
+      }
+    },
+    {
+      "id": "q18",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "prefers-reduced-motion",
+      "qrels": {
+        "motion/accessible-motion.md": 3,
+        "platform-guides/preferences-and-accessibility.md": 2
+      }
+    },
+    {
+      "id": "q19",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "GSAP ScrollTrigger pinned horizontal scroll",
+      "qrels": {
+        "motion/techniques/scroll-choreography.md": 3
+      }
+    },
+    {
+      "id": "q20",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "animation jank and performance",
+      "qrels": {
+        "motion/rendering-and-performance.md": 3
+      }
+    },
+    {
+      "id": "q21",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "what happens when the user clicks again mid animation",
+      "qrels": {
+        "motion/interruption-and-retargeting.md": 3
+      }
+    },
+    {
+      "id": "q22",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "prevent double submit of a form",
+      "qrels": {
+        "design-engineering/state-management/patterns/single-flight.md": 3
+      }
+    },
+    {
+      "id": "q23",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "stale search response overwrites newer results",
+      "qrels": {
+        "design-engineering/state-management/patterns/latest-request-wins.md": 3,
+        "design-engineering/state-management/recipes/search-detail.md": 2
+      }
+    },
+    {
+      "id": "q24",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "optimistic update rollback",
+      "qrels": {
+        "design-engineering/state-management/patterns/optimistic-overlay.md": 3
+      }
+    },
+    {
+      "id": "q25",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "warn before leaving with unsaved changes",
+      "qrels": {
+        "design-engineering/state-management/patterns/unsaved-navigation.md": 3,
+        "design-engineering/state-management/recipes/settings-save.md": 1
+      }
+    },
+    {
+      "id": "q26",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "keep filter state in the URL",
+      "qrels": {
+        "design-engineering/state-management/patterns/url-state.md": 3,
+        "design-engineering/state-management/recipes/search-detail.md": 2
+      }
+    },
+    {
+      "id": "q27",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "undo after delete",
+      "qrels": {
+        "design-engineering/state-management/recipes/delete-undo.md": 3
+      }
+    },
+    {
+      "id": "q28",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "loading spinner skeleton and progress feedback",
+      "qrels": {
+        "design-engineering/loading-and-feedback.md": 3
+      }
+    },
+    {
+      "id": "q29",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "dialog vs popover",
+      "qrels": {
+        "design-engineering/native-interaction-contracts.md": 3,
+        "design-terminology/interaction-semantics.md": 3
+      }
+    },
+    {
+      "id": "q30",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "IME composition and right to left text input",
+      "qrels": {
+        "design-engineering/text-input-and-internationalization.md": 3
+      }
+    },
+    {
+      "id": "q31",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "Android back button behavior on the web",
+      "qrels": {
+        "platform-guides/android-interaction.md": 3,
+        "platform-guides/adaptive-navigation.md": 2
+      }
+    },
+    {
+      "id": "q32",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "keyboard focus order across platforms",
+      "qrels": {
+        "platform-guides/input-and-focus.md": 3
+      }
+    },
+    {
+      "id": "q33",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "design token naming and aliases resolution",
+      "qrels": {
+        "design-terminology/token-semantics.md": 3,
+        "quality/evidence/tokens.md": 1
+      }
+    },
+    {
+      "id": "q34",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "film grain noise texture css",
+      "qrels": {
+        "expression/techniques/grain-and-texture.md": 3
+      }
+    },
+    {
+      "id": "q35",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "three.js hero background",
+      "qrels": {
+        "expression/techniques/webgl-hero.md": 3
+      }
+    },
+    {
+      "id": "q36",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "dark editorial visual direction",
+      "qrels": {
+        "expression/directions/nocturne-editorial.md": 3,
+        "expression/direction-brief.md": 1
+      }
+    },
+    {
+      "id": "q37",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "kinetic typography headline animation",
+      "qrels": {
+        "motion/techniques/kinetic-type.md": 3
+      }
+    },
+    {
+      "id": "q38",
+      "lang": "en",
+      "kind": "paraphrase",
+      "must_pass": false,
+      "query": "pin the top bar",
+      "qrels": {
+        "patterns/viewport-shell/sticky-header.md": 3
+      }
+    },
+    {
+      "id": "q39",
+      "lang": "en",
+      "kind": "paraphrase",
+      "must_pass": false,
+      "query": "equal height cards with buttons aligned at the bottom",
+      "qrels": {
+        "patterns/stacking/line-up.md": 3
+      }
+    },
+    {
+      "id": "q40",
+      "lang": "en",
+      "kind": "paraphrase",
+      "must_pass": false,
+      "query": "tags with counts",
+      "qrels": {
+        "patterns/in-line-grouping/badge-list.md": 3
+      }
+    },
+    {
+      "id": "q41",
+      "lang": "en",
+      "kind": "paraphrase",
+      "must_pass": false,
+      "query": "pinterest style staggered layout",
+      "qrels": {
+        "patterns/grid-repetition/masonry-approx.md": 3
+      }
+    },
+    {
+      "id": "q42",
+      "lang": "en",
+      "kind": "paraphrase",
+      "must_pass": false,
+      "query": "classic page with header footer and two sidebars",
+      "qrels": {
+        "patterns/viewport-shell/holy-grail.md": 3
+      }
+    },
+    {
+      "id": "q43",
+      "lang": "en",
+      "kind": "edge",
+      "must_pass": false,
+      "query": "stack",
+      "qrels": {
+        "patterns/stacking/stack.md": 3
+      }
+    },
+    {
+      "id": "q44",
+      "lang": "en",
+      "kind": "edge",
+      "must_pass": false,
+      "query": "ram grid",
+      "qrels": {
+        "patterns/grid-repetition/ram-grid.md": 3
+      }
+    },
+    {
+      "id": "q45",
+      "lang": "en",
+      "kind": "edge",
+      "must_pass": false,
+      "query": "how do agents search this repository",
+      "qrels": {
+        "AGENTS.md": 3,
+        "README.md": 2,
+        "consumer-reference/agent-native/README.md": 2
+      }
+    },
+    {
+      "id": "q46",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": true,
+      "query": "헤더 고정",
+      "qrels": {
+        "patterns/viewport-shell/sticky-header.md": 3
+      }
+    },
+    {
+      "id": "q47",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": true,
+      "query": "푸터를 화면 아래에 붙이기",
+      "qrels": {
+        "patterns/viewport-shell/sticky-footer.md": 3
+      }
+    },
+    {
+      "id": "q48",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": false,
+      "query": "가운데 정렬",
+      "qrels": {
+        "patterns/centering/center.md": 3,
+        "patterns/centering/super-center.md": 3
+      }
+    },
+    {
+      "id": "q49",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": true,
+      "query": "사이드바 레이아웃",
+      "qrels": {
+        "patterns/split-sidebar/sidebar.md": 3,
+        "patterns/viewport-shell/fixed-sidenav-shell.md": 2,
+        "patterns/split-sidebar/index.md": 2
+      }
+    },
+    {
+      "id": "q50",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": false,
+      "query": "반응형 카드 그리드",
+      "qrels": {
+        "patterns/grid-repetition/card-grid.md": 3,
+        "patterns/grid-repetition/ram-grid.md": 3
+      }
+    },
+    {
+      "id": "q51",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": false,
+      "query": "가로 스크롤",
+      "qrels": {
+        "patterns/in-line-grouping/reel.md": 3
+      }
+    },
+    {
+      "id": "q52",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": true,
+      "query": "모션 줄이기 접근성",
+      "qrels": {
+        "motion/accessible-motion.md": 3,
+        "platform-guides/preferences-and-accessibility.md": 2
+      }
+    },
+    {
+      "id": "q53",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": false,
+      "query": "중복 제출 방지",
+      "qrels": {
+        "design-engineering/state-management/patterns/single-flight.md": 3
+      }
+    },
+    {
+      "id": "q54",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": false,
+      "query": "저장하지 않은 변경 사항 경고",
+      "qrels": {
+        "design-engineering/state-management/patterns/unsaved-navigation.md": 3
+      }
+    },
+    {
+      "id": "q55",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": false,
+      "query": "대시보드 레이아웃",
+      "qrels": {
+        "recipes/dashboard.md": 3
+      }
+    },
+    {
+      "id": "q56",
+      "lang": "ko",
+      "kind": "ko",
+      "must_pass": false,
+      "query": "랜딩 페이지 만들기",
+      "qrels": {
+        "recipes/homepage.md": 3,
+        "guides/webpage-generation-workflow.md": 3
+      }
+    },
+    {
+      "id": "q57",
+      "lang": "ko",
+      "kind": "ko-with-en",
+      "must_pass": false,
+      "query": "스크롤 연출",
+      "query_en": "scroll choreography animation",
+      "qrels": {
+        "motion/techniques/scroll-choreography.md": 3,
+        "motion/observed-choreography.md": 2
+      }
+    },
+    {
+      "id": "q58",
+      "lang": "ko",
+      "kind": "ko-with-en",
+      "must_pass": false,
+      "query": "다이얼로그와 팝오버 차이",
+      "query_en": "dialog vs popover",
+      "qrels": {
+        "design-engineering/native-interaction-contracts.md": 3,
+        "design-terminology/interaction-semantics.md": 3
+      }
+    },
+    {
+      "id": "q59",
+      "lang": "mixed",
+      "kind": "ko",
+      "must_pass": false,
+      "query": "sticky 헤더",
+      "qrels": {
+        "patterns/viewport-shell/sticky-header.md": 3
+      }
+    },
+    {
+      "id": "q60",
+      "lang": "mixed",
+      "kind": "ko",
+      "must_pass": false,
+      "query": "grid 반응형",
+      "qrels": {
+        "patterns/grid-repetition/ram-grid.md": 3,
+        "patterns/grid-repetition/card-grid.md": 3
+      }
+    },
+    {
+      "id": "h01",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "make the nav bar stick to the top",
+      "qrels": {
+        "patterns/viewport-shell/sticky-header.md": 3
+      }
+    },
+    {
+      "id": "h02",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "grid that adapts column count to available width",
+      "qrels": {
+        "patterns/grid-repetition/ram-grid.md": 3,
+        "patterns/grid-repetition/card-grid.md": 3
+      }
+    },
+    {
+      "id": "h03",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "two pane email client layout",
+      "qrels": {
+        "patterns/split-sidebar/list-detail.md": 3,
+        "recipes/list-detail.md": 3
+      }
+    },
+    {
+      "id": "h04",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "animate on scroll with css only",
+      "qrels": {
+        "motion/techniques/scroll-choreography.md": 3
+      }
+    },
+    {
+      "id": "h05",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "spinner vs skeleton screen",
+      "qrels": {
+        "design-engineering/loading-and-feedback.md": 3
+      }
+    },
+    {
+      "id": "h06",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "race condition in a search box",
+      "qrels": {
+        "design-engineering/state-management/patterns/latest-request-wins.md": 3,
+        "design-engineering/state-management/recipes/search-detail.md": 2
+      }
+    },
+    {
+      "id": "h07",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "table of contents that follows while reading",
+      "qrels": {
+        "patterns/split-sidebar/sticky-aside.md": 3
+      }
+    },
+    {
+      "id": "h08",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "full bleed image inside centered content",
+      "qrels": {
+        "patterns/grid-repetition/grid-wrapper.md": 3
+      }
+    },
+    {
+      "id": "h09",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "keyboard shortcuts on Windows",
+      "qrels": {
+        "platform-guides/windows-interaction.md": 3
+      }
+    },
+    {
+      "id": "h10",
+      "lang": "ko",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "카드 아래 버튼 정렬",
+      "qrels": {
+        "patterns/stacking/line-up.md": 3
+      }
+    },
+    {
+      "id": "h11",
+      "lang": "ko",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "모달 대화상자",
+      "qrels": {
+        "design-engineering/native-interaction-contracts.md": 3,
+        "design-terminology/interaction-semantics.md": 2
+      }
+    },
+    {
+      "id": "h12",
+      "lang": "ko",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "이미지 비율",
+      "qrels": {
+        "patterns/media-fit/frame.md": 3
+      }
+    },
+    {
+      "id": "h13",
+      "lang": "ko",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "검색 필터 상태 유지",
+      "qrels": {
+        "design-engineering/state-management/patterns/url-state.md": 3,
+        "design-engineering/state-management/recipes/search-detail.md": 3
+      }
+    },
+    {
+      "id": "h14",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "compare design terms between design systems",
+      "qrels": {
+        "design-terminology/comparison-workflow.md": 3,
+        "design-terminology/conflict-cases.md": 2
+      }
+    },
+    {
+      "id": "h15",
+      "lang": "en",
+      "kind": "heldout",
+      "must_pass": false,
+      "query": "rules for an unofficial brand study",
+      "qrels": {
+        "expression/brand-studies.md": 3
+      }
+    }
+  ]
+}

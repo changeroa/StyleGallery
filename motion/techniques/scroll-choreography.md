@@ -2,6 +2,8 @@
 type: Domain Recipe
 title: Scroll Choreography Technique
 description: Copy-ready GSAP ScrollTrigger and Lenis setup, pinned horizontal travel, scrubbed scenes, and a native CSS scroll-timeline equivalent.
+aliases: ["scroll animation","ScrollTrigger","scroll-driven animation","pinned section","스크롤 애니메이션","스크롤 연출"]
+questions: ["How do I build a pinned horizontal scroll scene?"]
 domain: motion
 lifecycle: experimental
 provenance_kind: local

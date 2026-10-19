@@ -4,6 +4,7 @@ name: dense-grid
 title: dense-grid
 category: Grid / Repetition
 description: Fill a compact grid with repeated small items.
+aliases: ["compact grid","grid-auto-flow dense","촘촘한 그리드"]
 primary_spatial_problem: Fill a compact grid with repeated small items.
 secondary_spatial_problems: none
 layout_axis: both

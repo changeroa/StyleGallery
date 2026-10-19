@@ -4,6 +4,8 @@ name: fixed-sidenav-shell
 title: fixed-sidenav-shell
 category: Viewport / Shell
 description: Keep side navigation stable while main content scrolls.
+aliases: ["fixed side navigation","sidenav shell","고정 사이드 내비게이션","사이드바 레이아웃","고정 사이드바"]
+questions: ["How do I keep side navigation fixed while the main content scrolls?"]
 primary_spatial_problem: Keep side navigation stable while main content scrolls.
 secondary_spatial_problems: none
 layout_axis: both

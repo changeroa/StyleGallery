@@ -4,6 +4,8 @@ name: holy-grail
 title: holy-grail
 category: Viewport / Shell
 description: Place header, footer, sidebars, and main content in a resilient shell.
+aliases: ["header footer two sidebars","three column page layout","홀리 그레일 레이아웃","3단 레이아웃"]
+questions: ["How do I lay out a header, footer, two sidebars, and main content?"]
 primary_spatial_problem: Place header, footer, sidebars, and main content in a resilient shell.
 secondary_spatial_problems: none
 layout_axis: both

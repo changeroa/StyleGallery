@@ -4,6 +4,7 @@ name: split-screen
 title: split-screen
 category: Split / Sidebar
 description: Split a viewport or region into two balanced panes.
+aliases: ["two column split","50/50 split","화면 분할","2단 분할"]
 primary_spatial_problem: Split a viewport or region into two balanced panes.
 secondary_spatial_problems: none
 layout_axis: inline

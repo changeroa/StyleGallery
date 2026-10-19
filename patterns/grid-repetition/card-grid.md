@@ -4,6 +4,8 @@ name: card-grid
 title: card-grid
 category: Grid / Repetition
 description: Align repeating cards in rows and columns.
+aliases: ["responsive card grid","cards in rows and columns","카드 그리드","반응형 카드 그리드","카드 목록"]
+questions: ["How do I align repeating cards into a responsive grid?"]
 primary_spatial_problem: Align repeating cards in rows and columns.
 secondary_spatial_problems: none
 layout_axis: both

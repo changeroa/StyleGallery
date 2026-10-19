@@ -2,6 +2,7 @@
 type: Layout Recipe
 title: Article Page
 description: Compose readable prose with optional supporting aside content.
+aliases: ["blog post layout","long-form article","블로그 글 레이아웃","아티클 페이지"]
 screen_type: Article page
 primary_user_task: Read a long document while referencing supporting material.
 spatial_model: Constrained reading column with nearby supplemental content.

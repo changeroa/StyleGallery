@@ -1,5 +1,18 @@
 # StyleGallery Log
 
+## 2026-10-19
+
+Understood as: release `stylegallery@0.1.12`, which makes agent search one `stylegallery` command with BM25F ranking, Korean aliases, readable ids, section reads, and a CI retrieval gate.
+
+- CLI: `stylegallery` is the only command name. It adds `search`, `read`, `retrieve`, `help`/`--help`, and `version`/`--version` beside the existing governed and compiler commands; `context --query` builds the material context. The `sg` bin is removed because it collides with ast-grep. `sg-material`, `stylegallery-material`, and `stylegallery-material-mcp` print a rename notice and delegate in this release only. `stylegallery-mcp` gains `search` and `read` tools that return the same JSON as the CLI.
+- Search v3 (`scripts/agent-native/v2/material-search-v3.mjs`): BM25F over title, aliases, description, questions, path, headings, and body; Hangul 2-grams indexed only from Korean aliases, questions, and titles; an optional `query_en`; readable ids `sg:<domain>/<slug>` with hash identities kept for `--detailed`; schema 3.0 results with a verbatim snippet and the next `read` command; `read --outline` and `read --section`.
+- Metadata: frontmatter `aliases` and `questions` (JSON lists) for all 46 Layout patterns, through `scripts/pattern-data.mjs` and the pattern generator, and for 29 recipe, guide, motion, design-engineering, platform, and expression documents.
+- Evaluation: `eval/search/questions.json` holds 75 questions (56 English, 19 Korean or mixed, 19 must-pass, 15 held out from alias writing). `eval/search/scores.json` records the legacy ranker on the original corpus and search v3: Hit@5 0.613 to 0.973, nDCG@5 0.482 to 0.863, MRR 0.510 to 0.876, must-pass 14/19 to 19/19, Korean Hit@5 0.105 to 1.0, held-out Hit@5 0.533 to 0.867. `validate.yml` runs `scripts/test-stylegallery-search.mjs` and `scripts/search-eval.mjs --gate` on every pull request.
+- `skills/stylegallery-search/SKILL.md` ships one search how-to skill.
+
+Consumer reference: not_applicable
+Consumer reference reason: This change adds retrieval tooling and search metadata and selects no consumer-reference profile or record.
+
 ## 2026-10-16
 
 Understood as: release `stylegallery@0.1.11`, the first version published by the Trusted Publishing workflow from PR #57.

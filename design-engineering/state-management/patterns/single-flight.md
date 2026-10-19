@@ -2,6 +2,8 @@
 type: Domain Guide
 title: Single Flight And Duplicate Submission
 description: Apply an explicit policy to repeated activation of one pending operation.
+aliases: ["double submit","duplicate submission","prevent double click","중복 제출","중복 클릭 방지","중복 제출 방지"]
+questions: ["How do I prevent a form from being submitted twice?"]
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local

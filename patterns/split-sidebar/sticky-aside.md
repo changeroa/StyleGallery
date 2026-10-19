@@ -4,6 +4,8 @@ name: sticky-aside
 title: sticky-aside
 category: Split / Sidebar
 description: Keep related aside content visible during long reads.
+aliases: ["sticky sidebar","sticky table of contents","고정 사이드 영역","스티키 사이드바"]
+questions: ["How do I keep an aside visible during long reads?"]
 primary_spatial_problem: Keep related aside content visible during long reads.
 secondary_spatial_problems: none
 layout_axis: block

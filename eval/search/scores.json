@@ -1,0 +1,325 @@
+{
+  "before": {
+    "ranker": "legacy",
+    "overall": {
+      "n": 75,
+      "hit3": 0.5733,
+      "hit5": 0.6133,
+      "mrr": 0.5103,
+      "ndcg5": 0.4817
+    },
+    "english": {
+      "n": 56,
+      "hit3": 0.7321,
+      "hit5": 0.7857,
+      "mrr": 0.6655,
+      "ndcg5": 0.6227
+    },
+    "korean": {
+      "n": 19,
+      "hit3": 0.1053,
+      "hit5": 0.1053,
+      "mrr": 0.0526,
+      "ndcg5": 0.0661
+    },
+    "heldout": {
+      "n": 15,
+      "hit3": 0.4667,
+      "hit5": 0.5333,
+      "mrr": 0.3229,
+      "ndcg5": 0.3403
+    },
+    "must_pass": {
+      "n": 19,
+      "passed": 14
+    },
+    "misses": [
+      {
+        "id": "q08",
+        "query": "readable line length for long articles",
+        "top3": [
+          "patterns/stacking/line-up.md",
+          "patterns/in-line-grouping/index.md",
+          "patterns/in-line-grouping/deconstructed-pancake.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "q09",
+        "query": "horizontal scrolling row of cards",
+        "top3": [
+          "patterns/in-line-grouping/wrap-row.md",
+          "guides/webpage-generation-workflow.md",
+          "quality/claim-records/samples.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "q16",
+        "query": "which layout pattern should I pick",
+        "top3": [
+          "expression/techniques/webgl-hero.md",
+          "expression/direction-brief.md",
+          "CATALOG.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "q22",
+        "query": "prevent double submit of a form",
+        "top3": [
+          "design-engineering/state-management/recipes/multi-step-form.md",
+          "recipes/form-flow.md",
+          "platform-guides/apple-interaction.md"
+        ],
+        "must_pass": true
+      },
+      {
+        "id": "q38",
+        "query": "pin the top bar",
+        "top3": [
+          "guides/webpage-generation-workflow.md",
+          "motion/techniques/scroll-choreography.md",
+          "log.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "q39",
+        "query": "equal height cards with buttons aligned at the bottom",
+        "top3": [
+          "CATALOG.md",
+          "layout/index.md",
+          "quality/claim-records/samples.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "q40",
+        "query": "tags with counts",
+        "top3": [
+          "patterns/split-sidebar/main-with-rail.md",
+          "design-engineering/state-management/recipes/multi-step-form.md",
+          "design-engineering/state-management/recipes/settings-save.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "q41",
+        "query": "pinterest style staggered layout",
+        "top3": [
+          "CATALOG.md",
+          "guides/layout-brief.md",
+          "motion/index.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "q42",
+        "query": "classic page with header footer and two sidebars",
+        "top3": [
+          "patterns/viewport-shell/sticky-header.md",
+          "patterns/viewport-shell/sticky-footer.md",
+          "recipes/article-page.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "q46",
+        "query": "헤더 고정",
+        "top3": [
+          "README.md"
+        ],
+        "must_pass": true
+      },
+      {
+        "id": "q47",
+        "query": "푸터를 화면 아래에 붙이기",
+        "top3": [],
+        "must_pass": true
+      },
+      {
+        "id": "q48",
+        "query": "가운데 정렬",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "q49",
+        "query": "사이드바 레이아웃",
+        "top3": [],
+        "must_pass": true
+      },
+      {
+        "id": "q50",
+        "query": "반응형 카드 그리드",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "q51",
+        "query": "가로 스크롤",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "q52",
+        "query": "모션 줄이기 접근성",
+        "top3": [],
+        "must_pass": true
+      },
+      {
+        "id": "q53",
+        "query": "중복 제출 방지",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "q54",
+        "query": "저장하지 않은 변경 사항 경고",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "q55",
+        "query": "대시보드 레이아웃",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "q56",
+        "query": "랜딩 페이지 만들기",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "q57",
+        "query": "스크롤 연출",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "q58",
+        "query": "다이얼로그와 팝오버 차이",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "h01",
+        "query": "make the nav bar stick to the top",
+        "top3": [
+          "patterns/stacking/step-nav.md",
+          "patterns/in-line-grouping/split-nav.md",
+          "guides/webpage-generation-workflow.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h02",
+        "query": "grid that adapts column count to available width",
+        "top3": [
+          "motion/review-workflow.md",
+          "quality/evidence/search-metadata-polyhierarchy.md",
+          "patterns/grid-repetition/grid-wrapper.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h03",
+        "query": "two pane email client layout",
+        "top3": [
+          "patterns/split-sidebar/supporting-pane.md",
+          "layout/index.md",
+          "CATALOG.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h10",
+        "query": "카드 아래 버튼 정렬",
+        "top3": [
+          "design-engineering/state-management/index.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h11",
+        "query": "모달 대화상자",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "h12",
+        "query": "이미지 비율",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "h13",
+        "query": "검색 필터 상태 유지",
+        "top3": [
+          "design-engineering/state-management/index.md",
+          "README.md"
+        ],
+        "must_pass": false
+      }
+    ]
+  },
+  "after": {
+    "ranker": "v3",
+    "overall": {
+      "n": 75,
+      "hit3": 0.9333,
+      "hit5": 0.9733,
+      "mrr": 0.876,
+      "ndcg5": 0.8631
+    },
+    "english": {
+      "n": 56,
+      "hit3": 0.9107,
+      "hit5": 0.9643,
+      "mrr": 0.8458,
+      "ndcg5": 0.8405
+    },
+    "korean": {
+      "n": 19,
+      "hit3": 1,
+      "hit5": 1,
+      "mrr": 0.9649,
+      "ndcg5": 0.9299
+    },
+    "heldout": {
+      "n": 15,
+      "hit3": 0.7333,
+      "hit5": 0.8667,
+      "mrr": 0.6856,
+      "ndcg5": 0.6831
+    },
+    "must_pass": {
+      "n": 19,
+      "passed": 19
+    },
+    "misses": [
+      {
+        "id": "h02",
+        "query": "grid that adapts column count to available width",
+        "top3": [
+          "guides/decision-tree.md",
+          "CATALOG.md",
+          "patterns/grid-repetition/grid-wrapper.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h03",
+        "query": "two pane email client layout",
+        "top3": [
+          "patterns/split-sidebar/split-screen.md",
+          "patterns/split-sidebar/index.md",
+          "design-engineering/state-management/patterns/single-flight.md"
+        ],
+        "must_pass": false
+      }
+    ]
+  }
+}

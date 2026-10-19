@@ -2,6 +2,7 @@
 type: Domain Recipe
 title: Grain And Texture
 description: Copy-ready film grain, noise, and halftone textures without image files.
+aliases: ["film grain","noise texture","halftone","그레인","노이즈 텍스처"]
 domain: expression
 lifecycle: experimental
 provenance_kind: local

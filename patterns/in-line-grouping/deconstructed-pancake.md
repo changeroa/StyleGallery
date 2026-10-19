@@ -4,6 +4,7 @@ name: deconstructed-pancake
 title: deconstructed-pancake
 category: In-line grouping
 description: Let equal cards stretch in a row and stack naturally when narrow.
+aliases: ["cards stretch then stack","flex wrap cards","카드 가로 배치 후 세로 쌓기"]
 primary_spatial_problem: Let equal cards stretch in a row and stack naturally when narrow.
 secondary_spatial_problems: none
 layout_axis: inline

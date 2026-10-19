@@ -4,6 +4,8 @@ name: content-limiter
 title: content-limiter
 category: Containment
 description: Keep prose width readable inside fluid containers.
+aliases: ["readable line length","max measure","prose width","읽기 좋은 줄 길이","본문 폭 제한"]
+questions: ["How do I keep prose at a readable line length?"]
 primary_spatial_problem: Keep prose width readable inside fluid containers.
 secondary_spatial_problems: none
 layout_axis: inline
