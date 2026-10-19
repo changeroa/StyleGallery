@@ -3,6 +3,12 @@
 // Claude Code: ~/.claude/skills/<name>/SKILL.md and the user-scope "mcpServers"
 // map in ~/.claude.json. Codex: ~/.agents/skills/<name>/SKILL.md and the
 // [mcp_servers.<name>] table in $CODEX_HOME/config.toml (default ~/.codex).
+// OmO: ~/.agents/skills/<name>/SKILL.md (shared with Codex) and the
+// "mcpServers" map in <agentDir>/mcp.json, where agentDir is
+// $OMO_CODING_AGENT_DIR (default ~/.omo/agent).
+// A skill file shared by several agents is written or removed once. Uninstall
+// keeps a shared skill while another agent that uses it is still installed
+// (detected) and not part of the same uninstall run.
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -13,7 +19,7 @@ const SKILL_NAME = "stylegallery-search";
 const SERVER_NAME = "stylegallery";
 export const MCP_COMMAND = "npx";
 export const MCP_ARGS = ["-y", "--package", "stylegallery", "stylegallery-mcp"];
-const AGENTS = ["claude", "codex"];
+const AGENTS = ["claude", "codex", "omo"];
 const PARTS = ["skill", "mcp"];
 
 function onPath(binary, env) {
@@ -35,6 +41,11 @@ function locations(home, env) {
       skill: path.join(home, ".agents", "skills", SKILL_NAME, "SKILL.md"),
       mcp: path.join(codexHome, "config.toml"),
     },
+    omo: {
+      detect: [path.join(home, ".omo")],
+      skill: path.join(home, ".agents", "skills", SKILL_NAME, "SKILL.md"),
+      mcp: path.join(env.OMO_CODING_AGENT_DIR || path.join(home, ".omo", "agent"), "mcp.json"),
+    },
   };
 }
 
@@ -42,12 +53,13 @@ const readText = (file) => (fs.existsSync(file) ? fs.readFileSync(file, "utf8") 
 
 // --- Claude Code ~/.claude.json -------------------------------------------
 const claudeEntry = () => ({ type: "stdio", command: MCP_COMMAND, args: [...MCP_ARGS], env: {} });
+const omoEntry = () => ({ command: MCP_COMMAND, args: [...MCP_ARGS] });
 const sameClaudeEntry = (entry) => entry && entry.command === MCP_COMMAND
   && JSON.stringify(entry.args) === JSON.stringify(MCP_ARGS)
   && (entry.type === undefined || entry.type === "stdio")
   && Object.keys(entry.env ?? {}).length === 0;
 
-function planClaudeMcp(text, uninstall, force) {
+function planJsonMcp(text, uninstall, force, entry) {
   let config = {};
   if (text !== null && text.trim() !== "") {
     try { config = JSON.parse(text); } catch { return { status: "error", message: "existing file is not valid JSON; left untouched" }; }
@@ -63,7 +75,7 @@ function planClaudeMcp(text, uninstall, force) {
   }
   if (sameClaudeEntry(current)) return { status: "unchanged" };
   if (current !== undefined && !force) return { status: "conflict", message: `mcpServers.${SERVER_NAME} already exists with different settings; rerun with --force to replace it` };
-  return { status: current === undefined ? (text === null ? "created" : "updated") : "replaced", content: `${JSON.stringify({ ...config, mcpServers: { ...servers, [SERVER_NAME]: claudeEntry() } }, null, 2)}\n` };
+  return { status: current === undefined ? (text === null ? "created" : "updated") : "replaced", content: `${JSON.stringify({ ...config, mcpServers: { ...servers, [SERVER_NAME]: entry() } }, null, 2)}\n` };
 }
 
 // --- Codex config.toml ----------------------------------------------------
@@ -184,22 +196,34 @@ export function runSetup(args, { env = process.env, home = env.HOME || os.homedi
   const stamp = now.toISOString().replace(/[:.]/g, "-");
   const changes = [];
   const failures = [];
+  const handled = new Map();
   for (const agent of agents) {
     for (const kind of parts) {
       const file = where[agent][kind];
-      const plan = kind === "skill" ? planSkill(file, skillText, options.uninstall, options.force)
-        : agent === "claude" ? planClaudeMcp(readText(file), options.uninstall, options.force)
-          : planCodexMcp(readText(file), options.uninstall, options.force);
+      const first = handled.get(file);
+      if (first) {
+        changes.push({ agent, kind, path: file, action: first.action, shared_with: first.agent });
+        continue;
+      }
+      const keeper = options.uninstall && kind === "skill"
+        ? detected.find((other) => !agents.includes(other) && where[other].skill === file) : undefined;
+      const plan = keeper ? { status: "kept", message: `still used by ${keeper}` }
+        : kind === "skill" ? planSkill(file, skillText, options.uninstall, options.force)
+          : agent === "claude" ? planJsonMcp(readText(file), options.uninstall, options.force, claudeEntry)
+            : agent === "omo" ? planJsonMcp(readText(file), options.uninstall, options.force, omoEntry)
+              : planCodexMcp(readText(file), options.uninstall, options.force);
       const change = { agent, kind, path: file, action: plan.status };
+      handled.set(file, change);
       if (plan.message) change.message = plan.message;
       if (plan.status === "conflict" || plan.status === "error") failures.push({ code: `setup_${plan.status}`, message: `${file}: ${plan.message}` });
-      else if (plan.status !== "unchanged" && !options.dryRun) Object.assign(change, apply(kind, file, plan, stamp));
+      else if (plan.status !== "unchanged" && plan.status !== "kept" && !options.dryRun) Object.assign(change, apply(kind, file, plan, stamp));
       changes.push(change);
     }
   }
   const next = options.uninstall ? [] : [
     ...(agents.includes("claude") && parts.includes("mcp") ? ["claude mcp list"] : []),
     ...(agents.includes("codex") && parts.includes("mcp") ? ["codex mcp list"] : []),
+    ...(agents.includes("omo") && parts.includes("mcp") ? ["restart omo to load mcp.json"] : []),
   ];
   return {
     ok: failures.length === 0,
@@ -209,7 +233,7 @@ export function runSetup(args, { env = process.env, home = env.HOME || os.homedi
     agents,
     mcp: { name: SERVER_NAME, command: MCP_COMMAND, args: MCP_ARGS },
     changes,
-    ...(agents.length === 0 ? { hint: "No Claude Code or Codex installation detected; pass --agent claude, codex, or all." } : {}),
+    ...(agents.length === 0 ? { hint: "No Claude Code, Codex, or OmO installation detected; pass --agent claude, codex, omo, or all." } : {}),
     ...(next.length && !options.dryRun && failures.length === 0 ? { next } : {}),
     failures,
   };

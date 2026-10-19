@@ -38,8 +38,8 @@ Governed records:
   registrar | conservator       Check claim records | measure Layout patterns in Chromium.
 
 Connect your agents:
-  setup                         Install the search skill and register stylegallery-mcp for Claude Code and Codex.
-      --agent <claude|codex|all> Agents to configure (default: the ones detected on this machine).
+  setup                         Install the search skill and register stylegallery-mcp for Claude Code, Codex, and OmO.
+      --agent <claude|codex|omo|all> Agents to configure (default: the ones detected on this machine).
       --only <skill|mcp>        Configure only the skill or only the MCP server.
       --dry-run                 Print the planned changes without writing anything.
       --uninstall               Remove what setup installed.

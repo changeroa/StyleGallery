@@ -145,6 +145,44 @@ test("--agent and --only narrow the work; nothing detected gives a hint", (t) =>
   assert.equal(bad.report.failures[0].code, "argument_value_invalid");
 });
 
+test("omo: mcp.json is merged, an identical hand-made entry is unchanged, and the shared skill is written once", (t) => {
+  const home = tempHome(t);
+  const p = paths(home);
+  const omoJson = path.join(home, ".omo", "agent", "mcp.json");
+  fs.mkdirSync(path.dirname(omoJson), { recursive: true });
+  fs.mkdirSync(path.dirname(p.codexToml), { recursive: true });
+  const handMade = { mcpServers: { stylegallery: { command: "npx", args: ["-y", "--package", "stylegallery", "stylegallery-mcp"] }, other: { command: "x" } } };
+  fs.writeFileSync(omoJson, JSON.stringify(handMade, null, 2));
+  const run = setup(home);
+  assert.equal(run.status, 0, JSON.stringify(run.report));
+  assert.deepEqual(run.report.detected, ["codex", "omo"]);
+  const omo = run.report.changes.filter(({ agent }) => agent === "omo");
+  assert.deepEqual(omo.map(({ kind, action }) => [kind, action]), [["skill", "created"], ["mcp", "unchanged"]]);
+  assert.equal(omo[0].shared_with, "codex");
+  assert.deepEqual(JSON.parse(fs.readFileSync(omoJson, "utf8")), handMade);
+  assert.equal(fs.readFileSync(p.codexSkill, "utf8"), skill);
+
+  const kept = setup(home, "--uninstall", "--agent", "omo");
+  assert.equal(kept.status, 0, JSON.stringify(kept.report));
+  assert.equal(kept.report.changes[0].action, "kept");
+  assert.ok(fs.existsSync(p.codexSkill), "codex still uses the shared skill");
+  assert.deepEqual(JSON.parse(fs.readFileSync(omoJson, "utf8")).mcpServers, { other: { command: "x" } });
+  const all = setup(home, "--uninstall");
+  assert.equal(all.status, 0);
+  assert.ok(!fs.existsSync(p.codexSkill));
+});
+
+test("omo honours OMO_CODING_AGENT_DIR", (t) => {
+  const home = tempHome(t);
+  const agentDir = path.join(home, "custom-agent");
+  const run = spawnSync(process.execPath, [path.join(root, "scripts", "sg-entry.mjs"), "setup", "--agent", "omo", "--only", "mcp"], {
+    cwd: root, encoding: "utf8", env: { HOME: home, PATH: "", OMO_CODING_AGENT_DIR: agentDir },
+  });
+  assert.equal(run.status, 0, run.stdout);
+  const config = JSON.parse(fs.readFileSync(path.join(agentDir, "mcp.json"), "utf8"));
+  assert.deepEqual(config.mcpServers.stylegallery, { command: "npx", args: ["-y", "--package", "stylegallery", "stylegallery-mcp"] });
+});
+
 test("invalid JSON in ~/.claude.json is reported and left untouched", (t) => {
   const home = tempHome(t);
   const p = paths(home);
