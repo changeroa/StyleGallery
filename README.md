@@ -91,15 +91,15 @@ For a coding agent with repository filesystem access, local guided traversal is 
 
 ### Connect your agent
 
-Installing the package does not make Claude Code or Codex use it. Run `setup` once to copy the `stylegallery-search` skill into each agent's user skill folder and register the `stylegallery-mcp` server:
+Installing the package does not make Claude Code, Codex, or OmO use it. Run `setup` once to copy the `stylegallery-search` skill into each agent's user skill folder and register the `stylegallery-mcp` server:
 
 ```sh
 npm install --global stylegallery
 stylegallery setup --dry-run   # show the planned changes
-stylegallery setup             # Claude Code and Codex, whichever is installed
+stylegallery setup             # Claude Code, Codex, and OmO, whichever is installed
 ```
 
-Claude Code gets `~/.claude/skills/stylegallery-search/SKILL.md` and a user-scope `mcpServers.stylegallery` entry in `~/.claude.json`; Codex gets `~/.agents/skills/stylegallery-search/SKILL.md` and `[mcp_servers.stylegallery]` in `~/.codex/config.toml` (or `$CODEX_HOME/config.toml`). The server runs as `npx -y --package stylegallery stylegallery-mcp`, so it works however the package was installed. Rerunning changes nothing, every modified config file is backed up first as `<file>.bak-stylegallery-<timestamp>`, other settings are preserved, and an existing entry with the same name but different settings is left alone unless you pass `--force`. Use `--agent claude|codex|all`, `--only skill|mcp`, and `--uninstall` to narrow or undo it, then check with `claude mcp list` or `codex mcp list`.
+Claude Code gets `~/.claude/skills/stylegallery-search/SKILL.md` and a user-scope `mcpServers.stylegallery` entry in `~/.claude.json`; Codex gets `~/.agents/skills/stylegallery-search/SKILL.md` and `[mcp_servers.stylegallery]` in `~/.codex/config.toml` (or `$CODEX_HOME/config.toml`); OmO shares the `~/.agents/skills` copy with Codex (written once, and kept on `--uninstall --agent omo` while Codex is still detected, and vice versa) and gets `mcpServers.stylegallery` in `~/.omo/agent/mcp.json` (or `$OMO_CODING_AGENT_DIR/mcp.json`). The server runs as `npx -y --package stylegallery stylegallery-mcp`, so it works however the package was installed. Rerunning changes nothing, every modified config file is backed up first as `<file>.bak-stylegallery-<timestamp>`, other settings are preserved, and an existing entry with the same name but different settings is left alone unless you pass `--force`. Use `--agent claude|codex|omo|all`, `--only skill|mcp`, and `--uninstall` to narrow or undo it, then check with `claude mcp list` or `codex mcp list`.
 
 ### CLI reference
 
@@ -138,7 +138,7 @@ Connect your agents:
 
 | Command | Options | Purpose |
 | --- | --- | --- |
-| `setup` | `--agent <claude\|codex\|all>`, `--only <skill\|mcp>`, `--dry-run`, `--uninstall`, `--force` | Install the search skill and register `stylegallery-mcp` for Claude Code and Codex ([Connect your agent](#connect-your-agent)) |
+| `setup` | `--agent <claude\|codex\|omo\|all>`, `--only <skill\|mcp>`, `--dry-run`, `--uninstall`, `--force` | Install the search skill and register `stylegallery-mcp` for Claude Code, Codex, and OmO ([Connect your agent](#connect-your-agent)) |
 
 Site compilation (requires `SG_COMPILER_ROOT`): `compile`, `timeline`, `transcribe`, `sale`, `gate`, `build`, `shots`, `probe`, `workflow`. Start with `stylegallery workflow`.
 
@@ -192,7 +192,7 @@ npm install --global stylegallery
 stylegallery discover --format json
 ```
 
-설치만으로는 Claude Code나 Codex가 StyleGallery를 쓰지 않습니다. 한 번 `stylegallery setup`을 실행하면 `stylegallery-search` 스킬을 각 에이전트의 사용자 스킬 폴더에 복사하고 `stylegallery-mcp` 서버를 등록합니다. `--dry-run`으로 바뀔 내용만 먼저 볼 수 있고, `--agent claude|codex|all`, `--only skill|mcp`, `--uninstall`, `--force`를 지원합니다. 다시 실행해도 결과는 같고, 수정하는 설정 파일은 먼저 `.bak-stylegallery-<시각>`으로 백업하며, 같은 이름의 다른 설정은 `--force` 없이는 건드리지 않습니다. 등록 확인은 `claude mcp list` 또는 `codex mcp list`로 합니다.
+설치만으로는 Claude Code, Codex, OmO가 StyleGallery를 쓰지 않습니다. 한 번 `stylegallery setup`을 실행하면 `stylegallery-search` 스킬을 각 에이전트의 사용자 스킬 폴더에 복사하고 `stylegallery-mcp` 서버를 등록합니다. `--dry-run`으로 바뀔 내용만 먼저 볼 수 있고, `--agent claude|codex|omo|all`, `--only skill|mcp`, `--uninstall`, `--force`를 지원합니다. 다시 실행해도 결과는 같고, 수정하는 설정 파일은 먼저 `.bak-stylegallery-<시각>`으로 백업하며, 같은 이름의 다른 설정은 `--force` 없이는 건드리지 않습니다. OmO는 Codex와 같은 `~/.agents/skills` 스킬을 쓰고 MCP는 `~/.omo/agent/mcp.json`(또는 `$OMO_CODING_AGENT_DIR/mcp.json`)에 등록합니다. 공유 스킬은 다른 에이전트가 아직 설치돼 있으면 `--uninstall` 때 남깁니다. 등록 확인은 `claude mcp list` 또는 `codex mcp list`로 하고, OmO는 다시 시작하면 반영됩니다.
 
 ```sh
 stylegallery setup --dry-run
