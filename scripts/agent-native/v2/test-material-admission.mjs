@@ -28,7 +28,7 @@ const v2Directory = path.join(repositoryRoot, "consumer-reference", "agent-nativ
 const temporaryRoots = new Set();
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const EXPECTED_PATH_COUNT = JSON.parse(fs.readFileSync(path.join(v2Directory, "schema", "admission-policy.schema.json"), "utf8")).properties.allowed_materials.minItems;
-const EXPECTED_PATHS_NEWLINE_SHA256 = "df6e32b3989126c907c4e0588f665745fe9c895160547b278641b59e183a10ba";
+const EXPECTED_PATHS_NEWLINE_SHA256 = "5d052ea0e0bf05d9efb301433afb9ce3f55148f068f72904970f638a02428845";
 
 function run(command, args, options = {}) {
   return spawnSync(command, args, { encoding: "utf8", maxBuffer: 8 * 1024 * 1024, timeout: 30_000, ...options });

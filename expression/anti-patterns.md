@@ -6,7 +6,9 @@ aliases: ["ai slop","ai slop ui","slop catalog","anti-patterns","template look",
 questions: ["Why does my generated landing page look like AI slop?","Which AI-slop patterns can a headless browser detect?","Is a purple gradient behind a headline a problem?","Should I use emoji as feature icons?","How many soft shadows are too many on a landing page?"]
 domain: expression
 lifecycle: experimental
-provenance_kind: local
+source_repository: leonxlnx/taste-skill
+source_path: skills/taste-skill/references/tells.md
+source_revision: b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2
 ---
 
 # AI-Slop UI Anti-Patterns
@@ -25,6 +27,19 @@ Each entry has an id in the `slop.*` namespace, a definition, and one of two det
 - `review`: a question for a human or agent reviewer. Review entries have severity `review` and never gate a build, because they depend on taste or on facts a browser cannot see.
 
 The JSON file is the source of the exact rules. It defines the shared terms once in `measurement_context`: a screen is a 900px slice of the document, coverage is the unioned area of visible boxes on that slice, and body size is the character-weighted modal font size. `node scripts/validate-anti-patterns.mjs --json` checks that the catalog is complete and consistent with this page.
+
+### Evidence grades
+
+Every entry records `first_seen` as an ISO calendar date: the date its id first entered this repository, not the date someone believes the visual device originated. All current ids were introduced by commit `edded3eb698625f9013b58da4cc45dc0d98ea2ee` on 2026-10-19. Preserve that date when revising an entry.
+
+`evidence_grade` describes the support for the rule, separately from its detection kind:
+
+- `measured-differential`: a measured difference between sites rated strong and weak, with the sample, rating method, and comparison cited.
+- `measured-baseline`: calibration against our 49 measured originals, including the Showcase QA floors derived from that baseline. It is not a preference experiment or proof that every numeric cutoff optimizes quality.
+- `consensus-opinion`: an unmeasured concern named in at least three independent skill collections; name those collections before assigning it. Repetition is not measurement.
+- `owner-taste`: a maintainer preference or contextual review judgment without that measurement or documented independent consensus.
+
+The existing machine rules retain `measured-baseline`; their QA-derived operational cutoffs, including emoji and CTA checks, are local policy choices, not separately measured strong/weak effects. Rhythm review also uses our measured baseline. Copy, proof, and gradient-text review conservatively use `owner-taste`; their contextual judgments have no direct calibration here. No current entry claims `measured-differential` or `consensus-opinion`. Both opinion grades must remain `detectable: review` with severity `review`, never machine errors.
 
 ### Machine Entries
 
@@ -80,6 +95,21 @@ The common thread is substitution: a gradient where a picture belongs, a shadow 
 
 Treat a machine error as a definite defect and a review question as a prompt to defend the choice. A direction may answer a review question with a reason, for example gradient text used once as a brand mark.
 
+Write alternatives as procedures: identify the information a device should carry, choose a treatment from the product's actual content, then inspect whether the result communicates it. Do not publish replacement-font or replacement-colour lists as the remedy. Repeated substitution from a fixed shopping list merely trains the next recognizable default.
+
+## Reviewed and rejected
+
+The JSON's top-level `reviewed_and_rejected` list preserves ids, titles, exact upstream repository/path/revision, and a reason for each decision. Rejected ids cannot collide with active entry ids. These are exclusions from adaptation, not new rules:
+
+- **Monospace ban:** the taste-skill study (model panel) reports labels on 44% of strong sites versus 24% of weak sites; the proposed prohibition expresses house taste.
+- **Index-number (01/02) ban:** the taste-skill study (model panel) reports 38% versus 21%, again opposing a blanket ban. Decide whether order needs explaining.
+- **Hairline/1px box ban:** the taste-skill study (model panel) reports thin rules on 61% versus 52%, without a useful negative distinction. Our originals' median of 24 hairlines also contradicts prohibition.
+- **Two-line headline error:** the taste-skill study (model panel) reports compliance on 71% of strong sites and 83% of weak sites. Wrapping needs language, content, and width context.
+- **Unconditional 8.4vw display:** this is a strong-site median in the taste-skill study (model panel), not a prescription. Keep our body-relative calibration and explicit exceptions.
+- **Claude-brand hex and cream+terracotta bans:** brand association and rarity do not establish a design defect; evaluate the brief and contrast.
+- **Cliche-word dictionary as error:** individual words do not establish generic copy. Retain contextual review.
+- **Research/laziness material:** model motivation and incentive claims are outside this catalog's design evidence and lack local verification; no material is imported.
+
 ## Platform-Specific Guidance
 
 The thresholds come from desktop Chromium at 1440x900 with an `en-US` locale. Emoji glyphs, and therefore how loudly emoji icons read, differ across Apple, Google, Microsoft, and Linux fonts. Hover rules apply only to pointer: fine; on touch devices the focus half of `slop.static-interactive` still applies. Korean service pages run a display ratio near 2.0, so a low ratio is never an error.
@@ -90,11 +120,11 @@ The thresholds are medians and quartiles of one snapshot of 49 homepages, not un
 
 ## Verification Contract
 
-`node scripts/validate-anti-patterns.mjs --json` passes: ids are unique and in the `slop.` namespace, every required field is present, every machine entry has a complete rule and severity `error`, every review entry has a question and severity `review`, every cited source exists, and every id appears on this page. `node scripts/test-validate-anti-patterns.mjs` proves that the validator fails on a catalog built to violate each of those conditions. When a benchmark in [Measured Expression Benchmarks](measured-benchmarks.md) or a floor in the [Showcase QA contract](../showcase/QA.md) changes, update the matching threshold here and in the JSON together.
+`node scripts/validate-anti-patterns.mjs --json` checks unique ids, required fields, calendar dates, evidence grades, opinion-only review, complete machine rules, review questions, source existence, companion ids, and the closed rejected-item shape and collision boundary. `node scripts/test-validate-anti-patterns.mjs` exercises failures for those conditions. It cannot establish historical dates or the truth of an evidence claim; inspect Git history and named sources. When a benchmark or QA floor changes, update the matching threshold here and in the JSON together. Use the [blind design A/B protocol](../quality/evidence/design-ab.md) to compare outcomes: zero violations do not establish a better page.
 
 ## Source, License, And Attribution
 
-Locally authored. Thresholds are the computed-style measurements recorded in [Measured Expression Benchmarks](measured-benchmarks.md) and the floors in the [Showcase QA contract](../showcase/QA.md); no markup, copy, or code from measured sites is reproduced.
+The dated registry and procedural-remedy method are independently rewritten from [taste-skill's registry](https://github.com/leonxlnx/taste-skill/blob/b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2/skills/taste-skill/references/tells.md) (MIT, Leonxlnx, 2026). Supporting rejection comparisons were re-checked in [its research](https://github.com/leonxlnx/taste-skill/blob/b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2/skills/taste-skill/references/research.md) on 2026-10-19; they are model-panel observations, not human preference evidence. No upstream sentences, tables, or code are reproduced. Existing detection rules and thresholds remain StyleGallery-local, based on [Measured Expression Benchmarks](measured-benchmarks.md) and [Showcase QA](../showcase/QA.md). Evidence grades are a local classification, not an upstream quality guarantee.
 
 ## IA Navigation
 

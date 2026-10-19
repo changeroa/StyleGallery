@@ -72,6 +72,8 @@
   "entries": [
     {
       "id": "slop.headline-only-gradient-screen",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Headline alone on a gradient screen",
       "definition": "A screen whose only content is a heading, and perhaps a short line and a button, set over a gradient or flat fill, with no picture, drawn scene, render, live product surface, or dense text.",
       "detectable": "machine",
@@ -91,6 +93,8 @@
     },
     {
       "id": "slop.empty-screen",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Empty screen",
       "definition": "A screen that shows neither imagery nor enough text, whatever its background.",
       "detectable": "machine",
@@ -109,6 +113,8 @@
     },
     {
       "id": "slop.unanchored-violet-gradient",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Random purple gradient",
       "definition": "A large blue-violet-to-magenta gradient whose hue appears nowhere else in the page's solid colors, so it signals a default rather than a brand.",
       "detectable": "machine",
@@ -127,6 +133,8 @@
     },
     {
       "id": "slop.gradient-area-excess",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Gradient filling the space imagery should hold",
       "definition": "Gradients paint more of the page than the measured originals' upper quartile, standing in for content.",
       "detectable": "machine",
@@ -144,6 +152,8 @@
     },
     {
       "id": "slop.soft-shadow-excess",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Excessive soft shadows",
       "definition": "Cards and panels separated by large blurred drop shadows instead of masks, clips, and hairlines.",
       "detectable": "machine",
@@ -162,6 +172,8 @@
     },
     {
       "id": "slop.unfinished-surfaces",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "No masks, clips, or hairlines",
       "definition": "Surfaces with no mask, rounded clip, or 1px rule, the finishing detail the measured originals use instead of shadows.",
       "detectable": "machine",
@@ -181,6 +193,8 @@
     },
     {
       "id": "slop.emoji-icons",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Emoji used as icons",
       "definition": "Emoji characters standing in for icons in navigation, buttons, headings, list markers, or feature cards.",
       "detectable": "machine",
@@ -200,6 +214,8 @@
     },
     {
       "id": "slop.repeated-card-triplet",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Repeated identical three-card grids",
       "definition": "Two or more rows of three or four structurally identical, imageless cards (icon, heading, sentence), the template feature grid.",
       "detectable": "machine",
@@ -223,6 +239,8 @@
     },
     {
       "id": "slop.static-interactive",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Links and buttons without a state change",
       "definition": "Links, buttons, tabs, or cards that do not change at all under the pointer or keyboard focus.",
       "detectable": "machine",
@@ -241,6 +259,8 @@
     },
     {
       "id": "slop.sluggish-state-change",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Sluggish or sparse state transitions",
       "definition": "State changes that run longer than the measured 100-320ms band, or too few responding elements for the page length.",
       "detectable": "machine",
@@ -260,6 +280,8 @@
     },
     {
       "id": "slop.dishonest-cta",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Fake or dishonest call to action",
       "definition": "A call to action that looks real but does nothing, jumps to the top, or pretends to complete an action that does not exist.",
       "detectable": "machine",
@@ -278,6 +300,8 @@
     },
     {
       "id": "slop.oversized-display",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Oversized display type",
       "definition": "Display type so large relative to the body that it shouts, crowding out imagery and pacing.",
       "detectable": "machine",
@@ -296,6 +320,8 @@
     },
     {
       "id": "slop.generic-copy",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "owner-taste",
       "title": "Generic marketing copy",
       "definition": "Headlines and section copy that could sit on any product: unlock, supercharge, seamless, next-level, all-in-one, built for the future.",
       "detectable": "review",
@@ -309,6 +335,8 @@
     },
     {
       "id": "slop.fabricated-proof",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "owner-taste",
       "title": "Fabricated social proof",
       "definition": "Invented customer logos, testimonials, ratings, user counts, or metrics presented as real.",
       "detectable": "review",
@@ -347,6 +375,8 @@
     },
     {
       "id": "slop.uniform-section-rhythm",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Uniform section rhythm",
       "definition": "Every section has the same height, the same centered heading-plus-subtitle opener, and the same background change, so the page has no pacing.",
       "detectable": "review",
@@ -557,6 +587,72 @@
         "source_path": "skills/taste-skill/references/motion.md",
         "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
       }
+    }
+  ],
+  "reviewed_and_rejected": [
+    {
+      "id": "monospace-ban",
+      "title": "Ban monospace outside code",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/tells.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "The taste-skill study (model panel) reports monospace labels on 44% of strong sites versus 24% of weak sites. Its ban is a house preference, not evidence of inferior design."
+    },
+    {
+      "id": "index-number-ban",
+      "title": "Ban zero-padded section numbers",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/tells.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "The taste-skill study (model panel) reports index numbers on 38% of strong sites versus 21% of weak sites. Review whether numbering communicates order instead of banning 01/02."
+    },
+    {
+      "id": "hairline-box-ban",
+      "title": "Ban hairlines and 1px boxes",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/tells.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "The taste-skill study (model panel) reports thin rules on 61% of strong sites versus 52% of weak sites, without a useful negative distinction. Our measured originals use a median 24 hairlines; a ban conflicts with our surface guidance."
+    },
+    {
+      "id": "two-line-headline-error",
+      "title": "Fail every headline longer than two lines",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/research.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "In the taste-skill study (model panel), 71% of strong sites and 83% of weak sites meet the desktop two-line condition. This does not justify an error threshold across languages and widths."
+    },
+    {
+      "id": "unconditional-huge-display",
+      "title": "Always size display type at 8.4vw",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/research.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "The 8.4vw figure is a strong-site median in the taste-skill study (model panel), not a universal prescription. Its gallery sample differs from our originals; preserve our body-relative calibration and direction-specific exceptions."
+    },
+    {
+      "id": "brand-palette-ban",
+      "title": "Ban Claude-brand hex values and cream with terracotta",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/scripts/lint.mjs",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "A brand-associated palette is not evidence of poor usability or composition. Color selection needs the brief, contrast, and product context, not a brand blacklist."
+    },
+    {
+      "id": "cliche-dictionary-error",
+      "title": "Turn a cliche-word dictionary into build errors",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/copy.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "Words alone cannot distinguish a concrete product claim from filler. Keep copy specificity as contextual review rather than a lexical error."
+    },
+    {
+      "id": "laziness-material",
+      "title": "Import model-laziness research and prompting prescriptions",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "research/laziness/findings/empirical-results.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "Model motivation and incentive claims lack a locally verified basis and fall outside this design catalog's evidence boundary. No prompting prescriptions or research material are admitted."
     }
   ]
 }
