@@ -40,5 +40,8 @@ jobs:
       - name: Search contracts
         run: node --test scripts/test-stylegallery-search.mjs
 
+      - name: Setup command contracts
+        run: node --test scripts/test-stylegallery-setup.mjs
+
       - name: Retrieval evaluation gate (must-pass top 5, Hit@5 and nDCG@5 within 0.02 of eval/search/scores.json)
         run: node scripts/search-eval.mjs --gate
