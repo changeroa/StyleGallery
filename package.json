@@ -1,6 +1,6 @@
 {
   "name": "stylegallery",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "A governed gallery of portable interface knowledge with knowledge CLIs, website compilation, and MCP servers.",
   "type": "module",
   "license": "MIT",
@@ -272,7 +272,8 @@
     "scripts/sg.mjs",
     "scripts/strict-json.mjs",
     "scripts/stylegallery-cli.mjs",
-    "showcase/README.md"
+    "showcase/README.md",
+    "skills/stylegallery-search/SKILL.md"
   ],
   "bin": {
     "sg-material": "scripts/legacy-sg-material.mjs",
@@ -321,7 +322,9 @@
     "test:compiler": "node --test scripts/test-sg-compiler.mjs",
     "sg:v1": "node scripts/sg.mjs",
     "sg:mcp:v1": "node scripts/sg-mcp.mjs",
-    "stylegallery": "node scripts/sg-entry.mjs"
+    "stylegallery": "node scripts/sg-entry.mjs",
+    "test:search": "node --test scripts/test-stylegallery-search.mjs",
+    "eval:search": "node scripts/search-eval.mjs --gate"
   },
   "devDependencies": {
     "@playwright/test": "1.61.0",
