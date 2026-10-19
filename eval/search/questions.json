@@ -1234,6 +1234,38 @@
         "expression/anti-patterns.md": 3,
         "expression/measured-benchmarks.md": 2
       }
+    },
+    {
+      "id": "hig01",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "Which Apple HIG principles apply to the web and which are Apple-specific?",
+      "qrels": {
+        "platform-guides/hig-universal-principles.md": 3,
+        "platform-guides/apple-interaction.md": 1
+      }
+    },
+    {
+      "id": "hig02",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "Map HIG accessibility guidance to WCAG 2.2 success criteria",
+      "qrels": {
+        "platform-guides/hig-universal-principles.md": 3,
+        "platform-guides/preferences-and-accessibility.md": 1
+      }
+    },
+    {
+      "id": "hig03",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "checklist of iPhone design rules that also make sense for a website",
+      "qrels": {
+        "platform-guides/hig-universal-principles.md": 3
+      }
     }
   ]
 }

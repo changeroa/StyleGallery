@@ -1,0 +1,4526 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "platform_principle_extraction",
+  "title": "Apple HIG Universal Principles Extraction",
+  "platform": "Apple Human Interface Guidelines",
+  "source_index": "https://developer.apple.com/tutorials/data/design/human-interface-guidelines.json",
+  "sections": [
+    {
+      "id": "foundations",
+      "title": "Foundations",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/foundations"
+    },
+    {
+      "id": "patterns",
+      "title": "Patterns",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/patterns"
+    },
+    {
+      "id": "components",
+      "title": "Components",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/components"
+    },
+    {
+      "id": "inputs",
+      "title": "Inputs",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/inputs"
+    },
+    {
+      "id": "technologies",
+      "title": "Technologies",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/technologies"
+    }
+  ],
+  "out_of_scope_sections": [
+    {
+      "id": "getting-started",
+      "reason": "Per-platform overview pages; principle extraction covers the five guidance sections only."
+    }
+  ],
+  "reviewed_on": "2026-10-19",
+  "review_by": "2027-04-19T00:00:00Z",
+  "text_policy": "paraphrase_and_link_only",
+  "classes": {
+    "universal": "The principle holds on the web and on other platforms without translating an Apple mechanism.",
+    "adapt": "The goal is universal, but HIG expresses it through an Apple mechanism or value that must be translated to a named web or cross-platform counterpart.",
+    "apple-specific": "The guidance depends on Apple hardware, system rendering, licensing, or brand assets and must not become a web default."
+  },
+  "wcag": {
+    "1.1.1": {
+      "title": "Non-text Content",
+      "url": "https://www.w3.org/TR/WCAG22/#non-text-content"
+    },
+    "1.2.2": {
+      "title": "Captions (Prerecorded)",
+      "url": "https://www.w3.org/TR/WCAG22/#captions-prerecorded"
+    },
+    "1.2.5": {
+      "title": "Audio Description (Prerecorded)",
+      "url": "https://www.w3.org/TR/WCAG22/#audio-description-prerecorded"
+    },
+    "1.3.1": {
+      "title": "Info and Relationships",
+      "url": "https://www.w3.org/TR/WCAG22/#info-and-relationships"
+    },
+    "1.3.2": {
+      "title": "Meaningful Sequence",
+      "url": "https://www.w3.org/TR/WCAG22/#meaningful-sequence"
+    },
+    "1.3.3": {
+      "title": "Sensory Characteristics",
+      "url": "https://www.w3.org/TR/WCAG22/#sensory-characteristics"
+    },
+    "1.3.4": {
+      "title": "Orientation",
+      "url": "https://www.w3.org/TR/WCAG22/#orientation"
+    },
+    "1.3.5": {
+      "title": "Identify Input Purpose",
+      "url": "https://www.w3.org/TR/WCAG22/#identify-input-purpose"
+    },
+    "1.4.1": {
+      "title": "Use of Color",
+      "url": "https://www.w3.org/TR/WCAG22/#use-of-color"
+    },
+    "1.4.2": {
+      "title": "Audio Control",
+      "url": "https://www.w3.org/TR/WCAG22/#audio-control"
+    },
+    "1.4.3": {
+      "title": "Contrast (Minimum)",
+      "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum"
+    },
+    "1.4.4": {
+      "title": "Resize Text",
+      "url": "https://www.w3.org/TR/WCAG22/#resize-text"
+    },
+    "1.4.10": {
+      "title": "Reflow",
+      "url": "https://www.w3.org/TR/WCAG22/#reflow"
+    },
+    "1.4.11": {
+      "title": "Non-text Contrast",
+      "url": "https://www.w3.org/TR/WCAG22/#non-text-contrast"
+    },
+    "1.4.12": {
+      "title": "Text Spacing",
+      "url": "https://www.w3.org/TR/WCAG22/#text-spacing"
+    },
+    "1.4.13": {
+      "title": "Content on Hover or Focus",
+      "url": "https://www.w3.org/TR/WCAG22/#content-on-hover-or-focus"
+    },
+    "2.1.1": {
+      "title": "Keyboard",
+      "url": "https://www.w3.org/TR/WCAG22/#keyboard"
+    },
+    "2.1.2": {
+      "title": "No Keyboard Trap",
+      "url": "https://www.w3.org/TR/WCAG22/#no-keyboard-trap"
+    },
+    "2.1.4": {
+      "title": "Character Key Shortcuts",
+      "url": "https://www.w3.org/TR/WCAG22/#character-key-shortcuts"
+    },
+    "2.2.1": {
+      "title": "Timing Adjustable",
+      "url": "https://www.w3.org/TR/WCAG22/#timing-adjustable"
+    },
+    "2.2.2": {
+      "title": "Pause, Stop, Hide",
+      "url": "https://www.w3.org/TR/WCAG22/#pause-stop-hide"
+    },
+    "2.3.1": {
+      "title": "Three Flashes or Below Threshold",
+      "url": "https://www.w3.org/TR/WCAG22/#three-flashes-or-below-threshold"
+    },
+    "2.3.3": {
+      "title": "Animation from Interactions",
+      "url": "https://www.w3.org/TR/WCAG22/#animation-from-interactions"
+    },
+    "2.4.3": {
+      "title": "Focus Order",
+      "url": "https://www.w3.org/TR/WCAG22/#focus-order"
+    },
+    "2.4.4": {
+      "title": "Link Purpose (In Context)",
+      "url": "https://www.w3.org/TR/WCAG22/#link-purpose-in-context"
+    },
+    "2.4.6": {
+      "title": "Headings and Labels",
+      "url": "https://www.w3.org/TR/WCAG22/#headings-and-labels"
+    },
+    "2.4.7": {
+      "title": "Focus Visible",
+      "url": "https://www.w3.org/TR/WCAG22/#focus-visible"
+    },
+    "2.4.11": {
+      "title": "Focus Not Obscured (Minimum)",
+      "url": "https://www.w3.org/TR/WCAG22/#focus-not-obscured-minimum"
+    },
+    "2.5.1": {
+      "title": "Pointer Gestures",
+      "url": "https://www.w3.org/TR/WCAG22/#pointer-gestures"
+    },
+    "2.5.2": {
+      "title": "Pointer Cancellation",
+      "url": "https://www.w3.org/TR/WCAG22/#pointer-cancellation"
+    },
+    "2.5.3": {
+      "title": "Label in Name",
+      "url": "https://www.w3.org/TR/WCAG22/#label-in-name"
+    },
+    "2.5.4": {
+      "title": "Motion Actuation",
+      "url": "https://www.w3.org/TR/WCAG22/#motion-actuation"
+    },
+    "2.5.5": {
+      "title": "Target Size (Enhanced)",
+      "url": "https://www.w3.org/TR/WCAG22/#target-size-enhanced"
+    },
+    "2.5.7": {
+      "title": "Dragging Movements",
+      "url": "https://www.w3.org/TR/WCAG22/#dragging-movements"
+    },
+    "2.5.8": {
+      "title": "Target Size (Minimum)",
+      "url": "https://www.w3.org/TR/WCAG22/#target-size-minimum"
+    },
+    "3.1.2": {
+      "title": "Language of Parts",
+      "url": "https://www.w3.org/TR/WCAG22/#language-of-parts"
+    },
+    "3.1.3": {
+      "title": "Unusual Words",
+      "url": "https://www.w3.org/TR/WCAG22/#unusual-words"
+    },
+    "3.2.1": {
+      "title": "On Focus",
+      "url": "https://www.w3.org/TR/WCAG22/#on-focus"
+    },
+    "3.2.2": {
+      "title": "On Input",
+      "url": "https://www.w3.org/TR/WCAG22/#on-input"
+    },
+    "3.2.3": {
+      "title": "Consistent Navigation",
+      "url": "https://www.w3.org/TR/WCAG22/#consistent-navigation"
+    },
+    "3.2.4": {
+      "title": "Consistent Identification",
+      "url": "https://www.w3.org/TR/WCAG22/#consistent-identification"
+    },
+    "3.2.6": {
+      "title": "Consistent Help",
+      "url": "https://www.w3.org/TR/WCAG22/#consistent-help"
+    },
+    "3.3.1": {
+      "title": "Error Identification",
+      "url": "https://www.w3.org/TR/WCAG22/#error-identification"
+    },
+    "3.3.2": {
+      "title": "Labels or Instructions",
+      "url": "https://www.w3.org/TR/WCAG22/#labels-or-instructions"
+    },
+    "3.3.3": {
+      "title": "Error Suggestion",
+      "url": "https://www.w3.org/TR/WCAG22/#error-suggestion"
+    },
+    "3.3.4": {
+      "title": "Error Prevention (Legal, Financial, Data)",
+      "url": "https://www.w3.org/TR/WCAG22/#error-prevention-legal-financial-data"
+    },
+    "3.3.7": {
+      "title": "Redundant Entry",
+      "url": "https://www.w3.org/TR/WCAG22/#redundant-entry"
+    },
+    "3.3.8": {
+      "title": "Accessible Authentication (Minimum)",
+      "url": "https://www.w3.org/TR/WCAG22/#accessible-authentication-minimum"
+    },
+    "4.1.2": {
+      "title": "Name, Role, Value",
+      "url": "https://www.w3.org/TR/WCAG22/#name-role-value"
+    },
+    "4.1.3": {
+      "title": "Status Messages",
+      "url": "https://www.w3.org/TR/WCAG22/#status-messages"
+    }
+  },
+  "material3": {
+    "bottom-sheets": {
+      "title": "Bottom sheets",
+      "url": "https://m3.material.io/components/bottom-sheets/overview"
+    },
+    "buttons": {
+      "title": "Buttons",
+      "url": "https://m3.material.io/components/buttons/overview"
+    },
+    "cards": {
+      "title": "Cards",
+      "url": "https://m3.material.io/components/cards/overview"
+    },
+    "carousel": {
+      "title": "Carousel",
+      "url": "https://m3.material.io/components/carousel/overview"
+    },
+    "chips": {
+      "title": "Chips",
+      "url": "https://m3.material.io/components/chips/overview"
+    },
+    "color": {
+      "title": "Color system",
+      "url": "https://m3.material.io/styles/color/overview"
+    },
+    "color-roles": {
+      "title": "Color roles",
+      "url": "https://m3.material.io/styles/color/roles"
+    },
+    "content-design": {
+      "title": "Content design",
+      "url": "https://m3.material.io/foundations/content-design/overview"
+    },
+    "contrast": {
+      "title": "Accessibility: color and contrast",
+      "url": "https://m3.material.io/foundations/designing/color-contrast"
+    },
+    "date-pickers": {
+      "title": "Date pickers",
+      "url": "https://m3.material.io/components/date-pickers/overview"
+    },
+    "dialogs": {
+      "title": "Dialogs",
+      "url": "https://m3.material.io/components/dialogs/overview"
+    },
+    "elevation": {
+      "title": "Elevation",
+      "url": "https://m3.material.io/styles/elevation/overview"
+    },
+    "gestures": {
+      "title": "Gestures",
+      "url": "https://m3.material.io/foundations/interaction/gestures"
+    },
+    "icons": {
+      "title": "Icons",
+      "url": "https://m3.material.io/styles/icons/overview"
+    },
+    "layout": {
+      "title": "Layout overview",
+      "url": "https://m3.material.io/foundations/layout/understanding-layout/overview"
+    },
+    "lists": {
+      "title": "Lists",
+      "url": "https://m3.material.io/components/lists/overview"
+    },
+    "menus": {
+      "title": "Menus",
+      "url": "https://m3.material.io/components/menus/overview"
+    },
+    "motion": {
+      "title": "Motion",
+      "url": "https://m3.material.io/styles/motion/overview"
+    },
+    "navigation-bar": {
+      "title": "Navigation bar",
+      "url": "https://m3.material.io/components/navigation-bar/overview"
+    },
+    "navigation-drawer": {
+      "title": "Navigation drawer",
+      "url": "https://m3.material.io/components/navigation-drawer/overview"
+    },
+    "progress-indicators": {
+      "title": "Progress indicators",
+      "url": "https://m3.material.io/components/progress-indicators/overview"
+    },
+    "search": {
+      "title": "Search",
+      "url": "https://m3.material.io/components/search/overview"
+    },
+    "segmented-buttons": {
+      "title": "Segmented buttons",
+      "url": "https://m3.material.io/components/segmented-buttons/overview"
+    },
+    "sliders": {
+      "title": "Sliders",
+      "url": "https://m3.material.io/components/sliders/overview"
+    },
+    "snackbar": {
+      "title": "Snackbar",
+      "url": "https://m3.material.io/components/snackbar/overview"
+    },
+    "states": {
+      "title": "Interaction states",
+      "url": "https://m3.material.io/foundations/interaction/states/overview"
+    },
+    "structure": {
+      "title": "Accessibility: structure and target sizes",
+      "url": "https://m3.material.io/foundations/designing/structure"
+    },
+    "switch": {
+      "title": "Switch",
+      "url": "https://m3.material.io/components/switch/overview"
+    },
+    "tabs": {
+      "title": "Tabs",
+      "url": "https://m3.material.io/components/tabs/overview"
+    },
+    "text-fields": {
+      "title": "Text fields",
+      "url": "https://m3.material.io/components/text-fields/overview"
+    },
+    "tooltips": {
+      "title": "Tooltips",
+      "url": "https://m3.material.io/components/tooltips/overview"
+    },
+    "top-app-bar": {
+      "title": "App bars",
+      "url": "https://m3.material.io/components/top-app-bar/overview"
+    },
+    "typography": {
+      "title": "Typography",
+      "url": "https://m3.material.io/styles/typography/overview"
+    },
+    "window-size-classes": {
+      "title": "Window size classes",
+      "url": "https://m3.material.io/foundations/layout/applying-layout/window-size-classes"
+    }
+  },
+  "apg": {
+    "alertdialog": {
+      "title": "Alert and message dialogs pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/"
+    },
+    "button": {
+      "title": "Button pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/button/"
+    },
+    "carousel": {
+      "title": "Carousel pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/carousel/"
+    },
+    "combobox": {
+      "title": "Combobox pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/"
+    },
+    "dialog-modal": {
+      "title": "Dialog (modal) pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/"
+    },
+    "disclosure": {
+      "title": "Disclosure pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/"
+    },
+    "grid": {
+      "title": "Grid pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/grid/"
+    },
+    "keyboard-interface": {
+      "title": "Developing a keyboard interface",
+      "url": "https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/"
+    },
+    "landmarks": {
+      "title": "Landmarks pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/"
+    },
+    "listbox": {
+      "title": "Listbox pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/listbox/"
+    },
+    "menu-button": {
+      "title": "Menu button pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/"
+    },
+    "menubar": {
+      "title": "Menu and menubar pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/menubar/"
+    },
+    "meter": {
+      "title": "Meter pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/meter/"
+    },
+    "names-and-descriptions": {
+      "title": "Providing accessible names and descriptions",
+      "url": "https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/"
+    },
+    "radio": {
+      "title": "Radio group pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/radio/"
+    },
+    "slider": {
+      "title": "Slider pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/slider/"
+    },
+    "spinbutton": {
+      "title": "Spinbutton pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/"
+    },
+    "switch": {
+      "title": "Switch pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/switch/"
+    },
+    "table": {
+      "title": "Table pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/table/"
+    },
+    "tabs": {
+      "title": "Tabs pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/"
+    },
+    "toolbar": {
+      "title": "Toolbar pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/"
+    },
+    "tooltip": {
+      "title": "Tooltip pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/"
+    },
+    "treegrid": {
+      "title": "Treegrid pattern",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/treegrid/"
+    }
+  },
+  "source_pages": [
+    {
+      "page": "accessibility",
+      "section": "foundations",
+      "title": "Accessibility",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "disposition": "extracted"
+    },
+    {
+      "page": "app-icons",
+      "section": "foundations",
+      "title": "App icons",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/app-icons",
+      "disposition": "excluded",
+      "reason": "Home-screen icon production for Apple platforms; web favicon and manifest icons are out of this extraction's scope."
+    },
+    {
+      "page": "branding",
+      "section": "foundations",
+      "title": "Branding",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/branding",
+      "disposition": "extracted"
+    },
+    {
+      "page": "color",
+      "section": "foundations",
+      "title": "Color",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/color",
+      "disposition": "extracted"
+    },
+    {
+      "page": "dark-mode",
+      "section": "foundations",
+      "title": "Dark Mode",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/dark-mode",
+      "disposition": "extracted"
+    },
+    {
+      "page": "icons",
+      "section": "foundations",
+      "title": "Icons",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/icons",
+      "disposition": "extracted"
+    },
+    {
+      "page": "images",
+      "section": "foundations",
+      "title": "Images",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/images",
+      "disposition": "extracted"
+    },
+    {
+      "page": "immersive-experiences",
+      "section": "foundations",
+      "title": "Immersive experiences",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/immersive-experiences",
+      "disposition": "excluded",
+      "reason": "visionOS immersion modes depend on Apple spatial computing hardware; no web default exists."
+    },
+    {
+      "page": "inclusion",
+      "section": "foundations",
+      "title": "Inclusion",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/inclusion",
+      "disposition": "extracted"
+    },
+    {
+      "page": "layout",
+      "section": "foundations",
+      "title": "Layout",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "disposition": "extracted"
+    },
+    {
+      "page": "materials",
+      "section": "foundations",
+      "title": "Materials",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+      "disposition": "extracted"
+    },
+    {
+      "page": "motion",
+      "section": "foundations",
+      "title": "Motion",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "disposition": "extracted"
+    },
+    {
+      "page": "privacy",
+      "section": "foundations",
+      "title": "Privacy",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/privacy",
+      "disposition": "extracted"
+    },
+    {
+      "page": "right-to-left",
+      "section": "foundations",
+      "title": "Right to left",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/right-to-left",
+      "disposition": "extracted"
+    },
+    {
+      "page": "sf-symbols",
+      "section": "foundations",
+      "title": "SF Symbols",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols",
+      "disposition": "extracted"
+    },
+    {
+      "page": "spatial-layout",
+      "section": "foundations",
+      "title": "Spatial layout",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/spatial-layout",
+      "disposition": "excluded",
+      "reason": "visionOS spatial placement depends on Apple head-mounted hardware; no web default exists."
+    },
+    {
+      "page": "typography",
+      "section": "foundations",
+      "title": "Typography",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "disposition": "extracted"
+    },
+    {
+      "page": "writing",
+      "section": "foundations",
+      "title": "Writing",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/writing",
+      "disposition": "extracted"
+    },
+    {
+      "page": "charting-data",
+      "section": "patterns",
+      "title": "Charting data",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/charting-data",
+      "disposition": "extracted"
+    },
+    {
+      "page": "collaboration-and-sharing",
+      "section": "patterns",
+      "title": "Collaboration and sharing",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/collaboration-and-sharing",
+      "disposition": "extracted"
+    },
+    {
+      "page": "drag-and-drop",
+      "section": "patterns",
+      "title": "Drag and drop",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/drag-and-drop",
+      "disposition": "extracted"
+    },
+    {
+      "page": "entering-data",
+      "section": "patterns",
+      "title": "Entering data",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/entering-data",
+      "disposition": "extracted"
+    },
+    {
+      "page": "feedback",
+      "section": "patterns",
+      "title": "Feedback",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/feedback",
+      "disposition": "extracted"
+    },
+    {
+      "page": "file-management",
+      "section": "patterns",
+      "title": "File management",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/file-management",
+      "disposition": "extracted"
+    },
+    {
+      "page": "going-full-screen",
+      "section": "patterns",
+      "title": "Going full screen",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/going-full-screen",
+      "disposition": "extracted"
+    },
+    {
+      "page": "launching",
+      "section": "patterns",
+      "title": "Launching",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/launching",
+      "disposition": "extracted"
+    },
+    {
+      "page": "live-viewing-apps",
+      "section": "patterns",
+      "title": "Live-viewing apps",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/live-viewing-apps",
+      "disposition": "excluded",
+      "reason": "tvOS live-television viewing conventions; no general web default."
+    },
+    {
+      "page": "loading",
+      "section": "patterns",
+      "title": "Loading",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/loading",
+      "disposition": "extracted"
+    },
+    {
+      "page": "managing-accounts",
+      "section": "patterns",
+      "title": "Managing accounts",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/managing-accounts",
+      "disposition": "extracted"
+    },
+    {
+      "page": "managing-notifications",
+      "section": "patterns",
+      "title": "Managing notifications",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/managing-notifications",
+      "disposition": "extracted"
+    },
+    {
+      "page": "modality",
+      "section": "patterns",
+      "title": "Modality",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/modality",
+      "disposition": "extracted"
+    },
+    {
+      "page": "multitasking",
+      "section": "patterns",
+      "title": "Multitasking",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/multitasking",
+      "disposition": "extracted"
+    },
+    {
+      "page": "offering-help",
+      "section": "patterns",
+      "title": "Offering help",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/offering-help",
+      "disposition": "extracted"
+    },
+    {
+      "page": "onboarding",
+      "section": "patterns",
+      "title": "Onboarding",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/onboarding",
+      "disposition": "extracted"
+    },
+    {
+      "page": "playing-audio",
+      "section": "patterns",
+      "title": "Playing audio",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/playing-audio",
+      "disposition": "extracted"
+    },
+    {
+      "page": "playing-haptics",
+      "section": "patterns",
+      "title": "Playing haptics",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/playing-haptics",
+      "disposition": "extracted"
+    },
+    {
+      "page": "playing-video",
+      "section": "patterns",
+      "title": "Playing video",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/playing-video",
+      "disposition": "extracted"
+    },
+    {
+      "page": "printing",
+      "section": "patterns",
+      "title": "Printing",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/printing",
+      "disposition": "extracted"
+    },
+    {
+      "page": "ratings-and-reviews",
+      "section": "patterns",
+      "title": "Ratings and reviews",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews",
+      "disposition": "extracted"
+    },
+    {
+      "page": "searching",
+      "section": "patterns",
+      "title": "Searching",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/searching",
+      "disposition": "extracted"
+    },
+    {
+      "page": "settings",
+      "section": "patterns",
+      "title": "Settings",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/settings",
+      "disposition": "extracted"
+    },
+    {
+      "page": "undo-and-redo",
+      "section": "patterns",
+      "title": "Undo and redo",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/undo-and-redo",
+      "disposition": "extracted"
+    },
+    {
+      "page": "workouts",
+      "section": "patterns",
+      "title": "Workouts",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/workouts",
+      "disposition": "excluded",
+      "reason": "watchOS fitness-session conventions tied to Apple Watch sensors; no general web default."
+    },
+    {
+      "page": "charts",
+      "section": "components",
+      "title": "Charts",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/charts",
+      "group": "Content",
+      "disposition": "extracted"
+    },
+    {
+      "page": "image-views",
+      "section": "components",
+      "title": "Image views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/image-views",
+      "group": "Content",
+      "disposition": "extracted"
+    },
+    {
+      "page": "text-views",
+      "section": "components",
+      "title": "Text views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/text-views",
+      "group": "Content",
+      "disposition": "extracted"
+    },
+    {
+      "page": "web-views",
+      "section": "components",
+      "title": "Web views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/web-views",
+      "group": "Content",
+      "disposition": "extracted"
+    },
+    {
+      "page": "boxes",
+      "section": "components",
+      "title": "Boxes",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/boxes",
+      "group": "Layout and organization",
+      "disposition": "extracted"
+    },
+    {
+      "page": "collections",
+      "section": "components",
+      "title": "Collections",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/collections",
+      "group": "Layout and organization",
+      "disposition": "extracted"
+    },
+    {
+      "page": "column-views",
+      "section": "components",
+      "title": "Column views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/column-views",
+      "group": "Layout and organization",
+      "disposition": "excluded",
+      "reason": "macOS column browser; web hierarchy navigation is covered by outline-views and split-views principles."
+    },
+    {
+      "page": "disclosure-controls",
+      "section": "components",
+      "title": "Disclosure controls",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/disclosure-controls",
+      "group": "Layout and organization",
+      "disposition": "extracted"
+    },
+    {
+      "page": "labels",
+      "section": "components",
+      "title": "Labels",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/labels",
+      "group": "Layout and organization",
+      "disposition": "covered",
+      "covered_by": "hig.components.text-views.selectable-useful-text",
+      "reason": "Label guidance on selectable text and readable type is covered by text-views and typography principles."
+    },
+    {
+      "page": "lists-and-tables",
+      "section": "components",
+      "title": "Lists and tables",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/lists-and-tables",
+      "group": "Layout and organization",
+      "disposition": "extracted"
+    },
+    {
+      "page": "lockups",
+      "section": "components",
+      "title": "Lockups",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/lockups",
+      "group": "Layout and organization",
+      "disposition": "excluded",
+      "reason": "tvOS focusable content lockups; no general web default."
+    },
+    {
+      "page": "outline-views",
+      "section": "components",
+      "title": "Outline views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/outline-views",
+      "group": "Layout and organization",
+      "disposition": "extracted"
+    },
+    {
+      "page": "split-views",
+      "section": "components",
+      "title": "Split views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/split-views",
+      "group": "Layout and organization",
+      "disposition": "extracted"
+    },
+    {
+      "page": "tab-views",
+      "section": "components",
+      "title": "Tab views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/tab-views",
+      "group": "Layout and organization",
+      "disposition": "extracted"
+    },
+    {
+      "page": "activity-views",
+      "section": "components",
+      "title": "Activity views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/activity-views",
+      "group": "Menus and actions",
+      "disposition": "covered",
+      "covered_by": "hig.patterns.collaboration-and-sharing.clear-sharing-scope",
+      "reason": "The share-sheet guidance reduces to clear sharing scope; the system share sheet itself is Apple-provided."
+    },
+    {
+      "page": "buttons",
+      "section": "components",
+      "title": "Buttons",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "group": "Menus and actions",
+      "disposition": "extracted"
+    },
+    {
+      "page": "context-menus",
+      "section": "components",
+      "title": "Context menus",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/context-menus",
+      "group": "Menus and actions",
+      "disposition": "extracted"
+    },
+    {
+      "page": "dock-menus",
+      "section": "components",
+      "title": "Dock menus",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/dock-menus",
+      "group": "Menus and actions",
+      "disposition": "excluded",
+      "reason": "macOS Dock integration; no web counterpart."
+    },
+    {
+      "page": "edit-menus",
+      "section": "components",
+      "title": "Edit menus",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/edit-menus",
+      "group": "Menus and actions",
+      "disposition": "extracted"
+    },
+    {
+      "page": "home-screen-quick-actions",
+      "section": "components",
+      "title": "Home Screen quick actions",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/home-screen-quick-actions",
+      "group": "Menus and actions",
+      "disposition": "excluded",
+      "reason": "iOS Home Screen integration; no web counterpart."
+    },
+    {
+      "page": "menus",
+      "section": "components",
+      "title": "Menus",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/menus",
+      "group": "Menus and actions",
+      "disposition": "extracted"
+    },
+    {
+      "page": "ornaments",
+      "section": "components",
+      "title": "Ornaments",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/ornaments",
+      "group": "Menus and actions",
+      "disposition": "excluded",
+      "reason": "visionOS window ornaments; no web counterpart."
+    },
+    {
+      "page": "pop-up-buttons",
+      "section": "components",
+      "title": "Pop-up buttons",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/pop-up-buttons",
+      "group": "Menus and actions",
+      "disposition": "extracted"
+    },
+    {
+      "page": "pull-down-buttons",
+      "section": "components",
+      "title": "Pull-down buttons",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/pull-down-buttons",
+      "group": "Menus and actions",
+      "disposition": "extracted"
+    },
+    {
+      "page": "the-menu-bar",
+      "section": "components",
+      "title": "The menu bar",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/the-menu-bar",
+      "group": "Menus and actions",
+      "disposition": "extracted"
+    },
+    {
+      "page": "toolbars",
+      "section": "components",
+      "title": "Toolbars",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "group": "Menus and actions",
+      "disposition": "extracted"
+    },
+    {
+      "page": "path-controls",
+      "section": "components",
+      "title": "Path controls",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/path-controls",
+      "group": "Navigation and search",
+      "disposition": "excluded",
+      "reason": "macOS path control; web breadcrumb guidance lives in design-engineering/evidence-patterns/breadcrumbs.md."
+    },
+    {
+      "page": "search-fields",
+      "section": "components",
+      "title": "Search fields",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/search-fields",
+      "group": "Navigation and search",
+      "disposition": "extracted"
+    },
+    {
+      "page": "sidebars",
+      "section": "components",
+      "title": "Sidebars",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/sidebars",
+      "group": "Navigation and search",
+      "disposition": "extracted"
+    },
+    {
+      "page": "tab-bars",
+      "section": "components",
+      "title": "Tab bars",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/tab-bars",
+      "group": "Navigation and search",
+      "disposition": "extracted"
+    },
+    {
+      "page": "token-fields",
+      "section": "components",
+      "title": "Token fields",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/token-fields",
+      "group": "Navigation and search",
+      "disposition": "excluded",
+      "reason": "macOS token field; web chip-input guidance lives in design-engineering/evidence-patterns/autocomplete.md."
+    },
+    {
+      "page": "action-sheets",
+      "section": "components",
+      "title": "Action sheets",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/action-sheets",
+      "group": "Presentation",
+      "disposition": "extracted"
+    },
+    {
+      "page": "alerts",
+      "section": "components",
+      "title": "Alerts",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/alerts",
+      "group": "Presentation",
+      "disposition": "extracted"
+    },
+    {
+      "page": "page-controls",
+      "section": "components",
+      "title": "Page controls",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/page-controls",
+      "group": "Presentation",
+      "disposition": "extracted"
+    },
+    {
+      "page": "panels",
+      "section": "components",
+      "title": "Panels",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/panels",
+      "group": "Presentation",
+      "disposition": "excluded",
+      "reason": "macOS floating inspector panels; transient web surfaces are covered by popovers and sheets principles."
+    },
+    {
+      "page": "popovers",
+      "section": "components",
+      "title": "Popovers",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/popovers",
+      "group": "Presentation",
+      "disposition": "extracted"
+    },
+    {
+      "page": "scroll-views",
+      "section": "components",
+      "title": "Scroll views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/scroll-views",
+      "group": "Presentation",
+      "disposition": "extracted"
+    },
+    {
+      "page": "sheets",
+      "section": "components",
+      "title": "Sheets",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "group": "Presentation",
+      "disposition": "extracted"
+    },
+    {
+      "page": "windows",
+      "section": "components",
+      "title": "Windows",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/windows",
+      "group": "Presentation",
+      "disposition": "extracted"
+    },
+    {
+      "page": "color-wells",
+      "section": "components",
+      "title": "Color wells",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/color-wells",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "combo-boxes",
+      "section": "components",
+      "title": "Combo boxes",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/combo-boxes",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "digit-entry-views",
+      "section": "components",
+      "title": "Digit entry views",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/digit-entry-views",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "image-wells",
+      "section": "components",
+      "title": "Image wells",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/image-wells",
+      "group": "Selection and input",
+      "disposition": "excluded",
+      "reason": "macOS editable image wells; no general web default beyond file inputs."
+    },
+    {
+      "page": "pickers",
+      "section": "components",
+      "title": "Pickers",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/pickers",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "segmented-controls",
+      "section": "components",
+      "title": "Segmented controls",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/segmented-controls",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "sliders",
+      "section": "components",
+      "title": "Sliders",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/sliders",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "steppers",
+      "section": "components",
+      "title": "Steppers",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/steppers",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "text-fields",
+      "section": "components",
+      "title": "Text fields",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/text-fields",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "toggles",
+      "section": "components",
+      "title": "Toggles",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/toggles",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "virtual-keyboards",
+      "section": "components",
+      "title": "Virtual keyboards",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/virtual-keyboards",
+      "group": "Selection and input",
+      "disposition": "extracted"
+    },
+    {
+      "page": "activity-rings",
+      "section": "components",
+      "title": "Activity rings",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/activity-rings",
+      "group": "Status",
+      "disposition": "excluded",
+      "reason": "Apple Fitness brand element restricted to Apple health data; must not be imitated."
+    },
+    {
+      "page": "gauges",
+      "section": "components",
+      "title": "Gauges",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/gauges",
+      "group": "Status",
+      "disposition": "extracted"
+    },
+    {
+      "page": "progress-indicators",
+      "section": "components",
+      "title": "Progress indicators",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/progress-indicators",
+      "group": "Status",
+      "disposition": "extracted"
+    },
+    {
+      "page": "rating-indicators",
+      "section": "components",
+      "title": "Rating indicators",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/rating-indicators",
+      "group": "Status",
+      "disposition": "extracted"
+    },
+    {
+      "page": "app-shortcuts",
+      "section": "components",
+      "title": "App Shortcuts",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/app-shortcuts",
+      "group": "System experiences",
+      "disposition": "excluded",
+      "reason": "Siri and Shortcuts system integration; no web counterpart."
+    },
+    {
+      "page": "complications",
+      "section": "components",
+      "title": "Complications",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/complications",
+      "group": "System experiences",
+      "disposition": "excluded",
+      "reason": "watchOS watch-face complications; no web counterpart."
+    },
+    {
+      "page": "controls",
+      "section": "components",
+      "title": "Controls",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/controls",
+      "group": "System experiences",
+      "disposition": "excluded",
+      "reason": "iOS Control Center and Lock Screen controls; no web counterpart."
+    },
+    {
+      "page": "live-activities",
+      "section": "components",
+      "title": "Live Activities",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/live-activities",
+      "group": "System experiences",
+      "disposition": "excluded",
+      "reason": "iOS Lock Screen and Dynamic Island live activities; must not be imitated on the web."
+    },
+    {
+      "page": "notifications",
+      "section": "components",
+      "title": "Notifications",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/notifications",
+      "group": "System experiences",
+      "disposition": "extracted"
+    },
+    {
+      "page": "snippets",
+      "section": "components",
+      "title": "Snippets",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/snippets",
+      "group": "System experiences",
+      "disposition": "excluded",
+      "reason": "Siri and App Intents result snippets; no web counterpart."
+    },
+    {
+      "page": "status-bars",
+      "section": "components",
+      "title": "Status bars",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/status-bars",
+      "group": "System experiences",
+      "disposition": "excluded",
+      "reason": "iOS system status bar; covered for web by the layout safe-regions principle."
+    },
+    {
+      "page": "top-shelf",
+      "section": "components",
+      "title": "Top Shelf",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/top-shelf",
+      "group": "System experiences",
+      "disposition": "excluded",
+      "reason": "tvOS Top Shelf; no web counterpart."
+    },
+    {
+      "page": "watch-faces",
+      "section": "components",
+      "title": "Watch faces",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/watch-faces",
+      "group": "System experiences",
+      "disposition": "excluded",
+      "reason": "watchOS watch faces; no web counterpart."
+    },
+    {
+      "page": "widgets",
+      "section": "components",
+      "title": "Widgets",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/widgets",
+      "group": "System experiences",
+      "disposition": "excluded",
+      "reason": "Home Screen and desktop widgets are Apple system surfaces; no web counterpart."
+    },
+    {
+      "page": "action-button",
+      "section": "inputs",
+      "title": "Action button",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/action-button",
+      "disposition": "excluded",
+      "reason": "iPhone and Apple Watch hardware Action button; no web counterpart."
+    },
+    {
+      "page": "apple-pencil-and-scribble",
+      "section": "inputs",
+      "title": "Apple Pencil and Scribble",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/apple-pencil-and-scribble",
+      "disposition": "extracted"
+    },
+    {
+      "page": "camera-control",
+      "section": "inputs",
+      "title": "Camera Control",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/camera-control",
+      "disposition": "excluded",
+      "reason": "iPhone hardware Camera Control; no web counterpart."
+    },
+    {
+      "page": "digital-crown",
+      "section": "inputs",
+      "title": "Digital Crown",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/digital-crown",
+      "disposition": "excluded",
+      "reason": "Apple Watch and Vision Pro hardware crown; no web counterpart."
+    },
+    {
+      "page": "eyes",
+      "section": "inputs",
+      "title": "Eyes",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/eyes",
+      "disposition": "covered",
+      "covered_by": "hig.inputs.gestures.multiple-input-paths",
+      "reason": "Eye-input guidance generalizes to offering multiple input paths, covered by the gestures principle."
+    },
+    {
+      "page": "focus-and-selection",
+      "section": "inputs",
+      "title": "Focus and selection",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/focus-and-selection",
+      "disposition": "extracted"
+    },
+    {
+      "page": "game-controls",
+      "section": "inputs",
+      "title": "Game controls",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/game-controls",
+      "disposition": "excluded",
+      "reason": "Game-controller and on-screen game control conventions; target-size and press-state needs are covered by accessibility and buttons principles."
+    },
+    {
+      "page": "gestures",
+      "section": "inputs",
+      "title": "Gestures",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/gestures",
+      "disposition": "extracted"
+    },
+    {
+      "page": "gyro-and-accelerometer",
+      "section": "inputs",
+      "title": "Gyroscope and accelerometer",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/gyro-and-accelerometer",
+      "disposition": "extracted"
+    },
+    {
+      "page": "keyboards",
+      "section": "inputs",
+      "title": "Keyboards",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/keyboards",
+      "disposition": "extracted"
+    },
+    {
+      "page": "nearby-interactions",
+      "section": "inputs",
+      "title": "Nearby interactions",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/nearby-interactions",
+      "disposition": "excluded",
+      "reason": "Ultra Wideband device-proximity interaction; no web counterpart."
+    },
+    {
+      "page": "pointing-devices",
+      "section": "inputs",
+      "title": "Pointing devices",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/pointing-devices",
+      "disposition": "extracted"
+    },
+    {
+      "page": "remotes",
+      "section": "inputs",
+      "title": "Remotes",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/remotes",
+      "disposition": "excluded",
+      "reason": "Siri Remote and tvOS focus engine; no web counterpart."
+    },
+    {
+      "page": "airplay",
+      "section": "technologies",
+      "title": "AirPlay",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/airplay",
+      "disposition": "excluded",
+      "reason": "Apple media-streaming protocol; no web default."
+    },
+    {
+      "page": "always-on",
+      "section": "technologies",
+      "title": "Always On",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/always-on",
+      "disposition": "excluded",
+      "reason": "Always On display behavior of Apple hardware; no web counterpart."
+    },
+    {
+      "page": "app-clips",
+      "section": "technologies",
+      "title": "App Clips",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/app-clips",
+      "disposition": "excluded",
+      "reason": "Apple lightweight app-launch technology; no web counterpart."
+    },
+    {
+      "page": "apple-in-app-purchase",
+      "section": "technologies",
+      "title": "Apple In-App Purchase",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/apple-in-app-purchase",
+      "disposition": "extracted"
+    },
+    {
+      "page": "apple-pay",
+      "section": "technologies",
+      "title": "Apple Pay",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/apple-pay",
+      "disposition": "extracted"
+    },
+    {
+      "page": "augmented-reality",
+      "section": "technologies",
+      "title": "Augmented reality",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/augmented-reality",
+      "disposition": "excluded",
+      "reason": "ARKit-based augmented reality on Apple devices; no web default."
+    },
+    {
+      "page": "carekit",
+      "section": "technologies",
+      "title": "CareKit",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/carekit",
+      "disposition": "covered",
+      "covered_by": "hig.foundations.privacy.ask-in-context",
+      "reason": "Health-data permission guidance reduces to contextual, minimal permission requests."
+    },
+    {
+      "page": "carplay",
+      "section": "technologies",
+      "title": "CarPlay",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/carplay",
+      "disposition": "excluded",
+      "reason": "CarPlay in-vehicle system; no web counterpart."
+    },
+    {
+      "page": "game-center",
+      "section": "technologies",
+      "title": "Game Center",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/game-center",
+      "disposition": "excluded",
+      "reason": "Apple game services; no web counterpart."
+    },
+    {
+      "page": "generative-ai",
+      "section": "technologies",
+      "title": "Generative AI",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/generative-ai",
+      "disposition": "extracted"
+    },
+    {
+      "page": "healthkit",
+      "section": "technologies",
+      "title": "HealthKit",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/healthkit",
+      "disposition": "covered",
+      "covered_by": "hig.foundations.privacy.ask-in-context",
+      "reason": "Health-data permission guidance reduces to contextual, minimal permission requests."
+    },
+    {
+      "page": "homekit",
+      "section": "technologies",
+      "title": "HomeKit",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/homekit",
+      "disposition": "excluded",
+      "reason": "Apple home-automation framework; no web counterpart."
+    },
+    {
+      "page": "icloud",
+      "section": "technologies",
+      "title": "iCloud",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/icloud",
+      "disposition": "extracted"
+    },
+    {
+      "page": "id-verifier",
+      "section": "technologies",
+      "title": "ID Verifier",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/id-verifier",
+      "disposition": "covered",
+      "covered_by": "hig.foundations.privacy.minimal-data",
+      "reason": "Identity verification guidance reduces to requesting only the data needed."
+    },
+    {
+      "page": "imessage-apps-and-stickers",
+      "section": "technologies",
+      "title": "iMessage apps and stickers",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/imessage-apps-and-stickers",
+      "disposition": "excluded",
+      "reason": "Messages app extensions; no web counterpart."
+    },
+    {
+      "page": "live-photos",
+      "section": "technologies",
+      "title": "Live Photos",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/live-photos",
+      "disposition": "excluded",
+      "reason": "Apple Live Photo media format; no web default."
+    },
+    {
+      "page": "mac-catalyst",
+      "section": "technologies",
+      "title": "Mac Catalyst",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/mac-catalyst",
+      "disposition": "excluded",
+      "reason": "Apple framework for bringing iPad apps to macOS; no web counterpart."
+    },
+    {
+      "page": "machine-learning",
+      "section": "technologies",
+      "title": "Machine learning",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
+      "disposition": "extracted"
+    },
+    {
+      "page": "maps",
+      "section": "technologies",
+      "title": "Maps",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/maps",
+      "disposition": "extracted"
+    },
+    {
+      "page": "nfc",
+      "section": "technologies",
+      "title": "NFC",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/nfc",
+      "disposition": "excluded",
+      "reason": "Core NFC tag reading on iPhone; no web default."
+    },
+    {
+      "page": "photo-editing",
+      "section": "technologies",
+      "title": "Photo editing",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/photo-editing",
+      "disposition": "covered",
+      "covered_by": "hig.patterns.modality.obvious-dismiss",
+      "reason": "Confirming cancellation of edits reduces to the modal dismiss-and-protect principle."
+    },
+    {
+      "page": "researchkit",
+      "section": "technologies",
+      "title": "ResearchKit",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/researchkit",
+      "disposition": "extracted"
+    },
+    {
+      "page": "shareplay",
+      "section": "technologies",
+      "title": "SharePlay",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/shareplay",
+      "disposition": "excluded",
+      "reason": "Apple shared-activity framework; no web counterpart."
+    },
+    {
+      "page": "shazamkit",
+      "section": "technologies",
+      "title": "ShazamKit",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/shazamkit",
+      "disposition": "excluded",
+      "reason": "Apple audio-recognition service; no web counterpart."
+    },
+    {
+      "page": "sign-in-with-apple",
+      "section": "technologies",
+      "title": "Sign in with Apple",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple",
+      "disposition": "covered",
+      "covered_by": "hig.patterns.managing-accounts.delay-sign-in",
+      "reason": "Sign-in timing guidance reduces to delaying sign-in until it provides value; the Apple button itself is Apple-specific."
+    },
+    {
+      "page": "siri",
+      "section": "technologies",
+      "title": "Siri",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/siri",
+      "disposition": "excluded",
+      "reason": "Siri voice-assistant integration; no web counterpart."
+    },
+    {
+      "page": "tap-to-pay-on-iphone",
+      "section": "technologies",
+      "title": "Tap to Pay on iPhone",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/tap-to-pay-on-iphone",
+      "disposition": "excluded",
+      "reason": "Apple merchant payment acceptance; no web counterpart."
+    },
+    {
+      "page": "voiceover",
+      "section": "technologies",
+      "title": "VoiceOver",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/voiceover",
+      "disposition": "extracted"
+    },
+    {
+      "page": "wallet",
+      "section": "technologies",
+      "title": "Wallet",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/wallet",
+      "disposition": "excluded",
+      "reason": "Apple Wallet passes; no web counterpart."
+    }
+  ],
+  "principles": [
+    {
+      "id": "hig.foundations.accessibility.target-size",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Give every interactive control a hit area and surrounding spacing large enough that a person with limited dexterity reliably activates the intended control.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "adapt",
+      "class_reason": "HIG states its minimum in Apple points per platform; on the web the floor is WCAG 2.5.8 (24 by 24 CSS px or equivalent spacing), with 2.5.5 as the enhanced target.",
+      "wcag": [
+        "2.5.8",
+        "2.5.5"
+      ],
+      "material3": "structure",
+      "apg": null,
+      "verification_question": "Does every pointer target meet 24 by 24 CSS px, or have enough spacing that a 24 px circle around it touches no other target?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.text-resize",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Let people enlarge text without losing content, controls, or reading order.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "adapt",
+      "class_reason": "HIG frames this through Dynamic Type; the web equivalents are browser zoom, text-only zoom, and relative units, verified against WCAG resize and reflow criteria.",
+      "wcag": [
+        "1.4.4",
+        "1.4.10",
+        "1.4.12"
+      ],
+      "material3": "typography",
+      "apg": null,
+      "verification_question": "At 200% text size and at a 320 CSS px wide viewport, is every piece of content and every control still reachable without two-dimensional scrolling?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.contrast",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Keep text, icons, and control boundaries distinguishable from their background in every supported appearance.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "universal",
+      "class_reason": "Contrast need comes from human vision, not from a platform; both HIG and WCAG require measurable minimums.",
+      "wcag": [
+        "1.4.3",
+        "1.4.11"
+      ],
+      "material3": "contrast",
+      "apg": null,
+      "verification_question": "Do body text, large text, and essential non-text indicators meet 4.5:1, 3:1, and 3:1 in light, dark, and increased-contrast states?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.not-color-alone",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Never make color the only carrier of status, meaning, or interactivity; pair it with text, shape, or position.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "universal",
+      "class_reason": "Color-vision differences exist on every platform.",
+      "wcag": [
+        "1.4.1"
+      ],
+      "material3": "color",
+      "apg": null,
+      "verification_question": "If the screen is rendered in grayscale, can every status, error, selected item, and link still be identified?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.assistive-names",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Expose a meaningful name, role, and current state for every control and informative image to assistive technology.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "universal",
+      "class_reason": "HIG names VoiceOver; the requirement is the same for any screen reader on any platform.",
+      "wcag": [
+        "1.1.1",
+        "4.1.2"
+      ],
+      "material3": null,
+      "apg": "names-and-descriptions",
+      "verification_question": "Does a screen reader announce a specific name, the correct role, and the current state for each control in the flow?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.media-alternatives",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Offer text-based and described alternatives such as captions, transcripts, and audio description for audio and video content.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "universal",
+      "class_reason": "People who cannot hear or see the media exist regardless of device.",
+      "wcag": [
+        "1.2.2",
+        "1.2.5"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does every prerecorded video with speech have synchronized captions, and is essential visual information described?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.multimodal-cues",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "When a cue is delivered by sound or vibration, deliver the same information through a visible channel too.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "universal",
+      "class_reason": "Sensory redundancy is platform-neutral.",
+      "wcag": [
+        "1.3.3"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can a person with sound off and no vibration still notice every alert and confirmation?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.gesture-alternatives",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Keep common actions reachable with simple single-pointer input and provide an alternative for any path-based, multi-finger, or drag gesture.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "universal",
+      "class_reason": "Motor limits apply to every touch and pointer surface.",
+      "wcag": [
+        "2.5.1",
+        "2.5.7"
+      ],
+      "material3": "gestures",
+      "apg": null,
+      "verification_question": "Can every gesture-driven action also be done with a single tap or click, without dragging?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.keyboard-only",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Make the whole experience operable with a keyboard alone, with a visible focus indicator and no traps.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "universal",
+      "class_reason": "HIG pairs this with Full Keyboard Access and Switch Control; keyboard operability is the shared base for all such technologies.",
+      "wcag": [
+        "2.1.1",
+        "2.1.2",
+        "2.4.7"
+      ],
+      "material3": null,
+      "apg": "keyboard-interface",
+      "verification_question": "Can the main task be completed using only Tab, Shift+Tab, arrow keys, Enter, Space, and Escape, with focus always visible?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.label-in-name",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Make the spoken name of each control match its visible label so voice-input users can target it by saying what they see.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "adapt",
+      "class_reason": "HIG frames this through Voice Control; on the web it maps to the accessible name containing the visible label text.",
+      "wcag": [
+        "2.5.3"
+      ],
+      "material3": null,
+      "apg": "names-and-descriptions",
+      "verification_question": "Does each control's accessible name start with, or contain, its visible label text?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.time-limits",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Avoid interface elements that expire on a timer; when a limit is unavoidable, let people extend or turn it off.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "universal",
+      "class_reason": "Cognitive and motor differences make fixed time limits exclusionary everywhere.",
+      "wcag": [
+        "2.2.1"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can every timed element be paused, extended, or disabled before it expires?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.accessibility.flashing-and-fast-motion",
+      "section": "foundations",
+      "page": "accessibility",
+      "statement": "Let people stop moving or blinking content and avoid flashes that can trigger seizures.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "class": "universal",
+      "class_reason": "Photosensitivity and vestibular risk are physiological, not platform-bound.",
+      "wcag": [
+        "2.3.1",
+        "2.2.2"
+      ],
+      "material3": "motion",
+      "apg": null,
+      "verification_question": "Does any content flash more than three times per second, and can every auto-moving element be paused?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.color.consistent-meaning",
+      "section": "foundations",
+      "page": "color",
+      "statement": "Assign each color one meaning and keep that meaning stable across the product.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/color",
+      "class": "universal",
+      "class_reason": "Consistent semantics reduce learning cost on any platform.",
+      "wcag": [
+        "3.2.4"
+      ],
+      "material3": "color-roles",
+      "apg": null,
+      "verification_question": "Is any one color used for two unrelated meanings, such as both success and selection?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.color.appearance-coverage",
+      "section": "foundations",
+      "page": "color",
+      "statement": "Check every color pairing in each appearance the product ships, including high-contrast modes, and under varied ambient lighting.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/color",
+      "class": "universal",
+      "class_reason": "Display conditions vary across all devices.",
+      "wcag": [
+        "1.4.3",
+        "1.4.11"
+      ],
+      "material3": "color",
+      "apg": null,
+      "verification_question": "Has each foreground/background pair been measured in every appearance the product ships?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.color.semantic-roles",
+      "section": "foundations",
+      "page": "color",
+      "statement": "Reference colors through named semantic roles that resolve per appearance, rather than hard-coding literal values.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/color",
+      "class": "adapt",
+      "class_reason": "HIG relies on Apple dynamic system colors; on the web use role-named custom properties, CSS system colors, and appearance media queries.",
+      "wcag": [],
+      "material3": "color-roles",
+      "apg": null,
+      "verification_question": "Can the appearance change without editing any literal color value inside component code?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.color.cultural-meaning",
+      "section": "foundations",
+      "page": "color",
+      "statement": "Consider that color connotations differ across cultures and regions before attaching meaning to a hue.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/color",
+      "class": "universal",
+      "class_reason": "Cultural interpretation is independent of platform.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Has the color meaning been checked for each target locale?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.color.glass-tinting",
+      "section": "foundations",
+      "page": "color",
+      "statement": "Tinting rules for Apple's system glass material describe an Apple-rendered surface and are not a web default.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/color",
+      "class": "apple-specific",
+      "class_reason": "The material is drawn by Apple's system frameworks; imitating it on the web is out of bounds under this domain's no-imitation boundary.",
+      "wcag": [],
+      "material3": "elevation",
+      "apg": null,
+      "verification_question": "Does the web adaptation avoid recreating Apple's system glass and instead use a verified opaque or tonal surface?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.dark-mode.follow-system-appearance",
+      "section": "foundations",
+      "page": "dark-mode",
+      "statement": "Follow the person's system-wide light or dark preference by default.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/dark-mode",
+      "class": "adapt",
+      "class_reason": "HIG discourages an app-only appearance switch; on the web honor prefers-color-scheme and color-scheme, and treat any site-level override as a deliberate product decision.",
+      "wcag": [],
+      "material3": "color",
+      "apg": null,
+      "verification_question": "With no saved preference, does the page render in the operating system's current appearance?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.dark-mode.both-appearances",
+      "section": "foundations",
+      "page": "dark-mode",
+      "statement": "Make content, images, and icons legible and well-balanced in both light and dark appearances.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/dark-mode",
+      "class": "universal",
+      "class_reason": "Any product offering two appearances must verify both.",
+      "wcag": [
+        "1.4.3",
+        "1.4.11"
+      ],
+      "material3": "contrast",
+      "apg": null,
+      "verification_question": "Do all text, icons, and full-color images keep required contrast and remain recognizable in both appearances?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.dark-mode.soften-bright-backgrounds",
+      "section": "foundations",
+      "page": "dark-mode",
+      "statement": "Avoid pure, glaring white backgrounds in dark contexts; dim large bright surfaces so they do not overpower nearby content.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/dark-mode",
+      "class": "universal",
+      "class_reason": "Glare in low light is a display property, not a platform rule.",
+      "wcag": [],
+      "material3": "color",
+      "apg": null,
+      "verification_question": "Does any large bright surface appear inside the dark appearance without being dimmed?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.icons.single-concept",
+      "section": "foundations",
+      "page": "icons",
+      "statement": "Design each interface icon around one simplified, recognizable concept and keep the icon family visually consistent.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/icons",
+      "class": "universal",
+      "class_reason": "Icon legibility principles are shared across design systems.",
+      "wcag": [],
+      "material3": "icons",
+      "apg": null,
+      "verification_question": "Can people name the action of each icon without its label, and do all icons share stroke weight and style?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.icons.text-alternative",
+      "section": "foundations",
+      "page": "icons",
+      "statement": "Give every icon-only control a text alternative that names its action.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/icons",
+      "class": "universal",
+      "class_reason": "Assistive technology needs a name for any non-text control.",
+      "wcag": [
+        "1.1.1",
+        "4.1.2"
+      ],
+      "material3": "icons",
+      "apg": "button",
+      "verification_question": "Does every icon-only button have an accessible name that describes the action, not the picture?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.icons.vector-and-optical-alignment",
+      "section": "foundations",
+      "page": "icons",
+      "statement": "Prefer vector formats for interface icons and align them optically with adjacent text.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/icons",
+      "class": "universal",
+      "class_reason": "Resolution independence and optical alignment apply to every rendering surface.",
+      "wcag": [],
+      "material3": "icons",
+      "apg": null,
+      "verification_question": "Are interface icons delivered as vector assets and vertically aligned with their labels at every text size?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.images.density-ready",
+      "section": "foundations",
+      "page": "images",
+      "statement": "Deliver images that stay sharp at every display density the product supports, preferring vector art for flat graphics.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/images",
+      "class": "adapt",
+      "class_reason": "HIG names Apple scale factors; on the web use responsive image sources, vector formats, and verified density descriptors.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "On a high-density display, is every bitmap served at sufficient resolution without oversized downloads?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.images.real-device-check",
+      "section": "foundations",
+      "page": "images",
+      "statement": "Verify artwork on real target displays, not only in design tools.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/images",
+      "class": "universal",
+      "class_reason": "Color profiles and densities differ across physical screens.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Was the artwork reviewed on at least one physical device per target display class?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.inclusion.plain-language",
+      "section": "foundations",
+      "page": "inclusion",
+      "statement": "Write in plain language, define specialist terms, and avoid idioms that do not translate.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/inclusion",
+      "class": "universal",
+      "class_reason": "Comprehension and translation needs are universal.",
+      "wcag": [
+        "3.1.3"
+      ],
+      "material3": "content-design",
+      "apg": null,
+      "verification_question": "Does any user-facing string contain an undefined term of art or a colloquialism?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.inclusion.respectful-reference",
+      "section": "foundations",
+      "page": "inclusion",
+      "statement": "Refer to people respectfully, use people-first wording about disability, and avoid assumptions about identity.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/inclusion",
+      "class": "universal",
+      "class_reason": "Respectful communication is independent of platform.",
+      "wcag": [],
+      "material3": "content-design",
+      "apg": null,
+      "verification_question": "Does any copy assume gender, family structure, or ability where it does not need to?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.inclusion.inclusive-imagery",
+      "section": "foundations",
+      "page": "inclusion",
+      "statement": "Choose imagery and examples that represent a broad range of people and do not exclude people with disabilities.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/inclusion",
+      "class": "universal",
+      "class_reason": "Representation concerns apply to every product surface.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Do illustrations and sample data represent a range of people rather than one default?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.layout.importance-order",
+      "section": "foundations",
+      "page": "layout",
+      "statement": "Order content by importance so the most relevant information comes first in both visual and reading order.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "class": "universal",
+      "class_reason": "Reading and focus order must match the visual hierarchy on any platform.",
+      "wcag": [
+        "1.3.2",
+        "2.4.3"
+      ],
+      "material3": "layout",
+      "apg": null,
+      "verification_question": "Does the DOM and focus order present the primary content and action before secondary material?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.layout.group-related",
+      "section": "foundations",
+      "page": "layout",
+      "statement": "Group related items and use alignment and indentation to express hierarchy.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "class": "universal",
+      "class_reason": "Proximity and alignment are general perception principles.",
+      "wcag": [
+        "1.3.1"
+      ],
+      "material3": "layout",
+      "apg": null,
+      "verification_question": "Are grouped items also grouped semantically, for example with a list, fieldset, or section heading?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.layout.progressive-disclosure",
+      "section": "foundations",
+      "page": "layout",
+      "statement": "Reveal secondary detail on demand rather than showing everything at once.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "class": "universal",
+      "class_reason": "Reducing upfront complexity is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": "disclosure",
+      "verification_question": "Is secondary detail hidden behind a labeled control that exposes its expanded state?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.layout.adapt-to-space",
+      "section": "foundations",
+      "page": "layout",
+      "statement": "Base layout changes on the space actually available, keeping functionality the same and changes recognizable as size changes.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "class": "adapt",
+      "class_reason": "HIG uses Apple size classes; on the web use intrinsic layout, container queries, and viewport breakpoints only for viewport-level shells.",
+      "wcag": [
+        "1.4.10",
+        "1.3.4"
+      ],
+      "material3": "window-size-classes",
+      "apg": null,
+      "verification_question": "When the container narrows from roomy to tight, does every function remain available in a recognizable arrangement?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.layout.controls-vs-content",
+      "section": "foundations",
+      "page": "layout",
+      "statement": "Make controls visually distinguishable from the content they act on.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "class": "universal",
+      "class_reason": "Affordance clarity is shared across design systems.",
+      "wcag": [
+        "1.4.11"
+      ],
+      "material3": "states",
+      "apg": null,
+      "verification_question": "Can a first-time viewer tell which elements are interactive without hovering?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.layout.safe-regions",
+      "section": "foundations",
+      "page": "layout",
+      "statement": "Keep controls and essential content out of regions that hardware or system interface may cover.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "class": "adapt",
+      "class_reason": "HIG names Apple safe areas and camera housings; on the web use env(safe-area-inset-*) with viewport-fit and test on devices with display cutouts.",
+      "wcag": [
+        "2.4.11"
+      ],
+      "material3": "layout",
+      "apg": null,
+      "verification_question": "On a device with a display cutout or home indicator, is any control or essential text obscured?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.materials.system-material",
+      "section": "foundations",
+      "page": "materials",
+      "statement": "Apple's translucent system materials, including Liquid Glass, are rendered by Apple frameworks and are not a pattern to recreate on the web.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+      "class": "apple-specific",
+      "class_reason": "Recreating the visual signature would be platform imitation; the web counterpart decision is an opaque or tonal surface verified for contrast.",
+      "wcag": [],
+      "material3": "elevation",
+      "apg": null,
+      "verification_question": "Does the adaptation avoid backdrop-blur imitation of Apple system materials as a default surface?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.materials.legibility-over-translucency",
+      "section": "foundations",
+      "page": "materials",
+      "statement": "When content sits over any translucent or blurred surface, verify legibility against the worst-case background, not the typical one.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+      "class": "adapt",
+      "class_reason": "HIG relies on system vibrancy to keep text legible; on the web no such guarantee exists, so contrast must be measured on real backgrounds.",
+      "wcag": [
+        "1.4.3",
+        "1.4.11"
+      ],
+      "material3": "contrast",
+      "apg": null,
+      "verification_question": "Has text over every translucent layer been measured against the lightest and darkest content that can scroll beneath it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.motion.purposeful",
+      "section": "foundations",
+      "page": "motion",
+      "statement": "Use motion only where it communicates status, feedback, or spatial relationship, and keep it from dominating the task.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "class": "universal",
+      "class_reason": "Purposeful motion is a shared principle across HIG and Material.",
+      "wcag": [],
+      "material3": "motion",
+      "apg": null,
+      "verification_question": "Can each animation be justified by the information it conveys?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.motion.optional",
+      "section": "foundations",
+      "page": "motion",
+      "statement": "Make motion optional and provide an equivalent non-moving presentation when people reduce motion.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "class": "adapt",
+      "class_reason": "HIG ties this to the Reduce Motion setting; on the web honor prefers-reduced-motion and keep the same content available.",
+      "wcag": [
+        "2.3.3",
+        "2.2.2"
+      ],
+      "material3": "motion",
+      "apg": null,
+      "verification_question": "With reduced motion enabled, is all content and state still conveyed without non-essential movement?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.motion.brief-and-cancelable",
+      "section": "foundations",
+      "page": "motion",
+      "statement": "Keep feedback motion short and precise, and let people interrupt or cancel it without waiting.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "class": "universal",
+      "class_reason": "Responsiveness and control are platform-neutral.",
+      "wcag": [
+        "2.2.2"
+      ],
+      "material3": "motion",
+      "apg": null,
+      "verification_question": "Can new input interrupt any running transition without a locked or jumping state?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.motion.avoid-frequent",
+      "section": "foundations",
+      "page": "motion",
+      "statement": "Avoid animating interactions that people repeat many times in a session.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "class": "universal",
+      "class_reason": "Repeated animation becomes friction on every platform.",
+      "wcag": [],
+      "material3": "motion",
+      "apg": null,
+      "verification_question": "Is any high-frequency action, such as typing or toggling, gated by an animation?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.privacy.minimal-data",
+      "section": "foundations",
+      "page": "privacy",
+      "statement": "Collect only data the feature genuinely needs and explain how it is used.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/privacy",
+      "class": "universal",
+      "class_reason": "Data minimization is a general privacy principle and a legal expectation in many regions.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can each requested data item be tied to a specific feature that would fail without it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.privacy.ask-in-context",
+      "section": "foundations",
+      "page": "privacy",
+      "statement": "Request access to sensitive resources at the moment a feature needs it, with copy that explains why, rather than at first launch.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/privacy",
+      "class": "universal",
+      "class_reason": "Contextual permission requests apply to web permission prompts as much as native ones.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Is every permission request triggered by a person's action on the feature that needs it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.privacy.no-misleading-preprompt",
+      "section": "foundations",
+      "page": "privacy",
+      "statement": "Never place a screen before a system permission prompt that pressures, confuses, or misrepresents the choice.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/privacy",
+      "class": "universal",
+      "class_reason": "Deceptive consent design is harmful on every platform.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does any pre-permission screen offer only one path, hide the decline option, or misdescribe the system prompt?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.privacy.beyond-passwords",
+      "section": "foundations",
+      "page": "privacy",
+      "statement": "Offer authentication that does not rely only on a memorized password, such as passkeys.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/privacy",
+      "class": "adapt",
+      "class_reason": "HIG names keychain and Apple sign-in; on the web the counterparts are WebAuthn passkeys and password-manager-friendly fields.",
+      "wcag": [
+        "3.3.8"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can a person sign in without transcribing or memorizing a secret, for example with a passkey or autofill?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.right-to-left.mirror-interface",
+      "section": "foundations",
+      "page": "right-to-left",
+      "statement": "Mirror interface direction for right-to-left scripts, flipping controls that express reading order or progress.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/right-to-left",
+      "class": "universal",
+      "class_reason": "Script direction support is required for any localized product.",
+      "wcag": [
+        "1.3.2"
+      ],
+      "material3": "layout",
+      "apg": null,
+      "verification_question": "With dir=rtl, do navigation order, progress controls, and back/forward affordances flip while layout stays intact?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.right-to-left.numerals-and-real-direction",
+      "section": "foundations",
+      "page": "right-to-left",
+      "statement": "Keep the digits within a number in their natural order and keep icons that depict physical direction or real objects unflipped.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/right-to-left",
+      "class": "universal",
+      "class_reason": "Number and object semantics do not change with script direction.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "In right-to-left mode, are numbers, clocks, media play icons, and photographs left unmirrored?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.right-to-left.align-by-language",
+      "section": "foundations",
+      "page": "right-to-left",
+      "statement": "Align each paragraph according to its own language, not the surrounding interface direction.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/right-to-left",
+      "class": "universal",
+      "class_reason": "Mixed-script content occurs on every platform.",
+      "wcag": [
+        "3.1.2"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Do embedded paragraphs in another script carry their own language and direction?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.sf-symbols.system-symbol-set",
+      "section": "foundations",
+      "page": "sf-symbols",
+      "statement": "Apple's symbol set is licensed for Apple platforms and integrates with Apple's system font; it is not an icon source for web products.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols",
+      "class": "apple-specific",
+      "class_reason": "Using it on the web would be both a licensing problem and platform imitation; choose an openly licensed icon set instead.",
+      "wcag": [],
+      "material3": "icons",
+      "apg": null,
+      "verification_question": "Does the web product avoid shipping Apple system symbols or close redrawings of them?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.branding.brand-defers-to-content",
+      "section": "foundations",
+      "page": "branding",
+      "statement": "Express brand through voice, accent color, and type while keeping standard components and letting content stay primary.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/branding",
+      "class": "universal",
+      "class_reason": "Balancing identity with familiarity is shared by HIG and Material.",
+      "wcag": [],
+      "material3": "color",
+      "apg": null,
+      "verification_question": "Does branding ever displace content or alter a standard control's recognizable behavior?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.branding.no-brand-gate",
+      "section": "foundations",
+      "page": "branding",
+      "statement": "Do not use launch or loading screens, or repeated logos, as branding moments that delay people.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/branding",
+      "class": "universal",
+      "class_reason": "Delays for brand display cost time on every platform.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Is there any screen whose only purpose is to show a logo?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.typography.legible-defaults",
+      "section": "foundations",
+      "page": "typography",
+      "statement": "Use default text sizes most people read comfortably and avoid very thin weights for body text.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "class": "adapt",
+      "class_reason": "HIG states sizes in Apple points per platform; on the web use a relative root size and verify at increased text size.",
+      "wcag": [
+        "1.4.4",
+        "1.4.12"
+      ],
+      "material3": "typography",
+      "apg": null,
+      "verification_question": "Is body text set in relative units at a comfortable default size and readable at 200%?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.typography.hierarchy-few-typefaces",
+      "section": "foundations",
+      "page": "typography",
+      "statement": "Build hierarchy with size, weight, and color, and keep the number of typefaces small.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "class": "universal",
+      "class_reason": "Typographic hierarchy is a shared design principle.",
+      "wcag": [
+        "1.3.1"
+      ],
+      "material3": "typography",
+      "apg": null,
+      "verification_question": "Is visual hierarchy also expressed in heading semantics, and does the page use no more than two typefaces?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.typography.system-fonts",
+      "section": "foundations",
+      "page": "typography",
+      "statement": "Apple's system typefaces are licensed for Apple platforms; the web counterpart is the system-ui stack, not a bundled copy of Apple fonts.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "class": "apple-specific",
+      "class_reason": "Shipping or imitating Apple fonts on the web is outside the no-imitation boundary.",
+      "wcag": [],
+      "material3": "typography",
+      "apg": null,
+      "verification_question": "Does the web build avoid bundling Apple system font files?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.typography.prioritize-on-resize",
+      "section": "foundations",
+      "page": "typography",
+      "statement": "When text grows, keep the most important content visible and let layout reflow instead of truncating it.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "class": "universal",
+      "class_reason": "Large-text resilience applies on every platform.",
+      "wcag": [
+        "1.4.4",
+        "1.4.10"
+      ],
+      "material3": "typography",
+      "apg": null,
+      "verification_question": "At the largest supported text size, is any essential label truncated or overlapped?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.writing.clear-and-action-oriented",
+      "section": "foundations",
+      "page": "writing",
+      "statement": "Label actions with specific verbs and keep copy short, clear, and suited to each screen's purpose.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/writing",
+      "class": "universal",
+      "class_reason": "Content design guidance is shared across HIG and Material.",
+      "wcag": [
+        "2.4.6",
+        "2.4.4"
+      ],
+      "material3": "content-design",
+      "apg": null,
+      "verification_question": "Does every button or link describe the outcome of activating it, without needing surrounding context?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.writing.consistent-language",
+      "section": "foundations",
+      "page": "writing",
+      "statement": "Use the same term for the same thing and the same capitalization style throughout, especially across multi-step flows.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/writing",
+      "class": "universal",
+      "class_reason": "Terminology consistency reduces errors everywhere.",
+      "wcag": [
+        "3.2.4"
+      ],
+      "material3": "content-design",
+      "apg": null,
+      "verification_question": "Is any concept named two different ways across the flow?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.writing.empty-states-next-step",
+      "section": "foundations",
+      "page": "writing",
+      "statement": "Give every empty screen a clear next step.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/writing",
+      "class": "universal",
+      "class_reason": "Empty states occur on every platform.",
+      "wcag": [],
+      "material3": "content-design",
+      "apg": null,
+      "verification_question": "Does each empty view state why it is empty and offer one action to fill it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.foundations.writing.helpful-errors",
+      "section": "foundations",
+      "page": "writing",
+      "statement": "Write error messages that say what went wrong and how to fix it, in a neutral tone.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/writing",
+      "class": "universal",
+      "class_reason": "Error recovery guidance is platform-neutral.",
+      "wcag": [
+        "3.3.1",
+        "3.3.3"
+      ],
+      "material3": "content-design",
+      "apg": null,
+      "verification_question": "Does each error message name the problem and a concrete correction?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.charting-data.accessible-charts",
+      "section": "patterns",
+      "page": "charting-data",
+      "statement": "Make every chart understandable without sight and without color, with a text summary of its key insight.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/charting-data",
+      "class": "universal",
+      "class_reason": "Data visualization accessibility is platform-neutral.",
+      "wcag": [
+        "1.1.1",
+        "1.4.1"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can a screen-reader user obtain the chart's main takeaway and underlying values?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.charting-data.simple-then-detail",
+      "section": "patterns",
+      "page": "charting-data",
+      "statement": "Prefer familiar chart types and a simple default view, letting people choose to see more detail.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/charting-data",
+      "class": "universal",
+      "class_reason": "Progressive detail in charts is a general visualization principle.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does the default chart answer one question, with further detail available on request?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.collaboration-and-sharing.clear-sharing-scope",
+      "section": "patterns",
+      "page": "collaboration-and-sharing",
+      "statement": "Describe who can access shared content and what they can do in short, plain phrases before sharing.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/collaboration-and-sharing",
+      "class": "universal",
+      "class_reason": "Permission clarity matters on any platform.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Before sharing, can a person tell exactly who gets access and whether they can edit?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.drag-and-drop.non-drag-alternative",
+      "section": "patterns",
+      "page": "drag-and-drop",
+      "statement": "Offer a non-dragging way to perform anything that drag and drop can do.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/drag-and-drop",
+      "class": "universal",
+      "class_reason": "Dragging is hard for many people regardless of platform.",
+      "wcag": [
+        "2.5.7",
+        "2.1.1"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can every drag-and-drop outcome be achieved with single clicks or the keyboard?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.drag-and-drop.drop-target-feedback",
+      "section": "patterns",
+      "page": "drag-and-drop",
+      "statement": "Show whether a destination accepts the dragged item and what the drop will do.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/drag-and-drop",
+      "class": "universal",
+      "class_reason": "Predictable drop outcomes are a direct-manipulation principle.",
+      "wcag": [],
+      "material3": "states",
+      "apg": null,
+      "verification_question": "While dragging, does each potential target show whether it accepts the item?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.drag-and-drop.undoable-drop",
+      "section": "patterns",
+      "page": "drag-and-drop",
+      "statement": "Let people undo a drop, especially one that moves rather than copies.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/drag-and-drop",
+      "class": "universal",
+      "class_reason": "Recoverability is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can the last drop be undone without manual reconstruction?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.entering-data.prefer-choices",
+      "section": "patterns",
+      "page": "entering-data",
+      "statement": "Offer choices, defaults, and pasting instead of free text entry where possible.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/entering-data",
+      "class": "universal",
+      "class_reason": "Reducing typing lowers error rates everywhere.",
+      "wcag": [
+        "3.3.7"
+      ],
+      "material3": "text-fields",
+      "apg": null,
+      "verification_question": "Is any field asking people to type something the product already knows or could offer as a choice?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.entering-data.autofill-input-purpose",
+      "section": "patterns",
+      "page": "entering-data",
+      "statement": "Obtain known information from the system rather than asking for it again.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/entering-data",
+      "class": "adapt",
+      "class_reason": "HIG uses Apple system data sources; on the web expose input purpose with autocomplete tokens so browsers and password managers can fill fields.",
+      "wcag": [
+        "1.3.5",
+        "3.3.7"
+      ],
+      "material3": "text-fields",
+      "apg": null,
+      "verification_question": "Do personal-data fields declare the correct autocomplete token?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.entering-data.validate-early",
+      "section": "patterns",
+      "page": "entering-data",
+      "statement": "Check values as people work and make required information clear before they try to continue.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/entering-data",
+      "class": "universal",
+      "class_reason": "Inline validation and required-field clarity are shared form principles.",
+      "wcag": [
+        "3.3.1",
+        "3.3.2",
+        "3.3.3"
+      ],
+      "material3": "text-fields",
+      "apg": null,
+      "verification_question": "Are required fields identified before submission, and are errors reported next to the field with a fix?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.entering-data.protect-secrets",
+      "section": "patterns",
+      "page": "entering-data",
+      "statement": "Mask secret entry and never prefill a password field with a stored value visible to others.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/entering-data",
+      "class": "universal",
+      "class_reason": "Credential protection is platform-neutral.",
+      "wcag": [],
+      "material3": "text-fields",
+      "apg": null,
+      "verification_question": "Are password fields masked by default, with an optional reveal control?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.feedback.accessible-feedback",
+      "section": "patterns",
+      "page": "feedback",
+      "statement": "Deliver status feedback in ways every person can perceive, including assistive technology.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/feedback",
+      "class": "universal",
+      "class_reason": "Status announcements are needed on every platform.",
+      "wcag": [
+        "4.1.3"
+      ],
+      "material3": "snackbar",
+      "apg": null,
+      "verification_question": "Is each success, progress, or error status announced to screen readers without moving focus?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.feedback.warn-before-irreversible",
+      "section": "patterns",
+      "page": "feedback",
+      "statement": "Warn before an action causes unexpected, irreversible data loss.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/feedback",
+      "class": "universal",
+      "class_reason": "Error prevention for destructive actions is a shared principle.",
+      "wcag": [
+        "3.3.4"
+      ],
+      "material3": "dialogs",
+      "apg": "alertdialog",
+      "verification_question": "Does every irreversible destructive action require confirmation or offer undo?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.feedback.explain-unavailable",
+      "section": "patterns",
+      "page": "feedback",
+      "statement": "When a command cannot run, show that it is unavailable and explain why.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/feedback",
+      "class": "universal",
+      "class_reason": "Explaining constraints helps recovery on every platform.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does a disabled or failed command tell people what condition must change?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.file-management.work-is-preserved",
+      "section": "patterns",
+      "page": "file-management",
+      "statement": "Keep people's work safe automatically unless they explicitly discard it.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/file-management",
+      "class": "universal",
+      "class_reason": "Data-loss prevention is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "If the tab closes or the connection drops mid-edit, is the work recoverable?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.going-full-screen.keep-essentials-and-exit",
+      "section": "patterns",
+      "page": "going-full-screen",
+      "statement": "In full-screen views, keep essential controls reachable and let people choose when to leave.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/going-full-screen",
+      "class": "universal",
+      "class_reason": "Control over immersive views applies to the web Fullscreen API too.",
+      "wcag": [
+        "2.1.2"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "In full-screen mode, are core controls reachable and does Escape always exit?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.going-full-screen.resume-position",
+      "section": "patterns",
+      "page": "going-full-screen",
+      "statement": "When people return to a full-screen experience, resume where they left off.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/going-full-screen",
+      "class": "universal",
+      "class_reason": "State restoration is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "After leaving and returning, does playback or reading resume at the previous position?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.launching.fast-start",
+      "section": "patterns",
+      "page": "launching",
+      "statement": "Show the first usable screen as quickly as possible and avoid splash screens that only delay.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/launching",
+      "class": "universal",
+      "class_reason": "Startup time matters on every platform.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Is the first meaningful content visible without an intermediate brand or splash screen?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.launching.restore-state",
+      "section": "patterns",
+      "page": "launching",
+      "statement": "Bring back the prior view, selection, and position when someone returns, so the session picks up without rework.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/launching",
+      "class": "universal",
+      "class_reason": "Continuity applies to web sessions as well.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "After a reload, does the view return to the same location, filters, and selection?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.loading.show-something-soon",
+      "section": "patterns",
+      "page": "loading",
+      "statement": "Display available content immediately and fill in the rest as it loads.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/loading",
+      "class": "universal",
+      "class_reason": "Perceived performance principles are platform-neutral.",
+      "wcag": [],
+      "material3": "progress-indicators",
+      "apg": null,
+      "verification_question": "Does the screen show structure or partial content before all data arrives?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.loading.communicate-progress",
+      "section": "patterns",
+      "page": "loading",
+      "statement": "Make clear that content is loading and, when possible, how long it will take.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/loading",
+      "class": "universal",
+      "class_reason": "Progress communication is shared with Material and WCAG status guidance.",
+      "wcag": [
+        "4.1.3"
+      ],
+      "material3": "progress-indicators",
+      "apg": null,
+      "verification_question": "Does every load longer than about a second show a progress indication announced to assistive technology?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.loading.non-blocking-wait",
+      "section": "patterns",
+      "page": "loading",
+      "statement": "Let people keep using other parts of the product while content loads.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/loading",
+      "class": "universal",
+      "class_reason": "Non-blocking loading is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can people navigate elsewhere while a long load continues?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.managing-accounts.delay-sign-in",
+      "section": "patterns",
+      "page": "managing-accounts",
+      "statement": "Let people explore before requiring registration, and explain what an account gives them when you do ask.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/managing-accounts",
+      "class": "universal",
+      "class_reason": "Deferred registration is a general usability principle.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can a new visitor reach meaningful content before any sign-in prompt?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.managing-accounts.clear-account-deletion",
+      "section": "patterns",
+      "page": "managing-accounts",
+      "statement": "Provide an easy-to-find way to delete an account, consistent across app and website.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/managing-accounts",
+      "class": "universal",
+      "class_reason": "Account control is expected, and in some regions required, everywhere.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can a signed-in person find and complete account deletion without contacting support?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.managing-accounts.name-auth-method",
+      "section": "patterns",
+      "page": "managing-accounts",
+      "statement": "Name the authentication methods that are actually available in the current context.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/managing-accounts",
+      "class": "adapt",
+      "class_reason": "HIG refers to Apple biometrics and passkeys; on the web reflect what the browser and device support.",
+      "wcag": [
+        "3.3.8"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does the sign-in screen only offer methods the current browser and device can complete?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.managing-notifications.honest-urgency",
+      "section": "patterns",
+      "page": "managing-notifications",
+      "statement": "Represent each notification's urgency accurately and never use urgent channels for marketing.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/managing-notifications",
+      "class": "universal",
+      "class_reason": "Trustworthy interruption is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Is any promotional message delivered through a channel reserved for time-sensitive alerts?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.managing-notifications.consent-and-control",
+      "section": "patterns",
+      "page": "managing-notifications",
+      "statement": "Get explicit permission for promotional notifications and let people manage notification settings inside the product.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/managing-notifications",
+      "class": "universal",
+      "class_reason": "Consent and control apply to web push too.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can people change notification types from within the product's own settings?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.modality.modal-only-when-needed",
+      "section": "patterns",
+      "page": "modality",
+      "statement": "Use modal presentation only when focusing on a short, self-contained task brings a clear benefit.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/modality",
+      "class": "universal",
+      "class_reason": "Modal overuse harms flow on every platform.",
+      "wcag": [],
+      "material3": "dialogs",
+      "apg": "dialog-modal",
+      "verification_question": "Could this modal task be done inline without losing clarity?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.modality.obvious-dismiss",
+      "section": "patterns",
+      "page": "modality",
+      "statement": "Every modal view needs a clear exit, and closing it must not silently discard work in progress.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/modality",
+      "class": "universal",
+      "class_reason": "Escape routes and data protection are platform-neutral.",
+      "wcag": [
+        "2.1.2"
+      ],
+      "material3": "dialogs",
+      "apg": "dialog-modal",
+      "verification_question": "Does each modal close with a visible control and Escape, and warn before discarding unsaved input?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.modality.one-modal-at-a-time",
+      "section": "patterns",
+      "page": "modality",
+      "statement": "Avoid stacking modal views; close one before presenting another.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/modality",
+      "class": "universal",
+      "class_reason": "Nested modality disorients people on any platform.",
+      "wcag": [],
+      "material3": "dialogs",
+      "apg": "dialog-modal",
+      "verification_question": "Can a modal ever open another modal on top of itself?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.multitasking.pause-when-hidden",
+      "section": "patterns",
+      "page": "multitasking",
+      "statement": "Pause activities that need attention when people switch away, and resume smoothly.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/multitasking",
+      "class": "adapt",
+      "class_reason": "HIG uses Apple app-lifecycle events; on the web use the Page Visibility API.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "When the tab becomes hidden, do timers, games, and attention-requiring media pause?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.offering-help.task-based-help",
+      "section": "patterns",
+      "page": "offering-help",
+      "statement": "Shape help around the tasks people perform, using consistent wording and imagery.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/offering-help",
+      "class": "universal",
+      "class_reason": "Task-oriented help is platform-neutral.",
+      "wcag": [
+        "3.2.6"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Is help placed in the same location on every screen and organized by task?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.offering-help.short-dismissible-tips",
+      "section": "patterns",
+      "page": "offering-help",
+      "statement": "Keep tips brief and actionable, and make them dismissible without moving focus or hiding content.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/offering-help",
+      "class": "universal",
+      "class_reason": "Tooltip and coach-mark behavior is shared with web guidance.",
+      "wcag": [
+        "1.4.13"
+      ],
+      "material3": "tooltips",
+      "apg": "tooltip",
+      "verification_question": "Can every tip be dismissed with Escape, and does it stay visible while hovered?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.onboarding.learn-by-doing",
+      "section": "patterns",
+      "page": "onboarding",
+      "statement": "Teach through interaction in context rather than through long upfront tutorials.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/onboarding",
+      "class": "universal",
+      "class_reason": "Contextual learning is a general usability principle.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does onboarding let people perform the real task instead of reading about it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.onboarding.optional-and-brief",
+      "section": "patterns",
+      "page": "onboarding",
+      "statement": "Keep any required onboarding short, make tutorials optional, and postpone nonessential setup.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/onboarding",
+      "class": "universal",
+      "class_reason": "Low-friction start applies everywhere.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can a person skip onboarding and still reach the main task?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.playing-audio.respect-sound-settings",
+      "section": "patterns",
+      "page": "playing-audio",
+      "statement": "Respect people's silence and volume choices and never start sound unexpectedly.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/playing-audio",
+      "class": "adapt",
+      "class_reason": "HIG references the hardware silence switch and system volume; on the web avoid autoplaying audio and provide a pause or mute control.",
+      "wcag": [
+        "1.4.2"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does any audio play automatically for more than three seconds without a control to stop it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.playing-haptics.haptics-supplement",
+      "section": "patterns",
+      "page": "playing-haptics",
+      "statement": "Treat haptics as optional reinforcement of feedback that is already visible.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/playing-haptics",
+      "class": "adapt",
+      "class_reason": "HIG documents Apple haptic engine patterns; web vibration support is limited and must never be the only feedback channel.",
+      "wcag": [
+        "1.3.3"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Is every haptic cue paired with a visible equivalent and possible to turn off?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.playing-video.preserve-aspect-ratio",
+      "section": "patterns",
+      "page": "playing-video",
+      "statement": "Show video at its original aspect ratio without stretching or cropping essential content.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/playing-video",
+      "class": "universal",
+      "class_reason": "Media fidelity is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does video keep its native aspect ratio at every container size?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.playing-video.expected-controls",
+      "section": "patterns",
+      "page": "playing-video",
+      "statement": "Support the playback interactions people expect for their input device, preferring the platform's player.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/playing-video",
+      "class": "adapt",
+      "class_reason": "HIG prefers Apple's system player; on the web prefer native media controls or a player with full keyboard support.",
+      "wcag": [
+        "2.1.1"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can playback be started, paused, and scrubbed with the keyboard?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.printing.discoverable-relevant-printing",
+      "section": "patterns",
+      "page": "printing",
+      "statement": "Offer printing only when output is meaningful, and keep frequently used print options separate from advanced ones.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/printing",
+      "class": "universal",
+      "class_reason": "Print relevance applies to web print styles too.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "When printing is offered, does the printed output contain the content people expect without interface chrome?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.ratings-and-reviews.ask-at-good-moments",
+      "section": "patterns",
+      "page": "ratings-and-reviews",
+      "statement": "Ask for feedback only after people have engaged, never mid-task, and not repeatedly.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews",
+      "class": "universal",
+      "class_reason": "Interruption cost is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can a rating prompt appear during an unfinished task or more than once in a short period?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.searching.prominent-search",
+      "section": "patterns",
+      "page": "searching",
+      "statement": "When finding things is central to the product, put search in a prominent, stable location with one entry point.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/searching",
+      "class": "universal",
+      "class_reason": "Findability is a shared navigation principle.",
+      "wcag": [
+        "3.2.3"
+      ],
+      "material3": "search",
+      "apg": "combobox",
+      "verification_question": "Is search reachable from the same location on every screen where it matters?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.searching.visible-scope-and-suggestions",
+      "section": "patterns",
+      "page": "searching",
+      "statement": "Show the current search scope and offer suggestions to reduce typing.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/searching",
+      "class": "universal",
+      "class_reason": "Scope clarity and suggestions are shared search principles.",
+      "wcag": [
+        "4.1.3"
+      ],
+      "material3": "search",
+      "apg": "combobox",
+      "verification_question": "Is the current scope visible, and are suggestion counts announced to assistive technology?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.searching.private-history",
+      "section": "patterns",
+      "page": "searching",
+      "statement": "Consider privacy before displaying recent searches, and let people clear them.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/searching",
+      "class": "universal",
+      "class_reason": "Search history can reveal sensitive information on any device.",
+      "wcag": [],
+      "material3": "search",
+      "apg": null,
+      "verification_question": "Can people clear search history, and is it hidden on shared surfaces?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.settings.good-defaults-few-settings",
+      "section": "patterns",
+      "page": "settings",
+      "statement": "Choose defaults that serve most people and keep the number of settings small.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/settings",
+      "class": "universal",
+      "class_reason": "Default quality is a general product principle.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Could any setting be removed by choosing a better default?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.settings.respect-system-preferences",
+      "section": "patterns",
+      "page": "settings",
+      "statement": "Honor system-wide preferences rather than duplicating them in product settings.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/settings",
+      "class": "adapt",
+      "class_reason": "HIG refers to Apple system settings; on the web read user-preference media queries such as reduced motion, contrast, and color scheme.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does the product read system preferences before offering its own duplicate toggles?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.settings.options-in-context",
+      "section": "patterns",
+      "page": "settings",
+      "statement": "Let people adjust task-specific options where they work rather than in a distant settings area.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/settings",
+      "class": "universal",
+      "class_reason": "Contextual options reduce navigation everywhere.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Are task-specific options available from the task's own view?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.undo-and-redo.predictable-undo",
+      "section": "patterns",
+      "page": "undo-and-redo",
+      "statement": "Make undo predictable: describe what will be undone, show its result, and allow multiple steps.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/undo-and-redo",
+      "class": "universal",
+      "class_reason": "Recoverability is a universal usability heuristic.",
+      "wcag": [],
+      "material3": "snackbar",
+      "apg": null,
+      "verification_question": "Does the undo control name the action it reverses, and can several actions be undone in order?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.patterns.undo-and-redo.standard-undo-shortcuts",
+      "section": "patterns",
+      "page": "undo-and-redo",
+      "statement": "Support the platform's standard undo and redo shortcuts and avoid redefining them.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/undo-and-redo",
+      "class": "adapt",
+      "class_reason": "HIG names macOS menu commands and shortcuts; on the web support the host platform's conventional undo shortcuts without hijacking text-field undo.",
+      "wcag": [
+        "2.1.4"
+      ],
+      "material3": null,
+      "apg": "keyboard-interface",
+      "verification_question": "Do the conventional undo and redo shortcuts work, including inside text fields?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.charts.meaningful-axes",
+      "section": "components",
+      "page": "charts",
+      "statement": "Choose axis ranges and lower bounds that match what the data means, and use familiar tick values.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/charts",
+      "class": "universal",
+      "class_reason": "Honest axes are a general data-visualization principle.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Could the axis range exaggerate or hide the size of a change?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.image-views.text-over-images",
+      "section": "components",
+      "page": "image-views",
+      "statement": "When text overlays an image, guarantee its contrast against every part of the image it can cover.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/image-views",
+      "class": "universal",
+      "class_reason": "Overlay legibility is platform-neutral.",
+      "wcag": [
+        "1.4.3"
+      ],
+      "material3": "contrast",
+      "apg": null,
+      "verification_question": "Has overlay text been measured against the brightest and darkest regions beneath it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.image-views.interactive-images-are-buttons",
+      "section": "components",
+      "page": "image-views",
+      "statement": "Make a clickable image a real button or link, not a passive image with a click handler.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/image-views",
+      "class": "universal",
+      "class_reason": "Role exposure is required on every platform.",
+      "wcag": [
+        "4.1.2"
+      ],
+      "material3": "buttons",
+      "apg": "button",
+      "verification_question": "Does each clickable image expose a button or link role and an accessible name?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.text-views.selectable-useful-text",
+      "section": "components",
+      "page": "text-views",
+      "statement": "Let people select and copy text that is useful outside the product.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/text-views",
+      "class": "universal",
+      "class_reason": "Copyable content supports reuse everywhere.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can people select and copy reference numbers, addresses, and error text?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.text-views.matching-keyboard",
+      "section": "components",
+      "page": "text-views",
+      "statement": "Show the on-screen keyboard that matches the content being entered.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/text-views",
+      "class": "adapt",
+      "class_reason": "HIG uses Apple keyboard types; on the web use input types, inputmode, and enterkeyhint.",
+      "wcag": [
+        "1.3.5"
+      ],
+      "material3": "text-fields",
+      "apg": null,
+      "verification_question": "Do email, number, phone, and search fields bring up the matching on-screen keyboard?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.web-views.embedded-navigation",
+      "section": "components",
+      "page": "web-views",
+      "statement": "When embedding navigable web content, support back and forward movement within it.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/web-views",
+      "class": "universal",
+      "class_reason": "History navigation is expected in any embedded browser context.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can people go back after following a link inside embedded content?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.boxes.titled-groups",
+      "section": "components",
+      "page": "boxes",
+      "statement": "Give a visually grouped set of controls a short title that describes its contents.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/boxes",
+      "class": "universal",
+      "class_reason": "Group labeling is platform-neutral.",
+      "wcag": [
+        "1.3.1"
+      ],
+      "material3": "cards",
+      "apg": null,
+      "verification_question": "Does each visual group of related fields have a programmatic group label such as a fieldset legend?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.collections.standard-grid-calm-changes",
+      "section": "components",
+      "page": "collections",
+      "statement": "Prefer standard row or grid arrangements and avoid disorienting layout changes when items are inserted or removed.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/collections",
+      "class": "universal",
+      "class_reason": "Layout stability is a shared principle.",
+      "wcag": [
+        "2.3.3"
+      ],
+      "material3": "cards",
+      "apg": "grid",
+      "verification_question": "Does inserting or removing an item keep the person's place and focus?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.disclosure-controls.labeled-adjacent-disclosure",
+      "section": "components",
+      "page": "disclosure-controls",
+      "statement": "Label each disclosure control with what it reveals and place it next to the content it controls.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/disclosure-controls",
+      "class": "universal",
+      "class_reason": "Disclosure semantics are shared with WAI-ARIA.",
+      "wcag": [
+        "4.1.2"
+      ],
+      "material3": null,
+      "apg": "disclosure",
+      "verification_question": "Does each disclosure trigger expose its expanded state and sit adjacent to its panel?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.lists-and-tables.text-in-lists",
+      "section": "components",
+      "page": "lists-and-tables",
+      "statement": "Present primarily textual items as lists or tables with succinct rows and descriptive column headings.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/lists-and-tables",
+      "class": "universal",
+      "class_reason": "Tabular semantics are platform-neutral.",
+      "wcag": [
+        "1.3.1"
+      ],
+      "material3": "lists",
+      "apg": "table",
+      "verification_question": "Do data tables use header cells, and are list rows short enough to scan?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.lists-and-tables.avoid-clipping",
+      "section": "components",
+      "page": "lists-and-tables",
+      "statement": "Preserve readability of long item text instead of clipping meaning through truncation.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/lists-and-tables",
+      "class": "universal",
+      "class_reason": "Truncation harms comprehension everywhere.",
+      "wcag": [
+        "1.4.10"
+      ],
+      "material3": "lists",
+      "apg": null,
+      "verification_question": "Is the full text of any truncated row available without hovering?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.lists-and-tables.selection-feedback",
+      "section": "components",
+      "page": "lists-and-tables",
+      "statement": "Give clear feedback when a list item is selected.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/lists-and-tables",
+      "class": "universal",
+      "class_reason": "Selection state must be perceivable on every platform.",
+      "wcag": [
+        "4.1.2",
+        "1.4.11"
+      ],
+      "material3": "lists",
+      "apg": "listbox",
+      "verification_question": "Is the selected row visually distinct and exposed as selected to assistive technology?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.outline-views.hierarchy-first-column",
+      "section": "components",
+      "page": "outline-views",
+      "statement": "Show hierarchy in a single leading column, make nested groups easy to expand and collapse, and use a plain table for flat data.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/outline-views",
+      "class": "universal",
+      "class_reason": "Tree semantics are shared with WAI-ARIA.",
+      "wcag": [
+        "1.3.1"
+      ],
+      "material3": null,
+      "apg": "treegrid",
+      "verification_question": "Is hierarchy exposed only in the first column with keyboard expand and collapse?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.split-views.persistent-selection",
+      "section": "components",
+      "page": "split-views",
+      "statement": "In multi-pane layouts, keep the chosen item marked in every navigation pane above the detail view.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/split-views",
+      "class": "universal",
+      "class_reason": "Wayfinding in list-detail layouts is platform-neutral.",
+      "wcag": [],
+      "material3": "layout",
+      "apg": null,
+      "verification_question": "Does the list pane continue to show which item the detail pane displays?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.split-views.collapse-for-narrow",
+      "section": "components",
+      "page": "split-views",
+      "statement": "Account for narrow, intermediate, and wide widths, with sensible minimum and maximum pane sizes and the option to hide a pane.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/split-views",
+      "class": "universal",
+      "class_reason": "Adaptive list-detail behavior is shared with Material canonical layouts.",
+      "wcag": [
+        "1.4.10"
+      ],
+      "material3": "window-size-classes",
+      "apg": null,
+      "verification_question": "At a narrow width, does the split view collapse to one pane with a way back to the list?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.tab-views.related-panes",
+      "section": "components",
+      "page": "tab-views",
+      "statement": "Use tabs only for closely related content areas, with descriptive labels and a small number of tabs.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/tab-views",
+      "class": "universal",
+      "class_reason": "Tab semantics are shared with WAI-ARIA and Material.",
+      "wcag": [
+        "4.1.2",
+        "2.4.6"
+      ],
+      "material3": "tabs",
+      "apg": "tabs",
+      "verification_question": "Are tabs few, clearly labeled, and implemented with tablist semantics and arrow-key movement?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.tab-views.pane-local-controls",
+      "section": "components",
+      "page": "tab-views",
+      "statement": "Controls inside a tab pane should affect only that pane.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/tab-views",
+      "class": "universal",
+      "class_reason": "Scope clarity is platform-neutral.",
+      "wcag": [],
+      "material3": "tabs",
+      "apg": "tabs",
+      "verification_question": "Does any control inside one tab change content in another tab?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.buttons.press-state",
+      "section": "components",
+      "page": "buttons",
+      "statement": "Give every custom button a visible pressed state in addition to hover and focus states.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "class": "universal",
+      "class_reason": "State feedback is shared with Material interaction states.",
+      "wcag": [
+        "2.4.7"
+      ],
+      "material3": "states",
+      "apg": "button",
+      "verification_question": "Does each custom button show distinct hover, focus, pressed, and disabled states?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.buttons.one-prominent-action",
+      "section": "components",
+      "page": "buttons",
+      "statement": "Give the most likely action the most prominent style and keep prominent buttons few per view.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "class": "universal",
+      "class_reason": "Action hierarchy is a shared principle.",
+      "wcag": [],
+      "material3": "buttons",
+      "apg": null,
+      "verification_question": "Is there exactly one primary-styled button per decision point?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.buttons.role-is-clear",
+      "section": "components",
+      "page": "buttons",
+      "statement": "Indicate a button's role, such as destructive or cancel, through label and styling, not color alone.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "class": "universal",
+      "class_reason": "Role clarity is platform-neutral.",
+      "wcag": [
+        "1.4.1"
+      ],
+      "material3": "buttons",
+      "apg": "button",
+      "verification_question": "Is a destructive button identifiable from its label even without its color?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.context-menus.context-menu-redundancy",
+      "section": "components",
+      "page": "context-menus",
+      "statement": "Make every context menu command also available from the main interface, and keep these menus short and relevant.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/context-menus",
+      "class": "universal",
+      "class_reason": "Hidden-only commands are undiscoverable on every platform.",
+      "wcag": [
+        "2.1.1"
+      ],
+      "material3": "menus",
+      "apg": "menu-button",
+      "verification_question": "Is each context-menu command reachable without a right-click or long press?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.context-menus.shallow-submenus",
+      "section": "components",
+      "page": "context-menus",
+      "statement": "Limit submenus to one level and hide items that do not apply in a context menu.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/context-menus",
+      "class": "universal",
+      "class_reason": "Menu depth increases error rates everywhere.",
+      "wcag": [],
+      "material3": "menus",
+      "apg": "menubar",
+      "verification_question": "Does any context menu nest more than one submenu level?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.edit-menus.platform-edit-commands",
+      "section": "components",
+      "page": "edit-menus",
+      "statement": "Rely on the platform's own edit commands for cut, copy, paste, and undo rather than rebuilding them.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/edit-menus",
+      "class": "adapt",
+      "class_reason": "HIG refers to Apple's system edit menu; on the web keep native selection and clipboard behavior working and add custom commands beside it.",
+      "wcag": [],
+      "material3": "menus",
+      "apg": null,
+      "verification_question": "Do native copy, paste, and selection still work wherever custom edit actions are added?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.menus.clear-menu-labels",
+      "section": "components",
+      "page": "menus",
+      "statement": "Label each menu item with a succinct description of its action and show when an item is unavailable.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/menus",
+      "class": "universal",
+      "class_reason": "Menu clarity is shared with WAI-ARIA and Material.",
+      "wcag": [
+        "4.1.2"
+      ],
+      "material3": "menus",
+      "apg": "menubar",
+      "verification_question": "Does every menu item name its action, and are unavailable items exposed as disabled?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.menus.more-input-indicator",
+      "section": "components",
+      "page": "menus",
+      "statement": "Signal when a menu command needs more input before it completes.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/menus",
+      "class": "adapt",
+      "class_reason": "HIG uses a trailing ellipsis convention from Apple platforms; on the web the signal may be an ellipsis or a description, verified for clarity.",
+      "wcag": [],
+      "material3": "menus",
+      "apg": "menubar",
+      "verification_question": "Can people predict which menu items open a further step before choosing them?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.pop-up-buttons.exclusive-options-with-default",
+      "section": "components",
+      "page": "pop-up-buttons",
+      "statement": "Use a compact single-choice control when exactly one of several options applies, and preselect a sensible value.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/pop-up-buttons",
+      "class": "universal",
+      "class_reason": "Single-select controls are platform-neutral.",
+      "wcag": [
+        "4.1.2"
+      ],
+      "material3": "menus",
+      "apg": "listbox",
+      "verification_question": "Does the collapsed control show the current choice so people can predict the options?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.pull-down-buttons.related-commands-confirm-destructive",
+      "section": "components",
+      "page": "pull-down-buttons",
+      "statement": "Group only commands related to the button's action in its menu and confirm destructive items.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/pull-down-buttons",
+      "class": "universal",
+      "class_reason": "Command grouping and destructive confirmation are shared principles.",
+      "wcag": [
+        "3.3.4"
+      ],
+      "material3": "menus",
+      "apg": "menu-button",
+      "verification_question": "Does the menu contain only related commands, and do destructive ones require confirmation?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.the-menu-bar.system-menu-bar",
+      "section": "components",
+      "page": "the-menu-bar",
+      "statement": "The macOS menu bar is a system-owned surface with a fixed structure; web products should not draw an imitation of it.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/the-menu-bar",
+      "class": "apple-specific",
+      "class_reason": "Imitating system chrome is outside the no-imitation boundary; web command menus follow WAI-ARIA menubar semantics on their own terms.",
+      "wcag": [],
+      "material3": null,
+      "apg": "menubar",
+      "verification_question": "Does the web product avoid recreating the macOS menu bar's appearance and position?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.toolbars.uncrowded-toolbars",
+      "section": "components",
+      "page": "toolbars",
+      "statement": "Choose toolbar items deliberately, move overflow into a more menu, and prefer standard controls.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "class": "universal",
+      "class_reason": "Toolbar density is a shared principle.",
+      "wcag": [],
+      "material3": "top-app-bar",
+      "apg": "toolbar",
+      "verification_question": "At narrow widths, do surplus toolbar actions move into an overflow menu rather than shrinking?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.search-fields.search-hint-and-instant-results",
+      "section": "components",
+      "page": "search-fields",
+      "statement": "Use placeholder hints to describe what can be searched and start showing results as people type when feasible.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/search-fields",
+      "class": "universal",
+      "class_reason": "Search-field behavior is shared with Material and WAI-ARIA.",
+      "wcag": [
+        "3.3.2",
+        "4.1.3"
+      ],
+      "material3": "search",
+      "apg": "combobox",
+      "verification_question": "Does the search field have a persistent accessible label, with the placeholder only as a hint?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.search-fields.filterable-results",
+      "section": "components",
+      "page": "search-fields",
+      "statement": "Keep search results simple and let people filter by clearly defined scopes.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/search-fields",
+      "class": "universal",
+      "class_reason": "Scoped filtering is a general search principle.",
+      "wcag": [],
+      "material3": "chips",
+      "apg": null,
+      "verification_question": "Can people narrow results by category without starting a new search?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.sidebars.shallow-hideable-sidebar",
+      "section": "components",
+      "page": "sidebars",
+      "statement": "Keep sidebar hierarchy to about two levels, let people hide it, and group deep content with disclosure.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/sidebars",
+      "class": "universal",
+      "class_reason": "Navigation depth limits are shared with Material navigation drawers.",
+      "wcag": [],
+      "material3": "navigation-drawer",
+      "apg": "landmarks",
+      "verification_question": "Is the sidebar a labeled navigation landmark that people can collapse?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.tab-bars.navigation-not-actions",
+      "section": "components",
+      "page": "tab-bars",
+      "statement": "Use a bottom or top navigation bar only to move between sections, never to trigger actions.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/tab-bars",
+      "class": "universal",
+      "class_reason": "Separating navigation from commands is shared with Material navigation bars.",
+      "wcag": [
+        "3.2.3"
+      ],
+      "material3": "navigation-bar",
+      "apg": null,
+      "verification_question": "Does every item in the navigation bar lead to a destination rather than perform an action?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.tab-bars.stable-labeled-destinations",
+      "section": "components",
+      "page": "tab-bars",
+      "statement": "Keep the section navigation visible and stable, label every item, and do not hide or disable destinations.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/tab-bars",
+      "class": "universal",
+      "class_reason": "Consistent navigation is a WCAG and Material principle.",
+      "wcag": [
+        "3.2.3",
+        "2.4.6"
+      ],
+      "material3": "navigation-bar",
+      "apg": null,
+      "verification_question": "Are navigation items labeled with text and present in the same order on every section?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.action-sheets.choices-for-intentional-action",
+      "section": "components",
+      "page": "action-sheets",
+      "statement": "Present a set of choices tied to an action the person started, include a way to cancel, and make destructive choices prominent.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/action-sheets",
+      "class": "universal",
+      "class_reason": "Action-choice sheets are shared with Material bottom sheets.",
+      "wcag": [],
+      "material3": "bottom-sheets",
+      "apg": "dialog-modal",
+      "verification_question": "Does every action sheet include a cancel path and clearly mark destructive choices?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.alerts.alerts-sparingly",
+      "section": "components",
+      "page": "alerts",
+      "statement": "Reserve alerts for critical, actionable situations; do not use them for information or for common actions that can be undone.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/alerts",
+      "class": "universal",
+      "class_reason": "Alert fatigue is platform-neutral.",
+      "wcag": [],
+      "material3": "dialogs",
+      "apg": "alertdialog",
+      "verification_question": "Could this alert be replaced by inline status or an undo affordance?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.alerts.clear-alert-copy",
+      "section": "components",
+      "page": "alerts",
+      "statement": "Write alert titles that state the situation directly and buttons that name the outcome.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/alerts",
+      "class": "universal",
+      "class_reason": "Dialog copy guidance is shared with Material.",
+      "wcag": [
+        "2.4.6"
+      ],
+      "material3": "dialogs",
+      "apg": "alertdialog",
+      "verification_question": "Can someone choose correctly by reading only the alert's buttons?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.page-controls.ordered-page-position",
+      "section": "components",
+      "page": "page-controls",
+      "statement": "Indicate the current position among a small ordered set of pages with simple, consistent indicators.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/page-controls",
+      "class": "universal",
+      "class_reason": "Position indication is shared with WAI-ARIA carousels.",
+      "wcag": [
+        "4.1.2"
+      ],
+      "material3": "carousel",
+      "apg": "carousel",
+      "verification_question": "Does the page indicator expose the current page and total to assistive technology?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.popovers.small-single-popover",
+      "section": "components",
+      "page": "popovers",
+      "statement": "Use a popover for a small amount of related content, show one at a time, and keep any work when it closes automatically.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/popovers",
+      "class": "universal",
+      "class_reason": "Non-modal overlay behavior is platform-neutral.",
+      "wcag": [
+        "1.4.13"
+      ],
+      "material3": "menus",
+      "apg": null,
+      "verification_question": "Does opening a second popover close the first, and is input kept when a popover dismisses?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.scroll-views.visible-scrollability",
+      "section": "components",
+      "page": "scroll-views",
+      "statement": "Make it apparent when content scrolls and support standard scrolling input including the keyboard.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/scroll-views",
+      "class": "universal",
+      "class_reason": "Scroll discoverability is platform-neutral.",
+      "wcag": [
+        "2.1.1"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can a keyboard user scroll every scroll container, and is clipped content visibly hinted?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.scroll-views.no-same-axis-nesting",
+      "section": "components",
+      "page": "scroll-views",
+      "statement": "Avoid nesting a scroll area inside another that scrolls in the same direction.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/scroll-views",
+      "class": "universal",
+      "class_reason": "Nested same-axis scrolling traps input on every platform.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Is there any scroll container inside another with the same scroll axis?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.sheets.one-sheet-with-dismiss",
+      "section": "components",
+      "page": "sheets",
+      "statement": "Show one sheet at a time, offer an alternative to the confirm action for dismissal, and choose a different surface for long flows.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "class": "universal",
+      "class_reason": "Sheet behavior is shared with Material bottom and side sheets.",
+      "wcag": [
+        "2.1.2"
+      ],
+      "material3": "bottom-sheets",
+      "apg": "dialog-modal",
+      "verification_question": "Can each sheet be dismissed without confirming, and is no second sheet stacked over it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.windows.fluid-sizing",
+      "section": "components",
+      "page": "windows",
+      "statement": "Let windows and app frames adapt fluidly to any size people choose.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/windows",
+      "class": "universal",
+      "class_reason": "Resizable frames exist on desktop web and native alike.",
+      "wcag": [
+        "1.4.10"
+      ],
+      "material3": "window-size-classes",
+      "apg": null,
+      "verification_question": "At every browser window width from 320 CSS px upward, does the layout remain usable?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.windows.no-fake-system-chrome",
+      "section": "components",
+      "page": "windows",
+      "statement": "Avoid drawing custom window chrome that mimics the operating system.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/windows",
+      "class": "adapt",
+      "class_reason": "HIG asks apps to keep system window UI; on the web drawing imitation title bars or traffic-light buttons is platform imitation.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does the web product avoid rendering imitation operating-system window controls?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.color-wells.platform-color-picker",
+      "section": "components",
+      "page": "color-wells",
+      "statement": "Prefer the color selection UI the platform already provides over a custom picker.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/color-wells",
+      "class": "adapt",
+      "class_reason": "HIG refers to the Apple system color picker; on the web the counterpart is the native color input.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does a color selection field use the native color input unless a custom picker is required?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.combo-boxes.default-and-relevant-choices",
+      "section": "components",
+      "page": "combo-boxes",
+      "statement": "Prefill a combined text-and-list control with a meaningful default, label it, and offer relevant choices.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/combo-boxes",
+      "class": "universal",
+      "class_reason": "Combobox semantics are shared with WAI-ARIA.",
+      "wcag": [
+        "3.3.2",
+        "4.1.2"
+      ],
+      "material3": "menus",
+      "apg": "combobox",
+      "verification_question": "Does the combobox have a visible label and expose its expanded state and active option?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.digit-entry-views.purposeful-code-entry",
+      "section": "components",
+      "page": "digit-entry-views",
+      "statement": "State the purpose of short code entry and protect it when the code is secret.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/digit-entry-views",
+      "class": "adapt",
+      "class_reason": "HIG describes Apple digit-entry views; on the web use one-time-code autocomplete and a single labeled input instead of split boxes that break paste.",
+      "wcag": [
+        "1.3.5",
+        "3.3.2"
+      ],
+      "material3": "text-fields",
+      "apg": null,
+      "verification_question": "Can a one-time code be pasted or autofilled in one action?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.pickers.ordered-in-place-pickers",
+      "section": "components",
+      "page": "pickers",
+      "statement": "Offer predictable, logically ordered values in place without switching views, and avoid needless precision.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/pickers",
+      "class": "universal",
+      "class_reason": "Picker ordering is a general selection principle.",
+      "wcag": [],
+      "material3": "date-pickers",
+      "apg": "listbox",
+      "verification_question": "Are picker values in a logical order and selectable without leaving the current view?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.segmented-controls.few-related-segments",
+      "section": "components",
+      "page": "segmented-controls",
+      "statement": "Use a segmented control for a few closely related choices, with consistent segment size and either all text or all icons.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/segmented-controls",
+      "class": "universal",
+      "class_reason": "Segmented choice semantics are shared with Material segmented buttons.",
+      "wcag": [
+        "4.1.2"
+      ],
+      "material3": "segmented-buttons",
+      "apg": "radio",
+      "verification_question": "Does the control have a small number of segments, exposed as a single-choice group?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.sliders.slider-with-precise-entry",
+      "section": "components",
+      "page": "sliders",
+      "statement": "Pair a slider with precise entry when exact values matter, give live feedback, and use the expected direction.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/sliders",
+      "class": "universal",
+      "class_reason": "Slider operability is shared with WAI-ARIA and Material.",
+      "wcag": [
+        "2.5.7",
+        "2.1.1"
+      ],
+      "material3": "sliders",
+      "apg": "slider",
+      "verification_question": "Can the slider value be set exactly with the keyboard or a text field, without dragging?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.steppers.visible-stepped-value",
+      "section": "components",
+      "page": "steppers",
+      "statement": "Make the value a stepper changes obvious and pair it with text entry for large changes.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/steppers",
+      "class": "adapt",
+      "class_reason": "HIG describes the Apple stepper control; the web counterpart is a spinbutton or number input with visible value.",
+      "wcag": [
+        "4.1.2"
+      ],
+      "material3": null,
+      "apg": "spinbutton",
+      "verification_question": "Is the current value visible next to the stepper and announced on change?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.text-fields.sized-and-labeled-fields",
+      "section": "components",
+      "page": "text-fields",
+      "statement": "Size each text field to its expected content and keep a persistent label, using placeholder text only as a hint.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/text-fields",
+      "class": "universal",
+      "class_reason": "Field labeling is shared with WCAG and Material.",
+      "wcag": [
+        "3.3.2"
+      ],
+      "material3": "text-fields",
+      "apg": null,
+      "verification_question": "Does every field keep its label visible while people type?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.text-fields.expected-field-order",
+      "section": "components",
+      "page": "text-fields",
+      "statement": "Make moving between fields follow the order people expect.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/text-fields",
+      "class": "universal",
+      "class_reason": "Focus order is platform-neutral.",
+      "wcag": [
+        "2.4.3"
+      ],
+      "material3": "text-fields",
+      "apg": "keyboard-interface",
+      "verification_question": "Does Tab move through fields in visual reading order?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.toggles.obvious-two-state-toggle",
+      "section": "components",
+      "page": "toggles",
+      "statement": "Use a toggle for two opposing states, identify what it controls, and make its states visually obvious.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/toggles",
+      "class": "universal",
+      "class_reason": "Binary control semantics are shared with WAI-ARIA and Material.",
+      "wcag": [
+        "1.4.1",
+        "1.4.11",
+        "4.1.2"
+      ],
+      "material3": "switch",
+      "apg": "switch",
+      "verification_question": "Is the on and off state distinguishable without color and exposed as checked or unchecked?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.virtual-keyboards.content-matched-keyboard",
+      "section": "components",
+      "page": "virtual-keyboards",
+      "statement": "Match the on-screen keyboard and its return key to the content and next step.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/virtual-keyboards",
+      "class": "adapt",
+      "class_reason": "HIG uses Apple keyboard types and return-key labels; on the web use inputmode and enterkeyhint.",
+      "wcag": [
+        "1.3.5"
+      ],
+      "material3": "text-fields",
+      "apg": null,
+      "verification_question": "Does the on-screen keyboard's action key describe what happens next?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.gauges.labeled-range",
+      "section": "components",
+      "page": "gauges",
+      "statement": "Label a gauge's current value and both ends of its range.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/gauges",
+      "class": "universal",
+      "class_reason": "Range indicators need context on every platform.",
+      "wcag": [
+        "1.1.1"
+      ],
+      "material3": null,
+      "apg": "meter",
+      "verification_question": "Does the gauge expose its value, minimum, and maximum as text or meter semantics?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.progress-indicators.determinate-when-possible",
+      "section": "components",
+      "page": "progress-indicators",
+      "statement": "Prefer a determinate progress indicator, report advancement honestly, and switch from indeterminate to determinate once duration is known.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/progress-indicators",
+      "class": "universal",
+      "class_reason": "Progress honesty is shared with Material.",
+      "wcag": [
+        "4.1.3"
+      ],
+      "material3": "progress-indicators",
+      "apg": null,
+      "verification_question": "Does a long task show a determinate value as soon as one is known?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.progress-indicators.visible-continuation",
+      "section": "components",
+      "page": "progress-indicators",
+      "statement": "Keep a progress display visibly alive while work continues, so a running task never looks frozen.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/progress-indicators",
+      "class": "universal",
+      "class_reason": "Liveness signals are platform-neutral.",
+      "wcag": [],
+      "material3": "progress-indicators",
+      "apg": null,
+      "verification_question": "Does a stalled task change its indicator rather than appear frozen?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.rating-indicators.clear-adjustable-rating",
+      "section": "components",
+      "page": "rating-indicators",
+      "statement": "Make ratings easy to change and keep any custom rating symbol understandable.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/rating-indicators",
+      "class": "universal",
+      "class_reason": "Rating input semantics are platform-neutral.",
+      "wcag": [
+        "4.1.2"
+      ],
+      "material3": null,
+      "apg": "radio",
+      "verification_question": "Can a rating be changed with the keyboard, and is each option named?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.components.notifications.concise-respectful-notifications",
+      "section": "components",
+      "page": "notifications",
+      "statement": "Send concise notifications without duplicates or sensitive details, and show errors inside the product rather than as notifications.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/notifications",
+      "class": "adapt",
+      "class_reason": "HIG describes Apple notification delivery; the same content rules apply to web push and in-page toasts.",
+      "wcag": [],
+      "material3": "snackbar",
+      "apg": null,
+      "verification_question": "Could any notification expose private data on a locked screen, or repeat an earlier one?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.apple-pencil-and-scribble.hover-previews-not-actions",
+      "section": "inputs",
+      "page": "apple-pencil-and-scribble",
+      "statement": "Use hover to preview what will happen, never to commit an action.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/apple-pencil-and-scribble",
+      "class": "adapt",
+      "class_reason": "HIG frames this for Apple Pencil hover; the same rule applies to web pointer hover, which touch users cannot trigger.",
+      "wcag": [
+        "1.4.13"
+      ],
+      "material3": "states",
+      "apg": null,
+      "verification_question": "Does any action fire on hover alone, without a click, tap, or key press?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.focus-and-selection.no-unexpected-focus-moves",
+      "section": "inputs",
+      "page": "focus-and-selection",
+      "statement": "Do not move focus without the person's action.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/focus-and-selection",
+      "class": "universal",
+      "class_reason": "Unexpected focus changes disorient people on every platform.",
+      "wcag": [
+        "3.2.1",
+        "3.2.2"
+      ],
+      "material3": null,
+      "apg": "keyboard-interface",
+      "verification_question": "Does focus ever jump without a key press, click, or explicit request?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.focus-and-selection.logical-focus-path",
+      "section": "inputs",
+      "page": "focus-and-selection",
+      "statement": "Make focus move through custom views in a sensible, predictable order.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/focus-and-selection",
+      "class": "universal",
+      "class_reason": "Focus order is platform-neutral.",
+      "wcag": [
+        "2.4.3"
+      ],
+      "material3": null,
+      "apg": "keyboard-interface",
+      "verification_question": "Does keyboard focus travel through custom widgets in reading order?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.focus-and-selection.platform-consistent-focus-indicator",
+      "section": "inputs",
+      "page": "focus-and-selection",
+      "statement": "Indicate focus with a visible appearance consistent with the platform and never let it be hidden behind other content.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/focus-and-selection",
+      "class": "adapt",
+      "class_reason": "HIG relies on Apple system focus effects; on the web use :focus-visible with a high-contrast indicator that is not obscured by sticky elements.",
+      "wcag": [
+        "2.4.7",
+        "2.4.11"
+      ],
+      "material3": "states",
+      "apg": null,
+      "verification_question": "Is the focus indicator visible on every control and never covered by a sticky header or footer?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.gestures.multiple-input-paths",
+      "section": "inputs",
+      "page": "gestures",
+      "statement": "Offer several input routes to each action, and treat shortcut gestures as extras on top of standard controls.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/gestures",
+      "class": "universal",
+      "class_reason": "Input redundancy supports people with different abilities and devices.",
+      "wcag": [
+        "2.5.1",
+        "2.1.1"
+      ],
+      "material3": "gestures",
+      "apg": null,
+      "verification_question": "Is every gesture shortcut also available as a visible control?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.gestures.responsive-expected-gestures",
+      "section": "inputs",
+      "page": "gestures",
+      "statement": "Respond to standard gestures quickly and in the way people expect, and show when a gesture is unavailable.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/gestures",
+      "class": "universal",
+      "class_reason": "Gesture predictability is shared with Material.",
+      "wcag": [
+        "2.5.2"
+      ],
+      "material3": "gestures",
+      "apg": null,
+      "verification_question": "Can a person cancel a touch action by moving off the target before release?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.gestures.no-system-gesture-conflicts",
+      "section": "inputs",
+      "page": "gestures",
+      "statement": "Avoid custom gestures that collide with system or browser gestures.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/gestures",
+      "class": "adapt",
+      "class_reason": "HIG names Apple system gestures; on the web avoid capturing edge swipes, back gestures, and pinch zoom.",
+      "wcag": [],
+      "material3": "gestures",
+      "apg": null,
+      "verification_question": "Does any custom gesture block browser back-swipe or pinch zoom?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.gyro-and-accelerometer.motion-input-alternatives",
+      "section": "inputs",
+      "page": "gyro-and-accelerometer",
+      "statement": "Use device-motion input only for a tangible benefit, and always provide a conventional alternative.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/gyro-and-accelerometer",
+      "class": "universal",
+      "class_reason": "Motion actuation excludes people who cannot move the device.",
+      "wcag": [
+        "2.5.4"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can every motion-triggered action also be done with a control, and can motion input be disabled?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.keyboards.respect-standard-shortcuts",
+      "section": "inputs",
+      "page": "keyboards",
+      "statement": "Keep standard keyboard shortcuts working and reserve custom shortcuts for the most frequent commands.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/keyboards",
+      "class": "adapt",
+      "class_reason": "HIG lists Apple modifier conventions; on the web avoid overriding browser and assistive-technology shortcuts and let single-key shortcuts be remapped or disabled.",
+      "wcag": [
+        "2.1.4"
+      ],
+      "material3": null,
+      "apg": "keyboard-interface",
+      "verification_question": "Does any custom shortcut override a browser or screen-reader shortcut, and can single-character shortcuts be turned off?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.keyboards.describe-shortcuts",
+      "section": "inputs",
+      "page": "keyboards",
+      "statement": "Give every shortcut a descriptive name so it can be discovered from menus or help.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/keyboards",
+      "class": "universal",
+      "class_reason": "Discoverability of shortcuts is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": "keyboard-interface",
+      "verification_question": "Is each shortcut listed alongside its command where people can find it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.pointing-devices.consistent-across-inputs",
+      "section": "inputs",
+      "page": "pointing-devices",
+      "statement": "Deliver a consistent experience whether people use touch, a pointer, a keyboard, or other input.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/pointing-devices",
+      "class": "universal",
+      "class_reason": "Input parity is platform-neutral.",
+      "wcag": [
+        "2.1.1"
+      ],
+      "material3": "states",
+      "apg": null,
+      "verification_question": "Does the same task succeed with touch, mouse, and keyboard alone?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.inputs.pointing-devices.reveal-hidden-controls",
+      "section": "inputs",
+      "page": "pointing-devices",
+      "statement": "Let people reveal controls that auto-hide by moving the pointer or focusing, and keep them visible while in use.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/pointing-devices",
+      "class": "universal",
+      "class_reason": "Auto-hidden controls must be recoverable on every platform.",
+      "wcag": [
+        "1.4.13",
+        "2.4.7"
+      ],
+      "material3": "states",
+      "apg": null,
+      "verification_question": "Do auto-hidden controls reappear on pointer movement and on keyboard focus?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.technologies.apple-in-app-purchase.transparent-pricing",
+      "section": "technologies",
+      "page": "apple-in-app-purchase",
+      "statement": "Let people try the product before paying and show the total price and billing period of each purchase.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/apple-in-app-purchase",
+      "class": "adapt",
+      "class_reason": "HIG describes Apple's purchase system; transparent pricing applies to any web checkout or subscription.",
+      "wcag": [
+        "3.3.4"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does every purchase option show its full price and renewal period before confirmation?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.technologies.apple-pay.apple-payment-marks",
+      "section": "technologies",
+      "page": "apple-pay",
+      "statement": "Apple payment buttons and marks are trademarked, system-defined artwork used only to start Apple Pay; they are not a generic payment pattern.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/apple-pay",
+      "class": "apple-specific",
+      "class_reason": "Using or imitating the marks outside their licensed use is brand imitation.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Does the product use official payment marks only through their official integration and never as a styling reference?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.technologies.generative-ai.people-in-control",
+      "section": "technologies",
+      "page": "generative-ai",
+      "statement": "Keep people in control of generated output, disclose where AI is used, and keep the experience useful when generation is unavailable or declined.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/generative-ai",
+      "class": "universal",
+      "class_reason": "Responsible generative features are a cross-platform concern.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Can people review, edit, or reject generated output, and does the product still work with the feature off?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.technologies.icloud.graceful-sync-absence",
+      "section": "technologies",
+      "page": "icloud",
+      "statement": "Keep content current when sync is available and keep the product usable when it is not.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/icloud",
+      "class": "universal",
+      "class_reason": "Offline and sync-failure resilience is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "With the network or sync service unavailable, can people still read and edit local work?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.technologies.machine-learning.voluntary-feedback",
+      "section": "technologies",
+      "page": "machine-learning",
+      "statement": "Make explicit feedback on automated results voluntary, describe each option plainly, and act on it promptly.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
+      "class": "universal",
+      "class_reason": "Feedback loops for automated features are platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Is giving feedback optional, and does the product visibly respond to it?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.technologies.maps.legible-interactive-maps",
+      "section": "technologies",
+      "page": "maps",
+      "statement": "Make maps interactive, cluster overlapping points, and clearly identify the selected element.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/maps",
+      "class": "universal",
+      "class_reason": "Map legibility principles apply to any map surface.",
+      "wcag": [
+        "1.4.11"
+      ],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Are overlapping markers clustered, and is the selected marker distinguishable without color alone?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.technologies.researchkit.understood-consent",
+      "section": "technologies",
+      "page": "researchkit",
+      "statement": "Break long consent into digestible sections and confirm understanding before asking for agreement.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/researchkit",
+      "class": "universal",
+      "class_reason": "Informed consent design is platform-neutral.",
+      "wcag": [],
+      "material3": null,
+      "apg": null,
+      "verification_question": "Is consent split into short sections, with a check that people understood before they agree?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.technologies.voiceover.decorative-hidden-meaningful-described",
+      "section": "technologies",
+      "page": "voiceover",
+      "statement": "Describe meaningful images and hide purely decorative ones from screen readers.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/voiceover",
+      "class": "universal",
+      "class_reason": "HIG names VoiceOver; the rule holds for every screen reader.",
+      "wcag": [
+        "1.1.1"
+      ],
+      "material3": null,
+      "apg": "names-and-descriptions",
+      "verification_question": "Do informative images have descriptive alternatives and decorative images empty ones?",
+      "reviewed_on": "2026-10-19"
+    },
+    {
+      "id": "hig.technologies.voiceover.structure-for-navigation",
+      "section": "technologies",
+      "page": "voiceover",
+      "statement": "Use headings, grouping, and a logical order so screen-reader users can navigate the information hierarchy.",
+      "source_url": "https://developer.apple.com/design/human-interface-guidelines/voiceover",
+      "class": "universal",
+      "class_reason": "Semantic structure is platform-neutral.",
+      "wcag": [
+        "1.3.1",
+        "1.3.2",
+        "2.4.6"
+      ],
+      "material3": null,
+      "apg": "landmarks",
+      "verification_question": "Can a screen-reader user jump between headings and landmarks to reach each section?",
+      "reviewed_on": "2026-10-19"
+    }
+  ]
+}

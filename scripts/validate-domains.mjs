@@ -116,6 +116,7 @@ export const canonicalDomains = [
       { path: "platform-guides/adaptive-navigation.md", provenance: "local" },
       { path: "platform-guides/preferences-and-accessibility.md", provenance: "local" },
       { path: "platform-guides/input-and-focus.md", provenance: "local" },
+      { path: "platform-guides/hig-universal-principles.md", provenance: "local" },
       { path: "platform-guides/apple-interaction.md", provenance: "external", sourcePath: "skills/apple-design/SKILL.md" },
       { path: "platform-guides/adaptation-workflow.md", provenance: "local" },
       { path: "platform-guides/android-interaction.md", provenance: "local" },

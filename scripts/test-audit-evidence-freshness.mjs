@@ -10,6 +10,7 @@ import { cleanupFixture, completeSession, initializeConsumer } from "./page-evid
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const auditor = path.join(repositoryRoot, "scripts", "audit-evidence-freshness.mjs");
 const calibration = path.join(repositoryRoot, "consumer-reference", "baselines", "calibration.json");
+const principleExtraction = path.join(repositoryRoot, "platform-guides", "hig-universal-principles.json");
 const selectedCase = process.argv.find((argument) => argument === "--case") ? process.argv[process.argv.indexOf("--case") + 1] : null;
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stylegallery-freshness-"));
 
@@ -76,6 +77,11 @@ fs.writeFileSync(malformed, '{"record_kind":"page_evidence_manifest","review_by"
 const unknown = path.join(tempRoot, "unknown.json");
 writeJson(unknown, { record_kind: "unsupported_evidence_manifest", schema_version: "1.0" });
 const missing = path.join(tempRoot, "missing.json");
+const principleSource = JSON.parse(fs.readFileSync(principleExtraction, "utf8"));
+const principleWithoutDeadline = path.join(tempRoot, "principles-without-review-by.json");
+writeJson(principleWithoutDeadline, (({ review_by: _omitted, ...rest }) => rest)(principleSource));
+const principleFutureReview = path.join(tempRoot, "principles-future-review.json");
+writeJson(principleFutureReview, { ...principleSource, principles: principleSource.principles.map((item, index) => (index === 0 ? { ...item, reviewed_on: "2099-01-01" } : item)) });
 const missingPageSchema = path.join(tempRoot, "missing-page-evidence-manifest.schema.json");
 const completedPageFixture = initializeConsumer();
 const completedPage = completeSession(completedPageFixture);
@@ -161,6 +167,24 @@ const cases = [
     const actual = run(["--record", pagePastDeadline, "--page-schema", pageSchemaPath, "--as-of", "2026-07-21T00:00:00Z", "--mode", "blocking"]);
     return result("review-due-blocking", "exit nonzero with evidence_review_due", { codes: actual.report?.failures?.map((item) => item.code), status: actual.child.status, statuses: actual.report?.records?.map((item) => item.status) }, actual.child.status !== 0 && actual.report?.ok === false && actual.report.records[0]?.status === "review_due" && actual.report.failures.some((item) => item.code === "evidence_review_due"));
   })(),
+  (() => {
+    const actual = run(["--record", principleExtraction, "--as-of", "2026-10-20T00:00:00Z", "--mode", "blocking"]);
+    const entry = actual.report?.records?.[0];
+    return result("principle-extraction-fresh", "exit 0 with fresh status, review_by threshold, and reviewed_on as verified_at", { kind: entry?.kind, status: actual.child.status, statuses: actual.report?.records?.map((item) => item.status), threshold: entry?.threshold_date, verified: entry?.verified_at }, actual.child.status === 0 && entry?.kind === "platform_principle_extraction" && entry.status === "fresh" && entry.threshold_date === principleSource.review_by && entry.verified_at === `${principleSource.reviewed_on}T00:00:00Z`);
+  })(),
+  (() => {
+    const asOf = new Date(Date.parse(principleSource.review_by) - 3 * 24 * 60 * 60 * 1000).toISOString();
+    const actual = run(["--record", principleExtraction, "--as-of", asOf, "--mode", "advisory"]);
+    return result("principle-extraction-expiring", "exit 0 with expiring status inside the advisory window", { codes: actual.report?.warnings?.map((item) => item.code), status: actual.child.status, statuses: actual.report?.records?.map((item) => item.status) }, actual.child.status === 0 && actual.report?.records?.[0]?.status === "expiring" && actual.report.warnings.some((item) => item.code === "evidence_expiring"));
+  })(),
+  (() => {
+    const actual = run(["--record", principleExtraction, "--as-of", principleSource.review_by, "--mode", "blocking"]);
+    return result("principle-extraction-review-due-blocking", "exit nonzero with review_due/evidence_review_due at review_by", { codes: actual.report?.failures?.map((item) => item.code), status: actual.child.status, statuses: actual.report?.records?.map((item) => item.status) }, actual.child.status !== 0 && actual.report?.records?.[0]?.status === "review_due" && actual.report.failures.some((item) => item.code === "evidence_review_due"));
+  })(),
+  ...[["principle-extraction-missing-review-by", principleWithoutDeadline], ["principle-extraction-future-principle-review", principleFutureReview]].map(([name, file]) => (() => {
+    const actual = run(["--record", file, "--as-of", "2026-10-20T00:00:00Z", "--mode", "advisory"]);
+    return result(name, "exit nonzero with freshness_record_invalid", { codes: actual.report?.failures?.map((item) => item.code), status: actual.child.status }, actual.child.status !== 0 && actual.report?.failures?.some((item) => item.code === "freshness_record_invalid"));
+  })()),
   (() => {
     const actual = run(["--record", pageAtDeadline, "--page-schema", pageSchemaPath, "--as-of", "2026-07-21T00:00:00Z", "--mode", "blocking"]);
     return result("page-at-review-deadline-blocking", "exit nonzero with review_due/evidence_review_due at the deadline", { codes: actual.report?.failures?.map((item) => item.code), status: actual.child.status, statuses: actual.report?.records?.map((item) => item.status) }, actual.child.status !== 0 && actual.report?.ok === false && actual.report.records[0]?.status === "review_due" && actual.report.failures.some((item) => item.code === "evidence_review_due"));

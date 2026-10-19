@@ -770,6 +770,11 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "platform-guides/hig-universal-principles.md",
+      "domain": "platform-guides",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "platform-guides/index.md",
       "domain": "platform-guides",
       "lifecycle": "experimental"
@@ -1057,5 +1062,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:d3a7ac528239965bddc336917239158b43a8e504f004f374789346f1feb86d5e"
+  "version_id": "sg:policy/material-admission-v2@sha256:f0f5758d8da48a15861f3cadc7e1cb437d59fecc71fdf8d9991466776cc9ff20"
 }

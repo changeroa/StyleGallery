@@ -42,6 +42,7 @@ jobs:
           set +e
           node scripts/audit-evidence-freshness.mjs \
             --record consumer-reference/baselines/calibration.json \
+            --record platform-guides/hig-universal-principles.json \
             --as-of "$as_of" \
             --mode advisory \
             --json > evidence-freshness-report.json
