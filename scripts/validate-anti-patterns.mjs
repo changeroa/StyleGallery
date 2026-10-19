@@ -25,6 +25,9 @@ export const REQUIRED_IDS = [
   "slop.oversized-display",
 ];
 
+export const PROFILE_NAMES = ["landing", "app", "content"];
+const AUDIT_CHECK_PATTERN = /^audit\.[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
 const nonEmpty = (value) => typeof value === "string" && value.trim().length > 0;
 
 export function validateAntiPatterns({ catalog, root = repositoryRoot, companion } = {}) {
@@ -81,6 +84,30 @@ export function validateAntiPatterns({ catalog, root = repositoryRoot, companion
   });
 
   for (const id of REQUIRED_IDS) if (!seen.has(id)) fail("required_entry_missing", `catalog must define ${id}`, "$.entries");
+
+  // Page profiles relax landing-calibrated rules to warnings; each relaxation needs a rationale
+  // and must name a real machine entry or a shared audit.* check.
+  if (catalog.profiles !== undefined) {
+    const profiles = catalog.profiles;
+    if (profiles === null || typeof profiles !== "object" || Array.isArray(profiles)) fail("profiles_not_object", "profiles must be an object", "$.profiles");
+    else {
+      if (!nonEmpty(profiles.detection)) fail("profiles_detection_missing", "profiles must describe how a profile is detected", "$.profiles.detection");
+      const machine = new Set(catalog.entries.filter((e) => e?.detectable === "machine").map((e) => e.id));
+      for (const name of PROFILE_NAMES) {
+        const profile = profiles[name];
+        const at = `$.profiles.${name}`;
+        if (profile === null || typeof profile !== "object" || Array.isArray(profile)) { fail("profile_missing", `profiles must define ${name}`, at); continue; }
+        if (!nonEmpty(profile.description) || !nonEmpty(profile.rationale)) fail("profile_field_missing", `${name} needs a description and a rationale`, at);
+        if (!Array.isArray(profile.relaxed)) { fail("profile_relaxed_invalid", `${name}.relaxed must be an array`, `${at}.relaxed`); continue; }
+        for (const id of profile.relaxed) {
+          if (!(machine.has(id) || AUDIT_CHECK_PATTERN.test(id))) fail("profile_relaxed_unknown", `${name} relaxes ${id}, which is neither a machine entry nor an audit.* check`, `${at}.relaxed`);
+        }
+        if (new Set(profile.relaxed).size !== profile.relaxed.length) fail("profile_relaxed_duplicate", `${name}.relaxed lists an id more than once`, `${at}.relaxed`);
+      }
+      if (Array.isArray(profiles.landing?.relaxed) && profiles.landing.relaxed.length) fail("profile_landing_relaxed", "landing is the calibration profile and relaxes nothing", "$.profiles.landing.relaxed");
+      for (const key of Object.keys(profiles)) if (key !== "detection" && !PROFILE_NAMES.includes(key)) fail("profile_unknown", `unknown profile ${key}`, `$.profiles.${key}`);
+    }
+  }
 
   const companionText = companion ?? (nonEmpty(catalog.companion_document) && fs.existsSync(path.join(root, catalog.companion_document)) ? fs.readFileSync(path.join(root, catalog.companion_document), "utf8") : null);
   if (companionText === null) fail("companion_missing", "companion_document must name an existing Markdown page", "$.companion_document");

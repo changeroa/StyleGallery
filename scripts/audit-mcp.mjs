@@ -14,10 +14,12 @@ export const auditToolDefinitions = [
   },
   {
     name: "audit_check",
-    description: "Run shared showcase checks and every machine slop rule on a URL or HTML file in Chromium. Activates controls; use a test instance. Returns measurements, not a usability certification.",
+    description: "Run shared showcase checks and every machine slop rule on a URL or HTML file in Chromium within a time budget (partial results are marked timed_out). Pages that never render are reported as blocked_or_empty. Profile landing|app|content (default auto) relaxes landing-only rules to warnings. Activates controls; use a test instance. Returns measurements, not a usability certification.",
     inputSchema: { type: "object", additionalProperties: false, required: ["target"], properties: {
       target: { type: "string", minLength: 1 },
       viewports: { type: "array", minItems: 1, maxItems: 10, uniqueItems: true, items: { type: "integer", minimum: 320, maximum: 7680 } },
+      profile: { type: "string", enum: ["auto", "landing", "app", "content"] },
+      timeout: { type: "integer", minimum: 10, maximum: 3600 },
     } },
     annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: true },
   },
@@ -38,7 +40,7 @@ export async function invokeAuditTool(name, input, { signal } = {}) {
   if (!validate || !validate(input)) return { ok: false, operation: name, failures: [{ code: "audit_input_invalid", message: validate ? ajv.errorsText(validate.errors) : "unknown audit tool" }] };
   try {
     if (name === "audit_init") return initAudit(input.url, { out: input.out });
-    if (name === "audit_check") return await checkAudit(input.target, { viewports: input.viewports, signal });
+    if (name === "audit_check") return await checkAudit(input.target, { viewports: input.viewports, profile: input.profile, timeout: input.timeout, signal });
     return runAuditStatus([input.ledger, "--json", ...(input.principles ? ["--principles", input.principles] : [])]).report;
   } catch (error) { return { ok: false, operation: name, failures: [{ code: `${name}_failed`, message: error.message }] }; }
 }

@@ -1,0 +1,143 @@
+{
+  "description": "Local reproductions of the patterns stylegallery audit check met on 12 live homepages on 2026-10-19. Pages are written from scratch: no markup, text, or assets are copied from the sites. Each case names the sites it reproduces, the checks that must keep failing (true violations), and the checks that must not fail (false positives fixed for 0.1.18).",
+  "run": "node scripts/test-audit-realsites.mjs",
+  "cases": [
+    {
+      "fixture": "content-service.html",
+      "sites": [
+        "www.gov.uk"
+      ],
+      "options": {
+        "viewports": [
+          320,
+          1440
+        ]
+      },
+      "verdict": "fail",
+      "profile": "content",
+      "must_fail": [
+        "audit.contrast"
+      ],
+      "must_not_fail": [
+        "slop.dishonest-cta",
+        "slop.empty-screen",
+        "audit.empty-screen",
+        "slop.static-interactive",
+        "slop.sluggish-state-change"
+      ],
+      "notes": "Search button contrast 3.89 stays an error. Reject-cookies, skip-link, and feedback buttons are not dishonest CTAs; text-led screens are content-profile warnings, not errors."
+    },
+    {
+      "fixture": "landing-hidden-controls.html",
+      "sites": [
+        "github.com",
+        "vercel.com"
+      ],
+      "options": {
+        "viewports": [
+          320,
+          1440
+        ]
+      },
+      "verdict": "fail",
+      "profile": "landing",
+      "must_fail": [
+        "audit.focus"
+      ],
+      "must_not_fail": [
+        "slop.static-interactive",
+        "slop.dishonest-cta"
+      ],
+      "notes": "An email input without a focus indicator stays an error. Clipped carousel slides, aria-hidden duplicates, off-page pause buttons, and the skip link are skipped, not static or dishonest."
+    },
+    {
+      "fixture": "content-link-directory.html",
+      "sites": [
+        "news.ycombinator.com",
+        "craigslist.org",
+        "www.naver.com"
+      ],
+      "options": {
+        "viewports": [
+          1440
+        ]
+      },
+      "verdict": "pass",
+      "profile": "content",
+      "must_fail": [],
+      "must_not_fail": [
+        "slop.static-interactive",
+        "slop.sluggish-state-change",
+        "slop.unfinished-surfaces"
+      ],
+      "notes": "A link directory without hover transitions is a content page: landing-only rules are warnings, and an unresponsive page is not counted twice."
+    },
+    {
+      "fixture": "static-minimal.html",
+      "sites": [
+        "example.com"
+      ],
+      "options": {
+        "viewports": [
+          1440
+        ],
+        "profile": "landing"
+      },
+      "verdict": "fail",
+      "profile": "landing",
+      "must_fail": [
+        "slop.static-interactive"
+      ],
+      "must_not_fail": [
+        "slop.sluggish-state-change"
+      ],
+      "notes": "When nothing responds, slop.static-interactive reports it once; sluggish-state-change keeps only its speed reason."
+    },
+    {
+      "fixture": "empty-main-shell.html",
+      "sites": [
+        "www.airbnb.com"
+      ],
+      "options": {
+        "viewports": [
+          1440
+        ]
+      },
+      "verdict": "blocked_or_empty",
+      "notes": "A shell whose main never renders is reported as blocked_or_empty instead of being audited."
+    },
+    {
+      "fixture": "challenge.html",
+      "sites": [],
+      "options": {
+        "viewports": [
+          1440
+        ]
+      },
+      "verdict": "blocked_or_empty",
+      "notes": "A bot challenge interstitial is reported as blocked_or_empty."
+    },
+    {
+      "fixture": "slow-never-settles.html",
+      "sites": [
+        "stripe.com",
+        "linear.app",
+        "www.apple.com",
+        "www.notion.com",
+        "toss.im",
+        "craigslist.org",
+        "www.naver.com"
+      ],
+      "options": {
+        "timeout": 20
+      },
+      "verdict_in": [
+        "partial",
+        "fail",
+        "pass"
+      ],
+      "max_elapsed_ms": 26000,
+      "notes": "A page that never settles and has 2,400 controls still returns within its 20 s budget, with unfinished checks marked timed_out."
+    }
+  ]
+}

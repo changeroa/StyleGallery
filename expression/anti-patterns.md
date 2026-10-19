@@ -52,6 +52,16 @@ The JSON file is the source of the exact rules. It defines the shared terms once
 | `slop.gradient-text-everywhere` | Gradient text as the default emphasis | Does each gradient-filled word carry a meaning the direction names? |
 | `slop.uniform-section-rhythm` | Uniform section rhythm | Do sections differ in length, density, and opener so the page is paced? |
 
+## Page Profiles
+
+The machine thresholds were calibrated on landing and brand homepages, so they hold a reading page or an application to the wrong standard. The catalog's `profiles` object names three page profiles and, for each, the rules that become warnings instead of errors:
+
+- `landing`: marketing, brand, and product landing pages. Every machine rule is an error; this is the calibration profile.
+- `app`: dashboards, editors, search and booking forms. Richness floors, display scale, surface finishing, gradients as fill, card triplets, and motion density become warnings.
+- `content`: articles, documentation, government, news, and link directories. The same rules as `app`, plus soft shadows, become warnings. A text-led screen is finished by its text, so the empty-screen floor, which counts imagery or 10% text coverage, is not a defect there.
+
+Accessibility checks (`audit.*` other than empty screens and link transition speed), honest actions (`slop.dishonest-cta`), and emoji icons (`slop.emoji-icons`) stay errors in every profile. `stylegallery audit check` picks the profile from rendered signals unless `--profile` names one, and reports the profile, its source, and the signals. The detection rule is in `profiles.detection`. The 2026-10-19 real-site run that motivated the split is reproduced in `tests/fixtures/audit-realsites/`: GOV.UK screens with 8.5% and 9.9% text coverage, and Hacker News links without hover transitions, failed the landing floors even though they are correct for their purpose.
+
 ## Opinionated Guidance
 
 The common thread is substitution: a gradient where a picture belongs, a shadow where a clip or hairline belongs, a bigger headline where better content belongs, and an emoji where a drawn icon belongs. The 49 measured originals keep display type at 3.5-5.5 times the body, answer every link within 100-320ms, and finish surfaces with masks and hairlines rather than soft shadows. Fixing one entry by adding the next (replacing a gradient screen with a triplet of emoji cards) still produces slop.
