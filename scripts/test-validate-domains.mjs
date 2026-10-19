@@ -252,6 +252,7 @@ const additionalLocalLeaves = {
     ["adaptive-navigation.md", "Adaptive Navigation Across Platforms"],
     ["preferences-and-accessibility.md", "Preferences And Accessibility Across Platforms"],
     ["input-and-focus.md", "Input And Focus Across Platforms"],
+    ["hig-universal-principles.md", "Apple HIG Universal Principles Extraction"],
     [
       "adaptation-workflow.md",
       "Platform Adaptation Workflow"

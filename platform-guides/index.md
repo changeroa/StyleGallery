@@ -16,12 +16,14 @@ Out of scope: affiliation, brand imitation, unsupported platform equivalence, an
 | Compare Back and adaptive window behavior. | [Android Interaction As A Comparative Reference](android-interaction.md) |
 | Compare keyboard, focus, and commands. | [Windows Interaction As A Comparative Reference](windows-interaction.md) |
 | Select target and fallback verification cases. | [Platform Compatibility Matrix](compatibility-matrix.md) |
+| Audit a web product against HIG principles without importing Apple-specific defaults. | [Apple HIG Universal Principles Extraction](hig-universal-principles.md) |
 
 These workflows and worked cases are usable experimental guidance. Expected-result tables are test designs; actual product, engine, and reader evidence must be recorded separately. Review on a failed task, a source change, or a changed ownership contract.
 
 ## Available Guides
 
 - [Apple Interaction As A Comparative Reference](apple-interaction.md) turns selected interaction themes into questions for web adaptation without claiming platform equivalence.
+- [Apple HIG Universal Principles Extraction](hig-universal-principles.md) classifies dated, paraphrased HIG principles as universal, adapt, or apple-specific, with WCAG 2.2, Material 3, and APG counterparts and a machine-readable record.
 
 ## Comparison, Not Imitation
 

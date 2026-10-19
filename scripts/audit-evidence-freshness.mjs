@@ -12,6 +12,8 @@ const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url))
 const calibrationSchemaPath = path.join(repositoryRoot, "consumer-reference", "schema", "calibration-record.schema.json");
 const defaultPageSchemaPath = path.join(repositoryRoot, "consumer-reference", "schema", "page-evidence-manifest.schema.json");
 const PAGE_RECORD_KIND = "page_evidence_manifest";
+// Dated platform-guidance extractions declare reviewed_on plus an explicit review_by deadline.
+const PRINCIPLE_RECORD_KIND = "platform_principle_extraction";
 // This is an advisory warning window only. It never changes an explicit expiry or adds a TTL.
 const DEFAULT_EXPIRING_WINDOW_DAYS = 7;
 
@@ -163,10 +165,43 @@ function validatePageRecord(value, sourcePath, pageSchemaPath, failures) {
   return { thresholdDate, verifiedAt: null };
 }
 
+function isRealDate(value) {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
+}
+
+function validatePrincipleRecord(value, sourcePath, failures) {
+  if (value.schema_version !== "1.0") {
+    failures.push(failure("freshness_record_invalid", sourcePath, "principle extraction schema_version must be 1.0"));
+    return undefined;
+  }
+  if (!isRealDate(value.reviewed_on)) {
+    failures.push(failure("freshness_record_invalid", sourcePath, "principle extraction reviewed_on must be a real YYYY-MM-DD date"));
+    return undefined;
+  }
+  const thresholdDate = value.review_by;
+  if (!Number.isFinite(parseDateTime(thresholdDate))) {
+    failures.push(failure("freshness_record_invalid", sourcePath, "principle extraction review_by must be an RFC 3339 date-time value"));
+    return undefined;
+  }
+  const verifiedAt = `${value.reviewed_on}T00:00:00Z`;
+  if (Date.parse(thresholdDate) <= Date.parse(verifiedAt)) {
+    failures.push(failure("freshness_record_invalid", sourcePath, "principle extraction review_by must be later than reviewed_on"));
+    return undefined;
+  }
+  const principles = Array.isArray(value.principles) ? value.principles : [];
+  if (principles.some((item) => !isRealDate(item?.reviewed_on) || item.reviewed_on > value.reviewed_on)) {
+    failures.push(failure("freshness_record_invalid", sourcePath, "every principle reviewed_on must be a real date no later than the record reviewed_on"));
+    return undefined;
+  }
+  return { thresholdDate, verifiedAt };
+}
+
 function classify(entry, asOfMs, windowMs) {
   if (entry.thresholdDate === null) return "fresh";
   const thresholdMs = Date.parse(entry.thresholdDate);
-  if (entry.kind === PAGE_RECORD_KIND) {
+  if (entry.kind === PAGE_RECORD_KIND || entry.kind === PRINCIPLE_RECORD_KIND) {
     if (asOfMs >= thresholdMs) return "review_due";
     return thresholdMs - asOfMs <= windowMs ? "expiring" : "fresh";
   }
@@ -193,6 +228,9 @@ function auditOne({ file, asOf, asOfMs, mode, root, pageSchemaPath, expiringWind
   if (value.record_kind === PAGE_RECORD_KIND) {
     kind = PAGE_RECORD_KIND;
     dates = validatePageRecord(value, sourcePath, pageSchemaPath, failures);
+  } else if (value.record_kind === PRINCIPLE_RECORD_KIND) {
+    kind = PRINCIPLE_RECORD_KIND;
+    dates = validatePrincipleRecord(value, sourcePath, failures);
   } else if (value.committed_ci !== undefined || value.required_runs !== undefined || value.runs !== undefined) {
     kind = "calibration_record";
     dates = validateCalibrationRecord(value, sourcePath, failures);
