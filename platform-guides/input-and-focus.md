@@ -61,6 +61,16 @@ The product offers a drag handle and chooses a Move action with explicit destina
 
 This is a local proposal. It does not prescribe one keyboard shortcut or say that every list must be a composite ARIA widget.
 
+### Target And Gesture Numbers Without Conflation
+
+Additional sources rechecked 2026-10-19: [Target Size Enhanced, SC 2.5.5](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html) and [Pointer Gestures, SC 2.5.1](https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures.html), alongside the Minimum target source above. These explain the 2024 WCAG 2.2 Recommendation; they are not target-size experiments.
+
+- AA SC 2.5.8 uses 24 by 24 CSS pixels, with spacing, equivalent-control, inline, user-agent, and essential exceptions. Its spacing alternative uses a 24 CSS pixel diameter circle centered on each undersized target; it is not a blanket 24px gap rule.
+- AAA SC 2.5.5 uses 44 by 44 CSS pixels, with its own exceptions. It is not the AA minimum and is not interchangeable with 44 native points.
+- Level A SC 2.5.1 concerns multipoint/path-based gestures and requires a single-pointer alternative without a path-based gesture unless essential. AA SC 2.5.7 separately concerns dragging. Keyboard access answers neither pointer condition by itself.
+
+Local application: measure actual hit regions of table sort controls, filter removals, and mobile navigation, including adjacent targets. Provide visible click/tap alternatives for custom gesture-only actions. Verify cancelled gestures and ensure fixed navigation never entirely hides focus. No physical-device or consumer execution is claimed.
+
 ## Opinionated Guidance
 
 Use shortcuts to accelerate visible actions. Scope listeners to the intended surface, and let text editing and composition retain their own keys. Give each cancellation action one clearly documented owner before allowing it to propagate outward.

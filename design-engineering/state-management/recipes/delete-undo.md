@@ -40,6 +40,12 @@ Use pending-until-confirmed deletion by default in this recipe. An optimistic ov
 | Delete the last row | Show empty state and move focus to a logical heading |
 | Undo expires or restoration fails | Explain failure and reconcile actual collection state |
 
+### Confirmation Versus Reversal
+
+[WCAG Error Prevention, SC 3.3.4](https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-legal-financial-data.html) was rechecked 2026-10-19 against the 2024 WCAG 2.2 Recommendation. For its scoped legal/financial, user-controlled stored-data, and test-response submissions, at least one of three conditions applies: reversibility, input checking with correction opportunity, or review/confirmation with correction before finalization. This is a normative alternative set, not a study showing Undo always beats confirmation.
+
+Local decision: prefer supported recovery for frequent reversible low-cost actions; use explicit review before genuinely consequential irreversible commitment. Keep the existing backend contract decisive. A five-second toast cannot make an irreversible write reversible, and a confirm dialog cannot establish the accuracy of the submitted snapshot. Test expiry, failed restoration, unknown outcome, and focus after deleting the last item.
+
 ## Opinionated Guidance
 
 Keep the ownership boundaries visible when composing the patterns. One screen can combine these mechanisms without making every value global. Record the rejected alternative and its user-visible cost in the [state brief](../state-brief.md).

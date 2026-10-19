@@ -3,6 +3,166 @@
   "description": "Agent-style retrieval questions for stylegallery search. qrels grade 3 = the answer document, 2 = a strong alternative, 1 = useful context. must_pass items must place a grade >= 2 document in the top 5. kind heldout = written after aliases were added, never used to tune them.",
   "questions": [
     {
+      "id": "ep01",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "When should form validation wait until blur instead of typing?",
+      "qrels": {
+        "design-engineering/evidence-patterns/inline-validation.md": 3
+      }
+    },
+    {
+      "id": "ep02",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "How do I build a form error summary with field recovery links?",
+      "qrels": {
+        "design-engineering/evidence-patterns/error-recovery.md": 3
+      }
+    },
+    {
+      "id": "ep03",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "Should a form use persistent labels or disappearing placeholders?",
+      "qrels": {
+        "design-engineering/evidence-patterns/form-labels.md": 3
+      }
+    },
+    {
+      "id": "ep04",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "When should a phone input use a localized mask?",
+      "qrels": {
+        "design-engineering/evidence-patterns/input-masks.md": 3
+      }
+    },
+    {
+      "id": "ep05",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "How should applied faceted filters combine OR and AND?",
+      "qrels": {
+        "design-engineering/evidence-patterns/faceted-filters.md": 3
+      }
+    },
+    {
+      "id": "ep06",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "What should no results and first use empty states show?",
+      "qrels": {
+        "design-engineering/evidence-patterns/empty-states.md": 3
+      }
+    },
+    {
+      "id": "ep07",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "How do sortable data tables expose sorting and sticky headers?",
+      "qrels": {
+        "design-engineering/evidence-patterns/data-tables.md": 3
+      }
+    },
+    {
+      "id": "ep08",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "Should I use tabs or a segmented selector for a value?",
+      "qrels": {
+        "design-engineering/evidence-patterns/tabs-and-segmented-controls.md": 3
+      }
+    },
+    {
+      "id": "ep09",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "When does an active autocomplete suggestion become accepted?",
+      "qrels": {
+        "design-engineering/evidence-patterns/autocomplete.md": 3
+      }
+    },
+    {
+      "id": "ep10",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "Should breadcrumbs follow hierarchy or browsing history?",
+      "qrels": {
+        "design-engineering/evidence-patterns/breadcrumbs.md": 3
+      }
+    },
+    {
+      "id": "ep11",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "Which peer destinations belong in bottom navigation?",
+      "qrels": {
+        "design-engineering/evidence-patterns/bottom-navigation.md": 3
+      }
+    },
+    {
+      "id": "ep12",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "What contrast ratios must a dark theme meet?",
+      "qrels": {
+        "design-engineering/evidence-patterns/dark-mode-contrast.md": 3
+      }
+    },
+    {
+      "id": "ep13",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "Where are evidence based interface patterns for forms and navigation?",
+      "qrels": {
+        "design-engineering/evidence-patterns/index.md": 3
+      }
+    },
+    {
+      "id": "ep14",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "When should I use a toast instead of inline feedback?",
+      "qrels": {
+        "design-engineering/loading-and-feedback.md": 3
+      }
+    },
+    {
+      "id": "ep15",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "What do 0.1 1 and 10 second response time thresholds mean?",
+      "qrels": {
+        "design-engineering/loading-and-feedback.md": 3
+      }
+    },
+    {
+      "id": "ep16",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "How should modal dialog focus be contained and returned?",
+      "qrels": {
+        "design-engineering/native-interaction-contracts.md": 3
+      }
+    },
+    {
       "id": "q01",
       "lang": "en",
       "kind": "real",

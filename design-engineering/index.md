@@ -70,6 +70,23 @@ Choose [State Management](state-management/index.md) for UI state ownership, tra
 
 This domain proposes product-layer questions. [Quality Gates](../quality/index.md) remain the shared authority for claims, evidence families, accessibility precedence, rationale, and debt.
 
+## Evidence Patterns
+
+Use [Evidence-Based Interface Patterns](evidence-patterns/index.md) to distinguish standards, measured observations, and local product recommendations.
+
+- [Inline Validation Timing](evidence-patterns/inline-validation.md)
+- [Error Messages And Recovery Summaries](evidence-patterns/error-recovery.md)
+- [Persistent Form Labels](evidence-patterns/form-labels.md)
+- [Localized Input Masks](evidence-patterns/input-masks.md)
+- [Faceted Filter Selection](evidence-patterns/faceted-filters.md)
+- [Empty States And No Results](evidence-patterns/empty-states.md)
+- [Data Table Interaction](evidence-patterns/data-tables.md)
+- [Tabs And Segmented Controls](evidence-patterns/tabs-and-segmented-controls.md)
+- [Autocomplete Acceptance](evidence-patterns/autocomplete.md)
+- [Breadcrumb Hierarchy](evidence-patterns/breadcrumbs.md)
+- [Bottom Navigation Destinations](evidence-patterns/bottom-navigation.md)
+- [Dark Mode Contrast](evidence-patterns/dark-mode-contrast.md)
+
 ## Source-Backed Deep Dives
 
 - [Native Interaction Contracts](native-interaction-contracts.md). Choose dialog, disclosure, menu, popover, and combobox behavior.

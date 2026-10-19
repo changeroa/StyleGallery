@@ -6,7 +6,7 @@ aliases: ["loading state","spinner","skeleton","progress indicator","로딩 상�
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local
-reviewed_on: 2026-09-21
+reviewed_on: 2026-10-19
 ---
 
 # Loading, Progress, And Feedback
@@ -61,6 +61,33 @@ The result summary, busy state, empty state, and visible records must describe t
 The editor submits a snapshot. Connectivity drops after the server may have received it. The consumer must decide how to reconcile that uncertainty: a supported operation identity, refetch, or a documented recovery flow. Merely showing a retry button cannot prove that retrying is safe.
 
 Keep the submitted snapshot distinct from edits made while saving. A successful acknowledgement for the earlier snapshot cannot mark the newer draft saved. Compose [submitted snapshot](state-management/patterns/submitted-snapshot.md) with [draft and baseline](state-management/patterns/draft-and-baseline.md).
+
+### Indicator Choice And Time Boundaries
+
+Extend this owner rather than creating a second loading-state catalog. A skeleton is useful only when the eventual structure is sufficiently predictable; keep placeholders stationary under reduced motion and reserve realistic space. A spinner conveys indeterminate waiting, not a completion percentage. Prefer real progress when completed and total work are meaningful. None of these choices proves shorter perceived waiting for the current task.
+
+| Source | Year | What was measured or specified |
+| --- | --- | --- |
+| [NN/g response-time limits](https://www.nngroup.com/articles/response-times-3-important-limits/) | 1993; 2014 addendum | Synthesizes approximately 0.1 seconds for immediate-feeling response, 1 second for uninterrupted flow, and 10 seconds for sustained attention. These are published heuristics drawing on earlier HCI work, not a new controlled skeleton-versus-spinner experiment. |
+| [Status Messages explanation](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html) | 2024 Recommendation; living explanation read 2026 | SC 4.1.3 addresses programmatically determinable status without taking focus; it specifies no toast timeout. |
+
+Those two sources were rechecked 2026-10-19. The 0.1/1/10-second heuristics help identify a feedback need; they are not exact trigger timers. For work expected to exceed about 10 seconds, explain stage, honest progress where available, and a supported interruption/recovery path. Never fabricate a percent to satisfy that heuristic. Do not artificially hold fast results to display a spinner.
+
+### Toast Versus Inline Feedback
+
+Local selection proposal: keep field errors inline, long-running state with its affected region, and important outcomes in a durable location. A nonmodal toast can supplement a low-priority completed action when missing it does not block recovery. Do not put the only error explanation, required decision, or sole recovery action in a disappearing toast. There is no source-backed universal three-, five-, or ten-second toast duration.
+
+For dynamic status, update an existing concise region without moving focus. Use assertive interruptions only when urgency warrants them; repeated routine success messages should not continually interrupt speech.
+
+```html
+<section aria-labelledby="upload-heading">
+  <h2 id="upload-heading">Upload</h2>
+  <p id="upload-status" role="status">Uploading file 2 of 4.</p>
+  <progress max="4" value="1" aria-label="Files uploaded">1 of 4</progress>
+</section>
+```
+
+This local fragment describes one completed file and the second in progress. The state owner must update both values together from accepted work; it does not implement uploading. For completed-zero and first-use guidance, use [Empty States And No Results](evidence-patterns/empty-states.md).
 
 ## Opinionated Guidance
 
