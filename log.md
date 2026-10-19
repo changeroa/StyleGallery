@@ -1,5 +1,27 @@
 # StyleGallery Log
 
+## 2026-10-20
+
+Understood as: release `stylegallery@0.1.18`, which makes `stylegallery audit check` usable on live sites and adopts the measured parts of taste-skill, from PRs #76-#78. Before this, a 12-site run timed out on 6 sites and reported false positives on the rest.
+
+- `stylegallery audit check` (#76) always ends within `--timeout` (default 120 s). Stages share the budget, and an overrunning stage is closed and reported as `timed_out` with `verdict: "partial"`. Live pages are sampled: 24 hovered controls, 8 activated CTAs, a 120-stop Tab walk.
+- Pages whose content never renders (HTTP error, challenge page, an empty `main`) are reported as `blocked_or_empty` instead of being audited.
+- `--profile landing|app|content` (default `auto`, from rendered signals) relaxes landing-calibrated rules to warnings. The rationale is recorded in the catalog's `profiles` object.
+- False positives removed: hidden, off-page, clipped, `aria-hidden`, and unreachable controls are skipped. Skip links, consent and cookie controls, and legal links are not CTAs. Rendered-text and ARIA state changes count as effects, and `slop.static-interactive` and `slop.sluggish-state-change` no longer double count.
+- `tests/fixtures/audit-realsites/` reproduces the 12-site run from scratch and gates CI through `test:audit:realsites`. `audit:realsites:live` re-runs the live sites outside CI.
+- `expression/anti-patterns.json` (#77): entries carry `first_seen` and `evidence_grade` (`measured-differential`, `measured-baseline`, `consensus-opinion`, `owner-taste`; opinion grades can only be review entries). `reviewed_and_rejected` records what was reviewed and rejected from taste-skill, with reasons.
+- New pages: `quality/evidence/design-ab.md` (a blind A/B design evaluation protocol) and `motion/usability-anti-patterns.md` (preloaders, gates, scroll hijacking, hidden first-screen text). Every `SKILL.md` frontmatter is now parsed strictly in CI (`validate:skill-frontmatter`).
+- New machine rules (#78), adapted from leonxlnx/taste-skill `b9ca2fd` with the method rewritten and calibrated on the 12 live homepages:
+  - `slop.eyebrow-label` and `slop.pill-badge-kicker`
+  - `slop.gradient-text-everywhere`, promoted from a review entry
+  - icon-topped card rows in `slop.repeated-card-triplet`
+  - five `slop.frame-*` frame checks
+  - `slop.blocked-first-paint`
+  Each has a violation fixture that must fail. The settling scroll is now instant with three frames per step, and sticky scenes count as covering their containing block.
+
+Consumer reference: not_applicable
+Consumer reference reason: This release changes audit tooling and catalog records and selects no consumer-reference profile or record.
+
 ## 2026-10-19
 
 Understood as: release `stylegallery@0.1.17`, which ships the design audit kit from PRs #70-#74 so an agent can run a HIG-grounded audit of any page and turn it into fix PRs with evidence.
