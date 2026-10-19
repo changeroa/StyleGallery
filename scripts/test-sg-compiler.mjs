@@ -137,7 +137,7 @@ test("MCP advertises unprefixed commands with effects and retains frozen resourc
   const connection = await connect();
   try {
     const { tools } = await connection.client.listTools();
-    const expected = ["claims", "context", "discover", "ops", "resolve", "retrieve", "compile", "timeline", "transcribe", "sale", "gate", "build", "shots", "probe", "batch-triage", "triage", "batch-capture", "pack-status", "pack-release", "workflow"].sort();
+    const expected = ["claims", "context", "discover", "ops", "resolve", "retrieve", "compile", "timeline", "transcribe", "sale", "gate", "build", "shots", "probe", "batch-triage", "triage", "batch-capture", "pack-status", "pack-release", "workflow", "search", "read"].sort();
     assert.deepEqual(tools.map(({ name }) => name), expected);
     assert.equal(tools.find(({ name }) => name === "compile").annotations.readOnlyHint, false);
     assert.equal(tools.find(({ name }) => name === "workflow").annotations.readOnlyHint, true);
@@ -178,10 +178,10 @@ test("MCP cancellation stops both the compiler and its child processes", { timeo
 
 test("packaged entrypoints use the new CLI and real MCP stdio without stdout pollution", async () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, "package.json")));
-  assert.equal(manifest.bin.sg, "scripts/sg-entry.mjs");
+  assert.equal(manifest.bin.stylegallery, "scripts/sg-entry.mjs");
   assert.equal(manifest.bin["stylegallery-mcp"], "scripts/sg-server.mjs");
-  for (const relative of [manifest.bin.sg, manifest.bin["stylegallery-mcp"], "scripts/compiler/cli.mjs", "scripts/compiler/operations.mjs", "scripts/compiler/runtime.mjs", "scripts/compiler/mcp.mjs", "scripts/compiler/README.md"]) assert.ok(manifest.files.includes(relative), relative);
-  const child = spawnSync(process.execPath, [path.join(root, manifest.bin.sg), "compile", "--compiler-root", compilerRoot, "--url", "https://failure.example/", "--out", "capture"], { cwd, encoding: "utf8" });
+  for (const relative of [manifest.bin.stylegallery, manifest.bin["stylegallery-mcp"], "scripts/compiler/cli.mjs", "scripts/compiler/operations.mjs", "scripts/compiler/runtime.mjs", "scripts/compiler/mcp.mjs", "scripts/compiler/README.md"]) assert.ok(manifest.files.includes(relative), relative);
+  const child = spawnSync(process.execPath, [path.join(root, manifest.bin.stylegallery), "compile", "--compiler-root", compilerRoot, "--url", "https://failure.example/", "--out", "capture"], { cwd, encoding: "utf8" });
   assert.equal(child.status, 1);
   assert.equal(child.stderr, "");
   assert.equal(JSON.parse(child.stdout).result.exit_code, 7);
@@ -191,7 +191,7 @@ test("packaged entrypoints use the new CLI and real MCP stdio without stdout pol
   const client = new Client({ name: "sg-compiler-stdio", version: "1.0.0" });
   try {
     await client.connect(transport);
-    assert.equal((await client.listTools()).tools.length, 20);
+    assert.equal((await client.listTools()).tools.length, 22);
     const result = envelope(await client.callTool({ name: "workflow", arguments: { document: "readme" } }));
     assert.equal(result.result.text, "# Installed compiler\n");
     assert.equal(envelope(await client.callTool({ name: "discover", arguments: {} })).compiler.installation.configured, true);

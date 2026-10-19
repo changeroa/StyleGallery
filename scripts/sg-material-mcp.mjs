@@ -54,7 +54,7 @@ export class MaterialMcpStdin extends Transform {
   }
 }
 
-async function main() {
+export async function main() {
   const server = createMaterialMcpServer();
   const input = new MaterialMcpStdin();
   const transport = new StdioServerTransport(input);

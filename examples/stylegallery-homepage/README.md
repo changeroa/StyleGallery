@@ -14,8 +14,8 @@ The implementation was planned from a clean temporary install of the published p
 
 ```sh
 npm install stylegallery@latest
-sg-material search --query "homepage cover content limiter stack cluster ram grid frame" --limit 10
-sg-material context --query "homepage semantic order cover content limiter stack cluster ram-grid frame accessibility responsive" --budget-tokens 6000
+stylegallery search "homepage cover content limiter stack cluster ram grid frame" --limit 10
+stylegallery context --query "homepage semantic order cover content limiter stack cluster ram-grid frame accessibility responsive" --budget-tokens 6000
 ```
 
 The tested package was `stylegallery@0.1.2`. Search returned the Homepage recipe and the selected `cover`, `content-limiter`, `stack`, `cluster`, `ram-grid`, and `frame` pattern guidance.
