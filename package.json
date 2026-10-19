@@ -1,6 +1,6 @@
 {
   "name": "stylegallery",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "A governed gallery of portable interface knowledge with knowledge CLIs, website compilation, and MCP servers.",
   "type": "module",
   "license": "MIT",

@@ -2,6 +2,14 @@
 
 ## 2026-10-19
 
+Understood as: release `stylegallery@0.1.15`, which ships OmO support for `stylegallery setup` from PR #66.
+
+- `stylegallery setup` adds `--agent omo`, detected by `~/.omo` or `omo` on PATH and included by default and in `all`. It registers `mcpServers.stylegallery` (`npx -y --package stylegallery stylegallery-mcp`) in `<agentDir>/mcp.json`, where agentDir is `$OMO_CODING_AGENT_DIR` or `~/.omo/agent`, with the same backup, `--force`, and idempotence rules as Claude Code and Codex. An identical hand-made entry is reported unchanged.
+- The skill copy in `~/.agents/skills/stylegallery-search/` is shared by Codex and OmO: it is written once, and the second agent is reported with `shared_with`. `--uninstall` keeps the shared skill (`kept`) while another detected agent that uses it is not part of the same uninstall run.
+
+Consumer reference: not_applicable
+Consumer reference reason: This release adds agent setup tooling and selects no consumer-reference profile or record.
+
 Understood as: release `stylegallery@0.1.14`, which ships `stylegallery setup` from PR #64 so an installed package can connect Claude Code and Codex in one command.
 
 - `stylegallery setup` copies `skills/stylegallery-search/SKILL.md` to `~/.claude/skills/stylegallery-search/` and `~/.agents/skills/stylegallery-search/` and registers `npx -y --package stylegallery stylegallery-mcp` as user-scope `mcpServers.stylegallery` in `~/.claude.json` and `[mcp_servers.stylegallery]` in `~/.codex/config.toml`. Options: `--dry-run`, `--agent claude|codex|all`, `--only skill|mcp`, `--uninstall`, `--force`. Reruns change nothing, modified config files are backed up as `<file>.bak-stylegallery-<timestamp>`, other settings are preserved, and a different same-name entry is left alone without `--force`. Sources: https://code.claude.com/docs/en/mcp, https://code.claude.com/docs/en/skills, https://developers.openai.com/codex/mcp, https://developers.openai.com/codex/skills, read 2026-10-19.
