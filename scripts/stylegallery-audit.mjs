@@ -133,12 +133,30 @@ export function runAuditStatus(args) {
 }
 
 export const AUDIT_SUBCOMMANDS = {
+  init: async (args) => {
+    const parsed = parseOptions("audit init", args, { "--out": { field: "out" } });
+    if (parsed.error) return parsed.error;
+    if (parsed.positional.length !== 1) return failure("audit init", "argument_value_required", "give exactly one URL");
+    try {
+      const { initAudit } = await import("./audit-kit.mjs");
+      return report(initAudit(parsed.positional[0], parsed.values));
+    } catch (error) { return failure("audit init", "audit_init_failed", error.message); }
+  },
+  check: async (args, config) => {
+    const parsed = parseOptions("audit check", args, { "--viewports": { field: "viewports" }, "--json": { field: "json", flag: true } });
+    if (parsed.error) return parsed.error;
+    if (parsed.positional.length !== 1) return failure("audit check", "argument_value_required", "give exactly one URL or HTML file");
+    try {
+      const { checkAudit } = await import("./audit-kit.mjs");
+      return report(await checkAudit(parsed.positional[0], { ...parsed.values, signal: config.signal }));
+    } catch (error) { return failure("audit check", "audit_check_failed", error.message); }
+  },
   status: runAuditStatus,
 };
 
-export async function runAuditCli(args) {
+export async function runAuditCli(args, config = {}) {
   const [subcommand, ...rest] = args;
   const handler = AUDIT_SUBCOMMANDS[subcommand];
   if (!handler) return failure("audit", "argument_unknown", `unknown audit subcommand ${subcommand ?? "(none)"}; available: ${Object.keys(AUDIT_SUBCOMMANDS).join(", ")}`);
-  return handler(rest);
+  return handler(rest, config);
 }

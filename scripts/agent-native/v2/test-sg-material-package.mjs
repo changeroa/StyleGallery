@@ -128,6 +128,9 @@ const required = new Set([
   "consumer-reference/agent-native/v2/search-embeddings.json",
   // `stylegallery audit status` validates ledgers against this schema at runtime.
   "quality/audit/ledger.schema.json",
+  // Companion machine catalogs are runtime inputs, never material admission.
+  "expression/anti-patterns.json",
+  "platform-guides/hig-universal-principles.json",
   // Transport setup documentation is packaged without admitting tool code or
   // private upstream documents to the governed material corpus.
   "scripts/compiler/README.md",
@@ -224,7 +227,7 @@ try {
   try {
     await bounded(currentClient.connect(currentTransport), "installed SG MCP initialize");
     const tools = (await bounded(currentClient.listTools(), "installed SG MCP tools")).tools;
-    assert.equal(tools.length, 22);
+    assert.equal(tools.length, 25);
     assert.equal(tools.find(({ name }) => name === "compile").annotations.readOnlyHint, false);
     const compiled = toolEnvelope(await bounded(currentClient.callTool({ name: "compile", arguments: { url: "https://example.com/", out: "capture output" } }), "installed SG MCP compile"));
     assert.deepEqual(compiled, installedCompile, "installed direct CLI and MCP compile must agree");
@@ -240,7 +243,7 @@ try {
   try {
     await bounded(materialClient.connect(materialTransport), "installed material MCP initialize");
     assert.deepEqual((await bounded(materialClient.listTools(), "installed material MCP tools")).tools.map(({ name }) => name), ["material-context", "material-discover", "material-get", "material-search"]);
-    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 197);
+    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, manifest.materials.length);
     assert.deepEqual((await bounded(materialClient.listResourceTemplates(), "installed material MCP templates")).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
     const installedMcpSearch = toolEnvelope(await bounded(materialClient.callTool({
       name: "material-search",

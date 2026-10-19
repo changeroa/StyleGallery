@@ -800,6 +800,21 @@
       "lifecycle": "stable"
     },
     {
+      "repository_path": "quality/audit/ideal-state.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/audit/persona-journey.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
+      "repository_path": "quality/audit/severity.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
       "repository_path": "quality/claim-records/design-terminology-domain-scope.md",
       "domain": "shared",
       "lifecycle": "stable"
@@ -1067,5 +1082,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:eca56180f3f2a4ec9458f087f5c5ea96f5f170f96c0c572aba3cbc2bdcf2cab5"
+  "version_id": "sg:policy/material-admission-v2@sha256:5a58bb2d73649f0e46efd101dcb677baef8bdab8740d779954a5b84f305668d9"
 }
