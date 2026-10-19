@@ -2,6 +2,15 @@
 
 ## 2026-10-19
 
+Understood as: release `stylegallery@0.1.13`, which ships the evidence-based UI pattern documents from PR #61 and the README CLI reference from PR #62.
+
+- Design Engineering: `design-engineering/evidence-patterns/` adds 12 documents (inline validation, error recovery, form labels, input masks, faceted filters, autocomplete, empty states, data tables, tabs and segmented controls, breadcrumbs, bottom navigation, dark-mode contrast) with 22 cited sources; `loading-and-feedback`, `native-interaction-contracts`, `platform-guides/input-and-focus`, and the `delete-undo` recipe gain evidence sections.
+- Search evaluation: 91 questions, Hit@5 0.978, nDCG@5 0.877, must-pass 35/35.
+- README: a CLI reference under Quick Start lists the agent loop and every command with its options.
+
+Consumer reference: not_applicable
+Consumer reference reason: This release adds documentation and selects no consumer-reference profile or record.
+
 Understood as: release `stylegallery@0.1.12`, which makes agent search one `stylegallery` command with BM25F ranking, Korean aliases, readable ids, section reads, and a CI retrieval gate.
 
 - CLI: `stylegallery` is the only command name. It adds `search`, `read`, `retrieve`, `help`/`--help`, and `version`/`--version` beside the existing governed and compiler commands; `context --query` builds the material context. The `sg` bin is removed because it collides with ast-grep. `sg-material`, `stylegallery-material`, and `stylegallery-material-mcp` print a rename notice and delegate in this release only. `stylegallery-mcp` gains `search` and `read` tools that return the same JSON as the CLI.
