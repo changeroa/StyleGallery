@@ -4,6 +4,8 @@ name: reel
 title: reel
 category: In-line grouping
 description: Let a row scroll horizontally instead of wrapping.
+aliases: ["horizontal scroll row","carousel row","scrollable row","가로 스크롤","가로 스크롤 목록"]
+questions: ["How do I make a row scroll horizontally instead of wrapping?"]
 primary_spatial_problem: Let a row scroll horizontally instead of wrapping.
 secondary_spatial_problems: none
 layout_axis: inline

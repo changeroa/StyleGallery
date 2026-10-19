@@ -2,6 +2,7 @@
 type: Layout Recipe
 title: SaaS Settings
 description: Compose a fixed side navigation with a constrained settings flow.
+aliases: ["settings page","account settings layout","설정 페이지","설정 화면 레이아웃"]
 screen_type: SaaS settings
 primary_user_task: Review and edit account or workspace settings.
 spatial_model: Fixed navigation plus constrained primary content.

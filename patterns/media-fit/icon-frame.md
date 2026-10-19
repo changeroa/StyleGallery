@@ -4,6 +4,7 @@ name: icon-frame
 title: icon-frame
 category: Media / Fit
 description: Keep an icon aligned inside a fixed square slot.
+aliases: ["icon slot","square icon box","아이콘 정렬"]
 primary_spatial_problem: Keep an icon aligned inside a fixed square slot.
 secondary_spatial_problems: none
 layout_axis: both

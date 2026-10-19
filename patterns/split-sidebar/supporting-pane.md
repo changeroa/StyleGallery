@@ -4,6 +4,7 @@ name: supporting-pane
 title: supporting-pane
 category: Split / Sidebar
 description: Keep supplemental information beside a primary task.
+aliases: ["supporting panel","보조 패널"]
 primary_spatial_problem: Keep supplemental information beside a primary task.
 secondary_spatial_problems: none
 layout_axis: inline

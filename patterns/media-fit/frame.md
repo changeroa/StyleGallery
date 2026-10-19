@@ -4,6 +4,8 @@ name: frame
 title: frame
 category: Media / Fit
 description: Preserve media aspect ratio in a responsive slot.
+aliases: ["aspect ratio box","responsive image slot","object-fit","이미지 비율 유지","종횡비"]
+questions: ["How do I keep media at a fixed aspect ratio?"]
 primary_spatial_problem: Preserve media aspect ratio in a responsive slot.
 secondary_spatial_problems: none
 layout_axis: both

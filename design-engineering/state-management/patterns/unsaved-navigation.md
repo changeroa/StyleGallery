@@ -2,6 +2,8 @@
 type: Domain Guide
 title: Unsaved Changes And Navigation
 description: Make leaving an edited screen an explicit decision without losing the current draft.
+aliases: ["unsaved changes warning","leave page confirmation","beforeunload","저장하지 않은 변경 사항","이탈 경고"]
+questions: ["How do I warn before leaving with unsaved changes?"]
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local

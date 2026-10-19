@@ -2,7 +2,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { patterns, samples } from "./pattern-data.mjs";
+import { patterns, samples, searchMetadata } from "./pattern-data.mjs";
 
 const root = process.cwd();
 const patternsDir = path.join(root, "patterns");
@@ -129,6 +129,8 @@ function render(raw) {
     `title: ${pattern.slug}`,
     `category: ${pattern.category}`,
     `description: ${pattern.problem}`,
+    ...(searchMetadata[pattern.slug]?.aliases ? [`aliases: ${JSON.stringify(searchMetadata[pattern.slug].aliases)}`] : []),
+    ...(searchMetadata[pattern.slug]?.questions ? [`questions: ${JSON.stringify(searchMetadata[pattern.slug].questions)}`] : []),
     `primary_spatial_problem: ${pattern.problem}`,
     "secondary_spatial_problems: none",
     `layout_axis: ${pattern.axis}`,

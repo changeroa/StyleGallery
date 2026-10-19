@@ -4,6 +4,7 @@ name: page-grid
 title: page-grid
 category: Grid / Repetition
 description: Align page content to margins, gutters, and a central track.
+aliases: ["page margins and gutters","central content track","페이지 그리드"]
 primary_spatial_problem: Align page content to margins, gutters, and a central track.
 secondary_spatial_problems: none
 layout_axis: inline

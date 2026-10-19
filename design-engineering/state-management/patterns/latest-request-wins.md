@@ -2,6 +2,8 @@
 type: Domain Guide
 title: Latest Request Wins
 description: Prevent an older read response from replacing the result of a newer user intent.
+aliases: ["race condition","stale response","out of order responses","경쟁 조건","오래된 응답"]
+questions: ["How do I stop an older search response from replacing newer results?"]
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local

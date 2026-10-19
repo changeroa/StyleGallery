@@ -73,6 +73,7 @@ export function evaluate(rankerName) {
     overall: summarize(rows),
     english: summarize(rows.filter((row) => row.question.lang === "en")),
     korean: summarize(rows.filter((row) => row.question.lang !== "en")),
+    heldout: summarize(rows.filter((row) => row.question.kind === "heldout")),
     must_pass: { n: mustPass.length, passed: mustPass.filter((row) => row.hit5 === 1).length },
     misses: rows.filter((row) => row.hit5 === 0).map((row) => ({ id: row.question.id, query: row.question.query, top3: row.paths.slice(0, 3), must_pass: row.question.must_pass === true })),
   };
@@ -108,7 +109,7 @@ function main() {
   if (options.json) process.stdout.write(`${JSON.stringify({ ...report, gate_failures: failures }, null, 2)}\n`);
   else {
     const line = (label, value) => `${label.padEnd(8)} n=${value.n} Hit@3=${value.hit3} Hit@5=${value.hit5} MRR=${value.mrr} nDCG@5=${value.ndcg5}`;
-    process.stdout.write(`${[`ranker ${report.ranker}`, line("overall", report.overall), line("english", report.english), line("korean", report.korean),
+    process.stdout.write(`${[`ranker ${report.ranker}`, line("overall", report.overall), line("english", report.english), line("korean", report.korean), line("heldout", report.heldout),
       `must-pass ${report.must_pass.passed}/${report.must_pass.n}`, `misses ${report.misses.map((miss) => miss.id).join(" ") || "none"}`,
       ...failures.map((failure) => `GATE FAIL: ${failure}`)].join("\n")}\n`);
   }

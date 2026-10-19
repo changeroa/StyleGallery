@@ -4,6 +4,7 @@ name: masonry-approx
 title: masonry-approx
 category: Grid / Repetition
 description: Approximate staggered content with columns when exact row alignment is not needed.
+aliases: ["masonry","pinterest style","staggered layout","메이슨리","핀터레스트 스타일"]
 primary_spatial_problem: Approximate staggered content with columns when exact row alignment is not needed.
 secondary_spatial_problems: none
 layout_axis: block

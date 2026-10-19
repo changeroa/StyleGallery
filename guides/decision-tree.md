@@ -2,6 +2,8 @@
 type: Planning Guide
 title: Layout Decision Tree
 description: Question-driven route from screen constraints to StyleGallery Layout patterns and recipes.
+aliases: ["choose a layout pattern","which pattern","레이아웃 패턴 고르기","패턴 선택"]
+questions: ["Which layout pattern should I use for this screen?"]
 ---
 
 # Layout Decision Tree

@@ -4,6 +4,7 @@ name: clamped-card
 title: clamped-card
 category: Containment
 description: Constrain a card to a readable fluid width.
+aliases: ["card max width clamp","카드 폭 제한"]
 primary_spatial_problem: Constrain a card to a readable fluid width.
 secondary_spatial_problems: none
 layout_axis: inline

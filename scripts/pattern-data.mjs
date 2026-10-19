@@ -323,3 +323,412 @@ export const patterns = [
   ["masonry-approx", "Grid / Repetition", "Approximate staggered content with columns when exact row alignment is not needed.", "block", "fluid", sources.mdnCookbook, [[".masonry_approx", { "column-gap": "1rem", "column-width": "14rem" }]]],
   ["main-with-rail", "Split / Sidebar", "Keep primary content dominant with a narrow secondary rail.", "inline", "reflow", sources.govukLayout, [[".main_with_rail", { display: "grid", gap: "1rem", "grid-template-columns": "repeat(auto-fit, minmax(min(18rem, 100%), 1fr))" }], [".main_with_rail_main", { "min-inline-size": "0" }], [".main_with_rail_side", { "min-inline-size": "0" }]]],
 ];
+
+// Search-only metadata: English and Korean names an agent may use for each pattern,
+// and questions the pattern's sections answer. Emitted as frontmatter aliases/questions.
+export const searchMetadata = {
+  "sticky-header": {
+    "aliases": [
+            "pinned top bar",
+      "sticky top navigation",
+      "헤더 고정",
+      "고정 헤더",
+      "상단 고정 메뉴"
+    ],
+    "questions": [
+      "How do I keep the header visible while the page scrolls?"
+    ]
+  },
+  "sticky-footer": {
+    "aliases": [
+      "footer at bottom",
+      "push footer down",
+      "푸터 고정",
+      "하단 푸터",
+      "푸터를 화면 아래에 붙이기"
+    ],
+    "questions": [
+      "How do I keep the footer at the bottom when content is short?"
+    ]
+  },
+  "scroll-body-shell": {
+    "aliases": [
+      "fixed header and footer with scrolling body",
+      "app shell",
+      "스크롤 영역",
+      "본문만 스크롤"
+    ],
+    "questions": [
+      "How do I make only the body scroll between a fixed header and footer?"
+    ]
+  },
+  "fixed-sidenav-shell": {
+    "aliases": [
+      "fixed side navigation",
+      "sidenav shell",
+      "고정 사이드 내비게이션",
+      "사이드바 레이아웃",
+      "고정 사이드바"
+    ],
+    "questions": [
+      "How do I keep side navigation fixed while the main content scrolls?"
+    ]
+  },
+  "holy-grail": {
+    "aliases": [
+      "header footer two sidebars",
+      "three column page layout",
+      "홀리 그레일 레이아웃",
+      "3단 레이아웃"
+    ],
+    "questions": [
+      "How do I lay out a header, footer, two sidebars, and main content?"
+    ]
+  },
+  "cover": {
+    "aliases": [
+      "full height hero",
+      "vertically centered hero",
+      "커버 레이아웃",
+      "전체 높이 히어로"
+    ]
+  },
+  "panel-layout": {
+    "aliases": [
+      "main and utility panels",
+      "패널 레이아웃"
+    ]
+  },
+  "sidebar": {
+    "aliases": [
+      "wrapping sidebar",
+      "intrinsic sidebar",
+      "사이드바",
+      "사이드바 레이아웃"
+    ],
+    "questions": [
+      "How do I make a sidebar wrap under the content when space is tight?"
+    ]
+  },
+  "sticky-aside": {
+    "aliases": [
+      "sticky sidebar",
+      "sticky table of contents",
+      "고정 사이드 영역",
+      "스티키 사이드바"
+    ],
+    "questions": [
+      "How do I keep an aside visible during long reads?"
+    ]
+  },
+  "switcher": {
+    "aliases": [
+      "row to stack without media query",
+      "flex switcher",
+      "가로 세로 전환"
+    ],
+    "questions": [
+      "How do I switch equal regions from a row to a stack without a breakpoint?"
+    ]
+  },
+  "list-detail": {
+    "aliases": [
+      "master detail",
+      "list and detail panes",
+      "목록 상세",
+      "리스트 디테일"
+    ]
+  },
+  "split-screen": {
+    "aliases": [
+      "two column split",
+      "50/50 split",
+      "화면 분할",
+      "2단 분할"
+    ]
+  },
+  "main-with-rail": {
+    "aliases": [
+      "content with right rail",
+      "secondary rail",
+      "메인과 보조 레일"
+    ]
+  },
+  "media-object": {
+    "aliases": [
+      "image beside text",
+      "avatar with text",
+      "미디어 오브젝트",
+      "이미지와 텍스트 나란히"
+    ]
+  },
+  "supporting-pane": {
+    "aliases": [
+      "supporting panel",
+      "보조 패널"
+    ]
+  },
+  "ram-grid": {
+    "aliases": [
+      "repeat auto-fit minmax",
+      "responsive grid without media queries",
+      "auto-fit grid",
+      "반응형 그리드",
+      "반응형 카드 그리드"
+    ],
+    "questions": [
+      "How do I make a grid that fits as many columns as space allows without media queries?"
+    ]
+  },
+  "card-grid": {
+    "aliases": [
+      "responsive card grid",
+      "cards in rows and columns",
+      "카드 그리드",
+      "반응형 카드 그리드",
+      "카드 목록"
+    ],
+    "questions": [
+      "How do I align repeating cards into a responsive grid?"
+    ]
+  },
+  "dense-grid": {
+    "aliases": [
+      "compact grid",
+      "grid-auto-flow dense",
+      "촘촘한 그리드"
+    ]
+  },
+  "twelve-span-grid": {
+    "aliases": [
+      "12 column grid",
+      "twelve column layout",
+      "12단 그리드"
+    ]
+  },
+  "page-grid": {
+    "aliases": [
+      "page margins and gutters",
+      "central content track",
+      "페이지 그리드"
+    ]
+  },
+  "grid-wrapper": {
+    "aliases": [
+      "full bleed breakout",
+      "full-width breakout",
+      "풀 블리드",
+      "전체 폭 확장"
+    ]
+  },
+  "columns": {
+    "aliases": [
+      "multi-column text",
+      "css columns",
+      "다단 텍스트"
+    ]
+  },
+  "masonry-approx": {
+    "aliases": [
+      "masonry",
+      "pinterest style",
+      "staggered layout",
+      "메이슨리",
+      "핀터레스트 스타일"
+    ]
+  },
+  "reel": {
+    "aliases": [
+      "horizontal scroll row",
+      "carousel row",
+      "scrollable row",
+      "가로 스크롤",
+      "가로 스크롤 목록"
+    ],
+    "questions": [
+      "How do I make a row scroll horizontally instead of wrapping?"
+    ]
+  },
+  "cluster": {
+    "aliases": [
+      "inline group that wraps",
+      "tag group",
+      "항목 묶음",
+      "줄바꿈 그룹"
+    ]
+  },
+  "breadcrumb": {
+    "aliases": [
+      "breadcrumbs",
+      "hierarchy links",
+      "브레드크럼",
+      "경로 표시"
+    ]
+  },
+  "pagination": {
+    "aliases": [
+      "page numbers",
+      "page controls",
+      "페이지네이션",
+      "페이지 번호"
+    ]
+  },
+  "tab-strip": {
+    "aliases": [
+      "tabs row",
+      "tab bar",
+      "탭 바",
+      "탭 메뉴"
+    ]
+  },
+  "split-nav": {
+    "aliases": [
+      "navbar with left and right items",
+      "primary and secondary nav",
+      "내비게이션 바",
+      "좌우 분리 내비게이션"
+    ]
+  },
+  "wrap-row": {
+    "aliases": [
+      "wrapping toolbar",
+      "button row that wraps",
+      "버튼 줄바꿈"
+    ]
+  },
+  "badge-list": {
+    "aliases": [
+      "tags with counts",
+      "labels with trailing counts",
+      "배지 목록",
+      "개수 표시 목록"
+    ]
+  },
+  "deconstructed-pancake": {
+    "aliases": [
+      "cards stretch then stack",
+      "flex wrap cards",
+      "카드 가로 배치 후 세로 쌓기"
+    ]
+  },
+  "stack": {
+    "aliases": [
+      "vertical rhythm",
+      "vertical spacing between children",
+      "스택",
+      "세로 간격"
+    ]
+  },
+  "feed": {
+    "aliases": [
+      "content feed",
+      "activity feed",
+      "피드"
+    ]
+  },
+  "line-up": {
+    "aliases": [
+      "equal height cards",
+      "buttons aligned at bottom",
+      "card footer alignment",
+      "카드 버튼 하단 정렬"
+    ],
+    "questions": [
+      "How do I align card footer actions at the bottom?"
+    ]
+  },
+  "step-nav": {
+    "aliases": [
+      "stepper",
+      "steps list",
+      "단계 표시",
+      "스텝 내비게이션"
+    ]
+  },
+  "center": {
+    "aliases": [
+      "center horizontally",
+      "max width centered",
+      "가운데 정렬",
+      "수평 가운데 정렬"
+    ]
+  },
+  "super-center": {
+    "aliases": [
+      "center horizontally and vertically",
+      "center a div",
+      "place-items center",
+      "가운데 정렬",
+      "정중앙 정렬"
+    ],
+    "questions": [
+      "How do I center an element both horizontally and vertically?"
+    ]
+  },
+  "box": {
+    "aliases": [
+      "padded box",
+      "내부 여백 박스"
+    ]
+  },
+  "clamped-card": {
+    "aliases": [
+      "card max width clamp",
+      "카드 폭 제한"
+    ]
+  },
+  "content-limiter": {
+    "aliases": [
+      "readable line length",
+      "max measure",
+      "prose width",
+      "읽기 좋은 줄 길이",
+      "본문 폭 제한"
+    ],
+    "questions": [
+      "How do I keep prose at a readable line length?"
+    ]
+  },
+  "fluid-styles": {
+    "aliases": [
+      "fluid width with max",
+      "유동 폭"
+    ]
+  },
+  "frame": {
+    "aliases": [
+      "aspect ratio box",
+      "responsive image slot",
+      "object-fit",
+      "이미지 비율 유지",
+      "종횡비"
+    ],
+    "questions": [
+      "How do I keep media at a fixed aspect ratio?"
+    ]
+  },
+  "icon-frame": {
+    "aliases": [
+      "icon slot",
+      "square icon box",
+      "아이콘 정렬"
+    ]
+  },
+  "imposter": {
+    "aliases": [
+      "overlay over parent",
+      "positioned overlay",
+      "modal over card",
+      "오버레이",
+      "겹쳐 띄우기"
+    ]
+  },
+  "overlay-stack": {
+    "aliases": [
+      "stack in one grid cell",
+      "text over image",
+      "겹치는 레이어",
+      "이미지 위 텍스트"
+    ]
+  }
+};

@@ -2,25 +2,32 @@
   "before": {
     "ranker": "legacy",
     "overall": {
-      "n": 60,
-      "hit3": 0.6,
-      "hit5": 0.6333,
-      "mrr": 0.5571,
-      "ndcg5": 0.517
+      "n": 75,
+      "hit3": 0.5733,
+      "hit5": 0.6133,
+      "mrr": 0.5103,
+      "ndcg5": 0.4817
     },
     "english": {
-      "n": 45,
-      "hit3": 0.7556,
-      "hit5": 0.8,
-      "mrr": 0.7206,
-      "ndcg5": 0.6615
+      "n": 56,
+      "hit3": 0.7321,
+      "hit5": 0.7857,
+      "mrr": 0.6655,
+      "ndcg5": 0.6227
     },
     "korean": {
+      "n": 19,
+      "hit3": 0.1053,
+      "hit5": 0.1053,
+      "mrr": 0.0526,
+      "ndcg5": 0.0661
+    },
+    "heldout": {
       "n": 15,
-      "hit3": 0.1333,
-      "hit5": 0.1333,
-      "mrr": 0.0667,
-      "ndcg5": 0.0837
+      "hit3": 0.4667,
+      "hit5": 0.5333,
+      "mrr": 0.3229,
+      "ndcg5": 0.3403
     },
     "must_pass": {
       "n": 19,
@@ -195,6 +202,65 @@
         "id": "q58",
         "query": "다이얼로그와 팝오버 차이",
         "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "h01",
+        "query": "make the nav bar stick to the top",
+        "top3": [
+          "patterns/stacking/step-nav.md",
+          "patterns/in-line-grouping/split-nav.md",
+          "guides/webpage-generation-workflow.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h02",
+        "query": "grid that adapts column count to available width",
+        "top3": [
+          "motion/review-workflow.md",
+          "quality/evidence/search-metadata-polyhierarchy.md",
+          "patterns/grid-repetition/grid-wrapper.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h03",
+        "query": "two pane email client layout",
+        "top3": [
+          "patterns/split-sidebar/supporting-pane.md",
+          "layout/index.md",
+          "CATALOG.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h10",
+        "query": "카드 아래 버튼 정렬",
+        "top3": [
+          "design-engineering/state-management/index.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h11",
+        "query": "모달 대화상자",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "h12",
+        "query": "이미지 비율",
+        "top3": [],
+        "must_pass": false
+      },
+      {
+        "id": "h13",
+        "query": "검색 필터 상태 유지",
+        "top3": [
+          "design-engineering/state-management/index.md",
+          "README.md"
+        ],
         "must_pass": false
       }
     ]

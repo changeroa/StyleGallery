@@ -4,6 +4,7 @@ name: main-with-rail
 title: main-with-rail
 category: Split / Sidebar
 description: Keep primary content dominant with a narrow secondary rail.
+aliases: ["content with right rail","secondary rail","메인과 보조 레일"]
 primary_spatial_problem: Keep primary content dominant with a narrow secondary rail.
 secondary_spatial_problems: none
 layout_axis: inline

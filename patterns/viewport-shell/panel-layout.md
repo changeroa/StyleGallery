@@ -4,6 +4,7 @@ name: panel-layout
 title: panel-layout
 category: Viewport / Shell
 description: Create predictable main and utility panels.
+aliases: ["main and utility panels","패널 레이아웃"]
 primary_spatial_problem: Create predictable main and utility panels.
 secondary_spatial_problems: none
 layout_axis: inline

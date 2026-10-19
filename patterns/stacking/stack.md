@@ -4,6 +4,7 @@ name: stack
 title: stack
 category: Stacking
 description: Create consistent vertical rhythm between direct children.
+aliases: ["vertical rhythm","vertical spacing between children","스택","세로 간격"]
 primary_spatial_problem: Create consistent vertical rhythm between direct children.
 secondary_spatial_problems: none
 layout_axis: block

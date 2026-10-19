@@ -4,6 +4,7 @@ name: feed
 title: feed
 category: Stacking
 description: Stack repeated content items with stable rhythm.
+aliases: ["content feed","activity feed","피드"]
 primary_spatial_problem: Stack repeated content items with stable rhythm.
 secondary_spatial_problems: none
 layout_axis: block

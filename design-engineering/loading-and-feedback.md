@@ -2,6 +2,7 @@
 type: Domain Guide
 title: Loading, Progress, And Feedback
 description: Separate input acknowledgement, pending work, stale content, confirmed completion, and measurable responsiveness.
+aliases: ["loading state","spinner","skeleton","progress indicator","로딩 상태","스켈레톤","진행 표시"]
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local

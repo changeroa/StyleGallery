@@ -2,6 +2,7 @@
 type: Domain Guide
 title: Optimistic Overlay And Recovery
 description: Show a speculative change while preserving an authoritative base for recovery.
+aliases: ["optimistic update","optimistic UI","rollback","낙관적 업데이트"]
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local

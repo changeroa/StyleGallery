@@ -2,6 +2,8 @@
 type: Layout Recipe
 title: Homepage
 description: Compose raw content into a homepage or ordinary webpage before product-level visual styling.
+aliases: ["landing page","marketing homepage","랜딩 페이지","홈페이지 레이아웃","랜딩 페이지 만들기"]
+questions: ["How do I compose raw content into a homepage layout?"]
 screen_type: Homepage
 primary_user_task: Understand the offer, find the right next path, and decide whether to act.
 spatial_model: First-viewport hook followed by stacked explanation, proof, comparison, conversion, and navigation sections.

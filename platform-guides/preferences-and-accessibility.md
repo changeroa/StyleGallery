@@ -2,6 +2,7 @@
 type: Domain Guide
 title: Preferences And Accessibility Across Platforms
 description: Compare text scaling, motion, contrast, transparency, and accessibility semantics without collapsing distinct user preferences.
+aliases: ["text scaling","reduced motion","high contrast","글자 크기","고대비"]
 domain: platform-guides
 lifecycle: experimental
 provenance_kind: local

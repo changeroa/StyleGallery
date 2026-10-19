@@ -2,6 +2,7 @@
 type: Layout Recipe
 title: List Detail
 description: Compose an explorable list beside its selected detail region.
+aliases: ["master detail screen","inbox layout","목록 상세 화면"]
 screen_type: List detail
 primary_user_task: Browse a collection and inspect one selected item.
 spatial_model: Peer list and detail regions with explicit scroll ownership.

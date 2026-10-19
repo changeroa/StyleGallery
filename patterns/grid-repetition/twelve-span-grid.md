@@ -4,6 +4,7 @@ name: twelve-span-grid
 title: twelve-span-grid
 category: Grid / Repetition
 description: Provide a twelve-column placement scaffold.
+aliases: ["12 column grid","twelve column layout","12단 그리드"]
 primary_spatial_problem: Provide a twelve-column placement scaffold.
 secondary_spatial_problems: none
 layout_axis: both

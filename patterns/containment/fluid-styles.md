@@ -4,6 +4,7 @@ name: fluid-styles
 title: fluid-styles
 category: Containment
 description: Let a region fill available width without exceeding a readable max.
+aliases: ["fluid width with max","유동 폭"]
 primary_spatial_problem: Let a region fill available width without exceeding a readable max.
 secondary_spatial_problems: none
 layout_axis: inline

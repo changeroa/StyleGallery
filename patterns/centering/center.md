@@ -4,6 +4,7 @@ name: center
 title: center
 category: Centering
 description: Center a block while respecting a maximum measure.
+aliases: ["center horizontally","max width centered","가운데 정렬","수평 가운데 정렬"]
 primary_spatial_problem: Center a block while respecting a maximum measure.
 secondary_spatial_problems: none
 layout_axis: inline

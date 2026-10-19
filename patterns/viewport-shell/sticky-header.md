@@ -4,6 +4,8 @@ name: sticky-header
 title: sticky-header
 category: Viewport / Shell
 description: Keep a header visible above a scrolling content region.
+aliases: ["pinned top bar","sticky top navigation","헤더 고정","고정 헤더","상단 고정 메뉴"]
+questions: ["How do I keep the header visible while the page scrolls?"]
 primary_spatial_problem: Keep a header visible above a scrolling content region.
 secondary_spatial_problems: none
 layout_axis: block

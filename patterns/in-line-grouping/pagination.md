@@ -4,6 +4,7 @@ name: pagination
 title: pagination
 category: In-line grouping
 description: Lay out page controls as a bounded wrapping row.
+aliases: ["page numbers","page controls","페이지네이션","페이지 번호"]
 primary_spatial_problem: Lay out page controls as a bounded wrapping row.
 secondary_spatial_problems: none
 layout_axis: inline

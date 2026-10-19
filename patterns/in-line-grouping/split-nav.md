@@ -4,6 +4,7 @@ name: split-nav
 title: split-nav
 category: In-line grouping
 description: Separate primary and secondary nav actions in one row.
+aliases: ["navbar with left and right items","primary and secondary nav","내비게이션 바","좌우 분리 내비게이션"]
 primary_spatial_problem: Separate primary and secondary nav actions in one row.
 secondary_spatial_problems: none
 layout_axis: inline

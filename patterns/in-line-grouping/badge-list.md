@@ -4,6 +4,7 @@ name: badge-list
 title: badge-list
 category: In-line grouping
 description: Align item labels with trailing counts.
+aliases: ["tags with counts","labels with trailing counts","배지 목록","개수 표시 목록"]
 primary_spatial_problem: Align item labels with trailing counts.
 secondary_spatial_problems: none
 layout_axis: inline

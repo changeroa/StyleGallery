@@ -4,6 +4,8 @@ name: switcher
 title: switcher
 category: Split / Sidebar
 description: Switch equal regions from row to stack without a viewport breakpoint.
+aliases: ["row to stack without media query","flex switcher","가로 세로 전환"]
+questions: ["How do I switch equal regions from a row to a stack without a breakpoint?"]
 primary_spatial_problem: Switch equal regions from row to stack without a viewport breakpoint.
 secondary_spatial_problems: none
 layout_axis: inline

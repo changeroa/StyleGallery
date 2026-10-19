@@ -2,6 +2,8 @@
 type: Planning Guide
 title: Webpage Generation Workflow
 description: Intake-to-implementation workflow for turning raw content into a homepage or ordinary webpage layout.
+aliases: ["build a webpage from content","landing page workflow","웹페이지 만들기","랜딩 페이지 만들기"]
+questions: ["How do I turn raw content into a homepage or webpage layout?"]
 ---
 
 # Webpage Generation Workflow

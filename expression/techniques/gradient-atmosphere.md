@@ -2,6 +2,7 @@
 type: Domain Recipe
 title: Gradient Atmosphere
 description: Copy-ready blurred gradient fields, card glows, and gradient text for expressive product pages.
+aliases: ["blurred gradient","glow","gradient text","그라데이션 배경"]
 domain: expression
 lifecycle: experimental
 provenance_kind: local

@@ -4,6 +4,7 @@ name: tab-strip
 title: tab-strip
 category: In-line grouping
 description: Keep peer tabs in one stable row that can wrap.
+aliases: ["tabs row","tab bar","탭 바","탭 메뉴"]
 primary_spatial_problem: Keep peer tabs in one stable row that can wrap.
 secondary_spatial_problems: none
 layout_axis: inline

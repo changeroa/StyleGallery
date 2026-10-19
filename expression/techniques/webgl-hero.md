@@ -2,6 +2,7 @@
 type: Domain Recipe
 title: WebGL Hero Field
 description: A three.js point field behind a hero, with pointer parallax, offscreen pausing, and safe fallbacks.
+aliases: ["three.js hero","WebGL background","3D hero","3D 배경"]
 domain: expression
 lifecycle: experimental
 provenance_kind: local

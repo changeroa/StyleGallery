@@ -4,6 +4,8 @@ name: super-center
 title: super-center
 category: Centering
 description: Center one region along both axes.
+aliases: ["center horizontally and vertically","center a div","place-items center","가운데 정렬","정중앙 정렬"]
+questions: ["How do I center an element both horizontally and vertically?"]
 primary_spatial_problem: Center one region along both axes.
 secondary_spatial_problems: none
 layout_axis: both

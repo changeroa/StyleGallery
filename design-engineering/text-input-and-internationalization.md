@@ -2,6 +2,7 @@
 type: Domain Guide
 title: Text Input And Internationalization
 description: Design composition-aware editing, explicit text units, bidirectional content, and locale-bound presentation without corrupting user input.
+aliases: ["IME","composition events","RTL","bidi","한글 입력","입력기 조합"]
 domain: design-engineering
 lifecycle: experimental
 provenance_kind: local

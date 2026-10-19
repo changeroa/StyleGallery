@@ -4,6 +4,7 @@ name: breadcrumb
 title: breadcrumb
 category: In-line grouping
 description: Lay out hierarchy links compactly with wrapping.
+aliases: ["breadcrumbs","hierarchy links","브레드크럼","경로 표시"]
 primary_spatial_problem: Lay out hierarchy links compactly with wrapping.
 secondary_spatial_problems: none
 layout_axis: inline

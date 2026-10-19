@@ -4,6 +4,7 @@ name: grid-wrapper
 title: grid-wrapper
 category: Grid / Repetition
 description: Center grid tracks while allowing full-width breakout tracks.
+aliases: ["full bleed breakout","full-width breakout","풀 블리드","전체 폭 확장"]
 primary_spatial_problem: Center grid tracks while allowing full-width breakout tracks.
 secondary_spatial_problems: none
 layout_axis: inline

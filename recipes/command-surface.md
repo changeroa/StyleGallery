@@ -2,6 +2,7 @@
 type: Layout Recipe
 title: Command Surface
 description: Compose a tool-heavy shell with stable command and content regions.
+aliases: ["editor shell","tool-heavy app shell","toolbar app","툴 화면","에디터 레이아웃"]
 screen_type: Command surface
 primary_user_task: Repeatedly execute commands while inspecting or editing content.
 spatial_model: Stable shell regions with wrapping or scrolling command rows.

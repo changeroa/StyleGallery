@@ -4,6 +4,7 @@ name: overlay-stack
 title: overlay-stack
 category: Overlay / Exception
 description: Stack several regions into the same grid cell.
+aliases: ["stack in one grid cell","text over image","겹치는 레이어","이미지 위 텍스트"]
 primary_spatial_problem: Stack several regions into the same grid cell.
 secondary_spatial_problems: none
 layout_axis: both

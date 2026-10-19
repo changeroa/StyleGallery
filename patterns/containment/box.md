@@ -4,6 +4,7 @@ name: box
 title: box
 category: Containment
 description: Wrap content with predictable internal spacing.
+aliases: ["padded box","내부 여백 박스"]
 primary_spatial_problem: Wrap content with predictable internal spacing.
 secondary_spatial_problems: none
 layout_axis: block

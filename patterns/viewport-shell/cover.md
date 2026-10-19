@@ -4,6 +4,7 @@ name: cover
 title: cover
 category: Viewport / Shell
 description: Keep a central region balanced between optional header and footer.
+aliases: ["full height hero","vertically centered hero","커버 레이아웃","전체 높이 히어로"]
 primary_spatial_problem: Keep a central region balanced between optional header and footer.
 secondary_spatial_problems: none
 layout_axis: block

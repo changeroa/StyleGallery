@@ -2,6 +2,7 @@
 type: Domain Guide
 title: Motion Rendering And Performance
 description: Diagnose animation cost and choose native transition mechanisms with measurable behavior and complete fallbacks.
+aliases: ["animation performance","jank","dropped frames","애니메이션 성능","버벅임"]
 domain: motion
 lifecycle: experimental
 provenance_kind: local
