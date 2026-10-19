@@ -390,6 +390,23 @@ for (const [domain, leaves] of Object.entries(additionalLocalLeaves)) {
     ? `${line.slice(0, -2)}, ${leaves.map(([name]) => `\`${domain}/${name}\``).join(", ")} |` : line).join("\n");
 }
 
+for (const [relative, sourcePath] of [
+  ["expression/anti-patterns.md", "skills/taste-skill/references/tells.md"],
+  ["motion/usability-anti-patterns.md", "skills/taste-skill/references/motion.md"],
+]) {
+  const domain = relative.split("/")[0];
+  const name = relative.slice(domain.length + 1);
+  const existing = baseFiles[relative];
+  baseFiles[relative] = leafPage({ title: name, domain, sourcePath, parent: "index.md", next: "../DOMAINS.md" })
+    .replaceAll(repository, "leonxlnx/taste-skill")
+    .replaceAll(revision, "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2");
+  if (!existing) {
+    baseFiles[`${domain}/index.md`] += `\n- [${name}](${name})\n`;
+    baseFiles["DOMAINS.md"] = baseFiles["DOMAINS.md"].split("\n").map((line) => line.includes(`| \`${domain}/index.md\` |`)
+      ? `${line.slice(0, -2)}, \`${relative}\` |` : line).join("\n");
+  }
+}
+
 for (const route of ["state-management/index.md", "state-management/recipes/index.md", "evidence-patterns/index.md"]) {
   baseFiles[`design-engineering/${route}`] = indexPage("State navigation", [["Design Engineering", "../index.md"]]);
   baseFiles["design-engineering/index.md"] += `\n- [State navigation](${route})\n`;

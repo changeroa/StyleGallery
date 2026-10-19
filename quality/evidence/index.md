@@ -12,6 +12,7 @@ Evidence references describe what sources and artifacts can support. They do not
 - [Before/After PR evidence](before-after-pr-evidence.md) - Capture, diff, and report a page's rendered change for a pull request.
 - [Accessibility](accessibility.md) - Accessibility evidence references and limits.
 - [HCI evaluation](hci-evaluation.md) - Heuristic, walkthrough, and user-evidence references.
+- [Blind design A/B evaluation](design-ab.md) - Compare guidance and baseline builds with anonymous captures, multiple judges, and separate machine failure counts.
 - [Design rationale](design-rationale.md) - Rationale and argument-structure references.
 - [Tokens](tokens.md) - Design token evidence and limits.
 - [Search, metadata, and polyhierarchy](search-metadata-polyhierarchy.md) - Retrieval benchmark, metadata dictionary, and search adoption decision.

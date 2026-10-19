@@ -25,6 +25,8 @@ jobs:
         with:
           bun-version: 1.3.14
       - run: bun install --frozen-lockfile --ignore-scripts
+      - run: bun run validate:skill-frontmatter
+      - run: bun run test:skill-frontmatter
       - run: bunx playwright install --with-deps chromium
       - run: bun run test:audit
       - run: bun run test:audit:self

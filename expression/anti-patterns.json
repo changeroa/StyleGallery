@@ -23,18 +23,43 @@
     },
     "app": {
       "description": "A product or tool surface: dashboards, editors, search and booking forms, signed-in views.",
-      "relaxed": ["audit.empty-screen", "audit.link-transition", "slop.headline-only-gradient-screen", "slop.empty-screen", "slop.gradient-area-excess", "slop.unfinished-surfaces", "slop.static-interactive", "slop.sluggish-state-change", "slop.oversized-display", "slop.repeated-card-triplet"],
+      "relaxed": [
+        "audit.empty-screen",
+        "audit.link-transition",
+        "slop.headline-only-gradient-screen",
+        "slop.empty-screen",
+        "slop.gradient-area-excess",
+        "slop.unfinished-surfaces",
+        "slop.static-interactive",
+        "slop.sluggish-state-change",
+        "slop.oversized-display",
+        "slop.repeated-card-triplet"
+      ],
       "rationale": "Richness floors, display scale, surface finishing, and motion density were measured on landing pages; application surfaces trade them for density and stability, so these rules become warnings. Accessibility checks, honest actions, emoji icons, unanchored violet gradients, and soft shadows stay errors."
     },
     "content": {
       "description": "A reading or index surface: articles, documentation, government and news pages, link directories.",
-      "relaxed": ["audit.empty-screen", "audit.link-transition", "slop.headline-only-gradient-screen", "slop.empty-screen", "slop.gradient-area-excess", "slop.unfinished-surfaces", "slop.static-interactive", "slop.sluggish-state-change", "slop.oversized-display", "slop.repeated-card-triplet", "slop.soft-shadow-excess"],
+      "relaxed": [
+        "audit.empty-screen",
+        "audit.link-transition",
+        "slop.headline-only-gradient-screen",
+        "slop.empty-screen",
+        "slop.gradient-area-excess",
+        "slop.unfinished-surfaces",
+        "slop.static-interactive",
+        "slop.sluggish-state-change",
+        "slop.oversized-display",
+        "slop.repeated-card-triplet",
+        "slop.soft-shadow-excess"
+      ],
       "rationale": "Text-led pages are finished by their text, not by imagery: GOV.UK screens of 8.5% and 9.9% text and Hacker News links without hover transitions are correct for their purpose, yet missed the landing floors in the 2026-10-19 real-site run. Landing-only rules become warnings; accessibility checks and honest actions stay errors."
     }
   },
   "entries": [
     {
       "id": "slop.headline-only-gradient-screen",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Headline alone on a gradient screen",
       "definition": "A screen whose only content is a heading, and perhaps a short line and a button, set over a gradient or flat fill, with no picture, drawn scene, render, live product surface, or dense text.",
       "detectable": "machine",
@@ -46,10 +71,16 @@
         "violation": "One error per screen where heading_present is true, both coverage floors are missed, and gradient_ground is true. A screen that misses both floors without a gradient ground is reported by slop.empty-screen instead."
       },
       "rationale": "The 49 measured originals give a median 53% of page area to raster images, video, and background images and only 3.9% to gradients; the studies gave 0% to imagery and 26% to gradients, which is why whole sections read empty (expression/measured-benchmarks.md, gap 1). showcase/QA.md I16 forbids a headline alone on a gradient.",
-      "sources": ["expression/measured-benchmarks.md", "showcase/QA.md", "expression/techniques/image-weight.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "showcase/QA.md",
+        "expression/techniques/image-weight.md"
+      ]
     },
     {
       "id": "slop.empty-screen",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Empty screen",
       "definition": "A screen that shows neither imagery nor enough text, whatever its background.",
       "detectable": "machine",
@@ -61,10 +92,15 @@
         "violation": "One error per screen that misses both floors and is not already reported as slop.headline-only-gradient-screen."
       },
       "rationale": "showcase/QA.md I16 and Q22 require at least 8% media or 10% text on every screen. expression/measured-benchmarks.md treats imagery as the floor for a finished page: a page with no raster or rendered imagery reads as a wireframe regardless of palette.",
-      "sources": ["showcase/QA.md", "expression/measured-benchmarks.md"]
+      "sources": [
+        "showcase/QA.md",
+        "expression/measured-benchmarks.md"
+      ]
     },
     {
       "id": "slop.unanchored-violet-gradient",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Random purple gradient",
       "definition": "A large blue-violet-to-magenta gradient whose hue appears nowhere else in the page's solid colors, so it signals a default rather than a brand.",
       "detectable": "machine",
@@ -76,10 +112,15 @@
         "violation": "One error per gradient element that meets all three conditions."
       },
       "rationale": "Gradient-painted area is 3.9% of the median original and 26% of the median study (expression/measured-benchmarks.md); the rule fires only when a violet gradient is both large and disconnected from every solid brand color, which separates a default from a chosen accent.",
-      "sources": ["expression/measured-benchmarks.md", "expression/techniques/gradient-atmosphere.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "expression/techniques/gradient-atmosphere.md"
+      ]
     },
     {
       "id": "slop.gradient-area-excess",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Gradient filling the space imagery should hold",
       "definition": "Gradients paint more of the page than the measured originals' upper quartile, standing in for content.",
       "detectable": "machine",
@@ -91,10 +132,14 @@
         "violation": "One error per page."
       },
       "rationale": "Originals paint 0 / 3.9% / 17% (p25 / median / p75) of their area with gradients; the studies' median of 26% sits above the originals' p75 and was diagnosed as gradients filling the space imagery should hold (expression/measured-benchmarks.md, gap 1).",
-      "sources": ["expression/measured-benchmarks.md"]
+      "sources": [
+        "expression/measured-benchmarks.md"
+      ]
     },
     {
       "id": "slop.soft-shadow-excess",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Excessive soft shadows",
       "definition": "Cards and panels separated by large blurred drop shadows instead of masks, clips, and hairlines.",
       "detectable": "machine",
@@ -106,10 +151,15 @@
         "violation": "One error per page, listing each soft-shadowed element's selector."
       },
       "rationale": "Elements with 24px+ blur shadows: originals 0 / 0 / 1 (p25 / median / p75), studies median 2. The originals finish surfaces with a median 12 masked or clipped elements and 24 hairlines instead (expression/measured-benchmarks.md, gap 3; expression/techniques/surface-detail.md).",
-      "sources": ["expression/measured-benchmarks.md", "expression/techniques/surface-detail.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "expression/techniques/surface-detail.md"
+      ]
     },
     {
       "id": "slop.unfinished-surfaces",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "No masks, clips, or hairlines",
       "definition": "Surfaces with no mask, rounded clip, or 1px rule, the finishing detail the measured originals use instead of shadows.",
       "detectable": "machine",
@@ -121,10 +171,16 @@
         "violation": "One error per page."
       },
       "rationale": "Originals: masked or clipped elements 1 / 12 / 27 and 1px borders 3 / 24 / 65 (p25 / median / p75); studies had 0 and 13 (expression/measured-benchmarks.md). showcase/QA.md I18 and Q24 set the floor at 2 and 3.",
-      "sources": ["expression/measured-benchmarks.md", "showcase/QA.md", "expression/techniques/surface-detail.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "showcase/QA.md",
+        "expression/techniques/surface-detail.md"
+      ]
     },
     {
       "id": "slop.emoji-icons",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Emoji used as icons",
       "definition": "Emoji characters standing in for icons in navigation, buttons, headings, list markers, or feature cards.",
       "detectable": "machine",
@@ -136,10 +192,16 @@
         "violation": "One error per page, listing every icon_use element."
       },
       "rationale": "Emoji render differently on every platform and announce as their Unicode names to screen readers. The measured originals use raster imagery, drawn vectors, or product surfaces on every screen (expression/measured-benchmarks.md; expression/techniques/drawn-products.md), and showcase/QA.md I16 counts only pictures, drawn scenes, renders, and live surfaces as content.",
-      "sources": ["expression/measured-benchmarks.md", "showcase/QA.md", "expression/techniques/drawn-products.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "showcase/QA.md",
+        "expression/techniques/drawn-products.md"
+      ]
     },
     {
       "id": "slop.repeated-card-triplet",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Repeated identical three-card grids",
       "definition": "Two or more rows of three or four structurally identical, imageless cards (icon, heading, sentence), the template feature grid.",
       "detectable": "machine",
@@ -151,10 +213,15 @@
         "violation": "One error per page, listing each triplet container."
       },
       "rationale": "Originals put pictures in every card and change pace down a 9.1-viewport page; studies compressed to 4.4 viewports and gave each idea one short beat (expression/measured-benchmarks.md, gaps 1 and 5). A repeated imageless triplet is the clearest machine signature of that compression and of a missing picture on the screen (showcase/QA.md I16).",
-      "sources": ["expression/measured-benchmarks.md", "showcase/QA.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "showcase/QA.md"
+      ]
     },
     {
       "id": "slop.static-interactive",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Links and buttons without a state change",
       "definition": "Links, buttons, tabs, or cards that do not change at all under the pointer or keyboard focus.",
       "detectable": "machine",
@@ -166,10 +233,15 @@
         "violation": "One error per element, reported as hover_unchanged, focus_unchanged, or focus_unreachable (the complete Tab walk never reached it). An element the pointer cannot reach (hover times out) or that a capped Tab walk did not reach is skipped, not a violation."
       },
       "rationale": "Originals put transitions on a median 76 elements per page, mostly opacity, color, transform, and background-color; studies had 8 and felt static (expression/measured-benchmarks.md, gap 4). showcase/QA.md I17 requires links, buttons, cards, tabs, and media frames to change state under the pointer, and I6 requires every focused element to be visible.",
-      "sources": ["expression/measured-benchmarks.md", "showcase/QA.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "showcase/QA.md"
+      ]
     },
     {
       "id": "slop.sluggish-state-change",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Sluggish or sparse state transitions",
       "definition": "State changes that run longer than the measured 100-320ms band, or too few responding elements for the page length.",
       "detectable": "machine",
@@ -181,10 +253,16 @@
         "violation": "One error per page naming which bound failed (reasons speed and too_few). When slop.static-interactive also fails, only the speed reason is reported: controls that do not respond at all are one finding, not two."
       },
       "rationale": "Hover and state transitions on the originals run 100-320ms, with a median dominant duration of 200ms; studies used 400ms and felt sluggish (expression/measured-benchmarks.md). showcase/QA.md Q23 fails a page whose median link and button duration exceeds 350ms or that has fewer than 4 transitioning elements per screen of length.",
-      "sources": ["expression/measured-benchmarks.md", "showcase/QA.md", "motion/techniques/scroll-choreography.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "showcase/QA.md",
+        "motion/techniques/scroll-choreography.md"
+      ]
     },
     {
       "id": "slop.dishonest-cta",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Fake or dishonest call to action",
       "definition": "A call to action that looks real but does nothing, jumps to the top, or pretends to complete an action that does not exist.",
       "detectable": "machine",
@@ -196,10 +274,15 @@
         "violation": "One error per element. A fictional action that announces itself in a role=status message passes, as showcase/QA.md I2 and Q4 require."
       },
       "rationale": "showcase/QA.md I2 requires every link and button to do something plausible and fictional actions to say so in an announced status message; Q3 forbids # and #top targets and Q4 requires the status message without a scroll jump. expression/techniques/live-product-demos.md asks demos to answer honestly.",
-      "sources": ["showcase/QA.md", "expression/techniques/live-product-demos.md"]
+      "sources": [
+        "showcase/QA.md",
+        "expression/techniques/live-product-demos.md"
+      ]
     },
     {
       "id": "slop.oversized-display",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Oversized display type",
       "definition": "Display type so large relative to the body that it shouts, crowding out imagery and pacing.",
       "detectable": "machine",
@@ -211,47 +294,135 @@
         "violation": "One error per page naming ratio and display_share. A ratio below 3.5 is not an error: Korean service originals run near 2.0 by design."
       },
       "rationale": "Largest size over body size on the originals: 2.8 / 3.95 / 5.5 (p25 / median / p75); studies median 5.2 with 22 of 49 studies more than 20% higher. Display share: originals 0.4% / 4.7% / 8.2%, studies 8.6% (expression/measured-benchmarks.md, gap 2). AGENTS.md and expression/techniques/display-type-calibration.md set display type at 3.5-5.5 times the body.",
-      "sources": ["expression/measured-benchmarks.md", "expression/techniques/display-type-calibration.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "expression/techniques/display-type-calibration.md"
+      ]
     },
     {
       "id": "slop.generic-copy",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "owner-taste",
       "title": "Generic marketing copy",
       "definition": "Headlines and section copy that could sit on any product: unlock, supercharge, seamless, next-level, all-in-one, built for the future.",
       "detectable": "review",
       "severity": "review",
       "review_question": "If the product name were removed, could a reader tell from the headline and the first paragraph what this product does, for whom, and what is different about it?",
       "rationale": "Word lists produce false positives on honest copy, so this stays a review question. The measured originals spend expression on content and response rather than on claims (expression/measured-benchmarks.md, Opinionated Guidance), and expression/direction-brief.md asks for a copy register chosen per direction.",
-      "sources": ["expression/measured-benchmarks.md", "expression/direction-brief.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "expression/direction-brief.md"
+      ]
     },
     {
       "id": "slop.fabricated-proof",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "owner-taste",
       "title": "Fabricated social proof",
       "definition": "Invented customer logos, testimonials, ratings, user counts, or metrics presented as real.",
       "detectable": "review",
       "severity": "review",
       "review_question": "Is every logo, quote, rating, and number on the page either sourced, or visibly marked as illustrative in a study or demo?",
       "rationale": "showcase/QA.md I2 requires fictional actions to say they are fictional; the same honesty applies to claims. expression/brand-studies.md forbids copied logos and verbatim copy and requires an Unofficial mark on brand studies.",
-      "sources": ["showcase/QA.md", "expression/brand-studies.md"]
+      "sources": [
+        "showcase/QA.md",
+        "expression/brand-studies.md"
+      ]
     },
     {
       "id": "slop.gradient-text-everywhere",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "owner-taste",
       "title": "Gradient text as the default emphasis",
       "definition": "background-clip: text gradients applied to headings and numbers as the page's main way of adding emphasis.",
       "detectable": "review",
       "severity": "review",
       "review_question": "Does each gradient-filled word carry a meaning the direction names, and would the page lose anything if it were set in the solid accent color?",
       "rationale": "Gradient text is easy to count but its fit depends on the direction, so it is a review question rather than a gate. Studies already painted six times more gradient area than the originals (expression/measured-benchmarks.md, gap 1); expression/techniques/display-type-calibration.md asks display type to read confident, not loud.",
-      "sources": ["expression/measured-benchmarks.md", "expression/techniques/display-type-calibration.md"]
+      "sources": [
+        "expression/measured-benchmarks.md",
+        "expression/techniques/display-type-calibration.md"
+      ]
     },
     {
       "id": "slop.uniform-section-rhythm",
+      "first_seen": "2026-10-19",
+      "evidence_grade": "measured-baseline",
       "title": "Uniform section rhythm",
       "definition": "Every section has the same height, the same centered heading-plus-subtitle opener, and the same background change, so the page has no pacing.",
       "detectable": "review",
       "severity": "review",
       "review_question": "Do the sections differ in length, density, and opener so that the page has a paced sequence rather than a stack of equal beats?",
       "rationale": "Originals run 9.1 viewports with a median of 3 background band changes; studies ran 4.4 viewports with 6 band changes, giving each idea a single short beat (expression/measured-benchmarks.md, gap 5). Rhythm needs judgment, so this stays a review question.",
-      "sources": ["expression/measured-benchmarks.md"]
+      "sources": [
+        "expression/measured-benchmarks.md"
+      ]
+    }
+  ],
+  "reviewed_and_rejected": [
+    {
+      "id": "monospace-ban",
+      "title": "Ban monospace outside code",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/tells.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "The taste-skill study (model panel) reports monospace labels on 44% of strong sites versus 24% of weak sites. Its ban is a house preference, not evidence of inferior design."
+    },
+    {
+      "id": "index-number-ban",
+      "title": "Ban zero-padded section numbers",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/tells.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "The taste-skill study (model panel) reports index numbers on 38% of strong sites versus 21% of weak sites. Review whether numbering communicates order instead of banning 01/02."
+    },
+    {
+      "id": "hairline-box-ban",
+      "title": "Ban hairlines and 1px boxes",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/tells.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "The taste-skill study (model panel) reports thin rules on 61% of strong sites versus 52% of weak sites, without a useful negative distinction. Our measured originals use a median 24 hairlines; a ban conflicts with our surface guidance."
+    },
+    {
+      "id": "two-line-headline-error",
+      "title": "Fail every headline longer than two lines",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/research.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "In the taste-skill study (model panel), 71% of strong sites and 83% of weak sites meet the desktop two-line condition. This does not justify an error threshold across languages and widths."
+    },
+    {
+      "id": "unconditional-huge-display",
+      "title": "Always size display type at 8.4vw",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/research.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "The 8.4vw figure is a strong-site median in the taste-skill study (model panel), not a universal prescription. Its gallery sample differs from our originals; preserve our body-relative calibration and direction-specific exceptions."
+    },
+    {
+      "id": "brand-palette-ban",
+      "title": "Ban Claude-brand hex values and cream with terracotta",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/scripts/lint.mjs",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "A brand-associated palette is not evidence of poor usability or composition. Color selection needs the brief, contrast, and product context, not a brand blacklist."
+    },
+    {
+      "id": "cliche-dictionary-error",
+      "title": "Turn a cliche-word dictionary into build errors",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "skills/taste-skill/references/copy.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "Words alone cannot distinguish a concrete product claim from filler. Keep copy specificity as contextual review rather than a lexical error."
+    },
+    {
+      "id": "laziness-material",
+      "title": "Import model-laziness research and prompting prescriptions",
+      "source_repository": "leonxlnx/taste-skill",
+      "source_path": "research/laziness/findings/empirical-results.md",
+      "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2",
+      "reason": "Model motivation and incentive claims lack a locally verified basis and fall outside this design catalog's evidence boundary. No prompting prescriptions or research material are admitted."
     }
   ]
 }
