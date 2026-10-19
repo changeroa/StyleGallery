@@ -65,6 +65,71 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "design-engineering/evidence-patterns/autocomplete.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/bottom-navigation.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/breadcrumbs.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/dark-mode-contrast.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/data-tables.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/empty-states.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/error-recovery.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/faceted-filters.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/form-labels.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/index.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/inline-validation.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/input-masks.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
+      "repository_path": "design-engineering/evidence-patterns/tabs-and-segmented-controls.md",
+      "domain": "design-engineering",
+      "lifecycle": "experimental"
+    },
+    {
       "repository_path": "design-engineering/index.md",
       "domain": "design-engineering",
       "lifecycle": "experimental"
@@ -982,5 +1047,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:02255d8e50f11d93e31481ce0014e0ec70062b56fc7be4dc3c34389875dad754"
+  "version_id": "sg:policy/material-admission-v2@sha256:1bfe3a30d62913fcf5647b5af03e07be8e128f83c78c133442748f535c8e9ed3"
 }

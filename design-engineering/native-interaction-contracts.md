@@ -68,6 +68,14 @@ An editable combobox has at least two responsibilities: editing text and navigat
 
 A disabled-looking control needs a deliberate discoverability policy. Native `disabled` and `aria-disabled` have different behavior; choose which focus and activation behavior the task requires, and explain why an action is unavailable without relying only on color.
 
+### Modal Focus Checklist
+
+The [APG modal-dialog source](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) was rechecked 2026-10-19. It is living informative guidance, not a measured comparison. It requires an explicit model of focus inside the modal, Tab/Shift+Tab containment, Escape dismissal, and focus return. Local checklist: verify both boundaries of the tab sequence, not only initial focus.
+
+For long structured content, consider initial focus on a static heading with `tabindex="-1"` so the beginning remains visible. Do not assign positive tabindex values to force an artificial reading order. Include a visible close action. After closing, return to the opener unless it no longer exists or a documented workflow makes another destination logical. `aria-modal="true"` describes modality; it does not trap focus or make the background inert.
+
+These checks extend this guide's existing modal contract. They do not authorize a second focus-trap implementation or establish a browser/screen-reader result.
+
 ## Opinionated Guidance
 
 Prefer native semantics when they fit the task, and build the smallest custom behavior that remains necessary. Name the semantic reason for every role override. Treat multiple open surfaces as an ownership question: which surface receives Escape, where focus stays, and which state survives dismissal.

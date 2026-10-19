@@ -220,6 +220,18 @@ const additionalLocalLeaves = {
     ["techniques/kinetic-type.md", "Kinetic Type Technique"]
   ],
   "design-engineering": [
+    ["evidence-patterns/autocomplete.md", "Autocomplete Acceptance"],
+    ["evidence-patterns/bottom-navigation.md", "Bottom Navigation Destinations"],
+    ["evidence-patterns/breadcrumbs.md", "Breadcrumb Hierarchy"],
+    ["evidence-patterns/dark-mode-contrast.md", "Dark Mode Contrast"],
+    ["evidence-patterns/data-tables.md", "Data Table Interaction"],
+    ["evidence-patterns/empty-states.md", "Empty States And No Results"],
+    ["evidence-patterns/error-recovery.md", "Error Messages And Recovery Summaries"],
+    ["evidence-patterns/faceted-filters.md", "Faceted Filter Selection"],
+    ["evidence-patterns/form-labels.md", "Persistent Form Labels"],
+    ["evidence-patterns/inline-validation.md", "Inline Validation Timing"],
+    ["evidence-patterns/input-masks.md", "Localized Input Masks"],
+    ["evidence-patterns/tabs-and-segmented-controls.md", "Tabs And Segmented Controls"],
     ["native-interaction-contracts.md", "Native Interaction Contracts"],
     ["text-input-and-internationalization.md", "Text Input And Internationalization"],
     ["loading-and-feedback.md", "Loading, Progress, And Feedback"],
@@ -376,7 +388,7 @@ for (const [domain, leaves] of Object.entries(additionalLocalLeaves)) {
     ? `${line.slice(0, -2)}, ${leaves.map(([name]) => `\`${domain}/${name}\``).join(", ")} |` : line).join("\n");
 }
 
-for (const route of ["state-management/index.md", "state-management/recipes/index.md"]) {
+for (const route of ["state-management/index.md", "state-management/recipes/index.md", "evidence-patterns/index.md"]) {
   baseFiles[`design-engineering/${route}`] = indexPage("State navigation", [["Design Engineering", "../index.md"]]);
   baseFiles["design-engineering/index.md"] += `\n- [State navigation](${route})\n`;
   baseFiles["DOMAINS.md"] = baseFiles["DOMAINS.md"].split("\n").map((line) => line.includes("| `design-engineering/index.md` |")
