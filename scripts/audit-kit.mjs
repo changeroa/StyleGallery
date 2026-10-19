@@ -144,7 +144,7 @@ export function blockedReason(signals, status) {
 // Automatic profile from rendered signals; an explicit --profile always wins.
 export function estimateProfile(signals) {
   if (signals.application_role || (signals.inputs >= 3 && signals.screens <= 2 && signals.link_text_share < 0.6)) return { profile: "app", reason: "form controls dominate a short page" };
-  if (signals.link_text_share >= 0.6 && signals.content_media <= 3) return { profile: "content", reason: `links carry ${Math.round(signals.link_text_share * 100)}% of the text and content media is ${signals.content_media}` };
+  if (signals.link_text_share >= 0.7 || (signals.link_text_share >= 0.6 && signals.content_media <= 3)) return { profile: "content", reason: `links carry ${Math.round(signals.link_text_share * 100)}% of the text and content media is ${signals.content_media}` };
   if (signals.content_media === 0 && signals.text_chars >= 1500) return { profile: "content", reason: `${signals.text_chars} characters of text and no content media` };
   return { profile: "landing", reason: "default for a marketing or product page with media" };
 }
@@ -158,7 +158,9 @@ async function preflight(browser, url, base, budget) {
     await page.waitForFunction(() => {
       const main = document.querySelector("main,[role=main]");
       const scope = main ?? document.body;
-      return scope && (scope.innerText.trim().length > 200 || scope.querySelector("img,picture,video,canvas,svg"));
+      // Real media, not the logo or an icon: a client-rendered page shows its chrome first.
+      const sized = [...scope.querySelectorAll("img,picture,video,canvas,svg")].some((el) => { const r = el.getBoundingClientRect(); return r.width >= 120 && r.height >= 80; });
+      return scope && (scope.innerText.trim().length > 200 || sized);
     }, null, { timeout: 8000, polling: 250 }).catch(() => {});
     const signals = await page.evaluate(pageSignals);
     return { signals, status: response || null, failures };

@@ -15,7 +15,7 @@
     "interactive": "a[href], button, summary, [role=button], [role=link], [role=tab], input[type=button], input[type=submit], excluding elements with the disabled attribute or aria-disabled=true."
   },
   "profiles": {
-    "detection": "stylegallery audit check resolves the profile before checking: an explicit --profile wins; otherwise app when the page declares role=application or shows 3 or more form controls on at most 2 screens with links under 60% of the text, content when links carry at least 60% of the rendered text with at most 3 content images, or when the page has no content imagery and at least 1500 characters of text, and landing otherwise. The resolved profile, its source, and the signals are reported.",
+    "detection": "stylegallery audit check resolves the profile before checking: an explicit --profile wins; otherwise app when the page declares role=application or shows 3 or more form controls on at most 2 screens with links under 60% of the text, content when links carry at least 70% of the rendered text, or at least 60% with at most 3 content images, or when the page has no content imagery and at least 1500 characters of text, and landing otherwise. The resolved profile, its source, and the signals are reported.",
     "landing": {
       "description": "A marketing, brand, or product landing page: the finished-page surface the 49 measured originals represent.",
       "relaxed": [],
