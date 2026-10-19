@@ -149,6 +149,12 @@ Connect your agents:
 
 Site compilation (requires `SG_COMPILER_ROOT`): `compile`, `timeline`, `transcribe`, `sale`, `gate`, `build`, `shots`, `probe`, `workflow`. Start with `stylegallery workflow`.
 
+Before/after PR evidence (local Chromium, no compiler):
+
+| Command | Options | Purpose |
+| --- | --- | --- |
+| `shots --before <ref\|url> --after <ref\|url>` | `--page <path>` (default `index.html`), `--out <dir>` (default `stylegallery-shots-compare` in the system temp directory), `--selector <css>`, `--threshold <0-1>` (default 0.05), `--full-page`, `--wait <ms>`, `--violations <ids>` | Capture 390 and 1440 widths x light/dark (x focus/hover with `--selector`) for a Git ref, `.` (working tree), or URL on each side; write before/after/diff PNGs, `report.json` with visual-qa `image-diff` fields, and `pr-body.md` ([Before/After PR Evidence](quality/evidence/before-after-pr-evidence.md)) |
+
 Other: `help` / `--help`, `version` / `--version`. The MCP server `stylegallery-mcp` exposes `search` and `read` with the same JSON, plus the governed and compiler tools.
 
 ### Worked homepage example

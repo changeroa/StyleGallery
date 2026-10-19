@@ -31,6 +31,8 @@ Visual QA evidence helps inspect rendered output.
 - aesthetic quality;
 - task completion.
 
+To produce paired captures and diffs for a pull request, use [Before/After PR Evidence](before-after-pr-evidence.md).
+
 ## Required Phrase
 
 Screenshot diffs show rendered change, not usability.

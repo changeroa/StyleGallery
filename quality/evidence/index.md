@@ -9,6 +9,7 @@ Evidence references describe what sources and artifacts can support. They do not
 - [Executable evidence](executable-evidence.md) - Validator, fixture, CI, rendered, review, and citation boundaries.
 - [Consumer migration evidence](consumer-migration.md) - Runtime, page-session, adoption, freshness, and human-review boundaries for migration readiness.
 - [Visual QA](visual-qa.md) - Rendered evidence references and limits.
+- [Before/After PR evidence](before-after-pr-evidence.md) - Capture, diff, and report a page's rendered change for a pull request.
 - [Accessibility](accessibility.md) - Accessibility evidence references and limits.
 - [HCI evaluation](hci-evaluation.md) - Heuristic, walkthrough, and user-evidence references.
 - [Design rationale](design-rationale.md) - Rationale and argument-structure references.
