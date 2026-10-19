@@ -89,6 +89,18 @@ Agents asking in another language should pass `--query-en` (MCP: `query_en`) wit
 
 For a coding agent with repository filesystem access, local guided traversal is the default: read `AGENTS.md` and this README, follow the narrowest relevant task route or domain index, and inspect the selected Markdown files directly. Use `search --paths-only` only when the path is unclear; it returns a deterministic `paths` array of repository-relative candidates without full result metadata. Reserve `context` for environments that cannot read repository files or for transferring a bounded, provenance-linked package.
 
+### Connect your agent
+
+Installing the package does not make Claude Code or Codex use it. Run `setup` once to copy the `stylegallery-search` skill into each agent's user skill folder and register the `stylegallery-mcp` server:
+
+```sh
+npm install --global stylegallery
+stylegallery setup --dry-run   # show the planned changes
+stylegallery setup             # Claude Code and Codex, whichever is installed
+```
+
+Claude Code gets `~/.claude/skills/stylegallery-search/SKILL.md` and a user-scope `mcpServers.stylegallery` entry in `~/.claude.json`; Codex gets `~/.agents/skills/stylegallery-search/SKILL.md` and `[mcp_servers.stylegallery]` in `~/.codex/config.toml` (or `$CODEX_HOME/config.toml`). The server runs as `npx -y --package stylegallery stylegallery-mcp`, so it works however the package was installed. Rerunning changes nothing, every modified config file is backed up first as `<file>.bak-stylegallery-<timestamp>`, other settings are preserved, and an existing entry with the same name but different settings is left alone unless you pass `--force`. Use `--agent claude|codex|all`, `--only skill|mcp`, and `--uninstall` to narrow or undo it, then check with `claude mcp list` or `codex mcp list`.
+
 ### CLI reference
 
 Run `stylegallery --help` for the same list. Every command prints JSON to stdout; invalid input prints an error object and exits nonzero.
@@ -121,6 +133,12 @@ Governed records:
 | `ops` | List operations |
 | `registrar` | Check claim records (`--stale`, `--unverified`) |
 | `conservator` | Measure Layout patterns in Chromium (`--pattern <a,b>`, `--controls`, `--install-browser`) |
+
+Connect your agents:
+
+| Command | Options | Purpose |
+| --- | --- | --- |
+| `setup` | `--agent <claude\|codex\|all>`, `--only <skill\|mcp>`, `--dry-run`, `--uninstall`, `--force` | Install the search skill and register `stylegallery-mcp` for Claude Code and Codex ([Connect your agent](#connect-your-agent)) |
 
 Site compilation (requires `SG_COMPILER_ROOT`): `compile`, `timeline`, `transcribe`, `sale`, `gate`, `build`, `shots`, `probe`, `workflow`. Start with `stylegallery workflow`.
 
@@ -172,6 +190,13 @@ npx stylegallery discover --format json
 ```sh
 npm install --global stylegallery
 stylegallery discover --format json
+```
+
+설치만으로는 Claude Code나 Codex가 StyleGallery를 쓰지 않습니다. 한 번 `stylegallery setup`을 실행하면 `stylegallery-search` 스킬을 각 에이전트의 사용자 스킬 폴더에 복사하고 `stylegallery-mcp` 서버를 등록합니다. `--dry-run`으로 바뀔 내용만 먼저 볼 수 있고, `--agent claude|codex|all`, `--only skill|mcp`, `--uninstall`, `--force`를 지원합니다. 다시 실행해도 결과는 같고, 수정하는 설정 파일은 먼저 `.bak-stylegallery-<시각>`으로 백업하며, 같은 이름의 다른 설정은 `--force` 없이는 건드리지 않습니다. 등록 확인은 `claude mcp list` 또는 `codex mcp list`로 합니다.
+
+```sh
+stylegallery setup --dry-run
+stylegallery setup
 ```
 
 `discover`는 사용 가능한 인터페이스를 보여주고, `resolve`는 하나의 레코드를 조회하며, `claims`는 관련 주장과 근거를 분리해서 보여줍니다. `context`는 에이전트에 전달할 수 있는 제한된 컨텍스트 패키지를 만들고, `ops`는 지원하는 작업 목록을 반환합니다. 저장소를 직접 읽을 수 있는 에이전트는 `AGENTS.md`와 이 README의 작업 경로에서 시작해 로컬 Markdown을 따라가는 방식이 기본입니다. 경로가 불명확할 때만 `stylegallery search "검색어" --paths-only --limit 5`로 후보 경로를 좁히고, `context`는 파일에 직접 접근할 수 없거나 제한된 패키지를 전달해야 할 때 사용합니다. 모든 결과는 자동화에 바로 사용할 수 있는 JSON입니다.

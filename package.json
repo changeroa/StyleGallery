@@ -285,6 +285,7 @@
     "scripts/sg.mjs",
     "scripts/strict-json.mjs",
     "scripts/stylegallery-cli.mjs",
+    "scripts/stylegallery-setup.mjs",
     "showcase/README.md",
     "skills/stylegallery-search/SKILL.md"
   ],
@@ -337,6 +338,7 @@
     "sg:mcp:v1": "node scripts/sg-mcp.mjs",
     "stylegallery": "node scripts/sg-entry.mjs",
     "test:search": "node --test scripts/test-stylegallery-search.mjs",
+    "test:setup": "node --test scripts/test-stylegallery-setup.mjs",
     "eval:search": "node scripts/search-eval.mjs --gate"
   },
   "devDependencies": {

@@ -37,6 +37,14 @@ Governed records:
   ops                           List operations.
   registrar | conservator       Check claim records | measure Layout patterns in Chromium.
 
+Connect your agents:
+  setup                         Install the search skill and register stylegallery-mcp for Claude Code and Codex.
+      --agent <claude|codex|all> Agents to configure (default: the ones detected on this machine).
+      --only <skill|mcp>        Configure only the skill or only the MCP server.
+      --dry-run                 Print the planned changes without writing anything.
+      --uninstall               Remove what setup installed.
+      --force                   Replace or remove a different existing entry with the same name.
+
 Site compilation: compile, timeline, transcribe, sale, gate, build, shots, probe, workflow (see stylegallery workflow).
 
   help, --help                  Show this help.
@@ -116,6 +124,10 @@ export async function runStylegalleryCli(argv, config = {}) {
   }
   if (command === "version" || command === "--version" || command === "-v") {
     return { exitCode: 0, output: `${packageVersion()}\n`, report: { ok: true, operation: "version" } };
+  }
+  if (command === "setup" && !rest.includes("--help")) {
+    const { runSetup } = await import("./stylegallery-setup.mjs");
+    return report(runSetup(rest));
   }
   if (rest.includes("--help")) return { exitCode: 0, output: HELP_TEXT, report: { ok: true, operation: "help" } };
   if (command === "search") return runSearch(rest);

@@ -94,8 +94,8 @@
         "scripts/test-lifecycle-disposition.mjs",
         "scripts/validate-lifecycle-disposition.mjs"
       ],
-      "scanned_file_count": 607,
-      "scanned_paths_content_id": "sha256:c51485b3607f2a97073ff56fe24a75b4ba10ea75000d8fe52a12dbab3fe5e3cf"
+      "scanned_file_count": 609,
+      "scanned_paths_content_id": "sha256:f7b18d347b27aa8c02f96b704ad0df97f2b830d930cab6e1327b8c5a1211aad7"
     },
     "implementation": {
       "path": "scripts/agent-native/v2/extensions/agui-projection.mjs",
@@ -203,10 +203,10 @@
         "role": "repository_reference",
         "lines": {
           "start": 1,
-          "end": 358
+          "end": 360
         },
-        "file_sha256": "64a38f55f5cd25f1ba84ad83e95e813176a4883993c305d3bd5e10d5730ec5be",
-        "content_id": "sha256:64a38f55f5cd25f1ba84ad83e95e813176a4883993c305d3bd5e10d5730ec5be",
+        "file_sha256": "8c31b3923e9b21c13a71ff0f28ec1a0b6186a9288f8fc508d976b629cfadcb80",
+        "content_id": "sha256:8c31b3923e9b21c13a71ff0f28ec1a0b6186a9288f8fc508d976b629cfadcb80",
         "reference_lines": [
           242,
           258
@@ -479,10 +479,10 @@
       "role": "installed_package_exposure",
       "lines": {
         "start": 1,
-        "end": 358
+        "end": 360
       },
-      "file_sha256": "64a38f55f5cd25f1ba84ad83e95e813176a4883993c305d3bd5e10d5730ec5be",
-      "content_id": "sha256:64a38f55f5cd25f1ba84ad83e95e813176a4883993c305d3bd5e10d5730ec5be"
+      "file_sha256": "8c31b3923e9b21c13a71ff0f28ec1a0b6186a9288f8fc508d976b629cfadcb80",
+      "content_id": "sha256:8c31b3923e9b21c13a71ff0f28ec1a0b6186a9288f8fc508d976b629cfadcb80"
     },
     "forwarding": {
       "path": "scripts/agent-native/agui-projection.mjs",
