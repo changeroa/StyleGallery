@@ -1,4 +1,5 @@
 ---
+type: Agent Skill
 name: stylegallery-search
 description: Find and read StyleGallery guidance (layout patterns, recipes, motion, state management, platform guides, design terminology, expression) with the stylegallery CLI or the stylegallery-mcp search/read tools. Use when a UI task needs a layout pattern, recipe, or interaction contract and the right document is not already known.
 ---
