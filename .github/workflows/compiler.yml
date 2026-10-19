@@ -25,3 +25,7 @@ jobs:
           bun-version: 1.3.14
       - run: bun install --frozen-lockfile --ignore-scripts
       - run: bun run test:compiler
+      - name: Install Playwright Chromium for shots before/after
+        run: bunx playwright install --with-deps chromium
+      - name: shots before/after self-test
+        run: bun run test:shots

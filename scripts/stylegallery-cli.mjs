@@ -56,6 +56,20 @@ Audit ledger:
 
 Site compilation: compile, timeline, transcribe, sale, gate, build, shots, probe, workflow (see stylegallery workflow).
 
+Before/after PR evidence (local Chromium; no site compiler needed):
+  shots --before <ref|url> --after <ref|url>
+                                Capture 390 and 1440 widths x light/dark (x focus/hover with --selector)
+                                for both sides, diff each pair, and write before/, after/, diff/,
+                                report.json, and pr-body.md. A side is an http(s) or file URL, a Git
+                                ref, or . for the working tree.
+      --page <path>             Repository-relative page served for a ref or . (default index.html).
+      --out <dir>               Output directory (default stylegallery-shots-compare in the system temp dir).
+      --selector <css>          Element to focus and hover for the extra states.
+      --threshold <0-1>         Per-channel tolerance before a pixel counts as changed (default 0.05).
+      --full-page               Capture the full page instead of the viewport.
+      --wait <ms>               Extra settle time after load (default 0).
+      --violations <ids>        Comma-separated audit violation ids for the PR body.
+
   help, --help                  Show this help.
   version, --version            Show the package version.
 
@@ -139,6 +153,10 @@ export async function runStylegalleryCli(argv, config = {}) {
   if (command === "setup" && !rest.includes("--help")) {
     const { runSetup } = await import("./stylegallery-setup.mjs");
     return report(runSetup(rest));
+  }
+  if (command === "shots" && (rest.includes("--before") || rest.includes("--after")) && !rest.includes("--help")) {
+    const { runShotsCompare } = await import("./shots-compare.mjs");
+    return runShotsCompare(rest, config);
   }
   if (rest.includes("--help")) return { exitCode: 0, output: HELP_TEXT, report: { ok: true, operation: "help" } };
   if (command === "search") return runSearch(rest);

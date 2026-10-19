@@ -830,6 +830,11 @@
       "lifecycle": "stable"
     },
     {
+      "repository_path": "quality/evidence/before-after-pr-evidence.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
       "repository_path": "quality/evidence/consumer-migration.md",
       "domain": "shared",
       "lifecycle": "stable"
@@ -1062,5 +1067,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:f0f5758d8da48a15861f3cadc7e1cb437d59fecc71fdf8d9991466776cc9ff20"
+  "version_id": "sg:policy/material-admission-v2@sha256:eca56180f3f2a4ec9458f087f5c5ea96f5f170f96c0c572aba3cbc2bdcf2cab5"
 }

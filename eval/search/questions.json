@@ -819,6 +819,28 @@
       }
     },
     {
+      "id": "q63",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "How do I add before and after screenshots to a pull request?",
+      "qrels": {
+        "quality/evidence/before-after-pr-evidence.md": 3,
+        "quality/evidence/visual-qa.md": 1
+      }
+    },
+    {
+      "id": "q64",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": false,
+      "query": "pixel diff ratio between two git revisions of a page",
+      "qrels": {
+        "quality/evidence/before-after-pr-evidence.md": 3,
+        "quality/evidence/visual-qa.md": 1
+      }
+    },
+    {
       "id": "h01",
       "lang": "en",
       "kind": "heldout",
@@ -1190,6 +1212,16 @@
       "query": "keep a list of every UI problem we found and whether each one is done",
       "qrels": {
         "quality/audit/README.md": 3
+      }
+    },
+    {
+      "id": "m22",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "show reviewers what my page looked like earlier versus now",
+      "qrels": {
+        "quality/evidence/before-after-pr-evidence.md": 3
       }
     },
     {
