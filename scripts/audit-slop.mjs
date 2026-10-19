@@ -54,6 +54,9 @@ export function measureSlop() {
   const elements = [...document.querySelectorAll("html, body, body *")].filter(visible);
   const media = [], text = [], headings = [], gradients = [], anchors = [], soft = [], emoji = [], triplets = [];
   const weights = new Map(), textSizes = [], durations = [];
+  // Taste-skill adaptations (method rewritten; see expression/anti-patterns.md): small tracked
+  // capitals, pill kickers, gradient-clipped text, heading boxes, and sections without titles.
+  const frameSources = [], smallCaps = [], pills = [], gradientText = [], headingBoxes = [], untitled = [];
   let masked = 0, hairlines = 0, transitioning = 0;
   const splitLayers = (value) => {
     const parts = [];
@@ -80,7 +83,17 @@ export function measureSlop() {
         text.push(...[...range.getClientRects()].map(rect));
       }
       if (el.matches("h1,h2,h3")) headings.push(box);
+      if (!el.closest("header,nav,footer,[role=dialog],dialog")) frameSources.push(el);
+      const tracking = parseFloat(s.letterSpacing);
+      const capitals = s.textTransform === "uppercase" || own === own.toUpperCase() && /\p{Lu}/u.test(own);
+      if (chars <= 40 && size <= 13.5 && capitals && tracking >= 0.05 * size && !el.closest("h1,h2,h3,h4,h5,h6,nav,header,footer,button,label")) smallCaps.push({ box, name, text: own.slice(0, 40) });
+      const radius = parseFloat(s.borderTopLeftRadius);
+      const filled = color(s.backgroundColor).a > 0.05 || parseFloat(s.borderTopWidth) > 0;
+      if (chars <= 30 && r.height >= 16 && r.height <= 40 && radius >= r.height / 2 - 1 && filled && !el.closest("nav,header,footer")) pills.push({ box, name, text: own.slice(0, 30) });
     }
+    if (el.matches("h1,h2,h3,[role=heading]")) headingBoxes.push(box);
+    if ((s.backgroundClip === "text" || s.webkitBackgroundClip === "text") && /gradient\(/.test(s.backgroundImage) && el.textContent.trim()) gradientText.push(name);
+    if (el.matches("section,article,[role=region]") && !el.closest("header,nav,footer,aside,[role=dialog],dialog") && el.innerText.trim().length >= 200 && !el.querySelector("h1,h2,h3,h4,h5,h6,[role=heading]")) untitled.push(name);
     if (s.maskImage !== "none" || s.webkitMaskImage && s.webkitMaskImage !== "none" || s.clipPath !== "none") masked++;
     if (["Top", "Right", "Bottom", "Left"].some((side) => s[`border${side}Width`] === "1px" && !["none", "hidden"].includes(s[`border${side}Style`]))) hairlines++;
     const times = s.transitionDuration.split(",").map(parseFloat).filter((d) => d > 0);
@@ -127,21 +140,42 @@ export function measureSlop() {
         const signatures = children.map((c) => signature(c).join(","));
         if (boxes.every((b) => Math.abs(b.top - boxes[0].top) <= 4 && Math.abs(b.width - boxes[0].width) <= 2) &&
             !children.some((c) => c.matches("img,picture,video,canvas") || [...c.querySelectorAll("img,picture,video,canvas")].some(visible)) && new Set(signatures).size === 1) {
-          triplets.push({ selector: name, signature: signatures[0] });
+          // A small drawn icon heading every card is the template's tell even in a single row.
+          const iconFirst = (c) => {
+            const card = c.getBoundingClientRect();
+            if (c.matches("button,[role=tab],[role=button]") || c.querySelector("button,[role=tab]") === c.firstElementChild || card.width < 160 || card.height < 120) return false;
+            const icon = c.querySelector("svg"), words = c.querySelector("h2,h3,h4,h5,h6,p,strong");
+            if (!icon || !words || !(icon.compareDocumentPosition(words) & Node.DOCUMENT_POSITION_FOLLOWING)) return false;
+            const b = icon.getBoundingClientRect();
+            return b.width > 0 && b.width <= 64 && b.height <= 64;
+          };
+          triplets.push({ selector: name, signature: signatures[0], icons: children.every(iconFirst) });
         }
       }
     }
   }
   const body = [...weights].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0]?.[0] ?? 16;
   headings.push(...textSizes.filter((t) => t.size >= 2.5 * body).map((t) => t.box));
+  // A sticky element with content pins its scene across its containing block: every screen
+  // of that block shows the scene, so layout-empty slices inside it are not empty to a reader.
+  const pinned = [];
+  for (const el of elements) {
+    if (getComputedStyle(el).position !== "sticky" || !el.parentElement) continue;
+    const own = el.getBoundingClientRect(), block = el.parentElement.getBoundingClientRect();
+    const hasContent = el.textContent.trim() || el.querySelector("img,picture,video,canvas,svg");
+    // Sticky headers and bars pin site chrome, not a scene.
+    if (hasContent && own.height >= H / 2 && !el.closest("header,nav,[role=banner],[role=navigation]") && block.height - own.height > H / 2) pinned.push({ top: block.top + scrollY, bottom: block.bottom + scrollY });
+  }
+  const pinnedOver = (top, bottom) => pinned.some((p) => Math.min(bottom, p.bottom) - Math.max(top, p.top) >= (bottom - top) / 2);
   let gradientArea = 0, screenArea = 0;
   for (let top = 0; top < height; top += H) {
     const bottom = Math.min(top + H, height), area = W * H;
+    const scene = pinnedOver(top, bottom);
     const mediaShare = union(media, top, bottom) / area, textShare = union(text, top, bottom) / area;
     const ground = gradients.some((g) => union([g.box], top, bottom) >= area * .5 ||
       g.box.left <= W / 2 && g.box.right >= W / 2 && g.box.top <= top + H / 2 && g.box.bottom >= top + H / 2);
     const heading = headings.some((b) => union([b], top, bottom) > 0);
-    if (mediaShare < .08 && textShare < .1) {
+    if (mediaShare < .08 && textShare < .1 && !scene) {
       if (heading && ground) add("headline-only-gradient-screen", { top, mediaShare, textShare });
       else if (bottom - top >= H / 2) add("empty-screen", { top, mediaShare, textShare });
     }
@@ -158,10 +192,80 @@ export function measureSlop() {
     }
   }
   if (gradientArea / screenArea > .17) add("gradient-area-excess", { share: gradientArea / screenArea });
+
+  // A label sits on top of a heading when the heading starts within 48px below it and the two overlap horizontally.
+  const above = (label, targets) => targets.some((h) => h.top - label.bottom >= -2 && h.top - label.bottom <= 48 && h.left < label.right && label.left < h.right);
+  const displayBoxes = [...headingBoxes, ...textSizes.filter((t) => t.size >= 2.5 * body).map((t) => t.box)];
+  const eyebrows = smallCaps.filter((label) => above(label.box, displayBoxes));
+  if (eyebrows.length >= 3) add("eyebrow-label", { labels: eyebrows.map(({ name, text }) => ({ selector: name, text })) });
+  const kickers = pills.filter((pill) => above(pill.box, displayBoxes));
+  if (kickers.length >= 1) add("pill-badge-kicker", { pills: kickers.map(({ name, text }) => ({ selector: name, text })) });
+  if (gradientText.length >= 2) add("gradient-text-everywhere", { selectors: gradientText });
+
+  // Frame: content boxes are text line boxes and media; full-bleed boxes do not define the gutters.
+  // Frame rules read layout, not paint: reveal-on-scroll content can sit at opacity 0 when the
+  // page is measured from the top (GitHub resets its sections), yet it occupies its place.
+  const laidText = [], laidMedia = [], laidH1 = [];
+  for (const el of document.querySelectorAll("body *")) {
+    if (!el.getClientRects().length || el.closest("[aria-hidden=true],dialog:not([open])")) continue;
+    const s = getComputedStyle(el);
+    if (s.visibility !== "visible") continue;
+    const r = el.getBoundingClientRect();
+    // A visually hidden (1px) h1 still states the page in its structure.
+    if (el.matches("h1,[role=heading][aria-level='1']") && el.textContent.trim()) laidH1.push(rect(r));
+    if (r.width <= 1 || r.height <= 1) continue;
+    if ((el.matches("img,picture,video,canvas,svg,[data-surface]") || /url\(/.test(s.backgroundImage)) && r.width >= 120 && r.height >= 80) laidMedia.push(rect(r));
+    for (const node of el.childNodes) {
+      if (node.nodeType !== Node.TEXT_NODE || !node.textContent.trim()) continue;
+      const range = document.createRange(); range.selectNodeContents(node);
+      laidText.push(...[...range.getClientRects()].map(rect));
+    }
+  }
+  const content = [...laidText, ...laidMedia, ...pinned.map((p) => ({ left: 0, right: W, ...p }))].filter((b) => b.right > b.left && b.bottom > b.top);
+  // The frame of a content element is its outermost ancestor narrower than the viewport: the
+  // container just inside a full-bleed band. Gutters are the medians over distinct frames.
+  const frames = new Set();
+  for (const el of frameSources) {
+    let frame = null;
+    for (let n = el; n && n !== document.body; n = n.parentElement) {
+      const b = n.getBoundingClientRect();
+      if (b.width >= W - 1) break;
+      if (getComputedStyle(n).position === "fixed") { frame = null; break; }
+      frame = n;
+    }
+    if (frame) frames.add(frame);
+  }
+  const gutters = [...frames].map((f) => f.getBoundingClientRect()).filter((b) => b.left >= 0 && b.right <= W).map((b) => [b.left, W - b.right]);
+  // A centred page keeps each frame's two gutters within 16px; a left-aligned measure inside a
+  // centred page is normal, so the page fails only when most frames lean the same way.
+  if (gutters.length >= 3) {
+    const leaning = (side) => gutters.filter(([l, r]) => (side === "left" ? r - l : l - r) > 16);
+    const side = leaning("left").length >= leaning("right").length ? "left" : "right";
+    const lean = leaning(side);
+    if (lean.length / gutters.length >= 0.6) add("frame-asymmetric-margins", { leans: side, frames: gutters.length, leaning: lean.length, sample: lean.slice(0, 5).map(([l, r]) => ({ left_px: Math.round(l), right_px: Math.round(r) })) });
+  }
+  for (let top = 0; top < height; top += H) {
+    const bottom = Math.min(top + H, height);
+    if (bottom - top < H / 2 || pinnedOver(top, bottom)) continue;
+    const inSlice = (b) => b.bottom > top && b.top < bottom;
+    const lines = laidText.filter(inSlice), pictures = laidMedia.filter(inSlice);
+    if (union(lines, top, bottom) / (W * H) < .02) continue;
+    const all = [...lines, ...pictures];
+    const leftOnly = all.every((b) => b.right <= W / 2), rightOnly = all.every((b) => b.left >= W / 2);
+    if (leftOnly || rightOnly) add("frame-one-sided-section", { top, side: leftOnly ? "left" : "right" });
+  }
+  const spans = content.map((b) => [b.top, b.bottom]).sort((a, b) => a[0] - b[0]);
+  let reach = spans.length ? spans[0][1] : 0;
+  for (const [start, finish] of spans) {
+    if (start - reach > (2 * H) / 3) add("frame-empty-gap", { from: Math.round(reach), to: Math.round(start), gap_px: Math.round(start - reach) });
+    reach = Math.max(reach, finish);
+  }
+  if (!laidH1.some((b) => b.top < H && b.bottom > 0)) add("frame-missing-h1", { h1_count: laidH1.length, h1_tops: laidH1.slice(0, 5).map((b) => Math.round(b.top)), scroll_y: Math.round(scrollY) });
+  if (untitled.length >= 2) add("frame-untitled-section", { selectors: untitled });
   if (soft.length > 1) add("soft-shadow-excess", { selectors: soft });
   if (masked < 2 || hairlines < 3) add("unfinished-surfaces", { masked, hairlines });
   if (emoji.length >= 2) add("emoji-icons", { selectors: emoji });
-  if (triplets.length >= 3 || triplets.some((t, i) => triplets.some((o, j) => i !== j && t.signature === o.signature))) add("repeated-card-triplet", { triplets });
+  if (triplets.length >= 3 || triplets.some((t) => t.icons) || triplets.some((t, i) => triplets.some((o, j) => i !== j && t.signature === o.signature))) add("repeated-card-triplet", { triplets });
   durations.sort((a, b) => a - b);
   const mid = Math.floor(durations.length / 2);
   const median = durations.length ? durations.length % 2 ? durations[mid] : (durations[mid - 1] + durations[mid]) / 2 : null;
@@ -175,6 +279,65 @@ export function measureSlop() {
   const ratio = Math.max(0, ...textSizes.map((t) => t.size)) / body;
   if (ratio > 5.5 || displayShare > .082) add("oversized-display", { body_px: body, ratio, display_share: displayShare });
   return { findings, measured: { width: W, height: H, document_height: height, body_px: body, masked, hairlines, transitioning, median_ms: median } };
+}
+
+// Runs in the page 4.5 s after load, before any scrolling: what still stands between a visitor
+// and the first screen. A covering overlay (preloader or gate) and first-screen text left
+// invisible are reported; dialogs are excluded because consent and sign-in prompts are legitimate.
+export function firstPaintBlockers() {
+  const W = innerWidth, H = innerHeight, found = [];
+  const describe = (el) => `${el.localName}${el.id ? `#${el.id}` : ""}${typeof el.className === "string" && el.className.trim() ? `.${el.className.trim().split(/\s+/)[0]}` : ""}`;
+  const h1 = document.querySelector("h1");
+  for (const el of document.querySelectorAll("body *")) {
+    const s = getComputedStyle(el);
+    if (!["fixed", "absolute"].includes(s.position) || s.visibility !== "visible" || Number(s.opacity) <= 0.5) continue;
+    const r = el.getBoundingClientRect();
+    const covered = Math.max(0, Math.min(r.right, W) - Math.max(r.left, 0)) * Math.max(0, Math.min(r.bottom, H) - Math.max(r.top, 0));
+    if (covered < W * H * 0.9 || el.closest("dialog,[role=dialog],[role=alertdialog],[aria-modal=true]") || (h1 && el.contains(h1))) continue;
+    // Only a painted layer blocks the view; a transparent full-screen wrapper does not.
+    const alpha = Number((s.backgroundColor.match(/[\d.]+/g) ?? [])[3] ?? (s.backgroundColor === "transparent" ? 0 : 1));
+    if (alpha < 0.5 && s.backgroundImage === "none" && s.backdropFilter === "none") continue;
+    const hit = document.elementFromPoint(W / 2, H / 2);
+    if (hit && (hit === el || el.contains(hit))) { found.push({ reason: "overlay", selector: describe(el) }); break; }
+  }
+  // Headings carry the page's message; animated product mock-ups may legitimately hide body lines.
+  for (const el of document.querySelectorAll("h1,h2")) {
+    // Closed menus, dialogs, and site chrome hide text by design.
+    if (!el.textContent.trim() || el.closest("[aria-hidden=true],header,nav,footer,[role=menu],[role=dialog],dialog,[hidden]")) continue;
+    const r = el.getBoundingClientRect();
+    if (!r.width || !r.height || r.bottom <= 0 || r.top >= H || r.right <= 0 || r.left >= W) continue;
+    let opacity = 1, hidden = false;
+    for (let n = el; n && n.nodeType === 1; n = n.parentElement) {
+      const style = getComputedStyle(n);
+      if (style.display === "none") { hidden = false; opacity = 1; break; }
+      opacity *= Number(style.opacity);
+      if (style.visibility === "hidden") hidden = true;
+    }
+    if (hidden || opacity < 0.1) found.push({ reason: "hidden_text", selector: describe(el), text: el.textContent.trim().slice(0, 40) });
+  }
+  return found;
+}
+
+async function measureFirstPaint(page) {
+  // The rule is defined at 4.5 s after load; this waits for that moment, it is not a settle sleep.
+  await page.waitForFunction(() => {
+    const nav = performance.getEntriesByType("navigation")[0];
+    const loaded = nav?.loadEventEnd || nav?.domContentLoadedEventEnd || 0;
+    return performance.now() >= loaded + 4500;
+  }, null, { timeout: 15000, polling: 250 }).catch(() => {});
+  const found = await page.evaluate(firstPaintBlockers);
+  // A wheel turn over the first screen must move the document unless an inner region scrolls.
+  const before = await page.evaluate(() => ({ y: scrollY, scrollable: document.documentElement.scrollHeight > innerHeight * 1.5, inner: [...document.querySelectorAll("*")].map((e) => e.scrollTop).join(",") }));
+  if (before.scrollable) {
+    const size = page.viewportSize();
+    await page.mouse.move(size.width / 2, size.height / 2);
+    await page.mouse.wheel(0, 600);
+    await page.waitForFunction((y) => Math.abs(scrollY - y) >= 40, before.y, { timeout: 1500, polling: "raf" }).catch(() => {});
+    const after = await page.evaluate(() => ({ y: scrollY, inner: [...document.querySelectorAll("*")].map((e) => e.scrollTop).join(",") }));
+    if (Math.abs(after.y - before.y) < 40 && after.inner === before.inner) found.push({ reason: "wheel_blocked", moved_px: Math.round(after.y - before.y) });
+    await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
+  }
+  return found;
 }
 
 async function finishState(page, capMs = 1000) {
@@ -226,15 +389,23 @@ export async function checkSlop(browser, url, catalog, { budget, fast = false } 
   const measured = await runStage(budget, "slop measure", 1, async () => {
     opened = await openPage(browser, url, { viewport: { width: 1440, height: 900 }, budget, fast }, base, loadFailures, "slop");
     const { page } = opened;
+    const blockers = await measureFirstPaint(page);
     await page.evaluate(async () => {
       const height = document.documentElement.scrollHeight;
+      // Three frames per step: IntersectionObserver callbacks run after the frame that moved
+      // the content into view, and reveal classes apply on the next. One frame left GitHub's
+      // sections at opacity 0 and measured them as empty.
+      const frame = () => new Promise((resolve) => requestAnimationFrame(resolve));
       for (let y = 0; y < height; y += 450) {
-        scrollTo(0, y); await new Promise((resolve) => requestAnimationFrame(resolve));
+        scrollTo({ top: y, behavior: "instant" }); await frame(); await frame(); await frame();
       }
-      scrollTo(0, 0);
+      // Instant: with scroll-behavior: smooth the page was still scrolling when measured.
+      scrollTo({ top: 0, behavior: "instant" });
     });
     await settle(page);
-    return page.evaluate(measureSlop);
+    const result = await page.evaluate(measureSlop);
+    if (blockers.length) result.findings["slop.blocked-first-paint"] = blockers;
+    return result;
   });
   const findings = measured === STAGE_INCOMPLETE ? {} : measured.findings;
   const skipped = {};
