@@ -89,6 +89,43 @@ Agents asking in another language should pass `--query-en` (MCP: `query_en`) wit
 
 For a coding agent with repository filesystem access, local guided traversal is the default: read `AGENTS.md` and this README, follow the narrowest relevant task route or domain index, and inspect the selected Markdown files directly. Use `search --paths-only` only when the path is unclear; it returns a deterministic `paths` array of repository-relative candidates without full result metadata. Reserve `context` for environments that cannot read repository files or for transferring a bounded, provenance-linked package.
 
+### CLI reference
+
+Run `stylegallery --help` for the same list. Every command prints JSON to stdout; invalid input prints an error object and exits nonzero.
+
+Typical agent loop:
+
+```sh
+stylegallery search "sticky header"                          # 1. find candidates
+stylegallery read sg:layout/sticky-header --outline          # 2. list sections
+stylegallery read sg:layout/sticky-header --section css      # 3. read only what you need
+```
+
+Find and read documents (offline, deterministic):
+
+| Command | Options | Purpose |
+| --- | --- | --- |
+| `search <query...>` | `--limit <n>` (1-50, default 5), `--paths-only`, `--detailed`, `--query-en <text>` | Rank the Markdown corpus; JSON schema 3.0 with id, snippet, and next `read` command |
+| `read <id\|path>` | `--outline`, `--section <slug>` | Read one document by id (`sg:layout/sticky-header`), repository path, or StableRef |
+| `context --query <text>` | `--budget-tokens <n>` (256-32768, default 8192) | Build a bounded, provenance-linked context package |
+
+Governed records:
+
+| Command | Purpose |
+| --- | --- |
+| `discover` | List interfaces, domains, and operations |
+| `resolve <ref>` | Read one governed record |
+| `claims <ref>` | List claims and evidence for a record |
+| `context <ref>` | Build a governed record context package |
+| `retrieve <query>` | Search governed records (v1 registry) |
+| `ops` | List operations |
+| `registrar` | Check claim records (`--stale`, `--unverified`) |
+| `conservator` | Measure Layout patterns in Chromium (`--pattern <a,b>`, `--controls`, `--install-browser`) |
+
+Site compilation (requires `SG_COMPILER_ROOT`): `compile`, `timeline`, `transcribe`, `sale`, `gate`, `build`, `shots`, `probe`, `workflow`. Start with `stylegallery workflow`.
+
+Other: `help` / `--help`, `version` / `--version`. The MCP server `stylegallery-mcp` exposes `search` and `read` with the same JSON, plus the governed and compiler tools.
+
 ### Worked homepage example
 
 The [StyleGallery homepage example](examples/stylegallery-homepage/README.md) was planned from a clean install of the published npm package. It demonstrates the Homepage recipe, selected layout patterns, agent-native CLI access, responsive behavior, and Chrome CDP verification in a standalone product-layer implementation.
@@ -138,6 +175,8 @@ stylegallery discover --format json
 ```
 
 `discover`는 사용 가능한 인터페이스를 보여주고, `resolve`는 하나의 레코드를 조회하며, `claims`는 관련 주장과 근거를 분리해서 보여줍니다. `context`는 에이전트에 전달할 수 있는 제한된 컨텍스트 패키지를 만들고, `ops`는 지원하는 작업 목록을 반환합니다. 저장소를 직접 읽을 수 있는 에이전트는 `AGENTS.md`와 이 README의 작업 경로에서 시작해 로컬 Markdown을 따라가는 방식이 기본입니다. 경로가 불명확할 때만 `stylegallery search "검색어" --paths-only --limit 5`로 후보 경로를 좁히고, `context`는 파일에 직접 접근할 수 없거나 제한된 패키지를 전달해야 할 때 사용합니다. 모든 결과는 자동화에 바로 사용할 수 있는 JSON입니다.
+
+전체 명령과 옵션은 위의 [CLI reference](#cli-reference)에 정리되어 있습니다. 기본 흐름은 `stylegallery search "sticky header"` → `stylegallery read <id> --outline` → `stylegallery read <id> --section <slug>`입니다.
 
 CLI와 MCP의 상세 사용법은 [Agent-Native StyleGallery 가이드](consumer-reference/agent-native/README.md)를 참고하세요. 사람이 문서를 탐색하려면 아래의 도메인 표에서 목적에 맞는 진입점을 선택하면 됩니다.
 
