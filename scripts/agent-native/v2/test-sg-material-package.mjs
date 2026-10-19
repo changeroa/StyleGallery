@@ -127,6 +127,8 @@ const required = new Set([
   // Transport setup documentation is packaged without admitting tool code or
   // private upstream documents to the governed material corpus.
   "scripts/compiler/README.md",
+  // The one search how-to skill ships beside the CLI it documents.
+  "skills/stylegallery-search/SKILL.md",
 ]);
 assert.deepEqual(files, [...required].sort(), "package files must equal the closed runtime/schema/material inventory");
 

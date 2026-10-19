@@ -202,7 +202,13 @@ function queryTerms(query, queryEn) {
 function scoreDocument(index, document, terms, idf) {
   let score = 0;
   const matched = new Set();
+  let koTotal = 0;
+  let koHits = 0;
   for (const term of terms) {
+    if (term.startsWith(KO_PREFIX)) {
+      koTotal += 1;
+      if (document.fields.ko.tf.has(term)) koHits += 1;
+    }
     let weighted = 0;
     for (const [name, { w, b }] of Object.entries(SEARCH_FIELDS)) {
       const isKo = term.startsWith(KO_PREFIX);
@@ -215,6 +221,8 @@ function scoreDocument(index, document, terms, idf) {
     }
     if (weighted > 0) score += idf.get(term) * (weighted / (SEARCH_K1 + weighted));
   }
+  // A stray shared syllable pair is not a match: 2-gram-only hits need half the query's 2-grams.
+  if (matched.size === 1 && matched.has("ko") && koHits * 2 < koTotal) return { score: 0, matched };
   return { score: Math.round(score * 1e6) / 1e6, matched };
 }
 

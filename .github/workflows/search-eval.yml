@@ -1,0 +1,36 @@
+name: Search evaluation
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stylegallery-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  search:
+    name: Search v3 contracts and retrieval gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Search contracts
+        run: node --test scripts/test-stylegallery-search.mjs
+
+      - name: Retrieval evaluation gate (must-pass top 5, Hit@5 and nDCG@5 within 0.02 of eval/search/scores.json)
+        run: node scripts/search-eval.mjs --gate

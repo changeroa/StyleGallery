@@ -40,8 +40,8 @@ const expectedFiles = Object.freeze({
 // the working tree at test time.
 const expectedDocumentation = Object.freeze({
   "consumer-reference/agent-native/README.md": {
-    baseline: "compiler-routing-docs-2026-09-21",
-    sha256: "7b4a91037ccbe9fe1a8dfc424dce99ec3959321dc1ca3215e9e1b40e01cc48c7",
+    baseline: "stylegallery-search-docs-2026-10-19",
+    sha256: "dedd72f4beb0f59e9d1c1db79f9288860d0559014ce8a1d24acf116f39cf6220",
   },
 });
 const expectedCli = Object.freeze([
