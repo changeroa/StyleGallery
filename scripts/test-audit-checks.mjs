@@ -15,10 +15,12 @@ const external = http.createServer((_, response) => response.writeHead(200, { "c
 await new Promise((resolve) => external.listen(0, "127.0.0.1", resolve));
 const externalBase = `http://127.0.0.1:${external.address().port}`;
 const server = http.createServer((request, response) => {
-  const name = path.basename(new URL(request.url, "http://localhost").pathname);
-  if (!fs.existsSync(path.join(fixtures, name))) { response.writeHead(404).end(); return; }
+  const pathname = new URL(request.url, "http://localhost").pathname;
+  const name = path.basename(pathname);
+  const directory = pathname.startsWith("/variants/") ? path.join(root, "tests/fixtures/audit-checks-variants") : fixtures;
+  if (!fs.existsSync(path.join(directory, name))) { response.writeHead(404).end(); return; }
   response.writeHead(200, { "content-type": "text/html; charset=utf-8" })
-    .end(fs.readFileSync(path.join(fixtures, name), "utf8").replaceAll("__EXTERNAL__", externalBase));
+    .end(fs.readFileSync(path.join(directory, name), "utf8").replaceAll("__EXTERNAL__", externalBase));
 });
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const base = `http://127.0.0.1:${server.address().port}`;
@@ -40,9 +42,20 @@ try {
     }
   };
   await Promise.all(Array.from({ length: 3 }, worker));
+  // Variants: extra violation shapes for a rule (file name <check_id>.<variant>.html) must also fail it.
+  const variants = path.join(root, "tests/fixtures/audit-checks-variants");
+  for (const file of fs.readdirSync(variants).filter((f) => f.endsWith(".html")).sort()) {
+    const id = file.split(".").slice(0, 2).join(".");
+    assert.ok(expected.includes(id), `${file}: unknown check id ${id}`);
+    const bad = await checkAudit(`${base}/variants/${file}`, { viewports: [1440] });
+    assert.equal(bad.checks.find((c) => c.check_id === id)?.pass, false, `${file}: injected violation passed`);
+    rows.push({ check_id: id, variant: file, violation: "FAIL", detected: true });
+    console.log(`ok ${file}: violation FAIL`);
+  }
   fs.mkdirSync(path.join(root, ".tmp/audit"), { recursive: true });
   fs.writeFileSync(path.join(root, ".tmp/audit/fixtures.json"), `${JSON.stringify({ ok: true, rows }, null, 2)}\n`);
-  console.log(`PASS: ${rows.length}/${expected.length} checks reject violations and accept the clean fixture`);
+  const variantCount = rows.filter((row) => row.variant).length;
+  console.log(`PASS: ${rows.length - variantCount}/${expected.length} checks reject violations and accept the clean fixture; ${variantCount} variant fixture(s) also fail`);
 } finally {
   await Promise.all([new Promise((resolve) => server.close(resolve)), new Promise((resolve) => external.close(resolve))]);
 }

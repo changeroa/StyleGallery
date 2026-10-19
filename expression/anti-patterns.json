@@ -8,7 +8,7 @@
   "measurement_context": {
     "browser": "Headless Chromium, the same engine used for expression/measured-benchmarks.md and scripts/check-showcase.mjs.",
     "viewport": "1440x900 CSS pixels, device scale factor 1, pointer: fine, prefers-reduced-motion: no-preference unless a rule says otherwise.",
-    "settling": "Before measuring, scroll the document top to bottom in 450px steps, return to the top, and await Promise.all(document.getAnimations().map((a) => a.finished)) with a 3000ms bound, skipping infinite animations. Never use a fixed sleep.",
+    "settling": "Before measuring, scroll the document top to bottom in 450px steps with instant scrolling, waiting three animation frames per step so scroll-triggered reveals fire, return to the top, and await Promise.all(document.getAnimations().map((a) => a.finished)) with a 3000ms bound, skipping infinite animations. Never use a fixed sleep.",
     "screen": "A screen is one viewport-height slice of the document: scrollY = k * 900 for k = 0 .. ceil(scrollHeight / 900) - 1. Coverage percentages are the area of visible boxes intersected with the screen rectangle, divided by 1440 * 900, with overlapping boxes unioned.",
     "visible": "An element is visible when getClientRects().length > 0, its computed visibility is visible, its computed opacity and every ancestor's computed opacity are above 0, and its box intersects the screen being measured.",
     "body_size": "The character-weighted modal computed font-size, rounded to the nearest pixel, over all visible elements' own text nodes (the measured-benchmarks.md console method).",
@@ -33,7 +33,14 @@
         "slop.static-interactive",
         "slop.sluggish-state-change",
         "slop.oversized-display",
-        "slop.repeated-card-triplet"
+        "slop.repeated-card-triplet",
+        "slop.eyebrow-label",
+        "slop.pill-badge-kicker",
+        "slop.frame-asymmetric-margins",
+        "slop.frame-one-sided-section",
+        "slop.frame-empty-gap",
+        "slop.frame-missing-h1",
+        "slop.frame-untitled-section"
       ],
       "rationale": "Richness floors, display scale, surface finishing, and motion density were measured on landing pages; application surfaces trade them for density and stability, so these rules become warnings. Accessibility checks, honest actions, emoji icons, unanchored violet gradients, and soft shadows stay errors."
     },
@@ -50,7 +57,14 @@
         "slop.sluggish-state-change",
         "slop.oversized-display",
         "slop.repeated-card-triplet",
-        "slop.soft-shadow-excess"
+        "slop.soft-shadow-excess",
+        "slop.eyebrow-label",
+        "slop.pill-badge-kicker",
+        "slop.frame-asymmetric-margins",
+        "slop.frame-one-sided-section",
+        "slop.frame-empty-gap",
+        "slop.frame-missing-h1",
+        "slop.frame-untitled-section"
       ],
       "rationale": "Text-led pages are finished by their text, not by imagery: GOV.UK screens of 8.5% and 9.9% text and Hacker News links without hover transitions are correct for their purpose, yet missed the landing floors in the 2026-10-19 real-site run. Landing-only rules become warnings; accessibility checks and honest actions stay errors."
     }
@@ -68,7 +82,7 @@
         "scope": "Every screen of every page.",
         "measure": "For each screen: media_coverage = unioned area of visible img, picture, video, canvas, svg elements at least 120x80, elements whose computed background-image contains url(, and [data-surface] elements; text_coverage = unioned area of the client rects of visible text-node ranges; heading_present = a visible h1, h2, or h3, or a text run at least 2.5x body_size, intersects the screen; gradient_ground = the topmost box behind the screen centre, or any element covering at least 50% of the screen, has a computed background-image containing gradient(.",
         "threshold": "media_coverage < 8% and text_coverage < 10%, the same floors as showcase/QA.md Q22.",
-        "violation": "One error per screen where heading_present is true, both coverage floors are missed, and gradient_ground is true. A screen that misses both floors without a gradient ground is reported by slop.empty-screen instead."
+        "violation": "One error per screen where heading_present is true, both coverage floors are missed, and gradient_ground is true. A screen that misses both floors without a gradient ground is reported by slop.empty-screen instead. Screens held by a pinned (sticky) scene are skipped, as in slop.empty-screen."
       },
       "rationale": "The 49 measured originals give a median 53% of page area to raster images, video, and background images and only 3.9% to gradients; the studies gave 0% to imagery and 26% to gradients, which is why whole sections read empty (expression/measured-benchmarks.md, gap 1). showcase/QA.md I16 forbids a headline alone on a gradient.",
       "sources": [
@@ -86,7 +100,7 @@
       "detectable": "machine",
       "severity": "error",
       "detection": {
-        "scope": "Every screen of every page except the last screen when it is shorter than 450px.",
+        "scope": "Every screen of every page except the last screen when it is shorter than 450px. A screen at least half covered by the containing block of a sticky element that holds text or media is skipped: the pinned scene fills it as the reader scrolls.",
         "measure": "media_coverage and text_coverage as defined in slop.headline-only-gradient-screen.",
         "threshold": "media_coverage < 8% and text_coverage < 10%.",
         "violation": "One error per screen that misses both floors and is not already reported as slop.headline-only-gradient-screen."
@@ -209,14 +223,19 @@
       "detection": {
         "scope": "Every visible element whose computed display is grid, inline-grid, flex, or inline-flex.",
         "measure": "A triplet is a container whose visible element children number 3 or 4, share one top edge within 4px, have widths within 2px of each other, contain no visible img, picture, video, or canvas, and have an identical signature, where signature = the ordered list of descendant tag names (svg subtrees collapsed to svg, text-only inline elements ignored).",
-        "threshold": "2 or more triplets on a page whose children share one signature, or 3 or more triplets with any signatures.",
+        "threshold": "2 or more triplets on a page whose children share one signature, or 3 or more triplets with any signatures. A single row also fails when every card is at least 160x120px, is not itself a button or tab, and opens with a drawn icon (svg at most 64x64px) before its heading or text.",
         "violation": "One error per page, listing each triplet container."
       },
-      "rationale": "Originals put pictures in every card and change pace down a 9.1-viewport page; studies compressed to 4.4 viewports and gave each idea one short beat (expression/measured-benchmarks.md, gaps 1 and 5). A repeated imageless triplet is the clearest machine signature of that compression and of a missing picture on the screen (showcase/QA.md I16).",
+      "rationale": "Originals put pictures in every card and change pace down a 9.1-viewport page; studies compressed to 4.4 viewports and gave each idea one short beat (expression/measured-benchmarks.md, gaps 1 and 5). A repeated imageless triplet is the clearest machine signature of that compression and of a missing picture on the screen (showcase/QA.md I16). The taste-skill study (model panel) found rows of icon-topped identical cards on 7% of top-scored and 26% of bottom-scored sites, which is why one such row is enough.",
       "sources": [
         "expression/measured-benchmarks.md",
         "showcase/QA.md"
-      ]
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/research.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
     },
     {
       "id": "slop.static-interactive",
@@ -332,17 +351,27 @@
     {
       "id": "slop.gradient-text-everywhere",
       "first_seen": "2026-10-19",
-      "evidence_grade": "owner-taste",
+      "evidence_grade": "measured-differential",
       "title": "Gradient text as the default emphasis",
       "definition": "background-clip: text gradients applied to headings and numbers as the page's main way of adding emphasis.",
-      "detectable": "review",
-      "severity": "review",
-      "review_question": "Does each gradient-filled word carry a meaning the direction names, and would the page lose anything if it were set in the solid accent color?",
-      "rationale": "Gradient text is easy to count but its fit depends on the direction, so it is a review question rather than a gate. Studies already painted six times more gradient area than the originals (expression/measured-benchmarks.md, gap 1); expression/techniques/display-type-calibration.md asks display type to read confident, not loud.",
+      "detectable": "machine",
+      "severity": "error",
+      "detection": {
+        "scope": "Every visible element whose own subtree holds text.",
+        "measure": "gradient_text = elements whose computed background-clip (or -webkit-background-clip) is text and whose background-image contains gradient(.",
+        "threshold": "2 or more gradient_text elements on a page.",
+        "violation": "One error per page, listing each element. A single gradient wordmark or display line passes."
+      },
+      "rationale": "Gradient text is easy to count but its fit depends on the direction, so it is a review question rather than a gate. Studies already painted six times more gradient area than the originals (expression/measured-benchmarks.md, gap 1); expression/techniques/display-type-calibration.md asks display type to read confident, not loud. The taste-skill study (model panel) found gradient text on 2% of top-scored and 13% of bottom-scored sites, so the rule is machine-checked; one gradient wordmark or display line remains allowed.",
       "sources": [
         "expression/measured-benchmarks.md",
         "expression/techniques/display-type-calibration.md"
-      ]
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/research.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
     },
     {
       "id": "slop.uniform-section-rhythm",
@@ -357,6 +386,207 @@
       "sources": [
         "expression/measured-benchmarks.md"
       ]
+    },
+    {
+      "id": "slop.eyebrow-label",
+      "first_seen": "2026-10-20",
+      "evidence_grade": "measured-differential",
+      "title": "Eyebrow labels over every heading",
+      "definition": "Small, tracked, all-capital labels set directly above headings across the page, a template device that announces each section instead of letting the heading do it.",
+      "detectable": "machine",
+      "severity": "error",
+      "detection": {
+        "scope": "Visible elements outside headings, nav, header, footer, buttons, and labels whose own text is at most 40 characters.",
+        "measure": "small_caps = elements whose computed font-size is at most 13.5px, whose text is set in capitals (text-transform: uppercase, or own text equal to its upper-case form with at least one capital letter), and whose computed letter-spacing is at least 0.05em. An eyebrow is a small_caps element with an h1, h2, h3, [role=heading], or a text run at least 2.5x body_size starting 0-48px below its bottom edge and overlapping it horizontally.",
+        "threshold": "3 or more eyebrows on a page.",
+        "violation": "One error per page, listing each eyebrow's selector and text."
+      },
+      "rationale": "In the taste-skill study (model panel) of 247 gallery sites, three or more small-caps labels appeared on 6% of the top-scored sites and 43% of the bottom-scored sites. The study notes its own detector over-counts, so the rule requires the label to sit directly on a heading and three such labels before it fails; one or two kickers remain allowed. Relaxed to a warning for app and content pages.",
+      "sources": [
+        "showcase/QA.md",
+        "expression/measured-benchmarks.md"
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/research.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
+    },
+    {
+      "id": "slop.pill-badge-kicker",
+      "first_seen": "2026-10-20",
+      "evidence_grade": "measured-differential",
+      "title": "Pill badge above the headline",
+      "definition": "A small rounded pill (\"New\", \"Beta\", an announcement) placed directly above a headline as a kicker.",
+      "detectable": "machine",
+      "severity": "error",
+      "detection": {
+        "scope": "Visible elements outside nav, header, and footer whose own text is at most 30 characters.",
+        "measure": "pill = an element 16-40px tall whose computed border-top-left-radius is at least half its height minus 1px and that paints a background with alpha above 0.05 or a top border. A kicker is a pill with an h1, h2, h3, [role=heading], or a text run at least 2.5x body_size starting 0-48px below it and overlapping it horizontally.",
+        "threshold": "1 or more kickers on a page.",
+        "violation": "One error per page, listing each kicker."
+      },
+      "rationale": "The taste-skill study (model panel) found headline pill badges on 5% of top-scored and 26% of bottom-scored sites. Relaxed to a warning for app and content pages, where status pills above titles are functional.",
+      "sources": [
+        "showcase/QA.md",
+        "expression/measured-benchmarks.md"
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/research.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
+    },
+    {
+      "id": "slop.frame-asymmetric-margins",
+      "first_seen": "2026-10-20",
+      "evidence_grade": "measured-differential",
+      "title": "Lopsided page frame",
+      "definition": "Most content frames sit closer to one edge of the viewport than the other, so the page reads as shifted rather than composed.",
+      "detectable": "machine",
+      "severity": "error",
+      "detection": {
+        "scope": "Content elements (own text, outside header, nav, footer, and dialogs) at 1440x900.",
+        "measure": "frame = the outermost ancestor of a content element that is narrower than the viewport (stopping at full-width bands; frames inside fixed elements are ignored). For each distinct frame inside the viewport, left gutter = its left edge and right gutter = 1440 minus its right edge.",
+        "threshold": "At least 3 frames, and 60% or more of them lean the same way by more than 16px (one gutter exceeds the other by more than 16px).",
+        "violation": "One error per page, naming the side and a sample of leaning frames."
+      },
+      "rationale": "The taste-skill study (model panel) second study of 100 Awwwards sites of the day found strong pages keep their outer left and right margins within a few pixels. A left-aligned measure inside a centred page is normal, so the rule counts frames and fails only when most of them lean the same way; live checks of Linear, Apple, and Notion stay clean. Relaxed for app and content pages.",
+      "sources": [
+        "showcase/QA.md",
+        "expression/measured-benchmarks.md"
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/research.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
+    },
+    {
+      "id": "slop.frame-one-sided-section",
+      "first_seen": "2026-10-20",
+      "evidence_grade": "measured-differential",
+      "title": "Half-empty screen",
+      "definition": "A screen whose text and media all sit in one half of the viewport while the other half holds nothing.",
+      "detectable": "machine",
+      "severity": "error",
+      "detection": {
+        "scope": "Every screen at least 450px tall at 1440x900.",
+        "measure": "For each screen with text_coverage of at least 2%: every text line box and media box with a layout box and computed visibility visible (whatever its opacity) that intersects the screen lies within x <= 720, or every one lies within x >= 720. Screens held by a pinned (sticky) scene are skipped.",
+        "threshold": "1 or more such screens.",
+        "violation": "One error per screen, naming the side."
+      },
+      "rationale": "The taste-skill study (model panel) second study found a section with text in one half and the other half empty on roughly 1 of 100 strong pages. Content pages with a single reading column are expected to do this, so the rule is a warning for content and app pages.",
+      "sources": [
+        "showcase/QA.md",
+        "expression/measured-benchmarks.md"
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/research.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
+    },
+    {
+      "id": "slop.frame-empty-gap",
+      "first_seen": "2026-10-20",
+      "evidence_grade": "measured-differential",
+      "title": "Dead vertical gap",
+      "definition": "A vertical band longer than two thirds of a screen with no text and no media between two pieces of content.",
+      "detectable": "machine",
+      "severity": "error",
+      "detection": {
+        "scope": "The whole document at 1440x900, after the settling scroll.",
+        "measure": "Content spans = the vertical extents of every text line box and media box that has a layout box and computed visibility visible, whatever its opacity (reveal-on-scroll content holds its place). Walk the spans in order of their top edge, tracking the lowest bottom edge reached so far. The containing block of a sticky element with text or media counts as one content span.",
+        "threshold": "A span that starts more than 600px (two thirds of the 900px screen) below the lowest bottom edge reached before it.",
+        "violation": "One error per gap, with its start, end, and length. Space after the last content is not a gap."
+      },
+      "rationale": "The taste-skill study (model panel) second study flags blank bands longer than half a screen as a usability cost. Live checks found 450-550px spacing bands on GitHub, Stripe, and Linear, so the threshold here is two thirds of a screen; slop.empty-screen measures coverage per fixed screen and can miss a gap that straddles two screens. Relaxed for app and content pages.",
+      "sources": [
+        "showcase/QA.md",
+        "expression/measured-benchmarks.md"
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/research.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
+    },
+    {
+      "id": "slop.frame-missing-h1",
+      "first_seen": "2026-10-20",
+      "evidence_grade": "measured-differential",
+      "title": "First screen without a title",
+      "definition": "The first screen has no h1, so the page never states what it is in its document structure.",
+      "detectable": "machine",
+      "severity": "error",
+      "detection": {
+        "scope": "The first screen (0-900px) at 1440x900.",
+        "measure": "h1 boxes = h1 and [role=heading][aria-level=1] elements with text, a layout box, and computed visibility visible, including visually hidden (1px) headings, which still state the page in its structure.",
+        "threshold": "0 h1 boxes intersecting the first screen.",
+        "violation": "One error per page, with the page's total h1 count."
+      },
+      "rationale": "In the taste-skill study (model panel) second study, 15 of 97 first screens did not say what the site was and scored lower on usability; a first-screen h1 is the machine-visible half of that. Link directories and portals often omit it, so the rule is a warning for content and app pages.",
+      "sources": [
+        "showcase/QA.md",
+        "expression/measured-benchmarks.md"
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/research.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
+    },
+    {
+      "id": "slop.frame-untitled-section",
+      "first_seen": "2026-10-20",
+      "evidence_grade": "measured-differential",
+      "title": "Sections without headings",
+      "definition": "Text-bearing sections with no heading, so a scanning reader cannot tell where one topic ends and the next begins.",
+      "detectable": "machine",
+      "severity": "error",
+      "detection": {
+        "scope": "section, article, and [role=region] elements outside header, nav, footer, aside, and dialogs.",
+        "measure": "untitled = such elements whose rendered text is at least 200 characters and that contain no h1-h6 or [role=heading].",
+        "threshold": "2 or more untitled sections on a page.",
+        "violation": "One error per page, listing each untitled section."
+      },
+      "rationale": "The taste-skill study (model panel) second study found 82% of text sections on strong pages open with a heading. One untitled section is common (a quote, a legal note), so two are required. Relaxed for app and content pages.",
+      "sources": [
+        "showcase/QA.md",
+        "expression/measured-benchmarks.md"
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/research.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
+    },
+    {
+      "id": "slop.blocked-first-paint",
+      "first_seen": "2026-10-20",
+      "evidence_grade": "measured-differential",
+      "title": "First screen blocked after load",
+      "definition": "4.5 seconds after load, a preloader or entry gate still covers the first screen, its text is still invisible, or a wheel turn does not move the page.",
+      "detectable": "machine",
+      "severity": "error",
+      "detection": {
+        "scope": "The first screen at 1440x900, measured 4.5 seconds after the load event and before any scrolling.",
+        "measure": "overlay = a fixed or absolutely positioned element with opacity above 0.5 that paints a background (alpha at least 0.5, an image, or a backdrop filter), covers at least 90% of the viewport, is the topmost element at the viewport centre, is not a dialog, and does not contain the h1. hidden_text = an h1 or h2 intersecting the first screen, outside header, nav, footer, menus, dialogs, [hidden], and [aria-hidden=true], whose effective opacity (product over ancestors) is below 0.1 or whose visibility is hidden. wheel_blocked = on a document taller than 1.5 screens, a 600px wheel turn at the viewport centre moves neither the document nor any inner scroller by 40px within 1500ms.",
+        "threshold": "1 or more overlay, hidden_text, or wheel_blocked findings.",
+        "violation": "One error per finding, with its reason and selector."
+      },
+      "rationale": "The taste-skill study (model panel) second study found preloaders on 60 of 99 award sites, wheel hijacking associated with lower usability scores (6.01 against 6.50), and first-screen text left at 0 opacity; motion/usability-anti-patterns.md rewrites the guidance. Blocking the first screen is a usability failure on every page type, so the rule stays an error in every profile.",
+      "sources": [
+        "showcase/QA.md",
+        "expression/measured-benchmarks.md",
+        "motion/usability-anti-patterns.md"
+      ],
+      "adapted_from": {
+        "source_repository": "leonxlnx/taste-skill",
+        "source_path": "skills/taste-skill/references/motion.md",
+        "source_revision": "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2"
+      }
     }
   ],
   "reviewed_and_rejected": [

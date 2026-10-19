@@ -99,8 +99,9 @@ test("MCP exposes separate effect annotations and real init/status handlers", as
       arguments: { target: path.join(root, "tests/fixtures/audit-checks/clean.html"), viewports: [1440] },
     }));
     assert.equal(checked.ok, true, JSON.stringify(checked));
-    assert.equal(checked.checks.length, 23);
-    assert.equal(checked.review.length, 4);
+    const catalog = auditCatalogs().slop.entries;
+    assert.equal(checked.checks.length, 11 + catalog.filter((e) => e.detectable === "machine").length);
+    assert.equal(checked.review.length, catalog.filter((e) => e.detectable === "review").length);
     assert.ok(checked.checks.every((c) => c.pass && c.evidence));
   } finally {
     await client.close(); await server.close();

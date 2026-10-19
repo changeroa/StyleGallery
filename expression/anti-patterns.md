@@ -52,11 +52,20 @@ The existing machine rules retain `measured-baseline`; their QA-derived operatio
 | `slop.soft-shadow-excess` | Excessive soft shadows | More than 1 non-floating element with a 24px+ blur shadow | Originals 0 median, 1 at p75 |
 | `slop.unfinished-surfaces` | No masks, clips, or hairlines | Fewer than 2 masked or clipped elements, or fewer than 3 hairlines | QA Q24; originals 12 masks and 24 hairlines |
 | `slop.emoji-icons` | Emoji as icons | 2+ nav items, buttons, headings, list items, or sibling cards whose text is or starts with an emoji | QA I16 counts only pictures, drawings, renders, and live surfaces |
-| `slop.repeated-card-triplet` | Repeated identical three-card grids | 2+ rows of 3-4 equal, imageless cards with one shared structure | Originals 9.1 viewports long with a picture in every card |
+| `slop.repeated-card-triplet` | Repeated identical three-card grids | 2+ rows of 3-4 equal, imageless cards with one shared structure, or one row of card-sized boxes that each open with a small drawn icon | Originals 9.1 viewports long with a picture in every card |
 | `slop.static-interactive` | Links without a state change | An interactive element whose computed style is unchanged on hover or on keyboard focus | QA I17, I6; originals transition 76 elements |
 | `slop.sluggish-state-change` | Slow or sparse transitions | Median link and button duration over 350ms or under 100ms, or fewer than max(12, 4 per viewport) transitioning elements | Measured 100-320ms band; QA Q23 |
 | `slop.dishonest-cta` | Fake or dishonest call to action | A `#`, `#top`, dead-hash, or `javascript:` target, or a click that changes nothing and announces nothing | QA I2, Q3, Q4 |
 | `slop.oversized-display` | Oversized display type | Largest size over body size above 5.5, or more than 8.2% of characters at display size | Originals' p75 for both measures |
+| `slop.gradient-text-everywhere` | Gradient text as the default emphasis | 2+ elements whose text is clipped to a gradient background | taste-skill study (model panel): 2% of top vs 13% of bottom sites |
+| `slop.eyebrow-label` | Eyebrow labels over every heading | 3+ small (13.5px or less), tracked, capitalised labels sitting 0-48px above a heading | taste-skill study (model panel): 6% of top vs 43% of bottom sites |
+| `slop.pill-badge-kicker` | Pill badge above the headline | A 16-40px rounded, filled pill sitting 0-48px above a heading | taste-skill study (model panel): 5% vs 26% |
+| `slop.frame-asymmetric-margins` | Lopsided page frame | 60%+ of 3+ content frames have one gutter more than 16px wider than the other, on the same side | taste-skill SOTD study: strong pages keep both margins within a few px |
+| `slop.frame-one-sided-section` | Half-empty screen | A screen with 2%+ text whose text and media all sit in one half | taste-skill SOTD study: about 1 in 100 strong pages |
+| `slop.frame-empty-gap` | Dead vertical gap | More than 600px with no text or media between two pieces of content | taste-skill SOTD study (half a screen), recalibrated on GitHub, Stripe, and Linear |
+| `slop.frame-missing-h1` | First screen without a title | No h1 (visually hidden ones count) on the first screen | taste-skill SOTD study: 15 of 97 first screens did not say what the site was |
+| `slop.frame-untitled-section` | Sections without headings | 2+ sections or articles with 200+ characters and no heading | taste-skill SOTD study: 82% of text sections open with a heading |
+| `slop.blocked-first-paint` | First screen blocked after load | 4.5 s after load: a painted full-screen overlay, an invisible first-screen h1 or h2, or a wheel turn that scrolls nothing | taste-skill SOTD study: preloaders on 60 of 99 sites; [Motion Usability Anti-Patterns](../motion/usability-anti-patterns.md) |
 
 ### Review Entries
 
@@ -64,8 +73,11 @@ The existing machine rules retain `measured-baseline`; their QA-derived operatio
 | --- | --- | --- |
 | `slop.generic-copy` | Generic marketing copy | With the product name removed, can a reader tell what the product does, for whom, and what is different? |
 | `slop.fabricated-proof` | Fabricated social proof | Is every logo, quote, rating, and number sourced, or visibly marked as illustrative? |
-| `slop.gradient-text-everywhere` | Gradient text as the default emphasis | Does each gradient-filled word carry a meaning the direction names? |
 | `slop.uniform-section-rhythm` | Uniform section rhythm | Do sections differ in length, density, and opener so the page is paced? |
+
+### Taste-Skill Adaptations
+
+The eyebrow, pill, gradient-text, icon-card, frame, and first-paint rules adapt measurements from leonxlnx/taste-skill (MIT, revision `b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2`; `skills/taste-skill/references/research.md` and `references/motion.md`). The method is rewritten here and no upstream text or code is copied. Their numbers come from a model-panel study of gallery and award sites, not from human judges, so each entry names that source. Each threshold was checked against the 12 live homepages of the 2026-10-19 audit run and recalibrated where strong sites failed it: frame gutters are counted per frame, gaps must exceed 600px, a visually hidden h1 counts, decorative product mock-ups may hide body text, and screens held by a sticky scene are skipped. Scroll scenes pinned by script, with position toggled during scrolling rather than set to sticky, are not recognised as pinned and can still read as gaps. App and content profiles relax every frame, eyebrow, and pill rule. `slop.blocked-first-paint` stays an error everywhere.
 
 ## Page Profiles
 
