@@ -2,6 +2,14 @@
 
 ## 2026-10-19
 
+Understood as: release `stylegallery@0.1.14`, which ships `stylegallery setup` from PR #64 so an installed package can connect Claude Code and Codex in one command.
+
+- `stylegallery setup` copies `skills/stylegallery-search/SKILL.md` to `~/.claude/skills/stylegallery-search/` and `~/.agents/skills/stylegallery-search/` and registers `npx -y --package stylegallery stylegallery-mcp` as user-scope `mcpServers.stylegallery` in `~/.claude.json` and `[mcp_servers.stylegallery]` in `~/.codex/config.toml`. Options: `--dry-run`, `--agent claude|codex|all`, `--only skill|mcp`, `--uninstall`, `--force`. Reruns change nothing, modified config files are backed up as `<file>.bak-stylegallery-<timestamp>`, other settings are preserved, and a different same-name entry is left alone without `--force`. Sources: https://code.claude.com/docs/en/mcp, https://code.claude.com/docs/en/skills, https://developers.openai.com/codex/mcp, https://developers.openai.com/codex/skills, read 2026-10-19.
+- The package `files` list adds `scripts/stylegallery-setup.mjs`. `scripts/test-stylegallery-setup.mjs` runs in the Search evaluation workflow.
+
+Consumer reference: not_applicable
+Consumer reference reason: This release adds agent setup tooling and selects no consumer-reference profile or record.
+
 Understood as: release `stylegallery@0.1.13`, which ships the evidence-based UI pattern documents from PR #61 and the README CLI reference from PR #62.
 
 - Design Engineering: `design-engineering/evidence-patterns/` adds 12 documents (inline validation, error recovery, form labels, input masks, faceted filters, autocomplete, empty states, data tables, tabs and segmented controls, breadcrumbs, bottom navigation, dark-mode contrast) with 22 cited sources; `loading-and-feedback`, `native-interaction-contracts`, `platform-guides/input-and-focus`, and the `delete-undo` recipe gain evidence sections.
