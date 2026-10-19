@@ -13,7 +13,7 @@ const readOnly = { readOnlyHint: true, destructiveHint: false, idempotentHint: t
 export const searchToolDefinitions = Object.freeze([
   {
     name: "search",
-    description: "Search the StyleGallery Markdown corpus (layout patterns, recipes, motion, design engineering, platform guides, terminology, expression). Offline BM25F ranking. Returns light results: id, path, title, description, a verbatim snippet, and the next read command. When the question is not in English, also pass query_en with an English rewrite; Korean-only queries match only documents with Korean aliases.",
+    description: "Search the StyleGallery Markdown corpus (layout patterns, recipes, motion, design engineering, platform guides, terminology, expression). Hybrid ranking by default: BM25F fused with an English embedding model (downloaded once, then offline); falls back to BM25F alone when the model is unavailable, and the result's mode field says which ran. Returns light results: id, path, title, description, a verbatim snippet, and the next read command. When the question is not in English, also pass query_en with an English rewrite; Korean-only queries match only documents with Korean aliases.",
     inputSchema: {
       type: "object", additionalProperties: false, required: ["query"],
       properties: {
@@ -21,6 +21,7 @@ export const searchToolDefinitions = Object.freeze([
         query_en: { type: "string", description: "English rewrite of query. Strongly recommended when query is not English." },
         limit: { type: "integer", minimum: 1, maximum: 50, default: 5 },
         paths_only: { type: "boolean", description: "Return repository-relative paths only." },
+        mode: { type: "string", enum: ["hybrid", "lexical"], default: "hybrid", description: "hybrid fuses BM25F with embedding similarity; lexical is BM25F only." },
         response_format: { type: "string", enum: ["concise", "detailed"], default: "concise", description: "detailed adds scores, hash identities, and ranking terms." },
       },
     },
@@ -72,7 +73,7 @@ export function createSgMcpServer(config = {}) {
     let input = request.params.arguments ?? {};
     let report;
     if (operation === "search" || operation === "read") {
-      report = invokeSearchOperation(operation, input, materialRuntimeOptions());
+      report = await invokeSearchOperation(operation, input, materialRuntimeOptions());
     } else if (Object.hasOwn(compilerOperations, operation) || operation === "workflow") {
       const signals = [lifetime.signal, extra.signal, config.signal].filter(Boolean);
       report = await executeCompiler(operation, input, { ...config, signal: AbortSignal.any(signals) });

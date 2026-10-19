@@ -124,6 +124,8 @@ const required = new Set([
   "consumer-reference/agent-native/registry.json",
   "consumer-reference/agent-native/v2/admission-policy.json",
   "consumer-reference/agent-native/v2/material-registry.json",
+  // Precomputed document vectors for hybrid search; the model itself is downloaded on first use.
+  "consumer-reference/agent-native/v2/search-embeddings.json",
   // Transport setup documentation is packaged without admitting tool code or
   // private upstream documents to the governed material corpus.
   "scripts/compiler/README.md",

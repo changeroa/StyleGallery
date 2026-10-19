@@ -50,6 +50,7 @@
     "consumer-reference/agent-native/v2/schema/admission-policy.schema.json",
     "consumer-reference/agent-native/v2/schema/material-manifest.schema.json",
     "consumer-reference/agent-native/v2/schema/material-record.schema.json",
+    "consumer-reference/agent-native/v2/search-embeddings.json",
     "consumer-reference/contract.md",
     "consumer-reference/index.md",
     "design-engineering/component-contract.md",
@@ -265,6 +266,7 @@
     "scripts/agent-native/v2/material-queries.mjs",
     "scripts/agent-native/v2/material-registry.mjs",
     "scripts/agent-native/v2/material-search-v3.mjs",
+    "scripts/agent-native/v2/search-embeddings.mjs",
     "scripts/compiler/README.md",
     "scripts/compiler/cli.mjs",
     "scripts/compiler/mcp.mjs",
@@ -339,7 +341,8 @@
     "stylegallery": "node scripts/sg-entry.mjs",
     "test:search": "node --test scripts/test-stylegallery-search.mjs",
     "test:setup": "node --test scripts/test-stylegallery-setup.mjs",
-    "eval:search": "node scripts/search-eval.mjs --gate"
+    "eval:search": "node scripts/agent-native/v2/generate-search-embeddings.mjs --check && node scripts/search-eval.mjs --gate",
+    "generate:search-embeddings": "node scripts/agent-native/v2/generate-search-embeddings.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.61.0",
@@ -356,5 +359,8 @@
   },
   "overrides": {
     "brace-expansion": "5.0.9"
+  },
+  "optionalDependencies": {
+    "onnxruntime-web": "1.30.0"
   }
 }

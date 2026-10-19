@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "description": "Agent-style retrieval questions for stylegallery search. qrels grade 3 = the answer document, 2 = a strong alternative, 1 = useful context. must_pass items must place a grade >= 2 document in the top 5. kind heldout = written after aliases were added, never used to tune them.",
+  "description": "Agent-style retrieval questions for stylegallery search. qrels grade 3 = the answer document, 2 = a strong alternative, 1 = useful context. must_pass items must place a grade >= 2 document in the top 5. kind heldout = written after aliases were added, never used to tune them. kind mismatch = everyday wording that shares few words with the answer document, written without reading its aliases or questions; it measures hybrid (embedding) search.",
   "questions": [
     {
       "id": "ep01",
@@ -952,6 +952,214 @@
       "query": "rules for an unofficial brand study",
       "qrels": {
         "expression/brand-studies.md": 3
+      }
+    },
+    {
+      "id": "m01",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "sidebar layout that collapses on mobile",
+      "qrels": {
+        "patterns/split-sidebar/sidebar.md": 3,
+        "patterns/split-sidebar/switcher.md": 2
+      }
+    },
+    {
+      "id": "m02",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "animate elements as the user scrolls down the story",
+      "qrels": {
+        "motion/techniques/scroll-choreography.md": 3
+      }
+    },
+    {
+      "id": "m03",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "footer stays at the bottom when the page has little text",
+      "qrels": {
+        "patterns/viewport-shell/sticky-footer.md": 3
+      }
+    },
+    {
+      "id": "m04",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "put something exactly in the middle of the screen",
+      "qrels": {
+        "patterns/centering/super-center.md": 3,
+        "patterns/centering/center.md": 2,
+        "patterns/viewport-shell/cover.md": 2
+      }
+    },
+    {
+      "id": "m05",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "pinterest style uneven tile wall",
+      "qrels": {
+        "patterns/grid-repetition/masonry-approx.md": 3
+      }
+    },
+    {
+      "id": "m06",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "show where I am in the site hierarchy",
+      "qrels": {
+        "patterns/in-line-grouping/breadcrumb.md": 3,
+        "design-engineering/evidence-patterns/breadcrumbs.md": 3
+      }
+    },
+    {
+      "id": "m07",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "swipe through a row of items sideways",
+      "qrels": {
+        "patterns/in-line-grouping/reel.md": 3
+      }
+    },
+    {
+      "id": "m08",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "people who get dizzy from animation",
+      "qrels": {
+        "motion/accessible-motion.md": 3,
+        "platform-guides/preferences-and-accessibility.md": 2
+      }
+    },
+    {
+      "id": "m09",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "undo after accidentally removing an item",
+      "qrels": {
+        "design-engineering/state-management/recipes/delete-undo.md": 3
+      }
+    },
+    {
+      "id": "m10",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "older search responses overwrite newer ones",
+      "qrels": {
+        "design-engineering/state-management/patterns/latest-request-wins.md": 3
+      }
+    },
+    {
+      "id": "m11",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "warn before leaving a page with unsaved edits",
+      "qrels": {
+        "design-engineering/state-management/patterns/unsaved-navigation.md": 3
+      }
+    },
+    {
+      "id": "m12",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "what to show when a list has nothing in it",
+      "qrels": {
+        "design-engineering/evidence-patterns/empty-states.md": 3
+      }
+    },
+    {
+      "id": "m13",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "keep picture proportions when resizing thumbnails",
+      "qrels": {
+        "patterns/media-fit/frame.md": 3
+      }
+    },
+    {
+      "id": "m14",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "menu bar at the bottom of a phone app",
+      "qrels": {
+        "design-engineering/evidence-patterns/bottom-navigation.md": 3,
+        "platform-guides/adaptive-navigation.md": 2
+      }
+    },
+    {
+      "id": "m15",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "header that does not move while content scrolls",
+      "qrels": {
+        "patterns/viewport-shell/sticky-header.md": 3,
+        "patterns/viewport-shell/scroll-body-shell.md": 2
+      }
+    },
+    {
+      "id": "m16",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "spinner versus skeleton while data arrives",
+      "qrels": {
+        "design-engineering/loading-and-feedback.md": 3
+      }
+    },
+    {
+      "id": "m17",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "suggest matches while someone types in a box",
+      "qrels": {
+        "design-engineering/evidence-patterns/autocomplete.md": 3
+      }
+    },
+    {
+      "id": "m18",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "make paragraphs not stretch too wide on big monitors",
+      "qrels": {
+        "patterns/containment/content-limiter.md": 3
+      }
+    },
+    {
+      "id": "m19",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "letters that move and bounce in a headline",
+      "qrels": {
+        "motion/techniques/kinetic-type.md": 3
+      }
+    },
+    {
+      "id": "m20",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "click an email in the inbox and read it beside the list",
+      "qrels": {
+        "patterns/split-sidebar/list-detail.md": 3,
+        "recipes/list-detail.md": 3
       }
     }
   ]
