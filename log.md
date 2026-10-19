@@ -2,6 +2,17 @@
 
 ## 2026-10-19
 
+Understood as: release `stylegallery@0.1.17`, which ships the design audit kit from PRs #70-#74 so an agent can run a HIG-grounded audit of any page and turn it into fix PRs with evidence.
+
+- `platform-guides/hig-universal-principles.md` (#73): 187 principles paraphrased from the Apple HIG with links, each classed `universal`, `adapt`, or `apple-specific` and mapped to WCAG 2.2, Material 3, and WAI-ARIA APG, with `reviewed_on` enrolled in the evidence-freshness audit.
+- `expression/anti-patterns.md` (#70): an AI-slop UI catalog with ids, definitions, and machine-detectable rules grounded in the measured expression benchmarks; taste-only entries stay review questions.
+- `stylegallery shots --before --after` (#72): captures 390 and 1440 widths in light and dark, computes pixel diff ratios and hotspots, and writes a PR body section; `quality/evidence/before-after-pr-evidence.md` holds the PR template.
+- `quality/audit/ledger.schema.json` and `stylegallery audit status` (#71): principle -> violation -> PR -> check -> status ledger with progress counts.
+- `stylegallery audit init <url>` and `stylegallery audit check <url|file>` plus MCP audit tools (#74): persona, journey, ideal-state, and severity templates; generic checks shared with `check-showcase.mjs` plus the machine-detectable slop rules, each proven by a violation fixture that must fail.
+
+Consumer reference: not_applicable
+Consumer reference reason: This release adds audit tooling and guidance and selects no consumer-reference profile or record.
+
 Understood as: release `stylegallery@0.1.16`, which ships hybrid search from PR #68: BM25F fused with an English embedding model so everyday wording finds documents that use different words.
 
 - `stylegallery search` and the MCP `search` tool take `--mode hybrid|lexical` (`mode`), default `hybrid`: weighted reciprocal rank fusion (k 60, semantic weight 0.5) of BM25F and bge-small-en-v1.5 (quantized ONNX, 34 MB). The result reports the `mode` that ran and a `mode_reason` on fallback.
