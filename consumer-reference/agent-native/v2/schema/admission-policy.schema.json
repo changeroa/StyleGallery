@@ -13,8 +13,8 @@
     "media_type": { "const": "text/markdown" },
     "allowed_materials": {
       "type": "array",
-      "minItems": 194,
-      "maxItems": 194,
+      "minItems": 195,
+      "maxItems": 195,
       "items": {
         "type": "object",
         "additionalProperties": false,

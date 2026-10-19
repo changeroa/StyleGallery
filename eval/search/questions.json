@@ -1191,6 +1191,49 @@
       "qrels": {
         "quality/audit/README.md": 3
       }
+    },
+    {
+      "id": "ap01",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "Which AI slop UI patterns can a headless browser detect automatically?",
+      "qrels": {
+        "expression/anti-patterns.md": 3
+      }
+    },
+    {
+      "id": "ap02",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "Is using emoji as feature icons on a landing page a bad idea?",
+      "qrels": {
+        "expression/anti-patterns.md": 3,
+        "expression/techniques/drawn-products.md": 1
+      }
+    },
+    {
+      "id": "ap03",
+      "lang": "ko",
+      "kind": "real",
+      "must_pass": false,
+      "query": "AI 슬롭처럼 보이는 랜딩 페이지 패턴",
+      "query_en": "landing page patterns that look like AI slop",
+      "qrels": {
+        "expression/anti-patterns.md": 3
+      }
+    },
+    {
+      "id": "ap04",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "why does my generated homepage look cheap and template-y",
+      "qrels": {
+        "expression/anti-patterns.md": 3,
+        "expression/measured-benchmarks.md": 2
+      }
     }
   ]
 }

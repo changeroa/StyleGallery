@@ -296,7 +296,8 @@ const additionalLocalLeaves = {
     ["measured-benchmarks.md", "Measured Expression Benchmarks"],
     ["techniques/image-weight.md", "Image Weight"],
     ["techniques/display-type-calibration.md", "Display Type Calibration"],
-    ["techniques/surface-detail.md", "Masks, Clips, And Hairlines"]
+    ["techniques/surface-detail.md", "Masks, Clips, And Hairlines"],
+    ["anti-patterns.md", "AI-Slop UI Anti-Patterns"]
   ]
 };
 
