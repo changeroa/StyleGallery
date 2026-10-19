@@ -785,6 +785,11 @@
       "lifecycle": "experimental"
     },
     {
+      "repository_path": "quality/audit/README.md",
+      "domain": "shared",
+      "lifecycle": "stable"
+    },
+    {
       "repository_path": "quality/claim-records/design-terminology-domain-scope.md",
       "domain": "shared",
       "lifecycle": "stable"
@@ -1047,5 +1052,5 @@
       "code": "material_path_internal_excluded"
     }
   ],
-  "version_id": "sg:policy/material-admission-v2@sha256:1bfe3a30d62913fcf5647b5af03e07be8e128f83c78c133442748f535c8e9ed3"
+  "version_id": "sg:policy/material-admission-v2@sha256:d79b48891e97d9b0b1a3fae919f6e0f91e2e1d5ba1bc5eafe1397067c9064c1a"
 }

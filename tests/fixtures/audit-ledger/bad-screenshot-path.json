@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "ledger_kind": "stylegallery_audit_ledger",
+  "subject": "Example checkout web app",
+  "updated_on": "2026-10-19",
+  "principles": [
+    {
+      "principle_id": "hig.foundations.accessibility",
+      "violations": [
+        {
+          "violation_id": "v-001",
+          "summary": "Checkout button text contrast is 3.1:1 in dark mode.",
+          "screenshots": [
+            "../outside.png"
+          ],
+          "severity": 3,
+          "persona_refs": [
+            "low-vision-shopper"
+          ],
+          "journey_refs": [
+            "checkout"
+          ],
+          "fix": {
+            "pr_url": "https://github.com/example/shop/pull/12",
+            "pr_number": 12
+          },
+          "check_id": "contrast-text",
+          "status": "verified"
+        },
+        {
+          "violation_id": "v-002",
+          "summary": "Focus ring is clipped inside the cart drawer.",
+          "screenshots": [
+            "audit/shots/cart-focus-1440.png"
+          ],
+          "severity": 2,
+          "persona_refs": [
+            "keyboard-user"
+          ],
+          "journey_refs": [
+            "checkout"
+          ],
+          "fix": {
+            "pr_number": 14
+          },
+          "status": "fixing"
+        }
+      ]
+    },
+    {
+      "principle_id": "hig.patterns.feedback",
+      "violations": [
+        {
+          "violation_id": "v-003",
+          "summary": "Saving the address gives no confirmation.",
+          "screenshots": [
+            "audit/shots/address-save-390.png"
+          ],
+          "severity": 2,
+          "persona_refs": [],
+          "journey_refs": [
+            "checkout"
+          ],
+          "status": "open"
+        },
+        {
+          "violation_id": "v-004",
+          "summary": "Promo banner animation ignores reduced motion.",
+          "screenshots": [
+            "audit/shots/promo-1440.png"
+          ],
+          "severity": 1,
+          "persona_refs": [],
+          "journey_refs": [],
+          "status": "wont_fix",
+          "note": "Banner is removed next quarter."
+        }
+      ]
+    },
+    {
+      "principle_id": "slop.gradient-headline-only",
+      "violations": []
+    }
+  ]
+}

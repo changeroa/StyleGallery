@@ -203,6 +203,8 @@
     "platform-guides/input-and-focus.md",
     "platform-guides/preferences-and-accessibility.md",
     "platform-guides/windows-interaction.md",
+    "quality/audit/README.md",
+    "quality/audit/ledger.schema.json",
     "quality/claim-records/design-terminology-domain-scope.md",
     "quality/claim-records/index.md",
     "quality/claim-records/samples.md",
@@ -286,6 +288,7 @@
     "scripts/sg-server.mjs",
     "scripts/sg.mjs",
     "scripts/strict-json.mjs",
+    "scripts/stylegallery-audit.mjs",
     "scripts/stylegallery-cli.mjs",
     "scripts/stylegallery-setup.mjs",
     "showcase/README.md",
@@ -342,7 +345,8 @@
     "test:search": "node --test scripts/test-stylegallery-search.mjs",
     "test:setup": "node --test scripts/test-stylegallery-setup.mjs",
     "eval:search": "node scripts/agent-native/v2/generate-search-embeddings.mjs --check && node scripts/search-eval.mjs --gate",
-    "generate:search-embeddings": "node scripts/agent-native/v2/generate-search-embeddings.mjs"
+    "generate:search-embeddings": "node scripts/agent-native/v2/generate-search-embeddings.mjs",
+    "test:audit": "node --test scripts/test-stylegallery-audit.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.61.0",

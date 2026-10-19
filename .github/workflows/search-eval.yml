@@ -52,6 +52,9 @@ jobs:
       - name: Setup command contracts
         run: node --test scripts/test-stylegallery-setup.mjs
 
+      - name: Audit command contracts (ledger schema, good and bad fixtures)
+        run: node --test scripts/test-stylegallery-audit.mjs
+
       - name: Retrieval evaluation gate, lexical mode (must-pass top 5, Hit@5 and nDCG@5 within 0.02 of eval/search/scores.json)
         run: node scripts/search-eval.mjs --gate --mode lexical
 

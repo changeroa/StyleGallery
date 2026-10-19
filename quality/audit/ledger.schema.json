@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stylegallery.example/quality/audit/ledger.schema.json",
+  "title": "StyleGallery audit ledger",
+  "description": "Progress ledger for a principle-based design audit: principle -> violations -> fix PR -> check -> status. Cross-record rules (unique ids) are enforced by `stylegallery audit status`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ledger_kind", "subject", "updated_on", "principles"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "ledger_kind": { "const": "stylegallery_audit_ledger" },
+    "subject": {
+      "description": "What is being audited: a product name, URL, or repository.",
+      "type": "string",
+      "minLength": 1
+    },
+    "updated_on": { "$ref": "#/$defs/date" },
+    "principles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/principle" }
+    }
+  },
+  "$defs": {
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "principleId": {
+      "description": "An HIG universal principle id (hig.<section>.<slug>) or an AI-slop catalog id (slop.<slug>).",
+      "type": "string",
+      "pattern": "^(?:hig\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*|slop\\.[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*)$"
+    },
+    "repositoryPath": {
+      "description": "Relative path without traversal, scheme, query, or fragment.",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?![A-Za-z][A-Za-z0-9+.-]*:)(?!.*[\\\\?#])[^/]+(?:/[^/]+)*$"
+    },
+    "principle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["principle_id", "violations"],
+      "properties": {
+        "principle_id": { "$ref": "#/$defs/principleId" },
+        "violations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/violation" }
+        }
+      }
+    },
+    "violation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["violation_id", "summary", "screenshots", "severity", "persona_refs", "journey_refs", "status"],
+      "properties": {
+        "violation_id": { "$ref": "#/$defs/identifier" },
+        "summary": { "type": "string", "minLength": 1 },
+        "screenshots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/repositoryPath" }
+        },
+        "severity": {
+          "description": "NN/g severity: 0 not a usability problem, 1 cosmetic, 2 minor, 3 major, 4 catastrophe.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "persona_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "journey_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "fix": { "$ref": "#/$defs/fix" },
+        "check_id": { "$ref": "#/$defs/identifier" },
+        "status": { "enum": ["open", "fixing", "fixed", "verified", "wont_fix"] },
+        "note": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "enum": ["fixing", "fixed", "verified"] } } },
+          "then": { "required": ["fix"] }
+        },
+        {
+          "if": { "properties": { "status": { "const": "verified" } } },
+          "then": { "required": ["check_id"] }
+        },
+        {
+          "if": { "properties": { "status": { "const": "wont_fix" } } },
+          "then": { "required": ["note"] }
+        }
+      ]
+    },
+    "fix": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "pr_url": {
+          "type": "string",
+          "pattern": "^https://[^\\s/]+/[^\\s]+/pull/[0-9]+$"
+        },
+        "pr_number": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

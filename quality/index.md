@@ -18,6 +18,7 @@ The [Consumer Reference Receiver Contract](../consumer-reference/contract.md) is
 - [Executable evidence coverage](evidence/executable-evidence.md) - Validator, fixture, CI, rendered-evidence, and review boundaries.
 - [Consumer migration evidence gate](gates/consumer-migration-evidence.md) - Blocking contract for a declared consumer migration.
 - [Consumer migration evidence](evidence/consumer-migration.md) - Claim boundaries for runtime and source-bound page evidence.
+- [Audit ledger](audit/README.md) - Ledger schema and `stylegallery audit status` for tracking a design audit from violation to verified fix.
 
 ## Admission Model
 

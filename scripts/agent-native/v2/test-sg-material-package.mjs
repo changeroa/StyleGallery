@@ -126,6 +126,8 @@ const required = new Set([
   "consumer-reference/agent-native/v2/material-registry.json",
   // Precomputed document vectors for hybrid search; the model itself is downloaded on first use.
   "consumer-reference/agent-native/v2/search-embeddings.json",
+  // `stylegallery audit status` validates ledgers against this schema at runtime.
+  "quality/audit/ledger.schema.json",
   // Transport setup documentation is packaged without admitting tool code or
   // private upstream documents to the governed material corpus.
   "scripts/compiler/README.md",
@@ -238,7 +240,7 @@ try {
   try {
     await bounded(materialClient.connect(materialTransport), "installed material MCP initialize");
     assert.deepEqual((await bounded(materialClient.listTools(), "installed material MCP tools")).tools.map(({ name }) => name), ["material-context", "material-discover", "material-get", "material-search"]);
-    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 193);
+    assert.equal((await bounded(materialClient.listResources(), "installed material MCP resources")).resources.length, 194);
     assert.deepEqual((await bounded(materialClient.listResourceTemplates(), "installed material MCP templates")).resourceTemplates.map(({ uriTemplate }) => uriTemplate), ["sg://v2/material/{reference}"]);
     const installedMcpSearch = toolEnvelope(await bounded(materialClient.callTool({
       name: "material-search",
