@@ -143,7 +143,7 @@ export const AUDIT_SUBCOMMANDS = {
     } catch (error) { return failure("audit init", "audit_init_failed", error.message); }
   },
   check: async (args, config) => {
-    const parsed = parseOptions("audit check", args, { "--viewports": { field: "viewports" }, "--json": { field: "json", flag: true } });
+    const parsed = parseOptions("audit check", args, { "--viewports": { field: "viewports" }, "--profile": { field: "profile" }, "--timeout": { field: "timeout", integer: true }, "--json": { field: "json", flag: true } });
     if (parsed.error) return parsed.error;
     if (parsed.positional.length !== 1) return failure("audit check", "argument_value_required", "give exactly one URL or HTML file");
     try {

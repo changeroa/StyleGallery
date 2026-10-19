@@ -57,6 +57,12 @@ const cases = [
   { name: "required entry removed", mutate: (c) => { c.entries = c.entries.filter(({ id }) => id !== "slop.dishonest-cta"); }, expected: "required_entry_missing" },
   { name: "entry absent from companion page", mutate: (c) => c.entries.push({ ...structuredClone(entry(c, "slop.generic-copy")), id: "slop.unlisted-entry" }), expected: "companion_id_missing" },
   { name: "empty entries", mutate: (c) => { c.entries = []; }, expected: "entries_missing" },
+  { name: "profile missing", mutate: (c) => { delete c.profiles.content; }, expected: "profile_missing" },
+  { name: "profile without rationale", mutate: (c) => { delete c.profiles.app.rationale; }, expected: "profile_field_missing" },
+  { name: "profile relaxes unknown id", mutate: (c) => { c.profiles.content.relaxed.push("slop.not-a-rule"); }, expected: "profile_relaxed_unknown" },
+  { name: "profile relaxes a review entry", mutate: (c) => { c.profiles.content.relaxed.push("slop.generic-copy"); }, expected: "profile_relaxed_unknown" },
+  { name: "landing relaxes a rule", mutate: (c) => { c.profiles.landing.relaxed.push("slop.empty-screen"); }, expected: "profile_landing_relaxed" },
+  { name: "unknown profile", mutate: (c) => { c.profiles.kiosk = structuredClone(c.profiles.app); }, expected: "profile_unknown" },
 ];
 
 const results = [];
