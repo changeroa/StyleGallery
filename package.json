@@ -364,7 +364,9 @@
     "generate:search-embeddings": "node scripts/agent-native/v2/generate-search-embeddings.mjs",
     "test:audit": "node --test scripts/test-stylegallery-audit.mjs scripts/test-audit-kit.mjs",
     "test:audit:self": "node scripts/test-audit-checks.mjs",
-    "test:audit:parity": "node scripts/test-audit-parity.mjs"
+    "test:audit:parity": "node scripts/test-audit-parity.mjs",
+    "test:audit:realsites": "node scripts/test-audit-realsites.mjs",
+    "audit:realsites:live": "node scripts/audit-realsites-live.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.61.0",

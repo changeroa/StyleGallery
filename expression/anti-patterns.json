@@ -14,6 +14,24 @@
     "body_size": "The character-weighted modal computed font-size, rounded to the nearest pixel, over all visible elements' own text nodes (the measured-benchmarks.md console method).",
     "interactive": "a[href], button, summary, [role=button], [role=link], [role=tab], input[type=button], input[type=submit], excluding elements with the disabled attribute or aria-disabled=true."
   },
+  "profiles": {
+    "detection": "stylegallery audit check resolves the profile before checking: an explicit --profile wins; otherwise app when the page declares role=application or shows 3 or more form controls on at most 2 screens with links under 60% of the text, content when links carry at least 60% of the rendered text with at most 3 content images, or when the page has no content imagery and at least 1500 characters of text, and landing otherwise. The resolved profile, its source, and the signals are reported.",
+    "landing": {
+      "description": "A marketing, brand, or product landing page: the finished-page surface the 49 measured originals represent.",
+      "relaxed": [],
+      "rationale": "Every rule in this catalog was calibrated on landing and brand homepages (expression/measured-benchmarks.md), so all machine rules are errors."
+    },
+    "app": {
+      "description": "A product or tool surface: dashboards, editors, search and booking forms, signed-in views.",
+      "relaxed": ["audit.empty-screen", "audit.link-transition", "slop.headline-only-gradient-screen", "slop.empty-screen", "slop.gradient-area-excess", "slop.unfinished-surfaces", "slop.static-interactive", "slop.sluggish-state-change", "slop.oversized-display", "slop.repeated-card-triplet"],
+      "rationale": "Richness floors, display scale, surface finishing, and motion density were measured on landing pages; application surfaces trade them for density and stability, so these rules become warnings. Accessibility checks, honest actions, emoji icons, unanchored violet gradients, and soft shadows stay errors."
+    },
+    "content": {
+      "description": "A reading or index surface: articles, documentation, government and news pages, link directories.",
+      "relaxed": ["audit.empty-screen", "audit.link-transition", "slop.headline-only-gradient-screen", "slop.empty-screen", "slop.gradient-area-excess", "slop.unfinished-surfaces", "slop.static-interactive", "slop.sluggish-state-change", "slop.oversized-display", "slop.repeated-card-triplet", "slop.soft-shadow-excess"],
+      "rationale": "Text-led pages are finished by their text, not by imagery: GOV.UK screens of 8.5% and 9.9% text and Hacker News links without hover transitions are correct for their purpose, yet missed the landing floors in the 2026-10-19 real-site run. Landing-only rules become warnings; accessibility checks and honest actions stay errors."
+    }
+  },
   "entries": [
     {
       "id": "slop.headline-only-gradient-screen",
@@ -142,10 +160,10 @@
       "detectable": "machine",
       "severity": "error",
       "detection": {
-        "scope": "Every visible interactive element (measurement_context.interactive) at 1440x900 with pointer: fine.",
+        "scope": "Every visible interactive element (measurement_context.interactive) at 1440x900 with pointer: fine. Elements that are zero-size or at most 1px, outside the document, clipped by an overflow ancestor or a clip, inside [aria-hidden=true] or [inert], or under a hidden ancestor are skipped and counted in evidence.skipped, never reported. Live pages (stylegallery audit check) sample at most 24 elements evenly across the document.",
         "measure": "Snapshot computed color, background-color, background-image, border-*-color, outline-style, outline-color, text-decoration-line, text-decoration-color, opacity, transform, translate, scale, box-shadow, filter, and clip-path on the element and its descendants up to depth 2. Then hover the element with the pointer and await its getAnimations({ subtree: true }) finished promises (bounded at 1000ms); snapshot again. Then move the pointer away, focus the element with the keyboard (Tab order), and snapshot a third time.",
         "threshold": "0 changed properties between the rest and hover snapshots, or 0 changed properties between the rest and focus snapshots; 1 such element is enough to fail the page.",
-        "violation": "One error per element, reported as hover_unchanged or focus_unchanged."
+        "violation": "One error per element, reported as hover_unchanged, focus_unchanged, or focus_unreachable (the complete Tab walk never reached it). An element the pointer cannot reach (hover times out) or that a capped Tab walk did not reach is skipped, not a violation."
       },
       "rationale": "Originals put transitions on a median 76 elements per page, mostly opacity, color, transform, and background-color; studies had 8 and felt static (expression/measured-benchmarks.md, gap 4). showcase/QA.md I17 requires links, buttons, cards, tabs, and media frames to change state under the pointer, and I6 requires every focused element to be visible.",
       "sources": ["expression/measured-benchmarks.md", "showcase/QA.md"]
@@ -160,7 +178,7 @@
         "scope": "The whole page.",
         "measure": "durations = for each visible a[href] and button with a computed transition-duration above 0, the longest duration among transitioned properties other than all-with-0s; transitioning = count of visible elements with any computed transition-duration above 0; viewports = scrollHeight / 900.",
         "threshold": "median(durations) > 350ms, or median(durations) < 100ms, or transitioning < max(12, 4 * viewports). The 350ms and count floors are showcase/QA.md Q23; the 100ms lower edge is the measured band.",
-        "violation": "One error per page naming which bound failed."
+        "violation": "One error per page naming which bound failed (reasons speed and too_few). When slop.static-interactive also fails, only the speed reason is reported: controls that do not respond at all are one finding, not two."
       },
       "rationale": "Hover and state transitions on the originals run 100-320ms, with a median dominant duration of 200ms; studies used 400ms and felt sluggish (expression/measured-benchmarks.md). showcase/QA.md Q23 fails a page whose median link and button duration exceeds 350ms or that has fewer than 4 transitioning elements per screen of length.",
       "sources": ["expression/measured-benchmarks.md", "showcase/QA.md", "motion/techniques/scroll-choreography.md"]
@@ -172,9 +190,9 @@
       "detectable": "machine",
       "severity": "error",
       "detection": {
-        "scope": "Visible interactive elements outside header and footer, plus every element in header or footer whose accessible name matches /\\b(get started|sign ?up|subscribe|book|buy|order|download|try|start|join|request|contact|get (a|an|the|your)|claim|reserve)\\b/i.",
-        "measure": "Static: href is empty, #, #top, or javascript:, or href is #id with no element of that id. Dynamic: record location.href, scrollY, open dialogs, the text of [role=status], [role=alert], and [aria-live] regions, and outgoing requests; activate the element with a click; await one animation frame and the element's animations (bounded at 1000ms); record again.",
-        "threshold": "1 or more elements with a static match, or with 0 of these effects after activation: a URL change, a request, a newly open dialog or popover, an existing hash target scrolled into the top half of the viewport, or new non-empty text in a status, alert, or live region.",
+        "scope": "Visible interactive elements that are not skip links (/^skip (to|navigation)/i and Korean equivalents), consent or cookie controls (inside an element whose id, class, or aria-label names cookie, consent, onetrust, gdpr, or cmp, or whose name mentions cookies or consent), or legal links (privacy, terms, legal, imprint, accessibility statement), outside header and footer, plus every such element in header or footer whose accessible name matches /\\b(get started|sign ?up|subscribe|book|buy|order|download|try|start|join|request|contact|get (a|an|the|your)|claim|reserve)\\b/i.",
+        "measure": "Static: href is empty, #, #top, or javascript:, or href is #id with no element of that id. Dynamic: record location.href, scrollY, open dialogs, the text of [role=status], [role=alert], and [aria-live] regions, aria-expanded, aria-selected, and aria-pressed states, the rendered body text, and outgoing requests; activate the element with a click; await one animation frame and the element's animations (bounded at 1000ms); record again.",
+        "threshold": "1 or more elements with a static match, or with 0 of these effects after activation: a URL change, a request, a newly open dialog or popover, an existing hash target scrolled into the top half of the viewport, or new non-empty text in a status, alert, or live region, a changed aria-expanded, aria-selected, or aria-pressed state, changed rendered text, or a scroll of more than 40px. A click that times out is skipped as unreachable, not a violation. Live pages sample at most 8 calls to action.",
         "violation": "One error per element. A fictional action that announces itself in a role=status message passes, as showcase/QA.md I2 and Q4 require."
       },
       "rationale": "showcase/QA.md I2 requires every link and button to do something plausible and fictional actions to say so in an announced status message; Q3 forbids # and #top targets and Q4 requires the status message without a scroll jump. expression/techniques/live-product-demos.md asks demos to answer honestly.",

@@ -28,5 +28,6 @@ jobs:
       - run: bunx playwright install --with-deps chromium
       - run: bun run test:audit
       - run: bun run test:audit:self
+      - run: bun run test:audit:realsites
       - run: bun run test:showcase:self
       - run: bun run test:audit:parity

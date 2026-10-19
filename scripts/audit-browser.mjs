@@ -41,6 +41,51 @@ const shortViewport = { width: 1280, height: 620 };
 const scrollStops = ["top", "middle", "bottom"];
 const maxTabStops = 60;
 const settleTimeoutMs = 6000;
+// Audit runs on live sites (fast mode) cap each settle wait: pages that never stop animating
+// would otherwise spend the whole wait at every scroll stop.
+const fastSettleTimeoutMs = 1000;
+
+// ---------- time budget ----------
+
+// A budget bounds one audit run. Each stage receives a share of the remaining time in proportion
+// to its weight; a stage that overruns has its browser contexts closed and is reported as
+// timed out, so the run always ends with partial results instead of waiting indefinitely.
+export const STAGE_INCOMPLETE = Symbol("stage_incomplete");
+export function createBudget(totalMs, totalWeight) {
+  return { end: Date.now() + totalMs, weightLeft: totalWeight, contexts: new Set(), stages: [], remaining() { return this.end - Date.now(); } };
+}
+export async function runStage(budget, name, weight, fn) {
+  if (!budget) return fn();
+  const remaining = budget.remaining();
+  // Most stages finish well inside their share; a 3x allowance lets a heavy stage borrow from
+  // that slack while still leaving later stages a turn.
+  const share = budget.weightLeft > 0 ? remaining * Math.min(1, (weight / budget.weightLeft) * 3) : remaining;
+  budget.weightLeft -= weight;
+  const allowed = Math.min(remaining, Math.max(share, 5000));
+  if (allowed < 500) {
+    budget.stages.push({ name, status: "skipped", ms: 0, reason: "time budget exhausted" });
+    return STAGE_INCOMPLETE;
+  }
+  const started = Date.now();
+  const before = new Set(budget.contexts);
+  let timer;
+  const outcome = await Promise.race([
+    Promise.resolve().then(fn).then((value) => ({ value }), (error) => ({ error })),
+    new Promise((resolve) => { timer = setTimeout(() => resolve({ timeout: true }), allowed); }),
+  ]);
+  clearTimeout(timer);
+  if (outcome.timeout) {
+    await Promise.all([...budget.contexts].filter((context) => !before.has(context)).map((context) => context.close().catch(() => {})));
+    budget.stages.push({ name, status: "timed_out", ms: Date.now() - started, limit_ms: Math.round(allowed) });
+    return STAGE_INCOMPLETE;
+  }
+  if (outcome.error) {
+    budget.stages.push({ name, status: "error", ms: Date.now() - started, reason: outcome.error.message.split("\n")[0] });
+    return STAGE_INCOMPLETE;
+  }
+  budget.stages.push({ name, status: "done", ms: Date.now() - started });
+  return outcome.value;
+}
 // Richness floor (showcase/QA.md I16-I18), calibrated on expression/measured-benchmarks.md.
 const richness = { surfaceShare: 0.08, textShare: 0.1, transitionsPerScreen: 4, minTransitions: 12, slowHoverMs: 350, minClipped: 2, minHairlines: 3 };
 
@@ -270,12 +315,16 @@ function fixedTooTall() {
 // ---------- node-side helpers ----------
 
 export async function settle(page) {
-  await page.waitForFunction(pageIsSettled, null, { timeout: settleTimeoutMs, polling: "raf" }).catch(() => {});
+  await page.waitForFunction(pageIsSettled, null, { timeout: page.sgFast ? fastSettleTimeoutMs : settleTimeoutMs, polling: "raf" }).catch(() => {});
 }
 
 export async function openPage(browser, url, contextOptions, sameOriginBase, failures, label) {
-  const { blockExternal, blockScripts, ...browserContextOptions } = contextOptions;
+  const { blockExternal, blockScripts, budget, fast, ...browserContextOptions } = contextOptions;
   const context = await browser.newContext(browserContextOptions);
+  if (budget) {
+    budget.contexts.add(context);
+    context.on("close", () => budget.contexts.delete(context));
+  }
   if (blockExternal || blockScripts) {
     await context.route("**/*", async (route) => {
       const request = route.request();
@@ -290,16 +339,21 @@ export async function openPage(browser, url, contextOptions, sameOriginBase, fai
     });
   }
   const page = await context.newPage();
+  page.sgFast = Boolean(fast);
   page.on("pageerror", (error) => failures.push(`${label}: page error ${error.message}`));
   page.on("response", (response) => {
     if (new URL(response.url()).origin === new URL(sameOriginBase).origin && response.status() >= 400) failures.push(`${label}: ${response.status()} for ${response.url().slice(sameOriginBase.length)}`);
   });
   try {
-    await page.goto(url, { waitUntil: "load", timeout: 20000 });
+    if (fast) {
+      // Live sites keep loading trackers and ads; the document is what the checks read.
+      await page.goto(url, { waitUntil: "domcontentloaded", timeout: 20000 });
+      await page.waitForLoadState("load", { timeout: 5000 }).catch(() => {});
+    } else await page.goto(url, { waitUntil: "load", timeout: 20000 });
   } catch (error) {
     failures.push(`${label}: page did not finish loading (${error.message.split("\n")[0]})`);
   }
-  await page.evaluate(() => document.fonts.ready).catch(() => {});
+  await page.evaluate((fast) => (fast ? Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 3000))]) : document.fonts.ready), Boolean(fast)).catch(() => {});
   await settle(page);
   return { context, page };
 }
@@ -325,10 +379,14 @@ export async function overflowFailure(page, label) {
 
 export async function checkFocus(page, label) {
   const failures = [];
-  const restStyles = await page.evaluate(() => [...document.querySelectorAll("*")].map((element) => {
-    const s = getComputedStyle(element);
-    return [s.color, s.backgroundColor, s.boxShadow, s.borderColor, s.textDecorationLine].join("|");
-  }));
+  // Resting styles stay in the page: sending one string per element on every Tab press made
+  // large live pages spend most of the focus walk on serialization.
+  await page.evaluate(() => {
+    window.__sgRestStyles = [...document.querySelectorAll("*")].map((element) => {
+      const s = getComputedStyle(element);
+      return [s.color, s.backgroundColor, s.boxShadow, s.borderColor, s.textDecorationLine].join("|");
+    });
+  });
   const tabbables = await page.evaluate(() => {
     const selector = "a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex='-1'])";
     return [...document.querySelectorAll(selector)].filter((element) => !element.disabled && !element.closest("[inert]") && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== "hidden").length;
@@ -338,7 +396,8 @@ export async function checkFocus(page, label) {
   const limit = Math.min(tabbables, maxTabStops);
   for (let step = 0; step < limit; step += 1) {
     await page.keyboard.press("Tab");
-    const state = await page.evaluate(async (restStyles) => {
+    const state = await page.evaluate(async () => {
+      const restStyles = window.__sgRestStyles;
       await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       const element = document.activeElement;
       if (!element || element === document.body) return null;
@@ -367,7 +426,7 @@ export async function checkFocus(page, label) {
         obscured: !reachable,
         coveredBy,
       };
-    }, restStyles);
+    });
     if (!state) {
       failures.push(`${label}: tab stop ${step + 1} of ${limit} left the document`);
       break;
@@ -418,12 +477,12 @@ async function landingState(page, id) {
   }, { id, topBarSource: topBarBottom.toString() });
 }
 
-async function checkHashNavigation(browser, url, base, label) {
+async function checkHashNavigation(browser, url, base, label, env = {}) {
   const entry = new URL(url);
   entry.hash = "";
   url = entry.href;
   const failures = [];
-  const { context, page } = await openPage(browser, url, { viewport: { width: 1440, height: viewportHeight } }, base, failures, label);
+  const { context, page } = await openPage(browser, url, { viewport: { width: 1440, height: viewportHeight }, ...env }, base, failures, label);
   failures.push(...await page.evaluate(() => [...document.querySelectorAll("a[href^='#']")].flatMap((link) => {
     const hash = link.getAttribute("href");
     return hash.length > 1 && !document.getElementById(decodeURIComponent(hash.slice(1))) ? [`missing hash target ${hash}`] : [];
@@ -450,7 +509,7 @@ async function checkHashNavigation(browser, url, base, label) {
 
   if (navTargets.length > 0) {
     const last = navTargets[navTargets.length - 1];
-    const direct = await openPage(browser, `${url}${last}`, { viewport: { width: 1440, height: viewportHeight } }, base, failures, label);
+    const direct = await openPage(browser, `${url}${last}`, { viewport: { width: 1440, height: viewportHeight }, ...env }, base, failures, label);
     await direct.page.evaluate(waitForScrollIdle);
     await settle(direct.page);
     const landed = await landingState(direct.page, last.slice(1));
@@ -460,9 +519,9 @@ async function checkHashNavigation(browser, url, base, label) {
   return failures;
 }
 
-async function checkShortViewport(browser, url, base, label) {
+async function checkShortViewport(browser, url, base, label, env = {}) {
   const failures = [];
-  const { context, page } = await openPage(browser, url, { viewport: shortViewport }, base, failures, label);
+  const { context, page } = await openPage(browser, url, { viewport: shortViewport, ...env }, base, failures, label);
   const found = new Set();
   for (let stop = 0; stop <= 24; stop += 1) {
     await scrollToStop(page, stop / 24);
@@ -473,9 +532,9 @@ async function checkShortViewport(browser, url, base, label) {
   return failures;
 }
 
-async function checkDegraded(browser, url, base, label, contextOptions) {
+async function checkDegraded(browser, url, base, label, contextOptions, env = {}) {
   const failures = [];
-  const { context, page } = await openPage(browser, url, { viewport: { width: 390, height: 844 }, ...contextOptions }, base, failures, label);
+  const { context, page } = await openPage(browser, url, { viewport: { width: 390, height: 844 }, ...contextOptions, ...env }, base, failures, label);
   failures.push(...(await page.evaluate(hiddenTextFailures)).map((failure) => `${label}: ${failure}`));
   for (const stop of ["top", "bottom"]) {
     await scrollToStop(page, stop);
@@ -501,8 +560,16 @@ export const sharedCheckPrinciples = {
 
 // Both entry points call this exact matrix. Showcase adds only its local identity,
 // demo, ambient-loop and surface-finishing requirements.
-export async function checkPage(browser, { slug = "audit", url, base = new URL(url).origin, outDir, rich = true, showcase = true, viewports = widths }) {
+// Stage weights for the audit time budget: one per viewport pass and one per follow-up scenario.
+export function checkPageWeight(viewportCount) { return 2 * viewportCount + 4; }
+
+export async function checkPage(browser, { slug = "audit", url, base = new URL(url).origin, outDir, rich = true, showcase = true, viewports = widths, budget, fast = false }) {
   const failures = [], warnings = [], screenshots = [];
+  const env = { budget, fast };
+  const incomplete = new Set();
+  const stage = async (name, ids, fn) => {
+    if (await runStage(budget, name, 1, fn) === STAGE_INCOMPLETE) for (const id of ids) incomplete.add(id);
+  };
   const checks = Object.entries(sharedCheckPrinciples).map(([check_id, principle_ids]) => ({
     check_id, principle_ids, slop_ids: principle_ids.filter((id) => id.startsWith("slop.")), pass: true, evidence: [],
   }));
@@ -517,8 +584,12 @@ export async function checkPage(browser, { slug = "audit", url, base = new URL(u
     const mode = reducedMotion === "reduce" ? "reduced" : "motion";
     for (const width of viewports) {
       const label = `${mode} w${width}`;
+      const widest = width === Math.max(...viewports);
+      const ids = ["audit.load", "audit.overflow", mode === "motion" ? "audit.focus" : "audit.reduced-motion",
+        ...(widest ? (mode === "motion" ? ["audit.empty-screen", "audit.link-transition"] : ["audit.contrast"]) : [])];
+      await stage(label, ids, async () => {
       const loadFailures = [];
-      const { context, page } = await openPage(browser, url, { viewport: { width, height: viewportHeight }, reducedMotion }, base, loadFailures, label);
+      const { context, page } = await openPage(browser, url, { viewport: { width, height: viewportHeight }, reducedMotion, ...env }, base, loadFailures, label);
       try {
         for (const stop of scrollStops) {
           await scrollToStop(page, stop);
@@ -558,11 +629,12 @@ export async function checkPage(browser, { slug = "audit", url, base = new URL(u
         }
         record("audit.load", loadFailures, label);
       } finally { await context.close(); }
+      });
     }
   }
-  record("audit.hash-navigation", await checkHashNavigation(browser, url, base, "motion w1440 navigation"), "click, Back, direct hash");
-  record("audit.short-viewport", await checkShortViewport(browser, url, base, "motion 1280x620"), "24 scroll stops at 1280x620");
-  record("audit.offline", await checkDegraded(browser, url, base, "offline w390", { blockExternal: true }), "third-party requests blocked");
-  record("audit.no-script", await checkDegraded(browser, url, base, "no-script w390", { blockScripts: true }), "external and inline scripts blocked by CSP");
-  return { failures, screenshots, warnings, checks };
+  await stage("hash navigation", ["audit.hash-navigation"], async () => record("audit.hash-navigation", await checkHashNavigation(browser, url, base, "motion w1440 navigation", env), "click, Back, direct hash"));
+  await stage("short viewport", ["audit.short-viewport"], async () => record("audit.short-viewport", await checkShortViewport(browser, url, base, "motion 1280x620", env), "24 scroll stops at 1280x620"));
+  await stage("offline", ["audit.offline"], async () => record("audit.offline", await checkDegraded(browser, url, base, "offline w390", { blockExternal: true }, env), "third-party requests blocked"));
+  await stage("no-script", ["audit.no-script"], async () => record("audit.no-script", await checkDegraded(browser, url, base, "no-script w390", { blockScripts: true }, env), "external and inline scripts blocked by CSP"));
+  return { failures, screenshots, warnings, checks, incomplete: [...incomplete] };
 }

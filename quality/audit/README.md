@@ -20,11 +20,18 @@ Start with [Persona And Journey](persona-journey.md), define [Ideal States And C
 stylegallery audit init https://example.com --out ./audit
 stylegallery audit check https://example.com --json --viewports 320,768,1440
 stylegallery audit check ./index.html --json
+stylegallery audit check https://example.com --profile content --timeout 180
 ```
 
 `init` writes `audit.md` and `ledger.json` without overwriting existing files. The ledger pre-lists universal/adapt HIG principles and every slop catalog id with no violations triaged. Fill the product-specific assumptions and manual scenarios before claiming coverage.
 
 `check` runs the shared showcase browser measurements and every machine-detectable [slop rule](../../expression/anti-patterns.md). JSON includes check ids, principle/slop ids, verdicts, and evidence. Review-only rules remain review questions, never machine failures. Use on a test instance: the dishonest-CTA rule activates controls and can trigger real actions. Third-party blocking is the offline test; it does not simulate a service-worker cache or a fully disconnected first visit.
+
+`check` always ends. `--timeout <seconds>` (default 120, 10-3600) bounds the whole run, and each stage (every viewport pass, hash navigation, short viewport, offline, no-script, slop measurement, interactive states, CTA activation) receives a share of the remaining time. A stage that overruns has its browser contexts closed. The report then carries `timed_out: true`, `verdict: "partial"`, the checks that did finish, and `status: "timed_out"` on the rest. `stages` lists each stage's duration and outcome. Live pages are sampled: at most 24 controls are hovered and 8 calls to action are activated, and `evidence.skipped` records how many were sampled, hidden, or unreachable.
+
+Before checking, the page is opened once. When its content never renders (an HTTP error status, a bot challenge, fewer than 80 characters of text and no media, or an empty `main` landmark), the report is `verdict: "blocked_or_empty"` with the reason and signals, and no check runs. Otherwise the page profile is resolved: `--profile landing|app|content`, or `auto` (the default) from the rendered signals. Each check carries a `severity` (`error`, or `warning` when the profile relaxes it; see [Page Profiles](../../expression/anti-patterns.md#page-profiles)) and a `status` of `pass`, `fail`, `warn`, `timed_out`, or `skipped`. `ok` is true only when every error-severity check passed and nothing timed out. `verdict` is `pass`, `fail`, `partial`, or `blocked_or_empty`.
+
+`node scripts/test-audit-realsites.mjs` replays local reproductions of the 2026-10-19 run on 12 live homepages (`tests/fixtures/audit-realsites/`) and fails if a fixed false positive returns, a true violation stops failing, or a run overruns its budget. `node scripts/audit-realsites-live.mjs` re-runs the 12 live sites one at a time; it needs network access and is not part of CI.
 
 The public MCP server exposes `audit_init`, `audit_check`, and `audit_status` separately from the frozen v1 knowledge interface. `audit_init` writes consumer-owned files; `audit_check` visits and interacts with its target; neither mutates governed knowledge.
 
