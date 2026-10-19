@@ -1,0 +1,13 @@
+{
+  "principles": [
+    {
+      "id": "hig.foundations.accessibility"
+    },
+    {
+      "id": "hig.patterns.feedback"
+    },
+    {
+      "id": "slop.gradient-headline-only"
+    }
+  ]
+}

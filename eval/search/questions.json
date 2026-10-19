@@ -799,6 +799,26 @@
       }
     },
     {
+      "id": "q61",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "How do I track design audit violations from fix PR to verified status?",
+      "qrels": {
+        "quality/audit/README.md": 3
+      }
+    },
+    {
+      "id": "q62",
+      "lang": "en",
+      "kind": "real",
+      "must_pass": true,
+      "query": "stylegallery audit status ledger progress percent verified",
+      "qrels": {
+        "quality/audit/README.md": 3
+      }
+    },
+    {
       "id": "h01",
       "lang": "en",
       "kind": "heldout",
@@ -1160,6 +1180,16 @@
       "qrels": {
         "patterns/split-sidebar/list-detail.md": 3,
         "recipes/list-detail.md": 3
+      }
+    },
+    {
+      "id": "m21",
+      "lang": "en",
+      "kind": "mismatch",
+      "must_pass": false,
+      "query": "keep a list of every UI problem we found and whether each one is done",
+      "qrels": {
+        "quality/audit/README.md": 3
       }
     }
   ]

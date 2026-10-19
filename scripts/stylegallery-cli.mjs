@@ -48,6 +48,12 @@ Connect your agents:
       --uninstall               Remove what setup installed.
       --force                   Replace or remove a different existing entry with the same name.
 
+Audit ledger:
+  audit status <ledger.json>    Validate an audit ledger (quality/audit/ledger.schema.json) and print progress:
+                                counts per status, percent verified, principles with no violations triaged.
+      --principles <json>       Also fail when a principle id in this list is missing from the ledger.
+      --json                    Print the report as JSON.
+
 Site compilation: compile, timeline, transcribe, sale, gate, build, shots, probe, workflow (see stylegallery workflow).
 
   help, --help                  Show this help.
@@ -57,12 +63,12 @@ Typical agent loop: stylegallery search "sticky header" -> stylegallery read <id
 MCP server: stylegallery-mcp (tools: search, read, plus governed and compiler tools).
 `;
 
-function report(value) {
+export function report(value) {
   return { report: value, exitCode: value.ok ? 0 : 1, output: `${JSON.stringify(value, null, 2)}\n` };
 }
-function failure(operation, code, message) { return report({ ok: false, operation, failures: [{ code, message }] }); }
+export function failure(operation, code, message) { return report({ ok: false, operation, failures: [{ code, message }] }); }
 
-function parseOptions(command, args, specs) {
+export function parseOptions(command, args, specs) {
   const values = {};
   const positional = [];
   for (let index = 0; index < args.length; index += 1) {
@@ -138,6 +144,10 @@ export async function runStylegalleryCli(argv, config = {}) {
   if (command === "search") return runSearch(rest);
   if (command === "read") return runRead(rest);
   if (command === "retrieve") return runRetrieve(rest);
+  if (command === "audit") {
+    const { runAuditCli } = await import("./stylegallery-audit.mjs");
+    return runAuditCli(rest);
+  }
   if (command === "context" && rest.includes("--query")) {
     const { runMaterialCli } = await import("./agent-native/v2/material-cli-adapter.mjs");
     return runMaterialCli(["context", ...rest]);
