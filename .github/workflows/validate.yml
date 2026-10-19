@@ -49,6 +49,8 @@ jobs:
           node -c scripts/test-validate-domains.mjs
           node -c scripts/validate-design-terminology.mjs
           node -c scripts/test-validate-design-terminology.mjs
+          node -c scripts/validate-anti-patterns.mjs
+          node -c scripts/test-validate-anti-patterns.mjs
           node -c scripts/validate-consumer-reference.mjs
           node -c scripts/test-validate-consumer-reference.mjs
           node -c scripts/consumer-reference-case-runner.mjs
@@ -127,6 +129,11 @@ jobs:
           node scripts/test-validate-domains.mjs
           node scripts/validate-design-terminology.mjs --json
           node scripts/test-validate-design-terminology.mjs
+
+      - name: Expression anti-pattern catalog
+        run: |
+          node scripts/validate-anti-patterns.mjs --json
+          node scripts/test-validate-anti-patterns.mjs
 
       - name: Consumer reference receiver contract
         run: |

@@ -161,6 +161,7 @@ export const canonicalDomains = [
       { path: "expression/techniques/image-weight.md", provenance: "local" },
       { path: "expression/techniques/display-type-calibration.md", provenance: "local" },
       { path: "expression/techniques/surface-detail.md", provenance: "local" },
+      { path: "expression/anti-patterns.md", provenance: "local" },
     ],
   },
 ];

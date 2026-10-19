@@ -29,6 +29,7 @@ Out of scope: layout mechanics and scroll ownership (Layout), timing, interrupti
 | Reuse existing assets, frame imagery, and restrict new assets to graphics/vectors. | [Image Weight](techniques/image-weight.md) |
 | Calibrate display size, weight, tracking, and leading so type reads confident, not loud. | [Display Type Calibration](techniques/display-type-calibration.md) |
 | Add the finishing detail of edge-fade masks, rounded clips, wipes, blur-in, and hairlines. | [Masks, Clips, And Hairlines](techniques/surface-detail.md) |
+| Check a generated page for AI-slop looks: headline-only gradient screens, emoji icons, soft shadows, static links, fake calls to action. | [AI-Slop UI Anti-Patterns](anti-patterns.md) |
 | Find a finished brand study to learn from, and the lessons 54 studies taught. | [Study Atlas](study-atlas.md) |
 | Reinterpret a real brand as an unofficial study. | [Brand Studies](brand-studies.md) |
 

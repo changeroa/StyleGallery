@@ -57,8 +57,8 @@ const OWNER_TRUST_ROOT = Object.freeze({
 });
 const AUTHORIZED_APPROVAL_COMMITS = Object.freeze([]);
 const SENTINEL_WORKFLOW_PATH = ".github/workflows/validate.yml";
-const SENTINEL_ACTIVE_WORKFLOW_SHA256 = "aeef68c41281ee1e66afa108820f26824252acaff607f378bb17a88174c5a443";
-const SENTINEL_RETIRED_WORKFLOW_SHA256 = "e439a08c050cf5c28cb893cb66c7df5e725079eae839b54dc6a0b212f403d04f";
+const SENTINEL_ACTIVE_WORKFLOW_SHA256 = "040e405f9092b888371e6fc143b424843277bd483885cc1e13f6e71b364efcfc";
+const SENTINEL_RETIRED_WORKFLOW_SHA256 = "d4f5eaafda0811242b68e2a1e7882fa5ce13b8c03d5351a1eb4d92889f8d9649";
 const SENTINEL_JOB_SHA256 = "94f5749b0a7bc17a676e56a4e5fa550e406272086e8ac5cdc36eb22ea26c77a4";
 const SENTINEL_PROTECTED = Object.freeze([
   ["consumer-reference/baselines/calibration.json", "b537b0c3acb3ac55e4b926b1d12b41d2cb8050a85de2410ad4b42e1b7b53f88e", "raw_20_run_aggregate_and_provenance"],
@@ -80,8 +80,8 @@ const SENTINEL_PROTECTED = Object.freeze([
   ["tests/helpers/render-consumer-reference.mjs", "88802a948909d5e40470be6b5481766ce2de498e59c053ac68af370b46e72ca9", "sentinel_renderer_source"],
   ["tests/snapshots/consumer-reference-card-grid.png", "5528358e957a6115793155e501f62716f7db31dc1c86856d9e1234868d672837", "historical_baseline_bytes"],
 ]);const PAGE_WORKFLOW_PATH = ".github/workflows/validate.yml";
-const PAGE_ACTIVE_WORKFLOW_SHA256 = "aeef68c41281ee1e66afa108820f26824252acaff607f378bb17a88174c5a443";
-const PAGE_RETIRED_WORKFLOW_SHA256 = "93934db00034e33fb9284c56278497aa2d18751b13d084d67d4199775555aac9";
+const PAGE_ACTIVE_WORKFLOW_SHA256 = "040e405f9092b888371e6fc143b424843277bd483885cc1e13f6e71b364efcfc";
+const PAGE_RETIRED_WORKFLOW_SHA256 = "c4b368a312cf55e85be2d8dd8bf531824edfd03177bc182a4407aad992007df2";
 const PAGE_JOB_SHA256 = "090f6c7a9f9f645c982fdf90be4b1907c7a10c420a79ad46292a21cff34f0937";
 const PAGE_SYNTHETIC_REPOSITORIES = Object.freeze(["ark-jo/stylegallery", "changeroa/stylegallery", "example/stylegallery-page-evidence-ci"]);
 const PAGE_PROTECTED = Object.freeze([
