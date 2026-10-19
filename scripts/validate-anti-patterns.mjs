@@ -9,8 +9,10 @@ import { fileURLToPath } from "node:url";
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CATALOG = "expression/anti-patterns.json";
 const ID_PATTERN = /^slop\.[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const TOP_KEYS = ["schema_version", "record_kind", "title", "companion_document", "lifecycle", "description", "measurement_context", "entries"];
-const ENTRY_FIELDS = ["id", "title", "definition", "detectable", "severity", "rationale", "sources"];
+const TOP_KEYS = ["schema_version", "record_kind", "title", "companion_document", "lifecycle", "description", "measurement_context", "entries", "reviewed_and_rejected"];
+const ENTRY_FIELDS = ["id", "first_seen", "evidence_grade", "title", "definition", "detectable", "severity", "rationale", "sources"];
+const EVIDENCE_GRADES = ["measured-differential", "measured-baseline", "consensus-opinion", "owner-taste"];
+const REJECTED_FIELDS = ["id", "title", "source_repository", "source_path", "source_revision", "reason"];
 const DETECTION_FIELDS = ["scope", "measure", "threshold", "violation"];
 const BENCHMARK_SOURCES = ["expression/measured-benchmarks.md", "showcase/QA.md"];
 // The catalog must keep covering the anti-patterns P3 was commissioned to name.
@@ -55,6 +57,13 @@ export function validateAntiPatterns({ catalog, root = repositoryRoot, companion
       if (seen.has(entry.id)) fail("entry_id_duplicate", `${entry.id} appears more than once`, `${at}.id`);
       seen.add(entry.id);
     }
+    if (entry.first_seen !== undefined && (!/^\d{4}-\d{2}-\d{2}$/.test(entry.first_seen) || !Number.isFinite(Date.parse(entry.first_seen)) || new Date(entry.first_seen).toISOString().slice(0, 10) !== entry.first_seen)) {
+      fail("entry_date_invalid", `${entry.id} first_seen must be a real ISO calendar date`, `${at}.first_seen`);
+    }
+    if (entry.evidence_grade !== undefined && !EVIDENCE_GRADES.includes(entry.evidence_grade)) fail("entry_grade_invalid", `${entry.id} has an unknown evidence_grade`, `${at}.evidence_grade`);
+    if (["owner-taste", "consensus-opinion"].includes(entry.evidence_grade) && entry.detectable !== "review") {
+      fail("opinion_must_be_review", `${entry.id} opinion evidence must be detectable review, never a machine error`, `${at}.detectable`);
+    }
     if (entry.detectable === "machine") {
       if (entry.severity !== "error") fail("machine_severity_invalid", `${entry.id} is machine-detectable and must have severity error`, `${at}.severity`);
       const detection = entry.detection;
@@ -81,6 +90,25 @@ export function validateAntiPatterns({ catalog, root = repositoryRoot, companion
   });
 
   for (const id of REQUIRED_IDS) if (!seen.has(id)) fail("required_entry_missing", `catalog must define ${id}`, "$.entries");
+
+  if (!Array.isArray(catalog.reviewed_and_rejected)) {
+    fail("rejected_list_invalid", "reviewed_and_rejected must be an array", "$.reviewed_and_rejected");
+  } else {
+    const rejectedIds = new Set();
+    catalog.reviewed_and_rejected.forEach((item, index) => {
+      const at = `$.reviewed_and_rejected[${index}]`;
+      if (item === null || typeof item !== "object" || Array.isArray(item)) return fail("rejected_item_invalid", "rejected item must be an object", at);
+      if (Object.keys(item).length !== REJECTED_FIELDS.length || REJECTED_FIELDS.some((key) => !nonEmpty(item[key]))) fail("rejected_item_invalid", "rejected item must contain exactly id, title, source_repository, source_path, source_revision, and reason as non-empty strings", at);
+      if (nonEmpty(item.id) && !/^(?:slop\.)?[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.id)) fail("rejected_id_invalid", "rejected id must be kebab-case with an optional slop namespace", `${at}.id`);
+      const normalizedId = item.id?.startsWith("slop.") ? item.id : `slop.${item.id}`;
+      if (seen.has(normalizedId)) fail("rejected_id_collision", "rejected id must not name an active entry", `${at}.id`);
+      if (rejectedIds.has(normalizedId)) fail("rejected_id_duplicate", "rejected ids must be unique", `${at}.id`);
+      rejectedIds.add(normalizedId);
+      if (nonEmpty(item.source_repository) && !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(item.source_repository)) fail("rejected_source_invalid", "source_repository must be owner/repository", `${at}.source_repository`);
+      if (nonEmpty(item.source_path) && (path.isAbsolute(item.source_path) || !/^[A-Za-z0-9_.-]+(?:\/[A-Za-z0-9_.-]+)*$/.test(item.source_path) || item.source_path.split("/").some((part) => part === "." || part === ".."))) fail("rejected_source_invalid", "source_path must be a normalized repository-relative path", `${at}.source_path`);
+      if (!/^[a-f0-9]{40}$/.test(item.source_revision ?? "")) fail("rejected_revision_invalid", "source_revision must be a full lowercase Git SHA", `${at}.source_revision`);
+    });
+  }
 
   const companionText = companion ?? (nonEmpty(catalog.companion_document) && fs.existsSync(path.join(root, catalog.companion_document)) ? fs.readFileSync(path.join(root, catalog.companion_document), "utf8") : null);
   if (companionText === null) fail("companion_missing", "companion_document must name an existing Markdown page", "$.companion_document");

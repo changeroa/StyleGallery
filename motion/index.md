@@ -34,6 +34,7 @@ These workflows and worked cases are usable experimental guidance. Expected-resu
 - [Accessible Motion And Equivalent Feedback](accessible-motion.md). Separate motion preferences, automatic updates, and equivalent feedback.
 - [Interruption And Retargeting](interruption-and-retargeting.md). Resolve repeated input, cancellation, and stale completion callbacks.
 - [Motion Rendering And Performance](rendering-and-performance.md). Choose native mechanisms and diagnose measured delivery failures.
+- [Motion Usability Anti-Patterns](usability-anti-patterns.md). Inspect loading barriers, captured input, invisible text, and uncontrolled loops.
 
 ## Visual Reference: Motion Prompt
 

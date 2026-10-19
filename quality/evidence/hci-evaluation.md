@@ -16,6 +16,8 @@ HCI evidence helps separate task success, perceived usability, aesthetics, and c
 - first-impression or perceived-aesthetics evidence;
 - user testing or validated instruments when required.
 
+Use the [Blind Design A/B Evaluation](design-ab.md) protocol to compare the visible outcomes of guidance-assisted and baseline builds. It keeps weighted judge scores separate from machine failure counts and does not turn screenshot judgments into task-success evidence.
+
 ## Can Support
 
 - a task path has been reviewed;

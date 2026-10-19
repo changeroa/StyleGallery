@@ -50,6 +50,7 @@ export const canonicalDomains = [
     label: "Motion",
     leaves: [
       { path: "motion/accessible-motion.md", provenance: "local" },
+      { path: "motion/usability-anti-patterns.md", provenance: "external", sourcePath: "skills/taste-skill/references/motion.md" },
       { path: "motion/interruption-and-retargeting.md", provenance: "local" },
       { path: "motion/rendering-and-performance.md", provenance: "local" },
       { path: "motion/vocabulary.md", provenance: "external", sourcePath: "skills/animation-vocabulary/SKILL.md" },
@@ -162,7 +163,7 @@ export const canonicalDomains = [
       { path: "expression/techniques/image-weight.md", provenance: "local" },
       { path: "expression/techniques/display-type-calibration.md", provenance: "local" },
       { path: "expression/techniques/surface-detail.md", provenance: "local" },
-      { path: "expression/anti-patterns.md", provenance: "local" },
+      { path: "expression/anti-patterns.md", provenance: "external", sourcePath: "skills/taste-skill/references/tells.md" },
     ],
   },
 ];
@@ -172,7 +173,10 @@ let domains = canonicalDomains;
 let root = process.cwd();
 let failures = [];
 
-const sourceOverrides = {};
+const sourceOverrides = {
+  "expression/anti-patterns.md": { repository: "leonxlnx/taste-skill", revision: "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2" },
+  "motion/usability-anti-patterns.md": { repository: "leonxlnx/taste-skill", revision: "b9ca2fd8047f4c72d7da90ebc1c1203e57c72cd2" },
+};
 
 const requiredLeafSections = [
   "Repository Boundary",
