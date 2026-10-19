@@ -39,7 +39,11 @@ function stem(token) {
   if (/(?:ss|us|is)$/.test(token)) return token;
   if (/(?:sh|ch|x|z)es$/.test(token)) return token.slice(0, -2);
   if (token.endsWith("s")) return token.slice(0, -1);
-  return token;
+  let base = token;
+  if (token.length > 5 && token.endsWith("ing")) base = token.slice(0, -3);
+  else if (token.length > 4 && token.endsWith("ed") && !token.endsWith("eed")) base = token.slice(0, -2);
+  else return token;
+  return /([b-df-hj-km-rtv-y])\1$/.test(base) ? base.slice(0, -1) : base;
 }
 
 /** Terms for ranking: tokenizer words, stopwords removed, light English plural stemming. */
@@ -226,21 +230,27 @@ function bestSnippet(document, terms) {
   const lines = document.text.split("\n");
   const termSet = new Set(terms.filter((term) => !term.startsWith(KO_PREFIX)));
   const lineHits = (line) => searchTerms(line).filter((term) => termSet.has(term)).length;
+  // A section's own text stops at the next heading of any level.
+  const ownEnd = (section) => {
+    const next = document.sections.find((candidate) => candidate.line_start > section.line_start);
+    return next ? next.line_start - 1 : section.line_end;
+  };
   let best = null;
   for (const section of document.sections) {
-    const own = lines.slice(section.line_start, section.line_end);
+    const own = lines.slice(section.line_start, ownEnd(section));
     const hits = lineHits(section.title) * 2 + own.reduce((sum, line) => sum + lineHits(line), 0);
     if (hits > 0 && (!best || hits > best.hits)) best = { section, hits };
   }
   const section = best?.section ?? document.sections.find((candidate) => candidate.level > 1) ?? document.sections[0];
   if (!section) return null;
   const start = section.line_start + 1;
+  const end = ownEnd(section);
   let first = start;
-  for (let line = start; line <= section.line_end; line += 1) if (lineHits(lines[line - 1]) > 0) { first = line; break; }
-  while (first <= section.line_end && lines[first - 1].trim() === "") first += 1;
+  for (let line = start; line <= end; line += 1) if (lineHits(lines[line - 1]) > 0) { first = line; break; }
+  while (first <= end && lines[first - 1].trim() === "") first += 1;
   let text = "";
   let last = first - 1;
-  for (let line = first; line <= section.line_end && text.length < SEARCH_SNIPPET_CHARS; line += 1) {
+  for (let line = first; line <= end && text.length < SEARCH_SNIPPET_CHARS; line += 1) {
     text += `${text ? "\n" : ""}${lines[line - 1]}`;
     last = line;
   }

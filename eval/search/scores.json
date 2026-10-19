@@ -264,5 +264,62 @@
         "must_pass": false
       }
     ]
+  },
+  "after": {
+    "ranker": "v3",
+    "overall": {
+      "n": 75,
+      "hit3": 0.9333,
+      "hit5": 0.9733,
+      "mrr": 0.876,
+      "ndcg5": 0.8631
+    },
+    "english": {
+      "n": 56,
+      "hit3": 0.9107,
+      "hit5": 0.9643,
+      "mrr": 0.8458,
+      "ndcg5": 0.8405
+    },
+    "korean": {
+      "n": 19,
+      "hit3": 1,
+      "hit5": 1,
+      "mrr": 0.9649,
+      "ndcg5": 0.9299
+    },
+    "heldout": {
+      "n": 15,
+      "hit3": 0.7333,
+      "hit5": 0.8667,
+      "mrr": 0.6856,
+      "ndcg5": 0.6831
+    },
+    "must_pass": {
+      "n": 19,
+      "passed": 19
+    },
+    "misses": [
+      {
+        "id": "h02",
+        "query": "grid that adapts column count to available width",
+        "top3": [
+          "guides/decision-tree.md",
+          "CATALOG.md",
+          "patterns/grid-repetition/grid-wrapper.md"
+        ],
+        "must_pass": false
+      },
+      {
+        "id": "h03",
+        "query": "two pane email client layout",
+        "top3": [
+          "patterns/split-sidebar/split-screen.md",
+          "patterns/split-sidebar/index.md",
+          "design-engineering/state-management/patterns/single-flight.md"
+        ],
+        "must_pass": false
+      }
+    ]
   }
 }
