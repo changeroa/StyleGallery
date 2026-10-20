@@ -30,7 +30,7 @@
         "slop.static-interactive",
         "slop.sluggish-state-change"
       ],
-      "notes": "Search button contrast 3.89 stays an error. Reject-cookies, skip-link, and feedback buttons are not dishonest CTAs; text-led screens are content-profile warnings, not errors."
+      "notes": "Search button contrast 3.89 stays an error. Reject-cookies, skip-link, and feedback buttons are not dishonest CTAs; text-led screens pass empty-screen checks, and absent transition speed is not applicable."
     },
     {
       "fixture": "landing-hidden-controls.html",
