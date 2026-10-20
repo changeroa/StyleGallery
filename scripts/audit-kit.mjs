@@ -216,14 +216,15 @@ export async function checkAudit(target, { viewports, signal, profile, timeout }
     const estimate = estimateProfile(pre.signals);
     const resolved = requestedProfile === "auto" ? estimate.profile : requestedProfile;
     const relaxed = profileRules(slop)[resolved];
-    const shared = await checkPage(browser, { url, base, showcase: false, viewports: widths, budget, fast: true });
-    const slopChecks = await checkSlop(browser, url, slop, { budget, fast: true });
+    const shared = await checkPage(browser, { url, base, showcase: false, viewports: widths, budget, fast: true, profile: resolved });
+    const slopChecks = await checkSlop(browser, url, slop, { budget, fast: true, profile: resolved });
     const incomplete = new Set([...shared.incomplete, ...slopChecks.filter((c) => c.incomplete).map((c) => c.check_id)]);
     const checks = [...shared.checks, ...slopChecks.map(({ incomplete: _, ...check }) => check)].map((check) => {
       const severity = relaxed.has(check.check_id) ? "warning" : "error";
       // A violation found before the budget ran out still counts; a clean but unfinished check is not a pass.
       if (!check.pass) return { ...check, severity, status: severity === "error" ? "fail" : "warn" };
       if (incomplete.has(check.check_id)) return { ...check, pass: null, severity, status: "timed_out" };
+      if (check.not_applicable) return { ...check, pass: null, severity: null, status: "not_applicable" };
       return { ...check, severity, status: "pass" };
     });
     const timedOut = incomplete.size > 0;

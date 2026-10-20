@@ -183,16 +183,16 @@
         "role": "repository_reference",
         "lines": {
           "start": 1,
-          "end": 301
+          "end": 312
         },
-        "file_sha256": "a5acc3d40296a146c5d1fb4fb372b7ee5faaeed1a19f0d8066836c9ab768116a",
-        "content_id": "sha256:a5acc3d40296a146c5d1fb4fb372b7ee5faaeed1a19f0d8066836c9ab768116a",
+        "file_sha256": "9d29c68a2cd04c3503da52a3eb4bea1b2c47035ad4105a0a13882e4978a64a9f",
+        "content_id": "sha256:9d29c68a2cd04c3503da52a3eb4bea1b2c47035ad4105a0a13882e4978a64a9f",
         "reference_lines": [
-          89,
-          105,
-          157,
-          170,
-          257
+          100,
+          116,
+          168,
+          181,
+          268
         ],
         "reference_kinds": [
           "documentation_reference"
@@ -205,8 +205,8 @@
           "start": 1,
           "end": 394
         },
-        "file_sha256": "cd02c4a4abe6720dc31d191a002a6a1d88f57b701e76b23f8c40dbfbfb4d6bce",
-        "content_id": "sha256:cd02c4a4abe6720dc31d191a002a6a1d88f57b701e76b23f8c40dbfbfb4d6bce",
+        "file_sha256": "83ae7a7d30be6cac7f2bf93b260b5130572fd8e29b3a2ac603459c34f9b23f84",
+        "content_id": "sha256:83ae7a7d30be6cac7f2bf93b260b5130572fd8e29b3a2ac603459c34f9b23f84",
         "reference_lines": [
           255,
           271
@@ -481,8 +481,8 @@
         "start": 1,
         "end": 394
       },
-      "file_sha256": "cd02c4a4abe6720dc31d191a002a6a1d88f57b701e76b23f8c40dbfbfb4d6bce",
-      "content_id": "sha256:cd02c4a4abe6720dc31d191a002a6a1d88f57b701e76b23f8c40dbfbfb4d6bce"
+      "file_sha256": "83ae7a7d30be6cac7f2bf93b260b5130572fd8e29b3a2ac603459c34f9b23f84",
+      "content_id": "sha256:83ae7a7d30be6cac7f2bf93b260b5130572fd8e29b3a2ac603459c34f9b23f84"
     },
     "forwarding": {
       "path": "scripts/agent-native/agui-projection.mjs",

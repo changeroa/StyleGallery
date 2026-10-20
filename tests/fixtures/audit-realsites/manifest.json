@@ -18,6 +18,11 @@
       "must_fail": [
         "audit.contrast"
       ],
+      "must_status": {
+        "audit.empty-screen": "pass",
+        "slop.empty-screen": "pass",
+        "slop.sluggish-state-change": "not_applicable"
+      },
       "must_not_fail": [
         "slop.dishonest-cta",
         "slop.empty-screen",
@@ -25,7 +30,7 @@
         "slop.static-interactive",
         "slop.sluggish-state-change"
       ],
-      "notes": "Search button contrast 3.89 stays an error. Reject-cookies, skip-link, and feedback buttons are not dishonest CTAs; text-led screens are content-profile warnings, not errors."
+      "notes": "Search button contrast 3.89 stays an error. Reject-cookies, skip-link, and feedback buttons are not dishonest CTAs; text-led screens pass empty-screen checks, and absent transition speed is not applicable."
     },
     {
       "fixture": "landing-hidden-controls.html",
@@ -131,11 +136,8 @@
       "options": {
         "timeout": 20
       },
-      "verdict_in": [
-        "partial",
-        "fail",
-        "pass"
-      ],
+      "verdict": "partial",
+      "budget_exhaustion": true,
       "max_elapsed_ms": 26000,
       "notes": "A page that never settles and has 2,400 controls still returns within its 20 s budget, with unfinished checks marked timed_out."
     }

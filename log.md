@@ -2,6 +2,17 @@
 
 ## 2026-10-20
 
+Understood as: release `stylegallery@0.1.19`, fixing remaining audit false positives without hiding accessibility failures.
+
+- Content-profile empty-screen checks detect absence of rendered text and media, not low landing-page coverage. Text-led screens no longer produce empty-screen warnings; genuinely blank screens and landing richness failures remain detectable.
+- Transition speed is measured only from positive-duration link and button samples. No samples is `not_applicable`, not sluggishness. Actual static hover and keyboard response remains a separate check.
+- Interactive measurements await finite animations on the sampled control and settle pointer exit before the next comparison. Unsettled samples are recorded as skipped instead of unchanged.
+- Completed local real-site fixtures run twice and require identical check statuses, with explicit pass/not-applicable expectations and retained contrast/focus failures. The budget-exhaustion case must be partial. Live sites can change and have no identical-run guarantee.
+- Live-run summaries distinguish full, partial, blocked, and missing reports, and count runs and checks that timed out.
+
+Consumer reference: not_applicable
+Consumer reference reason: This release fixes audit tooling and its catalog and selects no consumer-reference profile or record.
+
 Understood as: release `stylegallery@0.1.18`, which makes `stylegallery audit check` usable on live sites and adopts the measured parts of taste-skill, from PRs #76-#78. Before this, a 12-site run timed out on 6 sites and reported false positives on the rest.
 
 - `stylegallery audit check` (#76) always ends within `--timeout` (default 120 s). Stages share the budget, and an overrunning stage is closed and reported as `timed_out` with `verdict: "partial"`. Live pages are sampled: 24 hovered controls, 8 activated CTAs, a 120-stop Tab walk.
