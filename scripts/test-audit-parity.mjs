@@ -30,7 +30,9 @@ const results = [];
 try {
   for (const slug of works) {
     const showcase = await run(["scripts/check-showcase.mjs", "--work", slug, "--json", "--out", out]);
-    const audit = await run(["scripts/sg-entry.mjs", "audit", "check", `${base}/${slug}/`, "--json"]);
+    // Showcase applies landing richness. Compare the same profile, not auto-detected
+    // content semantics, whose text-presence rule intentionally differs.
+    const audit = await run(["scripts/sg-entry.mjs", "audit", "check", `${base}/${slug}/`, "--profile", "landing", "--json"]);
     const shared = Object.keys(sharedCheckPrinciples);
     const verdicts = (checks) => Object.fromEntries(shared.map((id) => {
       const check = checks?.find((c) => c.check_id === id);
