@@ -33,6 +33,8 @@ Before checking, the page is opened once. When its content never renders (an HTT
 
 `node scripts/test-audit-realsites.mjs` replays local reproductions of the 2026-10-19 run on 12 live homepages (`tests/fixtures/audit-realsites/`) and fails if a fixed false positive returns, a true violation stops failing, or a run overruns its budget. `node scripts/audit-realsites-live.mjs` re-runs the 12 live sites one at a time; it needs network access and is not part of CI.
 
+Content-profile empty-screen checks require no rendered text or media, rather than applying the landing density floor. Transition speed with no positive-duration link or button samples is `status: "not_applicable"`, `pass: null`, and `severity: null`; the separate static-response check still runs. Unsettled hover and focus samples are recorded under `evidence.skipped`, not called unchanged. Completed local fixtures run twice and must produce identical statuses; live pages can change between runs and make no such guarantee.
+
 The public MCP server exposes `audit_init`, `audit_check`, and `audit_status` separately from the frozen v1 knowledge interface. `audit_init` writes consumer-owned files; `audit_check` visits and interacts with its target; neither mutates governed knowledge.
 
 ## Ledger Structure

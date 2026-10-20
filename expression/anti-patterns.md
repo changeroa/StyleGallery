@@ -46,7 +46,7 @@ The existing machine rules retain `measured-baseline`; their QA-derived operatio
 | Id | Anti-pattern | Rule in short | Threshold source |
 | --- | --- | --- | --- |
 | `slop.headline-only-gradient-screen` | A heading alone on a gradient screen | A screen with a heading, a gradient ground, under 8% media and under 10% text | QA Q22; originals give 53% of area to imagery, 3.9% to gradients |
-| `slop.empty-screen` | Empty screen | Any screen under 8% media and under 10% text | QA I16, Q22 |
+| `slop.empty-screen` | Empty screen | Landing/app: under 8% media and 10% text; content: no visible text or media | QA I16, Q22; content presence exception |
 | `slop.unanchored-violet-gradient` | Random purple gradient | A gradient with 2+ stops at hue 245-320deg covering 15%+ of a screen, whose hue no solid page color shares within 20deg | Gradient area 3.9% median original vs 26% median study |
 | `slop.gradient-area-excess` | Gradient as filler | Gradient-painted share of the page above 17% | Originals' p75 gradient area |
 | `slop.soft-shadow-excess` | Excessive soft shadows | More than 1 non-floating element with a 24px+ blur shadow | Originals 0 median, 1 at p75 |
@@ -54,7 +54,7 @@ The existing machine rules retain `measured-baseline`; their QA-derived operatio
 | `slop.emoji-icons` | Emoji as icons | 2+ nav items, buttons, headings, list items, or sibling cards whose text is or starts with an emoji | QA I16 counts only pictures, drawings, renders, and live surfaces |
 | `slop.repeated-card-triplet` | Repeated identical three-card grids | 2+ rows of 3-4 equal, imageless cards with one shared structure, or one row of card-sized boxes that each open with a small drawn icon | Originals 9.1 viewports long with a picture in every card |
 | `slop.static-interactive` | Links without a state change | An interactive element whose computed style is unchanged on hover or on keyboard focus | QA I17, I6; originals transition 76 elements |
-| `slop.sluggish-state-change` | Slow or sparse transitions | Median link and button duration over 350ms or under 100ms, or fewer than max(12, 4 per viewport) transitioning elements | Measured 100-320ms band; QA Q23 |
+| `slop.sluggish-state-change` | Transition speed outside the measured band | Median positive link and button duration over 350ms or under 100ms; no samples is not applicable | Measured 100-320ms band; QA Q23 |
 | `slop.dishonest-cta` | Fake or dishonest call to action | A `#`, `#top`, dead-hash, or `javascript:` target, or a click that changes nothing and announces nothing | QA I2, Q3, Q4 |
 | `slop.oversized-display` | Oversized display type | Largest size over body size above 5.5, or more than 8.2% of characters at display size | Originals' p75 for both measures |
 | `slop.gradient-text-everywhere` | Gradient text as the default emphasis | 2+ elements whose text is clipped to a gradient background | taste-skill study (model panel): 2% of top vs 13% of bottom sites |
@@ -85,7 +85,9 @@ The machine thresholds were calibrated on landing and brand homepages, so they h
 
 - `landing`: marketing, brand, and product landing pages. Every machine rule is an error; this is the calibration profile.
 - `app`: dashboards, editors, search and booking forms. Richness floors, display scale, surface finishing, gradients as fill, card triplets, and motion density become warnings.
-- `content`: articles, documentation, government, news, and link directories. The same rules as `app`, plus soft shadows, become warnings. A text-led screen is finished by its text, so the empty-screen floor, which counts imagery or 10% text coverage, is not a defect there.
+- `content`: articles, documentation, government, news, and link directories. The same rules as `app`, plus soft shadows, become warnings. Empty-screen checks instead require actual absence of rendered text and media: low text-area coverage is not even a warning. Genuinely blank slices remain detected.
+
+Transition speed and response are separate in every profile. With no positive-duration link or button transitions, `slop.sluggish-state-change` reports `not_applicable` with `pass: null`; instantaneous style changes can still respond correctly. `slop.static-interactive` tests that response. The Showcase transition-density floor remains a Showcase requirement, not a speed finding.
 
 Accessibility checks (`audit.*` other than empty screens and link transition speed), honest actions (`slop.dishonest-cta`), and emoji icons (`slop.emoji-icons`) stay errors in every profile. `stylegallery audit check` picks the profile from rendered signals unless `--profile` names one, and reports the profile, its source, and the signals. The detection rule is in `profiles.detection`. The 2026-10-19 real-site run that motivated the split is reproduced in `tests/fixtures/audit-realsites/`: GOV.UK screens with 8.5% and 9.9% text coverage, and Hacker News links without hover transitions, failed the landing floors even though they are correct for their purpose.
 

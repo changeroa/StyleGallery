@@ -18,6 +18,11 @@
       "must_fail": [
         "audit.contrast"
       ],
+      "must_status": {
+        "audit.empty-screen": "pass",
+        "slop.empty-screen": "pass",
+        "slop.sluggish-state-change": "not_applicable"
+      },
       "must_not_fail": [
         "slop.dishonest-cta",
         "slop.empty-screen",
@@ -131,11 +136,8 @@
       "options": {
         "timeout": 20
       },
-      "verdict_in": [
-        "partial",
-        "fail",
-        "pass"
-      ],
+      "verdict": "partial",
+      "budget_exhaustion": true,
       "max_elapsed_ms": 26000,
       "notes": "A page that never settles and has 2,400 controls still returns within its 20 s budget, with unfinished checks marked timed_out."
     }

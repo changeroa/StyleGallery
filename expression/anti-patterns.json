@@ -102,7 +102,7 @@
       "detection": {
         "scope": "Every screen of every page except the last screen when it is shorter than 450px. A screen at least half covered by the containing block of a sticky element that holds text or media is skipped: the pinned scene fills it as the reader scrolls.",
         "measure": "media_coverage and text_coverage as defined in slop.headline-only-gradient-screen.",
-        "threshold": "media_coverage < 8% and text_coverage < 10%.",
+        "threshold": "Landing and app: media_coverage < 8% and text_coverage < 10%. Content: both coverage values are zero; readable text does not have to fill a landing-page area quota.",
         "violation": "One error per screen that misses both floors and is not already reported as slop.headline-only-gradient-screen."
       },
       "rationale": "showcase/QA.md I16 and Q22 require at least 8% media or 10% text on every screen. expression/measured-benchmarks.md treats imagery as the floor for a finished page: a page with no raster or rendered imagery reads as a wireframe regardless of palette.",
@@ -261,15 +261,15 @@
       "id": "slop.sluggish-state-change",
       "first_seen": "2026-10-19",
       "evidence_grade": "measured-baseline",
-      "title": "Sluggish or sparse state transitions",
-      "definition": "State changes that run longer than the measured 100-320ms band, or too few responding elements for the page length.",
+      "title": "State transitions outside the measured speed band",
+      "definition": "Positive-duration link and button transitions outside the measured speed band; absence of transitions is not a speed measurement.",
       "detectable": "machine",
       "severity": "error",
       "detection": {
         "scope": "The whole page.",
         "measure": "durations = for each visible a[href] and button with a computed transition-duration above 0, the longest duration among transitioned properties other than all-with-0s; transitioning = count of visible elements with any computed transition-duration above 0; viewports = scrollHeight / 900.",
-        "threshold": "median(durations) > 350ms, or median(durations) < 100ms, or transitioning < max(12, 4 * viewports). The 350ms and count floors are showcase/QA.md Q23; the 100ms lower edge is the measured band.",
-        "violation": "One error per page naming which bound failed (reasons speed and too_few). When slop.static-interactive also fails, only the speed reason is reported: controls that do not respond at all are one finding, not two."
+        "threshold": "median(durations) > 350ms or median(durations) < 100ms. No positive-duration samples means not_applicable, not pass or fail. Transition counts remain evidence, not a speed threshold.",
+        "violation": "One error per page with reason speed. Instant but responsive hover and focus styles do not fail this rule; slop.static-interactive measures actual response."
       },
       "rationale": "Hover and state transitions on the originals run 100-320ms, with a median dominant duration of 200ms; studies used 400ms and felt sluggish (expression/measured-benchmarks.md). showcase/QA.md Q23 fails a page whose median link and button duration exceeds 350ms or that has fewer than 4 transitioning elements per screen of length.",
       "sources": [

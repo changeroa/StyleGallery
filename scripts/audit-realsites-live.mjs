@@ -36,6 +36,8 @@ function run(url) {
         resolve({ url, secs, exit: code, completed: true, verdict: report.verdict, profile: report.profile?.value ?? null, timed_out: report.timed_out,
           fails: (report.checks ?? []).filter((c) => c.status === "fail").map((c) => c.check_id),
           warnings: report.warnings ?? [], timed_out_checks: (report.checks ?? []).filter((c) => c.status === "timed_out").map((c) => c.check_id),
+          skipped_checks: (report.checks ?? []).filter((c) => c.status === "skipped").map((c) => c.check_id),
+          not_applicable_checks: (report.checks ?? []).filter((c) => c.status === "not_applicable").map((c) => c.check_id),
           blocked: report.blocked?.reason ?? null, report });
       } catch {
         resolve({ url, secs, exit: code, completed: false, error: signal ? `killed by ${signal} after ${wallSeconds}s` : `no JSON report: ${stderr.slice(0, 300)}` });
@@ -53,8 +55,18 @@ for (const url of sites) {
   rows.push(row);
   console.log(`${row.completed ? row.verdict : "INCOMPLETE"} ${url} ${row.secs}s${row.fails?.length ? ` fails: ${row.fails.join(", ")}` : ""}${row.error ? ` (${row.error})` : ""}`);
 }
-const table = ["| Site | Seconds | Completed | Verdict | Profile | Failing checks | Warnings | Timed-out checks |", "| --- | --- | --- | --- | --- | --- | --- | --- |",
+const counts = {
+  full: rows.filter((r) => r.completed && ["pass", "fail"].includes(r.verdict)).length,
+  partial: rows.filter((r) => r.verdict === "partial").length,
+  blocked: rows.filter((r) => r.verdict === "blocked_or_empty").length,
+  no_report: rows.filter((r) => !r.completed).length,
+  runs_with_timed_out_checks: rows.filter((r) => r.timed_out).length,
+  timed_out_checks: rows.reduce((n, r) => n + (r.timed_out_checks?.length ?? 0), 0),
+};
+const table = ["| Site | Seconds | Report returned | Verdict | Profile | Failing checks | Warnings | Timed-out checks |", "| --- | --- | --- | --- | --- | --- | --- | --- |",
   ...rows.map((r) => `| ${new URL(r.url).host} | ${r.secs} | ${r.completed ? "yes" : "no"} | ${r.verdict ?? r.error} | ${r.profile ?? "-"} | ${r.fails?.join(", ") || "-"} | ${r.warnings?.join(", ") || "-"} | ${r.timed_out_checks?.join(", ") || "-"} |`)].join("\n");
 fs.writeFileSync(path.join(out, "summary.json"), `${JSON.stringify(rows, null, 2)}\n`);
-fs.writeFileSync(path.join(out, "summary.md"), `${table}\n`);
-console.log(`\n${table}`);
+fs.writeFileSync(path.join(out, "counts.json"), `${JSON.stringify(counts, null, 2)}\n`);
+const summary = `Full ${counts.full}; partial ${counts.partial}; blocked ${counts.blocked}; no report ${counts.no_report}. ${counts.runs_with_timed_out_checks} runs have ${counts.timed_out_checks} timed-out checks.`;
+fs.writeFileSync(path.join(out, "summary.md"), `${summary}\n\n${table}\n`);
+console.log(`\n${summary}\n\n${table}`);

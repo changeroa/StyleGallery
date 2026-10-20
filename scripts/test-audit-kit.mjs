@@ -5,6 +5,8 @@ import { once } from "node:events";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
+import { chromium } from "playwright";
+import { measureSlop } from "./audit-slop.mjs";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
@@ -16,6 +18,25 @@ import { createSgMcpServer } from "./compiler/mcp.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const envelope = (result) => result.structuredContent ?? JSON.parse(result.content[0].text);
+test("instant responsive controls have no sluggish speed and content is not a landing richness score", async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await page.setContent(`<style>body{margin:0;font:16px/1.5 sans-serif}main{padding:24px;min-height:900px}a:hover{color:red}a:focus-visible{outline:3px solid black}</style><main><h1>Public information</h1><p>Choose a topic to read the service instructions.</p><a href="#details">Service details</a><p id="details">Documents and contact information for this service.</p></main>`);
+    const content = await page.evaluate(measureSlop, { profile: "content" });
+    assert.equal(content.findings["slop.sluggish-state-change"], undefined);
+    assert.equal(content.findings["slop.empty-screen"], undefined);
+    const landing = await page.evaluate(measureSlop);
+    assert.ok(landing.findings["slop.empty-screen"]?.length, "landing richness floor stays enforced");
+    await page.addStyleTag({ content: "a{transition:color 600ms}" });
+    const slow = await page.evaluate(measureSlop, { profile: "content" });
+    assert.ok(slow.findings["slop.sluggish-state-change"]?.length, "real slow transitions still fail");
+    await page.setContent("<style>body{margin:0}main{height:1800px}h1{margin:0}</style><main><h1>Content followed by an empty screen</h1></main>");
+    const blank = await page.evaluate(measureSlop, { profile: "content" });
+    assert.ok(blank.findings["slop.empty-screen"]?.some(({ top }) => top === 900), "genuinely blank content screen stays detected");
+  } finally { await browser.close(); }
+});
+
 test("init writes a valid complete ledger and never overwrites consumer files", async () => {
   const out = fs.mkdtempSync(path.join(os.tmpdir(), "sg-audit-init-"));
   try {

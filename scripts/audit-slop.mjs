@@ -4,7 +4,7 @@ const interactive = "a[href],button,summary,[role=button],[role=link],[role=tab]
 
 // This function is serialized into Chromium. Rectangles are unioned, not summed:
 // nested surfaces and overlapping text must not manufacture a passing screen.
-export function measureSlop() {
+export function measureSlop({ profile = "landing" } = {}) {
   const W = innerWidth, H = innerHeight, height = document.documentElement.scrollHeight;
   const findings = {};
   const add = (id, evidence) => (findings[`slop.${id}`] ??= []).push(evidence);
@@ -175,7 +175,10 @@ export function measureSlop() {
     const ground = gradients.some((g) => union([g.box], top, bottom) >= area * .5 ||
       g.box.left <= W / 2 && g.box.right >= W / 2 && g.box.top <= top + H / 2 && g.box.bottom >= top + H / 2);
     const heading = headings.some((b) => union([b], top, bottom) > 0);
-    if (mediaShare < .08 && textShare < .1 && !scene) {
+    // Content pages are complete through readable text, not landing-page area density.
+    // Keep detecting genuinely blank slices rather than downgrading a richness false positive.
+    const empty = profile === "content" ? mediaShare === 0 && textShare === 0 : mediaShare < .08 && textShare < .1;
+    if (empty && !scene) {
       if (heading && ground) add("headline-only-gradient-screen", { top, mediaShare, textShare });
       else if (bottom - top >= H / 2) add("empty-screen", { top, mediaShare, textShare });
     }
@@ -269,11 +272,9 @@ export function measureSlop() {
   durations.sort((a, b) => a - b);
   const mid = Math.floor(durations.length / 2);
   const median = durations.length ? durations.length % 2 ? durations[mid] : (durations[mid - 1] + durations[mid]) / 2 : null;
-  const floor = Math.max(12, 4 * height / H);
-  // reasons separate speed from absence: absence is also what slop.static-interactive measures,
-  // so checkSlop keeps only the speed reason when both rules would fire.
-  const reasons = [...(median !== null && (median < 100 || median > 350) ? ["speed"] : []), ...(transitioning < floor ? ["too_few"] : [])];
-  if (reasons.length) add("sluggish-state-change", { median_ms: median, transitioning, floor, reasons });
+  // Transition count says nothing about speed: instant hover/focus styles can respond
+  // correctly with no CSS transition. Static response is checked by actual interaction.
+  if (median !== null && (median < 100 || median > 350)) add("sluggish-state-change", { median_ms: median, transitioning, reasons: ["speed"] });
   const characters = textSizes.reduce((n, t) => n + t.chars, 0);
   const displayShare = textSizes.filter((t) => t.size >= 2.5 * body).reduce((n, t) => n + t.chars, 0) / (characters || 1);
   const ratio = Math.max(0, ...textSizes.map((t) => t.size)) / body;
@@ -340,18 +341,19 @@ async function measureFirstPaint(page) {
   return found;
 }
 
-async function finishState(page, capMs = 1000) {
-  await page.evaluate(async (capMs) => {
+async function finishState(page, capMs = 1000, index) {
+  return page.evaluate(async ({ capMs, index, selector }) => {
     await new Promise((resolve) => requestAnimationFrame(resolve));
-    const animations = document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations !== Infinity);
+    const scope = index === undefined ? document : document.querySelectorAll(selector)[index];
+    const animations = scope.getAnimations({ subtree: true }).filter((a) => a.effect?.getComputedTiming().iterations !== Infinity);
     let timer;
     try {
-      await Promise.race([
-        Promise.all(animations.map((a) => a.finished.catch(() => {}))),
-        new Promise((resolve) => { timer = setTimeout(resolve, capMs); }),
+      return await Promise.race([
+        Promise.all(animations.map((a) => a.finished.catch(() => {}))).then(() => true),
+        new Promise((resolve) => { timer = setTimeout(() => resolve(false), capMs); }),
       ]);
     } finally { clearTimeout(timer); }
-  }, capMs);
+  }, { capMs, index, selector: interactive });
 }
 
 // Evenly spaced, deterministic sample so long pages are measured across their whole length.
@@ -378,7 +380,7 @@ function interactiveSnapshot(element) {
 // Stage weights: measure, interactive states, CTA activation.
 export const SLOP_WEIGHT = 5;
 
-export async function checkSlop(browser, url, catalog, { budget, fast = false } = {}) {
+export async function checkSlop(browser, url, catalog, { budget, fast = false, profile = "landing" } = {}) {
   const base = url.startsWith("file:") ? "file://" : new URL(url).origin;
   const loadFailures = [];
   // Live pages are sampled: every control of a 300-link page would take minutes to hover and
@@ -403,7 +405,7 @@ export async function checkSlop(browser, url, catalog, { budget, fast = false } 
       scrollTo({ top: 0, behavior: "instant" });
     });
     await settle(page);
-    const result = await page.evaluate(measureSlop);
+    const result = await page.evaluate(measureSlop, { profile });
     if (blockers.length) result.findings["slop.blocked-first-paint"] = blockers;
     return result;
   });
@@ -450,7 +452,10 @@ export async function checkSlop(browser, url, catalog, { budget, fast = false } 
       await page.mouse.move(0, 0);
       await page.evaluate(() => { document.activeElement?.blur(); scrollTo(0, 0); });
       const resting = new Map();
-      for (const { index } of hovered) resting.set(index, await controls.nth(index).evaluate(interactiveSnapshot));
+      for (const { index } of hovered) {
+        if (await finishState(page, limits.finishMs, index)) resting.set(index, await controls.nth(index).evaluate(interactiveSnapshot));
+        else unreachable.push({ index, reason: "rest_not_settled" });
+      }
       // Use actual keyboard navigation, rather than programmatic focus that can
       // miss :focus-visible.
       const focused = new Map();
@@ -461,24 +466,27 @@ export async function checkSlop(browser, url, catalog, { budget, fast = false } 
         await page.keyboard.press("Tab");
         const index = await page.evaluate((selector) => [...document.querySelectorAll(selector)].indexOf(document.activeElement), interactive);
         if (index >= 0 && wanted.has(index)) {
-          await finishState(page, limits.finishMs);
-          focused.set(index, await controls.nth(index).evaluate(interactiveSnapshot));
+          if (await finishState(page, limits.finishMs, index)) focused.set(index, await controls.nth(index).evaluate(interactiveSnapshot));
+          else unreachable.push({ index, reason: "focus_not_settled" });
         }
       }
       const walkComplete = walk === tabStops;
       await page.evaluate(() => document.activeElement?.blur());
       for (const { index } of hovered) {
+        if (!resting.has(index)) continue;
         const control = controls.nth(index);
         try {
           await control.hover({ timeout: limits.hoverMs });
-          await finishState(page, limits.finishMs);
-          if (resting.get(index) === await control.evaluate(interactiveSnapshot)) staticFindings.push({ index, reason: "hover_unchanged" });
+          if (await finishState(page, limits.finishMs, index)) {
+            if (resting.get(index) === await control.evaluate(interactiveSnapshot)) staticFindings.push({ index, reason: "hover_unchanged" });
+          } else unreachable.push({ index, reason: "hover_not_settled" });
         } catch (error) { unreachable.push({ index, reason: "hover_unreachable", message: error.message.split("\n")[0] }); }
         if (focused.has(index)) { if (resting.get(index) === focused.get(index)) staticFindings.push({ index, reason: "focus_unchanged" }); }
-        else if (walkComplete) staticFindings.push({ index, reason: "focus_unreachable" });
+        else if (walkComplete && !unreachable.some((c) => c.index === index && c.reason === "focus_not_settled")) staticFindings.push({ index, reason: "focus_unreachable" });
         else unreachable.push({ index, reason: "focus_not_reached" });
         await page.mouse.move(0, 0);
-        if (!fast) await finishState(page, limits.finishMs);
+        // Subscribe to the exit transition before taking the next resting comparison.
+        await finishState(page, limits.finishMs, index);
       }
       skipped.unreachable_controls = unreachable;
       skipped.sampled_controls = { checked: hovered.length, of: candidates.length };
@@ -487,14 +495,6 @@ export async function checkSlop(browser, url, catalog, { budget, fast = false } 
     if (interactiveDone === STAGE_INCOMPLETE) incomplete.add("slop.static-interactive");
     await opened.context.close().catch(() => {});
   }
-  // An unresponsive page is one finding: when controls do not respond at all, the
-  // "too few transitions" half of sluggish-state-change restates static-interactive.
-  if (findings["slop.static-interactive"]?.length && findings["slop.sluggish-state-change"]) {
-    findings["slop.sluggish-state-change"] = findings["slop.sluggish-state-change"]
-      .map((finding) => ({ ...finding, reasons: finding.reasons.filter((reason) => reason === "speed"), deduplicated_with: "slop.static-interactive" }))
-      .filter((finding) => finding.reasons.length);
-  }
-
   if (measured !== STAGE_INCOMPLETE) {
     const ctas = sample(candidates.filter((c) => c.cta), limits.cta);
     skipped.sampled_ctas = { checked: ctas.length, of: candidates.filter((c) => c.cta).length };
@@ -556,6 +556,8 @@ export async function checkSlop(browser, url, catalog, { budget, fast = false } 
   return catalog.entries.filter((e) => e.detectable === "machine").map((entry) => ({
     check_id: entry.id, principle_ids: [], slop_ids: [entry.id],
     pass: !findings[entry.id]?.length,
+    ...(entry.id === "slop.sluggish-state-change" && measured !== STAGE_INCOMPLETE && measured.measured.median_ms === null
+      ? { not_applicable: "No positive-duration link or button transitions to measure; response is checked by slop.static-interactive." } : {}),
     incomplete: incomplete.has(entry.id),
     evidence: { measurements: measured === STAGE_INCOMPLETE ? null : measured.measured, violations: findings[entry.id] ?? [],
       ...(["slop.static-interactive", "slop.dishonest-cta"].includes(entry.id) ? { skipped } : {}) },

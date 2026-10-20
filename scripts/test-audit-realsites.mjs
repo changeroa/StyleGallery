@@ -42,6 +42,21 @@ try {
         for (const id of item.must_not_fail ?? []) {
           assert.notEqual(byId.get(id)?.status, "fail", `${item.fixture}: ${id} is a fixed false positive\n${JSON.stringify(byId.get(id)?.evidence).slice(0, 900)}`);
         }
+        for (const [id, status] of Object.entries(item.must_status ?? {})) {
+          assert.equal(byId.get(id)?.status, status, `${item.fixture}: ${id} must be ${status}, not a downgraded false positive\n${JSON.stringify(byId.get(id)?.evidence).slice(0, 900)}`);
+        }
+        // The budget-exhaustion fixture intentionally cannot finish. Every other local
+        // fixture must complete twice with identical semantic results, not timing luck.
+        if (!item.budget_exhaustion) {
+          const repeated = await checkAudit(`${base}/${item.fixture}`, item.options);
+          const signature = (run) => ({
+            verdict: run.verdict, profile: run.profile?.value ?? null,
+            checks: run.checks.map(({ check_id, status }) => [check_id, status]),
+          });
+          assert.equal(result.timed_out, false, `${item.fixture}: first run must finish`);
+          assert.equal(repeated.timed_out, false, `${item.fixture}: repeated run must finish`);
+          assert.deepEqual(signature(repeated), signature(result), `${item.fixture}: identical local input must produce identical completed statuses`);
+        }
         rows.push({ fixture: item.fixture, sites: item.sites, verdict: result.verdict, profile: result.profile?.value ?? null, elapsed_ms: elapsed, failing: result.checks.filter((c) => c.status === "fail").map((c) => c.check_id), warnings: result.warnings ?? [] });
         console.log(`ok ${item.fixture}: ${result.verdict}${result.profile?.value ? ` (${result.profile.value})` : ""} in ${(elapsed / 1000).toFixed(1)}s`);
       } catch (error) {

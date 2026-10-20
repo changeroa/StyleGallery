@@ -137,7 +137,7 @@ function detailCounts() {
   return { transitions, clipped, hairlines, hoverMedian: hover.length ? hover[Math.floor(hover.length / 2)] : null, screens: document.documentElement.scrollHeight / innerHeight };
 }
 
-async function checkRichness(page, label) {
+async function checkRichness(page, label, profile) {
   const findings = [];
   const height = await page.evaluate(() => document.documentElement.scrollHeight);
   const stops = [];
@@ -148,7 +148,8 @@ async function checkRichness(page, label) {
     await page.evaluate(waitForScrollIdle);
     await settle(page);
     const cover = await page.evaluate(screenCoverage);
-    if (cover.surface < richness.surfaceShare && cover.text < richness.textShare) {
+    const empty = profile === "content" ? cover.surface === 0 && cover.text === 0 : cover.surface < richness.surfaceShare && cover.text < richness.textShare;
+    if (empty) {
       findings.push(`${label} richness: screen ${index + 1} (${top}-${top + viewportHeight}px) is empty: images, drawn scenes, and product surfaces cover ${Math.round(cover.surface * 100)}% and text ${Math.round(cover.text * 100)}% (floor ${richness.surfaceShare * 100}% or ${richness.textShare * 100}%)`);
     }
   }
@@ -563,7 +564,7 @@ export const sharedCheckPrinciples = {
 // Stage weights for the audit time budget: one per viewport pass and one per follow-up scenario.
 export function checkPageWeight(viewportCount) { return 2 * viewportCount + 4; }
 
-export async function checkPage(browser, { slug = "audit", url, base = new URL(url).origin, outDir, rich = true, showcase = true, viewports = widths, budget, fast = false }) {
+export async function checkPage(browser, { slug = "audit", url, base = new URL(url).origin, outDir, rich = true, showcase = true, viewports = widths, budget, fast = false, profile = "landing" }) {
   const failures = [], warnings = [], screenshots = [];
   const env = { budget, fast };
   const incomplete = new Set();
@@ -612,7 +613,7 @@ export async function checkPage(browser, { slug = "audit", url, base = new URL(u
               failures.push(...(await page.evaluate(offscreenAmbientFailures)).map((f) => `${label} ${stop}: ${f}`));
             }
           }
-          const findings = await checkRichness(page, label);
+          const findings = await checkRichness(page, label, profile);
           record("audit.empty-screen", findings.filter((f) => f.includes("is empty:")), label);
           record("audit.link-transition", findings.filter((f) => f.includes("transitions have a median")), label);
           if (rich) warnings.push(...findings);
